@@ -1,9 +1,10 @@
 {
-  "name": "dictionnaire-urbain",
-  "version": "1.0.0",
-  "description": "",
-  "author": "Kevin Pastor",
-  "license": "MIT",
-  "scripts": {
-  }
+    "name": "dictionnaire-urbain",
+    "version": "0.1.0",
+    "description": "",
+    "author": "Kevin Pastor",
+    "license": "MIT",
+    "scripts": {
+        "start": "cd ./client/ && npm start"
+    }
 }
