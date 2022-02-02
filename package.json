@@ -6,5 +6,7 @@
     "license": "MIT",
     "scripts": {
         "start": "cd ./client/ && npm start"
-    }
+    },
+    "dependencies": {},
+    "devDependencies": {}
 }
