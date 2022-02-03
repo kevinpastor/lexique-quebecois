@@ -1,0 +1,19 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": [
+            "./client/tsconfig.json"
+        ]
+    },
+    "extends": [
+        "../.eslintrc.json",
+        "react-app",
+        "react-app/jest"
+    ],
+    "rules": {
+        "react/jsx-indent": [
+            "error",
+            4
+        ]
+    }
+}

@@ -8,10 +8,10 @@ import { ResponseCode } from "./response-code";
 @injectable()
 export class DefinitionsRoute implements AbstractRoute {
 
-    private router: Router;
+    private readonly router: Router;
 
     public constructor(
-        private service: DefinitionsService
+        private readonly service: DefinitionsService
     ) {
         this.router = Router();
         this.router.get("/definitions/:label", this.getDefinition.bind(this));
@@ -22,7 +22,7 @@ export class DefinitionsRoute implements AbstractRoute {
     }
 
     private getDefinition(req: Request, res: Response): void {
-        const definition: Definition = this.service.getDefinition(req.params.label)
+        const definition: Definition = this.service.getDefinition(req.params.label);
 
         res.status(ResponseCode.OK)
             .send(definition);

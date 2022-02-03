@@ -10,7 +10,7 @@ export class App {
 
     private static readonly port: number = 8080;
 
-    private app: Express;
+    private readonly app: Express;
 
     public constructor(routes: Routes) {
         this.app = express();

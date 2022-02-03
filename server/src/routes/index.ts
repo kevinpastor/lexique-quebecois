@@ -7,7 +7,7 @@ import { ResponseCode } from "./response-code";
 @injectable()
 export class Routes {
 
-    private router: Router;
+    private readonly router: Router;
 
     public constructor(@multiInject(AbstractRoute) routes: Array<AbstractRoute>) {
         this.router = Router();
