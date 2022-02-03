@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "alwaysStrict": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "incremental": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noEmit": false,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": true,
+        "outDir": "build/",
+        "removeComments": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "es6"
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "**/node_modules",
+        "**/.*/"
+    ]
+}
