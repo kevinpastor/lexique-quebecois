@@ -4,16 +4,14 @@
     "private": true,
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build"
+        "build": "react-scripts build",
+        "lint": "eslint ."
     },
     "dependencies": {
-        "@testing-library/jest-dom": "^5.16.1",
-        "@testing-library/react": "^12.1.2",
-        "@testing-library/user-event": "^13.5.0",
-        "@types/jest": "^27.4.0",
         "@types/node": "^16.11.22",
         "@types/react": "^17.0.38",
         "@types/react-dom": "^17.0.11",
+        "eslint-plugin-promise": "^6.0.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-router-dom": "^6.2.1",
@@ -23,7 +21,6 @@
     },
     "devDependencies": {
         "autoprefixer": "^10.4.2",
-        "eslint-plugin-promise": "^6.0.0",
         "postcss": "^8.4.6",
         "tailwindcss": "^3.0.18"
     },

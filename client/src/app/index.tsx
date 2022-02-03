@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
-import { Navigate } from "react-router-dom";
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { Navigation } from "./navigation";
 import { HomePage } from "./pages/home";
@@ -25,6 +24,4 @@ export const App = (): ReactElement => (
             </div>
         </main>
     </BrowserRouter>
-)
-
-
+);

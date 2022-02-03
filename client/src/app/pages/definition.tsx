@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { useParams } from "react-router-dom";
 
-import { Definition as DefinitionComponent } from "../../components/definition"
+import { Definition as DefinitionComponent } from "../../components/definition";
 
 export const DefinitionPage = (): ReactElement => {
     const { id } = useParams();
@@ -9,4 +9,4 @@ export const DefinitionPage = (): ReactElement => {
     return (
         <DefinitionComponent id={id as any} />
     );
-}
+};

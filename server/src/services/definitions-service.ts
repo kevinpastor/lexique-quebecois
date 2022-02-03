@@ -4,8 +4,6 @@ import { Definition } from "../../../shared/models/definition";
 @injectable()
 export class DefinitionsService {
 
-    public constructor() { }
-
     public getDefinition(label: string): Definition {
         return {
             id: "bjhabhiuadhbiu",
