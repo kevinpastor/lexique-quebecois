@@ -5,6 +5,7 @@ import { Navigation } from "./navigation";
 import { HomePage } from "./pages/home";
 import { DefinitionPage } from "./pages/definition";
 import { Sidebar } from "./sidebar";
+import { Add } from "./pages/add";
 
 export const App = (): ReactElement => (
     <BrowserRouter>
@@ -14,6 +15,7 @@ export const App = (): ReactElement => (
                 <div className="basis-2/3">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
+                        <Route path="/ajouter" element={<Add />} />
                         <Route path="/definitions/:id" element={<DefinitionPage />} />
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
