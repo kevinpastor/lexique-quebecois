@@ -15,17 +15,54 @@ export class DefinitionsRoute implements AbstractRoute {
     ) {
         this.router = Router();
         this.router.get("/definitions/:label", this.getDefinition.bind(this));
+        this.router.post("/definitions/:label", this.addDefinition.bind(this));
     }
 
     public get(): Router {
         return this.router;
     }
 
-    private getDefinition(req: Request, res: Response): void {
-        const definition: Definition = this.service.getDefinition(req.params.label);
+    private async getDefinition(req: Request, res: Response): Promise<void> {
+        const label: unknown = req.params.label;
+        if (!DefinitionsRoute.isValidLabel(label)) {
+            res.status(ResponseCode.BadRequest)
+                .send(); // TODO
+            return;
+        }
+
+        const definition: Definition = await this.service.getDefinition(label);
 
         res.status(ResponseCode.OK)
             .send(definition);
+    }
+
+    private async addDefinition(req: Request, res: Response): Promise<void> {
+        const label: unknown = req.params.label;
+        if (!DefinitionsRoute.isValidLabel(label)) {
+            res.status(ResponseCode.BadRequest)
+                .send(); // TODO
+            return;
+        }
+
+        const requestedDefinition: unknown = req.body;
+        if (!DefinitionsRoute.isValidDefinition(requestedDefinition)) {
+            res.status(ResponseCode.BadRequest)
+                .send(); // TODO
+            return;
+        }
+
+        const definition: Definition = await this.service.addDefinition(label, requestedDefinition);
+
+        res.status(ResponseCode.OK)
+            .send(definition);
+    }
+
+    private static isValidLabel(label: unknown): label is string {
+        return typeof label === "string";
+    }
+
+    private static isValidDefinition(definition: unknown): definition is Definition {
+        return true; // TODO
     }
 
 }
