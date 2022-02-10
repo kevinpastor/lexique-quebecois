@@ -12,4 +12,4 @@ const DefinitionPage = (): ReactElement => {
     );
 };
 
-export default DefinitionPage
+export default DefinitionPage;

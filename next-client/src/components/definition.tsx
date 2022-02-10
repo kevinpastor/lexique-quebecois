@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-// import { Link } from "react-router-dom";
+import Link from "next/link";
 
 import { useDefinition } from "@hooks/useDefinition";
 import { Status } from "@models/status";
@@ -34,11 +34,11 @@ export const Definition = ({ id }: Props): ReactElement => {
 
     return (
         <section className="bg-slate-700 rounded-lg p-8 space-y-4">
-            {/* <Link to={`/definitions/${state.response.id}`}> */}
-                <div className="text-3xl font-bold text-white">
+            <Link href={`/definitions/${state.response.id}`}>
+                <a className="text-3xl font-bold text-white">
                     {state.response.label}
-                </div>
-            {/* </Link> */}
+                </a>
+            </Link>
             <div className="text-white">
                 {state.response.definition}
             </div>

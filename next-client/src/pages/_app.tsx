@@ -1,10 +1,13 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { Navigation } from '@components/navigation'
-import { Sidebar } from '@components/sidebar'
-import Head from 'next/head'
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { ReactElement } from "react";
 
-const App = ({ Component, pageProps }: AppProps) => (
+import "../styles/globals.css";
+
+import { Navigation } from "@components/navigation";
+import { Sidebar } from "@components/sidebar";
+
+const App = ({ Component, pageProps }: AppProps): ReactElement => (
     <>
         <Head>
             <title>Québécois Urbain</title>
@@ -23,6 +26,6 @@ const App = ({ Component, pageProps }: AppProps) => (
             </div>
         </main>
     </>
-)
+);
 
-export default App
+export default App;

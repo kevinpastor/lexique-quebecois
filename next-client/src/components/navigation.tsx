@@ -5,10 +5,10 @@ import { ReactElement } from "react";
 export const Navigation = (): ReactElement => {
     const router = useRouter();
 
-    const onSubmit = (event: any): void => {
+    const onSubmit = async (event: any): Promise<void> => {
         event.preventDefault();
         const label: string = event.target.label.value;
-        router.push(`/definitions/${label}`);
+        await router.push(`/definitions/${label}`);
     };
 
     return (
