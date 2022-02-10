@@ -1,3 +1,4 @@
+/** @type {import("eslint").Linter.BaseConfig} */
 module.exports = {
     root: true,
     parserOptions: {
@@ -16,6 +17,9 @@ module.exports = {
         "eslint:recommended",
         "next",
         "plugin:@typescript-eslint/recommended"
+    ],
+    ignorePatterns: [
+        "**/*.js"
     ],
     rules: {
         "react/jsx-indent": [
@@ -57,7 +61,12 @@ module.exports = {
         "@typescript-eslint/no-confusing-void-expression": "error",
         "@typescript-eslint/no-dynamic-delete": "error",
         "@typescript-eslint/no-explicit-any": "warn",
-        "@typescript-eslint/no-floating-promises": "error",
+        "@typescript-eslint/no-floating-promises": [
+            "error",
+            {
+                "ignoreIIFE": true
+            }
+        ],
         "@typescript-eslint/no-implicit-any-catch": "error",
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-invalid-void-type": "error",

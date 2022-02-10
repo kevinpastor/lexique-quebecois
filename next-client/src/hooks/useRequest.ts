@@ -30,7 +30,7 @@ export const useRequest = <T>(endpoint: string): State<T> => {
             status: Status.loading
         });
 
-        const request = async (): Promise<void> => {
+        (async (): Promise<void> => {
             const response: Response = await fetch(endpoint);
             if (!response.ok) {
                 setState({
@@ -43,9 +43,7 @@ export const useRequest = <T>(endpoint: string): State<T> => {
                 status: Status.success,
                 response: parsedBody
             });
-        };
-
-        request();
+        })();
     }, [endpoint]);
 
     return state;
