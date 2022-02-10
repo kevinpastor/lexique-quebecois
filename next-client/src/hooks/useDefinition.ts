@@ -1,4 +1,4 @@
-import { Definition } from "../../shared/models/definition";
+import { Definition } from "../../../shared/models/definition";
 import { State, useRequest } from "./useRequest";
 
 export const useDefinition = (id: string): State<Definition> => {
