@@ -1,5 +1,5 @@
 {
-    "name": "next-client",
+    "name": "client",
     "private": true,
     "scripts": {
         "start": "next dev",
