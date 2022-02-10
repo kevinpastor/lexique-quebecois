@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Status } from "../models/status";
+import { Status } from "@models/status";
 
 interface InitialState {
     status: Status.initial;

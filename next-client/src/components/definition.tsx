@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 // import { Link } from "react-router-dom";
 
-import { useDefinition } from "../hooks/useDefinition";
-import { Status } from "../models/status";
+import { useDefinition } from "@hooks/useDefinition";
+import { Status } from "@models/status";
 
 interface Props {
     id: string;

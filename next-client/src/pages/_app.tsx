@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { Navigation } from '../components/navigation'
-import { Sidebar } from '../components/sidebar'
+import { Navigation } from '@components/navigation'
+import { Sidebar } from '@components/sidebar'
 import Head from 'next/head'
 
 const App = ({ Component, pageProps }: AppProps) => (
