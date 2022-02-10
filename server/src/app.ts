@@ -17,7 +17,7 @@ export class App {
 
         this.app.use(morgan("dev"))
             .use(json())
-            .use("/api/v1", routes.get());
+            .use("/api", routes.get());
     }
 
     public start(): void {
