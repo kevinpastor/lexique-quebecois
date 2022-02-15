@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import Link from "next/link";
 
-import { Definition as IDefinition } from "@shared/models/definition";
+import { Definition as IDefinition } from "@quebecois-urbain/shared/models/definition";
 
 interface Props {
     definition?: IDefinition;

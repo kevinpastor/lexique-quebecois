@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { GetServerSidePropsResult } from "next";
 
+import { Definition as IDefinition } from "@quebecois-urbain/shared/models/definition";
 import { Definition } from "@components/definition";
-import { Definition as IDefinition } from "@shared/models/definition";
 import { getDefinition } from "src/requests/definition";
 
 interface Props {

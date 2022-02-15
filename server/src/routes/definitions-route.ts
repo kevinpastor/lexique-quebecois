@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { injectable } from "inversify";
-import { Definition } from "../../../shared/models/definition";
+
+import { Definition } from "@quebecois-urbain/shared/models/definition";
 import { DefinitionsService } from "../services/definitions-service";
 import { asyncHandler } from "../utils/async-handler";
 import { AbstractRoute } from "./abstract-route";

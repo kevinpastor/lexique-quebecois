@@ -1,5 +1,5 @@
 {
-    "name": "server",
+    "name": "@quebecois-urbain/server",
     "version": "0.1.0",
     "description": "",
     "author": "Kevin Pastor",
@@ -7,7 +7,7 @@
     "scripts": {
         "start": "nodemon",
         "build": "tsc --project tsconfig.json",
-        "exec": "node --trace-warnings ./build/server/src/",
+        "exec": "node --trace-warnings ./build/",
         "lint": "eslint ."
     },
     "dependencies": {

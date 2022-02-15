@@ -1,4 +1,4 @@
-import { Definition } from "@shared/models/definition";
+import { Definition } from "@quebecois-urbain/shared/models/definition";
 
 export const getDefinition = async (id: string): Promise<Definition | undefined> => {
     try {

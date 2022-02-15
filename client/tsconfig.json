@@ -35,9 +35,6 @@
             ],
             "@styles/*": [
                 "./src/styles/*"
-            ],
-            "@shared/*": [
-                "../shared/*"
             ]
         }
     },

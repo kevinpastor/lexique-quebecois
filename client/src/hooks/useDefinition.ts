@@ -1,4 +1,4 @@
-import { Definition } from "@shared/models/definition";
+import { Definition } from "@quebecois-urbain/shared/models/definition";
 import { State, useRequest } from "@hooks/useRequest";
 
 export type DefinitionState = State<Definition>;

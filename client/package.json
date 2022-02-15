@@ -1,5 +1,5 @@
 {
-    "name": "client",
+    "name": "@quebecois-urbain/client",
     "private": true,
     "scripts": {
         "start": "next dev",

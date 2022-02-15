@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Collection, WithId } from "mongodb";
 
-import { Definition } from "../../../shared/models/definition";
+import { Definition } from "@quebecois-urbain/shared/models/definition";
 import { DatabaseService } from "./database-service";
 
 @injectable()
