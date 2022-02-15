@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactElement } from "react";
 
-import "../styles/globals.css";
+import "@styles/index.css";
 
 import { Navigation } from "@components/navigation";
 import { Sidebar } from "@components/sidebar";

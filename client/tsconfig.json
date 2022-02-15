@@ -19,6 +19,7 @@
         "jsx": "preserve",
         "incremental": true,
         "baseUrl": ".",
+        "noImplicitAny": true,
         "paths": {
             "@components/*": [
                 "./src/components/*"
@@ -31,6 +32,9 @@
             ],
             "@utils/*": [
                 "./src/utils/*"
+            ],
+            "@styles/*": [
+                "./src/styles/*"
             ],
             "@shared/*": [
                 "../shared/*"

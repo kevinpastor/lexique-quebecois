@@ -1,53 +1,44 @@
 import { ReactElement } from "react";
 import Link from "next/link";
 
-import { useDefinition } from "@hooks/useDefinition";
-import { Status } from "@models/status";
+import { Definition as IDefinition } from "@shared/models/definition";
 
 interface Props {
-    id: string;
+    definition?: IDefinition;
 }
 
-export const Definition = ({ id }: Props): ReactElement => {
-    const state = useDefinition(id);
-
-    if (state.status === Status.initial || state.status === Status.loading) {
+export const Definition = ({ definition }: Props): ReactElement => {
+    if (!definition) {
         return (
-            <section className="bg-slate-700 rounded-lg p-8">
-                <div className="space-y-6 animate-pulse">
-                    <div className="h-8 w-32 bg-slate-500 rounded-full"></div>
-                    <div className="space-y-2">
-                        <div className="h-4 w-full bg-slate-500 rounded-full"></div>
-                        <div className="h-4 w-full bg-slate-500 rounded-full"></div>
-                        <div className="h-4 w-1/2 bg-slate-500 rounded-full"></div>
-                    </div>
-                    <div className="h-4 w-2/3 bg-slate-500 rounded-full"></div>
-                    <div className="h-4 w-1/3 bg-slate-500 rounded-full"></div>
+            <section className="bg-slate-700 rounded-lg p-8 space-y-4">
+                {/* <Link href={`/definitions/${id}`}> */}
+                <a className="text-3xl font-bold text-white">
+                    Une erreur s&apos;est produite
+                </a>
+                {/* </Link> */}
+                <div className="text-white">
+                    Impossible de charger l&apos;information
                 </div>
             </section>
         );
     }
 
-    if (state.status === Status.failed) {
-        return (<>REQUEST FAILED TODO</>);
-    }
-
     return (
         <section className="bg-slate-700 rounded-lg p-8 space-y-4">
-            <Link href={`/definitions/${state.response.id}`}>
+            <Link href={`/definitions/${definition.id}`}>
                 <a className="text-3xl font-bold text-white">
-                    {state.response.label}
+                    {definition.label}
                 </a>
             </Link>
             <div className="text-white">
-                {state.response.definition}
+                {definition.definition}
             </div>
             <div className="text-white italic">
-                {state.response.example}
+                {definition.example}
             </div>
             <div>
                 <div className="text-slate-300">
-                    par {state.response.author ?? "Anonyme"}, {state.response.timestamp}
+                    par {definition.author ?? "Anonyme"}, {definition.timestamp}
                 </div>
             </div>
         </section>

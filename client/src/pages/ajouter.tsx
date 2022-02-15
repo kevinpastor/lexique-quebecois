@@ -1,6 +1,7 @@
+import { NextPage } from "next";
 import { ReactElement } from "react";
 
-const Add = (): ReactElement => (
+const Add: NextPage = (): ReactElement => (
     <section className="bg-slate-700 rounded-lg p-8 space-y-4">
         <div className="text-3xl font-bold text-white">
             Ajouter un mot
