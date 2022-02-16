@@ -24,6 +24,7 @@ export class DefinitionsService {
     }
 
     public addDefinition(label: string, definition: Definition): Promise<Definition> {
+        console.log(label, definition);
         return Promise.resolve(definition); // TODO
     }
 

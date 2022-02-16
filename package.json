@@ -12,9 +12,11 @@
     "scripts": {
         "client": "npm run --workspace=client",
         "server": "npm run --workspace=server",
-        "start:client": "cd ./client/ && npm start",
-        "start:server": "cd ./server/ && npm start"
+        "start": "concurrently --names client,server --prefix-colors cyan,green \"npm:start:client\" \"npm:start:server\"",
+        "start:client": "npm run start --workspace=client",
+        "start:server": "npm run start --workspace=server"
     },
-    "dependencies": {},
-    "devDependencies": {}
+    "devDependencies": {
+        "concurrently": "^7.0.0"
+    }
 }

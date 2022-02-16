@@ -4,5 +4,13 @@
     "description": "",
     "author": "Kevin Pastor",
     "license": "MIT",
-    "type": "module"
+    "exports": {
+        "./*": "./build/*.js"
+    },
+    "scripts": {
+        "build": "tsc"
+    },
+    "dependencies": {
+        "typescript": "^4.5.5"
+    }
 }

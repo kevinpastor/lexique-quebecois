@@ -1,7 +1,8 @@
 import { Request, Response, Router } from "express";
 import { injectable } from "inversify";
 
-import { Definition } from "@quebecois-urbain/shared/models/definition";
+import { cleanDefinition, Definition, isValidDefinition } from "@quebecois-urbain/shared/models/definition";
+import { isString } from "@quebecois-urbain/shared/utils/validators";
 import { DefinitionsService } from "../services/definitions-service";
 import { asyncHandler } from "../utils/async-handler";
 import { AbstractRoute } from "./abstract-route";
@@ -47,24 +48,21 @@ export class DefinitionsRoute implements AbstractRoute {
         }
 
         const requestedDefinition: unknown = req.body;
-        if (!DefinitionsRoute.isValidDefinition(requestedDefinition)) {
+        if (!isValidDefinition(requestedDefinition)) {
             res.status(ResponseCode.BadRequest)
                 .send(); // TODO
             return;
         }
 
-        const definition: Definition = await this.service.addDefinition(label, requestedDefinition);
+        const cleanedDefinition: Definition = cleanDefinition(requestedDefinition);
+        const definition: Definition = await this.service.addDefinition(label, cleanedDefinition);
 
         res.status(ResponseCode.OK)
             .send(definition);
     }
 
     private static isValidLabel(label: unknown): label is string {
-        return typeof label === "string";
-    }
-
-    private static isValidDefinition(definition: unknown): definition is Definition {
-        return true; // TODO
+        return isString(label);
     }
 
 }
