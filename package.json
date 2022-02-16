@@ -12,6 +12,7 @@
     "scripts": {
         "client": "npm run --workspace=client",
         "server": "npm run --workspace=server",
+        "shared": "npm run --workspace=shared",
         "start": "concurrently --names client,server --prefix-colors cyan,green \"npm:start:client\" \"npm:start:server\"",
         "start:client": "npm run start --workspace=client",
         "start:server": "npm run start --workspace=server"
