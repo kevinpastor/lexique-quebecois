@@ -19,12 +19,12 @@ const Add: NextPage = (): ReactElement => {
             definition: { value: string };
             example: { value: string };
         };
-        const definition = {
+        const word = {
             label: target.label.value,
             definition: target.definition.value,
             example: target.example.value
         };
-        console.log(definition);
+        console.log(word);
     };
 
     return (
