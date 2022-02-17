@@ -8,7 +8,7 @@ export const Sidebar = (): ReactElement => (
         </div>
         <div className="flex justify-center">
             <Link href="/ajouter">
-                <a className="bg-blue-500 font-bold  rounded-full  px-8 py-4 text-white text-center">
+                <a className="bg-blue-500 font-bold  rounded-full  px-6 py-3 text-white text-center">
                     Ajouter un mot
                 </a>
             </Link>

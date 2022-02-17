@@ -16,6 +16,21 @@ export const getWord = async (id: string): Promise<DatedWord | undefined> => {
     }
 };
 
+export const getWords = async (): Promise<Array<DatedWord> | undefined> => {
+    try {
+        const response: Response = await fetch("http://localhost:8080/api/words/");
+
+        if (!response.ok) {
+            return;
+        }
+
+        return await response.json();
+    }
+    catch {
+        return;
+    }
+};
+
 export const addWord = async (word: Word): Promise<boolean> => {
     try {
         const options: RequestInit = {

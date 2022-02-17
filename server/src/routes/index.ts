@@ -29,6 +29,7 @@ export class Routes {
             .send();
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     private internalError(err: any, _: Request, res: Response, __: NextFunction): void {
         console.error(err);
         res.status(ResponseCode.InternalError)

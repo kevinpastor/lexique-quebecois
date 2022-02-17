@@ -3,16 +3,16 @@ import { GetServerSidePropsResult } from "next";
 
 import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
 import { Word } from "@components/word";
-import { getWord } from "../requests/word";
+import { getWords } from "../requests/word";
 
 interface Props {
-    word?: DatedWord;
+    words?: Array<DatedWord>;
 }
 
 export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
-    const word: DatedWord | undefined = await getWord("gyu");
+    const words: Array<DatedWord> | undefined = await getWords();
 
-    if (!word) {
+    if (!words) {
         return {
             props: {}
         };
@@ -20,13 +20,19 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
 
     return {
         props: {
-            word
+            words
         }
     };
 };
 
-const Home = ({ word }: Props): ReactElement => (
-    <Word word={word} />
-);
+const Home = ({ words }: Props): ReactElement => {
+    return (
+        <div className="space-y-4">
+            {words?.map((word: DatedWord) => (
+                <Word key={word.timestamp} word={word} />
+            ))}
+        </div>
+    );
+};
 
 export default Home;

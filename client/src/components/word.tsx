@@ -1,21 +1,20 @@
 import { ReactElement } from "react";
 import Link from "next/link";
 
-import { Word as IWord } from "@quebecois-urbain/shared/models/word";
+import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
+import { formatDate } from "@utils/date";
 
 interface Props {
-    word?: IWord;
+    word?: DatedWord;
 }
 
 export const Word = ({ word }: Props): ReactElement => {
     if (!word) {
         return (
             <section className="bg-slate-700 rounded-lg p-8 space-y-4">
-                {/* <Link href={`/words/${id}`}> */}
-                <a className="text-3xl font-bold text-white">
+                <div className="text-3xl font-bold text-white">
                     Une erreur s&apos;est produite
-                </a>
-                {/* </Link> */}
+                </div>
                 <div className="text-white">
                     Impossible de charger l&apos;information
                 </div>
@@ -26,7 +25,7 @@ export const Word = ({ word }: Props): ReactElement => {
     return (
         <section className="bg-slate-700 rounded-lg p-8 space-y-4">
             <Link href={`/mots/${word.label}`}>
-                <a className="text-3xl font-bold text-white">
+                <a className="text-3xl font-bold text-blue-500 underline">
                     {word.label}
                 </a>
             </Link>
@@ -38,7 +37,7 @@ export const Word = ({ word }: Props): ReactElement => {
             </div>
             <div>
                 <div className="text-slate-300">
-                    par {word.author ?? "Anonyme"}, {word.timestamp}
+                    par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
                 </div>
             </div>
         </section>

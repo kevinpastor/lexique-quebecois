@@ -41,6 +41,10 @@ export class WordsRoute implements AbstractRoute {
             validate(getWordSchema),
             asyncHandler(this.getWord.bind(this))
         );
+        this.router.get(
+            "/words",
+            asyncHandler(this.getWords.bind(this))
+        );
         this.router.post(
             "/words",
             validate(postWordSchema),
@@ -60,12 +64,19 @@ export class WordsRoute implements AbstractRoute {
             .send(word);
     }
 
-    private async addWord(req: Request, res: Response): Promise<void> {
-        const requestedWord: Word = req.body;
-        const word: DatedWord = await this.service.addWord(requestedWord);
+    private async getWords(req: Request, res: Response): Promise<void> {
+        const words: Array<DatedWord> = await this.service.getWords();
 
         res.status(ResponseCode.OK)
-            .send(word);
+            .send(words);
+    }
+
+    private async addWord(req: Request, res: Response): Promise<void> {
+        const requestedWord: Word = req.body;
+        await this.service.addWord(requestedWord);
+
+        res.status(ResponseCode.OK)
+            .send();
     }
 
 }
