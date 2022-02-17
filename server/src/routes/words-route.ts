@@ -1,41 +1,31 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
 import { injectable } from "inversify";
+import * as yup from "yup";
 
-import { cleanWord, Word, isValidWord } from "@quebecois-urbain/shared/models/word";
+import { Word } from "@quebecois-urbain/shared/models/word";
 import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
-import { isString } from "@quebecois-urbain/shared/utils/validators";
 import { WordService } from "../services/words-service";
 import { asyncHandler } from "../utils/async-handler";
+import { validate } from "../utils/validate";
 import { AbstractRoute } from "./abstract-route";
 import { ResponseCode } from "./response-code";
 
-import * as yup from "yup";
-
-const wordSchema = yup.object({
-    body: yup.object({
-        label: yup.string().required(),
-        definition: yup.string().required(),
-        example: yup.string().required(),
-        author: yup.string().optional()
+const getWordSchema = yup.object({
+    params: yup.object({
+        label: yup.string().required()
     })
 });
 
-const validate = (schema: yup.AnySchema) => async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    try {
-        await schema.validate({
-            body: req.body,
-            query: req.query,
-            params: req.params
-        });
-        next();
-        return;
-    }
-    catch (error: unknown) {
-        res.status(ResponseCode.BadRequest)
-            .send();
-        return;
-    }
-};
+const postWordSchema = yup.object().shape({
+    body: yup
+        .object({
+            label: yup.string().required(),
+            definition: yup.string().required(),
+            example: yup.string().required(),
+            author: yup.string().optional()
+        })
+        .noUnknown()
+});
 
 @injectable()
 export class WordsRoute implements AbstractRoute {
@@ -46,8 +36,16 @@ export class WordsRoute implements AbstractRoute {
         private readonly service: WordService
     ) {
         this.router = Router();
-        this.router.get("/words/:label", asyncHandler(this.getWord.bind(this)));
-        this.router.post("/words", validate(wordSchema), asyncHandler(this.addWord.bind(this)));
+        this.router.get(
+            "/words/:label",
+            validate(getWordSchema),
+            asyncHandler(this.getWord.bind(this))
+        );
+        this.router.post(
+            "/words",
+            validate(postWordSchema),
+            asyncHandler(this.addWord.bind(this))
+        );
     }
 
     public get(): Router {
@@ -55,13 +53,7 @@ export class WordsRoute implements AbstractRoute {
     }
 
     private async getWord(req: Request, res: Response): Promise<void> {
-        const label: unknown = req.params.label;
-        if (!WordsRoute.isValidLabel(label)) {
-            res.status(ResponseCode.BadRequest)
-                .send(); // TODO
-            return;
-        }
-
+        const label: string = req.params.label;
         const word: DatedWord = await this.service.getWord(label);
 
         res.status(ResponseCode.OK)
@@ -69,22 +61,11 @@ export class WordsRoute implements AbstractRoute {
     }
 
     private async addWord(req: Request, res: Response): Promise<void> {
-        const requestedWord: unknown = req.body;
-        if (!isValidWord(requestedWord)) {
-            res.status(ResponseCode.BadRequest)
-                .send(); // TODO
-            return;
-        }
-
-        const cleanedWord: Word = cleanWord(requestedWord);
-        const word: DatedWord = await this.service.addWord(cleanedWord);
+        const requestedWord: Word = req.body;
+        const word: DatedWord = await this.service.addWord(requestedWord);
 
         res.status(ResponseCode.OK)
             .send(word);
-    }
-
-    private static isValidLabel(label: unknown): label is string {
-        return isString(label);
     }
 
 }

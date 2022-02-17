@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import { injectable, multiInject } from "inversify";
 import { AbstractRoute } from "./abstract-route";
 
@@ -13,10 +13,11 @@ export class Routes {
         this.router = Router();
 
         for (const route of routes) {
-            this.router.use(route.get());
+            this.router.use("/api", route.get());
         }
 
         this.router.use(this.notFound.bind(this));
+        this.router.use(this.internalError.bind(this));
     }
 
     public get(): Router {
@@ -25,7 +26,13 @@ export class Routes {
 
     private notFound(_: Request, res: Response): void {
         res.status(ResponseCode.NotFound)
-            .send({ error: "Not found" });
+            .send();
+    }
+
+    private internalError(err: any, _: Request, res: Response, __: NextFunction): void {
+        console.error(err);
+        res.status(ResponseCode.InternalError)
+            .send();
     }
 
 }
