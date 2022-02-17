@@ -6,6 +6,10 @@ import { Word } from "@quebecois-urbain/shared/models/word";
 import { DatabaseService } from "./database-service";
 import { shuffle } from "../utils/shuffle";
 
+interface ModeratedWord extends DatedWord {
+    isApproved: boolean;
+}
+
 @injectable()
 export class WordService {
 
@@ -14,11 +18,15 @@ export class WordService {
     ) { }
 
     public async getWord(label: string): Promise<DatedWord> {
-        const collection: Collection<DatedWord> = await this.databaseService.getCollection("definitions");
-        const query = { label };
+        const collection: Collection<ModeratedWord> = await this.databaseService.getCollection("definitions");
+        const query = {
+            label,
+            isApproved: true
+        };
         const options: FindOptions = {
             projection: {
-                _id: 0
+                _id: 0,
+                isApproved: 0
             }
         };
         const word: DatedWord | null = await collection.findOne(query, options);
@@ -31,10 +39,16 @@ export class WordService {
     }
 
     public async getWords(): Promise<Array<DatedWord>> {
-        const collection: Collection<DatedWord> = await this.databaseService.getCollection("definitions");
+        const collection: Collection<ModeratedWord> = await this.databaseService.getCollection("definitions");
         const pipeline = [
+            { $match: { isApproved: true } },
             { $sample: { size: 5 } },
-            { $project: { _id: 0 } }
+            {
+                $project: {
+                    _id: 0,
+                    isApproved: 0
+                }
+            }
         ];
         const words: Array<DatedWord> = await collection.aggregate<DatedWord>(pipeline)
             .toArray();
@@ -42,14 +56,20 @@ export class WordService {
         return shuffle(words);
     }
 
-    public async addWord(word: Word): Promise<void> {
+    public async addWord(word: Word): Promise<DatedWord> {
         const datedWord: DatedWord = {
             ...word,
             timestamp: new Date().getTime()
         };
+        const moderatedWord: ModeratedWord = {
+            ...datedWord,
+            isApproved: false
+        };
 
-        const collection: Collection<DatedWord> = await this.databaseService.getCollection("definitions");
-        await collection.insertOne(datedWord);
+        const collection: Collection<ModeratedWord> = await this.databaseService.getCollection("definitions");
+        await collection.insertOne(moderatedWord);
+
+        return datedWord;
     }
 
 }

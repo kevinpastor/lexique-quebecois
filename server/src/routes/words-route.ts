@@ -11,18 +11,45 @@ import { AbstractRoute } from "./abstract-route";
 import { ResponseCode } from "./response-code";
 
 const getWordSchema = yup.object({
-    params: yup.object({
-        label: yup.string().required()
-    })
+    params: yup
+        .object({
+            label: yup
+                .string()
+                .trim()
+                .min(2)
+                .max(32)
+                .required()
+        })
+        .noUnknown()
 });
 
-const postWordSchema = yup.object().shape({
+const addWordSchema = yup.object({
     body: yup
         .object({
-            label: yup.string().required(),
-            definition: yup.string().required(),
-            example: yup.string().required(),
-            author: yup.string().optional()
+            label: yup
+                .string()
+                .trim()
+                .min(2)
+                .max(32)
+                .required(),
+            definition: yup
+                .string()
+                .trim()
+                .min(2)
+                .max(256)
+                .required(),
+            example: yup
+                .string()
+                .trim()
+                .min(2)
+                .max(256)
+                .required(),
+            author: yup
+                .string()
+                .trim()
+                .min(2)
+                .max(32)
+                .optional()
         })
         .noUnknown()
 });
@@ -47,7 +74,7 @@ export class WordsRoute implements AbstractRoute {
         );
         this.router.post(
             "/words",
-            validate(postWordSchema),
+            validate(addWordSchema),
             asyncHandler(this.addWord.bind(this))
         );
     }
@@ -64,7 +91,7 @@ export class WordsRoute implements AbstractRoute {
             .send(word);
     }
 
-    private async getWords(req: Request, res: Response): Promise<void> {
+    private async getWords(_: Request, res: Response): Promise<void> {
         const words: Array<DatedWord> = await this.service.getWords();
 
         res.status(ResponseCode.OK)
@@ -73,10 +100,10 @@ export class WordsRoute implements AbstractRoute {
 
     private async addWord(req: Request, res: Response): Promise<void> {
         const requestedWord: Word = req.body;
-        await this.service.addWord(requestedWord);
+        const word: DatedWord = await this.service.addWord(requestedWord);
 
-        res.status(ResponseCode.OK)
-            .send();
+        res.status(ResponseCode.Created)
+            .send(word);
     }
 
 }
