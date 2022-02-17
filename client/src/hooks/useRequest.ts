@@ -31,7 +31,7 @@ export const useRequest = <T>(endpoint: string): State<T> => {
         });
 
         (async (): Promise<void> => {
-            const response: Response = await fetch(endpoint);
+            const response: Response = await fetch(`http://localhost:8080${endpoint}`);
             if (!response.ok) {
                 setState({
                     status: Status.failed

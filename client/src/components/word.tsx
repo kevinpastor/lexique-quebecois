@@ -25,7 +25,7 @@ export const Word = ({ word }: Props): ReactElement => {
 
     return (
         <section className="bg-slate-700 rounded-lg p-8 space-y-4">
-            <Link href={`/words/${word.label}`}>
+            <Link href={`/mots/${word.label}`}>
                 <a className="text-3xl font-bold text-white">
                     {word.label}
                 </a>

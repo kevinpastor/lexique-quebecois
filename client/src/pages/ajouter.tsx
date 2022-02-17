@@ -1,30 +1,26 @@
 import { NextPage } from "next";
 import { FormEvent, ReactElement } from "react";
+import { Word } from "@quebecois-urbain/shared/models/word";
+import { addWord } from "src/requests/word";
 
 const Add: NextPage = (): ReactElement => {
-    // const handleChange = (event) => {
-    //     const target = event.target;
-    //     const value = target.type === 'checkbox' ? target.checked : target.value;
-    //     const name = target.name;
-
-    //     this.setState({
-    //         [name]: value
-    //     });
-    // }
-
-    const handleSubmit = (event: FormEvent): void => {
+    const handleSubmit = async (event: FormEvent): Promise<void> => {
         event.preventDefault();
+
         const target = event.target as typeof event.target & {
             label: { value: string };
             definition: { value: string };
             example: { value: string };
         };
-        const word = {
+
+        const word: Word = {
             label: target.label.value,
             definition: target.definition.value,
-            example: target.example.value
+            example: target.example.value,
+            author: "Kevin Pastor"
         };
-        console.log(word);
+
+        const status: boolean = await addWord(word);
     };
 
     return (

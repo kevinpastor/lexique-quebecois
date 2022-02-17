@@ -1,16 +1,22 @@
 import { ReactElement } from "react";
 import { GetServerSidePropsResult } from "next";
 
-import { Word as IWord } from "@quebecois-urbain/shared/models/word";
+import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
 import { Word } from "@components/word";
-import { getWord } from "src/requests/word";
+import { getWord } from "../requests/word";
 
 interface Props {
-    word?: IWord;
+    word?: DatedWord;
 }
 
 export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
-    const word: IWord | undefined = await getWord("gyu");
+    const word: DatedWord | undefined = await getWord("gyu");
+
+    if (!word) {
+        return {
+            props: {}
+        };
+    }
 
     return {
         props: {
@@ -19,8 +25,8 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
     };
 };
 
-const Home = ({ word: definition }: Props): ReactElement => (
-    <Word word={definition} />
+const Home = ({ word }: Props): ReactElement => (
+    <Word word={word} />
 );
 
 export default Home;

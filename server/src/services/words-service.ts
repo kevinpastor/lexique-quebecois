@@ -1,6 +1,7 @@
 import { injectable } from "inversify";
 import { Collection, WithId } from "mongodb";
 
+import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
 import { Word } from "@quebecois-urbain/shared/models/word";
 import { DatabaseService } from "./database-service";
 
@@ -11,10 +12,10 @@ export class WordService {
         private readonly databaseService: DatabaseService
     ) { }
 
-    public async getWord(label: string): Promise<Word> {
-        const collection: Collection<Word> = await this.databaseService.getCollection("definitions");
+    public async getWord(label: string): Promise<DatedWord> {
+        const collection: Collection<DatedWord> = await this.databaseService.getCollection("definitions");
         const query = { label };
-        const word: WithId<Word> | null = await collection.findOne(query);
+        const word: WithId<DatedWord> | null = await collection.findOne(query);
 
         if (!word) {
             throw new Error("TODO Not found");
@@ -23,9 +24,13 @@ export class WordService {
         return word;
     }
 
-    public addWord(label: string, definition: Word): Promise<Word> {
-        console.log(label, definition);
-        return Promise.resolve(definition); // TODO
+    public addWord(word: Word): Promise<DatedWord> {
+        console.log("Adding", word);
+        // TODO
+        return Promise.resolve({
+            ...word,
+            timestamp: new Date().getTime()
+        });
     }
 
 }

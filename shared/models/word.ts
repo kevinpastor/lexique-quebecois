@@ -5,7 +5,6 @@ export interface Word {
     definition: string;
     example: string;
     author?: string;
-    timestamp: Date;
 }
 
 export const isValidWord = (word: any): word is Word => (
@@ -22,5 +21,4 @@ export const cleanWord = (word: any): Word => ({
     definition: word.definition,
     example: word.example,
     author: word.author,
-    timestamp: word.timestamp
 })

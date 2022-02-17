@@ -8,7 +8,7 @@ export const Navigation = (): ReactElement => {
     const onSubmit = async (event: any): Promise<void> => {
         event.preventDefault();
         const label: string = event.target.label.value;
-        await router.push(`/words/${label}`);
+        await router.push(`/mots/${label}`);
     };
 
     return (
