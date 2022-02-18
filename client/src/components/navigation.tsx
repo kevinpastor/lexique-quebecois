@@ -38,7 +38,7 @@ export const Navigation = (): ReactElement => {
                             placeholder="Chercher un mot"
                             minLength={2}
                             maxLength={32}
-                            className="placeholder-slate-500 bg-transparent outline-none py-2 pr-2 caret-white text-slate-300" />
+                            className="placeholder-slate-500 bg-transparent outline-none py-2 pr-4 caret-white text-slate-300" />
                     </div>
                 </form>
             </div>

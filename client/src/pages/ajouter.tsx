@@ -47,7 +47,7 @@ const Add: NextPage = (): ReactElement => {
                             Mot
                         </label>
                         <input
-                            className="rounded bg-slate-700 hover:bg-slate-600 focus:bg-slate-600 transition p-2 outline-none text-slate-300 w-full"
+                            className="rounded bg-slate-700 hover:bg-slate-600 focus:bg-slate-600 transition px-4 py-2 outline-none text-slate-300 w-full"
                             name="label"
                             required
                             autoFocus
@@ -60,7 +60,7 @@ const Add: NextPage = (): ReactElement => {
                             Définition
                         </label>
                         <textarea
-                            className="rounded bg-slate-700 hover:bg-slate-600 focus:bg-slate-600 transition p-2 outline-none text-slate-300 w-full resize-none"
+                            className="rounded bg-slate-700 hover:bg-slate-600 focus:bg-slate-600 transition px-4 py-2 outline-none text-slate-300 w-full resize-none"
                             name="definition"
                             required
                             minLength={2}
@@ -72,7 +72,7 @@ const Add: NextPage = (): ReactElement => {
                             Exemple
                         </label>
                         <input
-                            className="rounded bg-slate-700 hover:bg-slate-600 focus:bg-slate-600 transition p-2 outline-none text-slate-300 w-full"
+                            className="rounded bg-slate-700 hover:bg-slate-600 focus:bg-slate-600 transition px-4 py-2 outline-none text-slate-300 w-full"
                             name="example"
                             required
                             minLength={2}
@@ -84,7 +84,7 @@ const Add: NextPage = (): ReactElement => {
                             Auteur
                         </label>
                         <input
-                            className="rounded bg-slate-700 hover:bg-slate-600 focus:bg-slate-600 transition p-2 outline-none text-slate-300 w-full"
+                            className="rounded bg-slate-700 hover:bg-slate-600 focus:bg-slate-600 transition px-4 py-2 outline-none text-slate-300 w-full"
                             name="author"
                             required
                             minLength={2}
