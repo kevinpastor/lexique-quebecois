@@ -9,7 +9,7 @@ export const Sidebar = (): ReactElement => (
             </div>
             <div className="flex justify-center">
                 <Link href="/ajouter">
-                    <a className="bg-blue-500 font-bold rounded-full px-6 py-3 text-white text-center flex flex-row space-x-2">
+                    <a className="bg-blue-500 hover:bg-blue-600 font-bold rounded-full px-6 py-3 text-white text-center flex flex-row space-x-2 transition">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6 fill-transparent stroke-current"

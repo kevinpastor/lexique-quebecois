@@ -15,12 +15,12 @@ export const Navigation = (): ReactElement => {
         <nav className="bg-slate-800">
             <div className="container mx-auto py-4 flex flex-row justify-between">
                 <Link href="/">
-                    <a className="text-white text-2xl font-bold">
+                    <a className="text-white text-2xl font-extrabold font-serif">
                         Québécois Urbain
                     </a>
                 </Link>
                 <form onSubmit={onSubmit}>
-                    <div className="basis-1/4 rounded bg-slate-700 flex flex-row items-center gap-2">
+                    <div className="basis-1/4 rounded bg-slate-700 hover:bg-slate-600 active:bg-slate-600 transition flex flex-row items-center gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-4 w-4 text-slate-300 my-2 ml-4 fill-transparent stroke-current"
@@ -36,7 +36,9 @@ export const Navigation = (): ReactElement => {
                         <input
                             name="label"
                             placeholder="Chercher un mot"
-                            className="placeholder-slate-300 bg-transparent outline-none py-2 pr-2" />
+                            minLength={2}
+                            maxLength={32}
+                            className="placeholder-slate-500 bg-transparent outline-none py-2 pr-2 caret-white text-slate-300" />
                     </div>
                 </form>
             </div>

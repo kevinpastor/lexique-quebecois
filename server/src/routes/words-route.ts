@@ -85,10 +85,18 @@ export class WordsRoute implements AbstractRoute {
 
     private async getWord(req: Request, res: Response): Promise<void> {
         const label: string = req.params.label;
-        const word: DatedWord = await this.service.getWord(label);
 
-        res.status(ResponseCode.OK)
-            .send(word);
+        try {
+            const word: DatedWord = await this.service.getWord(label);
+            res.status(ResponseCode.OK)
+                .send(word);
+            return;
+        }
+        catch {
+            res.status(ResponseCode.NotFound)
+                .send();
+            return;
+        }
     }
 
     private async getWords(_: Request, res: Response): Promise<void> {

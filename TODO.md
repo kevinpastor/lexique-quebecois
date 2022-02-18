@@ -7,6 +7,7 @@
 - [ ] Add a plus icon to "Ajouter un mot"
 - [ ] Add a search icon to the search bar
 - [ ] Handle home 500
+- [ ] Add word type (adjective, noun, verb, etc.)
 
 ## Server
 
