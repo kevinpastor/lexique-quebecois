@@ -31,6 +31,9 @@ const Home = ({ words }: Props): ReactElement => {
             {words?.map((word: DatedWord) => (
                 <Word key={word.timestamp} word={word} />
             ))}
+            <div className="p-4 font-bold text-center text-slate-600 center">
+                Rafraichi la page pour découvrir des nouveaux mots!
+            </div>
         </div>
     );
 };

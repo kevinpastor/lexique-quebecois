@@ -26,47 +26,47 @@ const Add: NextPage = (): ReactElement => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <section className="bg-slate-700 rounded-lg p-8 space-y-8">
+            <section className="bg-slate-800 rounded-lg p-8 space-y-8">
                 <div className="text-3xl font-bold text-white">
                     Ajouter un mot
                 </div>
                 <div className="space-y-4">
                     <div className="space-y-1">
-                        <div className="text-white">
+                        <div className="text-slate-200">
                             Mot
                         </div>
                         <input
-                            className="rounded bg-slate-500 p-2 outline-none text-white w-full"
+                            className="rounded bg-slate-700 p-2 outline-none text-white w-full"
                             name="label"
                             required
                         />
                     </div>
                     <div className="space-y-1">
-                        <div className="text-white">
+                        <div className="text-slate-200">
                             Définition
                         </div>
                         <textarea
-                            className="rounded bg-slate-500 p-2 outline-none text-white w-full resize-none"
+                            className="rounded bg-slate-700 p-2 outline-none text-white w-full resize-none"
                             name="definition"
                             required
                         />
                     </div>
                     <div className="space-y-1">
-                        <div className="text-white">
+                        <div className="text-slate-200">
                             Exemple
                         </div>
                         <input
-                            className="rounded bg-slate-500 p-2 outline-none text-white w-full"
+                            className="rounded bg-slate-700 p-2 outline-none text-white w-full"
                             name="example"
                             required
                         />
                     </div>
                     <div className="space-y-1">
-                        <div className="text-white">
+                        <div className="text-slate-200">
                             Auteur
                         </div>
                         <input
-                            className="rounded bg-slate-500 p-2 outline-none text-white w-full"
+                            className="rounded bg-slate-700 p-2 outline-none text-white w-full"
                             name="author"
                             required
                         />

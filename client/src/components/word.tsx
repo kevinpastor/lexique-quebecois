@@ -23,20 +23,20 @@ export const Word = ({ word }: Props): ReactElement => {
     }
 
     return (
-        <section className="bg-slate-700 rounded-lg p-8 space-y-4">
+        <section className="bg-slate-800 rounded-lg p-8 space-y-4">
             <Link href={`/mots/${word.label}`}>
-                <a className="text-3xl font-bold text-blue-500 underline">
+                <a className="text-4xl font-bold text-blue-400 hover:text-blue-500">
                     {word.label}
                 </a>
             </Link>
-            <div className="text-white">
+            <div className="text-white font-medium text-lg">
                 {word.definition}
             </div>
-            <div className="text-white italic">
+            <div className="text-white italic text-lg">
                 {word.example}
             </div>
             <div>
-                <div className="text-slate-300">
+                <div className="text-slate-400 font-medium text-lg">
                     par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
                 </div>
             </div>

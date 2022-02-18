@@ -20,10 +20,24 @@ export const Navigation = (): ReactElement => {
                     </a>
                 </Link>
                 <form onSubmit={onSubmit}>
-                    <input
-                        name="label"
-                        placeholder="Rechercher"
-                        className="placeholder-slate-200 basis-1/4 rounded bg-slate-500 p-2 outline-none text-white w-full" />
+                    <div className="basis-1/4 rounded bg-slate-700 flex flex-row items-center gap-2">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4 text-slate-300 my-2 ml-4 fill-transparent stroke-current"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                className="stroke-2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+                        </svg>
+                        <input
+                            name="label"
+                            placeholder="Chercher un mot"
+                            className="placeholder-slate-300 bg-transparent outline-none py-2 pr-2" />
+                    </div>
                 </form>
             </div>
         </nav>
