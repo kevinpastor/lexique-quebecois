@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { injectable } from "inversify";
 import * as yup from "yup";
+import rateLimit from "express-rate-limit";
 
 import { Word } from "@quebecois-urbain/shared/models/word";
 import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
@@ -54,6 +55,14 @@ const addWordSchema = yup.object({
         .noUnknown()
 });
 
+const addWordRateLimit = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 2, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: ""
+});
+
 @injectable()
 export class WordsRoute implements AbstractRoute {
 
@@ -74,6 +83,7 @@ export class WordsRoute implements AbstractRoute {
         );
         this.router.post(
             "/words",
+            addWordRateLimit,
             validate(addWordSchema),
             asyncHandler(this.addWord.bind(this))
         );

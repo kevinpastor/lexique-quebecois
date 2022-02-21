@@ -3,6 +3,7 @@ import { Express, json, Request, Response, NextFunction } from "express";
 import { injectable } from "inversify";
 import * as morgan from "morgan";
 import * as cors from "cors";
+import helmet from "helmet";
 
 import { Routes } from "./routes";
 import { ResponseCode } from "./routes/response-code";
@@ -21,6 +22,7 @@ export class App {
             .use(cors({
                 origin: "http://localhost:3000"
             }))
+            .use(helmet())
             .use(json())
             .use(routes.get())
             .use(this.parsingError.bind(this));
