@@ -16,9 +16,7 @@
         "start": "concurrently --names client,server --prefix-colors cyan,green \"npm:start:client\" \"npm:start:server\"",
         "start:client": "npm run start --workspace=client",
         "start:server": "npm run start --workspace=server",
-        "build": "npm run shared build && npm run client build",
-        "build:shared": "npm run shared build",
-        "build:client": "npm run client build"
+        "build": "npm run build --workspace=shared && npm run build --workspace=client"
     },
     "devDependencies": {
         "concurrently": "^7.0.0"
