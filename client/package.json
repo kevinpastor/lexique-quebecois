@@ -1,5 +1,6 @@
 {
     "name": "@quebecois-urbain/client",
+    "version": "0.1.0",
     "private": true,
     "scripts": {
         "start": "next dev",
