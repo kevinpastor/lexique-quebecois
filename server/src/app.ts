@@ -5,20 +5,11 @@ import * as morgan from "morgan";
 import * as cors from "cors";
 import helmet from "helmet";
 import createNextServer from "next";
-import rateLimit from "express-rate-limit";
 
 import { Routes } from "./routes";
 import { ResponseCode } from "./routes/response-code";
 import { NextServer, NextServerOptions, RequestHandler } from "next/dist/server/next";
 import { isDevelopmentEnvironment, isProductionEnvironment } from "./utils/environment";
-
-const globalRateLimit = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 2, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-    standardHeaders: true,
-    legacyHeaders: false,
-    message: ""
-});
 
 @injectable()
 export class App {
@@ -30,12 +21,9 @@ export class App {
     public constructor(routes: Routes) {
         this.app = express();
 
-        // this.app.set("trust proxy", 1)
-        //     .use(globalRateLimit);
-
         this.app.use(morgan(
             isDevelopmentEnvironment()
-                ? "common" //"dev"
+                ? "dev"
                 : "common"
         ));
 
@@ -79,9 +67,13 @@ export class App {
         const handler: RequestHandler = server.getRequestHandler();
 
         const router: Router = Router();
-        router.all("*", (req: Request, res: Response): void => {
-            handler(req, res)
-                .catch(console.error);
+        router.all("*", async (req: Request, res: Response): Promise<void> => {
+            try {
+                await handler(req, res);
+            }
+            catch (error: unknown) {
+                console.error(error);
+            }
         });
 
         return router;

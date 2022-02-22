@@ -5,15 +5,13 @@ import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
 import { Word } from "@components/word";
 import { getWords } from "../requests/word";
 import { ErrorCard } from "@components/error-card";
+import { MobileCard } from "@components/mobile-card";
 
 interface Props {
     words?: Array<DatedWord>;
 }
 
-export const getServerSideProps = async ({ req }): Promise<GetServerSidePropsResult<Props>> => {
-    const forwarded = req.headers["x-forwarded-for"];
-    const ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
-    console.log(ip);
+export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
     const words: Array<DatedWord> | undefined = await getWords();
 
     if (!words) {
