@@ -16,7 +16,14 @@
         "start": "concurrently --names client,server --prefix-colors cyan,green \"npm:start:client\" \"npm:start:server\"",
         "start:client": "npm run start --workspace=client",
         "start:server": "npm run start --workspace=server",
-        "build": "cd client && npm run build"
+        "build": "concurrently --names client,server --prefix-colors cyan,green \"npm:build:client\" \"npm run shared build && npm run server build\"",
+        "build:shared": "npm run build --workspace=shared",
+        "build:client": "npm run build --workspace=client",
+        "build:server": "npm run build --workspace=server",
+        "build:prod:server": "docker build --tag server --file ./server.Dockerfile .",
+        "build:prod:client": "docker build --tag client --file ./client.Dockerfile .",
+        "start:prod:server": "docker run --detach --publish 8080:8080 server",
+        "start:prod:client": "docker run --detach --publish 3000:3000 client"
     },
     "devDependencies": {
         "concurrently": "^7.0.0"

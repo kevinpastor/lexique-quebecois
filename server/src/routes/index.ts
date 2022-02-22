@@ -12,12 +12,14 @@ export class Routes {
     public constructor(@multiInject(AbstractRoute) routes: Array<AbstractRoute>) {
         this.router = Router();
 
+        this.router.all("*", (req, res, next) => { console.log(req.headers); next(); });
+
         for (const route of routes) {
             this.router.use("/api", route.get());
         }
 
-        this.router.use(this.notFound.bind(this));
-        this.router.use(this.internalError.bind(this));
+        this.router.use("/api", this.notFound.bind(this));
+        this.router.use("/api", this.internalError.bind(this));
     }
 
     public get(): Router {
