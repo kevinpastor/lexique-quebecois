@@ -3,7 +3,6 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 
 import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
 import { Word as WordComponent } from "@components/word";
-import { getWord } from "../../requests/word";
 import { ErrorCard } from "@components/error-card";
 
 interface Props {

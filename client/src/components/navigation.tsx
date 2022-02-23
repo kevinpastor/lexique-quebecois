@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { FormEvent, ReactElement } from "react";
 
 export const Navigation = (): ReactElement => {
     const router = useRouter();
 
-    const onSubmit = async (event: any): Promise<void> => {
+    const onSubmit = async (event: FormEvent): Promise<void> => {
         event.preventDefault();
-        const label: string = event.target.label.value;
+        const target = event.target as typeof event.target & {
+            label: { value: string };
+        };
+        const label: string = target.label.value;
         await router.push(`/mots/${label}`);
     };
 

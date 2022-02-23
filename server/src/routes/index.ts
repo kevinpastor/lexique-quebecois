@@ -12,8 +12,6 @@ export class Routes {
     public constructor(@multiInject(AbstractRoute) routes: Array<AbstractRoute>) {
         this.router = Router();
 
-        this.router.all("*", (req, res, next) => { console.log(req.headers); next(); });
-
         for (const route of routes) {
             this.router.use("/api", route.get());
         }
@@ -32,8 +30,9 @@ export class Routes {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    private internalError(err: any, _: Request, res: Response, __: NextFunction): void {
-        console.error(err);
+    private internalError(error: unknown, _: Request, res: Response, __: NextFunction): void {
+        // eslint-disable-next-line no-console
+        console.error(error);
         res.status(ResponseCode.InternalError)
             .send();
     }

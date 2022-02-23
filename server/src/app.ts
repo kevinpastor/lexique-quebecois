@@ -45,6 +45,7 @@ export class App {
 
     public start(): void {
         this.app.listen(App.port, (): void => {
+            // eslint-disable-next-line no-console
             console.log(`Listening on port ${App.port}!`);
         });
     }
@@ -72,6 +73,7 @@ export class App {
                 await handler(req, res);
             }
             catch (error: unknown) {
+                // eslint-disable-next-line no-console
                 console.error(error);
             }
         });
