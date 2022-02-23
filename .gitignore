@@ -1,3 +1,6 @@
+ec2.pem
+rootkey.csv
+
 # Logs
 logs
 *.log
