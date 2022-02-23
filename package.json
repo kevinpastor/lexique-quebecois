@@ -13,18 +13,9 @@
         "client": "npm run --workspace=client",
         "server": "npm run --workspace=server",
         "shared": "npm run --workspace=shared",
-        "start": "concurrently --names client,server --prefix-colors cyan,green \"npm:start:client\" \"npm:start:server\"",
-        "start:client": "npm run start --workspace=client",
-        "start:server": "npm run start --workspace=server",
-        "build": "concurrently --names client,server --prefix-colors cyan,green \"npm:build:client\" \"npm run shared build && npm run server build\"",
-        "build:shared": "npm run build --workspace=shared",
-        "build:client": "npm run build --workspace=client",
-        "build:server": "npm run build --workspace=server",
         "build:prod": "docker build --tag quebecois-urbain --file ./Dockerfile .",
         "start:prod": "docker run --detach --publish 80:80 --env-file ./.env quebecois-urbain",
+        "debug:prod": "docker run --rm -it --entrypoint sh quebecois-urbain",
         "release:prod": "npm run build:prod && npm run start:prod"
-    },
-    "devDependencies": {
-        "concurrently": "^7.0.0"
     }
 }

@@ -1,6 +1,16 @@
 # Notes
 
-## Connect to EC2 instance
+## Docker
+
+### Shell into image
+
+```bash
+docker run --rm -it --entrypoint sh IMAGE_ID
+```
+
+## AWS
+
+### Connect to EC2 instance
 
 ```bash
 ssh -i ./ec2.pem ec2-user@ec2-54-166-166-145.compute-1.amazonaws.com
