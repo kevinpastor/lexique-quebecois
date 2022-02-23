@@ -43,6 +43,7 @@ COPY package.json ./package.json
 WORKDIR /app/client
 COPY --from=client-builder /app/client/next.config.js ./
 COPY --from=client-builder /app/client/build ./build
+COPY --from=client-builder /app/client/public ./public
 COPY --from=client-builder /app/client/package.json ./package.json
 
 WORKDIR /app/shared
@@ -56,8 +57,8 @@ COPY --from=server-builder /app/server/package.json ./package.json
 WORKDIR /app
 USER server
 
-EXPOSE 8080
+EXPOSE 80
 
-ENV PORT 8080
+ENV PORT 80
 
 CMD ["npm", "run", "server", "exec"]

@@ -6,19 +6,24 @@ import * as cors from "cors";
 import helmet from "helmet";
 import createNextServer from "next";
 
+import { isDevelopmentEnvironment, isProductionEnvironment } from "@quebecois-urbain/shared/utils/environment";
 import { Routes } from "./routes";
 import { ResponseCode } from "./routes/response-code";
 import { NextServer, NextServerOptions, RequestHandler } from "next/dist/server/next";
-import { isDevelopmentEnvironment, isProductionEnvironment } from "./utils/environment";
 
 @injectable()
 export class App {
 
-    private static readonly port: number = 8080;
+    private readonly port: number;
 
     private readonly app: Express;
 
     public constructor(routes: Routes) {
+        if (!process.env.PORT) {
+            throw new Error("Environment variable PORT is missing.");
+        }
+        this.port = parseInt(process.env.PORT);
+
         this.app = express();
 
         this.app.use(morgan(
@@ -44,9 +49,9 @@ export class App {
     }
 
     public start(): void {
-        this.app.listen(App.port, (): void => {
+        this.app.listen(this.port, (): void => {
             // eslint-disable-next-line no-console
-            console.log(`Listening on port ${App.port}!`);
+            console.log(`Listening on port ${this.port}!`);
         });
     }
 

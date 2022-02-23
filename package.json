@@ -20,10 +20,8 @@
         "build:shared": "npm run build --workspace=shared",
         "build:client": "npm run build --workspace=client",
         "build:server": "npm run build --workspace=server",
-        "build:prod:server": "docker build --tag server --file ./server.Dockerfile .",
-        "build:prod:client": "docker build --tag client --file ./client.Dockerfile .",
-        "start:prod:server": "docker run --detach --publish 8080:8080 server",
-        "start:prod:client": "docker run --detach --publish 3000:3000 client"
+        "build:prod": "docker build --tag quebecois-urbain --file ./Dockerfile .",
+        "start:prod": "docker run --detach --publish 80:80 --env-file ./.env quebecois-urbain"
     },
     "devDependencies": {
         "concurrently": "^7.0.0"

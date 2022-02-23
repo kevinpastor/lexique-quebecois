@@ -4,6 +4,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
 import { Word as WordComponent } from "@components/word";
 import { ErrorCard } from "@components/error-card";
+import { getUrl } from "src/requests";
 
 interface Props {
     hasFailed?: boolean;
@@ -20,7 +21,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext): 
     }
 
     try {
-        const response: Response = await fetch(`http://localhost:8080/api/words/${id}`);
+        const response: Response = await fetch(getUrl(`/api/words/${id}`));
 
         if (!response.ok) {
             if (response.status === 404) {

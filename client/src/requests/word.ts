@@ -1,9 +1,10 @@
 import { Word } from "@quebecois-urbain/shared/models/word";
 import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
+import { getUrl } from ".";
 
 export const getWord = async (id: string): Promise<DatedWord | undefined> => {
     try {
-        const response: Response = await fetch(`http://localhost:8080/api/words/${id}`);
+        const response: Response = await fetch(getUrl(`/api/words/${id}`));
 
         if (!response.ok) {
             return;
@@ -18,7 +19,7 @@ export const getWord = async (id: string): Promise<DatedWord | undefined> => {
 
 export const getWords = async (): Promise<Array<DatedWord> | undefined> => {
     try {
-        const response: Response = await fetch("http://localhost:8080/api/words/");
+        const response: Response = await fetch(getUrl("/api/words/"));
 
         if (!response.ok) {
             return;
@@ -40,7 +41,7 @@ export const addWord = async (word: Word): Promise<boolean> => {
             },
             body: JSON.stringify(word)
         };
-        const response: Response = await fetch("http://localhost:8080/api/words", options);
+        const response: Response = await fetch(getUrl("/api/words"), options);
 
         return response.ok;
     }
