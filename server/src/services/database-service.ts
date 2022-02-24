@@ -20,8 +20,8 @@ export class DatabaseService {
             try {
                 await client.connect();
             }
-            catch {
-                throw new Error("TODO");
+            catch (error: unknown) {
+                throw new Error(`Could not connect to database. \n${error}`);
             }
 
             this.db = client.db("quebecoisUrbain");

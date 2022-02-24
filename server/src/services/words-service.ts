@@ -32,7 +32,7 @@ export class WordService {
         const word: DatedWord | null = await collection.findOne(query, options);
 
         if (!word) {
-            throw new Error("TODO Not found");
+            throw new Error(`Could not find word in database. Looking for "${label}".`);
         }
 
         return word;
