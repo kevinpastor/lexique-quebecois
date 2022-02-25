@@ -8,6 +8,18 @@
 docker run --rm -it --entrypoint sh quebecois-urbain
 ```
 
+### Build client
+
+```bash
+docker build --tag quebecois-urbain-client --file ./client.Dockerfile .
+```
+
+### Build server
+
+```bash
+docker build --tag quebecois-urbain-server --file ./server.Dockerfile .
+```
+
 ## AWS
 
 ### Connect to EC2 instance

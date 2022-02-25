@@ -5,8 +5,8 @@ services:
       context: ./
       dockerfile: server.Dockerfile
     container_name: server
-    # environment:
-      # - PUID=1000
+    environment:
+      - DB_CONNECTION=${DB_CONNECTION}
     ports: 
       - 8080:8080
     # restart: unless-stopped
@@ -27,5 +27,4 @@ services:
     ports:
       - 80:80
     environment:
-      - NGINX_HOST=foobar.com
       - NGINX_PORT=80
