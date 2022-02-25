@@ -27,4 +27,4 @@ USER client
 ENV NODE_ENV production
 EXPOSE 3000
 
-CMD ["npm", "run", "client", "start:prod"]
+CMD ["npm", "run", "client", "exec"]
