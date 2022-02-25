@@ -1,5 +1,4 @@
-ec2.pem
-rootkey.csv
+.aws/
 
 # Logs
 logs

@@ -5,7 +5,7 @@
 ### Shell into image
 
 ```bash
-docker run --rm -it --entrypoint sh IMAGE_ID
+docker run --rm -it --entrypoint sh quebecois-urbain
 ```
 
 ## AWS
@@ -13,7 +13,7 @@ docker run --rm -it --entrypoint sh IMAGE_ID
 ### Connect to EC2 instance
 
 ```bash
-ssh -i ./ec2.pem ec2-user@ec2-54-166-166-145.compute-1.amazonaws.com
+ssh -i ./.aws/ec2.pem ec2-user@ec2-34-230-58-98.compute-1.amazonaws.com
 ```
 
 ### Push image to ECR

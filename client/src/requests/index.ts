@@ -3,5 +3,5 @@ import { isDevelopmentEnvironment } from "@quebecois-urbain/shared/utils/environ
 export const getUrl = (endpoint: string): string => (
     isDevelopmentEnvironment()
         ? `http://localhost:8080${endpoint}`
-        : `http://localhost${endpoint}`
+        : `http://server:8080${endpoint}`
 );

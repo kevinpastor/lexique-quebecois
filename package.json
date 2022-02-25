@@ -13,8 +13,13 @@
         "client": "npm run --workspace=client",
         "server": "npm run --workspace=server",
         "shared": "npm run --workspace=shared",
+        "shared:build:prod": "docker build --tag quebecois-urbain-shared --file ./shared.Dockerfile .",
+        "client:build:prod": "docker build --tag quebecois-urbain-client --file ./client.Dockerfile .",
+        "server:build:prod": "docker build --tag quebecois-urbain-server --file ./server.Dockerfile .",
         "build:prod": "docker build --tag quebecois-urbain --file ./Dockerfile .",
-        "start:prod": "docker run --detach --publish 80:80 --env-file ./.env --name quebecois-urbain quebecois-urbain",
+        "start:prod": "docker run --detach --publish 80:80 --publish 443:443 --env-file ./.env --name quebecois-urbain quebecois-urbain",
+        "client:start:prod": "docker run --detach --publish 3000:3000 --env-file ./.env --name quebecois-urbain-client quebecois-urbain-client",
+        "server:start:prod": "docker run --detach --publish 8080:8080 --env-file ./.env --name quebecois-urbain-server quebecois-urbain-server",
         "debug:prod": "docker run --rm -it --entrypoint sh quebecois-urbain",
         "release:prod": "npm run build:prod && npm run start:prod"
     }

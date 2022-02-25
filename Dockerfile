@@ -85,5 +85,5 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 server
 USER server
 
-EXPOSE 80
+EXPOSE 80 443
 CMD ["npm", "run", "server", "exec"]

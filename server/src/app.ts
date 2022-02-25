@@ -1,28 +1,25 @@
 import * as express from "express";
-import { Express, json, Request, Response, NextFunction, Router } from "express";
+import { Express, json, Request, Response, NextFunction } from "express";
 import { injectable } from "inversify";
 import * as morgan from "morgan";
 import * as cors from "cors";
 import helmet from "helmet";
-import createNextServer from "next";
 
-import { isDevelopmentEnvironment, isProductionEnvironment } from "@quebecois-urbain/shared/utils/environment";
+import { isDevelopmentEnvironment } from "@quebecois-urbain/shared/utils/environment";
 import { Routes } from "./routes";
 import { ResponseCode } from "./routes/response-code";
-import { NextServer, NextServerOptions, RequestHandler } from "next/dist/server/next";
 
 @injectable()
 export class App {
 
-    private readonly port: number;
+    private readonly port: number = 8080;
 
     private readonly app: Express;
 
     public constructor(routes: Routes) {
-        if (!process.env.PORT) {
-            throw new Error("Environment variable PORT is missing.");
+        if (process.env.PORT) {
+            this.port = parseInt(process.env.PORT);
         }
-        this.port = parseInt(process.env.PORT);
 
         this.app = express();
 
@@ -42,10 +39,6 @@ export class App {
             .use(json())
             .use(routes.get())
             .use(this.parsingError.bind(this));
-
-        if (isProductionEnvironment()) {
-            this.app.use(this.getNextRoute());
-        }
     }
 
     public start(): void {
@@ -63,27 +56,6 @@ export class App {
         }
 
         next();
-    }
-
-    private getNextRoute(): Router {
-        const options: NextServerOptions = {
-            dir: "../client"
-        };
-        const server: NextServer = createNextServer(options);
-        const handler: RequestHandler = server.getRequestHandler();
-
-        const router: Router = Router();
-        router.all("*", async (req: Request, res: Response): Promise<void> => {
-            try {
-                await handler(req, res);
-            }
-            catch (error: unknown) {
-                // eslint-disable-next-line no-console
-                console.error(error);
-            }
-        });
-
-        return router;
     }
 
 }
