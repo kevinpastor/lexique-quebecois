@@ -13,8 +13,7 @@
         "client": "npm run --workspace=client",
         "server": "npm run --workspace=server",
         "shared": "npm run --workspace=shared",
-        "client:build:prod": "docker build --tag quebecois-urbain-client --file ./client.Dockerfile .",
-        "server:build:prod": "docker build --tag quebecois-urbain-server --file ./server.Dockerfile .",
+        "build:prod": "docker-compose build --parallel",
         "release:prod": "docker-compose --env-file ./.env up --detach --build"
     }
 }

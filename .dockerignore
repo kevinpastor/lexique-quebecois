@@ -1,8 +1,14 @@
 node_modules/
 build/
+.aws/
 .git/
+
 .dockerignore
+.env
 .gitignore
-Dockerfile
+client.Dockerfile
+server.Dockerfile
+nginx.conf
+docker-compose.yml
 README.md
 TODO.md
