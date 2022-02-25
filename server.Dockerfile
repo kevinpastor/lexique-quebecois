@@ -1,5 +1,4 @@
-########################################
-FROM node:17-alpine AS dependencies
+FROM node:17-alpine
 
 WORKDIR /app
 
@@ -9,18 +8,20 @@ COPY ./server/package.json ./server/
 
 RUN npm ci
 
-COPY . .
+COPY ./shared/ ./shared/
+COPY ./server/ ./server/
 
 RUN npm run shared build
 RUN npm run server build
 
 RUN npm prune --production --workspaces
 
-ENV NODE_ENV production
-
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 server
 USER server
 
+ENV NODE_ENV production
+
 EXPOSE 8080
+
 CMD ["npm", "run", "server", "exec"]

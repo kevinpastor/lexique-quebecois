@@ -21,7 +21,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext): 
     }
 
     try {
-        const response: Response = await fetch(getUrl(`/api/words/${id}`));
+        const response: Response = await fetch(getUrl(`/api/words/${id}`, true));
 
         if (!response.ok) {
             if (response.status === 404) {

@@ -24,7 +24,7 @@ const Add: NextPage = (): ReactElement => {
             author: target.author.value
         };
 
-        const status: boolean = await addWord(word);
+        const status: boolean = await addWord(false, word);
 
         if (!status) {
             alert("Une erreur s'est produite. Veuillez réessayer.");

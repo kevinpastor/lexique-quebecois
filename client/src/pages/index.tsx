@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
-    const words: Array<DatedWord> | undefined = await getWords();
+    const words: Array<DatedWord> | undefined = await getWords(true);
 
     if (!words) {
         return {
