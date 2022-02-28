@@ -1,7 +1,0 @@
-{
-    "exec": "npm run build && npm run exec",
-    "ext": "ts",
-    "watch": [
-        "src"
-    ]
-}
