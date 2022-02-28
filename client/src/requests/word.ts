@@ -1,38 +1,6 @@
 import { Word } from "@quebecois-urbain/shared/models/word";
-import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
-import { getUrl } from ".";
 
-export const getWord = async (isSSR: boolean, id: string): Promise<DatedWord | undefined> => {
-    try {
-        const response: Response = await fetch(getUrl(`/api/words/${id}`, isSSR));
-
-        if (!response.ok) {
-            return;
-        }
-
-        return await response.json();
-    }
-    catch {
-        return;
-    }
-};
-
-export const getWords = async (isSSR: boolean): Promise<Array<DatedWord> | undefined> => {
-    try {
-        const response: Response = await fetch(getUrl("/api/words/", isSSR));
-
-        if (!response.ok) {
-            return;
-        }
-
-        return await response.json();
-    }
-    catch {
-        return;
-    }
-};
-
-export const addWord = async (isSSR: boolean, word: Word): Promise<boolean> => {
+export const addWord = async (word: Word): Promise<boolean> => {
     try {
         const options: RequestInit = {
             method: "POST",
@@ -41,7 +9,7 @@ export const addWord = async (isSSR: boolean, word: Word): Promise<boolean> => {
             },
             body: JSON.stringify(word)
         };
-        const response: Response = await fetch(getUrl("/api/words", isSSR), options);
+        const response: Response = await fetch("/api/words", options);
 
         return response.ok;
     }

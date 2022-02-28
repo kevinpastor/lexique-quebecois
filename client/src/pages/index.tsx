@@ -3,7 +3,7 @@ import { GetServerSidePropsResult } from "next";
 
 import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
 import { Word } from "@components/word";
-import { getWords } from "../requests/word";
+import { getWords } from "@services/words";
 import { ErrorCard } from "@components/error-card";
 
 interface Props {
@@ -11,19 +11,20 @@ interface Props {
 }
 
 export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
-    const words: Array<DatedWord> | undefined = await getWords(true);
+    try {
+        const words: Array<DatedWord> = await getWords();
 
-    if (!words) {
+        return {
+            props: {
+                words
+            }
+        };
+    }
+    catch {
         return {
             props: {}
         };
     }
-
-    return {
-        props: {
-            words
-        }
-    };
 };
 
 const Home = ({ words }: Props): ReactElement => {

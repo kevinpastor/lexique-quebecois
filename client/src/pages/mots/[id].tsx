@@ -4,7 +4,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
 import { Word as WordComponent } from "@components/word";
 import { ErrorCard } from "@components/error-card";
-import { getUrl } from "src/requests";
+import { getWord } from "@services/words";
 
 interface Props {
     hasFailed?: boolean;
@@ -16,27 +16,20 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext): 
 
     if (typeof id !== "string") {
         return {
-            props: {}
+            props: {
+                hasFailed: true
+            }
         };
     }
 
     try {
-        const response: Response = await fetch(getUrl(`/api/words/${id}`, true));
+        const word: DatedWord | undefined = await getWord(id);
 
-        if (!response.ok) {
-            if (response.status === 404) {
-                return {
-                    props: {}
-                };
-            }
+        if (!word) {
             return {
-                props: {
-                    hasFailed: true
-                }
+                props: {}
             };
         }
-
-        const word: DatedWord = await response.json();
 
         return {
             props: {
