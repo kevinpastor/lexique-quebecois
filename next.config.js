@@ -7,7 +7,7 @@ module.exports = {
             headers: [
                 {
                     key: "Content-Security-Policy",
-                    value: "default-src 'self' vitals.vercel-insights.com"
+                    value: "default-src 'self'; connect-src 'self' vitals.vercel-insights.com;"
                 }
             ]
         }
