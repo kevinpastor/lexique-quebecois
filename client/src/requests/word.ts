@@ -1,4 +1,4 @@
-import { Word } from "@quebecois-urbain/shared/models/word";
+import { Word } from "@models/word";
 
 export const addWord = async (word: Word): Promise<boolean> => {
     try {

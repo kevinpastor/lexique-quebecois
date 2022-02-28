@@ -1,4 +1,4 @@
-import { Word } from "@quebecois-urbain/shared/models/word";
+import { Word } from "@models/word";
 import { addWord } from "@services/words";
 import { NextApiRequest, NextApiResponse } from "next";
 import * as yup from "yup";
@@ -32,7 +32,7 @@ const addWordSchema = yup
     })
     .noUnknown();
 
-export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
     if (req.method !== "POST") {
         res.status(404)
             .end();
@@ -51,3 +51,5 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     res.status(200)
         .json(datedWord);
 };
+
+export default handler;

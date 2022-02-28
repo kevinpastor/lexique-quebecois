@@ -1,4 +1,4 @@
-import { Db, MongoClient } from 'mongodb'
+import { Db, MongoClient } from "mongodb";
 
 let client: MongoClient;
 let database: Db;
@@ -6,7 +6,7 @@ let database: Db;
 export const getDatabase = async (): Promise<Db> => {
     if (!database) {
         if (!process.env.MONGODB_URI) {
-            throw new Error('Please add your Mongo URI to .env.local')
+            throw new Error("Please add your Mongo URI to .env.local");
         }
 
         const uri: string = process.env.MONGODB_URI;
@@ -23,6 +23,4 @@ export const getDatabase = async (): Promise<Db> => {
     }
 
     return database;
-}
-
-
+};

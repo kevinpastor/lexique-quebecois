@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import Link from "next/link";
 
-import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
+import { DatedWord } from "@models/dated-word";
 import { formatDate } from "@utils/date";
 
 interface Props {

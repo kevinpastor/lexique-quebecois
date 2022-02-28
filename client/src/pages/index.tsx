@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { GetServerSidePropsResult } from "next";
 
-import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
+import { DatedWord } from "@models/dated-word";
 import { Word } from "@components/word";
 import { getWords } from "@services/words";
 import { ErrorCard } from "@components/error-card";

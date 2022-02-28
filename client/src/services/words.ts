@@ -1,9 +1,9 @@
 import { Collection, Db, FindOptions } from "mongodb";
 
-import { DatedWord } from "@quebecois-urbain/shared/models/dated-word";
+import { DatedWord } from "@models/dated-word";
 import { shuffle } from "@utils/random";
 import { getDatabase } from "./database";
-import { Word } from "@quebecois-urbain/shared/models/word";
+import { Word } from "@models/word";
 
 interface ModeratedWord extends DatedWord {
     isApproved: boolean;
@@ -26,7 +26,7 @@ export const getWords = async (): Promise<Array<DatedWord>> => {
         .toArray();
 
     return shuffle(words);
-}
+};
 
 export const getWord = async (label: string): Promise<DatedWord | undefined> => {
     const database: Db = await getDatabase();
@@ -48,7 +48,7 @@ export const getWord = async (label: string): Promise<DatedWord | undefined> => 
     }
 
     return word;
-}
+};
 
 export const addWord = async (word: Word): Promise<DatedWord> => {
     const datedWord: DatedWord = {

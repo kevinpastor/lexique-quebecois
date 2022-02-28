@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { FormEvent, ReactElement } from "react";
-import { Word } from "@quebecois-urbain/shared/models/word";
+import { Word } from "@models/word";
 import { addWord } from "src/requests/word";
 import { useRouter } from "next/router";
 
