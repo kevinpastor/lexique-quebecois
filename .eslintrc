@@ -1,27 +1,22 @@
-/** @type {import("eslint").Linter.BaseConfig} */
-module.exports = {
-    root: true,
-    parserOptions: {
-        tsconfigRootDir: __dirname,
-        project: [
-            "./tsconfig.json"
-        ],
-        createDefaultProgram: true
-    },
-    plugins: [
+{
+    "root": true,
+    "plugins": [
         "@typescript-eslint",
         "promise"
     ],
-    extends: [
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "extends": [
         "next/core-web-vitals",
         "eslint:recommended",
         "next",
         "plugin:@typescript-eslint/recommended"
     ],
-    ignorePatterns: [
+    "ignorePatterns": [
         "**/*.js"
     ],
-    rules: {
+    "rules": {
         "react/jsx-indent": [
             "error",
             4
