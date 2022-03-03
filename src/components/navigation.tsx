@@ -1,3 +1,4 @@
+import { getResourceName } from "@utils/word";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, ReactElement } from "react";
@@ -11,7 +12,8 @@ export const Navigation = (): ReactElement => {
             label: { value: string };
         };
         const label: string = target.label.value;
-        await router.push(`/mots/${label}`);
+        const resourceName: string = getResourceName(label);
+        await router.push(`/mots/${resourceName}`);
     };
 
     return (

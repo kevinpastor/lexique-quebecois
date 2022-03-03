@@ -1,6 +1,6 @@
-import { Word } from "@models/word";
+import { WordsPostRequestBody } from "@models/words-post-request-body";
 
-export const addWord = async (word: Word): Promise<boolean> => {
+export const addWord = async (word: WordsPostRequestBody): Promise<boolean> => {
     try {
         const options: RequestInit = {
             method: "POST",

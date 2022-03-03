@@ -1,8 +1,6 @@
-export interface Word {
-    resourceName: string;
+export interface WordsPostRequestBody {
     label: string;
     definition: string;
     example: string;
     author?: string;
-    timestamp: number;
 }

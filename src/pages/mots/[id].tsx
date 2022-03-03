@@ -1,14 +1,14 @@
 import { ReactElement } from "react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 
-import { DatedWord } from "@models/dated-word";
+import { Word as IWord } from "@models/word";
 import { Word as WordComponent } from "@components/word";
 import { ErrorCard } from "@components/error-card";
 import { getWord } from "@services/words";
 
 interface Props {
     hasFailed?: boolean;
-    word?: DatedWord;
+    word?: IWord;
 }
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Props>> => {
@@ -23,7 +23,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext): 
     }
 
     try {
-        const word: DatedWord | undefined = await getWord(id);
+        const word: IWord | undefined = await getWord(id);
 
         if (!word) {
             return {
@@ -46,7 +46,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext): 
     }
 };
 
-const WordPage = ({ word, hasFailed }: Props): ReactElement => {
+const Word = ({ word, hasFailed }: Props): ReactElement => {
     if (hasFailed) {
         return (
             <ErrorCard />
@@ -60,7 +60,7 @@ const WordPage = ({ word, hasFailed }: Props): ReactElement => {
                     Ce mot n&apos;a pas été trouvé
                 </div>
                 <div className="text-white font-medium">
-                    Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple à l&apos;aide du bouton à droite.
+                    Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple.
                 </div>
             </section>
         );
@@ -76,4 +76,4 @@ const WordPage = ({ word, hasFailed }: Props): ReactElement => {
     );
 };
 
-export default WordPage;
+export default Word;

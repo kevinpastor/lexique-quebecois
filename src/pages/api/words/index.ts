@@ -1,7 +1,8 @@
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { Word } from "@models/word";
+import { WordsPostRequestBody } from "@models/words-post-request-body";
 import { addWord } from "@services/words";
+import { labelRegex } from "@utils/word";
 import { NextApiRequest, NextApiResponse } from "next";
 import * as yup from "yup";
 
@@ -12,6 +13,7 @@ const addWordSchema = yup
             .trim()
             .min(2)
             .max(32)
+            .matches(labelRegex)
             .required(),
         definition: yup
             .string()
@@ -47,7 +49,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
         return;
     }
 
-    const word: Word = req.body;
+    const word: WordsPostRequestBody = req.body;
     const datedWord: unknown = await addWord(word);
 
     res.status(Status.Created)

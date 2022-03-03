@@ -1,18 +1,18 @@
 import { ReactElement } from "react";
 import { GetServerSidePropsResult } from "next";
 
-import { DatedWord } from "@models/dated-word";
+import { Word as IWord } from "@models/word";
 import { Word } from "@components/word";
 import { getWords } from "@services/words";
 import { ErrorCard } from "@components/error-card";
 
 interface Props {
-    words?: Array<DatedWord>;
+    words?: Array<IWord>;
 }
 
 export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
     try {
-        const words: Array<DatedWord> = await getWords();
+        const words: Array<IWord> = await getWords();
 
         return {
             props: {
@@ -36,7 +36,7 @@ const Home = ({ words }: Props): ReactElement => {
 
     return (
         <div className="space-y-4">
-            {words.map((word: DatedWord): ReactElement => (
+            {words.map((word: IWord): ReactElement => (
                 <Word key={word.timestamp} word={word} />
             ))}
             <div className="p-4 flex flex-row text-slate-600 gap-2 justify-center font-bold text-center">

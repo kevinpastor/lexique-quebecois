@@ -1,8 +1,9 @@
 import { NextPage } from "next";
 import { FormEvent, ReactElement } from "react";
-import { Word } from "@models/word";
+import { WordsPostRequestBody } from "@models/words-post-request-body";
 import { addWord } from "src/requests/word";
 import { useRouter } from "next/router";
+import { labelRegex } from "@utils/word";
 
 const Add: NextPage = (): ReactElement => {
     const router = useRouter();
@@ -17,7 +18,7 @@ const Add: NextPage = (): ReactElement => {
             author: { value: string };
         };
 
-        const word: Word = {
+        const word: WordsPostRequestBody = {
             label: target.label.value,
             definition: target.definition.value,
             example: target.example.value,
@@ -53,6 +54,7 @@ const Add: NextPage = (): ReactElement => {
                             autoFocus
                             minLength={2}
                             maxLength={32}
+                            pattern={labelRegex.source}
                         />
                     </div>
                     <div className="space-y-1">

@@ -1,15 +1,16 @@
 import { Collection, Db, FindOptions } from "mongodb";
 
-import { DatedWord } from "@models/dated-word";
+import { Word } from "@models/word";
 import { shuffle } from "@utils/random";
 import { getDatabase } from "./database";
-import { Word } from "@models/word";
+import { WordsPostRequestBody } from "@models/words-post-request-body";
+import { getResourceName } from "@utils/word";
 
-interface ModeratedWord extends DatedWord {
+interface ModeratedWord extends Word {
     isApproved: boolean;
 }
 
-export const getWords = async (): Promise<Array<DatedWord>> => {
+export const getWords = async (): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
     const collection: Collection<ModeratedWord> = database.collection("definitions");
     const pipeline = [
@@ -22,17 +23,17 @@ export const getWords = async (): Promise<Array<DatedWord>> => {
             }
         }
     ];
-    const words: Array<DatedWord> = await collection.aggregate<DatedWord>(pipeline)
+    const words: Array<Word> = await collection.aggregate<Word>(pipeline)
         .toArray();
 
     return shuffle(words);
 };
 
-export const getWord = async (label: string): Promise<DatedWord | undefined> => {
+export const getWord = async (resourceName: string): Promise<Word | undefined> => {
     const database: Db = await getDatabase();
     const collection: Collection<ModeratedWord> = database.collection("definitions");
     const query = {
-        label,
+        resourceName,
         isApproved: true
     };
     const options: FindOptions = {
@@ -41,7 +42,7 @@ export const getWord = async (label: string): Promise<DatedWord | undefined> => 
             isApproved: 0
         }
     };
-    const word: DatedWord | null = await collection.findOne(query, options);
+    const word: Word | null = await collection.findOne(query, options);
 
     if (!word) {
         return;
@@ -50,9 +51,10 @@ export const getWord = async (label: string): Promise<DatedWord | undefined> => 
     return word;
 };
 
-export const addWord = async (word: Word): Promise<DatedWord> => {
-    const datedWord: DatedWord = {
+export const addWord = async (word: WordsPostRequestBody): Promise<Word> => {
+    const datedWord: Word = {
         ...word,
+        resourceName: getResourceName(word.label),
         timestamp: new Date().getTime()
     };
     const moderatedWord: ModeratedWord = {

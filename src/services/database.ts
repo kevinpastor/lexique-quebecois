@@ -1,7 +1,6 @@
 import { Db, MongoClient } from "mongodb";
 
-let client: MongoClient;
-let database: Db;
+let database: Db | undefined = undefined;
 
 export const getDatabase = async (): Promise<Db> => {
     if (!database) {
@@ -10,7 +9,7 @@ export const getDatabase = async (): Promise<Db> => {
         }
 
         const uri: string = process.env.MONGODB_URI;
-        client = new MongoClient(uri);
+        const client: MongoClient = new MongoClient(uri);
 
         try {
             await client.connect();
