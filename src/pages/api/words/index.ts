@@ -1,3 +1,5 @@
+import { Method } from "@models/method";
+import { Status } from "@models/status";
 import { Word } from "@models/word";
 import { addWord } from "@services/words";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -33,14 +35,14 @@ const addWordSchema = yup
     .noUnknown();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-    if (req.method !== "POST") {
-        res.status(404)
+    if (req.method !== Method.POST) {
+        res.status(Status.MethodNotAllowed)
             .end();
         return;
     }
 
     if (!await addWordSchema.isValid(req.body, { strict: true })) {
-        res.status(400)
+        res.status(Status.BadRequest)
             .end();
         return;
     }
@@ -48,7 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
     const word: Word = req.body;
     const datedWord: unknown = await addWord(word);
 
-    res.status(200)
+    res.status(Status.Created)
         .json(datedWord);
 };
 

@@ -93,7 +93,7 @@ const Add: NextPage = (): ReactElement => {
                     </div>
                 </div>
                 <div className="flex flex-row-reverse">
-                    <button type="submit" className="bg-blue-500 hover:bg-blue-600 transition font-bold  rounded-full px-6 py-3 text-white text-center flex flex-row gap-2">
+                    <button type="submit" className="bg-blue-500 hover:bg-blue-600 transition font-bold rounded-lg px-6 py-3 text-white text-center flex flex-row gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6 fill-transparent stroke-current"
@@ -106,7 +106,7 @@ const Add: NextPage = (): ReactElement => {
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
                             />
                         </svg>
-                        Soumettre
+                        Envoyer
                     </button>
                 </div>
             </section>

@@ -8,9 +8,6 @@
 - [ ] Add a search icon to the search bar
 - [ ] Handle home 500
 - [ ] Add word type (adjective, noun, verb, etc.)
-
-## Server
-
-- [ ] Load database on start
+- [ ] beforeunload on ajouter
 
 # DONE

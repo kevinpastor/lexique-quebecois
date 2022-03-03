@@ -67,7 +67,12 @@ const WordPage = ({ word, hasFailed }: Props): ReactElement => {
     }
 
     return (
-        <WordComponent word={word} />
+        <div className="space-y-4">
+            <WordComponent word={word} />
+            <div className="p-4 flex flex-row text-slate-600 gap-2 justify-center font-bold text-center">
+                Il ne peut y avoir qu&apos;une seule définition par mot pour le moment
+            </div>
+        </div>
     );
 };
 
