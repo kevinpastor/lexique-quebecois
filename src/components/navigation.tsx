@@ -2,6 +2,7 @@ import { getResourceName } from "@utils/word";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, ReactElement } from "react";
+import { IconButton } from "./icon-button";
 
 export const Navigation = (): ReactElement => {
     const router = useRouter();
@@ -14,6 +15,10 @@ export const Navigation = (): ReactElement => {
         const label: string = target.label.value;
         const resourceName: string = getResourceName(label);
         await router.push(`/mots/${resourceName}`);
+    };
+
+    const onAdd = async (): Promise<void> => {
+        await router.push("/ajouter");
     };
 
     return (
@@ -48,8 +53,9 @@ export const Navigation = (): ReactElement => {
                         </div>
                     </form>
                     <div className="flex flex-row gap-4">
-                        <Link href="/ajouter">
-                            <a className="bg-blue-500 hover:bg-blue-600 font-bold rounded-full p-2 text-white text-center flex flex-row space-x-2 transition">
+                        <IconButton
+                            onClick={onAdd}
+                            icon={
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-6 w-6 fill-transparent stroke-current"
@@ -62,8 +68,8 @@ export const Navigation = (): ReactElement => {
                                         d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                                     />
                                 </svg>
-                            </a>
-                        </Link>
+                            }
+                        />
                     </div>
                 </div>
             </div>
