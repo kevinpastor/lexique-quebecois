@@ -4,9 +4,9 @@ import { ReactElement } from "react";
 
 import "@styles/index.css";
 
-import { Navigation } from "@components/navigation";
-import { Sidebar } from "@components/sidebar";
-import { MobileFooter } from "@components/mobile-footer";
+import { Navigation } from "@components/layout/navigation";
+import { Sidebar } from "@components/layout/sidebar";
+import { MobileFooter } from "@components/layout/mobile-footer";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
     <>

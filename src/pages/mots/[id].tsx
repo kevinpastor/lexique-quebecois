@@ -2,8 +2,8 @@ import { ReactElement } from "react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 
 import { Word as IWord } from "@models/word";
-import { Word as WordComponent } from "@components/word";
-import { ErrorCard } from "@components/error-card";
+import { Word as WordComponent } from "@components/misc/word";
+import { ErrorCard } from "@components/misc/error-card";
 import { getWord } from "@services/words";
 
 interface Props {
