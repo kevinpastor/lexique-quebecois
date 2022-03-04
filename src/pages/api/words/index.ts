@@ -1,39 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import * as yup from "yup";
 
-import { Method, Status, WordsPostRequestBody } from "@models";
+import { Method, Status, WordRequest } from "@models";
+import { isValidWordRequest } from "@utils/word";
 import { addWord } from "@services/words";
-import { labelRegex } from "@utils/word";
-
-const addWordSchema = yup
-    .object({
-        label: yup
-            .string()
-            .trim()
-            .min(2)
-            .max(32)
-            .matches(labelRegex)
-            .required(),
-        definition: yup
-            .string()
-            .trim()
-            .min(2)
-            .max(256)
-            .required(),
-        example: yup
-            .string()
-            .trim()
-            .min(2)
-            .max(256)
-            .required(),
-        author: yup
-            .string()
-            .trim()
-            .min(2)
-            .max(32)
-            .optional()
-    })
-    .noUnknown();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
     if (req.method !== Method.POST) {
@@ -42,14 +11,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
         return;
     }
 
-    if (!await addWordSchema.isValid(req.body, { strict: true })) {
+    if (!isValidWordRequest(req.body)) {
         res.status(Status.BadRequest)
             .end();
         return;
     }
 
-    const word: WordsPostRequestBody = req.body;
-    const datedWord: unknown = await addWord(word);
+    const wordRequest: WordRequest = req.body;
+    const datedWord: unknown = await addWord(wordRequest);
 
     res.status(Status.Created)
         .json(datedWord);

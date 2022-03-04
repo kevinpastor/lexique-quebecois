@@ -2,9 +2,8 @@ import { ReactElement } from "react";
 import { GetServerSidePropsResult } from "next";
 
 import { Word as IWord } from "@models";
-import { Word } from "@components/misc/word";
 import { getWords } from "@services/words";
-import { ErrorCard } from "@components/misc";
+import { ErrorCard, Word } from "@components/misc";
 
 interface Props {
     words?: Array<IWord>;

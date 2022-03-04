@@ -1,4 +1,4 @@
-export interface WordsPostRequestBody {
+export interface WordRequest {
     label: string;
     definition: string;
     example: string;

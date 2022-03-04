@@ -1,6 +1,6 @@
+import { FormEvent, ReactElement } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FormEvent, ReactElement } from "react";
 
 import { getResourceName } from "@utils/word";
 import { IconButton } from "@components/form";

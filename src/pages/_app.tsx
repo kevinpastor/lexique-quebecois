@@ -1,6 +1,6 @@
+import { ReactElement } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { ReactElement } from "react";
 
 import "@styles/index.css";
 

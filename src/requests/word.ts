@@ -1,13 +1,13 @@
-import { WordsPostRequestBody } from "@models";
+import { WordRequest } from "@models";
 
-export const addWord = async (word: WordsPostRequestBody): Promise<boolean> => {
+export const addWord = async (wordRequest: WordRequest): Promise<boolean> => {
     try {
         const options: RequestInit = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(word)
+            body: JSON.stringify(wordRequest)
         };
         const response: Response = await fetch("/api/words", options);
 

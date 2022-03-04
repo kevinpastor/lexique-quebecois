@@ -1,8 +1,7 @@
 import { Collection, Db, FindOptions } from "mongodb";
 
-import { Word } from "@models";
+import { Word, WordRequest } from "@models";
 import { shuffle } from "@utils/random";
-import { WordsPostRequestBody } from "src/models/words-post-request-body";
 import { getResourceName } from "@utils/word";
 
 import { getDatabase } from "./database";
@@ -52,7 +51,7 @@ export const getWord = async (resourceName: string): Promise<Word | undefined> =
     return word;
 };
 
-export const addWord = async (word: WordsPostRequestBody): Promise<Word> => {
+export const addWord = async (word: WordRequest): Promise<Word> => {
     const datedWord: Word = {
         ...word,
         resourceName: getResourceName(word.label),

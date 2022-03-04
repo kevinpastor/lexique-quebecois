@@ -1,5 +1,5 @@
-import { Html, Head, Main, NextScript } from "next/document";
 import { ReactElement } from "react";
+import { Html, Head, Main, NextScript } from "next/document";
 
 const Document = (): ReactElement => (
     <Html>
