@@ -1,5 +1,6 @@
-import { ErrorCard } from "@components/misc/error-card";
 import { ReactElement } from "react";
+
+import { ErrorCard } from "@components/misc";
 
 const InternalError = (): ReactElement => (
     <ErrorCard />

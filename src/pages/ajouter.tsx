@@ -1,11 +1,12 @@
 import { NextPage } from "next";
 import { ReactElement } from "react";
-import { WordsPostRequestBody } from "@models/words-post-request-body";
 import { useRouter } from "next/router";
-import { labelRegex } from "@utils/word";
-import { Button } from "@components/form/button";
 import { Field, Form, Formik, FormikProps, useFormikContext } from "formik";
 import * as yup from "yup";
+
+import { WordsPostRequestBody } from "@models/words-post-request-body";
+import { labelRegex } from "@utils/word";
+import { Button } from "@components/form";
 
 const initialValues: WordsPostRequestBody = {
     label: "",

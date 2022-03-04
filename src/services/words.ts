@@ -2,9 +2,10 @@ import { Collection, Db, FindOptions } from "mongodb";
 
 import { Word } from "@models/word";
 import { shuffle } from "@utils/random";
-import { getDatabase } from "./database";
 import { WordsPostRequestBody } from "@models/words-post-request-body";
 import { getResourceName } from "@utils/word";
+
+import { getDatabase } from "./database";
 
 interface ModeratedWord extends Word {
     isApproved: boolean;

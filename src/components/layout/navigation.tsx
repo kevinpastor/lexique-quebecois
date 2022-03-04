@@ -1,8 +1,9 @@
-import { getResourceName } from "@utils/word";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, ReactElement } from "react";
-import { IconButton } from "../form/icon-button";
+
+import { getResourceName } from "@utils/word";
+import { IconButton } from "@components/form";
 
 export const Navigation = (): ReactElement => {
     const router = useRouter();

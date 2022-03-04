@@ -1,10 +1,11 @@
+import { NextApiRequest, NextApiResponse } from "next";
+import * as yup from "yup";
+
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { WordsPostRequestBody } from "@models/words-post-request-body";
 import { addWord } from "@services/words";
 import { labelRegex } from "@utils/word";
-import { NextApiRequest, NextApiResponse } from "next";
-import * as yup from "yup";
 
 const addWordSchema = yup
     .object({
