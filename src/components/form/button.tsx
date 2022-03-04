@@ -1,9 +1,11 @@
 import { ButtonHTMLAttributes, ReactElement } from "react";
 import classnames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 interface Props {
     label: string;
-    icon?: ReactElement;
+    icon?: IconDefinition;
     type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
     onClick?: () => void;
     disabled?: boolean;
@@ -22,7 +24,9 @@ export const Button = ({ label, type = "submit", icon, onClick, disabled = false
         )}
         disabled={disabled}
     >
-        {icon}
+        {icon &&
+            <FontAwesomeIcon icon={icon} className="w-6 h-6" />
+        }
         {label}
     </button>
 );

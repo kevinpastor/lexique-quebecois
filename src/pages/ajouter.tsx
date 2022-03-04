@@ -7,6 +7,7 @@ import { WordRequest } from "@models";
 import { wordRequestValidationSchema } from "@utils/word";
 import { Button, Field } from "@components/form";
 import { addWord } from "src/requests/word";
+import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 const initialValues: WordRequest = {
     label: "",
@@ -66,20 +67,7 @@ const Add: NextPage = (): ReactElement => {
                             <Button
                                 label="Envoyer"
                                 disabled={isSubmitting}
-                                icon={
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-6 w-6 fill-transparent stroke-current"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            className="stroke-2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                                        />
-                                    </svg>
-                                }
+                                icon={faCloudArrowUp}
                             />
                         </div>
                     </section>
