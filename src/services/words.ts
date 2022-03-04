@@ -1,8 +1,8 @@
 import { Collection, Db, FindOptions } from "mongodb";
 
-import { Word } from "@models/word";
+import { Word } from "@models";
 import { shuffle } from "@utils/random";
-import { WordsPostRequestBody } from "@models/words-post-request-body";
+import { WordsPostRequestBody } from "src/models/words-post-request-body";
 import { getResourceName } from "@utils/word";
 
 import { getDatabase } from "./database";

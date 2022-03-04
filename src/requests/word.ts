@@ -1,4 +1,4 @@
-import { WordsPostRequestBody } from "@models/words-post-request-body";
+import { WordsPostRequestBody } from "@models";
 
 export const addWord = async (word: WordsPostRequestBody): Promise<boolean> => {
     try {

@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 
-import { Word as IWord } from "@models/word";
+import { Word as IWord } from "@models";
 import { ErrorCard, Word as WordComponent } from "@components/misc";
 import { getWord } from "@services/words";
 

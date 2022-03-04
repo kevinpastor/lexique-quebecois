@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Field, Form, Formik, FormikProps, useFormikContext } from "formik";
 import * as yup from "yup";
 
-import { WordsPostRequestBody } from "@models/words-post-request-body";
+import { WordsPostRequestBody } from "@models";
 import { labelRegex } from "@utils/word";
 import { Button } from "@components/form";
 

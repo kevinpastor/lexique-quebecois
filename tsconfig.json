@@ -28,7 +28,10 @@
                 "./src/hooks/*"
             ],
             "@models/*": [
-                "./src/models/*"
+                "src/models/*"
+            ],
+            "@models": [
+                "src/models"
             ],
             "@utils/*": [
                 "./src/utils/*"
