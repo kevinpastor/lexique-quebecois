@@ -4,24 +4,40 @@ import { Method, Status, WordRequest } from "@models";
 import { isValidWordRequest } from "@utils/word";
 import { addWord } from "@services/words";
 
-const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-    if (req.method !== Method.POST) {
+type Handler = () => Promise<void>;
+
+type Handlers = {
+    [method in Method]?: Handler;
+};
+
+const genericHandler = async ({ method }: NextApiRequest, res: NextApiResponse, handlers: Handlers): Promise<void> => {
+    const handler: Handler | undefined = handlers[method as Method];
+
+    if (!handler) {
         res.status(Status.MethodNotAllowed)
             .end();
         return;
     }
 
-    if (!isValidWordRequest(req.body)) {
-        res.status(Status.BadRequest)
-            .end();
-        return;
-    }
+    await handler();
+};
 
-    const wordRequest: WordRequest = req.body;
-    const datedWord: unknown = await addWord(wordRequest);
+const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+    await genericHandler(req, res, {
+        [Method.POST]: async (): Promise<void> => {
+            if (!isValidWordRequest(req.body)) {
+                res.status(Status.BadRequest)
+                    .end();
+                return;
+            }
 
-    res.status(Status.Created)
-        .json(datedWord);
+            const wordRequest: WordRequest = req.body;
+            const datedWord: unknown = await addWord(wordRequest);
+
+            res.status(Status.Created)
+                .json(datedWord);
+        }
+    });
 };
 
 export default handler;
