@@ -4,3 +4,6 @@ export enum Method {
     PUT = "PUT",
     DELETE = "DELETE"
 }
+
+export const isValidMethod = (value: string): value is Method =>
+    value in Method;

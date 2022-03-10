@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { NextPage } from "next";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { Form, Formik, FormikProps } from "formik";
 
 import { WordRequest } from "@models";
@@ -17,7 +17,7 @@ const initialValues: WordRequest = {
 };
 
 const Add: NextPage = (): ReactElement => {
-    const router = useRouter();
+    const router: NextRouter = useRouter();
 
     const onSubmit = async (word: WordRequest): Promise<void> => {
         const status: boolean = await addWord(word);
