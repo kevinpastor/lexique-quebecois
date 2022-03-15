@@ -4,6 +4,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { Word as IWord } from "@models";
 import { getWord } from "@services/words";
 import { ErrorCard, Word as WordComponent } from "@components/misc";
+import Head from "next/head";
 
 interface Props {
     hasFailed?: boolean;
@@ -66,12 +67,17 @@ const Word = ({ word, hasFailed }: Props): ReactElement => {
     }
 
     return (
-        <div className="space-y-4">
-            <WordComponent word={word} />
-            <div className="flex flex-row text-slate-600 justify-center font-bold text-center">
-                Il ne peut y avoir qu&apos;une seule définition par mot pour le moment
+        <>
+            <Head>
+                <title>{word.label} - Lexique Québécois</title>
+            </Head>
+            <div className="space-y-4">
+                <WordComponent word={word} />
+                <div className="flex flex-row text-slate-600 justify-center font-bold text-center">
+                    Il ne peut y avoir qu&apos;une seule définition par mot pour le moment
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
