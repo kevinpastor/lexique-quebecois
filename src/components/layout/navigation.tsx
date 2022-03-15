@@ -2,11 +2,12 @@ import { ReactElement } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Form, Formik } from "formik";
-import { faPlus, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faMagnifyingGlass, faBookOpenReader } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 
 import { getResourceName } from "@utils/word";
 import { Field, IconButton } from "@components/form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface FormValues {
     label: string;
@@ -38,20 +39,26 @@ export const Navigation = (): ReactElement => {
     };
 
     return (
-        <nav className="bg-slate-800">
+        <nav className="bg-slate-800 sticky sm:relative top-0 shadow sm:shadow-none">
             <div className="container mx-auto p-4 space-y-4">
-                <Link href="/">
-                    <a className="text-white text-2xl font-extrabold font-serif">
-                        Québécois Urbain
-                    </a>
-                </Link>
-                <div className="flex flex-row justify-between space-x-4">
+                <div className="flex flex-row flex-nowrap sm:flex-wrap justify-between gap-4">
+                    <Link href="/">
+                        <a className="flex flex-row items-center gap-4 sm:basis-full">
+                            <FontAwesomeIcon
+                                icon={faBookOpenReader}
+                                className="w-6 h-6 text-white"
+                            />
+                            <div className="hidden sm:block text-white text-xl font-extrabold font-serif">
+                                Lexique Québécois
+                            </div>
+                        </a>
+                    </Link>
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
                         onSubmit={onSubmit}
                     >
-                        <Form className="flex-grow">
+                        <Form className="grow">
                             <Field
                                 name="label"
                                 icon={faMagnifyingGlass}

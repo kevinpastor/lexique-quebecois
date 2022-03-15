@@ -8,28 +8,29 @@ config.autoAddCss = false;
 
 import "@styles/index.css";
 
-import { MobileFooter, Navigation, Sidebar } from "@components/layout";
+import { Footer, Navigation, Sidebar } from "@components/layout";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
     <>
         <Head>
-            <title>Québécois Urbain</title>
+            <title>Lexique Québécois</title>
             <meta name="description" content="Un peu comme le Urban Dictionnary, mais québécois" />
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <Navigation />
-        <main className="container mx-auto p-4">
-            <div className="flex flex-row space-x-4">
-                <div className="lg:basis-2/3 basis-full space-y-4 lg:space-y-0">
+        <main className="container mx-auto p-4 space-y-4">
+            <div className="flex flex-row gap-4">
+                <div className="basis-full lg:basis-2/3 lg:space-y-0">
                     <Component {...pageProps} />
                 </div>
-                <div className="lg:basis-1/3 hidden lg:block">
+                <div className="hidden lg:block lg:basis-1/3 space-y-4">
                     <Sidebar />
+                    <Footer />
                 </div>
             </div>
-            <footer className="lg:hidden">
-                <MobileFooter />
-            </footer>
+            <div className="lg:hidden">
+                <Footer />
+            </div>
         </main>
     </>
 );

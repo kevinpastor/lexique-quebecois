@@ -38,9 +38,6 @@ const Home = ({ words }: Props): ReactElement => {
             {words.map((word: IWord): ReactElement => (
                 <Word key={word.timestamp} word={word} />
             ))}
-            <div className="p-4 flex flex-row text-slate-600 gap-2 justify-center font-bold text-center">
-                Rafraîchis la page pour découvrir d&apos;autre mots
-            </div>
         </div>
     );
 };

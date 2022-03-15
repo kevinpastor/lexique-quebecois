@@ -1,9 +1,9 @@
 import { ReactElement } from "react";
 
-export const MobileFooter = (): ReactElement => (
-    <div className="container mx-auto my-4">
+export const Footer = (): ReactElement => (
+    <footer className="container mx-auto">
         <div className="text-center text-slate-600 font-bold">
-            &copy; 2022 Québécois Urbain
+            &copy; 2022 Lexique Québécois
         </div>
-    </div>
+    </footer>
 );

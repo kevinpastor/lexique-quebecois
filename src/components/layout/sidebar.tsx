@@ -12,10 +12,5 @@ export const Sidebar = (): ReactElement => (
                 Une plateforme pour en apprendre plus sur la culture populaire, peu importe si t&apos;es un ado, un millénial, ou un boomer.
             </div>
         </div>
-        <div className="container mx-auto">
-            <div className="text-center text-slate-600 font-bold">
-                &copy; 2022 Québécois Urbain
-            </div>
-        </div>
     </div>
 );
