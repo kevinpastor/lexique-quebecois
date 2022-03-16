@@ -71,6 +71,7 @@ export const Navigation = (): ReactElement => {
                         <IconButton
                             onClick={onAdd}
                             icon={faPlus}
+                            ariaLabel="Ajouter"
                         />
                     </div>
                 </div>

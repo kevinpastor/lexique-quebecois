@@ -73,6 +73,7 @@ const Add: NextPage = (): ReactElement => {
                                     label="Envoyer"
                                     disabled={isSubmitting}
                                     icon={faCloudArrowUp}
+                                    ariaLabel="Envoyer"
                                 />
                             </div>
                         </section>

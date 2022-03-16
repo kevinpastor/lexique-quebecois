@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { Html, Head, Main, NextScript } from "next/document";
 
 const Document = (): ReactElement => (
-    <Html>
+    <Html lang="fr">
         <Head>
             <link
                 rel="preconnect"

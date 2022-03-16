@@ -9,12 +9,14 @@ interface Props {
     type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
     onClick?: () => void;
     disabled?: boolean;
+    ariaLabel: string;
 }
 
-export const Button = ({ label, type = "submit", icon, onClick, disabled = false }: Props): ReactElement => (
+export const Button = ({ label, type = "submit", icon, onClick, disabled = false, ariaLabel }: Props): ReactElement => (
     <button
         type={type}
         onClick={onClick}
+        aria-label={ariaLabel}
         className={classnames(
             "transition font-bold rounded-lg px-6 py-3 text-center flex flex-row place-items-center gap-2",
             {
