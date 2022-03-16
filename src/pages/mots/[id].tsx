@@ -69,6 +69,7 @@ const Word = ({ word, hasFailed }: Props): ReactElement => {
     return (
         <>
             <Head>
+                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
                 <title>{word.label} - Lexique Québécois</title>
             </Head>
             <div className="space-y-4">

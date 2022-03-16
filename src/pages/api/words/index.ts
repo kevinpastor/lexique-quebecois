@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { Method, Status, Word, WordRequest } from "@models";
+import { Method, Status, Word } from "@models";
 import { createHandler, Handler } from "@utils/handler";
 import { isValidWordRequest } from "@utils/word";
 import { addWord } from "@services/words";
@@ -13,11 +13,10 @@ const handler: Handler = createHandler({
             return;
         }
 
-        const wordRequest: WordRequest = body;
-        const datedWord: Word = await addWord(wordRequest);
+        const word: Word = await addWord(body);
 
         res.status(Status.Created)
-            .json(datedWord);
+            .json(word);
     }
 });
 

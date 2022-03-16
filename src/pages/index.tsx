@@ -36,7 +36,10 @@ const Home = ({ words }: Props): ReactElement => {
     return (
         <div className="space-y-4">
             {words.map((word: IWord): ReactElement => (
-                <Word key={word.timestamp} word={word} />
+                <Word
+                    key={word.timestamp}
+                    word={word}
+                />
             ))}
         </div>
     );

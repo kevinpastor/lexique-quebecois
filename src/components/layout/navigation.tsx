@@ -43,12 +43,12 @@ export const Navigation = (): ReactElement => {
             <div className="container mx-auto p-4 space-y-4">
                 <div className="flex flex-row flex-nowrap sm:flex-wrap justify-between gap-4">
                     <Link href="/">
-                        <a className="flex flex-row items-center gap-4 sm:basis-full">
+                        <a className="flex flex-row items-center gap-4 sm:basis-full text-white">
                             <FontAwesomeIcon
                                 icon={faBookOpenReader}
-                                className="w-6 h-6 text-white"
+                                size="lg"
                             />
-                            <div className="hidden sm:block text-white text-xl font-extrabold font-serif">
+                            <div className="hidden sm:block text-xl font-extrabold font-serif">
                                 Lexique Québécois
                             </div>
                         </a>

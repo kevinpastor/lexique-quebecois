@@ -2,9 +2,14 @@ import * as yup from "yup";
 
 import { WordRequest } from "@models/word-request";
 
+const removeAccents = (input: string): string => (
+    input.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+);
+
 export const getResourceName = (label: string): string => {
     const spacelessLabel: string = label.replaceAll(" ", "-");
-    return spacelessLabel.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return removeAccents(spacelessLabel)
+        .toLocaleLowerCase();
 };
 
 export const labelRegex: RegExp = /^[a-zàâäéèêëïîôöùûüÿç]*$/gi;
@@ -20,7 +25,7 @@ export const wordRequestValidationSchema = yup
             .trim()
             .min(2, "Ce champ ne peut pas avoir moins de 2 caractères.")
             .max(32, "Ce champ ne peut pas dépasser 32 caractères.")
-            .matches(labelRegex)
+            .matches(labelRegex, "Ce champ ne peut seulement avoir des caractères alphabétiques accentués ou non.")
             .required("Ce champ est requis."),
         definition: yup
             .string()

@@ -20,7 +20,7 @@ const initialValues: WordRequest = {
 const Add: NextPage = (): ReactElement => {
     const router: NextRouter = useRouter();
 
-    const onSubmit = async (word: WordRequest): Promise<void> => {
+    const handleSubmit = async (word: WordRequest): Promise<void> => {
         const status: boolean = await addWord(word);
 
         if (!status) {
@@ -39,7 +39,7 @@ const Add: NextPage = (): ReactElement => {
             </Head>
             <Formik
                 initialValues={initialValues}
-                onSubmit={onSubmit}
+                onSubmit={handleSubmit}
                 validationSchema={wordRequestValidationSchema}
                 validateOnChange={false}
             >

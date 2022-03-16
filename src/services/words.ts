@@ -53,6 +53,7 @@ export const getWord = async (resourceName: string): Promise<Word | undefined> =
 
 export const addWord = async (word: WordRequest): Promise<Word> => {
     const datedWord: Word = {
+        author: "Anonyme",
         ...word,
         resourceName: getResourceName(word.label),
         timestamp: new Date().getTime()

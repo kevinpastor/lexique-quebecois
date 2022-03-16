@@ -16,7 +16,7 @@ export const Button = ({ label, type = "submit", icon, onClick, disabled = false
         type={type}
         onClick={onClick}
         className={classnames(
-            "transition font-bold rounded-lg px-6 py-3 text-center flex flex-row gap-2",
+            "transition font-bold rounded-lg px-6 py-3 text-center flex flex-row place-items-center gap-2",
             {
                 "bg-blue-500 hover:bg-blue-600 text-white": !disabled,
                 "bg-blue-900 saturate-50 text-slate-400": disabled
@@ -25,7 +25,10 @@ export const Button = ({ label, type = "submit", icon, onClick, disabled = false
         disabled={disabled}
     >
         {icon &&
-            <FontAwesomeIcon icon={icon} className="w-6 h-6" />
+            <FontAwesomeIcon
+                icon={icon}
+                size="lg"
+            />
         }
         {label}
     </button>

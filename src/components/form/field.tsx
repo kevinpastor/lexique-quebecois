@@ -14,8 +14,7 @@ interface Props<T> {
     hideErrors?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/comma-dangle
-export const Field = <T,>({ label, name, autofocus, type = "input", icon, placeholder, hideErrors = false }: Props<T>): ReactElement => {
+export const Field = <T extends Record<string, unknown>>({ label, name, autofocus, type = "input", icon, placeholder, hideErrors = false }: Props<T>): ReactElement => {
     const { touched, errors } = useFormikContext<T>();
     const inputRef = useRef<HTMLInputElement>(null);
     const [id, setId] = useState("");
@@ -44,10 +43,9 @@ export const Field = <T,>({ label, name, autofocus, type = "input", icon, placeh
             >
                 {
                     icon &&
-                    <FontAwesomeIcon
-                        icon={icon}
-                        className="h-4 w-4 text-slate-400 fill-transparent stroke-current"
-                    />
+                    <div className="text-slate-400 fill-transparent stroke-current">
+                        <FontAwesomeIcon icon={icon} />
+                    </div>
                 }
                 <FormikField
                     name={name}
