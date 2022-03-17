@@ -7,5 +7,6 @@ export enum Status {
     NotFound = 404,
     MethodNotAllowed = 405,
     Conflict = 409,
+    TooManyRequest = 429,
     InternalError = 500
 }

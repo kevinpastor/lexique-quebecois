@@ -13,7 +13,6 @@ export type MethodHandlers = {
 export const createHandler = (methodHandlers: MethodHandlers): Handler => {
     return async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
         if (!req.method) {
-            console.log("oihbeaiub");
             res.status(Status.BadRequest)
                 .end();
             return;
