@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { Html, Head, Main, NextScript } from "next/document";
 
-import { metadata } from "src/configs/metadata";
-import { Meta } from "src/configs/metadata/meta";
+import { metadata } from "@configs/metadata";
+import { Meta } from "@configs/metadata/meta";
 
 const Document = (): ReactElement => (
     <Html lang="fr">

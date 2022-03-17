@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { isValidMethod, Method, Status } from "@models";
+import { isValidMethod, Method } from "@models/method";
+import { Status } from "@models/status";
 
 export type Handler = (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
 

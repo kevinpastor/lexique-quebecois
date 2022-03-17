@@ -1,71 +1,19 @@
-import { Collection, Db, FindOptions } from "mongodb";
+import { WordRequest } from "@models/word-request";
 
-import { Word, WordRequest } from "@models";
-import { shuffle } from "@utils/random";
-import { getResourceName } from "@utils/word";
+export const addWord = async (wordRequest: WordRequest): Promise<boolean> => {
+    try {
+        const options: RequestInit = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(wordRequest)
+        };
+        const response: Response = await fetch("/api/words", options);
 
-import { getDatabase } from "./database";
-
-interface ModeratedWord extends Word {
-    isApproved: boolean;
-}
-
-export const getWords = async (): Promise<Array<Word>> => {
-    const database: Db = await getDatabase();
-    const collection: Collection<ModeratedWord> = database.collection("definitions");
-    const pipeline = [
-        { $match: { isApproved: true } },
-        { $sample: { size: 5 } },
-        {
-            $project: {
-                _id: 0,
-                isApproved: 0
-            }
-        }
-    ];
-    const words: Array<Word> = await collection.aggregate<Word>(pipeline)
-        .toArray();
-
-    return shuffle(words);
-};
-
-export const getWord = async (resourceName: string): Promise<Word | undefined> => {
-    const database: Db = await getDatabase();
-    const collection: Collection<ModeratedWord> = database.collection("definitions");
-    const query = {
-        resourceName,
-        isApproved: true
-    };
-    const options: FindOptions = {
-        projection: {
-            _id: 0,
-            isApproved: 0
-        }
-    };
-    const word: Word | null = await collection.findOne(query, options);
-
-    if (!word) {
-        return;
+        return response.ok;
     }
-
-    return word;
-};
-
-export const addWord = async (word: WordRequest): Promise<Word> => {
-    const datedWord: Word = {
-        author: "Anonyme",
-        ...word,
-        resourceName: getResourceName(word.label),
-        timestamp: new Date().getTime()
-    };
-    const moderatedWord: ModeratedWord = {
-        ...datedWord,
-        isApproved: false
-    };
-
-    const database: Db = await getDatabase();
-    const collection: Collection<ModeratedWord> = database.collection("definitions");
-    await collection.insertOne(moderatedWord);
-
-    return datedWord;
+    catch {
+        return false;
+    }
 };

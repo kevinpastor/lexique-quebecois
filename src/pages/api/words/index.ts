@@ -1,13 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { rateLimit } from "express-rate-limit";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { Word } from "@models/word";
 import { createHandler, Handler } from "@utils/api/handler";
-import { isValidWordRequest } from "@utils/word";
-import { addWord } from "@services/words";
-
-import { rateLimit } from "express-rate-limit";
+import { isValidWordRequest } from "@models/word-request";
+import { addWord } from "@services/api/words";
 import { Middleware, runMiddleware } from "@utils/api/middleware";
 
 const limiter: Middleware<unknown> = rateLimit({

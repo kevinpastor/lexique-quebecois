@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import Link from "next/link";
 
 import { Word as IWord } from "@models/word";
-import { formatDate } from "@utils/date";
+import { formatDate } from "@utils/misc/date";
 
 interface Props {
     word: IWord;

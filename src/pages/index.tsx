@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { GetServerSidePropsResult } from "next";
 
 import { Word as IWord } from "@models/word";
-import { getWords } from "@services/words";
+import { getWords } from "@services/api/words";
 import { ErrorCard } from "@components/misc/error-card";
 import { Word } from "@components/misc/word";
 import { Alert } from "@components/misc/alert";

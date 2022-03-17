@@ -24,23 +24,20 @@
             "@components/*": [
                 "./src/components/*"
             ],
-            "@hooks/*": [
-                "./src/hooks/*"
+            "@configs/*": [
+                "./src/configs/*"
             ],
             "@models/*": [
                 "src/models/*"
             ],
-            "@models": [
-                "src/models"
-            ],
-            "@utils/*": [
-                "./src/utils/*"
+            "@services/*": [
+                "./src/services/*"
             ],
             "@styles/*": [
                 "./src/styles/*"
             ],
-            "@services/*": [
-                "./src/services/*"
+            "@utils/*": [
+                "./src/utils/*"
             ]
         }
     },

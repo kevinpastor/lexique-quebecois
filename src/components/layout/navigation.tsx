@@ -5,7 +5,7 @@ import { Form, Formik } from "formik";
 import { faPlus, faMagnifyingGlass, faBookOpenReader } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 
-import { getResourceName } from "@utils/word";
+import { getResourceName } from "@models/word-request";
 import { Field } from "@components/form/field";
 import { IconButton } from "@components/form/icon-button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
