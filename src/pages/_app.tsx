@@ -8,7 +8,9 @@ config.autoAddCss = false;
 
 import "@styles/index.css";
 
-import { Footer, Navigation, Sidebar } from "@components/layout";
+import { Footer } from "@components/layout/footer";
+import { Navigation } from "@components/layout/navigation";
+import { Sidebar } from "@components/layout/sidebar";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
     <>

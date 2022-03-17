@@ -3,9 +3,10 @@ import { NextPage } from "next";
 import { NextRouter, useRouter } from "next/router";
 import { Form, Formik, FormikProps } from "formik";
 
-import { WordRequest } from "@models";
+import { WordRequest } from "@models/word-request";
 import { wordRequestValidationSchema } from "@utils/word";
-import { Button, Field } from "@components/form";
+import { Button } from "@components/form/button";
+import { Field } from "@components/form/field";
 import { addWord } from "src/requests/word";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import Head from "next/head";

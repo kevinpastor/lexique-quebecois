@@ -1,9 +1,11 @@
 import { ReactElement } from "react";
 import { GetServerSidePropsResult } from "next";
 
-import { Word as IWord } from "@models";
+import { Word as IWord } from "@models/word";
 import { getWords } from "@services/words";
-import { ErrorCard, Word } from "@components/misc";
+import { ErrorCard } from "@components/misc/error-card";
+import { Word } from "@components/misc/word";
+import { Alert } from "@components/misc/alert";
 
 interface Props {
     words?: Array<IWord>;
@@ -35,6 +37,11 @@ const Home = ({ words }: Props): ReactElement => {
 
     return (
         <div className="space-y-4">
+            {/* <Alert
+                isOpened
+                title="Succès"
+                content="Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu."
+            /> */}
             {words.map((word: IWord): ReactElement => (
                 <Word
                     key={word.timestamp}

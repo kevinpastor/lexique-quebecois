@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { Method, Status, Word } from "@models";
-import { createHandler, Handler } from "@utils/handler";
+import { Method } from "@models/method";
+import { Status } from "@models/status";
+import { Word } from "@models/word";
+import { createHandler, Handler } from "@utils/api/handler";
 import { isValidWordRequest } from "@utils/word";
 import { addWord } from "@services/words";
 

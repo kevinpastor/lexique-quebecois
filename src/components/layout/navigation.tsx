@@ -6,7 +6,8 @@ import { faPlus, faMagnifyingGlass, faBookOpenReader } from "@fortawesome/free-s
 import * as yup from "yup";
 
 import { getResourceName } from "@utils/word";
-import { Field, IconButton } from "@components/form";
+import { Field } from "@components/form/field";
+import { IconButton } from "@components/form/icon-button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface FormValues {
