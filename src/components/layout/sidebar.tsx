@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 
 export const Sidebar = (): ReactElement => (
-    <div className="space-y-4">
-        <div className="bg-slate-800 rounded-lg p-8 space-y-8">
+    <aside className="space-y-4">
+        <div className="bg-slate-800 rounded-lg p-8">
             <div className="text-xl text-slate-200 font-medium text-center">
                 Un peu comme Urban Dictionary, mais québécois.
             </div>
@@ -12,5 +12,5 @@ export const Sidebar = (): ReactElement => (
                 Une plateforme pour en apprendre plus sur la culture populaire, peu importe si t&apos;es un ado, un millénial, ou un boomer.
             </div>
         </div>
-    </div>
+    </aside>
 );

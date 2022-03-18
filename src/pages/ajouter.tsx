@@ -46,9 +46,11 @@ const Add: NextPage = (): ReactElement => {
                 {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
                     <Form>
                         <section className="bg-slate-800 rounded-lg p-8 space-y-8">
-                            <div className="text-3xl font-bold text-white font-serif">
-                                Ajouter un mot
-                            </div>
+                            <header>
+                                <h2 className="text-3xl font-bold text-white font-serif">
+                                    Ajouter un mot
+                                </h2>
+                            </header>
                             <div className="space-y-4">
                                 <Field
                                     label="Mot"

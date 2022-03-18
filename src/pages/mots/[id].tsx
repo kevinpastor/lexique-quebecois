@@ -75,7 +75,7 @@ const Word = ({ word, hasFailed }: Props): ReactElement => {
             </Head>
             <div className="space-y-4">
                 <WordComponent word={word} />
-                <div className="flex flex-row text-slate-500 justify-center font-bold text-center">
+                <div className="text-slate-500 font-bold text-center">
                     Il ne peut y avoir qu&apos;une seule définition par mot pour le moment
                 </div>
             </div>

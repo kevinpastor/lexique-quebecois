@@ -41,10 +41,10 @@ export const Navigation = (): ReactElement => {
 
     return (
         <nav className="bg-slate-800 sticky sm:relative top-0 shadow sm:shadow-none">
-            <div className="container mx-auto p-4 space-y-4">
-                <div className="flex flex-row flex-nowrap sm:flex-wrap justify-between gap-4">
+            <div className="container mx-auto p-4 flex sm:flex-wrap gap-4">
+                <h1 className="flex items-center sm:basis-full">
                     <Link href="/">
-                        <a className="flex flex-row items-center gap-4 sm:basis-full text-white">
+                        <a className="flex items-center gap-4 text-white">
                             <FontAwesomeIcon
                                 icon={faBookOpenReader}
                                 size="lg"
@@ -54,28 +54,26 @@ export const Navigation = (): ReactElement => {
                             </div>
                         </a>
                     </Link>
-                    <Formik
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmit}
-                    >
-                        <Form className="grow">
-                            <Field
-                                name="label"
-                                icon={faMagnifyingGlass}
-                                placeholder="Chercher un mot"
-                                hideErrors
-                            />
-                        </Form>
-                    </Formik>
-                    <div className="flex flex-row gap-4">
-                        <IconButton
-                            onClick={onAdd}
-                            icon={faPlus}
-                            ariaLabel="Ajouter"
+                </h1>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                >
+                    <Form className="grow">
+                        <Field
+                            name="label"
+                            icon={faMagnifyingGlass}
+                            placeholder="Chercher un mot"
+                            hideErrors
                         />
-                    </div>
-                </div>
+                    </Form>
+                </Formik>
+                <IconButton
+                    onClick={onAdd}
+                    icon={faPlus}
+                    ariaLabel="Ajouter"
+                />
             </div>
         </nav>
     );

@@ -6,7 +6,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
 
-import "@styles/index.css";
+import "@configs/styles.css";
 
 import { Footer } from "@components/layout/footer";
 import { Navigation } from "@components/layout/navigation";

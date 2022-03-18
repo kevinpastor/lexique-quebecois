@@ -9,12 +9,21 @@ interface Props {
 }
 
 export const Word = ({ word }: Props): ReactElement => (
-    <section className="bg-slate-800 rounded-lg p-8 space-y-4">
-        <Link href={`/mots/${word.resourceName}`}>
-            <a className="text-4xl font-bold font-serif text-blue-400 hover:text-blue-500 transition">
-                {word.label}
-            </a>
-        </Link>
+    <section
+        title={word.resourceName}
+        className="bg-slate-800 rounded-lg p-8 space-y-4"
+    >
+        <header>
+            <h2>
+                <Link href={`/mots/${word.resourceName}`}>
+                    <a
+                        className="text-4xl font-bold font-serif text-blue-400 hover:text-blue-500 transition"
+                    >
+                        {word.label}
+                    </a>
+                </Link>
+            </h2>
+        </header>
         <div className="text-white font-medium text-lg">
             {word.definition}
         </div>
