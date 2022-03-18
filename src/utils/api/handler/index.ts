@@ -1,15 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { isValidMethod, Method } from "@models/method";
+import { isValidMethod } from "@models/method";
 import { Status } from "@models/status";
+import { MethodHandler } from "./method-handler";
+import { MethodHandlers } from "./method-handlers";
 
 export type Handler = (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
-
-export type MethodHandler = (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
-
-export type MethodHandlers = {
-    [method in Method]?: MethodHandler;
-};
 
 export const createHandler = (methodHandlers: MethodHandlers): Handler => {
     return async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {

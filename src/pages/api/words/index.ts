@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { rateLimit } from "express-rate-limit";
+// import { getClientIp } from "request-ip";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
@@ -7,30 +7,22 @@ import { Word } from "@models/word";
 import { createHandler, Handler } from "@utils/api/handler";
 import { isValidWordRequest } from "@models/word-request";
 import { addWord } from "@services/api/words";
-import { Middleware, runMiddleware } from "@utils/api/middleware";
+// import { createRateLimiter } from "@utils/api/middlewares/rate-limiter";
 
-const limiter: Middleware<unknown> = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 1,
-    standardHeaders: false,
-    legacyHeaders: false,
-    keyGenerator: (req: NextApiRequest, _: NextApiResponse): string => (
-        (req.headers["x-real-ip"] as string | undefined)
-        || req.socket.remoteAddress
-        || ""
-    )
-});
+// const window: number = 1000 * 60 * 15;
+// const tokens: number = 1;
+// const rateLimiter = createRateLimiter(window, tokens);
 
 const handler: Handler = createHandler({
     [Method.POST]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-        try {
-            await runMiddleware(req, res, limiter);
-        }
-        catch {
-            res.status(Status.TooManyRequest)
-                .end();
-            return;
-        }
+        // const ip: string = getClientIp(req) ?? "";
+        // if (!rateLimiter(ip)) {
+        //     console.log("miss");
+        //     res.status(Status.TooManyRequest)
+        //         .end();
+        //     return;
+        // }
+        // console.log("pass");
 
         if (!isValidWordRequest(req.body)) {
             res.status(Status.BadRequest)

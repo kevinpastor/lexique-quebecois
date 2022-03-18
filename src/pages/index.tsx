@@ -5,7 +5,7 @@ import { Word as IWord } from "@models/word";
 import { getWords } from "@services/api/words";
 import { ErrorCard } from "@components/misc/error-card";
 import { Word } from "@components/misc/word";
-import { Alert } from "@components/misc/alert";
+// import { Alert } from "@components/misc/alert";
 
 interface Props {
     words?: Array<IWord>;
