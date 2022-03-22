@@ -1,33 +1,42 @@
 export type RateLimiterMiddleware = (key: string) => boolean;
 
-export const createRateLimiter = (window: number, tokens: number): RateLimiterMiddleware => {
-    const cache = new Map<string, Array<Date>>();
+export class RateLimiter {
 
-    return (key: string): boolean => {
-        if (!cache.has(key)) {
-            cache.set(key, []);
+    private readonly cache: Map<string, Array<Date>>;
+
+    constructor(
+        private readonly window: number,
+        private readonly tokens: number
+    ) {
+        this.cache = new Map<string, Array<Date>>();
+    }
+
+    consume(key: string): boolean {
+        if (!this.cache.has(key)) {
+            this.cache.set(key, []);
         }
 
         const now: Date = new Date();
-        const timestamps: Array<Date> = cache.get(key) as Array<Date>;
-        if (timestamps.length < tokens) {
+        const timestamps: Array<Date> = this.cache.get(key) as Array<Date>;
+        if (timestamps.length < this.tokens) {
             timestamps.push(now);
             return false;
         }
 
         while (timestamps.length > 0) {
             const elapsedTime: number = now.getTime() - timestamps[0].getTime();
-            if (elapsedTime <= window) {
+            if (elapsedTime <= this.window) {
                 break;
             }
             timestamps.shift();
         }
 
-        if (timestamps.length < tokens) {
-            timestamps.push(now);
-            return false;
+        if (timestamps.length >= this.tokens) {
+            return true;
         }
 
-        return true;
-    };
-};
+        timestamps.push(now);
+        return false;
+    }
+
+}

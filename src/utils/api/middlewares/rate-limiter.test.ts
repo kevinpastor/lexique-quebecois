@@ -1,4 +1,4 @@
-import { createRateLimiter, RateLimiterMiddleware } from "./rate-limiter";
+import { RateLimiter } from "./rate-limiter";
 
 describe("@utils", (): void => {
     describe("api", (): void => {
@@ -8,38 +8,53 @@ describe("@utils", (): void => {
                 const tokens: number = 1;
                 const key: string = "foobar";
 
-                it("should not limit initially", (): void => {
-                    const rateLimiter: RateLimiterMiddleware = createRateLimiter(window, tokens);
+                beforeEach((): void => {
+                    jest.useFakeTimers();
+                });
 
-                    const isLimited: boolean = rateLimiter(key);
+                afterEach((): void => {
+                    jest.useRealTimers();
+                });
+
+                it("should not limit initially", (): void => {
+                    const rateLimiter: RateLimiter = new RateLimiter(window, tokens);
+
+                    jest.setSystemTime(0);
+                    const isLimited: boolean = rateLimiter.consume(key);
 
                     expect(isLimited).toBeFalsy();
                 });
 
                 it("should limit after using all tokens", (): void => {
-                    const rateLimiter: RateLimiterMiddleware = createRateLimiter(window, tokens);
+                    const rateLimiter: RateLimiter = new RateLimiter(window, tokens);
 
-                    rateLimiter(key);
-                    const isLimited: boolean = rateLimiter(key);
+                    jest.setSystemTime(0);
+                    rateLimiter.consume(key);
+                    jest.setSystemTime(1);
+                    const isLimited: boolean = rateLimiter.consume(key);
 
                     expect(isLimited).toBeTruthy();
                 });
 
                 it("should not limit another key", (): void => {
-                    const rateLimiter: RateLimiterMiddleware = createRateLimiter(window, tokens);
+                    const rateLimiter: RateLimiter = new RateLimiter(window, tokens);
 
-                    rateLimiter(key);
-                    rateLimiter(key);
-                    const isLimited: boolean = rateLimiter("another-key");
+                    jest.setSystemTime(0);
+                    rateLimiter.consume(key);
+                    jest.setSystemTime(1);
+                    rateLimiter.consume(key);
+                    const isLimited: boolean = rateLimiter.consume("another-key");
 
                     expect(isLimited).toBeFalsy();
                 });
 
                 it("should reset after window", (): void => {
-                    const rateLimiter: RateLimiterMiddleware = createRateLimiter(0, tokens);
+                    const rateLimiter: RateLimiter = new RateLimiter(1, tokens);
 
-                    rateLimiter(key);
-                    const isLimited: boolean = rateLimiter(key);
+                    jest.setSystemTime(0);
+                    rateLimiter.consume(key);
+                    jest.setSystemTime(2);
+                    const isLimited: boolean = rateLimiter.consume(key);
 
                     expect(isLimited).toBeFalsy();
                 });
