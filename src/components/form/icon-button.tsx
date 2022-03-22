@@ -12,7 +12,7 @@ export const IconButton = ({ onClick, icon, ariaLabel }: Props): ReactElement =>
     <button
         type="button"
         onClick={onClick}
-        className="bg-blue-500 hover:bg-blue-600 rounded-full p-2 text-white transition w-10 h-10"
+        className="bg-blue-500 hover:bg-blue-600 bg-gradient-to-br from-blue-400 to-blue-500 hover:brightness-90 rounded-full p-2 text-white transition w-10 h-10"
         aria-label={ariaLabel}
     >
         <FontAwesomeIcon
