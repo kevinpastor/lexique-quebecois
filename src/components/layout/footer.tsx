@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import { ReactElement } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopyright } from "@fortawesome/free-solid-svg-icons";
