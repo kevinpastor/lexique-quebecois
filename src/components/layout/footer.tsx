@@ -13,15 +13,15 @@ const links: Array<Link> = [
     {
         label: "Conditions",
         href: "/conditions"
+    },
+    {
+        label: "Confidentialité",
+        href: "/confidentialite"
+    },
+    {
+        label: "Contact",
+        href: "/contact"
     }
-    // {
-    //     label: "Confidentialité",
-    //     href: "/confidentialite"
-    // },
-    // {
-    //     label: "Contact",
-    //     href: "/contact"
-    // }
 ];
 
 export const Footer = (): ReactElement => (
