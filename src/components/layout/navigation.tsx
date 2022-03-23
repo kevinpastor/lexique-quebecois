@@ -44,7 +44,7 @@ export const Navigation = (): ReactElement => {
             <div className="container mx-auto p-4 flex sm:flex-wrap gap-4">
                 <h1 className="flex items-center sm:basis-full">
                     <Link href="/">
-                        <a className="flex items-center gap-4 text-white">
+                        <a className="flex items-center gap-4 text-slate-100 hover:text-white transition">
                             <FontAwesomeIcon
                                 icon={faBookOpenReader}
                                 size="lg"

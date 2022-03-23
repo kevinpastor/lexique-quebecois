@@ -43,11 +43,11 @@ const Add: NextPage = (): ReactElement => {
                 validationSchema={wordRequestValidationSchema}
                 validateOnChange={false}
             >
-                {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
+                {({ isSubmitting, isValid }: FormikProps<WordRequest>): ReactElement => (
                     <Form>
                         <section className="bg-slate-800 rounded-lg p-8 space-y-8">
                             <header>
-                                <h2 className="text-3xl font-bold text-white font-serif">
+                                <h2 className="text-3xl font-bold text-slate-100 font-serif">
                                     Ajouter un mot
                                 </h2>
                             </header>
@@ -73,7 +73,7 @@ const Add: NextPage = (): ReactElement => {
                             <div className="flex flex-row-reverse">
                                 <Button
                                     label="Envoyer"
-                                    disabled={isSubmitting}
+                                    disabled={isSubmitting || !isValid}
                                     icon={faCloudArrowUp}
                                     ariaLabel="Envoyer"
                                 />

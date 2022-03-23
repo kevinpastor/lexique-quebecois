@@ -33,7 +33,14 @@ module.exports = {
                 "serif"
             ]
         },
-        extend: {},
+        extend: {
+            saturate: {
+                75: ".75"
+            },
+            brightness: {
+                70: ".70",
+            }
+        },
         screens: {
             sm: "640px",
             md: "768px",

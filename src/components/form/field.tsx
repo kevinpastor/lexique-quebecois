@@ -1,6 +1,6 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Field as FormikField, useFormikContext } from "formik";
+import { ErrorMessage, Field as FormikField } from "formik";
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
 
@@ -15,7 +15,6 @@ interface Props<T> {
 }
 
 export const Field = <T extends Record<string, unknown>>({ label, name, autofocus, type = "input", icon, placeholder, hideErrors = false }: Props<T>): ReactElement => {
-    const { touched, errors } = useFormikContext<T>();
     const inputRef = useRef<HTMLInputElement>(null);
     const [id, setId] = useState("");
 
@@ -41,8 +40,7 @@ export const Field = <T extends Record<string, unknown>>({ label, name, autofocu
                 onClick={onClick}
                 className="rounded bg-slate-700 hover:bg-slate-600 active:bg-slate-600 transition flex flex-row items-center cursor-text py-2 px-4 gap-2"
             >
-                {
-                    icon &&
+                {icon &&
                     <div className="text-slate-400 fill-transparent stroke-current">
                         <FontAwesomeIcon icon={icon} />
                     </div>
@@ -57,10 +55,14 @@ export const Field = <T extends Record<string, unknown>>({ label, name, autofocu
                     id={id}
                 />
             </div>
-            {!hideErrors && touched[name] &&
-                <div className="text-slate-600 text-sm">
-                    {errors[name]}
-                </div>
+            {!hideErrors &&
+                <ErrorMessage name={name as string}>
+                    {(message: string): ReactElement => (
+                        <div className="text-slate-600 text-sm">
+                            {message}
+                        </div>
+                    )}
+                </ErrorMessage>
             }
         </div>
     );

@@ -57,10 +57,10 @@ const Word = ({ word, hasFailed }: Props): ReactElement => {
     if (!word) {
         return (
             <section className="bg-slate-800 rounded-lg p-8 space-y-4">
-                <div className="text-4xl font-bold text-white font-serif">
+                <div className="text-4xl font-bold text-slate-100 font-serif">
                     Ce mot n&apos;a pas été trouvé
                 </div>
-                <div className="text-white font-medium">
+                <div className="text-slate-100 font-medium">
                     Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple.
                 </div>
             </section>
@@ -73,12 +73,7 @@ const Word = ({ word, hasFailed }: Props): ReactElement => {
                 {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
                 <title>{word.label} - Lexique Québécois</title>
             </Head>
-            <div className="space-y-4">
-                <WordComponent word={word} />
-                <div className="text-slate-500 font-bold text-center">
-                    Il ne peut y avoir qu&apos;une seule définition par mot pour le moment
-                </div>
-            </div>
+            <WordComponent word={word} />
         </>
     );
 };

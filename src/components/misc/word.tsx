@@ -24,10 +24,10 @@ export const Word = ({ word }: Props): ReactElement => (
                 </Link>
             </h2>
         </header>
-        <div className="text-white font-medium text-lg">
+        <div className="text-slate-200 font-medium text-lg">
             {word.definition}
         </div>
-        <div className="text-white italic text-lg">
+        <div className="text-slate-200 italic text-lg">
             {word.example}
         </div>
         <div>
