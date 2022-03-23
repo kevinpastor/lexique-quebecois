@@ -1,3 +1,6 @@
+/** @type {import("tailwindcss/tailwind-config").TailwindTheme} */
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 /** @type {import("tailwindcss/tailwind-config").TailwindConfig} */
 module.exports = {
     content: [
@@ -8,29 +11,11 @@ module.exports = {
         fontFamily: {
             sans: [
                 "Open Sans",
-                "ui-sans-serif",
-                "system-ui",
-                "-apple-system",
-                "BlinkMacSystemFont",
-                "Segoe\\ UI",
-                "Roboto",
-                "Helvetica\\ Neue",
-                "Arial",
-                "Noto Sans",
-                "sans-serif",
-                "Apple\\ Color\\ Emoji",
-                "Segoe\\ UI\\ Emoji",
-                "Segoe\\ UI\\ Symbol",
-                "Noto\\ Color\\ Emoji"
+                ...defaultTheme.fontFamily.sans
             ],
             serif: [
                 "Hahmlet",
-                "ui-serif",
-                "Georgia",
-                "Cambria",
-                "Times\\ New\\ Roman",
-                "Times",
-                "serif"
+                ...defaultTheme.fontFamily.serif
             ]
         },
         extend: {
@@ -38,7 +23,7 @@ module.exports = {
                 75: ".75"
             },
             brightness: {
-                70: ".70",
+                70: ".70"
             }
         },
         screens: {
