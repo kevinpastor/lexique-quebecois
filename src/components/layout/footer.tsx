@@ -17,10 +17,6 @@ const links: Array<Link> = [
     {
         label: "Confidentialité",
         href: "/confidentialite"
-    },
-    {
-        label: "Contact",
-        href: "/contact"
     }
 ];
 
