@@ -40,7 +40,7 @@ export const Navigation = (): ReactElement => {
     };
 
     return (
-        <nav className="bg-slate-800 sticky sm:relative top-0 shadow sm:shadow-none">
+        <nav className="bg-slate-800 sticky top-0 shadow-md">
             <div className="container mx-auto p-4 flex sm:flex-wrap gap-4">
                 <h1 className="flex items-center sm:basis-full">
                     <Link href="/">
