@@ -31,7 +31,7 @@ const Document = (): ReactElement => (
                 />
             ))}
         </Head>
-        <body>
+        <body className="text-slate-100">
             <Main />
             <NextScript />
         </body>

@@ -17,17 +17,17 @@ export const Word = ({ word }: Props): ReactElement => (
             <h2>
                 <Link href={`/mots/${word.resourceName}`}>
                     <a
-                        className="text-4xl font-bold font-serif text-blue-400 hover:text-blue-500 transition"
+                        className="text-4xl font-bold font-serif text-blue-500 hover:text-blue-400 transition"
                     >
                         {word.label}
                     </a>
                 </Link>
             </h2>
         </header>
-        <div className="text-slate-200 font-medium text-lg">
+        <div className="font-medium text-lg">
             {word.definition}
         </div>
-        <div className="text-slate-200 italic text-lg">
+        <div className="italic text-lg">
             {word.example}
         </div>
         <div>

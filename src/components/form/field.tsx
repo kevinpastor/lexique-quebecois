@@ -29,10 +29,7 @@ export const Field = <T extends Record<string, unknown>>({ label, name, autofocu
     return (
         <div className="space-y-1">
             {label &&
-                <label
-                    htmlFor={id}
-                    className="text-slate-200"
-                >
+                <label htmlFor={id}>
                     {label}
                 </label>
             }
