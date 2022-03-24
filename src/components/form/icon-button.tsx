@@ -13,7 +13,7 @@ export const IconButton = ({ onClick, icon, disabled = false, ariaLabel }: Props
     <button
         type="button"
         onClick={onClick}
-        className="transition bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 hover:disabled:bg-blue-500 text-white disabled:saturate-75 disabled:brightness-70 disabled:cursor-not-allowed rounded-full p-2 w-10 h-10"
+        className="transition bg-blue-500 hover:bg-blue-400 focus-visible:bg-blue-400 hover:disabled:bg-blue-500 text-white disabled:saturate-75 disabled:brightness-70 disabled:cursor-not-allowed rounded-full p-2 w-10 h-10"
         disabled={disabled}
         aria-label={ariaLabel}
     >
