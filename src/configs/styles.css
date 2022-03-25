@@ -2,24 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-html, body {
-    height: 100%;
-}
-
 html {
-    @apply bg-slate-900;
-
-    /*
-    scrollbar-color: #64748b #334155;
-    */
+    scrollbar-color: rgb(100, 116, 139) rgb(51, 65, 85);
 
     &::-webkit-scrollbar {
         @apply w-4;
     }
 
-    &::-webkit-scrollbar-track {
+    &::-webkit-scrollbar-track, &::-webkit-scrollbar-corner { 
         @apply bg-slate-700;
     }
 

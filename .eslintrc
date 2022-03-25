@@ -33,7 +33,8 @@
                         "allowedFor": [
                             "FormikField",
                             "Form",
-                            "ErrorMessage"
+                            "ErrorMessage",
+                            "Html"
                         ],
                         "message": "Prop \"className\" is forbidden on Components"
                     }
