@@ -8,6 +8,7 @@ import { List } from "@components/typography/list";
 import { ListItem } from "@components/typography/list-item";
 import { Footing } from "@components/typography/footing";
 import { Card } from "@components/misc/card";
+import { Email } from "@components/typography/email";
 
 const Privacy = (): ReactElement => (
     <Card>
@@ -84,7 +85,8 @@ const Privacy = (): ReactElement => (
                 Demandes de communication et demandes de suppression
             </Heading>
             <Paragraph>
-                Vous pouvez demander la divulgation et/ou la suppression de toute information que nous avons recueillie à votre sujet, en nous envoyant un courriel contenant les détails de votre demande à l&apos;adresse suivante&nbsp;: support@lexique-quebecois.com.
+                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                Vous pouvez demander la divulgation et/ou la suppression de toute information que nous avons recueillie à votre sujet, en nous envoyant un courriel contenant les détails de votre demande à l&apos;adresse suivante&nbsp;: <Email value="support@lexique-quebecois.com" />.
             </Paragraph>
             <Paragraph>
                 Nous vous contacterons après réception de votre demande pour vérifier votre identité et traiter votre demande. Veuillez noter que les demandes sont examinées au cas par cas et sont soumises aux exigences légales et à une vérification adéquate de l&apos;identité.
@@ -151,7 +153,8 @@ const Privacy = (): ReactElement => (
                 Questions
             </Heading>
             <Paragraph>
-                Toute question concernant la présente politique de confidentialité doit être adressée à l&apos;adresse suivante&nbsp;: legal@lexique-quebecois.com.
+                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                Toute question concernant la présente politique de confidentialité doit être adressée à l&apos;adresse suivante&nbsp;: <Email value="legal@lexique-quebecois.com" />.
             </Paragraph>
         </Section>
         <Footing>

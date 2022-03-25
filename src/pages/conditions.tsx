@@ -9,6 +9,8 @@ import { ListItem } from "@components/typography/list-item";
 import { Section } from "@components/typography/section";
 import { Footing } from "@components/typography/footing";
 import { Card } from "@components/misc/card";
+import { Email } from "@components/typography/email";
+import { Hyperlink } from "@components/typography/hyperlink";
 
 const Conditions = (): ReactElement => (
     <Card>
@@ -17,7 +19,8 @@ const Conditions = (): ReactElement => (
         </Title>
         <Section>
             <Paragraph>
-                Kevin Pastor (la &quot;société&quot;) propose Lexique Québécois (le &quot;site Web&quot;) conformément aux conditions de service déclarées ci-dessous. La société se réserve le droit de réviser ces conditions de temps à autre. Nous publierons un avis de toute révision importante sur le site Web. En continuant à utiliser le site Web, vous acceptez les présentes conditions. Les questions relatives aux conditions de service peuvent être envoyées à l&apos;adresse suivante&nbsp;: info@lexique-quebecois.com.
+                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                Kevin Pastor (la &quot;société&quot;) propose Lexique Québécois (le &quot;site Web&quot;) conformément aux conditions de service déclarées ci-dessous. La société se réserve le droit de réviser ces conditions de temps à autre. Nous publierons un avis de toute révision importante sur le site Web. En continuant à utiliser le site Web, vous acceptez les présentes conditions. Les questions relatives aux conditions de service peuvent être envoyées à l&apos;adresse suivante&nbsp;: <Email value="info@lexique-quebecois.com" />.
             </Paragraph>
         </Section>
         <Section>
@@ -126,13 +129,15 @@ const Conditions = (): ReactElement => (
                 Vous ne pouvez pas soumettre de contenu en utilisant des méthodes automatisées non autorisées (&quot;bots&quot;).
             </Paragraph>
             <Paragraph>
-                La société ne contrôle pas et ne peut pas contrôler tout le contenu publié par des tiers sur le site Web, et ne garantit pas l&apos;exactitude, l&apos;intégrité ou la qualité de ce contenu. Vous comprenez qu&apos;en utilisant le site Web, vous pouvez être exposé à du contenu que vous pouvez trouver offensant, indécent, incorrect ou répréhensible, et vous acceptez qu&apos;en aucun cas la société ne soit responsable de quelque manière que ce soit du contenu, y compris des erreurs ou omissions dans le contenu, ou de toute perte ou dommage de quelque nature que ce soit résultant de votre utilisation du contenu. Si vous souhaitez signaler des éléments répréhensibles, vous pouvez le problème à l&apos;adresse suivante&nbsp;: legal@lexique-quebecois.com.
+                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                La société ne contrôle pas et ne peut pas contrôler tout le contenu publié par des tiers sur le site Web, et ne garantit pas l&apos;exactitude, l&apos;intégrité ou la qualité de ce contenu. Vous comprenez qu&apos;en utilisant le site Web, vous pouvez être exposé à du contenu que vous pouvez trouver offensant, indécent, incorrect ou répréhensible, et vous acceptez qu&apos;en aucun cas la société ne soit responsable de quelque manière que ce soit du contenu, y compris des erreurs ou omissions dans le contenu, ou de toute perte ou dommage de quelque nature que ce soit résultant de votre utilisation du contenu. Si vous souhaitez signaler des éléments répréhensibles, vous pouvez le problème à l&apos;adresse suivante&nbsp;: <Email value="legal@lexique-quebecois.com" />.
             </Paragraph>
             <Paragraph>
                 Vous êtes seul responsable de tout contenu que vous publiez sur le site Web, ainsi que des conséquences de la publication de ce contenu. Vous acceptez d&apos;indemniser, de défendre et de dégager de toute responsabilité la société, ses dirigeants, ses administrateurs, ses employés et ses agents en cas de réclamations, pertes, coûts, responsabilités, dommages, jugements, pénalités, intérêts et dépenses (y compris les honoraires d&apos;avocat raisonnables) découlant de ou liés à (1) toute violation réelle ou présumée de vos déclarations, garanties ou obligations énoncées dans les présentes conditions d&apos;utilisation, et (2) toute violation réelle ou présumée de tout droit de propriété intellectuelle ou de propriété par tout contenu ou toute autre information que vous publiez sur le site Web.
             </Paragraph>
             <Paragraph>
-                L&apos;utilisation du site Web est également régie par notre politique de confidentialité, dont une copie se trouve actuellement à l&apos;adresse suivante&nbsp;: https://lexique-quebecois.com/confidentialite.
+                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                L&apos;utilisation du site Web est également régie par notre politique de confidentialité, dont une copie se trouve actuellement à l&apos;adresse suivante&nbsp;: <Hyperlink href="https://lexique-quebecois.com/confidentialite">https://lexique-quebecois.com/confidentialite</Hyperlink>.
             </Paragraph>
         </Section>
         <Section>
@@ -172,7 +177,8 @@ const Conditions = (): ReactElement => (
                 </ListItem>
             </List>
             <Paragraph>
-                L&apos;agent de la société chargé de notifier les réclamations relatives aux droits d&apos;auteur ou à toute autre violation de la propriété intellectuelle peut être contacté à l&apos;adresse suivante&nbsp;: legal@lexique-quebecois.com
+                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                L&apos;agent de la société chargé de notifier les réclamations relatives aux droits d&apos;auteur ou à toute autre violation de la propriété intellectuelle peut être contacté à l&apos;adresse suivante&nbsp;: <Email value="legal@lexique-quebecois.com" />.
             </Paragraph>
         </Section>
         <Section>
@@ -223,60 +229,60 @@ const Conditions = (): ReactElement => (
             </Paragraph>
             <List>
                 <ListItem>
-                    <a
+                    <Hyperlink
                         href="https://thenai.org/opt-out/"
-                        className="break-all"
+                        breakText
                     >
                         https://thenai.org/opt-out/
-                    </a>
+                    </Hyperlink>
                 </ListItem>
                 <ListItem>
-                    <a
+                    <Hyperlink
                         href="http://aboutads.info/choices/"
-                        className="break-all"
+                        breakText
                     >
                         http://aboutads.info/choices/
-                    </a>
+                    </Hyperlink>
                 </ListItem>
                 <ListItem>
-                    <a
+                    <Hyperlink
                         href="http://youronlinechoices.eu"
-                        className="break-all"
+                        breakText
                     >
                         http://youronlinechoices.eu
-                    </a>
+                    </Hyperlink>
                 </ListItem>
                 <ListItem>
-                    <a
+                    <Hyperlink
                         href="http://networkadvertising.org/choices/"
-                        className="break-all"
+                        breakText
                     >
                         http://networkadvertising.org/choices/
-                    </a>
+                    </Hyperlink>
                 </ListItem>
                 <ListItem>
-                    <a
+                    <Hyperlink
                         href="http://aboutads.info/"
-                        className="break-all"
+                        breakText
                     >
                         http://aboutads.info/
-                    </a>
+                    </Hyperlink>
                 </ListItem>
                 <ListItem>
-                    <a
+                    <Hyperlink
                         href="https://rhythmone.com/opt-out"
-                        className="break-all"
+                        breakText
                     >
                         https://rhythmone.com/opt-out
-                    </a>
+                    </Hyperlink>
                 </ListItem>
                 <ListItem>
-                    <a
+                    <Hyperlink
                         href="https://google.com/policies/privacy/partners/"
-                        className="break-all"
+                        breakText
                     >
                         https://google.com/policies/privacy/partners/
-                    </a>
+                    </Hyperlink>
                 </ListItem>
             </List>
         </Section>
