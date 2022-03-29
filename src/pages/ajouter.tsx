@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import { NextPage } from "next";
 import { NextRouter, useRouter } from "next/router";
 import { Form, Formik, FormikProps } from "formik";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +18,7 @@ const initialValues: WordRequest = {
     author: ""
 };
 
-const Add: NextPage = (): ReactElement => {
+const Add = (): ReactElement => {
     const router: NextRouter = useRouter();
 
     const handleSubmit = async (word: WordRequest): Promise<void> => {

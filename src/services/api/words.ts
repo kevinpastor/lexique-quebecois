@@ -1,26 +1,27 @@
 import { Collection, Db, FindOptions } from "mongodb";
 
 import { Word } from "@models/word";
-import { WordRequest, getResourceName } from "@models/word-request";
+import { WordRequest, getSlug } from "@models/word-request";
 import { shuffle } from "@utils/misc/random";
 
+import { Projection } from "@utils/types/projection";
+import { WordDocument } from "@models/word-document";
 import { getDatabase } from "./database";
 
-interface ModeratedWord extends Word {
-    isApproved: boolean;
-}
+const wordProjection: Projection<WordDocument, Word> = {
+    _id: 0,
+    isApproved: 0,
+    ip: 0
+};
 
 export const getWords = async (): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
-    const collection: Collection<ModeratedWord> = database.collection("definitions");
+    const collection: Collection<WordDocument> = database.collection("definitions");
     const pipeline = [
         { $match: { isApproved: true } },
         { $sample: { size: 5 } },
         {
-            $project: {
-                _id: 0,
-                isApproved: 0
-            }
+            $project: wordProjection
         }
     ];
     const words: Array<Word> = await collection.aggregate<Word>(pipeline)
@@ -29,20 +30,17 @@ export const getWords = async (): Promise<Array<Word>> => {
     return shuffle(words);
 };
 
-export const getWord = async (resourceName: string): Promise<Word | undefined> => {
+export const getWord = async (slug: string): Promise<Word | undefined> => {
     const database: Db = await getDatabase();
-    const collection: Collection<ModeratedWord> = database.collection("definitions");
-    const query = {
-        resourceName,
+    const collection: Collection<WordDocument> = database.collection("definitions");
+    const filter: Partial<WordDocument> = {
+        slug,
         isApproved: true
     };
     const options: FindOptions = {
-        projection: {
-            _id: 0,
-            isApproved: 0
-        }
+        projection: wordProjection
     };
-    const word: Word | null = await collection.findOne(query, options);
+    const word: Word | null = await collection.findOne(filter, options);
 
     if (!word) {
         return;
@@ -51,21 +49,22 @@ export const getWord = async (resourceName: string): Promise<Word | undefined> =
     return word;
 };
 
-export const addWord = async (word: WordRequest): Promise<Word> => {
-    const datedWord: Word = {
+export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Word> => {
+    const word: Word = {
         author: "Anonyme",
-        ...word,
-        resourceName: getResourceName(word.label),
+        ...wordRequest,
+        slug: getSlug(wordRequest.label),
         timestamp: new Date().getTime()
     };
-    const moderatedWord: ModeratedWord = {
-        ...datedWord,
+    const wordDocument: WordDocument = {
+        ...word,
+        ip,
         isApproved: false
     };
 
     const database: Db = await getDatabase();
-    const collection: Collection<ModeratedWord> = database.collection("definitions");
-    await collection.insertOne(moderatedWord);
+    const collection: Collection<WordDocument> = database.collection("definitions");
+    await collection.insertOne(wordDocument);
 
-    return datedWord;
+    return word;
 };

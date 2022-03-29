@@ -1,59 +1,49 @@
 import { ReactElement } from "react";
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
 import Head from "next/head";
 
 import { Word as IWord } from "@models/word";
 import { getWord } from "@services/api/words";
-import { ErrorCard } from "@components/misc/error-card";
 import { Word as WordComponent } from "@components/misc/word";
 
+export const getStaticPaths = (): GetStaticPathsResult => {
+    return {
+        paths: [],
+        fallback: "blocking"
+    };
+};
+
+type Params = {
+    slug: string;
+};
+
 interface Props {
-    hasFailed?: boolean;
     word?: IWord;
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Props>> => {
-    const { id } = query;
+export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>): Promise<GetStaticPropsResult<Props>> => {
+    if (!params) {
+        throw new Error("Called not from a dynamic route.");
+    }
 
-    if (typeof id !== "string") {
+    const { slug } = params;
+
+    const word: IWord | undefined = await getWord(slug);
+
+    if (!word) {
         return {
-            props: {
-                hasFailed: true
-            }
+            props: {}
         };
     }
 
-    try {
-        const word: IWord | undefined = await getWord(id);
-
-        if (!word) {
-            return {
-                props: {}
-            };
+    return {
+        props: {
+            word
         }
-
-        return {
-            props: {
-                word
-            }
-        };
-    }
-    catch {
-        return {
-            props: {
-                hasFailed: true
-            }
-        };
-    }
+    };
 };
 
-const Word = ({ word, hasFailed }: Props): ReactElement => {
-    if (hasFailed) {
-        return (
-            <ErrorCard />
-        );
-    }
-
+const Word = ({ word }: Props): ReactElement => {
     if (!word) {
         return (
             <section className="bg-slate-800 rounded-lg p-8 space-y-4">

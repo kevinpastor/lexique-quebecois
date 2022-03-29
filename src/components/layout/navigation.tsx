@@ -5,7 +5,7 @@ import { Form, Formik } from "formik";
 import { faPlus, faMagnifyingGlass, faBookOpenReader } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 
-import { getResourceName } from "@models/word-request";
+import { getSlug } from "@models/word-request";
 import { Field } from "@components/form/field";
 import { IconButton } from "@components/form/icon-button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,8 +31,8 @@ export const Navigation = (): ReactElement => {
 
     const onSubmit = async (values: FormValues): Promise<void> => {
         const label: string = values.label;
-        const resourceName: string = getResourceName(label);
-        await router.push(`/mots/${resourceName}`);
+        const slug: string = getSlug(label);
+        await router.push(`/mots/${slug}`);
     };
 
     const onAdd = async (): Promise<void> => {

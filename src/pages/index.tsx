@@ -1,40 +1,27 @@
 import { ReactElement } from "react";
-import { GetServerSidePropsResult } from "next";
+import { GetStaticPropsResult } from "next";
 
 import { Word as IWord } from "@models/word";
 import { getWords } from "@services/api/words";
-import { ErrorCard } from "@components/misc/error-card";
 import { Word } from "@components/misc/word";
 // import { Alert } from "@components/misc/alert";
 
 interface Props {
-    words?: Array<IWord>;
+    words: Array<IWord>;
 }
 
-export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
-    try {
-        const words: Array<IWord> = await getWords();
+export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+    const words: Array<IWord> = await getWords();
 
-        return {
-            props: {
-                words
-            }
-        };
-    }
-    catch {
-        return {
-            props: {}
-        };
-    }
+    return {
+        props: {
+            words
+        },
+        revalidate: 60 * 60 * 24
+    };
 };
 
 const Home = ({ words }: Props): ReactElement => {
-    if (!words) {
-        return (
-            <ErrorCard />
-        );
-    }
-
     return (
         <div className="space-y-4">
             {/* <Alert

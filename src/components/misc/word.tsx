@@ -12,7 +12,7 @@ interface Props {
 
 export const Word = ({ word }: Props): ReactElement => (
     <Card>
-        <Title href={`/mots/${word.resourceName}`}>
+        <Title href={`/mots/${word.slug}`}>
             {word.label}
         </Title>
         <div className="space-y-4">

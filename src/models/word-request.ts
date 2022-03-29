@@ -10,7 +10,7 @@ export interface WordRequest {
     author?: string;
 }
 
-export const getResourceName = (label: string): string => {
+export const getSlug = (label: string): string => {
     const spacelessLabel: string = label.replaceAll(" ", "-");
     return removeAccents(spacelessLabel)
         .toLocaleLowerCase();

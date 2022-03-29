@@ -28,7 +28,7 @@ const handler: Handler = createHandler({
             return;
         }
 
-        const word: Word = await addWord(req.body);
+        const word: Word = await addWord(req.body, ip);
 
         res.status(Status.Created)
             .json(word);

@@ -137,7 +137,7 @@ const Conditions = (): ReactElement => (
             </Paragraph>
             <Paragraph>
                 {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                L&apos;utilisation du site Web est également régie par notre politique de confidentialité, dont une copie se trouve actuellement à l&apos;adresse suivante&nbsp;: <Hyperlink href="https://lexique-quebecois.com/confidentialite">https://lexique-quebecois.com/confidentialite</Hyperlink>.
+                L&apos;utilisation du site Web est également régie par notre politique de confidentialité, dont une copie se trouve actuellement à l&apos;adresse suivante&nbsp;: <Hyperlink href="/confidentialite">https://lexique-quebecois.com/confidentialite</Hyperlink>.
             </Paragraph>
         </Section>
         <Section>
