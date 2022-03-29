@@ -53,5 +53,5 @@ export const wordRequestValidationSchema = yup
     .noUnknown();
 
 export const isValidWordRequest = (value: unknown): value is WordRequest => (
-    isValid(value, wordRequestValidationSchema)
+    isValid<WordRequest>(value, wordRequestValidationSchema)
 );

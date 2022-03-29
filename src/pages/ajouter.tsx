@@ -22,9 +22,10 @@ const Add = (): ReactElement => {
     const router: NextRouter = useRouter();
 
     const handleSubmit = async (word: WordRequest): Promise<void> => {
-        const status: boolean = await addWord(word);
-
-        if (!status) {
+        try {
+            await addWord(word);
+        }
+        catch {
             alert("Une erreur s'est produite. Veuillez réessayer.");
             return;
         }

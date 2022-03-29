@@ -50,9 +50,9 @@ export const getWord = async (slug: string): Promise<Word | undefined> => {
 };
 
 export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Word> => {
-    const word: Word = {
-        author: "Anonyme",
+    const word: Required<Word> = {
         ...wordRequest,
+        author: wordRequest.author ?? "Anonyme",
         slug: getSlug(wordRequest.label),
         timestamp: new Date().getTime()
     };

@@ -30,6 +30,13 @@ export const createHandler = (methodHandlers: MethodHandlers): Handler => {
             return;
         }
 
-        await handler(req, res);
+        try {
+            await handler(req, res);
+        }
+        catch (error: unknown) {
+            console.error(`An unexpected error occured. ${error}`);
+            res.status(Status.InternalError)
+                .end();
+        }
     };
 };

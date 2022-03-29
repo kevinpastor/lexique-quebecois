@@ -168,7 +168,15 @@
         "eqeqeq": "error",
         "linebreak-style": "off",
         "no-await-in-loop": "error",
-        "no-console": "warn",
+        "no-console": [
+            "error",
+            {
+                "allow": [
+                    "warn",
+                    "error"
+                ]
+            }
+        ],
         "no-trailing-spaces": "error",
         "require-await": "error",
         "promise/always-return": "error",
