@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import { isValidMethod } from "@models/method";
 import { Status } from "@models/status";
+
 import { MethodHandler } from "./method-handler";
 import { MethodHandlers } from "./method-handlers";
 

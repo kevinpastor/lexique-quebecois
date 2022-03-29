@@ -3,9 +3,9 @@ import { Collection, Db, FindOptions } from "mongodb";
 import { Word } from "@models/word";
 import { WordRequest, getSlug } from "@models/word-request";
 import { shuffle } from "@utils/misc/random";
-
 import { Projection } from "@utils/types/projection";
 import { WordDocument } from "@models/word-document";
+
 import { getDatabase } from "./database";
 
 const wordProjection: Projection<WordDocument, Word> = {
