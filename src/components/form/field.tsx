@@ -35,7 +35,7 @@ export const Field = <T extends Record<string, unknown>>({ label, name, autofocu
             }
             <div
                 onClick={onClick}
-                className="rounded bg-slate-700 hover:bg-slate-600 active:bg-slate-600 transition flex flex-row items-center cursor-text py-2 px-4 gap-2"
+                className="rounded bg-slate-700 hover:bg-slate-600 active:bg-slate-600 transition flex items-center cursor-text py-2 px-4 gap-2"
             >
                 {icon &&
                     <div className="text-slate-400 fill-transparent stroke-current">

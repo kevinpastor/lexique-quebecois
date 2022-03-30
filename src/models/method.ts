@@ -5,5 +5,6 @@ export enum Method {
     DELETE = "DELETE"
 }
 
-export const isValidMethod = (value: string): value is Method =>
-    value in Method;
+export const isValidMethod = (value: string): value is Method => (
+    value in Method
+);
