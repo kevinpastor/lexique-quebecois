@@ -6,12 +6,10 @@ import { Word as IWord } from "@models/word";
 import { getWord } from "@services/api/words";
 import { Word as WordComponent } from "@components/misc/word";
 
-export const getStaticPaths = (): GetStaticPathsResult => {
-    return {
-        paths: [],
-        fallback: "blocking"
-    };
-};
+export const getStaticPaths = (): GetStaticPathsResult => ({
+    paths: [],
+    fallback: "blocking"
+});
 
 type Params = {
     slug: string;

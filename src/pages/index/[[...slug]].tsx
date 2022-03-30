@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unused-prop-types */
-import { GetStaticPropsResult } from "next";
+import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { ReactElement, useMemo } from "react";
 
 import { getWordIndex } from "@services/api/words";
@@ -24,7 +24,20 @@ interface LetterGroup {
     group: Array<WordGroup>;
 }
 
-export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+export const getStaticPaths = (): GetStaticPathsResult => ({
+    paths: [
+        { params: {} }
+    ],
+    fallback: "blocking"
+});
+
+export const getStaticProps = async ({ params }: GetStaticPropsContext): Promise<GetStaticPropsResult<Props>> => {
+    if (params?.slug) {
+        return {
+            notFound: true
+        };
+    }
+
     const words: Array<string> = await getWordIndex();
 
     return {
