@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 import { removeAccents } from "@utils/misc/string";
-import { isValid } from "@utils/misc/validation";
+import { cleanup, isValid } from "@utils/misc/validation";
 
 export interface WordRequest {
     label: string;
@@ -49,9 +49,16 @@ export const wordRequestValidationSchema = yup
             .min(2, "Ce champ ne peut pas avoir moins de 2 caractères.")
             .max(32, "Ce champ ne peut pas dépasser 32 caractères.")
             .optional()
+            .transform((value: unknown): unknown | undefined => (
+                value === "" ? undefined : value
+            ))
     })
     .noUnknown();
 
 export const isValidWordRequest = (value: unknown): value is WordRequest => (
     isValid<WordRequest>(value, wordRequestValidationSchema)
+);
+
+export const cleanupWordRequest = (value: WordRequest): WordRequest => (
+    cleanup(value, wordRequestValidationSchema)
 );

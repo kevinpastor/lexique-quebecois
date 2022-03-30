@@ -1,15 +1,16 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { Form, Formik, FormikProps } from "formik";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import Head from "next/head";
 
-import { WordRequest, wordRequestValidationSchema } from "@models/word-request";
+import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
 import { Button } from "@components/form/button";
 import { Field } from "@components/form/field";
 import { addWord } from "@services/words";
 import { Title } from "@components/typography/title";
 import { Card } from "@components/misc/card";
+import { Alert } from "@components/misc/alert";
 
 const initialValues: WordRequest = {
     label: "",
@@ -19,19 +20,30 @@ const initialValues: WordRequest = {
 };
 
 const Add = (): ReactElement => {
+    const [isSuccessAlertOpened, setIsSuccessAlertOpened] = useState(false);
+    const [isErrorAlertOpened, setIsErrorAlertOpened] = useState(false);
     const router: NextRouter = useRouter();
 
-    const handleSubmit = async (word: WordRequest): Promise<void> => {
+    const handleSubmit = async (wordRequest: WordRequest): Promise<void> => {
+        const cleanedWordRequest: WordRequest = cleanupWordRequest(wordRequest);
         try {
-            await addWord(word);
+            await addWord(cleanedWordRequest);
         }
         catch {
-            alert("Une erreur s'est produite. Veuillez réessayer.");
+            setIsErrorAlertOpened(true);
             return;
         }
 
-        alert("Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu.");
+        setIsSuccessAlertOpened(true);
+    };
+
+    const handleSuccessAlertDismiss = async (): Promise<void> => {
+        setIsSuccessAlertOpened(false);
         await router.push("/");
+    };
+
+    const handleErrorAlertDismiss = (): void => {
+        setIsErrorAlertOpened(false);
     };
 
     return (
@@ -39,6 +51,18 @@ const Add = (): ReactElement => {
             <Head>
                 <title>Ajouter - Lexique Québécois</title>
             </Head>
+            <Alert
+                isOpened={isSuccessAlertOpened}
+                onDismiss={handleSuccessAlertDismiss}
+                title="Succès"
+                content="Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu."
+            />
+            <Alert
+                isOpened={isErrorAlertOpened}
+                onDismiss={handleErrorAlertDismiss}
+                title="Oops"
+                content="Une erreur s'est produite. Veuillez réessayer plus tard."
+            />
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
