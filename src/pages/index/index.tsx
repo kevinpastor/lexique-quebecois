@@ -70,7 +70,7 @@ const Index = ({ words }: Props): ReactElement => {
                     {group.map(({ slug, word }: WordGroup): ReactElement => (
                         <div key={slug}>
                             <Hyperlink
-                                href={slug}
+                                href={`/mots/${slug}`}
                             >
                                 {word}
                             </Hyperlink>
