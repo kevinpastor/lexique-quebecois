@@ -20,7 +20,7 @@ const links: Array<Link> = [
     },
     {
         label: "Index",
-        href: "/index"
+        href: "/mots"
     }
 ];
 
