@@ -11,7 +11,7 @@ export interface WordRequest {
 }
 
 export const getSlug = (label: string): string => {
-    const spacelessLabel: string = label.replaceAll(" ", "-");
+    const spacelessLabel: string = label.replace(/\s/g, "-");
     return removeAccents(spacelessLabel)
         .toLocaleLowerCase();
 };
