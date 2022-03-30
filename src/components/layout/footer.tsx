@@ -17,12 +17,16 @@ const links: Array<Link> = [
     {
         label: "Confidentialité",
         href: "/confidentialite"
+    },
+    {
+        label: "Index",
+        href: "/index"
     }
 ];
 
 export const Footer = (): ReactElement => (
     <footer className="container mx-auto space-y-2">
-        <div className="flex justify-center items-center space-x-4">
+        <div className="flex justify-center items-center gap-x-4 gap-y-2 flex-wrap">
             {links.map(({ label, href }: Link): ReactElement => (
                 <LinkComponent
                     key={href}

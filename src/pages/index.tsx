@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { GetStaticPropsResult } from "next";
 
 import { Word as IWord } from "@models/word";
-import { getWords } from "@services/api/words";
+import { getWordsSample } from "@services/api/words";
 import { Word } from "@components/misc/word";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
-    const words: Array<IWord> = await getWords();
+    const words: Array<IWord> = await getWordsSample();
 
     return {
         props: {
@@ -20,17 +20,15 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
     };
 };
 
-const Home = ({ words }: Props): ReactElement => {
-    return (
-        <div className="space-y-4">
-            {words.map((word: IWord): ReactElement => (
-                <Word
-                    key={word.timestamp}
-                    word={word}
-                />
-            ))}
-        </div>
-    );
-};
+const Home = ({ words }: Props): ReactElement => (
+    <div className="space-y-4">
+        {words.map((word: IWord): ReactElement => (
+            <Word
+                key={word.timestamp}
+                word={word}
+            />
+        ))}
+    </div>
+);
 
 export default Home;

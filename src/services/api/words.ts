@@ -14,7 +14,25 @@ const wordProjection: Projection<WordDocument, Word> = {
     ip: 0
 };
 
-export const getWords = async (): Promise<Array<Word>> => {
+export const getWordIndex = async (): Promise<Array<string>> => {
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("definitions");
+    const pipeline = [
+        { $match: { isApproved: true } },
+        { $sort: { slug: 1 } },
+        {
+            $project: wordProjection
+        }
+    ];
+    const words: Array<Word> = await collection.aggregate<Word>(pipeline)
+        .toArray();
+
+    return words.map(({ label }: Word): string => (
+        label
+    ));
+};
+
+export const getWordsSample = async (): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const pipeline = [
