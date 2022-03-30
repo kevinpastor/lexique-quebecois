@@ -25,9 +25,7 @@ interface LetterGroup {
 }
 
 export const getStaticPaths = (): GetStaticPathsResult => ({
-    paths: [
-        { params: {} }
-    ],
+    paths: [],
     fallback: "blocking"
 });
 
