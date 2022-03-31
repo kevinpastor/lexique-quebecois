@@ -1,8 +1,9 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ErrorMessage, Field as FormikField } from "formik";
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { v4 as uuid } from "uuid";
+import { ReactElement, useRef } from "react";
+
+import { useId } from "@utils/hooks/use-id";
 
 interface Props<T> {
     name: keyof T;
@@ -16,11 +17,7 @@ interface Props<T> {
 
 export const Field = <T extends Record<string, unknown>>({ label, name, autofocus, type = "input", icon, placeholder, hideErrors = false }: Props<T>): ReactElement => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const [id, setId] = useState("");
-
-    useEffect((): void => {
-        setId(uuid());
-    }, []);
+    const id: string = useId();
 
     const onClick = (): void => {
         inputRef.current?.focus();
