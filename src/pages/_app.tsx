@@ -11,9 +11,10 @@ import "@configs/styles.css";
 import { Footer } from "@components/layout/footer";
 import { Navigation } from "@components/layout/navigation";
 import { Sidebar } from "@components/layout/sidebar";
+import { Snackbars } from "@components/misc/snackbar/snackbars";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
-    <>
+    <Snackbars>
         <Head>
             <title>Lexique Québécois</title>
             <meta
@@ -41,7 +42,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
                 <Footer />
             </div>
         </main>
-    </>
+    </Snackbars>
 );
 
 export default App;

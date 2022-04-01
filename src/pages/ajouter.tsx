@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { Form, Formik, FormikProps } from "formik";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +10,8 @@ import { Field } from "@components/form/field";
 import { addWord } from "@services/words";
 import { Title } from "@components/typography/title";
 import { Card } from "@components/misc/card";
-import { Alert } from "@components/misc/alert";
+import { SnackbarsContext, snackbarsContext } from "@components/misc/snackbar/snackbar-context";
+import { Variant } from "@components/variant";
 
 const initialValues: WordRequest = {
     label: "",
@@ -20,9 +21,8 @@ const initialValues: WordRequest = {
 };
 
 const Add = (): ReactElement => {
-    const [isSuccessAlertOpened, setIsSuccessAlertOpened] = useState(false);
-    const [isErrorAlertOpened, setIsErrorAlertOpened] = useState(false);
     const router: NextRouter = useRouter();
+    const { push: pushSnackbar }: SnackbarsContext = useContext(snackbarsContext);
 
     const handleSubmit = async (wordRequest: WordRequest): Promise<void> => {
         const cleanedWordRequest: WordRequest = cleanupWordRequest(wordRequest);
@@ -30,20 +30,18 @@ const Add = (): ReactElement => {
             await addWord(cleanedWordRequest);
         }
         catch {
-            setIsErrorAlertOpened(true);
+            pushSnackbar({
+                label: "Une erreur s'est produite. Veuillez réessayer plus tard.",
+                variant: Variant.Error
+            });
             return;
         }
 
-        setIsSuccessAlertOpened(true);
-    };
+        pushSnackbar({
+            label: "Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu."
+        });
 
-    const handleSuccessAlertDismiss = async (): Promise<void> => {
-        setIsSuccessAlertOpened(false);
         await router.push("/");
-    };
-
-    const handleErrorAlertDismiss = (): void => {
-        setIsErrorAlertOpened(false);
     };
 
     return (
@@ -51,23 +49,10 @@ const Add = (): ReactElement => {
             <Head>
                 <title>Ajouter - Lexique Québécois</title>
             </Head>
-            <Alert
-                isOpened={isSuccessAlertOpened}
-                onDismiss={handleSuccessAlertDismiss}
-                title="Succès"
-                content="Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu."
-            />
-            <Alert
-                isOpened={isErrorAlertOpened}
-                onDismiss={handleErrorAlertDismiss}
-                title="Oops"
-                content="Une erreur s'est produite. Veuillez réessayer plus tard."
-            />
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
                 validationSchema={wordRequestValidationSchema}
-                validateOnChange={false}
             >
                 {({ isSubmitting, isValid }: FormikProps<WordRequest>): ReactElement => (
                     <Form>

@@ -36,7 +36,6 @@ export const Alert = ({ title, content, isOpened, onDismiss }: Props): ReactElem
                     </div>
                     <div className="flex flex-row-reverse">
                         <Button
-                            type="button"
                             onClick={handleDismiss}
                             label="OK"
                             ariaLabel="OK"

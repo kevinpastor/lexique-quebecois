@@ -43,7 +43,7 @@ export const Field = <T extends Record<string, unknown>>({ label, name, autofocu
                     name={name}
                     as={type}
                     autoFocus={autofocus/* TODO Fix me */}
-                    className="w-full placeholder-slate-500 focus:placeholder-slate-400 bg-transparent outline-none caret-white text-slate-300 resize-none"
+                    className="w-full placeholder-slate-400 bg-transparent outline-none caret-white text-slate-300 resize-none"
                     innerRef={inputRef}
                     placeholder={placeholder}
                     id={id}
@@ -52,7 +52,7 @@ export const Field = <T extends Record<string, unknown>>({ label, name, autofocu
             {!hideErrors &&
                 <ErrorMessage name={name as string}>
                     {(message: string): ReactElement => (
-                        <div className="text-slate-600 text-sm">
+                        <div className="text-slate-400 text-sm">
                             {message}
                         </div>
                     )}
