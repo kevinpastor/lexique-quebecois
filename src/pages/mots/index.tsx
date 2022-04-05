@@ -71,6 +71,7 @@ const Index = ({ words }: Props): ReactElement => {
                         <div key={slug}>
                             <Hyperlink
                                 href={`/mots/${slug}`}
+                                prefetch={false}
                             >
                                 {word}
                             </Hyperlink>

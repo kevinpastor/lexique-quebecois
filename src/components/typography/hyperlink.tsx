@@ -5,13 +5,15 @@ import { PropsWithChildren, ReactElement } from "react";
 interface Props {
     href: string;
     breakText?: boolean;
+    prefetch?: false;
 }
 
-export const Hyperlink = ({ href, breakText = false, children }: PropsWithChildren<Props>): ReactElement => (
+export const Hyperlink = ({ href, breakText = false, prefetch, children }: PropsWithChildren<Props>): ReactElement => (
     href.startsWith("/")
         ? (
             <Link
                 href={href}
+                prefetch={prefetch}
             >
                 <a
                     href={href}
