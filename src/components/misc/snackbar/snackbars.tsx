@@ -1,4 +1,4 @@
-import { delay } from "@utils/misc/delay";
+import { delay } from "@utils/misc/time";
 import classNames from "classnames";
 import { PropsWithChildren, ReactElement, useEffect, useMemo, useRef, useState } from "react";
 import { Transition, TransitionStatus } from "react-transition-group";
