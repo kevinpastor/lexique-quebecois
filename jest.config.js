@@ -6,7 +6,19 @@ const createJestConfig = nextJest({
     dir: "./",
 });
 
+/** @type {import("@jest/types/build/Config").GlobalConfig} */
 const customJestConfig = {
+    collectCoverageFrom: [
+        "**/*.ts"
+    ],
+    coverageThreshold: {
+        global: {
+            branches: 80,
+            functions: 80,
+            lines: 80,
+            statements: -10
+        }
+    },
     moduleNameMapper: {
         "^@/components/(.*)$": "<rootDir>/components/$1",
         "^@/configs/(.*)$": "<rootDir>/configs/$1",
