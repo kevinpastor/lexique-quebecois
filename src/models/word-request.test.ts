@@ -6,15 +6,19 @@ import {
     WordRequest
 } from "./word-request";
 
+import { wordDocumentStub } from "./word-document.stub";
+import { WordDocument } from "./word-document";
+import { wordRequestStub } from "./word-request.stub";
+
 describe("@models", (): void => {
     describe("word-request", (): void => {
         describe("getSlug", (): void => {
             it("should get slug", (): void => {
-                const label: string = "foo bar";
+                const { label, slug }: WordDocument = wordDocumentStub;
 
                 const result: string = getSlug(label);
 
-                expect(result).toEqual("foo-bar");
+                expect(result).toEqual(slug);
             });
         });
 
@@ -40,6 +44,14 @@ describe("@models", (): void => {
         });
 
         describe("isValidWordRequest", (): void => {
+            it("should not allow undefined", (): void => {
+                const value: unknown = undefined;
+
+                const result: boolean = isValidWordRequest(value);
+
+                expect(result).toBeFalsy();
+            });
+
             it("should not be a valid word request", (): void => {
                 const value: unknown = {};
 
@@ -49,13 +61,7 @@ describe("@models", (): void => {
             });
 
             it("should be a valid word request", (): void => {
-                const value: WordRequest = {
-                    label: "foo",
-                    definition: "bar",
-                    example: "baz"
-                };
-
-                const result: boolean = isValidWordRequest(value);
+                const result: boolean = isValidWordRequest(wordRequestStub);
 
                 expect(result).toBeTruthy();
             });
@@ -63,22 +69,14 @@ describe("@models", (): void => {
 
         describe("cleanupWordRequest", (): void => {
             it("should not cleanup the word request", (): void => {
-                const value: WordRequest = {
-                    label: "foo",
-                    definition: "bar",
-                    example: "baz"
-                };
+                const result: WordRequest = cleanupWordRequest(wordRequestStub);
 
-                const result: WordRequest = cleanupWordRequest(value);
-
-                expect(result).toEqual(value);
+                expect(result).toEqual(wordRequestStub);
             });
 
             it("should remove empty author", (): void => {
                 const value: WordRequest = {
-                    label: "foo",
-                    definition: "bar",
-                    example: "baz",
+                    ...wordRequestStub,
                     author: ""
                 };
 
@@ -90,10 +88,8 @@ describe("@models", (): void => {
 
             it("should trim attributes", (): void => {
                 const value: WordRequest = {
-                    label: "foo  ",
-                    definition: "  bar",
-                    example: "baz",
-                    author: "John Doe"
+                    ...wordRequestStub,
+                    author: "   John Doe   "
                 };
 
                 const result: WordRequest = cleanupWordRequest(value);

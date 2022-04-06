@@ -2,7 +2,7 @@ export const isDevelopmentEnvironment = (): boolean => (
     process.env.NODE_ENV === "development"
 );
 
-export const isTestingEnvironment = (): boolean => (
+export const isTestEnvironment = (): boolean => (
     process.env.NODE_ENV === "test"
 );
 

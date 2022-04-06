@@ -1,11 +1,11 @@
-import { isTestingEnvironment } from "@utils/misc/environment";
+import { isTestEnvironment } from "@utils/misc/environment";
 import { Db, MongoClient } from "mongodb";
 
 let database: Db | undefined = undefined;
 
 export const getDatabase = async (): Promise<Db> => {
-    if (isTestingEnvironment()) {
-        throw new Error("Database should not be accessed in a testing environment");
+    if (isTestEnvironment()) {
+        throw new Error("Database should not be accessed in a test environment");
     }
 
     if (!database) {
