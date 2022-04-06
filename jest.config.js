@@ -14,18 +14,21 @@ const customJestConfig = {
     coverageThreshold: {
         global: {
             branches: 80,
-            functions: 80,
-            lines: 80,
-            statements: -10
+            functions: 80
+            // lines: 80
+            // statements: 80
         }
     },
-    moduleNameMapper: {
-        "^@/components/(.*)$": "<rootDir>/components/$1",
-        "^@/configs/(.*)$": "<rootDir>/configs/$1",
-        "^@/models/(.*)$": "<rootDir>/models/$1",
-        "^@/services/(.*)$": "<rootDir>/services/$1",
-        "^@/utils/(.*)$": "<rootDir>/utils/$1"
-    }
+    moduleNameMapper: [
+        "components",
+        "configs",
+        "models",
+        "services",
+        "utils"
+    ].reduce((accumulator, value) => ({
+        ...accumulator,
+        [`^@${value}\\/(.*)$`]: `<rootDir>/src/${value}/$1`
+    }), {})
 };
 
 module.exports = createJestConfig(customJestConfig);
