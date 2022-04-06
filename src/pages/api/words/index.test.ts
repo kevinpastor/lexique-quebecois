@@ -23,26 +23,27 @@ describe("@pages", (): void => {
                     json: jsonMock
                 });
 
-            let resStub: NextApiResponse = {
-                status: statusMock
-            } as Partial<NextApiResponse> as NextApiResponse;
-
             let reqStub: NextApiRequest = {
                 method: Method.POST
             } as Partial<NextApiRequest> as NextApiRequest;
+
+            let resStub: NextApiResponse = {
+                status: statusMock
+            } as Partial<NextApiResponse> as NextApiResponse;
 
             beforeEach((): void => {
                 jest.useFakeTimers();
                 endMock.mockClear();
                 statusMock.mockClear();
 
+                reqStub = {
+                    method: Method.POST,
+                    body: wordRequestStub
+                } as Partial<NextApiRequest> as NextApiRequest;
+
                 resStub = {
                     status: statusMock
                 } as Partial<NextApiResponse> as NextApiResponse;
-
-                reqStub = {
-                    method: Method.POST
-                } as Partial<NextApiRequest> as NextApiRequest;
             });
 
             afterEach((): void => {
@@ -77,6 +78,7 @@ describe("@pages", (): void => {
             });
 
             it("should not allow empty request", async (): Promise<void> => {
+                reqStub.body = undefined;
                 await handler(reqStub, resStub);
 
                 expect(statusMock).toHaveBeenCalledWith(Status.BadRequest);
@@ -95,7 +97,6 @@ describe("@pages", (): void => {
             });
 
             it("should handle errors", async (): Promise<void> => {
-                reqStub.body = wordRequestStub;
                 addWordMock.mockRejectedValue(undefined);
 
                 await handler(reqStub, resStub);
@@ -105,7 +106,6 @@ describe("@pages", (): void => {
             });
 
             it("should add word", async (): Promise<void> => {
-                reqStub.body = wordRequestStub;
                 addWordMock.mockResolvedValue(wordStub);
 
                 await handler(reqStub, resStub);
@@ -114,7 +114,9 @@ describe("@pages", (): void => {
                 expect(jsonMock).toHaveBeenCalledWith(wordStub);
             });
 
+            // TODO Investigate why this is working
             it("should limit requests", async (): Promise<void> => {
+                jest.setSystemTime(0);
                 await handler(reqStub, resStub);
                 await handler(reqStub, resStub);
 
@@ -122,15 +124,15 @@ describe("@pages", (): void => {
                 expect(endMock).toHaveBeenCalled();
             });
 
-            it.skip("should not limit different user requests", async (): Promise<void> => {
+            it("should not limit different user requests", async (): Promise<void> => {
                 jest.setSystemTime(0);
+                await handler(reqStub, resStub);
                 const anotherReqStub: NextApiRequest = {
                     ...reqStub,
                     socket: {
                         remoteAddress: "1.1.1.1"
                     }
                 } as Partial<NextApiRequest> as NextApiRequest;
-                await handler(reqStub, resStub);
                 await handler(anotherReqStub, resStub);
 
                 expect(statusMock).toHaveBeenCalledWith(Status.Created);

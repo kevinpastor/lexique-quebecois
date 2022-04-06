@@ -8,7 +8,7 @@ import { getDatabase } from "./database";
 import { AggregationCursor, Collection, Db } from "mongodb";
 import { WordDocument } from "@models/word-document";
 import { Word } from "@models/word";
-import { getSlug, WordRequest } from "@models/word-request";
+import { WordRequest } from "@models/word-request";
 import { anotherWordStub, wordStub } from "@models/word.stub";
 import { wordRequestStub } from "@models/word-request.stub";
 import { wordDocumentStub } from "@models/word-document.stub";
@@ -137,6 +137,11 @@ describe("@services", (): void => {
                 });
 
                 it("should add an anonymous word", async (): Promise<void> => {
+                    const anonymousWordRequestStub: WordRequest = {
+                        ...wordRequestStub,
+                        author: undefined
+                    };
+
                     getDatabaseMock.mockResolvedValue({
                         collection: (): Collection<WordDocument> => ({
                             insertOne: insertOneMock
@@ -144,9 +149,13 @@ describe("@services", (): void => {
                     } as Partial<Db> as Db);
                     jest.setSystemTime(0);
 
-                    await addWord(wordRequestStub, ip);
+                    await addWord(anonymousWordRequestStub, ip);
 
-                    expect(insertOneMock).toHaveBeenCalledWith(wordDocumentStub);
+                    const anonymousWordDocumentStub: WordDocument = {
+                        ...wordDocumentStub,
+                        author: "Anonyme"
+                    };
+                    expect(insertOneMock).toHaveBeenCalledWith(anonymousWordDocumentStub);
                 });
 
                 it("should add a word", async (): Promise<void> => {
