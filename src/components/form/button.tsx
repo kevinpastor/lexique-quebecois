@@ -1,7 +1,7 @@
-import { ReactElement } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
+import { ReactElement } from "react";
 
 import { Type } from "@components/type";
 
@@ -14,7 +14,14 @@ interface Props {
     type?: Type;
 }
 
-export const Button = ({ label, icon, onClick, disabled = false, ariaLabel, type = Type.Filled }: Props): ReactElement => (
+export const Button = ({
+    label,
+    icon,
+    onClick,
+    disabled = false,
+    ariaLabel,
+    type = Type.Filled
+}: Props): ReactElement => (
     <button
         type={onClick ? "button" : "submit"}
         onClick={onClick}

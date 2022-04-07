@@ -1,17 +1,17 @@
-import { ReactElement, useContext } from "react";
-import { NextRouter, useRouter } from "next/router";
-import { Form, Formik, FormikProps } from "formik";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { Form, Formik, FormikProps } from "formik";
 import Head from "next/head";
+import { NextRouter, useRouter } from "next/router";
+import { ReactElement, useContext } from "react";
 
-import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
 import { Button } from "@components/form/button";
 import { Field } from "@components/form/field";
-import { addWord } from "@services/words";
-import { Title } from "@components/typography/title";
 import { Card } from "@components/misc/card";
 import { SnackbarsContext, snackbarsContext } from "@components/misc/snackbar/snackbar-context";
+import { Title } from "@components/typography/title";
 import { Variant } from "@components/variant";
+import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
+import { addWord } from "@services/words";
 
 const initialValues: WordRequest = {
     label: "",

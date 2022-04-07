@@ -3,6 +3,7 @@
  */
 import { Method } from "@models/method";
 import { wordRequestStub } from "@models/word-request.stub";
+
 import { addWord } from "./words";
 
 describe("@services", (): void => {

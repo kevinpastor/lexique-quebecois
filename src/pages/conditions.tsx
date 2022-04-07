@@ -1,16 +1,16 @@
 import { ReactElement } from "react";
 
-import { Title } from "@components/typography/title";
-import { Heading } from "@components/typography/heading";
-import { Subheading } from "@components/typography/subheading";
-import { Paragraph } from "@components/typography/paragraph";
-import { List } from "@components/typography/list";
-import { ListItem } from "@components/typography/list-item";
-import { Section } from "@components/typography/section";
-import { Footing } from "@components/typography/footing";
 import { Card } from "@components/misc/card";
 import { Email } from "@components/typography/email";
+import { Footing } from "@components/typography/footing";
+import { Heading } from "@components/typography/heading";
 import { Hyperlink } from "@components/typography/hyperlink";
+import { List } from "@components/typography/list";
+import { ListItem } from "@components/typography/list-item";
+import { Paragraph } from "@components/typography/paragraph";
+import { Section } from "@components/typography/section";
+import { Subheading } from "@components/typography/subheading";
+import { Title } from "@components/typography/title";
 
 const Conditions = (): ReactElement => (
     <Card>

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import classNames from "classnames";
+import Link from "next/link";
 import { PropsWithChildren, ReactElement } from "react";
 
 interface Props {
@@ -8,7 +8,12 @@ interface Props {
     prefetch?: false;
 }
 
-export const Hyperlink = ({ href, breakText = false, prefetch, children }: PropsWithChildren<Props>): ReactElement => (
+export const Hyperlink = ({
+    href,
+    breakText = false,
+    prefetch,
+    children
+}: PropsWithChildren<Props>): ReactElement => (
     href.startsWith("/")
         ? (
             <Link

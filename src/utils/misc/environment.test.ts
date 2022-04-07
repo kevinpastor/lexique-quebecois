@@ -1,8 +1,4 @@
-import {
-    isDevelopmentEnvironment,
-    isTestEnvironment,
-    isProductionEnvironment
-} from "./environment";
+import { isDevelopmentEnvironment, isTestEnvironment, isProductionEnvironment } from "./environment";
 
 describe("@utils", (): void => {
     describe("misc", (): void => {

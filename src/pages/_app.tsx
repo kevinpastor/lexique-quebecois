@@ -1,17 +1,16 @@
-import { ReactElement } from "react";
-import type { AppProps } from "next/app";
-import Head from "next/head";
-
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-config.autoAddCss = false;
-
-import "@configs/styles.css";
+import { AppProps } from "next/app";
+import Head from "next/head";
+import { ReactElement } from "react";
 
 import { Footer } from "@components/layout/footer";
 import { Navigation } from "@components/layout/navigation";
 import { Sidebar } from "@components/layout/sidebar";
 import { Snackbars } from "@components/misc/snackbar/snackbars";
+import "@configs/styles.css";
+
+config.autoAddCss = false;
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
     <Snackbars>

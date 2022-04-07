@@ -1,4 +1,5 @@
 import { createContext } from "react";
+
 import { Props as SnackbarProps } from ".";
 
 export interface SnackbarsContext {

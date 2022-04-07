@@ -1,6 +1,8 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { NextApiRequest, NextApiResponse } from "next";
+
 import { createHandler, Handler } from "./index";
 import { MethodHandlers } from "./method-handlers";
 

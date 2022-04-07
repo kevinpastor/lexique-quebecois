@@ -15,7 +15,15 @@ interface Props<T> {
     hideErrors?: boolean;
 }
 
-export const Field = <T extends Record<string, unknown>>({ label, name, autofocus, type = "input", icon, placeholder, hideErrors = false }: Props<T>): ReactElement => {
+export const Field = <T extends Record<string, unknown>>({
+    label,
+    name,
+    autofocus,
+    type = "input",
+    icon,
+    placeholder,
+    hideErrors = false
+}: Props<T>): ReactElement => {
     const inputRef = useRef<HTMLInputElement>(null);
     const id: string = useId();
 

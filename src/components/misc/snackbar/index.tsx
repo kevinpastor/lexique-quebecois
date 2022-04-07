@@ -1,9 +1,9 @@
+import classNames from "classnames";
 import { ReactElement } from "react";
 
 import { Button } from "@components/form/button";
 import { Type } from "@components/type";
 import { Variant } from "@components/variant";
-import classNames from "classnames";
 
 export interface Props {
     label: string;
@@ -12,7 +12,12 @@ export interface Props {
     onAction?: () => void;
 }
 
-export const Snackbar = ({ label, variant, actionLabel, onAction }: Props): ReactElement => (
+export const Snackbar = ({
+    label,
+    variant,
+    actionLabel,
+    onAction
+}: Props): ReactElement => (
     <div
         role="alert"
         className="fixed bottom-4 left-4 right-4 flex justify-center pointer-events-none"

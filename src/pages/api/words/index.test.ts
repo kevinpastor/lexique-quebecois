@@ -1,10 +1,12 @@
+import { NextApiRequest, NextApiResponse } from "next";
+
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { NextApiRequest, NextApiResponse } from "next";
-import handler from "./index";
-import { addWord } from "@services/api/words";
 import { wordRequestStub } from "@models/word-request.stub";
 import { wordStub } from "@models/word.stub";
+import { addWord } from "@services/api/words";
+
+import handler from "./index";
 
 jest.mock("@services/api/words");
 const addWordMock = addWord as jest.MockedFunction<typeof addWord>;

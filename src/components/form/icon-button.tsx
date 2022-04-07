@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ReactElement } from "react";
 
 interface Props {
     onClick: () => void;
@@ -9,7 +9,12 @@ interface Props {
     disabled?: boolean;
 }
 
-export const IconButton = ({ onClick, icon, disabled = false, ariaLabel }: Props): ReactElement => (
+export const IconButton = ({
+    onClick,
+    icon,
+    disabled = false,
+    ariaLabel
+}: Props): ReactElement => (
     <button
         type="button"
         onClick={onClick}

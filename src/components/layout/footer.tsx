@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unused-prop-types */
-import { ReactElement } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopyright } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LinkComponent from "next/link";
+import { ReactElement } from "react";
 
 interface Link {
     label: string;

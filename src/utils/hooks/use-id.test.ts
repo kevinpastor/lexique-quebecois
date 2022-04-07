@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { useId } from "./use-id";
-
 import { renderHook } from "@testing-library/react-hooks";
+
+import { useId } from "./use-id";
 
 describe("@utils", (): void => {
     describe("hooks", (): void => {

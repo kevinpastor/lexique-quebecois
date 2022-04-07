@@ -1,17 +1,14 @@
-import {
-    addWord,
-    getWord,
-    getWordIndex, getWordsSample
-} from "./words";
+import { AggregationCursor, Collection, Db } from "mongodb";
+
+import { Word } from "@models/word";
+import { WordDocument } from "@models/word-document";
+import { wordDocumentStub } from "@models/word-document.stub";
+import { WordRequest } from "@models/word-request";
+import { wordRequestStub } from "@models/word-request.stub";
+import { anotherWordStub, wordStub } from "@models/word.stub";
 
 import { getDatabase } from "./database";
-import { AggregationCursor, Collection, Db } from "mongodb";
-import { WordDocument } from "@models/word-document";
-import { Word } from "@models/word";
-import { WordRequest } from "@models/word-request";
-import { anotherWordStub, wordStub } from "@models/word.stub";
-import { wordRequestStub } from "@models/word-request.stub";
-import { wordDocumentStub } from "@models/word-document.stub";
+import { addWord, getWord, getWordIndex, getWordsSample } from "./words";
 
 jest.mock("./database", (): typeof import("./database") => ({
     ...jest.requireActual("./database"),

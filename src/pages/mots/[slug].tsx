@@ -1,10 +1,10 @@
-import { ReactElement } from "react";
 import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
 import Head from "next/head";
+import { ReactElement } from "react";
 
+import { Word as WordComponent } from "@components/misc/word";
 import { Word as IWord } from "@models/word";
 import { getWord } from "@services/api/words";
-import { Word as WordComponent } from "@components/misc/word";
 
 export const getStaticPaths = (): GetStaticPathsResult => ({
     paths: [],

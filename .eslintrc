@@ -13,7 +13,9 @@
         "next",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
-        "plugin:react/jsx-runtime"
+        "plugin:react/jsx-runtime",
+        "plugin:import/recommended",
+        "plugin:import/typescript"
     ],
     "ignorePatterns": [
         "**/*.js"
@@ -179,6 +181,34 @@
         ],
         "no-trailing-spaces": "error",
         "require-await": "error",
+        "import/newline-after-import": "warn",
+        "import/order": [
+            "warn",
+            {
+                "groups": [
+                    "external",
+                    "internal",
+                    [
+                        "sibling",
+                        "parent",
+                        "index"
+                    ]
+                ],
+                "pathGroups": [
+                    {
+                        "pattern": "@(components|configs|models|services|utils)/**",
+                        "group": "internal"
+                    }
+                ],
+                "pathGroupsExcludedImportTypes": [],
+                "newlines-between": "always",
+                "alphabetize": {
+                    "order": "asc",
+                    "caseInsensitive": true
+                },
+                "warnOnUnassignedImports": true
+            }
+        ],
         "promise/always-return": "error",
         "promise/no-return-wrap": "error",
         "promise/param-names": "error",
@@ -299,10 +329,22 @@
         "@typescript-eslint/no-use-before-define": "error",
         "no-useless-constructor": "off",
         "@typescript-eslint/no-useless-constructor": "error",
+        "object-curly-newline": [
+            "warn",
+            {
+                "consistent": true
+            }
+        ],
         "object-curly-spacing": "off",
         "@typescript-eslint/object-curly-spacing": [
             "error",
             "always"
+        ],
+        "object-property-newline": [
+            "warn",
+            {
+                "allowAllPropertiesOnSameLine": false
+            }
         ],
         "padded-blocks": [
             "error",

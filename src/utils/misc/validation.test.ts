@@ -1,9 +1,6 @@
-import {
-    isValid,
-    cleanup
-} from "./validation";
-
 import * as yup from "yup";
+
+import { isValid, cleanup } from "./validation";
 
 describe("@utils", (): void => {
     describe("misc", (): void => {

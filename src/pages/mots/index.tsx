@@ -2,13 +2,13 @@
 import { GetStaticPropsResult } from "next";
 import { ReactElement, useMemo } from "react";
 
-import { getWordIndex } from "@services/api/words";
 import { Card } from "@components/misc/card";
-import { getSlug } from "@models/word-request";
-import { Title } from "@components/typography/title";
-import { Hyperlink } from "@components/typography/hyperlink";
 import { Heading } from "@components/typography/heading";
+import { Hyperlink } from "@components/typography/hyperlink";
 import { Section } from "@components/typography/section";
+import { Title } from "@components/typography/title";
+import { getSlug } from "@models/word-request";
+import { getWordIndex } from "@services/api/words";
 
 interface Props {
     words: Array<string>;

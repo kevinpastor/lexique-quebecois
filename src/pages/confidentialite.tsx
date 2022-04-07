@@ -1,14 +1,14 @@
 import { ReactElement } from "react";
 
-import { Title } from "@components/typography/title";
-import { Section } from "@components/typography/section";
-import { Heading } from "@components/typography/heading";
-import { Paragraph } from "@components/typography/paragraph";
-import { List } from "@components/typography/list";
-import { ListItem } from "@components/typography/list-item";
-import { Footing } from "@components/typography/footing";
 import { Card } from "@components/misc/card";
 import { Email } from "@components/typography/email";
+import { Footing } from "@components/typography/footing";
+import { Heading } from "@components/typography/heading";
+import { List } from "@components/typography/list";
+import { ListItem } from "@components/typography/list-item";
+import { Paragraph } from "@components/typography/paragraph";
+import { Section } from "@components/typography/section";
+import { Title } from "@components/typography/title";
 
 const Privacy = (): ReactElement => (
     <Card>

@@ -9,7 +9,12 @@ interface Props {
     onDismiss?: () => void;
 }
 
-export const Alert = ({ title, content, isOpened, onDismiss }: Props): ReactElement | null => {
+export const Alert = ({
+    title,
+    content,
+    isOpened,
+    onDismiss
+}: Props): ReactElement | null => {
     const handleDismiss = (): void => {
         if (onDismiss) {
             onDismiss();

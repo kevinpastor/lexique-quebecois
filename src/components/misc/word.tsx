@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 
+import { Title } from "@components/typography/title";
 import { Word as IWord } from "@models/word";
 import { formatDate } from "@utils/misc/date";
-import { Title } from "@components/typography/title";
 
 import { Card } from "./card";
 

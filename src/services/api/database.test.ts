@@ -1,4 +1,5 @@
 import { Db, MongoClient } from "mongodb";
+
 import { getDatabase } from "./database";
 
 jest.mock("mongodb");

@@ -1,14 +1,14 @@
-import { ReactElement } from "react";
+import { faPlus, faMagnifyingGlass, faBookOpenReader } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Form, Formik } from "formik";
-import { faPlus, faMagnifyingGlass, faBookOpenReader } from "@fortawesome/free-solid-svg-icons";
+import { ReactElement } from "react";
 import * as yup from "yup";
 
-import { getSlug } from "@models/word-request";
 import { Field } from "@components/form/field";
 import { IconButton } from "@components/form/icon-button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getSlug } from "@models/word-request";
 
 interface FormValues {
     label: string;

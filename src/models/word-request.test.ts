@@ -1,13 +1,6 @@
-import {
-    getSlug,
-    isValidLabel,
-    isValidWordRequest,
-    cleanupWordRequest,
-    WordRequest
-} from "./word-request";
-
-import { wordDocumentStub } from "./word-document.stub";
 import { WordDocument } from "./word-document";
+import { wordDocumentStub } from "./word-document.stub";
+import { cleanupWordRequest, getSlug, isValidLabel, isValidWordRequest, WordRequest } from "./word-request";
 import { wordRequestStub } from "./word-request.stub";
 
 describe("@models", (): void => {

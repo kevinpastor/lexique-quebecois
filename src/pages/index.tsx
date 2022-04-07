@@ -1,9 +1,9 @@
-import { ReactElement } from "react";
 import { GetStaticPropsResult } from "next";
+import { ReactElement } from "react";
 
+import { Word } from "@components/misc/word";
 import { Word as IWord } from "@models/word";
 import { getWordsSample } from "@services/api/words";
-import { Word } from "@components/misc/word";
 
 interface Props {
     words: Array<IWord>;

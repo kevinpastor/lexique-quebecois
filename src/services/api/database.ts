@@ -1,5 +1,6 @@
-import { isTestEnvironment } from "@utils/misc/environment";
 import { Db, MongoClient } from "mongodb";
+
+import { isTestEnvironment } from "@utils/misc/environment";
 
 let database: Db | undefined = undefined;
 

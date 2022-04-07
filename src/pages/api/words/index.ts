@@ -4,9 +4,12 @@ import { getClientIp } from "request-ip";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { Word } from "@models/word";
-import { createHandler, Handler } from "@utils/api/handler";
 import { isValidWordRequest } from "@models/word-request";
 import { addWord } from "@services/api/words";
+import {
+    createHandler,
+    Handler
+} from "@utils/api/handler";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 
 const window: number = 1000 * 60 * 15;

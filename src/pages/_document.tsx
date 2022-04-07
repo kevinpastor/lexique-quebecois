@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
 import { Html, Head, Main, NextScript } from "next/document";
+import { ReactElement } from "react";
 
 import { metadata } from "@configs/metadata";
 import { Meta } from "@configs/metadata/meta";
