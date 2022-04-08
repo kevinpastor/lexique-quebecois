@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { PropsWithChildren, ReactElement, useEffect, useMemo, useRef, useState } from "react";
 import { Transition, TransitionStatus } from "react-transition-group";
 
+import { useBoolean } from "@utils/hooks/use-boolean";
 import { delay } from "@utils/misc/time";
 
 import { Props as SnackbarProps, Snackbar } from ".";
@@ -9,8 +10,16 @@ import { SnackbarsContext, snackbarsContext } from "./snackbar-context";
 
 export const Snackbars = ({ children }: PropsWithChildren<unknown>): ReactElement => {
     const [snackbarsProps, setSnackbarsProps] = useState<Array<SnackbarProps>>([]);
-    const [isDisplayed, setIsDisplayed] = useState(false);
-    const [isMounted, setIsMounted] = useState(false);
+    const {
+        value: isDisplayed,
+        setFalse: setIsDisplayedFalse,
+        setTrue: setIsDisplayedTrue
+    } = useBoolean(false);
+    const {
+        value: isSnackbarMounted,
+        setFalse: setIsSnackbarMountedFalse,
+        setTrue: setIsSnackbarMountedTrue
+    } = useBoolean(false);
 
     const value: SnackbarsContext = useMemo((): SnackbarsContext => ({
         snackbarsProps: snackbarsProps,
@@ -23,19 +32,19 @@ export const Snackbars = ({ children }: PropsWithChildren<unknown>): ReactElemen
     }), [snackbarsProps]);
 
     useEffect((): void => {
-        if (isMounted || snackbarsProps.length === 0) {
+        if (isSnackbarMounted || snackbarsProps.length === 0) {
             return;
         }
 
-        setIsMounted(true);
-        setIsDisplayed(true);
+        setIsSnackbarMountedTrue();
+        setIsDisplayedTrue();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [snackbarsProps]);
 
     // When the snackbar has been fully mounted, hide it after the timeout
     const handleEntered = async (): Promise<void> => {
         await delay(2500);
-        setIsDisplayed(false);
+        setIsDisplayedFalse();
     };
 
     // When the snackbar has been fully unmounted, remove the item from the list
@@ -43,7 +52,7 @@ export const Snackbars = ({ children }: PropsWithChildren<unknown>): ReactElemen
         setSnackbarsProps((oldProps: Array<SnackbarProps>): Array<SnackbarProps> => (
             oldProps.slice(1)
         ));
-        setIsMounted(false);
+        setIsSnackbarMountedFalse();
     };
 
     // TODO https://github.com/reactjs/react-transition-group/issues/668
