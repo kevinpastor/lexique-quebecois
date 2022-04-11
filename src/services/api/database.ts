@@ -6,7 +6,7 @@ let database: Db | undefined = undefined;
 
 export const getDatabase = async (): Promise<Db> => {
     if (isTestEnvironment()) {
-        throw new Error("Database should not be accessed in a test environment");
+        throw new Error("Database should not be accessed in a test environment.");
     }
 
     if (!database) {
