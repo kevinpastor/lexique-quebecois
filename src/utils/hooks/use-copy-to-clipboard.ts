@@ -13,7 +13,7 @@ export const useCopyToClipboard = (): CopyFunction => {
             await navigator.clipboard.writeText(text);
         }
         catch {
-            throw new Error(`Could not write to the clipboard.`);
+            throw new Error("Could not write to the clipboard.");
         }
     };
 };

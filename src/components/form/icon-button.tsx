@@ -1,4 +1,5 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { ReactElement } from "react";
@@ -11,6 +12,7 @@ interface Props {
     ariaLabel: string;
     disabled?: boolean;
     type?: Type;
+    isLoading?: boolean;
 }
 
 export const IconButton = ({
@@ -18,7 +20,8 @@ export const IconButton = ({
     icon,
     ariaLabel,
     disabled = false,
-    type = Type.Filled
+    type = Type.Filled,
+    isLoading = false
 }: Props): ReactElement => (
     <button
         type="button"
@@ -30,12 +33,22 @@ export const IconButton = ({
                 "text-slate-100 hover:text-white hover:bg-blue-400 focus-visible:bg-blue-400 hover:disabled:bg-blue-500": type === Type.Text
             }
         )}
-        disabled={disabled}
+        disabled={disabled || isLoading}
         aria-label={ariaLabel}
     >
-        <FontAwesomeIcon
-            icon={icon}
-            size="lg"
-        />
+        {isLoading
+            ? (
+                <FontAwesomeIcon
+                    icon={faCircleNotch}
+                    size="lg"
+                    spin
+                />
+            )
+            : (
+                <FontAwesomeIcon
+                    icon={icon}
+                    size="lg"
+                />
+            )}
     </button>
 );
