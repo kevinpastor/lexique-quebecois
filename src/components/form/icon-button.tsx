@@ -30,7 +30,7 @@ export const IconButton = ({
             "transition disabled:saturate-75 disabled:brightness-70 disabled:cursor-not-allowed rounded-full p-2 w-10 h-10",
             {
                 "text-white bg-blue-500 hover:bg-blue-400 focus-visible:bg-blue-400 hover:disabled:bg-blue-500": type === Type.Filled,
-                "text-slate-100 hover:text-white hover:bg-blue-400 focus-visible:bg-blue-400 hover:disabled:bg-blue-500": type === Type.Text
+                "text-slate-100 hover:text-white hover:bg-slate-600 focus-visible:bg-slate-600 hover:disabled:bg-transparent": type === Type.Text
             }
         )}
         disabled={disabled || isLoading}
