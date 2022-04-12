@@ -24,7 +24,7 @@ const Privacy = (): ReactElement => (
                     Quand et comment nous collectons, utilisons et partageons vos informations
                 </ListItem>
                 <ListItem>
-                    Quand et comment des réseaux publicitaires tiers peuvent collecter vos informations lorsque vous visitez lexique-quebecois.com
+                    Quand et comment des réseaux publicitaires tiers peuvent collecter vos informations lorsque vous visitez lexiquequebecois.com
                 </ListItem>
                 <ListItem>
                     Quels sont vos droits en matière de confidentialité et comment vous pouvez les exercer.
@@ -86,7 +86,7 @@ const Privacy = (): ReactElement => (
             </Heading>
             <Paragraph>
                 {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                Vous pouvez demander la divulgation et/ou la suppression de toute information que nous avons recueillie à votre sujet, en nous envoyant un courriel contenant les détails de votre demande à l&apos;adresse suivante&nbsp;: <Email value="support@lexique-quebecois.com" />.
+                Vous pouvez demander la divulgation et/ou la suppression de toute information que nous avons recueillie à votre sujet, en nous envoyant un courriel contenant les détails de votre demande à l&apos;adresse suivante&nbsp;: <Email value="info@lexiquequebecois.com" />{/* TODO Replace with support@lexiquequebecois.com */}.
             </Paragraph>
             <Paragraph>
                 Nous vous contacterons après réception de votre demande pour vérifier votre identité et traiter votre demande. Veuillez noter que les demandes sont examinées au cas par cas et sont soumises aux exigences légales et à une vérification adéquate de l&apos;identité.
@@ -154,7 +154,7 @@ const Privacy = (): ReactElement => (
             </Heading>
             <Paragraph>
                 {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                Toute question concernant la présente politique de confidentialité doit être adressée à l&apos;adresse suivante&nbsp;: <Email value="legal@lexique-quebecois.com" />.
+                Toute question concernant la présente politique de confidentialité doit être adressée à l&apos;adresse suivante&nbsp;: <Email value="info@lexiquequebecois.com" />{/* TODO Replace with legal@lexiquequebecois.com */}.
             </Paragraph>
         </Section>
         <Footing>
