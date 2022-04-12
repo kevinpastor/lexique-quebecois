@@ -16,7 +16,7 @@ export const getSlug = (label: string): string => {
         .toLocaleLowerCase();
 };
 
-export const labelRegex: RegExp = /^[a-zàâäéèêëïîôöùûüÿç]*$/gi;
+export const labelRegex: RegExp = /^[a-zàâäéèêëïîôöùûüÿç\s-]*$/gi;
 
 export const isValidLabel = (label: string): boolean => {
     return labelRegex.test(label);
@@ -29,7 +29,7 @@ export const wordRequestValidationSchema = yup
             .trim()
             .min(2, "Ce champ ne peut pas avoir moins de 2 caractères.")
             .max(32, "Ce champ ne peut pas dépasser 32 caractères.")
-            .matches(labelRegex, "Ce champ ne peut seulement avoir des caractères alphabétiques accentués ou non.")
+            .matches(labelRegex, "Ce champ ne peut contenir que des lettres, des espaces ou des tirets.")
             .required("Ce champ est requis."),
         definition: yup
             .string()

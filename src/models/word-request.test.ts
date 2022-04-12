@@ -19,7 +19,7 @@ describe("@models", (): void => {
         describe("isValidLabel", (): void => {
             it.each([
                 ["1"],
-                [" "]
+                ["&"]
             ])("should not consider \"%s\" as valid", (value: string): void => {
                 const result: boolean = isValidLabel(value);
 

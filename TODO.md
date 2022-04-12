@@ -1,6 +1,5 @@
 # TODO
 
-- Allow space and hyphen in label
 - Auto resize text area
 - ?Automatically remove quotes on example
 - Add ranking system
