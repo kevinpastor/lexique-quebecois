@@ -1,9 +1,8 @@
 # TODO
 
-## Client
-
-- [ ] Add word type (adjective, noun, verb, etc.)
-- [ ] Add ranking system
-- [ ] beforeunload on ajouter
-
-# DONE
+- Add ranking system
+- Allow multiple definition per word
+- Add word type (adjective, noun, verb, etc.)
+- Add pronounciation
+- Add alternative spelling
+- beforeunload on ajouter
