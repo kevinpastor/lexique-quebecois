@@ -88,6 +88,7 @@ const Add = (): ReactElement => {
                                     <Field
                                         label="Exemple"
                                         name="example"
+                                        type="textarea"
                                     />
                                     <Field
                                         label="Auteur"
