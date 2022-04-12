@@ -16,7 +16,9 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
         props: {
             words
         },
-        revalidate: 60 * 60 * 24
+        revalidate: 10
+        // TODO Enable back when list becomes bigger
+        // revalidate: 60 * 60 * 24
     };
 };
 
