@@ -21,7 +21,10 @@ const initialValues: WordRequest = {
 };
 
 const Add = (): ReactElement => {
-    const router: NextRouter = useRouter();
+    const {
+        push: pushRoute,
+        query: routeQuery
+    }: NextRouter = useRouter();
     const { push: pushSnackbar }: SnackbarsContext = useContext(snackbarsContext);
 
     const handleSubmit = async (wordRequest: WordRequest): Promise<void> => {
@@ -41,7 +44,7 @@ const Add = (): ReactElement => {
             label: "Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu."
         });
 
-        await router.push("/");
+        await pushRoute("/");
     };
 
     return (
@@ -50,7 +53,14 @@ const Add = (): ReactElement => {
                 <title>Ajouter - Lexique Québécois</title>
             </Head>
             <Formik
-                initialValues={initialValues}
+                initialValues={{
+                    ...initialValues,
+                    ...(
+                        routeQuery.label
+                        && !Array.isArray(routeQuery.label)
+                        && { label: routeQuery.label }
+                    )
+                }}
                 onSubmit={handleSubmit}
                 validationSchema={wordRequestValidationSchema}
             >
@@ -68,6 +78,7 @@ const Add = (): ReactElement => {
                                     <Field
                                         label="Mot"
                                         name="label"
+                                        autofocus
                                     />
                                     <Field
                                         label="Définition"

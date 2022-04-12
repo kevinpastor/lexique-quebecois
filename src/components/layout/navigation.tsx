@@ -27,16 +27,19 @@ const validationSchema = yup
     });
 
 export const Navigation = (): ReactElement => {
-    const router = useRouter();
+    const { push } = useRouter();
 
     const onSubmit = async (values: FormValues): Promise<void> => {
         const label: string = values.label;
         const slug: string = getSlug(label);
-        await router.push(`/mots/${slug}`);
+        await push(
+            `/mots/${slug}?label=${label}`,
+            `/mots/${slug}`
+        );
     };
 
     const onAdd = async (): Promise<void> => {
-        await router.push("/ajouter");
+        await push("/ajouter");
     };
 
     return (

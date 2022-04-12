@@ -47,11 +47,19 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>):
 };
 
 const Word = ({ word }: Props): ReactElement => {
-    const { push } = useRouter();
+    const {
+        push,
+        query
+    } = useRouter();
 
     if (!word) {
         const handleClick = async (): Promise<void> => {
-            await push("/ajouter");
+            if (!query.label) {
+                await push("/ajouter");
+            }
+            else {
+                await push(`/ajouter?label=${query.label}`, "/ajouter");
+            }
         };
 
         return (

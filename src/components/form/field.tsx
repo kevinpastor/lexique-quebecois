@@ -50,7 +50,7 @@ export const Field = <T extends Record<string, unknown>>({
                 <FormikField
                     name={name}
                     as={type}
-                    autoFocus={autofocus/* TODO Fix me */}
+                    autoFocus={autofocus}
                     className="w-full placeholder-slate-400 bg-transparent outline-none caret-white text-slate-300 resize-none"
                     innerRef={inputRef}
                     placeholder={placeholder}
