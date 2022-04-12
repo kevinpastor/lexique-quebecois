@@ -2,7 +2,7 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { ErrorMessage, Field as FormikField } from "formik";
-import { ReactElement } from "react";
+import { MutableRefObject, ReactElement } from "react";
 
 import { useAutoResize } from "@utils/hooks/use-auto-resize";
 import { useId } from "@utils/hooks/use-id";
@@ -28,7 +28,7 @@ export const Field = <T extends Record<string, unknown>>({
 }: Props<T>): ReactElement => {
     const id: string = useId();
 
-    const [height, ref] = useAutoResize();
+    const ref: MutableRefObject<HTMLTextAreaElement | undefined> = useAutoResize();
 
     return (
         <div className="space-y-1">
@@ -59,10 +59,10 @@ export const Field = <T extends Record<string, unknown>>({
                             "resize-y": type === "textarea"
                         }
                     )}
-                    style={{ height }}
+                    // style={{ height }}
                     placeholder={placeholder}
                     id={id}
-                    innerRef={ref}
+                    innerRef={type === "textarea" ? ref : undefined}
                 />
             </div>
             {!hideErrors &&

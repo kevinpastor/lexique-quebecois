@@ -1,48 +1,31 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 
-type Height = number | "auto";
-
-type ReturnValue = [
-    Height,
-    MutableRefObject<HTMLTextAreaElement | undefined>
-];
-
-export const useAutoResize = (): ReturnValue => {
+export const useAutoResize = (): MutableRefObject<HTMLTextAreaElement | undefined> => {
     const ref = useRef<HTMLTextAreaElement>();
-    const [height, setHeight] = useState<Height>(40);
 
     useEffect((): void => {
-        if (!ref.current) {
+        const { current: element } = ref;
+
+        if (!element) {
             return;
         }
 
-        if (ref.current.tagName !== "TEXTAREA") {
-            return;
-        }
-
-        setHeight("auto");
+        element.style.height = "auto";
     }, [ref.current?.value]);
 
     useEffect((): void => {
-        if (!ref.current) {
+        const { current: element } = ref;
+
+        if (!element) {
             return;
         }
 
-        if (ref.current.tagName !== "TEXTAREA") {
+        if (element.style.height !== "auto") {
             return;
         }
 
-        const { scrollHeight }: HTMLTextAreaElement = ref.current;
+        element.style.height = `${element.scrollHeight}px`;
+    }, [ref.current?.style.height]);
 
-        if (height !== "auto") {
-            return;
-        }
-
-        setHeight(scrollHeight);
-    }, [height]);
-
-    return [
-        height,
-        ref
-    ];
+    return ref;
 };
