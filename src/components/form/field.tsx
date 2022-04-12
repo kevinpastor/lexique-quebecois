@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { ErrorMessage, Field as FormikField } from "formik";
 import { ReactElement } from "react";
 
+import { useAutoResize } from "@utils/hooks/use-auto-resize";
 import { useId } from "@utils/hooks/use-id";
 
 interface Props<T> {
@@ -26,6 +27,8 @@ export const Field = <T extends Record<string, unknown>>({
     hideErrors = false
 }: Props<T>): ReactElement => {
     const id: string = useId();
+
+    const [height, ref] = useAutoResize();
 
     return (
         <div className="space-y-1">
@@ -56,8 +59,10 @@ export const Field = <T extends Record<string, unknown>>({
                             "resize-y": type === "textarea"
                         }
                     )}
+                    style={{ height }}
                     placeholder={placeholder}
                     id={id}
+                    innerRef={ref}
                 />
             </div>
             {!hideErrors &&
