@@ -7,7 +7,9 @@ import { ReactElement } from "react";
 import { Footer } from "@components/layout/footer";
 import { Navigation } from "@components/layout/navigation";
 import { Sidebar } from "@components/layout/sidebar";
+import { Snackbar } from "@components/misc/snackbar";
 import { Snackbars } from "@components/misc/snackbar/snackbars";
+import { Variant } from "@components/variant";
 import "@configs/styles.css";
 
 config.autoAddCss = false;
@@ -41,6 +43,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
                 <Footer />
             </div>
         </main>
+        <noscript>
+            <Snackbar
+                label="Ce site web requiert que JavaScript soit activé pour fonctionner correctement."
+                variant={Variant.Error}
+            />
+        </noscript>
     </Snackbars>
 );
 
