@@ -60,7 +60,7 @@ export const Field = <T extends Record<string, unknown>>({
             {!hideErrors &&
                 <ErrorMessage name={name as string}>
                     {(message: string): ReactElement => (
-                        <div className="text-slate-400 text-sm">
+                        <div className="text-red-500 text-sm">
                             {message}
                         </div>
                     )}
