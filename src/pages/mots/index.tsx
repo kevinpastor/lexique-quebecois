@@ -31,7 +31,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
         props: {
             words
         },
-        revalidate: 60 * 60 * 24
+        revalidate: 60 * 15 // 15 minutes
     };
 };
 

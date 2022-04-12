@@ -30,14 +30,16 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>):
 
     if (!word) {
         return {
-            props: {}
+            props: {},
+            revalidate: 60 * 15 // 15 minutes
         };
     }
 
     return {
         props: {
             word
-        }
+        },
+        revalidate: 60 * 15 // 15 minutes
     };
 };
 
