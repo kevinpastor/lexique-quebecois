@@ -1,4 +1,4 @@
-import { Collection, Db, FindOptions } from "mongodb";
+import { Collection, Db, Filter, FindOptions, UpdateFilter, UpdateResult } from "mongodb";
 
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
@@ -60,8 +60,9 @@ export const getWord = async (slug: string): Promise<Word | undefined> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const filter: Partial<WordDocument> = {
-        slug,
-        isApproved: true
+        slug
+        // ! TODO Uncomment
+        // isApproved: true
     };
     const options: FindOptions = {
         projection: wordProjection
@@ -87,4 +88,50 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<voi
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     await collection.insertOne(wordDocument);
+};
+
+// https://stackoverflow.com/questions/28006521/how-to-model-a-likes-voting-system-with-mongodb
+export const like = async (slug: string, ip: string): Promise<boolean> => {
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("definitions");
+
+    const filter: Filter<WordDocument> = {
+        slug,
+        likes: {
+            $ne: ip
+        }
+        // ! TODO Uncomment
+        // isApproved: true
+    };
+    const update: UpdateFilter<WordDocument> = {
+        $push: {
+            likes: ip
+        }
+    };
+    const result: UpdateResult = await collection.updateOne(filter, update);
+
+    return result.modifiedCount !== 0;
+};
+
+export const removeLike = async (slug: string, ip: string): Promise<boolean> => {
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("definitions");
+
+    const filter: Filter<WordDocument> = {
+        slug
+        // ! TODO Uncomment
+        // isApproved: true
+    };
+    const update: UpdateFilter<WordDocument> = {
+        $pull: {
+            likes: ip
+        }
+    };
+    const result: UpdateResult = await collection.updateOne(filter, update);
+
+    if (result.matchedCount === 0) {
+        throw new Error("Not found");
+    }
+
+    return result.modifiedCount !== 0;
 };
