@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { wordRequestStub } from "@models/word-request.stub";
-import { wordStub } from "@models/word.stub";
 import { addWord } from "@services/api/words";
 
 import handler from "./index";
@@ -108,12 +107,12 @@ describe("@pages", (): void => {
             });
 
             it("should add word", async (): Promise<void> => {
-                addWordMock.mockResolvedValue(wordStub);
+                addWordMock.mockResolvedValue();
 
                 await handler(reqStub, resStub);
 
                 expect(statusMock).toHaveBeenCalledWith(Status.Created);
-                expect(jsonMock).toHaveBeenCalledWith(wordStub);
+                expect(endMock).toHaveBeenCalled();
             });
 
             // TODO Investigate why this is working

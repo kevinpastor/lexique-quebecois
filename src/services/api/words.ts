@@ -75,14 +75,11 @@ export const getWord = async (slug: string): Promise<Word | undefined> => {
     return word;
 };
 
-export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Word> => {
-    const word: Required<Word> = {
+export const addWord = async (wordRequest: WordRequest, ip: string): Promise<void> => {
+    const wordDocument: WordDocument = {
         ...wordRequest,
         author: wordRequest.author ?? "Anonyme",
         slug: getSlug(wordRequest.label),
-    };
-    const wordDocument: WordDocument = {
-        ...word,
         ip,
         isApproved: false
     };
@@ -90,6 +87,4 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Wor
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     await collection.insertOne(wordDocument);
-
-    return word;
 };

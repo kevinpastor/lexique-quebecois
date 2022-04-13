@@ -3,7 +3,6 @@ import { getClientIp } from "request-ip";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { Word } from "@models/word";
 import { isValidWordRequest } from "@models/word-request";
 import { addWord } from "@services/api/words";
 import {
@@ -31,10 +30,10 @@ const handler: Handler = createHandler({
             return;
         }
 
-        const word: Word = await addWord(req.body, ip);
+        await addWord(req.body, ip);
 
         res.status(Status.Created)
-            .json(word);
+            .end();
     }
 });
 
