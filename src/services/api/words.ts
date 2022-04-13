@@ -4,14 +4,22 @@ import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
 import { WordRequest, getSlug } from "@models/word-request";
 import { shuffle } from "@utils/misc/random";
-import { Projection } from "@utils/types/projection";
+import { InclusiveProjection } from "@utils/types/projection";
 
 import { getDatabase } from "./database";
 
-const wordProjection: Projection<WordDocument, Word> = {
+const wordProjection: InclusiveProjection<WordDocument, Word> = {
     _id: 0,
-    isApproved: 0,
-    ip: 0
+    label: 1,
+    slug: 1,
+    definition: 1,
+    example: 1,
+    author: 1,
+    timestamp: {
+        $toDouble: {
+            $toDate: "$_id"
+        }
+    }
 };
 
 export const getWordIndex = async (): Promise<Array<string>> => {
@@ -58,7 +66,7 @@ export const getWord = async (slug: string): Promise<Word | undefined> => {
     const options: FindOptions = {
         projection: wordProjection
     };
-    const word: Word | null = await collection.findOne(filter, options);
+    const word: Word | null = await collection.findOne<Word>(filter, options);
 
     if (!word) {
         return;
@@ -72,7 +80,6 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Wor
         ...wordRequest,
         author: wordRequest.author ?? "Anonyme",
         slug: getSlug(wordRequest.label),
-        timestamp: new Date().getTime()
     };
     const wordDocument: WordDocument = {
         ...word,

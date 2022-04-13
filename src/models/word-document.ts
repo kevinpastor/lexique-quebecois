@@ -4,7 +4,6 @@ export interface WordDocument {
     definition: string;
     example: string;
     author: string;
-    timestamp: number;
     isApproved: boolean;
     ip: string;
 }
