@@ -43,7 +43,7 @@ export const Snackbars = ({ children }: PropsWithChildren<unknown>): ReactElemen
 
     // When the snackbar has been fully mounted, hide it after the timeout
     const handleEntered = async (): Promise<void> => {
-        await delay(2500);
+        await delay(5000);
         setIsDisplayedFalse();
     };
 

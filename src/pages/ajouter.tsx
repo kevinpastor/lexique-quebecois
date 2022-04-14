@@ -41,7 +41,8 @@ const Add = (): ReactElement => {
         }
 
         pushSnackbar({
-            label: "Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu."
+            label: "Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu.",
+            variant: Variant.Success
         });
 
         await pushRoute("/");
