@@ -1,12 +1,21 @@
 import { Db, MongoClient } from "mongodb";
 
-import { isTestEnvironment } from "@utils/misc/environment";
+import { isDevelopmentEnvironment, isTestEnvironment } from "@utils/misc/environment";
 
 let database: Db | undefined = undefined;
+
+interface ExtendedGlobal {
+    _database?: Db;
+}
 
 export const getDatabase = async (): Promise<Db> => {
     if (isTestEnvironment()) {
         throw new Error("Database should not be accessed in a test environment.");
+    }
+
+    // 2. Reassign database from cache
+    if (isDevelopmentEnvironment()) {
+        database = (global as ExtendedGlobal)._database;
     }
 
     if (!database) {
@@ -25,6 +34,11 @@ export const getDatabase = async (): Promise<Db> => {
         }
 
         database = client.db("quebecoisUrbain");
+
+        // 1. Cache the database for hot reload
+        if (isDevelopmentEnvironment()) {
+            (global as ExtendedGlobal)._database = database;
+        }
     }
 
     return database;
