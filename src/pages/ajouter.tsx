@@ -63,11 +63,10 @@ const Add = (): ReactElement => {
                 }}
                 onSubmit={handleSubmit}
                 validationSchema={wordRequestValidationSchema}
+                validateOnBlur={false}
+                validateOnChange={false}
             >
-                {({
-                    isSubmitting,
-                    isValid
-                }: FormikProps<WordRequest>): ReactElement => (
+                {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
                     <Form>
                         <Card>
                             <Title>
@@ -98,7 +97,6 @@ const Add = (): ReactElement => {
                                 <div className="flex flex-row-reverse">
                                     <Button
                                         label="Envoyer"
-                                        disabled={!isValid}
                                         isLoading={isSubmitting}
                                         icon={faCloudArrowUp}
                                         ariaLabel="Envoyer"
