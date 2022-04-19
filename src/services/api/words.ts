@@ -19,6 +19,32 @@ const wordProjection: InclusiveProjection<WordDocument, Word> = {
         $toDouble: {
             $toDate: "$_id"
         }
+    },
+    likes: {
+        $cond: {
+            if: {
+                $isArray: "$likes"
+            },
+            then: {
+                $size: "$likes"
+            },
+            else: 0
+        }
+    },
+    isLiked: {
+        $cond: {
+            if: {
+                $isArray: "$likes"
+            },
+            then: {
+                $in: [
+                    // ! TODO
+                    "::1",
+                    "$likes"
+                ]
+            },
+            else: false
+        }
     }
 };
 

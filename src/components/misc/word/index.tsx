@@ -9,8 +9,9 @@ import { Word as IWord } from "@models/word";
 import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
 import { formatDate } from "@utils/misc/date";
 
-import { Card } from "./card";
-import { snackbarsContext, SnackbarsContext } from "./snackbar/snackbar-context";
+import { Card } from "../card";
+import { snackbarsContext, SnackbarsContext } from "../snackbar/snackbar-context";
+import { Reactions } from "./reactions";
 
 interface Props {
     word: IWord;
@@ -64,6 +65,7 @@ export const Word = ({ word }: Props): ReactElement => {
                     {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
                     par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
                 </div>
+                <Reactions word={word} />
             </div>
         </Card>
     );

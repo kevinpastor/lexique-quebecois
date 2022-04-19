@@ -5,4 +5,6 @@ export interface Word {
     example: string;
     author?: string;
     timestamp: number;
+    likes: number;
+    isLiked: boolean;
 }

@@ -15,3 +15,25 @@ export const addWord = async (wordRequest: WordRequest): Promise<void> => {
         throw new Error("TODO");
     }
 };
+
+export const like = async (slug: string): Promise<void> => {
+    const options: RequestInit = {
+        method: Method.PUT
+    };
+    const response: Response = await fetch(`/api/words/${slug}/like`, options);
+
+    if (!response.ok) {
+        throw new Error("TODO");
+    }
+};
+
+export const removeLike = async (slug: string): Promise<void> => {
+    const options: RequestInit = {
+        method: Method.DELETE
+    };
+    const response: Response = await fetch(`/api/words/${slug}/like`, options);
+
+    if (!response.ok) {
+        throw new Error("TODO");
+    }
+};

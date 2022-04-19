@@ -1,5 +1,6 @@
 # TODO
 
+- Debounce like button
 - Add copy link tooltip
 - Add ranking system
 - Allow multiple definition per word
