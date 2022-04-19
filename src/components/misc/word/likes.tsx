@@ -1,12 +1,16 @@
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 
 import { ToggleButton } from "@components/form/toggle-button";
 import { Variant } from "@components/variant";
 import { Word as IWord } from "@models/word";
+import { isConflictError } from "@services/errors/conflict-error";
+import { isNotFoundError } from "@services/errors/not-found-error";
 import { like, removeLike } from "@services/words";
 import { useBoolean } from "@utils/hooks/use-boolean";
 import { useNumber } from "@utils/hooks/use-number";
+
+import { snackbarsContext, SnackbarsContext } from "../snackbar/snackbar-context";
 
 interface Props {
     word: IWord;
@@ -24,24 +28,47 @@ export const Likes = ({ word }: Props): ReactElement => {
         toggle: toggleIsLiked
     } = useBoolean(word.isLiked);
 
+    const { push: pushSnackbar }: SnackbarsContext = useContext(snackbarsContext);
+
     const handleClick = async (): Promise<void> => {
-        try {
-            if (isLiked) {
+        if (isLiked) {
+            try {
                 await removeLike(word.slug);
             }
-            else {
-                await like(word.slug);
+            catch (error: unknown) {
+                if (isConflictError(error) || isNotFoundError(error)) {
+                    toggleIsLiked();
+                    return;
+                }
+                else {
+                    pushSnackbar({
+                        label: "Un erreur inconnue s'est produite.",
+                        variant: Variant.Error
+                    });
+                    return;
+                }
             }
-        }
-        catch {
-            // TODO
-            return;
-        }
 
-        if (isLiked) {
             decrementLikes();
         }
         else {
+            try {
+                await like(word.slug);
+            }
+            catch (error: unknown) {
+                if (isConflictError(error)) {
+                    toggleIsLiked();
+                    return;
+                }
+                else {
+                    pushSnackbar({
+                        label: "Un erreur inconnue s'est produite.",
+                        variant: Variant.Error
+                    });
+                    return;
+                }
+            }
+
             incrementLikes();
         }
 
