@@ -3,17 +3,14 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { wordRequestStub } from "@models/word-request.stub";
-import { addWord } from "@services/api/words";
+import { like } from "@services/api/reactions";
 
-import handler from "./index";
+import handler from "./like";
 
-jest.mock("@services/api/words");
-const addWordMock = addWord as jest.MockedFunction<typeof addWord>;
+jest.mock("@services/api/reactions");
+const likeMock = like as jest.MockedFunction<typeof like>;
 
-describe("POST", (): void => {
-    jest.spyOn(console, "error")
-        .mockImplementation();
-
+describe("PUT", (): void => {
     const endMock = jest.fn();
     const jsonMock = jest.fn();
     const statusMock = jest.fn()
@@ -23,7 +20,7 @@ describe("POST", (): void => {
         });
 
     let reqStub: NextApiRequest = {
-        method: Method.POST
+        method: Method.PUT
     } as Partial<NextApiRequest> as NextApiRequest;
 
     let resStub: NextApiResponse = {
@@ -36,7 +33,7 @@ describe("POST", (): void => {
         statusMock.mockClear();
 
         reqStub = {
-            method: Method.POST,
+            method: Method.PUT,
             body: wordRequestStub
         } as Partial<NextApiRequest> as NextApiRequest;
 
@@ -49,36 +46,8 @@ describe("POST", (): void => {
         jest.useRealTimers();
     });
 
-    it("should not allow empty request", async (): Promise<void> => {
-        reqStub.body = undefined;
-        await handler(reqStub, resStub);
-
-        expect(statusMock).toHaveBeenCalledWith(Status.BadRequest);
-        expect(endMock).toHaveBeenCalled();
-    });
-
-    it("should not allow invalid request", async (): Promise<void> => {
-        reqStub.body = {
-            label: "foo"
-        };
-
-        await handler(reqStub, resStub);
-
-        expect(statusMock).toHaveBeenCalledWith(Status.BadRequest);
-        expect(endMock).toHaveBeenCalled();
-    });
-
-    it("should handle errors", async (): Promise<void> => {
-        addWordMock.mockRejectedValue(undefined);
-
-        await handler(reqStub, resStub);
-
-        expect(statusMock).toHaveBeenCalledWith(Status.InternalError);
-        expect(endMock).toHaveBeenCalled();
-    });
-
-    it("should add word", async (): Promise<void> => {
-        addWordMock.mockResolvedValue();
+    it.skip("should add word", async (): Promise<void> => {
+        likeMock.mockResolvedValue();
 
         await handler(reqStub, resStub);
 
@@ -87,7 +56,7 @@ describe("POST", (): void => {
     });
 
     // TODO Investigate why this is working
-    it("should limit requests", async (): Promise<void> => {
+    it.skip("should limit requests", async (): Promise<void> => {
         jest.setSystemTime(0);
         await handler(reqStub, resStub);
         await handler(reqStub, resStub);
@@ -96,7 +65,7 @@ describe("POST", (): void => {
         expect(endMock).toHaveBeenCalled();
     });
 
-    it("should not limit different user requests", async (): Promise<void> => {
+    it.skip("should not limit different user requests", async (): Promise<void> => {
         jest.setSystemTime(0);
         await handler(reqStub, resStub);
         const anotherReqStub: NextApiRequest = {
@@ -110,4 +79,9 @@ describe("POST", (): void => {
         expect(statusMock).toHaveBeenCalledWith(Status.Created);
         expect(endMock).toHaveBeenCalled();
     });
+});
+
+describe.skip("DELETE", (): void => {
+    jest.spyOn(console, "error")
+        .mockImplementation();
 });
