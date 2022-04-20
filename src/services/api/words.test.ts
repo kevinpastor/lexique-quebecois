@@ -20,6 +20,7 @@ const getDatabaseMock = getDatabase as jest.MockedFunction<typeof getDatabase>;
 describe("@services", (): void => {
     describe("api", (): void => {
         describe("words", (): void => {
+            const ip: string = "127.0.0.1";
             const wordsStub: Array<Word> = [
                 wordStub,
                 anotherWordStub
@@ -45,7 +46,7 @@ describe("@services", (): void => {
                         } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
                     } as Partial<Db> as Db);
 
-                    const wordIndex: Array<string> = await getWordIndex();
+                    const wordIndex: Array<string> = await getWordIndex(ip);
 
                     expect(wordIndex).toEqual(wordIndexStub);
                 });
@@ -66,7 +67,7 @@ describe("@services", (): void => {
                         } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
                     } as Partial<Db> as Db);
 
-                    const words: Array<Word> = await getWordsSample();
+                    const words: Array<Word> = await getWordsSample(ip);
 
                     expect(words).toHaveLength(wordsStub.length);
                     expect([...words].sort(({ slug: a }, { slug: b }) => {
@@ -98,7 +99,7 @@ describe("@services", (): void => {
                         } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
                     } as Partial<Db> as Db);
 
-                    const word: Word | undefined = await getWord(slug);
+                    const word: Word | undefined = await getWord(slug, ip);
 
                     expect(word).toBeUndefined();
                 });
@@ -112,15 +113,13 @@ describe("@services", (): void => {
                         } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
                     } as Partial<Db> as Db);
 
-                    const word: Word | undefined = await getWord(slug);
+                    const word: Word | undefined = await getWord(slug, ip);
 
                     expect(word).toEqual(wordsStub[0]);
                 });
             });
 
             describe("addWord", (): void => {
-                const ip: string = "127.0.0.1";
-
                 const insertOneMock = jest.fn()
                     .mockResolvedValue(undefined);
 
