@@ -3,6 +3,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
+import { getClientIp } from "request-ip";
 
 import { Button } from "@components/form/button";
 import { Word as WordComponent } from "@components/misc/word";
@@ -18,14 +19,15 @@ interface Props {
 }
 
 // TODO Investigate if the page can be partially generated statically. Initially reverted to this because of likes.
-export const getServerSideProps = async ({ params }: GetServerSidePropsContext<Params>): Promise<GetServerSidePropsResult<Props>> => {
+export const getServerSideProps = async ({ params, req }: GetServerSidePropsContext<Params>): Promise<GetServerSidePropsResult<Props>> => {
     if (!params) {
         throw new Error("Called not from a dynamic route.");
     }
 
     const { slug } = params;
+    const ip: string = getClientIp(req) ?? "";
 
-    const word: IWord | undefined = await getWord(slug);
+    const word: IWord | undefined = await getWord(slug, ip);
 
     if (!word) {
         return {

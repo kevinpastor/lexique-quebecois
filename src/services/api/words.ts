@@ -8,7 +8,7 @@ import { InclusiveProjection } from "@utils/types/projection";
 
 import { getDatabase } from "./database";
 
-const wordProjection: InclusiveProjection<WordDocument, Word> = {
+const wordProjection = (ip: string): InclusiveProjection<WordDocument, Word> => ({
     _id: 0,
     label: 1,
     slug: 1,
@@ -38,24 +38,23 @@ const wordProjection: InclusiveProjection<WordDocument, Word> = {
             },
             then: {
                 $in: [
-                    // ! TODO
-                    "::1",
+                    ip,
                     "$likes"
                 ]
             },
             else: false
         }
     }
-};
+});
 
-export const getWordIndex = async (): Promise<Array<string>> => {
+export const getWordIndex = async (ip: string): Promise<Array<string>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const pipeline = [
         { $match: { isApproved: true } },
         { $sort: { slug: 1 } },
         {
-            $project: wordProjection
+            $project: wordProjection(ip)
         }
     ];
     const words: Array<Word> = await collection.aggregate<Word>(pipeline)
@@ -66,14 +65,14 @@ export const getWordIndex = async (): Promise<Array<string>> => {
     ));
 };
 
-export const getWordsSample = async (): Promise<Array<Word>> => {
+export const getWordsSample = async (ip: string): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const pipeline = [
         { $match: { isApproved: true } },
         { $sample: { size: 5 } },
         {
-            $project: wordProjection
+            $project: wordProjection(ip)
         }
     ];
     const words: Array<Word> = await collection.aggregate<Word>(pipeline)
@@ -82,7 +81,7 @@ export const getWordsSample = async (): Promise<Array<Word>> => {
     return shuffle(words);
 };
 
-export const getWord = async (slug: string): Promise<Word | undefined> => {
+export const getWord = async (slug: string, ip: string): Promise<Word | undefined> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const filter: Partial<WordDocument> = {
@@ -91,7 +90,7 @@ export const getWord = async (slug: string): Promise<Word | undefined> => {
         // isApproved: true
     };
     const options: FindOptions = {
-        projection: wordProjection
+        projection: wordProjection(ip)
     };
     const word: Word | null = await collection.findOne<Word>(filter, options);
 

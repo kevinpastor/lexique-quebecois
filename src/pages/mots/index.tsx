@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unused-prop-types */
-import { GetStaticPropsResult } from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { ReactElement, useMemo } from "react";
+import { getClientIp } from "request-ip";
 
 import { Card } from "@components/misc/card";
 import { Heading } from "@components/typography/heading";
@@ -24,14 +25,16 @@ interface LetterGroup {
     group: Array<WordGroup>;
 }
 
-export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
-    const words: Array<string> = await getWordIndex();
+// TODO Investigate if the page can be partially generated statically. Initially reverted to this because of likes.
+export const getServerSideProps = async ({ req }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Props>> => {
+    const ip: string = getClientIp(req) ?? "";
+
+    const words: Array<string> = await getWordIndex(ip);
 
     return {
         props: {
             words
-        },
-        revalidate: 60 * 15 // 15 minutes
+        }
     };
 };
 
