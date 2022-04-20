@@ -6,18 +6,23 @@ import { wordRequestStub } from "@models/word-request.stub";
 
 import { addWord } from "./words";
 
-describe("addWord", (): void => {
-    const fetchMock = jest.fn()
-        .mockResolvedValue({
-            ok: true
-        } as Partial<Response> as Response);
-    global.fetch = fetchMock;
+const fetchMock = jest.fn()
+    .mockResolvedValue({
+        ok: true
+    } as Partial<Response> as Response);
+global.fetch = fetchMock;
 
+describe("addWord", (): void => {
     beforeEach((): void => {
         fetchMock.mockClear();
     });
 
     it("should add word", async (): Promise<void> => {
+        fetchMock
+            .mockResolvedValue({
+                ok: true
+            } as Partial<Response> as Response);
+
         await addWord(wordRequestStub);
 
         expect(fetchMock).toBeCalledWith(
@@ -28,13 +33,19 @@ describe("addWord", (): void => {
         );
     });
 
-    it("should throw an error", (): void => {
+    it("should throw an error", async (): Promise<void> => {
         fetchMock
             .mockResolvedValue({
                 ok: false
             } as Partial<Response> as Response);
 
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        expect(addWord(wordRequestStub)).rejects.toBeDefined();
+        await expect(addWord(wordRequestStub)).rejects.toBeDefined();
+
+        expect(fetchMock).toBeCalledWith(
+            "/api/words",
+            expect.objectContaining({
+                method: Method.POST
+            })
+        );
     });
 });
