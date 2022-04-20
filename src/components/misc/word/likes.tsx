@@ -36,11 +36,7 @@ export const Likes = ({ word }: Props): ReactElement => {
                 await removeLike(word.slug);
             }
             catch (error: unknown) {
-                if (isConflictError(error) || isNotFoundError(error)) {
-                    toggleIsLiked();
-                    return;
-                }
-                else {
+                if (!isConflictError(error) && !isNotFoundError(error)) {
                     pushSnackbar({
                         label: "Un erreur inconnue s'est produite.",
                         variant: Variant.Error
@@ -56,11 +52,7 @@ export const Likes = ({ word }: Props): ReactElement => {
                 await like(word.slug);
             }
             catch (error: unknown) {
-                if (isConflictError(error)) {
-                    toggleIsLiked();
-                    return;
-                }
-                else {
+                if (!isConflictError(error)) {
                     pushSnackbar({
                         label: "Un erreur inconnue s'est produite.",
                         variant: Variant.Error

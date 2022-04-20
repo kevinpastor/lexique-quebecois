@@ -125,9 +125,8 @@ export const like = async (slug: string, ip: string): Promise<boolean> => {
         slug,
         likes: {
             $ne: ip
-        }
-        // ! TODO Uncomment
-        // isApproved: true
+        },
+        isApproved: true
     };
     const update: UpdateFilter<WordDocument> = {
         $push: {
@@ -144,9 +143,8 @@ export const removeLike = async (slug: string, ip: string): Promise<boolean> => 
     const collection: Collection<WordDocument> = database.collection("definitions");
 
     const filter: Filter<WordDocument> = {
-        slug
-        // ! TODO Uncomment
-        // isApproved: true
+        slug,
+        isApproved: true
     };
     const update: UpdateFilter<WordDocument> = {
         $pull: {

@@ -1,5 +1,5 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -9,11 +9,6 @@ import { Word as WordComponent } from "@components/misc/word";
 import { Word as IWord } from "@models/word";
 import { getWord } from "@services/api/words";
 
-export const getStaticPaths = (): GetStaticPathsResult => ({
-    paths: [],
-    fallback: "blocking"
-});
-
 type Params = {
     slug: string;
 };
@@ -22,7 +17,8 @@ interface Props {
     word?: IWord;
 }
 
-export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>): Promise<GetStaticPropsResult<Props>> => {
+// TODO Investigate if the page can be partially generated statically. Initially reverted to this because of likes.
+export const getServerSideProps = async ({ params }: GetServerSidePropsContext<Params>): Promise<GetServerSidePropsResult<Props>> => {
     if (!params) {
         throw new Error("Called not from a dynamic route.");
     }
@@ -33,16 +29,14 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>):
 
     if (!word) {
         return {
-            props: {},
-            revalidate: 60 * 15 // 15 minutes
+            props: {}
         };
     }
 
     return {
         props: {
             word
-        },
-        revalidate: 60 * 15 // 15 minutes
+        }
     };
 };
 

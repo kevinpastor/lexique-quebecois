@@ -1,4 +1,4 @@
-import { GetStaticPropsResult } from "next";
+import { GetServerSidePropsResult } from "next";
 import { ReactElement } from "react";
 
 import { Word } from "@components/misc/word";
@@ -9,16 +9,14 @@ interface Props {
     words: Array<IWord>;
 }
 
-export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+// TODO Investigate if the page can be partially generated statically. Initially reverted to this because of likes.
+export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
     const words: Array<IWord> = await getWordsSample();
 
     return {
         props: {
             words
-        },
-        revalidate: 10
-        // TODO Enable back when list becomes bigger
-        // revalidate: 60 * 60 * 24 // 24 hours
+        }
     };
 };
 
