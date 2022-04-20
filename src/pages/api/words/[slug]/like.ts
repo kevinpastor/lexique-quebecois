@@ -14,7 +14,6 @@ const window: number = 1000 * 60 * 15;
 const tokens: number = 100;
 const rateLimiter = new RateLimiter(window, tokens);
 
-/* istanbul ignore next */
 const handler: Handler = createHandler({
     [Method.PUT]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
         const ip: string | null = getClientIp(req);

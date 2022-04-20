@@ -2,15 +2,15 @@ import { NextApiRequest } from "next";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { like, removeLike } from "@services/api/reactions";
+import { dislike, removeDislike } from "@services/api/reactions";
 import { createRequestStub } from "@utils/tests/request";
 import { createResponseStub } from "@utils/tests/response";
 
-import handler from "./like";
+import handler from "./dislike";
 
 jest.mock("@services/api/reactions");
-const likeMock = like as jest.MockedFunction<typeof like>;
-const removeLikeMock = removeLike as jest.MockedFunction<typeof removeLike>;
+const dislikeMock = dislike as jest.MockedFunction<typeof dislike>;
+const removeDislikeMock = removeDislike as jest.MockedFunction<typeof removeDislike>;
 
 describe("PUT", (): void => {
     beforeEach((): void => {
@@ -21,7 +21,7 @@ describe("PUT", (): void => {
         jest.useRealTimers();
     });
 
-    it("should not like with no ip", async (): Promise<void> => {
+    it("should not dislike with no ip", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.PUT,
             socket: {}
@@ -105,7 +105,7 @@ describe("PUT", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it("should not like non existent word", async (): Promise<void> => {
+    it("should not dislike non existent word", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.PUT,
             query: {
@@ -121,7 +121,7 @@ describe("PUT", (): void => {
                 }
             }
         } = createResponseStub();
-        likeMock.mockResolvedValue(Status.NotFound);
+        dislikeMock.mockResolvedValue(Status.NotFound);
 
         await handler(reqStub, resStub);
 
@@ -129,7 +129,7 @@ describe("PUT", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it("should not like already liked word", async (): Promise<void> => {
+    it("should not dislike already disliked word", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.PUT,
             query: {
@@ -145,7 +145,7 @@ describe("PUT", (): void => {
                 }
             }
         } = createResponseStub();
-        likeMock.mockResolvedValue(Status.Conflict);
+        dislikeMock.mockResolvedValue(Status.Conflict);
 
         await handler(reqStub, resStub);
 
@@ -153,7 +153,7 @@ describe("PUT", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it("should like", async (): Promise<void> => {
+    it("should dislike", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.PUT,
             query: {
@@ -169,7 +169,7 @@ describe("PUT", (): void => {
                 }
             }
         } = createResponseStub();
-        likeMock.mockResolvedValue(Status.OK);
+        dislikeMock.mockResolvedValue(Status.OK);
 
         await handler(reqStub, resStub);
 
@@ -187,7 +187,7 @@ describe("DELETE", (): void => {
         jest.useRealTimers();
     });
 
-    it("should not remove like with no ip", async (): Promise<void> => {
+    it("should not remove dislike with no ip", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.DELETE,
             socket: {}
@@ -271,7 +271,7 @@ describe("DELETE", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it("should not remove like on non existent word", async (): Promise<void> => {
+    it("should not remove dislike on non existent word", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.DELETE,
             query: {
@@ -287,7 +287,7 @@ describe("DELETE", (): void => {
                 }
             }
         } = createResponseStub();
-        removeLikeMock.mockResolvedValue(Status.NotFound);
+        removeDislikeMock.mockResolvedValue(Status.NotFound);
 
         await handler(reqStub, resStub);
 
@@ -295,7 +295,7 @@ describe("DELETE", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it("should not remove non existent like", async (): Promise<void> => {
+    it("should not remove non existent dislike", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.DELETE,
             query: {
@@ -311,7 +311,7 @@ describe("DELETE", (): void => {
                 }
             }
         } = createResponseStub();
-        removeLikeMock.mockResolvedValue(Status.Conflict);
+        removeDislikeMock.mockResolvedValue(Status.Conflict);
 
         await handler(reqStub, resStub);
 
@@ -319,7 +319,7 @@ describe("DELETE", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it("should remove like", async (): Promise<void> => {
+    it("should remove dislike", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.DELETE,
             query: {
@@ -335,7 +335,7 @@ describe("DELETE", (): void => {
                 }
             }
         } = createResponseStub();
-        removeLikeMock.mockResolvedValue(Status.OK);
+        removeDislikeMock.mockResolvedValue(Status.OK);
 
         await handler(reqStub, resStub);
 
