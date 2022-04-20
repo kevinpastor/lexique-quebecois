@@ -5,7 +5,7 @@ export interface WordDocument {
     example: string;
     author: string;
     ip: string;
-    isApproved?: boolean;
+    isApproved: boolean;
     likes?: Array<string>;
     dislikes?: Array<string>;
 }

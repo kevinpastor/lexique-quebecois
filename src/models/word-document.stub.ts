@@ -7,7 +7,7 @@ export const wordDocumentStub: WordDocument = {
     author: "Kevin",
     slug: "gyu",
     ip: "127.0.0.1",
-    likes: ["1.2.3.4"]
+    isApproved: false
 };
 
 export const anotherWordDocumentStub: WordDocument = {
@@ -17,6 +17,5 @@ export const anotherWordDocumentStub: WordDocument = {
     author: "Kevin",
     slug: "queteux",
     isApproved: true,
-    ip: "127.0.0.1",
-    dislikes: ["1.2.3.4"]
+    ip: "127.0.0.1"
 };
