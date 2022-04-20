@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react-hooks";
 
 import { NumberUtilities, useNumber } from "./use-number";
 
@@ -18,7 +18,9 @@ describe("useNumber", (): void => {
         const { result, rerender } = renderHook((): NumberUtilities => useNumber(initialValue));
 
         const newValue: number = 1;
-        result.current.setValue(1);
+        act((): void => {
+            result.current.setValue(1);
+        });
 
         rerender();
         expect(result.current.value).toEqual(newValue);
@@ -28,7 +30,9 @@ describe("useNumber", (): void => {
         const initialValue: number = 0;
         const { result, rerender } = renderHook((): NumberUtilities => useNumber(initialValue));
 
-        result.current.increment();
+        act((): void => {
+            result.current.increment();
+        });
 
         rerender();
         expect(result.current.value).toEqual(initialValue + 1);
@@ -38,7 +42,9 @@ describe("useNumber", (): void => {
         const initialValue: number = 0;
         const { result, rerender } = renderHook((): NumberUtilities => useNumber(initialValue));
 
-        result.current.decrement();
+        act((): void => {
+            result.current.decrement();
+        });
 
         rerender();
         expect(result.current.value).toEqual(initialValue - 1);
