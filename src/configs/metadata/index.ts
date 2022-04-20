@@ -1,6 +1,6 @@
-import { Meta } from "./meta";
 import { androidMetadata } from "./android-metadata";
 import { iosMetadata } from "./ios-metadata";
+import { Meta } from "./meta";
 import { miscMetadata } from "./misc-metadata";
 import { openGraphMetadata } from "./open-graph-metadata";
 import { windowsMetadata } from "./windows-metadata";
