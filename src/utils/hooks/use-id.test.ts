@@ -5,27 +5,21 @@ import { renderHook } from "@testing-library/react-hooks";
 
 import { useId } from "./use-id";
 
-describe("@utils", (): void => {
-    describe("hooks", (): void => {
-        describe("use-id", (): void => {
-            describe("useId", (): void => {
-                it("should return id", (): void => {
-                    const { result, rerender } = renderHook((): string => useId());
+describe("useId", (): void => {
+    it("should return id", (): void => {
+        const { result, rerender } = renderHook((): string => useId());
 
-                    const id: string = result.current;
-                    expect(id).not.toEqual("");
+        const id: string = result.current;
+        expect(id).not.toEqual("");
 
-                    rerender();
-                    expect(result.current).toEqual(id);
-                });
+        rerender();
+        expect(result.current).toEqual(id);
+    });
 
-                it("should generate multiple ids", (): void => {
-                    const { result: { current: first } } = renderHook((): string => useId());
-                    const { result: { current: second } } = renderHook((): string => useId());
+    it("should generate multiple ids", (): void => {
+        const { result: { current: first } } = renderHook((): string => useId());
+        const { result: { current: second } } = renderHook((): string => useId());
 
-                    expect(first).not.toEqual(second);
-                });
-            });
-        });
+        expect(first).not.toEqual(second);
     });
 });

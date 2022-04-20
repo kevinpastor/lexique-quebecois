@@ -1,82 +1,76 @@
 import { isDevelopmentEnvironment, isTestEnvironment, isProductionEnvironment } from "./environment";
 
-describe("@utils", (): void => {
-    describe("misc", (): void => {
-        describe("environment", (): void => {
-            describe("isDevelopmentEnvironment", (): void => {
-                const environment: NodeJS.ProcessEnv = process.env;
+describe("isDevelopmentEnvironment", (): void => {
+    const environment: NodeJS.ProcessEnv = process.env;
 
-                beforeEach(() => {
-                    jest.resetModules();
-                    process.env = { ...environment };
-                });
+    beforeEach(() => {
+        jest.resetModules();
+        process.env = { ...environment };
+    });
 
-                afterAll(() => {
-                    process.env = environment;
-                });
+    afterAll(() => {
+        process.env = environment;
+    });
 
-                it("should not be in development environment", (): void => {
-                    (process.env as Record<string, string>).NODE_ENV = "production";
+    it("should not be in development environment", (): void => {
+        (process.env as Record<string, string>).NODE_ENV = "production";
 
-                    expect(isDevelopmentEnvironment()).toBeFalsy();
-                });
+        expect(isDevelopmentEnvironment()).toBeFalsy();
+    });
 
-                it("should be in development environment", (): void => {
-                    (process.env as Record<string, string>).NODE_ENV = "development";
+    it("should be in development environment", (): void => {
+        (process.env as Record<string, string>).NODE_ENV = "development";
 
-                    expect(isDevelopmentEnvironment()).toBeTruthy();
-                });
-            });
+        expect(isDevelopmentEnvironment()).toBeTruthy();
+    });
+});
 
-            describe("isTestEnvironment", (): void => {
-                const environment: NodeJS.ProcessEnv = process.env;
+describe("isTestEnvironment", (): void => {
+    const environment: NodeJS.ProcessEnv = process.env;
 
-                beforeEach(() => {
-                    jest.resetModules();
-                    process.env = { ...environment };
-                });
+    beforeEach(() => {
+        jest.resetModules();
+        process.env = { ...environment };
+    });
 
-                afterAll(() => {
-                    process.env = environment;
-                });
+    afterAll(() => {
+        process.env = environment;
+    });
 
-                it("should not be in test environment", (): void => {
-                    (process.env as Record<string, string>).NODE_ENV = "production";
+    it("should not be in test environment", (): void => {
+        (process.env as Record<string, string>).NODE_ENV = "production";
 
-                    expect(isTestEnvironment()).toBeFalsy();
-                });
+        expect(isTestEnvironment()).toBeFalsy();
+    });
 
-                it("should be in test environment", (): void => {
-                    (process.env as Record<string, string>).NODE_ENV = "test";
+    it("should be in test environment", (): void => {
+        (process.env as Record<string, string>).NODE_ENV = "test";
 
-                    expect(isTestEnvironment()).toBeTruthy();
-                });
-            });
+        expect(isTestEnvironment()).toBeTruthy();
+    });
+});
 
-            describe("isProductionEnvironment", (): void => {
-                const environment: NodeJS.ProcessEnv = process.env;
+describe("isProductionEnvironment", (): void => {
+    const environment: NodeJS.ProcessEnv = process.env;
 
-                beforeEach(() => {
-                    jest.resetModules();
-                    process.env = { ...environment };
-                });
+    beforeEach(() => {
+        jest.resetModules();
+        process.env = { ...environment };
+    });
 
-                afterAll(() => {
-                    process.env = environment;
-                });
+    afterAll(() => {
+        process.env = environment;
+    });
 
-                it("should not be in production environment", (): void => {
-                    (process.env as Record<string, string>).NODE_ENV = "development";
+    it("should not be in production environment", (): void => {
+        (process.env as Record<string, string>).NODE_ENV = "development";
 
-                    expect(isProductionEnvironment()).toBeFalsy();
-                });
+        expect(isProductionEnvironment()).toBeFalsy();
+    });
 
-                it("should be in production environment", (): void => {
-                    (process.env as Record<string, string>).NODE_ENV = "production";
+    it("should be in production environment", (): void => {
+        (process.env as Record<string, string>).NODE_ENV = "production";
 
-                    expect(isProductionEnvironment()).toBeTruthy();
-                });
-            });
-        });
+        expect(isProductionEnvironment()).toBeTruthy();
     });
 });

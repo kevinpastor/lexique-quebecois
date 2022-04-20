@@ -17,156 +17,150 @@ jest.mock("./database", (): typeof import("./database") => ({
 
 const getDatabaseMock = getDatabase as jest.MockedFunction<typeof getDatabase>;
 
-describe("@services", (): void => {
-    describe("api", (): void => {
-        describe("words", (): void => {
-            const ip: string = "127.0.0.1";
-            const wordsStub: Array<Word> = [
-                wordStub,
-                anotherWordStub
-            ];
+const ip: string = "127.0.0.1";
+const wordsStub: Array<Word> = [
+    wordStub,
+    anotherWordStub
+];
 
-            describe("getWordIndex", (): void => {
-                const wordIndexStub: Array<string> = [
-                    wordStub.label,
-                    anotherWordStub.label
-                ];
+describe("getWordIndex", (): void => {
+    const wordIndexStub: Array<string> = [
+        wordStub.label,
+        anotherWordStub.label
+    ];
 
-                beforeEach((): void => {
-                    jest.resetAllMocks();
-                });
+    beforeEach((): void => {
+        jest.resetAllMocks();
+    });
 
-                it("should get word index", async (): Promise<void> => {
-                    getDatabaseMock.mockResolvedValue({
-                        collection: (): Collection<WordDocument> => ({
-                            aggregate: (): AggregationCursor<Word> => ({
-                                toArray: jest.fn()
-                                    .mockResolvedValue(wordsStub)
-                            } as Partial<AggregationCursor<Word>> as AggregationCursor<Word>)
-                        } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-                    } as Partial<Db> as Db);
+    it("should get word index", async (): Promise<void> => {
+        getDatabaseMock.mockResolvedValue({
+            collection: (): Collection<WordDocument> => ({
+                aggregate: (): AggregationCursor<Word> => ({
+                    toArray: jest.fn()
+                        .mockResolvedValue(wordsStub)
+                } as Partial<AggregationCursor<Word>> as AggregationCursor<Word>)
+            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
+        } as Partial<Db> as Db);
 
-                    const wordIndex: Array<string> = await getWordIndex(ip);
+        const wordIndex: Array<string> = await getWordIndex(ip);
 
-                    expect(wordIndex).toEqual(wordIndexStub);
-                });
-            });
+        expect(wordIndex).toEqual(wordIndexStub);
+    });
+});
 
-            describe("getWordsSample", (): void => {
-                beforeEach((): void => {
-                    jest.resetAllMocks();
-                });
+describe("getWordsSample", (): void => {
+    beforeEach((): void => {
+        jest.resetAllMocks();
+    });
 
-                it("should get word sample", async (): Promise<void> => {
-                    getDatabaseMock.mockResolvedValue({
-                        collection: (): Collection<WordDocument> => ({
-                            aggregate: (): AggregationCursor<Word> => ({
-                                toArray: jest.fn()
-                                    .mockResolvedValue(wordsStub)
-                            } as Partial<AggregationCursor<Word>> as AggregationCursor<Word>)
-                        } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-                    } as Partial<Db> as Db);
+    it("should get word sample", async (): Promise<void> => {
+        getDatabaseMock.mockResolvedValue({
+            collection: (): Collection<WordDocument> => ({
+                aggregate: (): AggregationCursor<Word> => ({
+                    toArray: jest.fn()
+                        .mockResolvedValue(wordsStub)
+                } as Partial<AggregationCursor<Word>> as AggregationCursor<Word>)
+            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
+        } as Partial<Db> as Db);
 
-                    const words: Array<Word> = await getWordsSample(ip);
+        const words: Array<Word> = await getWordsSample(ip);
 
-                    expect(words).toHaveLength(wordsStub.length);
-                    expect([...words].sort(({ slug: a }, { slug: b }) => {
-                        if (a < b) {
-                            return -1;
-                        }
+        expect(words).toHaveLength(wordsStub.length);
+        expect([...words].sort(({ slug: a }, { slug: b }) => {
+            if (a < b) {
+                return -1;
+            }
 
-                        if (a > b) {
-                            return 1;
-                        }
+            if (a > b) {
+                return 1;
+            }
 
-                        return 0;
-                    })).toEqual(wordsStub);
-                });
-            });
+            return 0;
+        })).toEqual(wordsStub);
+    });
+});
 
-            describe("getWord", (): void => {
-                const slug: string = "gyu";
+describe("getWord", (): void => {
+    const slug: string = "gyu";
 
-                beforeEach((): void => {
-                    jest.resetAllMocks();
-                });
+    beforeEach((): void => {
+        jest.resetAllMocks();
+    });
 
-                it("should not find word", async (): Promise<void> => {
-                    getDatabaseMock.mockResolvedValue({
-                        collection: (): Collection<WordDocument> => ({
-                            findOne: jest.fn()
-                                .mockResolvedValue(undefined)
-                        } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-                    } as Partial<Db> as Db);
+    it("should not find word", async (): Promise<void> => {
+        getDatabaseMock.mockResolvedValue({
+            collection: (): Collection<WordDocument> => ({
+                findOne: jest.fn()
+                    .mockResolvedValue(undefined)
+            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
+        } as Partial<Db> as Db);
 
-                    const word: Word | undefined = await getWord(slug, ip);
+        const word: Word | undefined = await getWord(slug, ip);
 
-                    expect(word).toBeUndefined();
-                });
+        expect(word).toBeUndefined();
+    });
 
-                it("should get word", async (): Promise<void> => {
-                    getDatabaseMock.mockResolvedValue({
-                        collection: (): Collection<WordDocument> => ({
-                            findOne: jest.fn()
-                                // TODO Refactor
-                                .mockResolvedValue(wordsStub[0])
-                        } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-                    } as Partial<Db> as Db);
+    it("should get word", async (): Promise<void> => {
+        getDatabaseMock.mockResolvedValue({
+            collection: (): Collection<WordDocument> => ({
+                findOne: jest.fn()
+                    // TODO Refactor
+                    .mockResolvedValue(wordsStub[0])
+            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
+        } as Partial<Db> as Db);
 
-                    const word: Word | undefined = await getWord(slug, ip);
+        const word: Word | undefined = await getWord(slug, ip);
 
-                    expect(word).toEqual(wordsStub[0]);
-                });
-            });
+        expect(word).toEqual(wordsStub[0]);
+    });
+});
 
-            describe("addWord", (): void => {
-                const insertOneMock = jest.fn()
-                    .mockResolvedValue(undefined);
+describe("addWord", (): void => {
+    const insertOneMock = jest.fn()
+        .mockResolvedValue(undefined);
 
-                beforeEach((): void => {
-                    jest.resetAllMocks();
-                    jest.useFakeTimers();
-                });
+    beforeEach((): void => {
+        jest.resetAllMocks();
+        jest.useFakeTimers();
+    });
 
-                afterEach((): void => {
-                    jest.useRealTimers();
-                });
+    afterEach((): void => {
+        jest.useRealTimers();
+    });
 
-                it("should add an anonymous word", async (): Promise<void> => {
-                    const anonymousWordRequestStub: WordRequest = {
-                        ...wordRequestStub,
-                        author: undefined
-                    };
+    it("should add an anonymous word", async (): Promise<void> => {
+        const anonymousWordRequestStub: WordRequest = {
+            ...wordRequestStub,
+            author: undefined
+        };
 
-                    getDatabaseMock.mockResolvedValue({
-                        collection: (): Collection<WordDocument> => ({
-                            insertOne: insertOneMock
-                        } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-                    } as Partial<Db> as Db);
-                    jest.setSystemTime(0);
+        getDatabaseMock.mockResolvedValue({
+            collection: (): Collection<WordDocument> => ({
+                insertOne: insertOneMock
+            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
+        } as Partial<Db> as Db);
+        jest.setSystemTime(0);
 
-                    await addWord(anonymousWordRequestStub, ip);
+        await addWord(anonymousWordRequestStub, ip);
 
-                    const anonymousWordDocumentStub: WordDocument = {
-                        ...wordDocumentStub,
-                        author: "Anonyme"
-                    };
-                    expect(insertOneMock).toHaveBeenCalledWith(anonymousWordDocumentStub);
-                });
+        const anonymousWordDocumentStub: WordDocument = {
+            ...wordDocumentStub,
+            author: "Anonyme"
+        };
+        expect(insertOneMock).toHaveBeenCalledWith(anonymousWordDocumentStub);
+    });
 
-                it("should add a word", async (): Promise<void> => {
-                    getDatabaseMock.mockResolvedValue({
-                        collection: (): Collection<WordDocument> => ({
-                            insertOne: insertOneMock
-                        } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-                    } as Partial<Db> as Db);
-                    jest.setSystemTime(0);
+    it("should add a word", async (): Promise<void> => {
+        getDatabaseMock.mockResolvedValue({
+            collection: (): Collection<WordDocument> => ({
+                insertOne: insertOneMock
+            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
+        } as Partial<Db> as Db);
+        jest.setSystemTime(0);
 
-                    await addWord(wordRequestStub, ip);
+        await addWord(wordRequestStub, ip);
 
-                    expect(insertOneMock).toHaveBeenCalledWith(wordDocumentStub);
-                });
-            });
-        });
+        expect(insertOneMock).toHaveBeenCalledWith(wordDocumentStub);
     });
 });

@@ -10,64 +10,58 @@ import { isNotFoundError } from "./not-found-error";
 import { isTooManyRequestError } from "./too-many-request-error";
 import { isUnauthorizedError } from "./unauthorized-error";
 
-describe("@services", (): void => {
-    describe("errors", (): void => {
-        describe("http-error-factory", (): void => {
-            describe("createError", (): void => {
-                it("should create BadRequestError", (): void => {
-                    const error: Error = createError(Status.BadRequest);
+describe("createError", (): void => {
+    it("should create BadRequestError", (): void => {
+        const error: Error = createError(Status.BadRequest);
 
-                    expect(isBadRequestError(error)).toBeTruthy();
-                });
+        expect(isBadRequestError(error)).toBeTruthy();
+    });
 
-                it("should create UnauthorizedError", (): void => {
-                    const error: Error = createError(Status.Unauthorized);
+    it("should create UnauthorizedError", (): void => {
+        const error: Error = createError(Status.Unauthorized);
 
-                    expect(isUnauthorizedError(error)).toBeTruthy();
-                });
+        expect(isUnauthorizedError(error)).toBeTruthy();
+    });
 
-                it("should create ForbiddenError", (): void => {
-                    const error: Error = createError(Status.Forbidden);
+    it("should create ForbiddenError", (): void => {
+        const error: Error = createError(Status.Forbidden);
 
-                    expect(isForbiddenError(error)).toBeTruthy();
-                });
+        expect(isForbiddenError(error)).toBeTruthy();
+    });
 
-                it("should create NotFoundError", (): void => {
-                    const error: Error = createError(Status.NotFound);
+    it("should create NotFoundError", (): void => {
+        const error: Error = createError(Status.NotFound);
 
-                    expect(isNotFoundError(error)).toBeTruthy();
-                });
+        expect(isNotFoundError(error)).toBeTruthy();
+    });
 
-                it("should create MethodNotAllowedError", (): void => {
-                    const error: Error = createError(Status.MethodNotAllowed);
+    it("should create MethodNotAllowedError", (): void => {
+        const error: Error = createError(Status.MethodNotAllowed);
 
-                    expect(isMethodNotAllowedError(error)).toBeTruthy();
-                });
+        expect(isMethodNotAllowedError(error)).toBeTruthy();
+    });
 
-                it("should create ConflictError", (): void => {
-                    const error: Error = createError(Status.Conflict);
+    it("should create ConflictError", (): void => {
+        const error: Error = createError(Status.Conflict);
 
-                    expect(isConflictError(error)).toBeTruthy();
-                });
+        expect(isConflictError(error)).toBeTruthy();
+    });
 
-                it("should create TooManyRequestError", (): void => {
-                    const error: Error = createError(Status.TooManyRequest);
+    it("should create TooManyRequestError", (): void => {
+        const error: Error = createError(Status.TooManyRequest);
 
-                    expect(isTooManyRequestError(error)).toBeTruthy();
-                });
+        expect(isTooManyRequestError(error)).toBeTruthy();
+    });
 
-                it("should create InternalErrorError", (): void => {
-                    const error: Error = createError(Status.InternalError);
+    it("should create InternalErrorError", (): void => {
+        const error: Error = createError(Status.InternalError);
 
-                    expect(isInternalError(error)).toBeTruthy();
-                });
+        expect(isInternalError(error)).toBeTruthy();
+    });
 
-                it("should not create other error", (): void => {
-                    expect((): void => {
-                        createError(Status.OK);
-                    }).toThrow();
-                });
-            });
-        });
+    it("should not create other error", (): void => {
+        expect((): void => {
+            createError(Status.OK);
+        }).toThrow();
     });
 });
