@@ -1,5 +1,6 @@
-import { Collection, Db, FindOptions } from "mongodb";
+import { Collection, Db, FindOptions, InsertOneResult } from "mongodb";
 
+import { Status } from "@models/status";
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
 import { WordRequest, getSlug } from "@models/word-request";
@@ -125,7 +126,7 @@ export const getWord = async (slug: string, ip: string): Promise<Word | undefine
     return word;
 };
 
-export const addWord = async (wordRequest: WordRequest, ip: string): Promise<void> => {
+export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Status> => {
     const wordDocument: WordDocument = {
         ...wordRequest,
         author: wordRequest.author ?? "Anonyme",
@@ -136,5 +137,11 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<voi
 
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
-    await collection.insertOne(wordDocument);
+    const result: InsertOneResult =  await collection.insertOne(wordDocument);
+
+    if (!result.acknowledged) {
+        return Status.InternalError;
+    }
+
+    return Status.Created;
 };

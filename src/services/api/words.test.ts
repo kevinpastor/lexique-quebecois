@@ -1,5 +1,6 @@
-import { AggregationCursor, Collection, Db } from "mongodb";
+import { AggregationCursor, Collection, Db, InsertOneResult } from "mongodb";
 
+import { Status } from "@models/status";
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
 import { wordDocumentStub } from "@models/word-document.stub";
@@ -134,7 +135,9 @@ describe("addWord", (): void => {
             ...wordRequestStub,
             author: undefined
         };
-
+        insertOneMock.mockResolvedValue({
+            acknowledged: true
+        } as Partial<InsertOneResult> as InsertOneResult);
         getDatabaseMock.mockResolvedValue({
             collection: (): Collection<WordDocument> => ({
                 insertOne: insertOneMock
@@ -142,8 +145,9 @@ describe("addWord", (): void => {
         } as Partial<Db> as Db);
         jest.setSystemTime(0);
 
-        await addWord(anonymousWordRequestStub, ip);
+        const result: Status = await addWord(anonymousWordRequestStub, ip);
 
+        expect(result).toEqual(Status.Created);
         const anonymousWordDocumentStub: WordDocument = {
             ...wordDocumentStub,
             author: "Anonyme"
@@ -152,6 +156,9 @@ describe("addWord", (): void => {
     });
 
     it("should add a word", async (): Promise<void> => {
+        insertOneMock.mockResolvedValue({
+            acknowledged: true
+        } as Partial<InsertOneResult> as InsertOneResult);
         getDatabaseMock.mockResolvedValue({
             collection: (): Collection<WordDocument> => ({
                 insertOne: insertOneMock

@@ -78,7 +78,7 @@ describe("POST", (): void => {
     });
 
     it("should add word", async (): Promise<void> => {
-        addWordMock.mockResolvedValue();
+        addWordMock.mockResolvedValue(Status.Created);
 
         await handler(reqStub, resStub);
 

@@ -30,9 +30,9 @@ const handler: Handler = createHandler({
             return;
         }
 
-        await addWord(req.body, ip);
+        const result: Status = await addWord(req.body, ip);
 
-        res.status(Status.Created)
+        res.status(result)
             .end();
     }
 });
