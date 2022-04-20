@@ -4,6 +4,8 @@ export interface WordDocument {
     definition: string;
     example: string;
     author: string;
-    isApproved: boolean;
     ip: string;
+    isApproved?: boolean;
+    likes?: Array<string>;
+    dislikes?: Array<string>;
 }

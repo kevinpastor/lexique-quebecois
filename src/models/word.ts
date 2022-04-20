@@ -7,4 +7,6 @@ export interface Word {
     timestamp: number;
     likes: number;
     isLiked: boolean;
+    dislikes: number;
+    isDisliked: boolean;
 }

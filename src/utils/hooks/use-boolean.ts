@@ -1,7 +1,7 @@
 // Taken from https://usehooks-ts.com/react-hook/use-boolean
 import { Dispatch, SetStateAction, useState } from "react";
 
-interface BooleanUtilities {
+export interface BooleanUtilities {
     value: boolean;
     setValue: Dispatch<SetStateAction<boolean>>;
     setTrue: () => void;

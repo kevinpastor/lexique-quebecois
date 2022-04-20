@@ -19,7 +19,7 @@ type ConversionProjection<Document, Type> = Record<
 export type InclusiveProjection<Document, Type> =
     Record<
         keyof Document & keyof Type,
-        1
+        1 | MongoDBDocument
     >
     & ConversionProjection<Document, Type>
     & IdProjection<Document, Type>;

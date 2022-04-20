@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 
-interface NumberUtilities {
+export interface NumberUtilities {
     value: number;
     setValue: Dispatch<SetStateAction<number>>;
     increment: () => void;

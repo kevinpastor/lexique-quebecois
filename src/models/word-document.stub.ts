@@ -6,8 +6,8 @@ export const wordDocumentStub: WordDocument = {
     example: "Le poulet était tellement gyu!",
     author: "Kevin",
     slug: "gyu",
-    isApproved: false,
-    ip: "127.0.0.1"
+    ip: "127.0.0.1",
+    likes: ["1.2.3.4"]
 };
 
 export const anotherWordDocumentStub: WordDocument = {
@@ -16,6 +16,7 @@ export const anotherWordDocumentStub: WordDocument = {
     example: "Le quêteux sur le bord de la rue faisait pitié.",
     author: "Kevin",
     slug: "queteux",
-    isApproved: false,
-    ip: "127.0.0.1"
+    isApproved: true,
+    ip: "127.0.0.1",
+    dislikes: ["1.2.3.4"]
 };
