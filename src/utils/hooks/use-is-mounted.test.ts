@@ -3,7 +3,7 @@
  */
 import { renderHook } from "@testing-library/react-hooks";
 
-import { useIsMounted } from "./use-mounted";
+import { useIsMounted } from "./use-is-mounted";
 
 describe("useIsMounted", (): void => {
     it("should be mounted initially", (): void => {
