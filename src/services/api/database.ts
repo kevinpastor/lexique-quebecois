@@ -14,6 +14,7 @@ export const getDatabase = async (): Promise<Db> => {
     }
 
     // 2. Reassign database from cache
+    /* istanbul ignore if */
     if (isDevelopmentEnvironment()) {
         database = (global as ExtendedGlobal)._database;
     }
@@ -36,6 +37,7 @@ export const getDatabase = async (): Promise<Db> => {
         database = client.db("quebecoisUrbain");
 
         // 1. Cache the database for hot reload
+        /* istanbul ignore if */
         if (isDevelopmentEnvironment()) {
             (global as ExtendedGlobal)._database = database;
         }
