@@ -3,7 +3,7 @@ import { getClientIp } from "request-ip";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { like, removeLike } from "@services/api/words";
+import { like, removeLike } from "@services/api/reactions";
 import {
     createHandler,
     Handler
@@ -14,6 +14,7 @@ const window: number = 1000 * 60 * 15;
 const tokens: number = 100;
 const rateLimiter = new RateLimiter(window, tokens);
 
+/* istanbul ignore next */
 const handler: Handler = createHandler({
     [Method.PUT]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
         const ip: string | null = getClientIp(req);

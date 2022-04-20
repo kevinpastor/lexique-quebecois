@@ -3,7 +3,7 @@ import { getClientIp } from "request-ip";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { dislike, removeDislike } from "@services/api/words";
+import { dislike, removeDislike } from "@services/api/reactions";
 import {
     createHandler,
     Handler

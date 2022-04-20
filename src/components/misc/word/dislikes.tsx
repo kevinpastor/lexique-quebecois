@@ -6,7 +6,7 @@ import { Variant } from "@components/variant";
 import { Word as IWord } from "@models/word";
 import { isConflictError } from "@services/errors/conflict-error";
 import { isNotFoundError } from "@services/errors/not-found-error";
-import { dislike, removeDislike } from "@services/words";
+import { dislike, removeDislike } from "@services/reactions";
 import { BooleanUtilities } from "@utils/hooks/use-boolean";
 import { NumberUtilities } from "@utils/hooks/use-number";
 
