@@ -26,6 +26,10 @@ export const like = async (slug: string, ip: string): Promise<boolean> => {
     };
     const result: UpdateResult = await collection.updateOne(filter, update);
 
+    if (result.matchedCount === 0) {
+        throw new Error("Not found");
+    }
+
     return result.modifiedCount !== 0;
 };
 
@@ -71,6 +75,10 @@ export const dislike = async (slug: string, ip: string): Promise<boolean> => {
         }
     };
     const result: UpdateResult = await collection.updateOne(filter, update);
+
+    if (result.matchedCount === 0) {
+        throw new Error("Not found");
+    }
 
     return result.modifiedCount !== 0;
 };

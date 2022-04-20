@@ -38,7 +38,15 @@ const handler: Handler = createHandler({
 
         const slug: string = req.query.slug;
 
-        const hasSucceeded = await like(slug, ip);
+        let hasSucceeded: boolean = true;
+        try {
+            hasSucceeded = await like(slug, ip);
+        }
+        catch {
+            res.status(Status.NotFound)
+                .end();
+            return;
+        }
 
         if (!hasSucceeded) {
             res.status(Status.Conflict)

@@ -20,19 +20,17 @@ describe("@services", (): void => {
                     process.env = environment;
                 });
 
-                it("should throw in test environment", (): void => {
-                    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                    expect(getDatabase()).rejects.toBeDefined();
+                it("should throw in test environment", async (): Promise<void> => {
+                    await expect(getDatabase()).rejects.toBeDefined();
                 });
 
-                it("should throw without MONGODB_URI environment variable", (): void => {
+                it("should throw without MONGODB_URI environment variable", async (): Promise<void> => {
                     (process.env as Record<string, string>).NODE_ENV = "production";
 
-                    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                    expect(getDatabase()).rejects.toBeDefined();
+                    await expect(getDatabase()).rejects.toBeDefined();
                 });
 
-                it("should throw when unable to connect", (): void => {
+                it("should throw when unable to connect", async (): Promise<void> => {
                     (process.env as Record<string, string>).NODE_ENV = "production";
                     const mongoDbUri: string = "foo";
                     (process.env as Record<string, string>).MONGODB_URI = mongoDbUri;
@@ -42,8 +40,7 @@ describe("@services", (): void => {
                             .mockRejectedValue(undefined)
                     } as Partial<MongoClient> as MongoClient));
 
-                    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                    expect(getDatabase()).rejects.not.toBeUndefined();
+                    await expect(getDatabase()).rejects.not.toBeUndefined();
                 });
 
                 it("should return database", async (): Promise<void> => {
