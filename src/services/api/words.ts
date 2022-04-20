@@ -8,7 +8,7 @@ import { InclusiveProjection } from "@utils/types/projection";
 
 import { getDatabase } from "./database";
 
-const wordProjection = (ip: string): InclusiveProjection<WordDocument, Word> => ({
+const getWordProjection = (ip: string): InclusiveProjection<WordDocument, Word> => ({
     _id: 0,
     label: 1,
     slug: 1,
@@ -54,7 +54,7 @@ export const getWordIndex = async (ip: string): Promise<Array<string>> => {
         { $match: { isApproved: true } },
         { $sort: { slug: 1 } },
         {
-            $project: wordProjection(ip)
+            $project: getWordProjection(ip)
         }
     ];
     const words: Array<Word> = await collection.aggregate<Word>(pipeline)
@@ -72,7 +72,7 @@ export const getWordsSample = async (ip: string): Promise<Array<Word>> => {
         { $match: { isApproved: true } },
         { $sample: { size: 5 } },
         {
-            $project: wordProjection(ip)
+            $project: getWordProjection(ip)
         }
     ];
     const words: Array<Word> = await collection.aggregate<Word>(pipeline)
@@ -85,12 +85,11 @@ export const getWord = async (slug: string, ip: string): Promise<Word | undefine
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const filter: Partial<WordDocument> = {
-        slug
-        // ! TODO Uncomment
-        // isApproved: true
+        slug,
+        isApproved: true
     };
     const options: FindOptions = {
-        projection: wordProjection(ip)
+        projection: getWordProjection(ip)
     };
     const word: Word | null = await collection.findOne<Word>(filter, options);
 
@@ -115,7 +114,7 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<voi
     await collection.insertOne(wordDocument);
 };
 
-// https://stackoverflow.com/questions/28006521/how-to-model-a-likes-voting-system-with-mongodb
+// Inspired by https://stackoverflow.com/a/28006849/7817501
 export const like = async (slug: string, ip: string): Promise<boolean> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
