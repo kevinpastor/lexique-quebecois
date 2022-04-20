@@ -1,5 +1,6 @@
 import { Collection, Db, UpdateResult } from "mongodb";
 
+import { Status } from "@models/status";
 import { WordDocument } from "@models/word-document";
 
 import { getDatabase } from "./database";
@@ -30,7 +31,9 @@ describe("like", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        await expect(like(slug, ip)).rejects.toBeDefined();
+        const result: Status = await like(slug, ip);
+
+        expect(result).toEqual(Status.NotFound);
     });
 
     it("should not like already liked word", async (): Promise<void> => {
@@ -43,9 +46,9 @@ describe("like", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: boolean = await like(slug, ip);
+        const result: Status = await like(slug, ip);
 
-        expect(result).toBeFalsy();
+        expect(result).toEqual(Status.Conflict);
     });
 
     it("should like", async (): Promise<void> => {
@@ -58,9 +61,9 @@ describe("like", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: boolean = await like(slug, ip);
+        const result: Status = await like(slug, ip);
 
-        expect(result).toBeTruthy();
+        expect(result).toEqual(Status.OK);
     });
 });
 
@@ -79,7 +82,9 @@ describe("removeLike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        await expect(removeLike(slug, ip)).rejects.toBeDefined();
+        const result: Status = await removeLike(slug, ip);
+
+        expect(result).toEqual(Status.NotFound);
     });
 
     it("should not remove non existent like", async (): Promise<void> => {
@@ -92,9 +97,9 @@ describe("removeLike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: boolean = await removeLike(slug, ip);
+        const result: Status = await removeLike(slug, ip);
 
-        expect(result).toBeFalsy();
+        expect(result).toEqual(Status.Conflict);
     });
 
     it("should remove like", async (): Promise<void> => {
@@ -107,9 +112,9 @@ describe("removeLike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: boolean = await removeLike(slug, ip);
+        const result: Status = await removeLike(slug, ip);
 
-        expect(result).toBeTruthy();
+        expect(result).toEqual(Status.OK);
     });
 });
 
@@ -128,7 +133,9 @@ describe("dislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        await expect(dislike(slug, ip)).rejects.toBeDefined();
+        const result: Status = await dislike(slug, ip);
+
+        expect(result).toEqual(Status.NotFound);
     });
 
     it("should not dislike already disliked word", async (): Promise<void> => {
@@ -141,9 +148,9 @@ describe("dislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: boolean = await dislike(slug, ip);
+        const result: Status = await dislike(slug, ip);
 
-        expect(result).toBeFalsy();
+        expect(result).toEqual(Status.Conflict);
     });
 
     it("should dislike", async (): Promise<void> => {
@@ -156,9 +163,9 @@ describe("dislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: boolean = await dislike(slug, ip);
+        const result: Status = await dislike(slug, ip);
 
-        expect(result).toBeTruthy();
+        expect(result).toEqual(Status.OK);
     });
 });
 
@@ -177,7 +184,9 @@ describe("removeDislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        await expect(removeDislike(slug, ip)).rejects.toBeDefined();
+        const result: Status = await removeDislike(slug, ip);
+
+        expect(result).toEqual(Status.NotFound);
     });
 
     it("should not remove non existent dislike", async (): Promise<void> => {
@@ -190,9 +199,9 @@ describe("removeDislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: boolean = await removeDislike(slug, ip);
+        const result: Status = await removeDislike(slug, ip);
 
-        expect(result).toBeFalsy();
+        expect(result).toEqual(Status.Conflict);
     });
 
     it("should remove dislike", async (): Promise<void> => {
@@ -205,8 +214,8 @@ describe("removeDislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: boolean = await removeDislike(slug, ip);
+        const result: Status = await removeDislike(slug, ip);
 
-        expect(result).toBeTruthy();
+        expect(result).toEqual(Status.OK);
     });
 });

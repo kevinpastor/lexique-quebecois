@@ -37,24 +37,9 @@ const handler: Handler = createHandler({
         }
 
         const slug: string = req.query.slug;
+        const result: Status = await like(slug, ip);
 
-        let hasSucceeded: boolean = true;
-        try {
-            hasSucceeded = await like(slug, ip);
-        }
-        catch {
-            res.status(Status.NotFound)
-                .end();
-            return;
-        }
-
-        if (!hasSucceeded) {
-            res.status(Status.Conflict)
-                .end();
-            return;
-        }
-
-        res.status(Status.OK)
+        res.status(result)
             .end();
     },
     [Method.DELETE]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
@@ -78,24 +63,9 @@ const handler: Handler = createHandler({
         }
 
         const slug: string = req.query.slug;
+        const result: Status = await removeLike(slug, ip);
 
-        let hasSucceeded: boolean = true;
-        try {
-            hasSucceeded = await removeLike(slug, ip);
-        }
-        catch {
-            res.status(Status.NotFound)
-                .end();
-            return;
-        }
-
-        if (!hasSucceeded) {
-            res.status(Status.Conflict)
-                .end();
-            return;
-        }
-
-        res.status(Status.OK)
+        res.status(result)
             .end();
     }
 });

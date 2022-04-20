@@ -1,11 +1,12 @@
 import { Collection, Db, Filter, UpdateFilter, UpdateResult } from "mongodb";
 
+import { Status } from "@models/status";
 import { WordDocument } from "@models/word-document";
 
 import { getDatabase } from "./database";
 
 // Inspired by https://stackoverflow.com/a/28006849/7817501
-export const like = async (slug: string, ip: string): Promise<boolean> => {
+export const like = async (slug: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
 
@@ -27,13 +28,17 @@ export const like = async (slug: string, ip: string): Promise<boolean> => {
     const result: UpdateResult = await collection.updateOne(filter, update);
 
     if (result.matchedCount === 0) {
-        throw new Error("Not found");
+        return Status.NotFound;
     }
 
-    return result.modifiedCount !== 0;
+    if (result.modifiedCount === 0) {
+        return Status.Conflict;
+    }
+
+    return Status.OK;
 };
 
-export const removeLike = async (slug: string, ip: string): Promise<boolean> => {
+export const removeLike = async (slug: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
 
@@ -49,13 +54,17 @@ export const removeLike = async (slug: string, ip: string): Promise<boolean> => 
     const result: UpdateResult = await collection.updateOne(filter, update);
 
     if (result.matchedCount === 0) {
-        throw new Error("Not found");
+        return Status.NotFound;
     }
 
-    return result.modifiedCount !== 0;
+    if (result.modifiedCount === 0) {
+        return Status.Conflict;
+    }
+
+    return Status.OK;
 };
 
-export const dislike = async (slug: string, ip: string): Promise<boolean> => {
+export const dislike = async (slug: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
 
@@ -77,13 +86,17 @@ export const dislike = async (slug: string, ip: string): Promise<boolean> => {
     const result: UpdateResult = await collection.updateOne(filter, update);
 
     if (result.matchedCount === 0) {
-        throw new Error("Not found");
+        return Status.NotFound;
     }
 
-    return result.modifiedCount !== 0;
+    if (result.modifiedCount === 0) {
+        return Status.Conflict;
+    }
+
+    return Status.OK;
 };
 
-export const removeDislike = async (slug: string, ip: string): Promise<boolean> => {
+export const removeDislike = async (slug: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
 
@@ -99,8 +112,12 @@ export const removeDislike = async (slug: string, ip: string): Promise<boolean> 
     const result: UpdateResult = await collection.updateOne(filter, update);
 
     if (result.matchedCount === 0) {
-        throw new Error("Not found");
+        return Status.NotFound;
     }
 
-    return result.modifiedCount !== 0;
+    if (result.modifiedCount === 0) {
+        return Status.Conflict;
+    }
+
+    return Status.OK;
 };
