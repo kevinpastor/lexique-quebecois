@@ -1,7 +1,7 @@
 export class InternalError extends Error {
 
-    public constructor(message?: string, options?: ErrorOptions) {
-        super(message, options);
+    public constructor(...args: ConstructorParameters<typeof Error>) {
+        super(...args);
 
         this.name = "InternalError";
     }

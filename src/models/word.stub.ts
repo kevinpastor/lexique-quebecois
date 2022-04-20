@@ -6,7 +6,9 @@ export const wordStub: Word = {
     example: "Le poulet était tellement gyu!",
     author: "Kevin",
     timestamp: 1645120033319,
-    slug: "gyu"
+    slug: "gyu",
+    likes: 2,
+    isLiked: true
 };
 
 export const anotherWordStub: Word = {
@@ -15,5 +17,7 @@ export const anotherWordStub: Word = {
     example: "Le quêteux sur le bord de la rue faisait pitié.",
     author: "Kevin",
     timestamp: 1645122767705,
-    slug: "queteux"
+    slug: "queteux",
+    likes: 3,
+    isLiked: false
 };
