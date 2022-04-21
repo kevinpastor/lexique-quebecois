@@ -1,6 +1,6 @@
 // Taken from https://usehooks-ts.com/react-hook/use-copy-to-clipboard
 
-type CopyFunction = (text: string) => Promise<void>;
+export type CopyFunction = (text: string) => Promise<void>;
 
 export const useCopyToClipboard = (): CopyFunction => {
     return async (text: string): Promise<void> => {
