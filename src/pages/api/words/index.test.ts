@@ -1,55 +1,42 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest } from "next";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { wordRequestStub } from "@models/word-request.stub";
 import { addWord } from "@services/api/words";
+import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
+import { createRequestStub } from "@utils/tests/request";
+import { createResponseStub } from "@utils/tests/response";
 
 import handler from "./index";
 
 jest.mock("@services/api/words");
 const addWordMock = addWord as jest.MockedFunction<typeof addWord>;
 
+const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
+
 describe("POST", (): void => {
-    jest.spyOn(console, "error")
-        .mockImplementation();
-
-    const endMock = jest.fn();
-    const jsonMock = jest.fn();
-    const statusMock = jest.fn()
-        .mockReturnValue({
-            end: endMock,
-            json: jsonMock
-        });
-
-    let reqStub: NextApiRequest = {
-        method: Method.POST
-    } as Partial<NextApiRequest> as NextApiRequest;
-
-    let resStub: NextApiResponse = {
-        status: statusMock
-    } as Partial<NextApiResponse> as NextApiResponse;
-
     beforeEach((): void => {
-        jest.useFakeTimers();
-        endMock.mockClear();
-        statusMock.mockClear();
-
-        reqStub = {
-            method: Method.POST,
-            body: wordRequestStub
-        } as Partial<NextApiRequest> as NextApiRequest;
-
-        resStub = {
-            status: statusMock
-        } as Partial<NextApiResponse> as NextApiResponse;
+        consumeMock.mockReturnValue(false);
     });
 
     afterEach((): void => {
-        jest.useRealTimers();
+        jest.resetAllMocks();
     });
 
     it("should not allow empty request", async (): Promise<void> => {
+        const reqStub: NextApiRequest = createRequestStub({
+            method: Method.POST
+        });
+        const {
+            stub: resStub,
+            status: {
+                mock: statusMock,
+                end: {
+                    mock: endMock
+                }
+            }
+        } = createResponseStub();
         reqStub.body = undefined;
         await handler(reqStub, resStub);
 
@@ -58,6 +45,21 @@ describe("POST", (): void => {
     });
 
     it("should not allow invalid request", async (): Promise<void> => {
+        const reqStub: NextApiRequest = createRequestStub({
+            method: Method.POST,
+            body: {
+                label: "foo"
+            }
+        });
+        const {
+            stub: resStub,
+            status: {
+                mock: statusMock,
+                end: {
+                    mock: endMock
+                }
+            }
+        } = createResponseStub();
         reqStub.body = {
             label: "foo"
         };
@@ -68,16 +70,20 @@ describe("POST", (): void => {
         expect(endMock).toHaveBeenCalled();
     });
 
-    it("should handle errors", async (): Promise<void> => {
-        addWordMock.mockRejectedValue(undefined);
-
-        await handler(reqStub, resStub);
-
-        expect(statusMock).toHaveBeenCalledWith(Status.InternalError);
-        expect(endMock).toHaveBeenCalled();
-    });
-
     it("should add word", async (): Promise<void> => {
+        const reqStub: NextApiRequest = createRequestStub({
+            method: Method.POST,
+            body: wordRequestStub
+        });
+        const {
+            stub: resStub,
+            status: {
+                mock: statusMock,
+                end: {
+                    mock: endMock
+                }
+            }
+        } = createResponseStub();
         addWordMock.mockResolvedValue(Status.Created);
 
         await handler(reqStub, resStub);
@@ -86,28 +92,25 @@ describe("POST", (): void => {
         expect(endMock).toHaveBeenCalled();
     });
 
-    // TODO Investigate why this is working
     it("should limit requests", async (): Promise<void> => {
-        jest.setSystemTime(0);
-        await handler(reqStub, resStub);
+        const reqStub: NextApiRequest = createRequestStub({
+            method: Method.POST,
+            body: wordRequestStub
+        });
+        const {
+            stub: resStub,
+            status: {
+                mock: statusMock,
+                end: {
+                    mock: endMock
+                }
+            }
+        } = createResponseStub();
+        consumeMock.mockReturnValue(true);
+
         await handler(reqStub, resStub);
 
         expect(statusMock).toHaveBeenCalledWith(Status.TooManyRequest);
-        expect(endMock).toHaveBeenCalled();
-    });
-
-    it("should not limit different user requests", async (): Promise<void> => {
-        jest.setSystemTime(0);
-        await handler(reqStub, resStub);
-        const anotherReqStub: NextApiRequest = {
-            ...reqStub,
-            socket: {
-                remoteAddress: "1.1.1.1"
-            }
-        } as Partial<NextApiRequest> as NextApiRequest;
-        await handler(anotherReqStub, resStub);
-
-        expect(statusMock).toHaveBeenCalledWith(Status.Created);
         expect(endMock).toHaveBeenCalled();
     });
 });

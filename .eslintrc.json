@@ -186,7 +186,10 @@
             "warn",
             {
                 "groups": [
-                    "external",
+                    [
+                        "builtin",
+                        "external"
+                    ],
                     "internal",
                     [
                         "sibling",

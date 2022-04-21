@@ -4,24 +4,21 @@
 import { CopyFunction, useCopyToClipboard } from "./use-copy-to-clipboard";
 
 describe("useCopyToClipboard", (): void => {
-    const originalClipboard = { ...global.navigator.clipboard };
     const writeTextMock = jest.fn()
         .mockResolvedValue(undefined);
 
+    const navigatorMock = jest.spyOn(global, "navigator", "get");
+
     beforeEach((): void => {
-        const clipboardMock = {
-            writeText: writeTextMock
-        };
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        global.navigator.clipboard = clipboardMock;
+        navigatorMock.mockReturnValue({
+            clipboard: {
+                writeText: writeTextMock
+            } as unknown as Clipboard
+        } as Partial<Navigator> as Navigator);
     });
 
     afterEach(() => {
         jest.resetAllMocks();
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        global.navigator.clipboard = originalClipboard;
     });
 
     it("should copy to clipboard", async (): Promise<void> => {
@@ -41,9 +38,17 @@ describe("useCopyToClipboard", (): void => {
     });
 
     it("should handle missing clipboard API", async (): Promise<void> => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        global.navigator.clipboard = undefined;
+        navigatorMock.mockReturnValue({
+            clipboard: undefined as unknown as Clipboard
+        } as Partial<Navigator> as Navigator);
+
+        const copyToClipboard: CopyFunction = useCopyToClipboard();
+
+        await expect(copyToClipboard("foo")).rejects.toThrow();
+    });
+
+    it("should handle missing navigator API", async (): Promise<void> => {
+        navigatorMock.mockReturnValue(undefined as unknown as Navigator);
 
         const copyToClipboard: CopyFunction = useCopyToClipboard();
 

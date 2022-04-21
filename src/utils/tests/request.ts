@@ -1,17 +1,26 @@
 import { NextApiRequest } from "next";
 
-import { RecursivePartial } from "@utils/types/recursive-partial";
+import { Method } from "@models/method";
+
+import { Socket } from "net";
+
+interface StubInput {
+    method?: Method;
+    query?: Record<string, unknown>;
+    body?: unknown;
+    socket?: Socket;
+}
 
 export const createRequestStub = ({
     method,
     query,
     body,
     socket
-}: RecursivePartial<NextApiRequest>): NextApiRequest => ({
+}: StubInput): NextApiRequest => ({
     method: method ?? undefined,
     query: query ?? {},
     body: body ?? undefined,
     socket: socket ?? {
         remoteAddress: "1.1.1.1"
     }
-} as RecursivePartial<NextApiRequest> as NextApiRequest);
+} as NextApiRequest);

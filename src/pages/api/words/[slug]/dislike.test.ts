@@ -1,8 +1,10 @@
+import { Socket } from "net";
 import { NextApiRequest } from "next";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { dislike, removeDislike } from "@services/api/reactions";
+import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { createRequestStub } from "@utils/tests/request";
 import { createResponseStub } from "@utils/tests/response";
 
@@ -12,19 +14,21 @@ jest.mock("@services/api/reactions");
 const dislikeMock = dislike as jest.MockedFunction<typeof dislike>;
 const removeDislikeMock = removeDislike as jest.MockedFunction<typeof removeDislike>;
 
+const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
+
 describe("PUT", (): void => {
     beforeEach((): void => {
-        jest.useFakeTimers();
+        consumeMock.mockReturnValue(false);
     });
 
     afterEach((): void => {
-        jest.useRealTimers();
+        jest.resetAllMocks();
     });
 
     it("should not dislike with no ip", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.PUT,
-            socket: {}
+            socket: {} as Socket
         });
         const {
             stub: resStub,
@@ -42,7 +46,8 @@ describe("PUT", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it.skip("should limit request rate", async (): Promise<void> => {
+    it("should limit request rate", async (): Promise<void> => {
+        consumeMock.mockReturnValue(true);
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.PUT
         });
@@ -180,17 +185,17 @@ describe("PUT", (): void => {
 
 describe("DELETE", (): void => {
     beforeEach((): void => {
-        jest.useFakeTimers();
+        consumeMock.mockReturnValue(false);
     });
 
     afterEach((): void => {
-        jest.useRealTimers();
+        jest.resetAllMocks();
     });
 
     it("should not remove dislike with no ip", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.DELETE,
-            socket: {}
+            socket: {} as Socket
         });
         const {
             stub: resStub,
@@ -208,7 +213,8 @@ describe("DELETE", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it.skip("should limit request rate", async (): Promise<void> => {
+    it("should limit request rate", async (): Promise<void> => {
+        consumeMock.mockReturnValue(true);
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.DELETE
         });

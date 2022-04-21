@@ -1,8 +1,10 @@
+import { Socket } from "net";
 import { NextApiRequest } from "next";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { like, removeLike } from "@services/api/reactions";
+import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { createRequestStub } from "@utils/tests/request";
 import { createResponseStub } from "@utils/tests/response";
 
@@ -12,19 +14,21 @@ jest.mock("@services/api/reactions");
 const likeMock = like as jest.MockedFunction<typeof like>;
 const removeLikeMock = removeLike as jest.MockedFunction<typeof removeLike>;
 
+const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
+
 describe("PUT", (): void => {
     beforeEach((): void => {
-        jest.useFakeTimers();
+        consumeMock.mockReturnValue(false);
     });
 
     afterEach((): void => {
-        jest.useRealTimers();
+        jest.resetAllMocks();
     });
 
     it("should not like with no ip", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.PUT,
-            socket: {}
+            socket: {} as Socket
         });
         const {
             stub: resStub,
@@ -42,7 +46,8 @@ describe("PUT", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it.skip("should limit request rate", async (): Promise<void> => {
+    it("should limit request rate", async (): Promise<void> => {
+        consumeMock.mockReturnValue(true);
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.PUT
         });
@@ -180,17 +185,18 @@ describe("PUT", (): void => {
 
 describe("DELETE", (): void => {
     beforeEach((): void => {
-        jest.useFakeTimers();
+        consumeMock.mockReturnValue(false);
     });
 
     afterEach((): void => {
-        jest.useRealTimers();
+        consumeMock.mockReset();
+        removeLikeMock.mockReset();
     });
 
     it("should not remove like with no ip", async (): Promise<void> => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.DELETE,
-            socket: {}
+            socket: {} as Socket
         });
         const {
             stub: resStub,
@@ -208,7 +214,9 @@ describe("DELETE", (): void => {
         expect(endMock).toBeCalled();
     });
 
-    it.skip("should limit request rate", async (): Promise<void> => {
+    // TODO Find alternative so that tests are isolated for rate limiting
+    it("should limit request rate", async (): Promise<void> => {
+        consumeMock.mockReturnValue(true);
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.DELETE
         });
@@ -224,7 +232,7 @@ describe("DELETE", (): void => {
 
         await handler(reqStub, resStub);
 
-        expect(statusMock).toBeCalledWith(Status.TooManyRequest);
+        expect(statusMock).toHaveBeenLastCalledWith(Status.TooManyRequest);
         expect(endMock).toBeCalled();
     });
 

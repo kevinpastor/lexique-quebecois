@@ -166,8 +166,26 @@ describe("addWord", (): void => {
         } as Partial<Db> as Db);
         jest.setSystemTime(0);
 
-        await addWord(wordRequestStub, ip);
+        const result: Status = await addWord(wordRequestStub, ip);
 
+        expect(result).toEqual(Status.Created);
+        expect(insertOneMock).toHaveBeenCalledWith(wordDocumentStub);
+    });
+
+    it("should add a word", async (): Promise<void> => {
+        insertOneMock.mockResolvedValue({
+            acknowledged: false
+        } as Partial<InsertOneResult> as InsertOneResult);
+        getDatabaseMock.mockResolvedValue({
+            collection: (): Collection<WordDocument> => ({
+                insertOne: insertOneMock
+            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
+        } as Partial<Db> as Db);
+        jest.setSystemTime(0);
+
+        const result: Status = await addWord(wordRequestStub, ip);
+
+        expect(result).toEqual(Status.InternalError);
         expect(insertOneMock).toHaveBeenCalledWith(wordDocumentStub);
     });
 });
