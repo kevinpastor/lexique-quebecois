@@ -12,13 +12,10 @@ export const like = async (slug: string, ip: string): Promise<Status> => {
 
     const filter: Filter<WordDocument> = {
         slug,
-        likes: {
-            $ne: ip
-        },
         isApproved: true
     };
     const update: UpdateFilter<WordDocument> = {
-        $push: {
+        $addToSet: {
             likes: ip
         },
         $pull: {
@@ -70,13 +67,10 @@ export const dislike = async (slug: string, ip: string): Promise<Status> => {
 
     const filter: Filter<WordDocument> = {
         slug,
-        dislikes: {
-            $ne: ip
-        },
         isApproved: true
     };
     const update: UpdateFilter<WordDocument> = {
-        $push: {
+        $addToSet: {
             dislikes: ip
         },
         $pull: {
