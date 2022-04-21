@@ -1,3 +1,4 @@
+import { Socket } from "net";
 import { NextApiRequest } from "next";
 
 import { Method } from "@models/method";
@@ -74,6 +75,29 @@ describe("POST", (): void => {
         const reqStub: NextApiRequest = createRequestStub({
             method: Method.POST,
             body: wordRequestStub
+        });
+        const {
+            stub: resStub,
+            status: {
+                mock: statusMock,
+                end: {
+                    mock: endMock
+                }
+            }
+        } = createResponseStub();
+        addWordMock.mockResolvedValue(Status.Created);
+
+        await handler(reqStub, resStub);
+
+        expect(statusMock).toHaveBeenCalledWith(Status.Created);
+        expect(endMock).toHaveBeenCalled();
+    });
+
+    it("should handle no ip", async (): Promise<void> => {
+        const reqStub: NextApiRequest = createRequestStub({
+            method: Method.POST,
+            body: wordRequestStub,
+            socket: {} as Socket
         });
         const {
             stub: resStub,
