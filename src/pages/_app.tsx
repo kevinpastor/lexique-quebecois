@@ -19,8 +19,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
         <Head>
             <title>Lexique Québécois</title>
             <meta
-                name="description"
-                content="Un peu comme le Urban Dictionnary, mais québécois"
+                name="viewport"
+                content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
             />
             <link
                 rel="icon"

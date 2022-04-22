@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import Head from "next/head";
 import { ReactElement, useMemo } from "react";
 import { getClientIp } from "request-ip";
 
@@ -61,28 +62,34 @@ const Index = ({ words }: Props): ReactElement => {
     ), [words]);
 
     return (
-        <Card>
-            <Title>
-                Index
-            </Title>
-            {memoizedLetterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
-                <Section key={letter}>
-                    <Heading>
-                        {letter}
-                    </Heading>
-                    {group.map(({ slug, word }: WordGroup): ReactElement => (
-                        <div key={slug}>
-                            <Hyperlink
-                                href={`/mots/${slug}`}
-                                prefetch={false}
-                            >
-                                {word}
-                            </Hyperlink>
-                        </div>
-                    ))}
-                </Section>
-            ))}
-        </Card>
+        <>
+            <Head>
+                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                <title>Index - Lexique Québécois</title>
+            </Head>
+            <Card>
+                <Title>
+                    Index
+                </Title>
+                {memoizedLetterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
+                    <Section key={letter}>
+                        <Heading>
+                            {letter}
+                        </Heading>
+                        {group.map(({ slug, word }: WordGroup): ReactElement => (
+                            <div key={slug}>
+                                <Hyperlink
+                                    href={`/mots/${slug}`}
+                                    prefetch={false}
+                                >
+                                    {word}
+                                </Hyperlink>
+                            </div>
+                        ))}
+                    </Section>
+                ))}
+            </Card>
+        </>
     );
 };
 

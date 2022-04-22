@@ -21,6 +21,6 @@ export const metadata: Array<Meta> = [
     },
     {
         name: "keywords",
-        content: "Lexique Québécois"
+        content: "lexique québécois, dictionnaire, quebec, montreal, quebecois, canada, gaspesie, vieux, français, anglais, traduction"
     }
 ];

@@ -131,6 +131,7 @@
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         // Style
+        "jsx-quotes": "warn",
         "react/jsx-closing-bracket-location": "warn",
         "react/jsx-closing-tag-location": "warn",
         "react/jsx-curly-spacing": "warn",
