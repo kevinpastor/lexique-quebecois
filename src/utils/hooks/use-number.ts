@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
 
 export interface NumberUtilities {
     value: number;
@@ -18,10 +18,12 @@ export const useNumber = (initialValue: number): NumberUtilities => {
         setValue((oldValue: number): number => (oldValue - 1));
     };
 
-    return {
+    const numberUtilities: NumberUtilities = useMemo((): NumberUtilities => ({
         value,
         setValue,
         increment,
         decrement
-    };
+    }), [value]);
+
+    return numberUtilities;
 };

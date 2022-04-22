@@ -6,7 +6,7 @@ import { useBoolean } from "@utils/hooks/use-boolean";
 import { delay } from "@utils/misc/time";
 
 import { Props as SnackbarProps, Snackbar } from ".";
-import { SnackbarsContext, snackbarsContext } from "./snackbar-context";
+import { SnackbarsContext, snackbarsContext } from "./context";
 
 export const Snackbars = ({ children }: PropsWithChildren<unknown>): ReactElement => {
     const [snackbarsProps, setSnackbarsProps] = useState<Array<SnackbarProps>>([]);

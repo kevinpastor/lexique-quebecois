@@ -10,7 +10,7 @@ import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
 import { formatDate } from "@utils/misc/date";
 
 import { Card } from "../card";
-import { snackbarsContext, SnackbarsContext } from "../snackbar/snackbar-context";
+import { snackbarsContext, SnackbarsContext } from "../snackbar/context";
 import { Reactions } from "./reactions";
 
 interface Props {

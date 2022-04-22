@@ -7,7 +7,7 @@ import { ReactElement, useContext } from "react";
 import { Button } from "@components/form/button";
 import { Field } from "@components/form/field";
 import { Card } from "@components/misc/card";
-import { SnackbarsContext, snackbarsContext } from "@components/misc/snackbar/snackbar-context";
+import { SnackbarsContext, snackbarsContext } from "@components/misc/snackbar/context";
 import { Title } from "@components/typography/title";
 import { Variant } from "@components/variant";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";

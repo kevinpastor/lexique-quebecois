@@ -12,3 +12,5 @@ export const snackbarsContext = createContext<SnackbarsContext>({
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     push: (_: SnackbarProps): void => { }
 });
+
+snackbarsContext.displayName = "SnackbarsContext";

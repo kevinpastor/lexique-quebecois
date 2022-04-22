@@ -3,38 +3,37 @@ import { ReactElement, useContext } from "react";
 
 import { ToggleButton } from "@components/form/toggle-button";
 import { Variant } from "@components/variant";
-import { Word as IWord } from "@models/word";
 import { isConflictError } from "@services/errors/conflict-error";
 import { isNotFoundError } from "@services/errors/not-found-error";
 import { dislike, removeDislike } from "@services/reactions";
 import { BooleanUtilities } from "@utils/hooks/use-boolean";
 import { NumberUtilities } from "@utils/hooks/use-number";
 
-import { snackbarsContext, SnackbarsContext } from "../snackbar/snackbar-context";
+import { snackbarsContext, SnackbarsContext } from "../snackbar/context";
 
 interface Props {
-    word: IWord;
-    dislikesNumber: NumberUtilities;
-    isDislikedBoolean: BooleanUtilities;
-    likesNumber: NumberUtilities;
-    isLikedBoolean: BooleanUtilities;
+    slug: string;
+    dislikes: NumberUtilities;
+    isDisliked: BooleanUtilities;
+    likes: NumberUtilities;
+    isLiked: BooleanUtilities;
 }
 
 export const Dislikes = ({
-    word,
-    dislikesNumber: {
+    slug,
+    dislikes: {
         value: dislikes,
         increment: incrementDislikes,
         decrement: decrementDislikes
     },
-    isDislikedBoolean: {
+    isDisliked: {
         value: isDisliked,
         toggle: toggleIsDisliked
     },
-    likesNumber: {
+    likes: {
         decrement: decrementLikes
     },
-    isLikedBoolean: {
+    isLiked: {
         value: isLiked,
         toggle: toggleIsLiked
     }
@@ -42,9 +41,13 @@ export const Dislikes = ({
     const { push: pushSnackbar }: SnackbarsContext = useContext(snackbarsContext);
 
     const handleClick = async (): Promise<void> => {
+        toggleIsDisliked();
+
         if (isDisliked) {
+            decrementDislikes();
+
             try {
-                await removeDislike(word.slug);
+                await removeDislike(slug);
             }
             catch (error: unknown) {
                 if (!isConflictError(error) && !isNotFoundError(error)) {
@@ -55,12 +58,17 @@ export const Dislikes = ({
                     return;
                 }
             }
-
-            decrementDislikes();
         }
         else {
+            if (isLiked) {
+                decrementLikes();
+                toggleIsLiked();
+            }
+
+            incrementDislikes();
+
             try {
-                await dislike(word.slug);
+                await dislike(slug);
             }
             catch (error: unknown) {
                 if (!isConflictError(error)) {
@@ -71,16 +79,7 @@ export const Dislikes = ({
                     return;
                 }
             }
-
-            if (isLiked) {
-                decrementLikes();
-                toggleIsLiked();
-            }
-
-            incrementDislikes();
         }
-
-        toggleIsDisliked();
     };
 
     return (

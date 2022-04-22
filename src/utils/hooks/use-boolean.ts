@@ -1,5 +1,5 @@
 // Taken from https://usehooks-ts.com/react-hook/use-boolean
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
 
 export interface BooleanUtilities {
     value: boolean;
@@ -21,16 +21,16 @@ export const useBoolean = (initialValue: boolean): BooleanUtilities => {
     };
 
     const toggle = (): void => {
-        setValue((oldValue: boolean): boolean => (
-            !oldValue
-        ));
+        setValue((oldValue: boolean): boolean => (!oldValue));
     };
 
-    return {
+    const booleanUtilities: BooleanUtilities = useMemo((): BooleanUtilities => ({
         value,
         setValue,
         setTrue,
         setFalse,
         toggle
-    };
+    }), [value]);
+
+    return booleanUtilities;
 };

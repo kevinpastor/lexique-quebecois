@@ -3,38 +3,37 @@ import { ReactElement, useContext } from "react";
 
 import { ToggleButton } from "@components/form/toggle-button";
 import { Variant } from "@components/variant";
-import { Word as IWord } from "@models/word";
 import { isConflictError } from "@services/errors/conflict-error";
 import { isNotFoundError } from "@services/errors/not-found-error";
 import { like, removeLike } from "@services/reactions";
 import { BooleanUtilities } from "@utils/hooks/use-boolean";
 import { NumberUtilities } from "@utils/hooks/use-number";
 
-import { snackbarsContext, SnackbarsContext } from "../snackbar/snackbar-context";
+import { snackbarsContext, SnackbarsContext } from "../snackbar/context";
 
 interface Props {
-    word: IWord;
-    likesNumber: NumberUtilities;
-    isLikedBoolean: BooleanUtilities;
-    dislikesNumber: NumberUtilities;
-    isDislikedBoolean: BooleanUtilities;
+    slug: string;
+    likes: NumberUtilities;
+    isLiked: BooleanUtilities;
+    dislikes: NumberUtilities;
+    isDisliked: BooleanUtilities;
 }
 
 export const Likes = ({
-    word,
-    likesNumber: {
+    slug,
+    likes: {
         value: likes,
         increment: incrementLikes,
         decrement: decrementLikes
     },
-    isLikedBoolean: {
+    isLiked: {
         value: isLiked,
         toggle: toggleIsLiked
     },
-    dislikesNumber: {
+    dislikes: {
         decrement: decrementDislikes
     },
-    isDislikedBoolean: {
+    isDisliked: {
         value: isDisliked,
         toggle: toggleIsDisliked
     }
@@ -42,9 +41,13 @@ export const Likes = ({
     const { push: pushSnackbar }: SnackbarsContext = useContext(snackbarsContext);
 
     const handleClick = async (): Promise<void> => {
+        toggleIsLiked();
+
         if (isLiked) {
+            decrementLikes();
+
             try {
-                await removeLike(word.slug);
+                await removeLike(slug);
             }
             catch (error: unknown) {
                 if (!isConflictError(error) && !isNotFoundError(error)) {
@@ -55,12 +58,17 @@ export const Likes = ({
                     return;
                 }
             }
-
-            decrementLikes();
         }
         else {
+            if (isDisliked) {
+                decrementDislikes();
+                toggleIsDisliked();
+            }
+
+            incrementLikes();
+
             try {
-                await like(word.slug);
+                await like(slug);
             }
             catch (error: unknown) {
                 if (!isConflictError(error)) {
@@ -71,15 +79,7 @@ export const Likes = ({
                     return;
                 }
             }
-
-            if (isDisliked) {
-                decrementDislikes();
-                toggleIsDisliked();
-            }
-            incrementLikes();
         }
-
-        toggleIsLiked();
     };
 
     return (
