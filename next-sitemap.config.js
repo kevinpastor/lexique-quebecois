@@ -28,7 +28,7 @@ const getWordsPath = async (config) => {
         loc: `/mots/${slug}`,
         changefreq: "daily",
         priority: config.priority,
-        lastmod: _id.getTimestamp(),
+        lastmod: _id.getTimestamp().toISOString(),
     }));
 
     await client.close();
