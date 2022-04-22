@@ -46,7 +46,7 @@ module.exports = {
             return {
                 loc: path,
                 changefreq: "always",
-                priority: 1.0
+                priority: "1.0" // Dirty fix to keep the decimal
             };
         }
 
