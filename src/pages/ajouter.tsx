@@ -4,10 +4,10 @@ import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
+import { SnackbarsContext, snackbarsContext } from "@components/feedback/snackbar/context";
 import { Button } from "@components/form/button";
 import { Field } from "@components/form/field";
 import { Card } from "@components/misc/card";
-import { SnackbarsContext, snackbarsContext } from "@components/misc/snackbar/context";
 import { Title } from "@components/typography/title";
 import { Variant } from "@components/variant";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";

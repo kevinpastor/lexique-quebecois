@@ -1,7 +1,9 @@
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement, useContext } from "react";
 
+import { snackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
 import { IconButton } from "@components/form/icon-button";
+import { Card } from "@components/misc/card";
 import { Type } from "@components/type";
 import { Title } from "@components/typography/title";
 import { Variant } from "@components/variant";
@@ -9,8 +11,6 @@ import { Word as IWord } from "@models/word";
 import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
 import { formatDate } from "@utils/misc/date";
 
-import { Card } from "../card";
-import { snackbarsContext, SnackbarsContext } from "../snackbar/context";
 import { Reactions } from "./reactions";
 
 interface Props {

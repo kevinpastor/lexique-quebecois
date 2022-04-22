@@ -3,9 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { ReactElement, useContext } from "react";
 
+import { isInButtonGroupContext } from "@components/form/button-group/context";
 import { Variant } from "@components/variant";
-
-import { isInButtonGroupContext } from "./button-group/context";
 
 interface Props {
     label: string;

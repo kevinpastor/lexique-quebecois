@@ -1,6 +1,7 @@
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement, useContext } from "react";
 
+import { snackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
 import { ToggleButton } from "@components/form/toggle-button";
 import { Variant } from "@components/variant";
 import { isConflictError } from "@services/errors/conflict-error";
@@ -8,8 +9,6 @@ import { isNotFoundError } from "@services/errors/not-found-error";
 import { like, removeLike } from "@services/reactions";
 import { BooleanUtilities } from "@utils/hooks/use-boolean";
 import { NumberUtilities } from "@utils/hooks/use-number";
-
-import { snackbarsContext, SnackbarsContext } from "../snackbar/context";
 
 interface Props {
     slug: string;

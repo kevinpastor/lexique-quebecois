@@ -4,11 +4,11 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactElement } from "react";
 
+import { Snackbar } from "@components/feedback/snackbar";
+import { Snackbars } from "@components/feedback/snackbar/snackbars";
 import { Footer } from "@components/layout/footer";
 import { Navigation } from "@components/layout/navigation";
 import { Sidebar } from "@components/layout/sidebar";
-import { Snackbar } from "@components/misc/snackbar";
-import { Snackbars } from "@components/misc/snackbar/snackbars";
 import { Variant } from "@components/variant";
 import "@configs/styles.css";
 
