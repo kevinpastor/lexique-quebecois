@@ -6,11 +6,18 @@ import { CopyFunction, useCopyToClipboard } from "./use-copy-to-clipboard";
 describe("useCopyToClipboard", (): void => {
     const writeTextMock = jest.fn()
         .mockResolvedValue(undefined);
+    const queryMock = jest.fn()
+        .mockResolvedValue({
+            state: "granted"
+        } as PermissionStatus);
 
     const navigatorMock = jest.spyOn(global, "navigator", "get");
 
     beforeEach((): void => {
         navigatorMock.mockReturnValue({
+            permissions: {
+                query: queryMock
+            } as Permissions,
             clipboard: {
                 writeText: writeTextMock
             } as unknown as Clipboard
@@ -31,6 +38,16 @@ describe("useCopyToClipboard", (): void => {
 
     it("should handle clipboard error", async (): Promise<void> => {
         writeTextMock.mockRejectedValue(undefined);
+
+        const copyToClipboard: CopyFunction = useCopyToClipboard();
+
+        await expect(copyToClipboard("foo")).rejects.toThrow();
+    });
+
+    it("should handle missing permission", async (): Promise<void> => {
+        queryMock.mockReturnValue({
+            state: "denied"
+        } as PermissionStatus);
 
         const copyToClipboard: CopyFunction = useCopyToClipboard();
 

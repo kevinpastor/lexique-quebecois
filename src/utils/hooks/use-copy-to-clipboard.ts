@@ -1,6 +1,7 @@
 export type CopyFunction = (text: string) => Promise<void>;
 
 // Taken from https://stackoverflow.com/a/53951634/7817501
+/* istanbul ignore next */
 const copyToClipboardFallback = (text: string): void => {
     const textarea: HTMLTextAreaElement = document.createElement("textarea");
     try {
