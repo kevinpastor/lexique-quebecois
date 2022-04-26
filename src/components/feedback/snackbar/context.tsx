@@ -2,15 +2,15 @@ import { createContext } from "react";
 
 import { Props as SnackbarProps } from ".";
 
-export interface SnackbarsContext {
+export interface ISnackbarsContext {
     snackbarsProps: Array<SnackbarProps>;
     push: (snackbarProps: SnackbarProps) => void;
 }
 
-export const snackbarsContext = createContext<SnackbarsContext>({
+export const SnackbarsContext = createContext<ISnackbarsContext>({
     snackbarsProps: [],
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     push: (_: SnackbarProps): void => { }
 });
 
-snackbarsContext.displayName = "SnackbarsContext";
+SnackbarsContext.displayName = "SnackbarsContext";

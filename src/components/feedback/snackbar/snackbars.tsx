@@ -6,7 +6,7 @@ import { useBoolean } from "@utils/hooks/use-boolean";
 import { delay } from "@utils/misc/time";
 
 import { Props as SnackbarProps, Snackbar } from ".";
-import { SnackbarsContext, snackbarsContext } from "./context";
+import { ISnackbarsContext, SnackbarsContext } from "./context";
 
 export const Snackbars = ({ children }: PropsWithChildren<unknown>): ReactElement => {
     const [snackbarsProps, setSnackbarsProps] = useState<Array<SnackbarProps>>([]);
@@ -21,7 +21,7 @@ export const Snackbars = ({ children }: PropsWithChildren<unknown>): ReactElemen
         setTrue: setIsSnackbarMountedTrue
     } = useBoolean(false);
 
-    const value: SnackbarsContext = useMemo((): SnackbarsContext => ({
+    const value: ISnackbarsContext = useMemo((): ISnackbarsContext => ({
         snackbarsProps: snackbarsProps,
         push: (snackbarProps: SnackbarProps): void => {
             setSnackbarsProps((oldProps: Array<SnackbarProps>): Array<SnackbarProps> => ([
@@ -59,7 +59,7 @@ export const Snackbars = ({ children }: PropsWithChildren<unknown>): ReactElemen
     const ref = useRef(null);
 
     return (
-        <snackbarsContext.Provider value={value}>
+        <SnackbarsContext.Provider value={value}>
             {children}
             <Transition
                 in={isDisplayed}
@@ -84,6 +84,6 @@ export const Snackbars = ({ children }: PropsWithChildren<unknown>): ReactElemen
                         )
                 )}
             </Transition>
-        </snackbarsContext.Provider>
+        </SnackbarsContext.Provider>
     );
 };

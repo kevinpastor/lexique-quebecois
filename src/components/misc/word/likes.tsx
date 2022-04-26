@@ -1,7 +1,7 @@
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement, useContext } from "react";
 
-import { snackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
+import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
 import { ToggleButton } from "@components/form/toggle-button";
 import { Variant } from "@components/variant";
 import { isConflictError } from "@services/errors/conflict-error";
@@ -37,7 +37,7 @@ export const Likes = ({
         toggle: toggleIsDisliked
     }
 }: Props): ReactElement => {
-    const { push: pushSnackbar }: SnackbarsContext = useContext(snackbarsContext);
+    const { push: pushSnackbar }: ISnackbarsContext = useContext(SnackbarsContext);
 
     const handleClick = async (): Promise<void> => {
         toggleIsLiked();

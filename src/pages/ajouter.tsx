@@ -4,7 +4,7 @@ import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
-import { SnackbarsContext, snackbarsContext } from "@components/feedback/snackbar/context";
+import { ISnackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
 import { Button } from "@components/form/button";
 import { Field } from "@components/form/field";
 import { Card } from "@components/misc/card";
@@ -25,7 +25,7 @@ const Add = (): ReactElement => {
         push: pushRoute,
         query: routeQuery
     }: NextRouter = useRouter();
-    const { push: pushSnackbar }: SnackbarsContext = useContext(snackbarsContext);
+    const { push: pushSnackbar }: ISnackbarsContext = useContext(SnackbarsContext);
 
     const handleSubmit = async (wordRequest: WordRequest): Promise<void> => {
         const cleanedWordRequest: WordRequest = cleanupWordRequest(wordRequest);

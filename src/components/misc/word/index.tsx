@@ -2,7 +2,7 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement, useContext } from "react";
 
 import { Tooltip } from "@components/data/tooltip";
-import { snackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
+import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
 import { IconButton } from "@components/form/icon-button";
 import { Card } from "@components/misc/card";
 import { Type } from "@components/type";
@@ -20,7 +20,7 @@ interface Props {
 
 export const Word = ({ word }: Props): ReactElement => {
     const copy = useCopyToClipboard();
-    const { push: pushSnackbar }: SnackbarsContext = useContext(snackbarsContext);
+    const { push: pushSnackbar }: ISnackbarsContext = useContext(SnackbarsContext);
 
     const handleClick = async (): Promise<void> => {
         try {
