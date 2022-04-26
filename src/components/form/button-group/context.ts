@@ -1,4 +1,10 @@
 import { Context, createContext } from "react";
 
-export const isInButtonGroupContext: Context<boolean> = createContext<boolean>(false);
-isInButtonGroupContext.displayName = "ButtonGroupContext";
+export interface IButtonGroupContext {
+    isInGroup: boolean;
+}
+
+export const ButtonGroupContext: Context<IButtonGroupContext> = createContext<IButtonGroupContext>({
+    isInGroup: false
+});
+ButtonGroupContext.displayName = "ButtonGroupContext";
