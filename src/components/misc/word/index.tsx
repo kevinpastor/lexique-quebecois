@@ -1,6 +1,7 @@
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement, useContext } from "react";
 
+import { Tooltip } from "@components/data/tooltip";
 import { snackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
 import { IconButton } from "@components/form/icon-button";
 import { Card } from "@components/misc/card";
@@ -46,12 +47,14 @@ export const Word = ({ word }: Props): ReactElement => {
                     {word.label}
                 </Title>
                 <div className="flex justify-end">
-                    <IconButton
-                        onClick={handleClick}
-                        icon={faLink}
-                        ariaLabel="Copier"
-                        type={Type.Text}
-                    />
+                    <Tooltip label="Copier le lien">
+                        <IconButton
+                            onClick={handleClick}
+                            icon={faLink}
+                            ariaLabel="Copier"
+                            type={Type.Text}
+                        />
+                    </Tooltip>
                 </div>
             </div>
             <div className="space-y-4">

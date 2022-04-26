@@ -1,6 +1,6 @@
-export enum Variant {
-    Info,
-    Success,
-    Warning,
-    Error
+export const enum Variant {
+    Info = "info",
+    Success = "success",
+    Warning = "warning",
+    Error = "error"
 }

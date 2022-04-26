@@ -1,4 +1,4 @@
-export enum Status {
+export const enum Status {
     OK = 200,
     Created = 201,
     BadRequest = 400,

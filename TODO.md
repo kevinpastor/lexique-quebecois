@@ -1,9 +1,7 @@
 # TODO
 
-- Create robots.txt file
-- Create sitemap file
+- Add loading animation on page transition
 - Create custom description meta per page
-- Add copy link tooltip
 - Allow multiple definition per word
 - Add word type (adjective, noun, verb, etc.)
 - Add pronounciation
