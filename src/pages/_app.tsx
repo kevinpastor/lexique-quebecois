@@ -26,6 +26,11 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
                 rel="icon"
                 href="/favicon.ico"
             />
+            <meta
+                key="description"
+                name="description"
+                content="Un peu comme Urban Dictionary, mais québécois."
+            />
         </Head>
         <Navigation />
         <main className="container mx-auto p-4 space-y-4">

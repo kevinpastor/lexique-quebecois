@@ -16,10 +16,6 @@ export const metadata: Array<Meta> = [
         content: "/icons/apple-touch-icon.png"
     },
     {
-        name: "description",
-        content: "Un peu comme Urban Dictionary, mais québécois."
-    },
-    {
         name: "keywords",
         content: "lexique québécois, lexique, dictionnaire, traduction, québécois, quebecois, québec, quebec, montréal, montreal, canada, gaspésie, gaspesie, vieux, français, francais, anglais"
     }

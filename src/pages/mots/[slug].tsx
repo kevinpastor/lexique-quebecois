@@ -83,6 +83,11 @@ const Word = ({ word }: Props): ReactElement => {
             <Head>
                 {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
                 <title>{word.label} - Lexique Québécois</title>
+                <meta
+                    key="description"
+                    name="description"
+                    content={`${word.label} - ${word.definition}`}
+                />
             </Head>
             <WordComponent word={word} />
         </>
