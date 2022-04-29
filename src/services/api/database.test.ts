@@ -1,19 +1,31 @@
-import { Db, MongoClient } from "mongodb";
-
-import { getDatabase } from "./database";
+import type { Db, MongoClient } from "mongodb";
 
 jest.mock("mongodb");
-const MongoClientMock = MongoClient as jest.MockedClass<typeof MongoClient>;
 
 describe("getDatabase", (): void => {
     const environment: NodeJS.ProcessEnv = process.env;
 
-    beforeEach(() => {
+    const connectMock = jest.fn();
+
+    // eslint-disable-next-line @typescript-eslint/init-declarations
+    let getDatabase!: typeof import("./database").getDatabase;
+    // eslint-disable-next-line @typescript-eslint/init-declarations
+    let MongoClientMock!: jest.MockedClass<typeof MongoClient>;
+
+    beforeEach(async (): Promise<void> => {
+        jest.resetAllMocks();
+
+        MongoClientMock = (await import("mongodb")).MongoClient as jest.MockedClass<typeof MongoClient>;
+        MongoClientMock.mockReturnValue({
+            connect: connectMock
+        } as Partial<MongoClient> as MongoClient);
+        getDatabase = (await import("./database")).getDatabase;
         jest.resetModules();
+
         process.env = { ...environment };
     });
 
-    afterAll(() => {
+    afterAll((): void => {
         process.env = environment;
     });
 
@@ -29,32 +41,30 @@ describe("getDatabase", (): void => {
 
     it("should throw when unable to connect", async (): Promise<void> => {
         (process.env as Record<string, string>).NODE_ENV = "production";
-        const mongoDbUri: string = "foo";
-        (process.env as Record<string, string>).MONGODB_URI = mongoDbUri;
+        (process.env as Record<string, string>).MONGODB_URI = "mongodb_uri";
 
-        MongoClientMock.mockImplementation((): MongoClient => ({
+        connectMock.mockRejectedValue(undefined);
+
+        MongoClientMock.mockReturnValue({
             connect: jest.fn()
                 .mockRejectedValue(undefined)
-        } as Partial<MongoClient> as MongoClient));
+        } as Partial<MongoClient> as MongoClient);
 
         await expect(getDatabase()).rejects.not.toBeUndefined();
     });
 
     it("should return database", async (): Promise<void> => {
         (process.env as Record<string, string>).NODE_ENV = "production";
-        const mongoDbUri: string = "foo";
-        (process.env as Record<string, string>).MONGODB_URI = mongoDbUri;
+        (process.env as Record<string, string>).MONGODB_URI = "mongodb_uri";
 
-        const getDbMock = jest.fn()
-            .mockReturnValue({});
-        MongoClientMock.mockImplementation((): MongoClient => ({
-            connect: jest.fn(),
-            db: getDbMock
-        } as Partial<MongoClient> as MongoClient));
+        connectMock.mockResolvedValue({
+            db: jest.fn()
+                .mockReturnValue({} as Partial<Db> as Db)
+        } as Partial<MongoClient> as MongoClient);
 
         const database: Db = await getDatabase();
 
-        expect(MongoClientMock).toHaveBeenCalledWith(mongoDbUri);
+        expect(MongoClientMock).toHaveBeenCalledWith("mongodb_uri");
         expect(database).toBeDefined();
     });
 });

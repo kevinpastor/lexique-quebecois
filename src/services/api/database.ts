@@ -2,46 +2,48 @@ import { Db, MongoClient } from "mongodb";
 
 import { isDevelopmentEnvironment, isTestEnvironment } from "@utils/misc/environment";
 
-let database: Db | undefined = undefined;
+let mongoClientConnect: Promise<MongoClient> | undefined = undefined;
 
 interface ExtendedGlobal {
-    _database?: Db;
+    _mongoClientConnect?: Promise<MongoClient>;
 }
 
 export const getDatabase = async (): Promise<Db> => {
     if (isTestEnvironment()) {
-        throw new Error("Database should not be accessed in a test environment.");
+        throw new Error("A MongoDB connection should not be made in a test environment.");
     }
 
     // 2. Reassign database from cache
     /* istanbul ignore if */
     if (isDevelopmentEnvironment()) {
-        database = (global as ExtendedGlobal)._database;
+        mongoClientConnect = (global as ExtendedGlobal)._mongoClientConnect;
     }
 
-    if (!database) {
+    if (!mongoClientConnect) {
         if (!process.env.MONGODB_URI) {
             throw new Error("MONGODB_URI is missing in environment variables.");
         }
 
         const uri: string = process.env.MONGODB_URI;
-        const client: MongoClient = new MongoClient(uri);
+        const mongoClient: MongoClient = new MongoClient(uri);
 
-        try {
-            await client.connect();
-        }
-        catch (error: unknown) {
-            throw new Error(`Could not connect to database. \n${error}`);
-        }
+        mongoClientConnect = mongoClient.connect();
 
-        database = client.db("quebecoisUrbain");
-
-        // 1. Cache the database for hot reload
+        // 1. Cache the MongoClient for hot reload
         /* istanbul ignore if */
         if (isDevelopmentEnvironment()) {
-            (global as ExtendedGlobal)._database = database;
+            (global as ExtendedGlobal)._mongoClientConnect = mongoClientConnect;
         }
     }
 
-    return database;
+    let mongoClient: MongoClient | undefined = undefined;
+
+    try {
+        mongoClient = await mongoClientConnect;
+    }
+    catch (error: unknown) {
+        throw new Error(`Could not connect to database. \n${error}`);
+    }
+
+    return mongoClient.db("quebecoisUrbain");
 };

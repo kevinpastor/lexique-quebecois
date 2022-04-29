@@ -3,12 +3,12 @@ import { isDevelopmentEnvironment, isTestEnvironment, isProductionEnvironment } 
 describe("isDevelopmentEnvironment", (): void => {
     const environment: NodeJS.ProcessEnv = process.env;
 
-    beforeEach(() => {
+    beforeEach((): void => {
         jest.resetModules();
         process.env = { ...environment };
     });
 
-    afterAll(() => {
+    afterAll((): void => {
         process.env = environment;
     });
 
@@ -28,12 +28,12 @@ describe("isDevelopmentEnvironment", (): void => {
 describe("isTestEnvironment", (): void => {
     const environment: NodeJS.ProcessEnv = process.env;
 
-    beforeEach(() => {
+    beforeEach((): void => {
         jest.resetModules();
         process.env = { ...environment };
     });
 
-    afterAll(() => {
+    afterAll((): void => {
         process.env = environment;
     });
 
@@ -53,12 +53,12 @@ describe("isTestEnvironment", (): void => {
 describe("isProductionEnvironment", (): void => {
     const environment: NodeJS.ProcessEnv = process.env;
 
-    beforeEach(() => {
+    beforeEach((): void => {
         jest.resetModules();
         process.env = { ...environment };
     });
 
-    afterAll(() => {
+    afterAll((): void => {
         process.env = environment;
     });
 
