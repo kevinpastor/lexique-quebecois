@@ -24,7 +24,7 @@ describe("useCopyToClipboard", (): void => {
         } as Partial<Navigator> as Navigator);
     });
 
-    afterEach(() => {
+    afterEach((): void => {
         jest.resetAllMocks();
     });
 

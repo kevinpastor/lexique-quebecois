@@ -28,6 +28,8 @@ module.exports = {
             animation: {
                 "fade-in": "fadeIn 150ms ease-in forwards",
                 "fade-out": "fadeOut 150ms ease-in forwards",
+                "progress-increase": "progressIncrease 2s infinite",
+                "progress-decrease": "progressDecrease 2s 0.5s infinite",
             },
             keyframes: {
                 "fadeIn": {
@@ -44,6 +46,26 @@ module.exports = {
                     },
                     "100%": {
                         opacity: 0
+                    }
+                },
+                "progressIncrease": {
+                    "from": {
+                        left: "-5%",
+                        width: "5%"
+                    },
+                    "to": {
+                        left: "130%",
+                        width: "100%"
+                    }
+                },
+                "progressDecrease": {
+                    "from": {
+                        left: "-80%",
+                        width: "80%"
+                    },
+                    "to": {
+                        left: "110%",
+                        width: "10%"
                     }
                 }
             }
