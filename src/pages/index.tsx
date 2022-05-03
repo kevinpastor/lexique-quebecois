@@ -5,7 +5,6 @@ import { getClientIp } from "request-ip";
 import { Word } from "@components/misc/word";
 import { Word as IWord } from "@models/word";
 import { getWordsSample } from "@services/api/words";
-import { delay } from "@utils/misc/time";
 
 interface Props {
     words: Array<IWord>;
@@ -16,8 +15,6 @@ export const getServerSideProps = async ({ req }: GetServerSidePropsContext): Pr
     const ip: string = getClientIp(req) ?? "";
 
     const words: Array<IWord> = await getWordsSample(ip);
-
-    await delay(5000);
 
     return {
         props: {
