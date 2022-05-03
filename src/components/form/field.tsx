@@ -2,10 +2,9 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { ErrorMessage, Field as FormikField } from "formik";
-import { MutableRefObject, ReactElement } from "react";
+import { MutableRefObject, ReactElement, useId } from "react";
 
 import { useAutoResize } from "@utils/hooks/use-auto-resize";
-import { useId } from "@utils/hooks/use-id";
 
 interface Props<T> {
     name: keyof T;
