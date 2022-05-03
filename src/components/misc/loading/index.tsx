@@ -4,6 +4,7 @@ import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
 import { useLockedBody } from "@utils/hooks/use-locked-body";
 
+import { LoadingArticle } from "./loading-article";
 import { LoadingWord } from "./loading-word";
 
 const routes = [
@@ -28,23 +29,27 @@ const routes = [
         Component: (): ReactElement => (
             <LoadingWord />
         )
+    },
+    {
+        matcher: (url: string): boolean => (
+            url === "/conditions"
+        ),
+        Component: (): ReactElement => (
+            <LoadingArticle />
+        )
+    },
+    {
+        matcher: (url: string): boolean => (
+            url === "/confidentialite"
+        ),
+        Component: (): ReactElement => (
+            <LoadingArticle />
+        )
     }
     // TODO
     // {
     //     matcher: (url: string): boolean => (
     //         url === "/ajouter"
-    //     ),
-    //     Component: (): ReactElement => ()
-    // },
-    // {
-    //     matcher: (url: string): boolean => (
-    //         url === "/conditions"
-    //     ),
-    //     Component: (): ReactElement => ()
-    // },
-    // {
-    //     matcher: (url: string): boolean => (
-    //         url === "/confidentialite"
     //     ),
     //     Component: (): ReactElement => ()
     // },

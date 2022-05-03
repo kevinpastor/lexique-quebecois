@@ -1,5 +1,7 @@
 /** @type {import("tailwindcss/tailwind-config").TailwindTheme} */
 const defaultTheme = require("tailwindcss/defaultTheme");
+/** @type {import("tailwindcss/plugin").TailwindPluginCreator} */
+const plugin = require("tailwindcss/plugin");
 
 /** @type {import("tailwindcss/tailwind-config").TailwindConfig} */
 module.exports = {
@@ -88,5 +90,40 @@ module.exports = {
             ]
         }
     },
-    plugins: []
+    plugins: [
+        // Animation Delay Plugin
+        plugin(({ addUtilities, matchUtilities }) => {
+            addUtilities({
+                ".animation-delay-75": {
+                    "animation-delay": "75ms"
+                },
+                ".animation-delay-100": {
+                    "animation-delay": "100ms"
+                },
+                ".animation-delay-150": {
+                    "animation-delay": "150ms"
+                },
+                ".animation-delay-200": {
+                    "animation-delay": "200ms"
+                },
+                ".animation-delay-300": {
+                    "animation-delay": "300ms"
+                },
+                ".animation-delay-500": {
+                    "animation-delay": "500ms"
+                },
+                ".animation-delay-700": {
+                    "animation-delay": "700ms"
+                },
+                ".animation-delay-1000": {
+                    "animation-delay": "1000ms"
+                }
+            });
+            matchUtilities({
+                "animation-delay": (value) => ({
+                    "animationDelay": value
+                })
+            })
+        })
+    ]
 };
