@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 import { Card } from "@components/misc/card";
 
-export const LoadingArticle = (): ReactElement => (
+export const LoadingTerms = (): ReactElement => (
     <Card>
         <div className="space-y-4">
             <div className="animate-pulse bg-slate-700 p-5 rounded w-3/4" />
