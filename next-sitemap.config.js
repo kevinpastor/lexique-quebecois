@@ -66,6 +66,10 @@ module.exports = {
             };
         }
 
+        if (path === "/admin") {
+            return null;
+        }
+
         return {
             loc: path,
             changefreq: config.changefreq,
