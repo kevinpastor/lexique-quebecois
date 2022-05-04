@@ -1,6 +1,6 @@
 # TODO
 
-- Add loading animation on page transition
+- Add admin page
 - Allow multiple definition per word
 - Add word type (adjective, noun, verb, etc.)
 - Add pronounciation

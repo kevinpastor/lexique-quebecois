@@ -1,10 +1,10 @@
 import { PropsWithChildren, ReactElement, useEffect } from "react";
 
+import { useLoadingUrl } from "@utils/hooks/use-loading-url";
 import { useLockedBody } from "@utils/hooks/use-locked-body";
 
 import { ProgressIndicator } from "./progress-indicator";
 import { routes } from "./routes";
-import { useLoadingUrl } from "./use-loading-url";
 
 export const Loading = ({ children }: PropsWithChildren<unknown>): ReactElement => {
     const loadingUrl: string | undefined = useLoadingUrl();
