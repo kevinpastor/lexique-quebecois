@@ -25,7 +25,7 @@ export const createHandler = (methodHandlers: MethodHandlers): Handler => {
         const handler: MethodHandler | undefined = methodHandlers[req.method];
 
         if (!handler) {
-            res.status(Status.MethodNotAllowed)
+            res.status(Status.NotFound)
                 .end();
             return;
         }

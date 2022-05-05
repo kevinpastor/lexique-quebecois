@@ -1,4 +1,4 @@
-import { Collection, Db, FindOptions, InsertOneResult } from "mongodb";
+import { Collection, Db, FindOptions, InsertOneResult, WithId, ObjectId, UpdateFilter, UpdateResult } from "mongodb";
 
 import { Status } from "@models/status";
 import { Word } from "@models/word";
@@ -6,6 +6,7 @@ import { WordDocument } from "@models/word-document";
 import { WordRequest, getSlug } from "@models/word-request";
 import { shuffle } from "@utils/misc/random";
 import { InclusiveProjection } from "@utils/types/projection";
+import { WithStringId } from "@utils/types/with-string-id";
 
 import { getDatabase } from "./database";
 
@@ -107,6 +108,80 @@ export const getWordsSample = async (ip: string): Promise<Array<Word>> => {
     return shuffle(words);
 };
 
+export const getWordDocuments = async (): Promise<Array<WithStringId<WordDocument>>> => {
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("definitions");
+    const pipeline = [
+        {
+            $addFields: {
+                _id: {
+                    $toString: "$_id"
+                }
+            }
+        }
+    ];
+    const wordDocuments: Array<WithStringId<WordDocument>> = await collection.aggregate<WithStringId<WordDocument>>(pipeline)
+        .toArray();
+
+    return wordDocuments;
+};
+
+export const getWordDocument = async (id: string): Promise<WithStringId<WordDocument> | undefined> => {
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("definitions");
+    const pipeline = [
+        {
+            $match: {
+                _id: new ObjectId(id)
+            }
+        },
+        {
+            $addFields: {
+                _id: {
+                    $toString: "$_id"
+                }
+            }
+        }
+    ];
+    const wordDocuments: Array<WithStringId<WordDocument>> = await collection.aggregate<WithStringId<WordDocument>>(pipeline)
+        .toArray();
+
+    if (wordDocuments.length !== 1) {
+        return;
+    }
+
+    return wordDocuments[0];
+};
+
+export const updateWordDocument = async (wordDocument: WithStringId<WordDocument>): Promise<Status> => {
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("definitions");
+    const filter: Partial<WithId<WordDocument>> = {
+        _id: new ObjectId(wordDocument._id)
+    };
+    const update: UpdateFilter<WordDocument> = {
+        $set: {
+            author: wordDocument.author,
+            definition: wordDocument.definition,
+            example: wordDocument.example,
+            isApproved: wordDocument.isApproved,
+            label: wordDocument.label,
+            slug: wordDocument.slug
+        }
+    };
+    const result: UpdateResult = await collection.updateOne(filter, update);
+
+    if (result.matchedCount === 0) {
+        return Status.NotFound;
+    }
+
+    if (result.modifiedCount === 0) {
+        return Status.Conflict;
+    }
+
+    return Status.OK;
+};
+
 export const getWord = async (slug: string, ip: string): Promise<Word | undefined> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
@@ -137,7 +212,7 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Sta
 
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
-    const result: InsertOneResult =  await collection.insertOne(wordDocument);
+    const result: InsertOneResult = await collection.insertOne(wordDocument);
 
     if (!result.acknowledged) {
         return Status.InternalError;
