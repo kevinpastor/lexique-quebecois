@@ -6,9 +6,15 @@ import { Status } from "@models/status";
 import { MethodHandler } from "./method-handler";
 import { MethodHandlers } from "./method-handlers";
 
+export type Options = {
+    hidden?: boolean;
+};
+
 export type Handler = (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
 
-export const createHandler = (methodHandlers: MethodHandlers): Handler => {
+export const createHandler = (methodHandlers: MethodHandlers, options?: Options): Handler => {
+    const hidden: boolean = options?.hidden ?? false;
+
     return async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
         if (!req.method) {
             res.status(Status.BadRequest)
@@ -25,7 +31,7 @@ export const createHandler = (methodHandlers: MethodHandlers): Handler => {
         const handler: MethodHandler | undefined = methodHandlers[req.method];
 
         if (!handler) {
-            res.status(Status.NotFound)
+            res.status(hidden ? Status.NotFound : Status.MethodNotAllowed)
                 .end();
             return;
         }
