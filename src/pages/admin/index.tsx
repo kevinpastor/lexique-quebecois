@@ -1,20 +1,17 @@
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetServerSidePropsResult } from "next";
 import { ReactElement } from "react";
+import { SWRConfig } from "swr";
 
-import { Card } from "@components/misc/card";
-import { Heading } from "@components/typography/heading";
-import { Hyperlink } from "@components/typography/hyperlink";
-import { Section } from "@components/typography/section";
-import { Title } from "@components/typography/title";
+import { WordDocuments } from "@components/misc/word-documents";
 import { WordDocument } from "@models/word-document";
 import { getWordDocuments } from "@services/api/words";
 import { isDevelopmentEnvironment } from "@utils/misc/environment";
 import { WithStringId } from "@utils/types/with-string-id";
 
 interface Props {
-    wordDocuments: Array<WithStringId<WordDocument>>;
+    fallback: {
+        [endpoint: string]: unknown;
+    };
 }
 
 export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
@@ -28,42 +25,17 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
 
     return {
         props: {
-            wordDocuments
+            fallback: {
+                "/api/admin": wordDocuments
+            }
         }
     };
 };
 
-const Admin = ({ wordDocuments }: Props): ReactElement => (
-    <Card>
-        <Title>
-            Dashboard
-        </Title>
-        <Section>
-            <Heading>
-                Word Index
-            </Heading>
-            {wordDocuments.map(({ _id, label, isApproved }: WithStringId<WordDocument>): ReactElement => (
-                <div
-                    key={_id}
-                    className="flex gap-2"
-                >
-                    <Hyperlink
-                        href={`/admin/${_id}`}
-                        prefetch={false}
-                    >
-                        {label}
-                    </Hyperlink>
-                    {isApproved && (
-                        <div className="text-slate-500">
-                            <FontAwesomeIcon
-                                icon={faCheckCircle}
-                            />
-                        </div>
-                    )}
-                </div>
-            ))}
-        </Section>
-    </Card>
+const Admin = ({ fallback }: Props): ReactElement => (
+    <SWRConfig value={{ fallback }}>
+        <WordDocuments />
+    </SWRConfig>
 );
 
 export default Admin;

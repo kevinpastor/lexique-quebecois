@@ -15,10 +15,11 @@ import { updateWordDocument } from "@services/word-document";
 import { WithStringId } from "@utils/types/with-string-id";
 
 export const WordDocumentEditor = (): ReactElement => {
-    const { push, query } = useRouter();
+    const { push, query: { id } } = useRouter();
 
-    const { id } = query;
     const { data } = useSWR<WithStringId<WordDocument>>(`/api/admin/${id}`);
+
+    // TODO Remove cast and handle undefined
     const wordDocument: WithStringId<WordDocument> = data as WithStringId<WordDocument>;
 
     const timestamp: number = parseInt(wordDocument._id.substring(0, 8), 16) * 1000;
