@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { ReactElement } from "react";
 import { SWRConfig } from "swr";
 
-import { WordDocumentEditor } from "@components/misc/word-document-editor";
+import { WordDocumentEditor } from "@components/pages/word-document-editor";
 import { WordDocument } from "@models/word-document";
 import { getWordDocument } from "@services/api/words";
 import { isDevelopmentEnvironment } from "@utils/misc/environment";
