@@ -3,6 +3,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactElement } from "react";
+import { SWRConfig } from "swr";
 
 import { Snackbar } from "@components/feedback/snackbar";
 import { Snackbars } from "@components/feedback/snackbar/snackbars";
@@ -12,6 +13,7 @@ import { Sidebar } from "@components/layout/sidebar";
 import { Loading } from "@components/misc/loading";
 import { Variant } from "@components/variant";
 import "@configs/styles.css";
+import { fetcher } from "@services/fetcher";
 
 config.autoAddCss = false;
 
@@ -38,7 +40,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
             <div className="flex gap-4">
                 <div className="basis-full lg:basis-2/3 lg:space-y-0">
                     <Loading>
-                        <Component {...pageProps} />
+                        <SWRConfig value={{ fetcher }}>
+                            <Component {...pageProps} />
+                        </SWRConfig>
                     </Loading>
                 </div>
                 {/* 132px comes from the nav height (116px) and the main padding (16px). */}

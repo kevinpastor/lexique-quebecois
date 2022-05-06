@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import { isValidMethod } from "@models/method";
 import { Status } from "@models/status";
+import { isDevelopmentEnvironment } from "@utils/misc/environment";
 
 import { MethodHandler } from "./method-handler";
 import { MethodHandlers } from "./method-handlers";
@@ -16,6 +17,11 @@ export const createHandler = (methodHandlers: MethodHandlers, options?: Options)
     const hidden: boolean = options?.hidden ?? false;
 
     return async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+        if (hidden && !isDevelopmentEnvironment()) {
+            res.status(Status.NotFound)
+                .end();
+        }
+
         if (!req.method) {
             res.status(Status.BadRequest)
                 .end();
@@ -31,7 +37,7 @@ export const createHandler = (methodHandlers: MethodHandlers, options?: Options)
         const handler: MethodHandler | undefined = methodHandlers[req.method];
 
         if (!handler) {
-            res.status(hidden ? Status.NotFound : Status.MethodNotAllowed)
+            res.status(Status.MethodNotAllowed)
                 .end();
             return;
         }
