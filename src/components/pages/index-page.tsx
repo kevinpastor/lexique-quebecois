@@ -22,7 +22,7 @@ interface LetterGroup {
 
 export const IndexPage = (): ReactElement => {
     // TODO Rename route
-    const { data } = useSWR<Array<string>>("/api/words/mots");
+    const { data } = useSWR<Array<string>>("/api/words/mots", { revalidateOnMount: false });
 
     // `data` coming from `fallback`
     const words: Array<string> = data as Array<string>;

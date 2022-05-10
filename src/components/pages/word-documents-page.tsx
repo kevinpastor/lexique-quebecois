@@ -12,7 +12,7 @@ import { WordDocument } from "@models/word-document";
 import { WithStringId } from "@utils/types/with-string-id";
 
 export const WordDocumentsPage = (): ReactElement => {
-    const { data } = useSWR<Array<WithStringId<WordDocument>>>("/api/admin");
+    const { data } = useSWR<Array<WithStringId<WordDocument>>>("/api/admin", { revalidateOnMount: false });
 
     // `data` coming from `fallback`
     const wordDocuments: Array<WithStringId<WordDocument>> = data as Array<WithStringId<WordDocument>>;

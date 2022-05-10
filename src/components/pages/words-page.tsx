@@ -5,7 +5,7 @@ import { Word as WordComponent } from "@components/misc/word";
 import { Word } from "@models/word";
 
 export const WordsPage = (): ReactElement => {
-    const { data } = useSWR<Array<Word>>("/api/words");
+    const { data } = useSWR<Array<Word>>("/api/words", { revalidateOnMount: false });
 
     // `data` coming from `fallback`
     const words: Array<Word> = data as Array<Word>;

@@ -17,7 +17,7 @@ import { WithStringId } from "@utils/types/with-string-id";
 export const WordDocumentPage = (): ReactElement => {
     const { push, query: { id } } = useRouter();
 
-    const { data } = useSWR<WithStringId<WordDocument>>(`/api/admin/${id}`);
+    const { data } = useSWR<WithStringId<WordDocument>>(`/api/admin/${id}`, { revalidateOnMount: false });
 
     // `data` coming from `fallback`
     const wordDocument: WithStringId<WordDocument> = data as WithStringId<WordDocument>;
