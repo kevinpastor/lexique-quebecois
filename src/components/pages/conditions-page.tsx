@@ -142,8 +142,8 @@ export const ConditionsPage = (): ReactElement => (
                     Vous êtes seul responsable de tout contenu que vous publiez sur le site Web, ainsi que des conséquences de la publication de ce contenu. Vous acceptez d&apos;indemniser, de défendre et de dégager de toute responsabilité la société, ses dirigeants, ses administrateurs, ses employés et ses agents en cas de réclamations, pertes, coûts, responsabilités, dommages, jugements, pénalités, intérêts et dépenses (y compris les honoraires d&apos;avocat raisonnables) découlant de ou liés à (1) toute violation réelle ou présumée de vos déclarations, garanties ou obligations énoncées dans les présentes conditions d&apos;utilisation, et (2) toute violation réelle ou présumée de tout droit de propriété intellectuelle ou de propriété par tout contenu ou toute autre information que vous publiez sur le site Web.
                 </Paragraph>
                 <Paragraph>
-                    {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                    L&apos;utilisation du site Web est également régie par notre politique de confidentialité, dont une copie se trouve actuellement à l&apos;adresse suivante&nbsp;: <Hyperlink href="/confidentialite">https://lexiquequebecois.com/confidentialite</Hyperlink>.
+                    {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
+                    L&apos;utilisation du site Web est également régie par notre politique de confidentialité, dont une copie se trouve actuellement à l&apos;adresse suivante&nbsp;: <Hyperlink href="/confidentialite" breakText>https://lexiquequebecois.com/confidentialite</Hyperlink>.
                 </Paragraph>
             </Section>
             <Section>
