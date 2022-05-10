@@ -22,7 +22,7 @@ export const getServerSideProps = async ({ req }: GetServerSidePropsContext): Pr
     return {
         props: {
             fallback: {
-                "/api/words/mots": words
+                "/api/words": words
             }
         }
     };

@@ -3,9 +3,8 @@ import { getClientIp } from "request-ip";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { Word } from "@models/word";
 import { isValidWordRequest } from "@models/word-request";
-import { addWord, getWordsSample } from "@services/api/words";
+import { addWord, getWordIndex } from "@services/api/words";
 import {
     createHandler,
     Handler
@@ -20,7 +19,7 @@ const handler: Handler = createHandler({
     [Method.GET]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
         const ip: string = getClientIp(req) ?? "";
 
-        const words: Array<Word> = await getWordsSample(ip);
+        const words: Array<string> = await getWordIndex(ip);
 
         res.status(Status.OK)
             .json(words);
