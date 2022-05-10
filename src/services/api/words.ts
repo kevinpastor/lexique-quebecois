@@ -4,7 +4,7 @@ import { Status } from "@models/status";
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
 import { WordRequest, getSlug } from "@models/word-request";
-import { shuffle } from "@utils/misc/random";
+import { sample } from "@utils/misc/random";
 import { InclusiveProjection } from "@utils/types/projection";
 import { WithStringId } from "@utils/types/with-string-id";
 
@@ -78,8 +78,16 @@ export const getWordIndex = async (ip: string): Promise<Array<string>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const pipeline = [
-        { $match: { isApproved: true } },
-        { $sort: { slug: 1 } },
+        {
+            $match: {
+                isApproved: true
+            }
+        },
+        {
+            $sort: {
+                slug: 1
+            }
+        },
         {
             $project: getWordProjection(ip)
         }
@@ -95,17 +103,43 @@ export const getWordIndex = async (ip: string): Promise<Array<string>> => {
 export const getWordsSample = async (ip: string): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
-    const pipeline = [
-        { $match: { isApproved: true } },
-        { $sample: { size: 5 } },
+    const idsPipeline = [
+        {
+            $match: {
+                isApproved: true
+            }
+        },
+        {
+            $project: {
+                _id: 1
+            }
+        }
+    ];
+    const ids: Array<ObjectId> = await collection.aggregate<WithId<unknown>>(idsPipeline)
+        .map(({ _id }: WithId<unknown>): ObjectId => (_id))
+        .toArray();
+
+    const sampleSize: number = 5;
+    const now: Date = new Date();
+    const seed: number = Math.floor(now.getTime() / 86400000); // 1000ms * 60s * 60min * 24h
+    const sampledIds: Array<ObjectId> = sample(ids, sampleSize, seed);
+
+    const wordsPipeline = [
+        {
+            $match: {
+                _id: {
+                    $in: sampledIds
+                }
+            }
+        },
         {
             $project: getWordProjection(ip)
         }
     ];
-    const words: Array<Word> = await collection.aggregate<Word>(pipeline)
+    const words: Array<Word> = await collection.aggregate<Word>(wordsPipeline)
         .toArray();
 
-    return shuffle(words);
+    return words;
 };
 
 export const getWordDocuments = async (): Promise<Array<WithStringId<WordDocument>>> => {
