@@ -3,8 +3,9 @@ import { getClientIp } from "request-ip";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
+import { Word } from "@models/word";
 import { isValidWordRequest } from "@models/word-request";
-import { addWord } from "@services/api/words";
+import { addWord, getWordsSample } from "@services/api/words";
 import {
     createHandler,
     Handler
@@ -16,6 +17,14 @@ const tokens: number = 5;
 const rateLimiter = new RateLimiter(window, tokens);
 
 const handler: Handler = createHandler({
+    [Method.GET]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+        const ip: string = getClientIp(req) ?? "";
+
+        const words: Array<Word> = await getWordsSample(ip);
+
+        res.status(Status.OK)
+            .json(words);
+    },
     [Method.POST]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
         const ip: string = getClientIp(req) ?? "";
         if (rateLimiter.consume(ip)) {
