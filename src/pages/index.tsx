@@ -29,9 +29,7 @@ export const getServerSideProps = async ({ req }: GetServerSidePropsContext): Pr
 };
 
 const Home = ({ fallback }: Props): ReactElement => (
-    <SWRConfig
-        value={{ fallback }}
-    >
+    <SWRConfig value={{ fallback }}>
         <Words />
     </SWRConfig>
 );
