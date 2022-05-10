@@ -19,7 +19,7 @@ export const WordDocumentEditor = (): ReactElement => {
 
     const { data } = useSWR<WithStringId<WordDocument>>(`/api/admin/${id}`);
 
-    // TODO Remove cast and handle undefined
+    // `data` coming from `fallback`
     const wordDocument: WithStringId<WordDocument> = data as WithStringId<WordDocument>;
 
     const timestamp: number = parseInt(wordDocument._id.substring(0, 8), 16) * 1000;
