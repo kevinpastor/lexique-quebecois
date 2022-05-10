@@ -3,8 +3,8 @@ import { ReactElement } from "react";
 import { getClientIp } from "request-ip";
 import { SWRConfig } from "swr";
 
-import { Word as WordComponent } from "@components/pages/word";
-import { Word as IWord } from "@models/word";
+import { WordPage } from "@components/pages/word-page";
+import { Word } from "@models/word";
 import { getWord } from "@services/api/words";
 
 type Params = {
@@ -25,7 +25,7 @@ export const getServerSideProps = async ({ params, req }: GetServerSidePropsCont
 
     const { slug } = params;
     const ip: string = getClientIp(req) ?? "";
-    const word: IWord | undefined = await getWord(slug, ip);
+    const word: Word | undefined = await getWord(slug, ip);
 
     return {
         props: {
@@ -36,10 +36,10 @@ export const getServerSideProps = async ({ params, req }: GetServerSidePropsCont
     };
 };
 
-const Word = ({ fallback }: Props): ReactElement => (
+const WordPageWrapper = ({ fallback }: Props): ReactElement => (
     <SWRConfig value={{ fallback }}>
-        <WordComponent />
+        <WordPage />
     </SWRConfig>
 );
 
-export default Word;
+export default WordPageWrapper;

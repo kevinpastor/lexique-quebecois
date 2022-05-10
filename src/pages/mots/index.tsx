@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import { getClientIp } from "request-ip";
 import { SWRConfig } from "swr";
 
-import { Index as IndexComponent } from "@components/pages/index";
+import { IndexPage } from "@components/pages/index-page";
 import { getWordIndex } from "@services/api/words";
 
 interface Props {
@@ -28,10 +28,10 @@ export const getServerSideProps = async ({ req }: GetServerSidePropsContext): Pr
     };
 };
 
-const Index = ({ fallback }: Props): ReactElement => (
+const IndexPageWrapper = ({ fallback }: Props): ReactElement => (
     <SWRConfig value={{ fallback }}>
-        <IndexComponent />
+        <IndexPage />
     </SWRConfig>
 );
 
-export default Index;
+export default IndexPageWrapper;

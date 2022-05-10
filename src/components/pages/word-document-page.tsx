@@ -14,7 +14,7 @@ import { WordDocument } from "@models/word-document";
 import { updateWordDocument } from "@services/word-document";
 import { WithStringId } from "@utils/types/with-string-id";
 
-export const WordDocumentEditor = (): ReactElement => {
+export const WordDocumentPage = (): ReactElement => {
     const { push, query: { id } } = useRouter();
 
     const { data } = useSWR<WithStringId<WordDocument>>(`/api/admin/${id}`);

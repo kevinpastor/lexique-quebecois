@@ -11,7 +11,7 @@ import { Title } from "@components/typography/title";
 import { WordDocument } from "@models/word-document";
 import { WithStringId } from "@utils/types/with-string-id";
 
-export const WordDocuments = (): ReactElement => {
+export const WordDocumentsPage = (): ReactElement => {
     const { data } = useSWR<Array<WithStringId<WordDocument>>>("/api/admin");
 
     // `data` coming from `fallback`

@@ -20,7 +20,7 @@ interface LetterGroup {
     group: Array<WordGroup>;
 }
 
-export const Index = (): ReactElement => {
+export const IndexPage = (): ReactElement => {
     // TODO Rename route
     const { data } = useSWR<Array<string>>("/api/words/mots");
 

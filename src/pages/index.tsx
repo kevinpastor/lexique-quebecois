@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import { getClientIp } from "request-ip";
 import { SWRConfig } from "swr";
 
-import { Words } from "@components/pages/words";
+import { WordsPage } from "@components/pages/words-page";
 import { Word } from "@models/word";
 import { getWordsSample } from "@services/api/words";
 
@@ -28,10 +28,10 @@ export const getServerSideProps = async ({ req }: GetServerSidePropsContext): Pr
     };
 };
 
-const Home = ({ fallback }: Props): ReactElement => (
+const WordsPageWrapper = ({ fallback }: Props): ReactElement => (
     <SWRConfig value={{ fallback }}>
-        <Words />
+        <WordsPage />
     </SWRConfig>
 );
 
-export default Home;
+export default WordsPageWrapper;

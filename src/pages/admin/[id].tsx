@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { ReactElement } from "react";
 import { SWRConfig } from "swr";
 
-import { WordDocumentEditor } from "@components/pages/word-document-editor";
+import { WordDocumentPage } from "@components/pages/word-document-page";
 import { WordDocument } from "@models/word-document";
 import { getWordDocument } from "@services/api/words";
 import { isDevelopmentEnvironment } from "@utils/misc/environment";
@@ -48,10 +48,10 @@ export const getServerSideProps = async ({ params }: GetServerSidePropsContext<P
     };
 };
 
-const Page = ({ fallback }: Props): ReactElement => (
+const WordDocumentPageWrapper = ({ fallback }: Props): ReactElement => (
     <SWRConfig value={{ fallback }}>
-        <WordDocumentEditor />
+        <WordDocumentPage />
     </SWRConfig>
 );
 
-export default Page;
+export default WordDocumentPageWrapper;
