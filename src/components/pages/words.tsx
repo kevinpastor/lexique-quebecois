@@ -7,7 +7,7 @@ import { Word as IWord } from "@models/word";
 export const Words = (): ReactElement => {
     const { data } = useSWR<Array<IWord>>("/api/words");
 
-    // TODO Remove cast and handle undefined
+    // `data` coming from `fallback`
     const words: Array<IWord> = data as Array<IWord>;
 
     return (

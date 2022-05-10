@@ -14,7 +14,7 @@ import { WithStringId } from "@utils/types/with-string-id";
 export const WordDocuments = (): ReactElement => {
     const { data } = useSWR<Array<WithStringId<WordDocument>>>("/api/admin");
 
-    // TODO Remove cast and handle undefined
+    // `data` coming from `fallback`
     const wordDocuments: Array<WithStringId<WordDocument>> = data as Array<WithStringId<WordDocument>>;
 
     return (
