@@ -1,8 +1,7 @@
+import { Socket } from "net";
 import { NextApiRequest } from "next";
 
 import { Method } from "@models/method";
-
-import { Socket } from "net";
 
 interface StubInput {
     method?: Method;
