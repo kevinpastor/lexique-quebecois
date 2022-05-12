@@ -1,10 +1,11 @@
 {
     "recommendations": [
-        "dbaeumer.vscode-eslint",
-        "orta.vscode-jest",
-        "csstools.postcss",
+        "aaron-bond.better-comments",
         "bradlc.vscode-tailwindcss",
+        "csstools.postcss",
+        "dbaeumer.vscode-eslint",
         "eg2.vscode-npm-script",
-        "christian-kohler.npm-intellisense"
+        "formulahendry.auto-rename-tag",
+        "orta.vscode-jest"
     ]
 }
