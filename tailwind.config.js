@@ -10,16 +10,6 @@ module.exports = {
         "./src/components/**/*.{js,ts,jsx,tsx}"
     ],
     theme: {
-        fontFamily: {
-            sans: [
-                "Open Sans",
-                ...defaultTheme.fontFamily.sans
-            ],
-            serif: [
-                "Hahmlet",
-                ...defaultTheme.fontFamily.serif
-            ]
-        },
         extend: {
             saturate: {
                 75: ".75"
