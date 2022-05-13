@@ -17,3 +17,14 @@ export const updateWordDocument = async (wordDocument: WithStringId<WordDocument
         throw createError(response.status);
     }
 };
+
+export const deleteWordDocument = async (id: string): Promise<void> => {
+    const options: RequestInit = {
+        method: Method.DELETE
+    };
+    const response: Response = await fetch(`/api/admin/${id}`, options);
+
+    if (!response.ok) {
+        throw createError(response.status);
+    }
+};

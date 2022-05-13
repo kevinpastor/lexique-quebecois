@@ -1,4 +1,4 @@
-import { Collection, Db, FindOptions, InsertOneResult, WithId, ObjectId, UpdateFilter, UpdateResult } from "mongodb";
+import { Collection, Db, FindOptions, InsertOneResult, WithId, ObjectId, UpdateFilter, UpdateResult, DeleteResult } from "mongodb";
 
 import { Status } from "@models/status";
 import { Word } from "@models/word";
@@ -211,6 +211,21 @@ export const updateWordDocument = async (wordDocument: WithStringId<WordDocument
 
     if (result.modifiedCount === 0) {
         return Status.Conflict;
+    }
+
+    return Status.OK;
+};
+
+export const deleteWordDocument = async (id: string): Promise<Status> => {
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("definitions");
+    const filter: Partial<WithId<WordDocument>> = {
+        _id: new ObjectId(id)
+    };
+    const result: DeleteResult = await collection.deleteOne(filter);
+
+    if (!result.acknowledged || result.deletedCount !== 1) {
+        return Status.NotFound;
     }
 
     return Status.OK;

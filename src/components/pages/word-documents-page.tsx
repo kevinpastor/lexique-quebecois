@@ -20,11 +20,11 @@ export const WordDocumentsPage = (): ReactElement => {
     return (
         <Card>
             <Title>
-                Dashboard
+                Tableau de modération
             </Title>
             <Section>
                 <Heading>
-                    Word Index
+                    Index
                 </Heading>
                 {wordDocuments.map(({ _id, label, isApproved }: WithStringId<WordDocument>): ReactElement => (
                     <div
