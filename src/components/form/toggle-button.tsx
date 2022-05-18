@@ -41,6 +41,7 @@ export const ToggleButton = ({
                     "text-white bg-green-600 hover:bg-green-500": variant === Variant.Success,
                     "text-white bg-amber-600 hover:bg-amber-500": variant === Variant.Warning,
                     "text-white bg-red-600 hover:bg-red-500": isActive && variant === Variant.Error,
+                    // TODO Fix `rounded-none` and `rounded-full` collision
                     "rounded-none first:rounded-l-full last:rounded-r-full": isInGroup
                 }
             )}

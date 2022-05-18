@@ -17,9 +17,7 @@ const rateLimiter = new RateLimiter(window, tokens);
 
 const handler: Handler = createHandler({
     [Method.GET]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-        const ip: string = getClientIp(req) ?? "";
-
-        const words: Array<string> = await getWordIndex(ip);
+        const words: Array<string> = await getWordIndex();
 
         res.status(Status.OK)
             .json(words);

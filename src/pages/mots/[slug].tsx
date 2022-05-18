@@ -6,11 +6,14 @@ import { SWRConfig } from "swr";
 import { LoadingWord } from "@components/misc/loading/routes/loading-word";
 import { WordPage } from "@components/pages/word-page";
 import { Word } from "@models/word";
-import { getWord } from "@services/api/words";
+import { getWord, getWords } from "@services/api/words";
 
 type Params = {
     slug: string;
 };
+
+type Paths = GetStaticPathsResult<Params>["paths"];
+type Path = GetStaticPathsResult<Params>["paths"][0];
 
 interface Props {
     fallback: {
@@ -18,17 +21,17 @@ interface Props {
     };
 }
 
-// eslint-disable-next-line require-await
 export const getStaticPaths = async (): Promise<GetStaticPathsResult<Params>> => {
-    // TODO Get list of all slugs
+    const words: Array<Word> = await getWords();
+    const slugs: Array<string> = words.map(({ slug }: Word): string => (slug));
+    const paths: Paths = slugs.map((slug: string): Path => ({
+        params: {
+            slug
+        }
+    }));
+
     return {
-        paths: [
-            {
-                params: {
-                    slug: "gyu"
-                }
-            }
-        ],
+        paths,
         fallback: true
     };
 };

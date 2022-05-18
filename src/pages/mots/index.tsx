@@ -1,7 +1,5 @@
-/* eslint-disable react/no-unused-prop-types */
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { GetStaticPropsResult } from "next";
 import { ReactElement } from "react";
-import { getClientIp } from "request-ip";
 import { SWRConfig } from "swr";
 
 import { IndexPage } from "@components/pages/index-page";
@@ -13,18 +11,16 @@ interface Props {
     };
 }
 
-// TODO Investigate if the page can be partially generated statically. Initially reverted to this because of likes.
-export const getServerSideProps = async ({ req }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Props>> => {
-    const ip: string = getClientIp(req) ?? "";
-
-    const words: Array<string> = await getWordIndex(ip);
+export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+    const words: Array<string> = await getWordIndex();
 
     return {
         props: {
             fallback: {
                 "/api/words": words
             }
-        }
+        },
+        revalidate: 60 * 60 * 24 // Revalidate every day
     };
 };
 

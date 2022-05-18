@@ -74,9 +74,10 @@ const getWordProjection = (ip: string): InclusiveProjection<WordDocument, Word> 
     }
 });
 
-export const getWordIndex = async (ip: string): Promise<Array<string>> => {
+export const getWords = async (): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
+    const ip: string = "";
     const pipeline = [
         {
             $match: {
@@ -94,6 +95,12 @@ export const getWordIndex = async (ip: string): Promise<Array<string>> => {
     ];
     const words: Array<Word> = await collection.aggregate<Word>(pipeline)
         .toArray();
+
+    return words;
+};
+
+export const getWordIndex = async (): Promise<Array<string>> => {
+    const words: Array<Word> = await getWords();
 
     return words.map(({ label }: Word): string => (
         label

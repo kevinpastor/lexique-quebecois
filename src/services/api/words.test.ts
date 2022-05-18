@@ -44,7 +44,7 @@ describe("getWordIndex", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const wordIndex: Array<string> = await getWordIndex(ip);
+        const wordIndex: Array<string> = await getWordIndex();
 
         expect(wordIndex).toEqual(wordIndexStub);
     });
