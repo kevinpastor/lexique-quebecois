@@ -1,9 +1,11 @@
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement, useContext } from "react";
 
+import { Tooltip } from "@components/data/tooltip";
 import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
 import { IconButton } from "@components/form/icon-button";
 import { Card } from "@components/misc/card";
+import { Placement } from "@components/placement";
 import { Type } from "@components/type";
 import { Title } from "@components/typography/title";
 import { Variant } from "@components/variant";
@@ -46,15 +48,17 @@ export const Word = ({ word }: Props): ReactElement => {
                     {word.label}
                 </Title>
                 <div className="flex justify-end">
-                    {/* TODO Fix mobile horizontal overflow */}
-                    {/* <Tooltip label="Copier le lien"> */}
-                    <IconButton
-                        onClick={handleClick}
-                        icon={faLink}
-                        ariaLabel="Copier"
-                        type={Type.Text}
-                    />
-                    {/* </Tooltip> */}
+                    <Tooltip
+                        label="Copier le lien"
+                        placement={Placement.Left}
+                    >
+                        <IconButton
+                            onClick={handleClick}
+                            icon={faLink}
+                            ariaLabel="Copier"
+                            type={Type.Text}
+                        />
+                    </Tooltip>
                 </div>
             </div>
             <div className="space-y-4">
