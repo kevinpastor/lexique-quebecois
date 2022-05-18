@@ -6,7 +6,7 @@ import { SWRConfig } from "swr";
 import { LoadingWord } from "@components/misc/loading/routes/loading-word";
 import { WordPage } from "@components/pages/word-page";
 import { Word } from "@models/word";
-import { getWord, getWords } from "@services/api/words";
+import { getWord, getWordsSlug } from "@services/api/words";
 
 type Params = {
     slug: string;
@@ -22,8 +22,7 @@ interface Props {
 }
 
 export const getStaticPaths = async (): Promise<GetStaticPathsResult<Params>> => {
-    const words: Array<Word> = await getWords();
-    const slugs: Array<string> = words.map(({ slug }: Word): string => (slug));
+    const slugs: Array<string> = await getWordsSlug();
     const paths: Paths = slugs.map((slug: string): Path => ({
         params: {
             slug

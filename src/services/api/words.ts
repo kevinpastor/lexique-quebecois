@@ -74,10 +74,9 @@ const getWordProjection = (ip: string): InclusiveProjection<WordDocument, Word> 
     }
 });
 
-export const getWords = async (): Promise<Array<Word>> => {
+export const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
-    const ip: string = "";
     const pipeline = [
         {
             $match: {
@@ -90,20 +89,46 @@ export const getWords = async (): Promise<Array<Word>> => {
             }
         },
         {
-            $project: getWordProjection(ip)
+            $project: {
+                _id: 0,
+                label: 1
+            }
         }
     ];
-    const words: Array<Word> = await collection.aggregate<Word>(pipeline)
+    const wordIndex: Array<Pick<Word, "label">> = await collection.aggregate<Pick<Word, "label">>(pipeline)
         .toArray();
 
-    return words;
+    return wordIndex.map(({ label }: Pick<Word, "label">): string => (
+        label
+    ));
 };
 
-export const getWordIndex = async (): Promise<Array<string>> => {
-    const words: Array<Word> = await getWords();
+export const getWordsSlug = async (): Promise<Array<string>> => {
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("definitions");
+    const pipeline = [
+        {
+            $match: {
+                isApproved: true
+            }
+        },
+        {
+            $sort: {
+                slug: 1
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                slug: 1
+            }
+        }
+    ];
+    const words: Array<Pick<Word, "slug">> = await collection.aggregate<Pick<Word, "slug">>(pipeline)
+        .toArray();
 
-    return words.map(({ label }: Word): string => (
-        label
+    return words.map(({ slug }: Pick<Word, "slug">): string => (
+        slug
     ));
 };
 

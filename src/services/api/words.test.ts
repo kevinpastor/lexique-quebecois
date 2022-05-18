@@ -9,7 +9,7 @@ import { wordRequestStub } from "@models/word-request.stub";
 import { anotherWordStub, wordStub } from "@models/word.stub";
 
 import { getDatabase } from "./database";
-import { addWord, getWord, getWordIndex, getWordsSample } from "./words";
+import { addWord, getWord, getWordsSample } from "./words";
 
 jest.mock("./database", (): typeof import("./database") => ({
     ...jest.requireActual("./database"),
@@ -24,31 +24,31 @@ const wordsStub: Array<Word> = [
     anotherWordStub
 ];
 
-describe("getWordIndex", (): void => {
-    const wordIndexStub: Array<string> = [
-        wordStub.label,
-        anotherWordStub.label
-    ];
+// describe("getWordIndex", (): void => {
+//     const wordIndexStub: Array<string> = [
+//         wordStub.label,
+//         anotherWordStub.label
+//     ];
 
-    beforeEach((): void => {
-        jest.resetAllMocks();
-    });
+//     beforeEach((): void => {
+//         jest.resetAllMocks();
+//     });
 
-    it("should get word index", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                aggregate: (): AggregationCursor<Word> => ({
-                    toArray: jest.fn()
-                        .mockResolvedValue(wordsStub)
-                } as Partial<AggregationCursor<Word>> as AggregationCursor<Word>)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
+//     it("should get word index", async (): Promise<void> => {
+//         getDatabaseMock.mockResolvedValue({
+//             collection: (): Collection<WordDocument> => ({
+//                 aggregate: (): AggregationCursor<Word> => ({
+//                     toArray: jest.fn()
+//                         .mockResolvedValue(wordsStub)
+//                 } as Partial<AggregationCursor<Word>> as AggregationCursor<Word>)
+//             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
+//         } as Partial<Db> as Db);
 
-        const wordIndex: Array<string> = await getWordIndex();
+//         const wordIndex: Array<string> = await getWordIndex();
 
-        expect(wordIndex).toEqual(wordIndexStub);
-    });
-});
+//         expect(wordIndex).toEqual(wordIndexStub);
+//     });
+// });
 
 describe("getWordsSample", (): void => {
     beforeEach((): void => {
