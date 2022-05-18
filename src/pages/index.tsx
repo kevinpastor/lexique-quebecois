@@ -1,6 +1,5 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { GetStaticPropsResult } from "next";
 import { ReactElement } from "react";
-import { getClientIp } from "request-ip";
 import { SWRConfig } from "swr";
 
 import { WordsPage } from "@components/pages/words-page";
@@ -13,18 +12,16 @@ interface Props {
     };
 }
 
-// TODO Investigate if the page can be partially generated statically. Initially reverted to this because of likes.
-export const getServerSideProps = async ({ req }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Props>> => {
-    const ip: string = getClientIp(req) ?? "";
-
-    const words: Array<Word> = await getWordsSample(ip);
+export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+    const words: Array<Word> = await getWordsSample();
 
     return {
         props: {
             fallback: {
                 "/api/words/sample": words
             }
-        }
+        },
+        revalidate: 60 * 60 * 24 // Every day
     };
 };
 

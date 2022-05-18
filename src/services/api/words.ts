@@ -100,7 +100,7 @@ export const getWordIndex = async (ip: string): Promise<Array<string>> => {
     ));
 };
 
-export const getWordsSample = async (ip: string): Promise<Array<Word>> => {
+export const getWordsSample = async (ip: string = ""): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const idsPipeline = [
