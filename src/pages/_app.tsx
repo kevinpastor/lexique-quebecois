@@ -36,7 +36,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
             />
         </Head>
         <Navigation />
-        <main className="container mx-auto p-4 space-y-4">
+        <main className="container mx-auto px-0 py-4 sm:p-4 space-y-4">
             <div className="flex gap-4">
                 <div className="basis-full lg:basis-2/3 lg:space-y-0">
                     <Loading>
@@ -45,8 +45,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
                         </SWRConfig>
                     </Loading>
                 </div>
-                {/* 132px comes from the nav height (116px) and the main padding (16px). */}
-                <div className="hidden lg:block sticky top-[132px] lg:basis-1/3 space-y-4 h-min">
+                {/* 132px comes from the nav height (56px) and the main padding (16px). */}
+                <div className="hidden lg:block sticky top-[72px] lg:basis-1/3 space-y-4 h-min">
                     <Sidebar />
                     <Footer />
                 </div>

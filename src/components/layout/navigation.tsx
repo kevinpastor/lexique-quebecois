@@ -44,8 +44,8 @@ export const Navigation = (): ReactElement => {
 
     return (
         <nav className="bg-slate-800 z-10 sticky top-0 shadow-md">
-            <div className="container mx-auto p-4 flex sm:flex-wrap gap-4">
-                <h1 className="flex items-center sm:basis-full">
+            <div className="container mx-auto px-4 py-2 flex justify-between gap-4">
+                <h1 className="flex items-center sm:basis-1/2 lg:basis-2/3">
                     <Link href="/">
                         <a
                             className="flex items-center gap-4 text-slate-100 hover:text-white transition"
@@ -61,25 +61,27 @@ export const Navigation = (): ReactElement => {
                         </a>
                     </Link>
                 </h1>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmit}
-                >
-                    <Form className="grow">
-                        <Field
-                            name="label"
-                            icon={faMagnifyingGlass}
-                            placeholder="Chercher un mot"
-                            hideErrors
-                        />
-                    </Form>
-                </Formik>
-                <IconButton
-                    onClick={onAdd}
-                    icon={faPlus}
-                    ariaLabel="Ajouter"
-                />
+                <div className="flex justify-end gap-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={onSubmit}
+                    >
+                        <Form className="grow">
+                            <Field
+                                name="label"
+                                icon={faMagnifyingGlass}
+                                placeholder="Chercher un mot"
+                                hideErrors
+                            />
+                        </Form>
+                    </Formik>
+                    <IconButton
+                        onClick={onAdd}
+                        icon={faPlus}
+                        ariaLabel="Ajouter"
+                    />
+                </div>
             </div>
         </nav>
     );
