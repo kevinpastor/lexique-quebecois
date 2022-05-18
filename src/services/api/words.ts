@@ -231,7 +231,7 @@ export const deleteWordDocument = async (id: string): Promise<Status> => {
     return Status.OK;
 };
 
-export const getWord = async (slug: string, ip: string): Promise<Word | undefined> => {
+export const getWord = async (slug: string, ip: string = ""): Promise<Word | undefined> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const filter: Partial<WordDocument> = {

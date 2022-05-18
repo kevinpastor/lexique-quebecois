@@ -1,8 +1,9 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { useRouter } from "next/router";
 import { ReactElement } from "react";
-import { getClientIp } from "request-ip";
 import { SWRConfig } from "swr";
 
+import { LoadingWord } from "@components/misc/loading/routes/loading-word";
 import { WordPage } from "@components/pages/word-page";
 import { Word } from "@models/word";
 import { getWord } from "@services/api/words";
@@ -17,29 +18,53 @@ interface Props {
     };
 }
 
-// TODO Investigate if the page can be partially generated statically. Initially reverted to this because of likes.
-export const getServerSideProps = async ({ params, req }: GetServerSidePropsContext<Params>): Promise<GetServerSidePropsResult<Props>> => {
+// eslint-disable-next-line require-await
+export const getStaticPaths = async (): Promise<GetStaticPathsResult<Params>> => {
+    // TODO Get list of all slugs
+    return {
+        paths: [
+            {
+                params: {
+                    slug: "gyu"
+                }
+            }
+        ],
+        fallback: true
+    };
+};
+
+export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>): Promise<GetStaticPropsResult<Props>> => {
     if (!params) {
         throw new Error("Called not from a dynamic route.");
     }
 
     const { slug } = params;
-    const ip: string = getClientIp(req) ?? "";
-    const word: Word | undefined = await getWord(slug, ip);
+    const word: Word | undefined = await getWord(slug);
 
     return {
         props: {
             fallback: {
                 [`/api/words/${slug}`]: word
             }
-        }
+        },
+        revalidate: 60 * 60 * 24 // Every day
     };
 };
 
-const WordPageWrapper = ({ fallback }: Props): ReactElement => (
-    <SWRConfig value={{ fallback }}>
-        <WordPage />
-    </SWRConfig>
-);
+const WordPageWrapper = ({ fallback }: Props): ReactElement => {
+    const { isFallback } = useRouter();
+
+    if (isFallback) {
+        return (
+            <LoadingWord />
+        );
+    }
+
+    return (
+        <SWRConfig value={{ fallback }}>
+            <WordPage />
+        </SWRConfig>
+    );
+};
 
 export default WordPageWrapper;

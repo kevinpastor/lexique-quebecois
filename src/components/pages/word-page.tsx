@@ -10,7 +10,7 @@ import { Word } from "@models/word";
 
 export const WordPage = (): ReactElement => {
     const { push, query } = useRouter();
-    const { data } = useSWR<Array<Word>>(`/api/words/${query.slug}`, { revalidateOnMount: false });
+    const { data } = useSWR<Array<Word>>(`/api/words/${query.slug}`);
 
     // `data` coming from `fallback`
     const word: Word | undefined = data as Word | undefined;
