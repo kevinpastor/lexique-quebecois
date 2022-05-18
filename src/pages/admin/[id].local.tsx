@@ -5,7 +5,6 @@ import { SWRConfig } from "swr";
 import { WordDocumentPage } from "@components/pages/word-document-page";
 import { WordDocument } from "@models/word-document";
 import { getWordDocument } from "@services/api/words";
-import { isDevelopmentEnvironment } from "@utils/misc/environment";
 import { WithStringId } from "@utils/types/with-string-id";
 
 type Params = {
@@ -19,12 +18,6 @@ interface Props {
 }
 
 export const getServerSideProps = async ({ params }: GetServerSidePropsContext<Params>): Promise<GetServerSidePropsResult<Props>> => {
-    if (!isDevelopmentEnvironment()) {
-        return {
-            notFound: true
-        };
-    }
-
     if (!params) {
         throw new Error("Called not from a dynamic route.");
     }

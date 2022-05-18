@@ -51,6 +51,6 @@ const handler: Handler = createHandler({
         res.status(result)
             .end();
     }
-}, { hidden: true });
+});
 
 export default handler;

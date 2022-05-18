@@ -17,6 +17,6 @@ const handler: Handler = createHandler({
         res.status(Status.OK)
             .json(wordDocuments);
     }
-}, { hidden: true });
+});
 
 export default handler;
