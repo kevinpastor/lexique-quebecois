@@ -11,7 +11,7 @@ export const Title = ({
     children
 }: PropsWithChildren<Props>): ReactElement => (
     <header>
-        <h2 className="text-3xl sm:text-4xl font-bold font-serif mb-4">
+        <h2 className="text-3xl font-bold font-serif mb-4">
             {href
                 ? (
                     <Hyperlink href={href}>

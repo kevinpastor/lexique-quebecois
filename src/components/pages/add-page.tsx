@@ -75,11 +75,13 @@ export const AddPage = (): ReactElement => {
                             </Title>
                             <div className="space-y-8">
                                 <div className="space-y-4">
-                                    <Field
-                                        label="Mot"
-                                        name="label"
-                                        autofocus
-                                    />
+                                    <div className="max-w-[225px]">
+                                        <Field
+                                            label="Mot"
+                                            name="label"
+                                            autofocus
+                                        />
+                                    </div>
                                     <Field
                                         label="Définition"
                                         name="definition"
@@ -90,10 +92,12 @@ export const AddPage = (): ReactElement => {
                                         name="example"
                                         type="textarea"
                                     />
-                                    <Field
-                                        label="Auteur"
-                                        name="author"
-                                    />
+                                    <div className="max-w-[125px]">
+                                        <Field
+                                            label="Auteur"
+                                            name="author"
+                                        />
+                                    </div>
                                 </div>
                                 <div className="flex flex-row-reverse">
                                     <Button
