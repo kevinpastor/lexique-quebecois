@@ -4,8 +4,9 @@
     "private": true,
     "scripts": {
         "start": "next dev",
-        "build": "next build",
-        "postbuild": "next-sitemap --config next-sitemap.config.js",
+        "build": "pnpm run build:site && pnpm run build:sitemap",
+        "build:site": "next build",
+        "build:sitemap": "next-sitemap --config next-sitemap.config.js",
         "exec": "next start",
         "lint": "next lint",
         "test": "jest",
