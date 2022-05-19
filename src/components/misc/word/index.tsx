@@ -27,7 +27,11 @@ export const Word = ({ word }: Props): ReactElement => {
         try {
             await copy(`${document.location.origin}/mots/${word.slug}`);
         }
-        catch {
+        catch (error: unknown) {
+            // ! TODO Remove
+            // eslint-disable-next-line no-console
+            console.log("uibheaiubheaibh");
+            console.error(error);
             pushSnackbar({
                 label: "Impossible de copier le lien.",
                 variant: Variant.Error
