@@ -53,12 +53,6 @@ export const useCopyToClipboard = (): CopyFunction => {
             return;
         }
 
-        const result: PermissionStatus = await navigator.permissions.query({ name: "clipboard-write" as PermissionName });
-
-        if (result.state === "denied") {
-            throw new Error("Missing permissions to copy to the clipboard.");
-        }
-
         try {
             await navigator.clipboard.writeText(text);
         }
