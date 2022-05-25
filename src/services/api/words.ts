@@ -1,88 +1,47 @@
-import { Collection, Db, FindOptions, InsertOneResult, WithId, ObjectId, UpdateFilter, UpdateResult, DeleteResult } from "mongodb";
+import { Collection, Db, FindOptions, InsertOneResult, WithId, ObjectId, UpdateFilter, UpdateResult, DeleteResult, Document } from "mongodb";
 
 import { Status } from "@models/status";
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
 import { WordRequest, getSlug } from "@models/word-request";
+import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
+import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
+import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { sample } from "@utils/misc/random";
 import { InclusiveProjection } from "@utils/types/projection";
 import { WithStringId } from "@utils/types/with-string-id";
 
 import { getDatabase } from "./database";
 
-const getWordProjection = (ip: string): InclusiveProjection<WordDocument, Word> => ({
+const approvedWordStage = (): Document => ({
+    $match: {
+        isApproved: true
+    }
+});
+
+const wordProjectionOperation = (ip: string): InclusiveProjection<WordDocument, Word> => ({
     _id: 0,
     label: 1,
     slug: 1,
     definition: 1,
     example: 1,
     author: 1,
-    timestamp: {
-        $toDouble: {
-            $toDate: "$_id"
-        }
-    },
-    likes: {
-        $cond: {
-            if: {
-                $isArray: "$likes"
-            },
-            then: {
-                $size: "$likes"
-            },
-            else: 0
-        }
-    },
-    isLiked: {
-        $cond: {
-            if: {
-                $isArray: "$likes"
-            },
-            then: {
-                $in: [
-                    ip,
-                    "$likes"
-                ]
-            },
-            else: false
-        }
-    },
-    dislikes: {
-        $cond: {
-            if: {
-                $isArray: "$dislikes"
-            },
-            then: {
-                $size: "$dislikes"
-            },
-            else: 0
-        }
-    },
-    isDisliked: {
-        $cond: {
-            if: {
-                $isArray: "$dislikes"
-            },
-            then: {
-                $in: [
-                    ip,
-                    "$dislikes"
-                ]
-            },
-            else: false
-        }
-    }
+    timestamp: timestampOperation(),
+    likes: countArrayOperation("$likes"),
+    isLiked: inArrayOperation("$likes", ip),
+    dislikes: countArrayOperation("$dislikes"),
+    isDisliked: inArrayOperation("$dislikes", ip)
+});
+
+const wordProjectionStage = (ip: string): Document => ({
+    $project: wordProjectionOperation(ip)
 });
 
 export const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const pipeline = [
-        {
-            $match: {
-                isApproved: true
-            }
-        },
+        approvedWordStage(),
         {
             $sort: {
                 slug: 1
@@ -107,11 +66,7 @@ export const getWordsSlug = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const pipeline = [
-        {
-            $match: {
-                isApproved: true
-            }
-        },
+        approvedWordStage(),
         {
             $sort: {
                 slug: 1
@@ -136,11 +91,7 @@ export const getWordsSample = async (ip: string = ""): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const idsPipeline = [
-        {
-            $match: {
-                isApproved: true
-            }
-        },
+        approvedWordStage(),
         {
             $project: {
                 _id: 1
@@ -164,9 +115,11 @@ export const getWordsSample = async (ip: string = ""): Promise<Array<Word>> => {
                 }
             }
         },
-        {
-            $project: getWordProjection(ip)
-        }
+        // ...reviewSortStages(
+        //     countArrayOperation("$likes"),
+        //     countArrayOperation("$dislikes")
+        // ),
+        wordProjectionStage(ip)
     ];
     const words: Array<Word> = await collection.aggregate<Word>(wordsPipeline)
         .toArray();
@@ -271,7 +224,7 @@ export const getWord = async (slug: string, ip: string = ""): Promise<Word | und
         isApproved: true
     };
     const options: FindOptions = {
-        projection: getWordProjection(ip)
+        projection: wordProjectionOperation(ip)
     };
     const word: Word | null = await collection.findOne<Word>(filter, options);
 
