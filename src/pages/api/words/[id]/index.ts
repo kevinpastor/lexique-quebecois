@@ -4,7 +4,7 @@ import { getClientIp } from "request-ip";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { Word } from "@models/word";
-import { getWord } from "@services/api/words";
+import { getWordCollection } from "@services/api/words";
 import {
     createHandler,
     Handler
@@ -19,23 +19,24 @@ const handler: Handler = createHandler({
             return;
         }
 
-        if (!req.query.slug || Array.isArray(req.query.slug)) {
+        if (!req.query.id || Array.isArray(req.query.id)) {
             res.status(Status.BadRequest)
                 .end();
             return;
         }
 
-        const slug: string = req.query.slug;
-        const word: Word | undefined = await getWord(slug, ip);
+        // ID is used here as the slug to get the word collection
+        const slug: string = req.query.id;
+        const wordCollection: Array<Word> | undefined = await getWordCollection(slug, ip);
 
-        if (!word) {
+        if (!wordCollection) {
             res.status(Status.NotFound)
                 .end();
             return;
         }
 
         res.status(Status.OK)
-            .json(word);
+            .json(wordCollection);
     }
 });
 

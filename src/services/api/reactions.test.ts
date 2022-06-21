@@ -13,7 +13,7 @@ jest.mock("./database", (): typeof import("./database") => ({
 
 const getDatabaseMock = getDatabase as jest.MockedFunction<typeof getDatabase>;
 
-const slug: string = "foo";
+const id: string = "507f1f77bcf86cd799439011";
 const ip: string = "127.0.0.1";
 
 describe("like", (): void => {
@@ -31,7 +31,7 @@ describe("like", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await like(slug, ip);
+        const result: Status = await like(id, ip);
 
         expect(result).toEqual(Status.NotFound);
     });
@@ -46,7 +46,7 @@ describe("like", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await like(slug, ip);
+        const result: Status = await like(id, ip);
 
         expect(result).toEqual(Status.Conflict);
     });
@@ -61,7 +61,7 @@ describe("like", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await like(slug, ip);
+        const result: Status = await like(id, ip);
 
         expect(result).toEqual(Status.OK);
     });
@@ -82,7 +82,7 @@ describe("removeLike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await removeLike(slug, ip);
+        const result: Status = await removeLike(id, ip);
 
         expect(result).toEqual(Status.NotFound);
     });
@@ -97,7 +97,7 @@ describe("removeLike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await removeLike(slug, ip);
+        const result: Status = await removeLike(id, ip);
 
         expect(result).toEqual(Status.Conflict);
     });
@@ -112,7 +112,7 @@ describe("removeLike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await removeLike(slug, ip);
+        const result: Status = await removeLike(id, ip);
 
         expect(result).toEqual(Status.OK);
     });
@@ -133,7 +133,7 @@ describe("dislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await dislike(slug, ip);
+        const result: Status = await dislike(id, ip);
 
         expect(result).toEqual(Status.NotFound);
     });
@@ -148,7 +148,7 @@ describe("dislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await dislike(slug, ip);
+        const result: Status = await dislike(id, ip);
 
         expect(result).toEqual(Status.Conflict);
     });
@@ -163,7 +163,7 @@ describe("dislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await dislike(slug, ip);
+        const result: Status = await dislike(id, ip);
 
         expect(result).toEqual(Status.OK);
     });
@@ -184,7 +184,7 @@ describe("removeDislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await removeDislike(slug, ip);
+        const result: Status = await removeDislike(id, ip);
 
         expect(result).toEqual(Status.NotFound);
     });
@@ -199,7 +199,7 @@ describe("removeDislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await removeDislike(slug, ip);
+        const result: Status = await removeDislike(id, ip);
 
         expect(result).toEqual(Status.Conflict);
     });
@@ -214,7 +214,7 @@ describe("removeDislike", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const result: Status = await removeDislike(slug, ip);
+        const result: Status = await removeDislike(id, ip);
 
         expect(result).toEqual(Status.OK);
     });

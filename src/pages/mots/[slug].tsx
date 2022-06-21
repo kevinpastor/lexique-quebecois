@@ -6,7 +6,7 @@ import { SWRConfig } from "swr";
 import { LoadingWord } from "@components/misc/loading/routes/loading-word";
 import { WordPage } from "@components/pages/word-page";
 import { Word } from "@models/word";
-import { getWord, getWordsSlug } from "@services/api/words";
+import { getWordCollection, getWordsSlug } from "@services/api/words";
 
 type Params = {
     slug: string;
@@ -41,12 +41,12 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>):
     }
 
     const { slug } = params;
-    const word: Word | undefined = await getWord(slug);
+    const wordCollection: Array<Word> | undefined = await getWordCollection(slug);
 
     return {
         props: {
             fallback: {
-                [`/api/words/${slug}`]: word
+                [`/api/words/${slug}`]: wordCollection
             }
         },
         revalidate: 60 * 60 * 24 // Every day

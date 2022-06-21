@@ -5,7 +5,11 @@ import { ReactElement } from "react";
 import useSWR from "swr";
 
 import { Button } from "@components/form/button";
+import { Card } from "@components/misc/card";
 import { Word as WordComponent } from "@components/misc/word";
+import { Paragraph } from "@components/typography/paragraph";
+import { Section } from "@components/typography/section";
+import { Title } from "@components/typography/title";
 import { Word } from "@models/word";
 
 export const WordPage = (): ReactElement => {
@@ -13,9 +17,9 @@ export const WordPage = (): ReactElement => {
     const { data } = useSWR<Array<Word>>(`/api/words/${query.slug}`);
 
     // `data` coming from `fallback`
-    const word: Word | undefined = data as Word | undefined;
+    const wordCollection: Array<Word> | undefined = data as Array<Word> | undefined;
 
-    if (!word) {
+    if (!wordCollection || wordCollection.length === 0) {
         const handleClick = async (): Promise<void> => {
             if (!query.label) {
                 await push("/ajouter");
@@ -26,13 +30,15 @@ export const WordPage = (): ReactElement => {
         };
 
         return (
-            <section className="bg-slate-800 rounded-lg p-8 space-y-4">
-                <div className="text-4xl font-bold text-slate-100 font-serif">
+            <Card>
+                <Title>
                     Ce mot n&apos;a pas été trouvé
-                </div>
-                <div className="text-slate-100 font-medium">
-                    Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple.
-                </div>
+                </Title>
+                <Section>
+                    <Paragraph>
+                        Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple.
+                    </Paragraph>
+                </Section>
                 <div className="flex flex-row-reverse">
                     <Button
                         onClick={handleClick}
@@ -41,7 +47,7 @@ export const WordPage = (): ReactElement => {
                         ariaLabel="Ajouter"
                     />
                 </div>
-            </section>
+            </Card>
         );
     }
 
@@ -49,14 +55,21 @@ export const WordPage = (): ReactElement => {
         <>
             <Head>
                 {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                <title>{word.label} - Lexique Québécois</title>
+                <title>{wordCollection[0].label} - Lexique Québécois</title>
                 <meta
                     key="description"
                     name="description"
-                    content={`${word.label} - ${word.definition}`}
+                    content={`${wordCollection[0].label} - ${wordCollection[0].definition}`}
                 />
             </Head>
-            <WordComponent word={word} />
+            <div className="space-y-4">
+                {wordCollection.map((word): ReactElement => (
+                    <WordComponent
+                        key={word.timestamp}
+                        word={word}
+                    />
+                ))}
+            </div>
         </>
     );
 };

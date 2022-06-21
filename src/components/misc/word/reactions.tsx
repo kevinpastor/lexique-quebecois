@@ -31,14 +31,14 @@ export const Reactions = ({ word }: Props): ReactElement => {
     return (
         <ButtonGroup>
             <Likes
-                slug={word.slug}
+                id={word.id}
                 likes={likes}
                 isLiked={isLiked}
                 dislikes={dislikes}
                 isDisliked={isDisliked}
             />
             <Dislikes
-                slug={word.slug}
+                id={word.id}
                 dislikes={dislikes}
                 isDisliked={isDisliked}
                 likes={likes}

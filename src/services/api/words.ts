@@ -1,4 +1,4 @@
-import { Collection, Db, FindOptions, InsertOneResult, WithId, ObjectId, UpdateFilter, UpdateResult, DeleteResult, Document } from "mongodb";
+import { Collection, Db, InsertOneResult, WithId, ObjectId, UpdateFilter, UpdateResult, DeleteResult, Document } from "mongodb";
 
 import { Status } from "@models/status";
 import { Word } from "@models/word";
@@ -7,6 +7,7 @@ import { WordRequest, getSlug } from "@models/word-request";
 import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
+import { reviewSortStages } from "@utils/api/aggregation/stages/review-sort-stages";
 import { sample } from "@utils/misc/random";
 import { InclusiveProjection } from "@utils/types/projection";
 import { WithStringId } from "@utils/types/with-string-id";
@@ -21,6 +22,9 @@ const approvedWordStage = (): Document => ({
 
 const wordProjectionOperation = (ip: string): InclusiveProjection<WordDocument, Word> => ({
     _id: 0,
+    id: {
+        $toString: "$_id"
+    },
     label: 1,
     slug: 1,
     definition: 1,
@@ -216,23 +220,27 @@ export const deleteWordDocument = async (id: string): Promise<Status> => {
     return Status.OK;
 };
 
-export const getWord = async (slug: string, ip: string = ""): Promise<Word | undefined> => {
+// ! TODO Remove undefined from return type
+export const getWordCollection = async (slug: string, ip: string = ""): Promise<Array<Word> | undefined> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
-    const filter: Partial<WordDocument> = {
-        slug,
-        isApproved: true
-    };
-    const options: FindOptions = {
-        projection: wordProjectionOperation(ip)
-    };
-    const word: Word | null = await collection.findOne<Word>(filter, options);
+    const pipeline = [
+        {
+            $match: {
+                slug,
+                isApproved: true
+            }
+        },
+        ...reviewSortStages(
+            countArrayOperation("$likes"),
+            countArrayOperation("$dislikes")
+        ),
+        wordProjectionStage(ip)
+    ];
+    const wordCollection: Array<Word> = await collection.aggregate<Word>(pipeline)
+        .toArray();
 
-    if (!word) {
-        return;
-    }
-
-    return word;
+    return wordCollection;
 };
 
 export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Status> => {

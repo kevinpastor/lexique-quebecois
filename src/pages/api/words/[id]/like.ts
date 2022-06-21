@@ -3,7 +3,7 @@ import { getClientIp } from "request-ip";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { dislike, removeDislike } from "@services/api/reactions";
+import { like, removeLike } from "@services/api/reactions";
 import {
     createHandler,
     Handler
@@ -29,14 +29,14 @@ const handler: Handler = createHandler({
             return;
         }
 
-        if (!req.query.slug || Array.isArray(req.query.slug)) {
+        if (!req.query.id || Array.isArray(req.query.id)) {
             res.status(Status.BadRequest)
                 .end();
             return;
         }
 
-        const slug: string = req.query.slug;
-        const result: Status = await dislike(slug, ip);
+        const id: string = req.query.id;
+        const result: Status = await like(id, ip);
 
         res.status(result)
             .end();
@@ -55,14 +55,14 @@ const handler: Handler = createHandler({
             return;
         }
 
-        if (!req.query.slug || Array.isArray(req.query.slug)) {
+        if (!req.query.id || Array.isArray(req.query.id)) {
             res.status(Status.BadRequest)
                 .end();
             return;
         }
 
-        const slug: string = req.query.slug;
-        const result: Status = await removeDislike(slug, ip);
+        const id: string = req.query.id;
+        const result: Status = await removeLike(id, ip);
 
         res.status(result)
             .end();

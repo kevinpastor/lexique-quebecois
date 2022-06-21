@@ -11,7 +11,7 @@ import { BooleanUtilities } from "@utils/hooks/use-boolean";
 import { NumberUtilities } from "@utils/hooks/use-number";
 
 interface Props {
-    slug: string;
+    id: string;
     likes: NumberUtilities;
     isLiked: BooleanUtilities;
     dislikes: NumberUtilities;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const Likes = ({
-    slug,
+    id,
     likes: {
         value: likes,
         increment: incrementLikes,
@@ -46,7 +46,7 @@ export const Likes = ({
             decrementLikes();
 
             try {
-                await removeLike(slug);
+                await removeLike(id);
             }
             catch (error: unknown) {
                 if (!isConflictError(error) && !isNotFoundError(error)) {
@@ -67,7 +67,7 @@ export const Likes = ({
             incrementLikes();
 
             try {
-                await like(slug);
+                await like(id);
             }
             catch (error: unknown) {
                 if (!isConflictError(error)) {

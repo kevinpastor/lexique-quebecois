@@ -1,4 +1,5 @@
 export interface Word {
+    id: string;
     slug: string;
     label: string;
     definition: string;

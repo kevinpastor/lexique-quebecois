@@ -9,7 +9,7 @@ import { wordRequestStub } from "@models/word-request.stub";
 import { anotherWordStub, wordStub } from "@models/word.stub";
 
 import { getDatabase } from "./database";
-import { addWord, getWord, getWordsSample } from "./words";
+import { addWord, getWordCollection, getWordsSample } from "./words";
 
 jest.mock("./database", (): typeof import("./database") => ({
     ...jest.requireActual("./database"),
@@ -100,28 +100,32 @@ describe("getWord", (): void => {
     it("should not find word", async (): Promise<void> => {
         getDatabaseMock.mockResolvedValue({
             collection: (): Collection<WordDocument> => ({
-                findOne: jest.fn()
-                    .mockResolvedValue(undefined)
+                aggregate: (): AggregationCursor<Word> => ({
+                    toArray: jest.fn()
+                        .mockResolvedValue([])
+                } as Partial<AggregationCursor<Word>> as AggregationCursor<Word>)
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const word: Word | undefined = await getWord(slug, ip);
+        const wordCollection: Array<Word> | undefined = await getWordCollection(slug, ip);
 
-        expect(word).toBeUndefined();
+        expect(wordCollection).toEqual([]);
     });
 
     it("should get word", async (): Promise<void> => {
         getDatabaseMock.mockResolvedValue({
             collection: (): Collection<WordDocument> => ({
-                findOne: jest.fn()
-                    // TODO Refactor
-                    .mockResolvedValue(wordsStub[0])
+                aggregate: (): AggregationCursor<Word> => ({
+                    toArray: jest.fn()
+                        // TODO Refactor
+                        .mockResolvedValue([wordsStub[0]])
+                } as Partial<AggregationCursor<Word>> as AggregationCursor<Word>)
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const word: Word | undefined = await getWord(slug, ip);
+        const wordCollection: Array<Word> | undefined = await getWordCollection(slug, ip);
 
-        expect(word).toEqual(wordsStub[0]);
+        expect(wordCollection).toEqual([wordsStub[0]]);
     });
 });
 
