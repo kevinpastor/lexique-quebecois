@@ -35,12 +35,30 @@ export const Button = ({
         className={classNames(
             "transition font-bold rounded-lg py-2 text-center flex place-items-center gap-2 disabled:saturate-75 disabled:brightness-70 disabled:cursor-not-allowed",
             {
-                "px-4": type === Type.Filled,
+                "px-4": type === Type.Filled || type === Type.FilledTonal,
+                // "px-4": type === Type.Filled,
                 "bg-blue-500 hover:bg-blue-400 focus-visible:bg-blue-400 hover:disabled:bg-blue-500": type === Type.Filled && variant === undefined,
+                "bg-sky-500 hover:bg-sky-400 focus-visible:bg-sky-400 hover:disabled:bg-sky-500": type === Type.Filled && variant === Variant.Info,
+                "bg-green-600 hover:bg-green-500 focus-visible:bg-green-500 hover:disabled:bg-green-600": type === Type.Filled && variant === Variant.Success,
+                "bg-amber-600 hover:bg-amber-500 focus-visible:bg-amber-500 hover:disabled:bg-amber-600": type === Type.Filled && variant === Variant.Warning,
                 "bg-red-600 hover:bg-red-500 focus-visible:bg-red-500 hover:disabled:bg-red-600": type === Type.Filled && variant === Variant.Error,
-                "px-2 hover:bg-white/20": type === Type.Text,
+                // "px-2": type === Type.FilledTonal,
+                "bg-white/20": type === Type.FilledTonal && variant === undefined,
+                "bg-sky-500/20 text-sky-500": type === Type.FilledTonal && variant === Variant.Info,
+                "bg-green-600/20 text-green-600": type === Type.FilledTonal && variant === Variant.Success,
+                "bg-amber-600/20 text-amber-600": type === Type.FilledTonal && variant === Variant.Warning,
+                "bg-red-600/20 text-red-600": type === Type.FilledTonal && variant === Variant.Error,
+                "px-2": type === Type.Text,
+                "hover:bg-white/20": type === Type.Text && variant === undefined,
+                "hover:bg-sky-500/20 text-sky-500": type === Type.Text && variant === Variant.Info,
+                "hover:bg-green-600/20 text-green-600": type === Type.Text && variant === Variant.Success,
+                "hover:bg-amber-600/20 text-amber-600": type === Type.Text && variant === Variant.Warning,
+                "hover:bg-red-600/20 text-red-600": type === Type.Text && variant === Variant.Error,
                 "px-3 py-1": type === Type.Outlined,
                 "hover:bg-white/20 border-2 border-slate-600": type === Type.Outlined && variant === undefined,
+                "hover:bg-sky-500/20 border-2 border-sky-500 text-sky-500": type === Type.Outlined && variant === Variant.Info,
+                "hover:bg-green-600/20 border-2 border-green-600 text-green-600": type === Type.Outlined && variant === Variant.Success,
+                "hover:bg-amber-600/20 border-2 border-amber-600 text-amber-600": type === Type.Outlined && variant === Variant.Warning,
                 "hover:bg-red-600/20 border-2 border-red-600 text-red-600": type === Type.Outlined && variant === Variant.Error
             }
         )}
