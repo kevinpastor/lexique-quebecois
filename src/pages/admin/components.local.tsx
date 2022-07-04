@@ -1,6 +1,8 @@
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement } from "react";
 
 import { Button } from "@components/form/button";
+import { IconButton } from "@components/form/icon-button";
 import { ToggleButton } from "@components/form/toggle-button";
 import { Card } from "@components/misc/card";
 import { Type } from "@components/type";
@@ -162,7 +164,7 @@ const Components = (): ReactElement => (
                     variant={Variant.Error}
                 />
             </Paragraph>
-        </Section >
+        </Section>
         <Section>
             <Heading>
                 Toggle Button
@@ -235,6 +237,19 @@ const Components = (): ReactElement => (
                     label="Error"
                     isActive
                     variant={Variant.Error}
+                />
+            </Paragraph>
+        </Section>
+        <Section>
+            <Heading>
+                Icon Button
+            </Heading>
+            <Paragraph>
+                <IconButton
+                    // eslint-disable-next-line @typescript-eslint/no-empty-function
+                    onClick={(): void => { }}
+                    ariaLabel="Default"
+                    icon={faInfo}
                 />
             </Paragraph>
         </Section>

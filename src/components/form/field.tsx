@@ -14,6 +14,7 @@ interface Props<T> {
     icon?: IconDefinition;
     placeholder?: string;
     hideErrors?: boolean;
+    onBlur?: () => void;
 }
 
 export const Field = <T extends Record<string, unknown>>({
@@ -23,7 +24,8 @@ export const Field = <T extends Record<string, unknown>>({
     type = "input",
     icon,
     placeholder,
-    hideErrors = false
+    hideErrors = false,
+    onBlur: handleBlur
 }: Props<T>): ReactElement => {
     const id: string = useId();
 
@@ -62,6 +64,7 @@ export const Field = <T extends Record<string, unknown>>({
                     placeholder={placeholder}
                     id={id}
                     innerRef={type === "textarea" ? ref : undefined}
+                    onBlur={handleBlur}
                 />
             </div>
             {!hideErrors &&

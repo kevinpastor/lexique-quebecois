@@ -8,6 +8,7 @@ interface Props {
     prefetch?: false;
 }
 
+// TODO Remove a tag from Link
 export const Hyperlink = ({
     href,
     breakText = false,

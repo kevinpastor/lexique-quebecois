@@ -9,6 +9,7 @@ import { Snackbar } from "@components/feedback/snackbar";
 import { Snackbars } from "@components/feedback/snackbar/snackbars";
 import { Footer } from "@components/layout/footer";
 import { Navigation } from "@components/layout/navigation";
+import { Overlay } from "@components/layout/overlay";
 import { Sidebar } from "@components/layout/sidebar";
 import { Loading } from "@components/misc/loading";
 import { Variant } from "@components/variant";
@@ -35,26 +36,28 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
                 content="Un peu comme Urban Dictionary, mais québécois."
             />
         </Head>
-        <Navigation />
-        <main className="container mx-auto px-0 py-4 sm:p-4 space-y-4">
-            <div className="flex gap-4">
-                <div className="basis-full lg:basis-2/3 lg:space-y-0">
-                    <Loading>
-                        <SWRConfig value={{ fetcher }}>
-                            <Component {...pageProps} />
-                        </SWRConfig>
-                    </Loading>
+        <Overlay>
+            <Navigation />
+            <main className="container mx-auto px-0 py-4 sm:p-4 space-y-4">
+                <div className="flex gap-4">
+                    <div className="basis-full lg:basis-2/3 lg:space-y-0">
+                        <Loading>
+                            <SWRConfig value={{ fetcher }}>
+                                <Component {...pageProps} />
+                            </SWRConfig>
+                        </Loading>
+                    </div>
+                    {/* 72px comes from the nav height (56px) and the main padding (16px). */}
+                    <div className="hidden lg:block sticky top-[72px] lg:basis-1/3 space-y-4 h-min">
+                        <Sidebar />
+                        <Footer />
+                    </div>
                 </div>
-                {/* 132px comes from the nav height (56px) and the main padding (16px). */}
-                <div className="hidden lg:block sticky top-[72px] lg:basis-1/3 space-y-4 h-min">
-                    <Sidebar />
+                <div className="lg:hidden">
                     <Footer />
                 </div>
-            </div>
-            <div className="lg:hidden">
-                <Footer />
-            </div>
-        </main>
+            </main>
+        </Overlay>
         <noscript>
             <Snackbar
                 label="Ce site web requiert que JavaScript soit activé pour fonctionner correctement."
