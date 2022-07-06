@@ -1,7 +1,7 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import { ErrorMessage, Field as FormikField } from "formik";
+import { ErrorMessage, Field as FormikField, useFormikContext } from "formik";
 import { MutableRefObject, ReactElement, useId } from "react";
 
 import { useAutoResize } from "@utils/hooks/use-auto-resize";
@@ -15,6 +15,8 @@ interface Props<T> {
     placeholder?: string;
     hideErrors?: boolean;
     onBlur?: () => void;
+    required?: boolean;
+    optional?: boolean;
 }
 
 export const Field = <T extends Record<string, unknown>>({
@@ -25,20 +27,30 @@ export const Field = <T extends Record<string, unknown>>({
     icon,
     placeholder,
     hideErrors = false,
-    onBlur: handleBlur
+    onBlur: handleBlur,
+    required = false,
+    optional = false
 }: Props<T>): ReactElement => {
     const id: string = useId();
-
     const ref: MutableRefObject<HTMLTextAreaElement | undefined> = useAutoResize();
+    const { errors } = useFormikContext<T>();
 
     return (
         <div className="space-y-1">
             {label &&
                 <label
                     htmlFor={id}
-                    className="cursor-pointer font-medium text-white/[.87]"
+                    className="cursor-pointer text-white/[.87]"
                 >
-                    {label}
+                    <span className="font-medium">
+                        {label}
+                    </span>
+                    {optional &&
+                        <span> (optionnel)</span>
+                    }
+                    {required &&
+                        <span> *</span>
+                    }
                 </label>
             }
             <div
@@ -75,6 +87,11 @@ export const Field = <T extends Record<string, unknown>>({
                         </div>
                     )}
                 </ErrorMessage>
+            }
+            {(required && !errors[name]) &&
+                <div className="text-white/[.60] text-sm">
+                    *obligatoire
+                </div>
             }
         </div>
     );
