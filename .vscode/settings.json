@@ -15,5 +15,9 @@
         "covered": "rgba(9, 156, 65, 0.4)",
         "partially-covered": "rgba(235, 198, 52, 0.4)",
         "uncovered": "rgba(179, 60, 32, 0.4)"
+    },
+    "jest.autoRun": {
+        "watch": false,
+        "onSave": "test-src-file"
     }
 }

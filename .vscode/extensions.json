@@ -4,7 +4,6 @@
         "bradlc.vscode-tailwindcss",
         "csstools.postcss",
         "dbaeumer.vscode-eslint",
-        "eg2.vscode-npm-script",
         "formulahendry.auto-rename-tag",
         "orta.vscode-jest"
     ]

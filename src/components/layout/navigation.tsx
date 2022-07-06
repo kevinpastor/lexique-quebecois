@@ -1,5 +1,6 @@
 import { faPlus, faBookOpenReader, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from "classnames";
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,6 +11,8 @@ import { Field } from "@components/form/field";
 import { IconButton } from "@components/form/icon-button";
 import { Type } from "@components/type";
 import { getSlug } from "@models/word-request";
+import { useLockedBody } from "@utils/hooks/use-locked-body";
+import { useScrollingDirection } from "@utils/hooks/use-scrolling-direction";
 
 import { OverlayContext } from "./overlay/context";
 
@@ -47,20 +50,34 @@ export const Navigation = (): ReactElement => {
     };
 
     const [isFocused, setIsFocused] = useState(false);
+    const [_, setLocked] = useLockedBody();
 
     const handleFocus = (): void => {
         setIsFocused(true);
+        setLocked(true);
         open();
     };
 
     const handleBlur = (): void => {
         setIsFocused(false);
+        setLocked(false);
         close();
     };
 
+    const { isScrollingUp } = useScrollingDirection();
+    const showNavigation: boolean = isScrollingUp || isFocused;
+
     return (
-        <nav className="bg-slate-900 z-30 sticky top-0 shadow-md">
-            <div className="bg-white/[.05]">
+        <nav
+            className={classNames(
+                "bg-slate-900 z-30 sticky transition-all ease-in-out",
+                {
+                    "top-0 shadow-md": showNavigation,
+                    "-top-14": !showNavigation
+                }
+            )}
+        >
+            <div className="bg-white/[.07]">
                 <div className="relative container mx-auto px-4 py-2 flex justify-between gap-4">
                     {isFocused
                         ? (
