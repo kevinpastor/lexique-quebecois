@@ -32,13 +32,13 @@ export const Footer = (): ReactElement => (
                     key={href}
                     href={href}
                 >
-                    <a className="text-slate-500 hover:text-slate-400 transition font-bold">
+                    <a className="text-white/[.60] hover:text-white/[.87] transition font-bold">
                         {label}
                     </a>
                 </LinkComponent>
             ))}
         </div>
-        <div className="text-center text-slate-500 font-bold space-x-2">
+        <div className="text-center text-white/[.60] font-bold space-x-2">
             <FontAwesomeIcon icon={faCopyright} />
             <span>
                 2022 Lexique Québécois

@@ -38,7 +38,7 @@ export const WordDocumentsPage = (): ReactElement => {
                             {label}
                         </Hyperlink>
                         {isApproved && (
-                            <div className="text-slate-500">
+                            <div className="text-white/[.60]">
                                 <FontAwesomeIcon
                                     icon={faCheckCircle}
                                 />

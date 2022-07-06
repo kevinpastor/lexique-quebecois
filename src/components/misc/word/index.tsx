@@ -68,7 +68,7 @@ export const Word = ({ word }: Props): ReactElement => {
                 <div className="italic text-lg">
                     {word.example}
                 </div>
-                <div className="text-slate-400 font-medium text-lg">
+                <div className="text-white/[.60] font-medium text-lg">
                     {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
                     par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
                 </div>

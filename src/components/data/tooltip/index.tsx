@@ -23,7 +23,7 @@ export const Tooltip = ({
         <div className="relative">
             {children}
             <div className={classNames(
-                "inline-block absolute invisible opacity-0 peer-hover:visible peer-hover:opacity-100 whitespace-nowrap overflow-visible z-10 text-sm px-4 py-2 bg-slate-700 rounded-lg shadow-md transition",
+                "inline-block absolute invisible opacity-0 peer-hover:visible peer-hover:opacity-100 whitespace-nowrap overflow-visible z-10 text-sm px-4 py-2 bg-white/[.09] rounded-lg shadow-md transition",
                 {
                     "mb-2 bottom-full left-0": placement === "top-start",
                     "mb-2 bottom-full left-1/2 -translate-x-1/2": placement === "top",

@@ -75,7 +75,7 @@ export const AddPage = (): ReactElement => {
                             </Title>
                             <div className="space-y-8">
                                 <div className="space-y-4">
-                                    <div className="max-w-[225px]">
+                                    <div className="sm:max-w-[225px]">
                                         <Field
                                             label="Mot"
                                             name="label"
@@ -92,7 +92,7 @@ export const AddPage = (): ReactElement => {
                                         name="example"
                                         type="textarea"
                                     />
-                                    <div className="max-w-[125px]">
+                                    <div className="sm:max-w-[125px]">
                                         <Field
                                             label="Auteur"
                                             name="author"

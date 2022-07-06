@@ -36,16 +36,16 @@ export const Field = <T extends Record<string, unknown>>({
             {label &&
                 <label
                     htmlFor={id}
-                    className="cursor-pointer"
+                    className="cursor-pointer font-medium text-white/[.87]"
                 >
                     {label}
                 </label>
             }
             <div
-                className="flex items-center relative"
+                className="flex items-center relative bg-white/[.07] rounded"
             >
                 {icon &&
-                    <div className="text-slate-400 fill-transparent stroke-current absolute pl-4 pointer-events-none">
+                    <div className="text-white/[.38] fill-transparent stroke-current absolute pl-4 pointer-events-none">
                         <FontAwesomeIcon icon={icon} />
                     </div>
                 }
@@ -54,7 +54,7 @@ export const Field = <T extends Record<string, unknown>>({
                     as={type}
                     autoFocus={autofocus}
                     className={classNames(
-                        "rounded bg-slate-700 hover:bg-slate-600 focus:bg-slate-600 transition w-full placeholder-slate-400 outline-none caret-white text-slate-300 resize-none py-2 px-4",
+                        "rounded bg-transparent hover:bg-white/[.04] focus:bg-white/[.12] transition w-full placeholder-white/[.38] outline-none caret-white text-white/[.87] resize-none py-2 px-4",
                         {
                             "pl-10": !!icon,
                             "resize-y": type === "textarea"

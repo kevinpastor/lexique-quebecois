@@ -59,64 +59,66 @@ export const Navigation = (): ReactElement => {
     };
 
     return (
-        <nav className="bg-slate-800 z-30 sticky top-0 shadow-md">
-            <div className="relative container mx-auto px-4 py-2 flex justify-between gap-4">
-                {isFocused
-                    ? (
-                        <div className="grow flex justify-center items-center">
-                            <Formik
-                                initialValues={initialValues}
-                                validationSchema={validationSchema}
-                                onSubmit={onSubmit}
-                            >
-                                <Form className="grow">
-                                    <Field
-                                        name="label"
-                                        placeholder="Rechercher un mot"
-                                        hideErrors
-                                        onBlur={handleBlur}
-                                        autofocus
-                                    />
-                                </Form>
-                            </Formik>
-                        </div>
-                    )
-                    : (
-                        <div className="grow flex justify-center items-center">
-                            <h1 className="grow flex items-center">
-                                <Link href="/">
-                                    <a
-                                        className="flex items-center gap-4 text-slate-100 hover:text-white transition"
-                                        aria-label="Lexique Québécois"
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={faBookOpenReader}
-                                            size="lg"
+        <nav className="bg-slate-900 z-30 sticky top-0 shadow-md">
+            <div className="bg-white/[.05]">
+                <div className="relative container mx-auto px-4 py-2 flex justify-between gap-4">
+                    {isFocused
+                        ? (
+                            <div className="grow flex justify-center items-center">
+                                <Formik
+                                    initialValues={initialValues}
+                                    validationSchema={validationSchema}
+                                    onSubmit={onSubmit}
+                                >
+                                    <Form className="grow">
+                                        <Field
+                                            name="label"
+                                            placeholder="Rechercher un mot"
+                                            hideErrors
+                                            onBlur={handleBlur}
+                                            autofocus
                                         />
-                                        {/* TODO Use prominent app bar (https://material.io/components/app-bars-top#anatomy) when text wraps. */}
-                                        <div className="text-lg font-extrabold font-serif">
-                                            Lexique Québécois
-                                        </div>
-                                    </a>
-                                </Link>
-                            </h1>
-                            <div className="flex justify-end gap-2">
-                                <IconButton
-                                    onClick={handleFocus}
-                                    icon={faSearch}
-                                    ariaLabel="Search"
-                                    type={Type.Text}
-                                />
-                                <IconButton
-                                    onClick={onAdd}
-                                    icon={faPlus}
-                                    ariaLabel="Ajouter"
-                                    type={Type.Text}
-                                />
+                                    </Form>
+                                </Formik>
                             </div>
-                        </div>
-                    )}
-            </div >
+                        )
+                        : (
+                            <div className="grow flex justify-center items-center">
+                                <h1 className="grow flex items-center">
+                                    <Link href="/">
+                                        <a
+                                            className="flex items-center gap-4 text-white/[.87] hover:text-white transition"
+                                            aria-label="Lexique Québécois"
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faBookOpenReader}
+                                                size="lg"
+                                            />
+                                            {/* TODO Use prominent app bar (https://material.io/components/app-bars-top#anatomy) when text wraps. */}
+                                            <div className="text-lg font-extrabold font-serif">
+                                                Lexique Québécois
+                                            </div>
+                                        </a>
+                                    </Link>
+                                </h1>
+                                <div className="flex justify-end gap-2">
+                                    <IconButton
+                                        onClick={handleFocus}
+                                        icon={faSearch}
+                                        ariaLabel="Search"
+                                        type={Type.Text}
+                                    />
+                                    <IconButton
+                                        onClick={onAdd}
+                                        icon={faPlus}
+                                        ariaLabel="Ajouter"
+                                        type={Type.Text}
+                                    />
+                                </div>
+                            </div>
+                        )}
+                </div>
+            </div>
         </nav >
     );
 };

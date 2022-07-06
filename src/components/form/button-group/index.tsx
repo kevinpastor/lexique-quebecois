@@ -8,7 +8,7 @@ const value: IButtonGroupContext = {
 
 export const ButtonGroup = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <ButtonGroupContext.Provider value={value}>
-        <div className="flex gap-[2px]">
+        <div className="flex">
             {children}
         </div>
     </ButtonGroupContext.Provider>

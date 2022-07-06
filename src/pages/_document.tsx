@@ -30,7 +30,7 @@ const Document = (): ReactElement => (
                 />
             ))}
         </Head>
-        <body className="h-full text-slate-100">
+        <body className="h-full text-white/[.87]">
             <Main />
             <NextScript />
         </body>

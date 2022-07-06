@@ -96,26 +96,26 @@ export const WordDocumentPage = (): ReactElement => {
                         <Section>
                             <div className="space-y-4">
                                 <div>
-                                    <div>
+                                    <div className="font-medium">
                                         ID
                                     </div>
-                                    <div className="text-slate-300">
+                                    <div>
                                         {wordDocument._id}
                                     </div>
                                 </div>
                                 <div>
-                                    <div>
+                                    <div className="font-medium">
                                         Timestamp
                                     </div>
-                                    <div className="text-slate-300">
+                                    <div>
                                         {new Date(timestamp).toISOString()}
                                     </div>
                                 </div>
                                 <div>
-                                    <div>
+                                    <div className="font-medium">
                                         IP
                                     </div>
-                                    <div className="text-slate-300">
+                                    <div>
                                         {wordDocument.ip}
                                     </div>
                                 </div>
@@ -148,18 +148,18 @@ export const WordDocumentPage = (): ReactElement => {
                                     name="isApproved"
                                 />
                                 <div>
-                                    <div>
+                                    <div className="font-medium">
                                         Likes
                                     </div>
-                                    <div className="text-slate-300">
+                                    <div>
                                         {wordDocument.likes?.length ?? 0}
                                     </div>
                                 </div>
                                 <div>
-                                    <div>
+                                    <div className="font-medium">
                                         Dislikes
                                     </div>
-                                    <div className="text-slate-300">
+                                    <div>
                                         {wordDocument.dislikes?.length ?? 0}
                                     </div>
                                 </div>

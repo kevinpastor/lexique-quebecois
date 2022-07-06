@@ -14,7 +14,7 @@ export const InternalErrorPage = (): ReactElement => (
             <Title>
                 Une erreur s&apos;est produite
             </Title>
-            <div className="text-slate-100 font-medium">
+            <div className="text-white/[.87] font-medium">
                 Impossible de charger l&apos;information
             </div>
         </Card>
