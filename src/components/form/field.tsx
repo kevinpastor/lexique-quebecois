@@ -40,7 +40,7 @@ export const Field = <T extends Record<string, unknown>>({
             {label &&
                 <label
                     htmlFor={id}
-                    className="cursor-pointer text-white/[.87]"
+                    className="cursor-pointer text-black/[.87]"
                 >
                     <span className="font-medium">
                         {label}
@@ -57,7 +57,7 @@ export const Field = <T extends Record<string, unknown>>({
                 className="flex items-center relative bg-white/[.07] rounded"
             >
                 {icon &&
-                    <div className="text-white/[.38] fill-transparent stroke-current absolute pl-4 pointer-events-none">
+                    <div className="text-black/[.38] fill-transparent stroke-current absolute pl-4 pointer-events-none">
                         <FontAwesomeIcon icon={icon} />
                     </div>
                 }
@@ -66,7 +66,7 @@ export const Field = <T extends Record<string, unknown>>({
                     as={type}
                     autoFocus={autofocus}
                     className={classNames(
-                        "rounded bg-transparent hover:bg-white/[.04] focus:bg-white/[.12] transition w-full placeholder-white/[.38] outline-none caret-white text-white/[.87] resize-none py-2 px-4",
+                        "rounded bg-transparent hover:bg-white/[.04] focus:bg-white/[.12] transition w-full placeholder-white/[.38] outline-none caret-white text-black/[.87] resize-none py-2 px-4",
                         {
                             "pl-10": !!icon,
                             "resize-y": type === "textarea"
@@ -89,7 +89,7 @@ export const Field = <T extends Record<string, unknown>>({
                 </ErrorMessage>
             }
             {(required && !errors[name]) &&
-                <div className="text-white/[.60] text-sm">
+                <div className="text-black/[.60] text-sm">
                     *obligatoire
                 </div>
             }

@@ -30,11 +30,11 @@ export const Alert = ({
             <div className="container mx-auto p-4 flex justify-center items-center">
                 <section className="bg-slate-800 rounded-lg p-8 space-y-8 shadow-xl w-full lg:w-1/2">
                     <div className="space-y-4">
-                        <div className="text-4xl font-bold text-white font-serif">
+                        <div className="text-4xl font-bold text-black font-serif">
                             {title}
                         </div>
                         {content &&
-                            <div className="text-white font-medium">
+                            <div className="text-black font-medium">
                                 {content}
                             </div>
                         }

@@ -32,8 +32,8 @@ export const IconButton = ({
             className={classNames(
                 "transition disabled:saturate-75 disabled:brightness-70 disabled:cursor-not-allowed rounded-full p-2 w-10 h-10",
                 {
-                    "text-white bg-blue-500 hover:bg-blue-400 focus-visible:bg-blue-400 hover:disabled:bg-blue-500": type === Type.Filled,
-                    "text-white/[.60] hover:bg-white/[.04] active:bg-white/[.10] focus-visible:bg-white/[.12] hover:disabled:bg-transparent": type === Type.Text,
+                    "text-black bg-blue-500 hover:bg-blue-400 focus-visible:bg-blue-400 hover:disabled:bg-blue-500": type === Type.Filled,
+                    "text-black/[.60] hover:bg-white/[.04] active:bg-white/[.10] focus-visible:bg-white/[.12] hover:disabled:bg-transparent": type === Type.Text,
                     "peer": hasTooltip
                 }
             )}

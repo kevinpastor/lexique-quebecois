@@ -33,3 +33,7 @@
 # Disabled
 
 12% opacity
+
+# Outline
+
+12% opacity

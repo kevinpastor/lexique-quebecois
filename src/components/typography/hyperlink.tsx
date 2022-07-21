@@ -24,7 +24,7 @@ export const Hyperlink = ({
                 <a
                     href={href}
                     className={classNames(
-                        "text-blue-500 hover:text-blue-400 transition",
+                        "text-black/[.87] hover:text-black/[.83] transition",
                         { "break-all": breakText }
                     )}
                 >

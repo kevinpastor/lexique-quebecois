@@ -14,6 +14,7 @@ import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
 import { formatDate } from "@utils/misc/date";
 
 import { Reactions } from "./reactions";
+import { Button } from "@components/form/button";
 
 interface Props {
     word: IWord;
@@ -43,36 +44,33 @@ export const Word = ({ word }: Props): ReactElement => {
 
     return (
         <Card>
-            <div className="flex justify-between">
-                <Title href={`/mots/${word.slug}`}>
-                    {word.label}
-                </Title>
-                <div className="flex justify-end">
-                    <Tooltip
-                        label="Copier le lien"
-                        placement={Placement.Left}
-                    >
-                        <IconButton
-                            onClick={handleClick}
-                            icon={faLink}
-                            ariaLabel="Copier"
-                            type={Type.Text}
-                        />
-                    </Tooltip>
-                </div>
-            </div>
             <div className="space-y-4">
-                <div className="font-medium text-lg">
-                    {word.definition}
+                <div className="flex justify-between">
+                    <Title href={`/mots/${word.slug}`}>
+                        {word.label}
+                    </Title>
                 </div>
-                <div className="italic text-lg">
-                    {word.example}
+                <div className="space-y-3 ml-4">
+                    <div className="font-semibold text-lg">
+                        {word.definition}
+                    </div>
+                    <div className="italic text-lg">
+                        {word.example}
+                    </div>
+                    <div className="text-black/[.60] font-medium text-lg">
+                        {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                        par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
+                    </div>
                 </div>
-                <div className="text-white/[.60] font-medium text-lg">
-                    {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                    par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
+                <div className="flex flex-row justify-between">
+                    <Reactions word={word} />
+                    <Button
+                        onClick={handleClick}
+                        icon={faLink}
+                        label="Partager"
+                        ariaLabel="Partager"
+                    />
                 </div>
-                <Reactions word={word} />
             </div>
         </Card>
     );

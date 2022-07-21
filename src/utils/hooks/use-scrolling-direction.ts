@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 interface ReturnType {
     isScrollingUp: boolean;
     isScrollingDown: boolean;
+    scrollPosition: number;
 }
 
 export const useScrollingDirection = (): ReturnType => {
@@ -23,6 +24,7 @@ export const useScrollingDirection = (): ReturnType => {
     }, [lastScrollPosition]);
 
     return {
+        scrollPosition: lastScrollPosition,
         isScrollingUp: !isScrollingDown,
         isScrollingDown: isScrollingDown
     };

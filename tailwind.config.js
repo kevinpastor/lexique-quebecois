@@ -11,6 +11,12 @@ module.exports = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                serif: [
+                    "Lora",
+                    ...defaultTheme.fontFamily.sans
+                ],
+            },
             saturate: {
                 75: ".75"
             },

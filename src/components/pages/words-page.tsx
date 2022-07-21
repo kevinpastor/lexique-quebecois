@@ -11,7 +11,7 @@ export const WordsPage = (): ReactElement => {
     const words: Array<Word> = data as Array<Word>;
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 mx-4 my-2">
             {words.map((word: Word): ReactElement => (
                 <WordComponent
                     key={word.timestamp}

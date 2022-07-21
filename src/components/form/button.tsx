@@ -24,7 +24,7 @@ export const Button = ({
     onClick,
     disabled = false,
     ariaLabel,
-    type = Type.Filled,
+    type = Type.Outlined,
     variant,
     isLoading = false
 }: Props): ReactElement => (
@@ -33,7 +33,7 @@ export const Button = ({
         onClick={onClick}
         aria-label={ariaLabel}
         className={classNames(
-            "transition font-bold rounded-lg py-2 text-center flex place-items-center gap-2 disabled:saturate-75 disabled:brightness-70 disabled:cursor-not-allowed",
+            "transition rounded py-2 text-center flex place-items-center gap-2 disabled:saturate-75 disabled:brightness-70 disabled:cursor-not-allowed",
             {
                 "px-4": type === Type.Filled || type === Type.FilledTonal,
                 // "px-4": type === Type.Filled,
@@ -55,7 +55,7 @@ export const Button = ({
                 "hover:bg-amber-600/[.04] text-amber-600": type === Type.Text && variant === Variant.Warning,
                 "hover:bg-red-600/[.04] text-red-600": type === Type.Text && variant === Variant.Error,
                 "px-3 py-1": type === Type.Outlined,
-                "hover:bg-white/[.04] border-2 border-white/[.38]": type === Type.Outlined && variant === undefined,
+                "hover:bg-white/[.04] border-2 border-black/[.12]": type === Type.Outlined && variant === undefined,
                 "hover:bg-sky-500/[.04] border-2 border-sky-500 text-sky-500": type === Type.Outlined && variant === Variant.Info,
                 "hover:bg-green-600/[.04] border-2 border-green-600 text-green-600": type === Type.Outlined && variant === Variant.Success,
                 "hover:bg-amber-600/[.04] border-2 border-amber-600 text-amber-600": type === Type.Outlined && variant === Variant.Warning,
