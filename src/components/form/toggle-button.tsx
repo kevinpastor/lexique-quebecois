@@ -1,14 +1,12 @@
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import { ReactElement, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 import { IButtonGroupContext, ButtonGroupContext } from "@components/form/button-group/context";
 import { Variant } from "@components/variant";
 
 interface Props {
     label: string;
-    icon?: IconDefinition;
+    icon?: ReactNode;
     onClick?: () => void;
     disabled?: boolean;
     ariaLabel: string;
@@ -47,12 +45,7 @@ export const ToggleButton = ({
             )}
             disabled={disabled}
         >
-            {icon &&
-                <FontAwesomeIcon
-                    icon={icon}
-                    size="lg"
-                />
-            }
+            {icon}
             {label}
         </button>
     );

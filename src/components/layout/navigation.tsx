@@ -1,6 +1,5 @@
-import { faBookOpenReader } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, Search } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import classNames from "classnames";
 import { Form, Formik } from "formik";
 import Link from "next/link";
@@ -14,7 +13,6 @@ import { useLockedBody } from "@utils/hooks/use-locked-body";
 import { useScrollingDirection } from "@utils/hooks/use-scrolling-direction";
 
 import { OverlayContext } from "./overlay/context";
-import { IconButton } from "@mui/material";
 
 interface FormValues {
     label: string;
@@ -73,13 +71,13 @@ export const Navigation = (): ReactElement => {
             className={classNames(
                 "bg-white z-30 sticky transition-all ease-in-out",
                 {
-                    "shadow-md": !isAtTop || (showNavigation && !isAtTop),
+                    "shadow-md": showNavigation && !isAtTop,
                     "top-0": showNavigation,
                     "-top-14": !showNavigation
                 }
             )}
         >
-            <div className="relative container mx-auto px-2 py-2 flex justify-between gap-4">
+            <div className="relative container mx-auto h-14 px-2 flex justify-between gap-4">
                 {isFocused
                     ? (
                         <div className="grow flex justify-center items-center">

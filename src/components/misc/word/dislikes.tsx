@@ -1,8 +1,8 @@
-import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import { ThumbDown, ThumbDownOutlined } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
-import { ToggleButton } from "@components/form/toggle-button";
 import { Variant } from "@components/variant";
 import { isConflictError } from "@services/errors/conflict-error";
 import { isNotFoundError } from "@services/errors/not-found-error";
@@ -82,13 +82,12 @@ export const Dislikes = ({
     };
 
     return (
-        <ToggleButton
+        <Button
             onClick={handleClick}
-            label={`${dislikes}`}
-            ariaLabel="Dislike"
-            icon={faThumbsDown}
-            isActive={isDisliked}
-            variant={Variant.Error}
-        />
+            aria-label="Dislike"
+            startIcon={isDisliked ? <ThumbDown /> : <ThumbDownOutlined />}
+        >
+            {dislikes}
+        </Button>
     );
 };

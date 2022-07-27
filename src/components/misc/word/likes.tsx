@@ -1,4 +1,4 @@
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { ThumbUp, ThumbUpOutlined } from "@mui/icons-material";
 import { ReactElement, useContext } from "react";
 
 import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
@@ -9,6 +9,7 @@ import { isNotFoundError } from "@services/errors/not-found-error";
 import { like, removeLike } from "@services/reactions";
 import { BooleanUtilities } from "@utils/hooks/use-boolean";
 import { NumberUtilities } from "@utils/hooks/use-number";
+import { Button } from "@mui/material";
 
 interface Props {
     id: string;
@@ -82,13 +83,12 @@ export const Likes = ({
     };
 
     return (
-        <ToggleButton
+        <Button
             onClick={handleClick}
-            label={`${likes}`}
-            ariaLabel="Like"
-            icon={faThumbsUp}
-            isActive={isLiked}
-            variant={Variant.Info}
-        />
+            aria-label="Like"
+            startIcon={isLiked ? <ThumbUp className="text-amber-500" /> : <ThumbUpOutlined />}
+        >
+            {likes}
+        </Button>
     );
 };

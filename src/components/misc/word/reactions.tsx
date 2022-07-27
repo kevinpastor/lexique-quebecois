@@ -1,6 +1,6 @@
+import { ButtonGroup } from "@mui/material";
 import { ReactElement, useEffect } from "react";
 
-import { ButtonGroup } from "@components/form/button-group";
 import { Word } from "@models/word";
 import { BooleanUtilities, useBoolean } from "@utils/hooks/use-boolean";
 import { NumberUtilities, useNumber } from "@utils/hooks/use-number";

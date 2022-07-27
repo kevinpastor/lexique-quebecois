@@ -1,12 +1,8 @@
-import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { Share } from "@mui/icons-material";
+import { Button, Card, CardActions, CardContent } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-import { Tooltip } from "@components/data/tooltip";
 import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
-import { IconButton } from "@components/form/icon-button";
-import { Card } from "@components/misc/card";
-import { Placement } from "@components/placement";
-import { Type } from "@components/type";
 import { Title } from "@components/typography/title";
 import { Variant } from "@components/variant";
 import { Word as IWord } from "@models/word";
@@ -14,7 +10,6 @@ import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
 import { formatDate } from "@utils/misc/date";
 
 import { Reactions } from "./reactions";
-import { Button } from "@components/form/button";
 
 interface Props {
     word: IWord;
@@ -44,7 +39,7 @@ export const Word = ({ word }: Props): ReactElement => {
 
     return (
         <Card>
-            <div className="space-y-4">
+            <CardContent>
                 <div className="flex justify-between">
                     <Title href={`/mots/${word.slug}`}>
                         {word.label}
@@ -62,16 +57,18 @@ export const Word = ({ word }: Props): ReactElement => {
                         par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
                     </div>
                 </div>
-                <div className="flex flex-row justify-between">
+            </CardContent>
+            <CardActions>
+                <div className="flex flex-row justify-between w-full">
                     <Reactions word={word} />
                     <Button
                         onClick={handleClick}
-                        icon={faLink}
-                        label="Partager"
-                        ariaLabel="Partager"
-                    />
+                        startIcon={<Share />}
+                    >
+                        Partager
+                    </Button>
                 </div>
-            </div>
+            </CardActions>
         </Card>
     );
 };
