@@ -1,10 +1,10 @@
+import { ITooltipContext, TooltipContext } from "@components/data/tooltip/context";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { ReactElement, useContext } from "react";
 
-import { ITooltipContext, TooltipContext } from "@components/data/tooltip/context";
 import { Type } from "@components/type";
 
 interface Props {

@@ -1,22 +1,16 @@
 import classNames from "classnames";
 import { ReactElement } from "react";
 
-import { Button } from "@components/form/button";
-import { Type } from "@components/type";
 import { Variant } from "@components/variant";
 
 export interface Props {
     label: string;
     variant?: Variant;
-    actionLabel?: string;
-    onAction?: () => void;
 }
 
 export const Snackbar = ({
     label,
-    variant,
-    actionLabel,
-    onAction
+    variant
 }: Props): ReactElement => (
     <div
         role="alert"
@@ -37,15 +31,6 @@ export const Snackbar = ({
             <div>
                 {label}
             </div>
-            {actionLabel && onAction && variant === Variant.Error &&
-                <div className="-m-2">
-                    <Button
-                        onClick={onAction}
-                        label={actionLabel}
-                        ariaLabel="Réessayer"
-                        type={Type.Text}
-                    />
-                </div>}
         </div>
     </div>
 );

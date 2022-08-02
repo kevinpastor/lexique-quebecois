@@ -1,10 +1,10 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Add } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
-import { Button } from "@components/form/button";
 import { Card } from "@components/misc/card";
 import { Word as WordComponent } from "@components/misc/word";
 import { Paragraph } from "@components/typography/paragraph";
@@ -42,10 +42,10 @@ export const WordPage = (): ReactElement => {
                 <div className="flex flex-row-reverse">
                     <Button
                         onClick={handleClick}
-                        label="Ajouter"
-                        icon={faPlus}
-                        ariaLabel="Ajouter"
-                    />
+                        startIcon={<Add />}
+                    >
+                        Ajouter
+                    </Button>
                 </div>
             </Card>
         );

@@ -1,16 +1,14 @@
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { ChevronLeft } from "@mui/icons-material";
+import { Button, IconButton } from "@mui/material";
 import { Form, Formik, FormikProps } from "formik";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 import useSWR from "swr";
 
 import { ISnackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
-import { Button } from "@components/form/button";
 import { Field } from "@components/form/field";
-import { IconButton } from "@components/form/icon-button";
 import { Switch } from "@components/form/switch";
 import { Card } from "@components/misc/card";
-import { Type } from "@components/type";
 import { Section } from "@components/typography/section";
 import { Title } from "@components/typography/title";
 import { Variant } from "@components/variant";
@@ -83,12 +81,12 @@ export const WordDocumentPage = (): ReactElement => {
                             <div className="flex items-center">
                                 <div className="text-base font-normal">
                                     <IconButton
-                                        icon={faChevronLeft}
-                                        ariaLabel="Cancel"
-                                        isLoading={isSubmitting}
-                                        type={Type.Outlined}
+                                        aria-label="Cancel"
+                                        disabled={isSubmitting}
                                         onClick={handleCancel}
-                                    />
+                                    >
+                                        <ChevronLeft />
+                                    </IconButton>
                                 </div>
                                 {wordDocument.label}
                             </div>
@@ -165,18 +163,17 @@ export const WordDocumentPage = (): ReactElement => {
                                 </div>
                                 <div className="flex justify-end gap-2">
                                     <Button
-                                        label="Supprimer"
-                                        ariaLabel="Supprimer"
-                                        isLoading={isSubmitting}
-                                        type={Type.Outlined}
-                                        variant={Variant.Error}
+                                        disabled={isSubmitting}
                                         onClick={handleDelete}
-                                    />
+                                        color="error"
+                                    >
+                                        Supprimer
+                                    </Button>
                                     <Button
-                                        label="Enregister"
-                                        ariaLabel="Enregister"
-                                        isLoading={isSubmitting}
-                                    />
+                                        disabled={isSubmitting}
+                                    >
+                                        Enregistrer
+                                    </Button>
                                 </div>
                             </div>
                         </Section>

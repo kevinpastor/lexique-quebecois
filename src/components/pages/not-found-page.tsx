@@ -1,11 +1,10 @@
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { Home } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-import { Button } from "@components/form/button";
 import { Card } from "@components/misc/card";
-import { Type } from "@components/type";
 import { Paragraph } from "@components/typography/paragraph";
 import { Title } from "@components/typography/title";
 
@@ -32,11 +31,10 @@ export const NotFoundPage = (): ReactElement => {
                 <div className="flex flex-row-reverse">
                     <Button
                         onClick={handleClick}
-                        label="Accueil"
-                        icon={faHouse}
-                        ariaLabel="Accueil"
-                        type={Type.Text}
-                    />
+                        startIcon={<Home />}
+                    >
+                        Accueil
+                    </Button>
                 </div>
             </Card>
         </>
