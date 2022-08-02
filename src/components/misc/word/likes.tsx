@@ -1,15 +1,14 @@
 import { ThumbUp, ThumbUpOutlined } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
-import { ToggleButton } from "@components/form/toggle-button";
 import { Variant } from "@components/variant";
 import { isConflictError } from "@services/errors/conflict-error";
 import { isNotFoundError } from "@services/errors/not-found-error";
 import { like, removeLike } from "@services/reactions";
 import { BooleanUtilities } from "@utils/hooks/use-boolean";
 import { NumberUtilities } from "@utils/hooks/use-number";
-import { Button } from "@mui/material";
 
 interface Props {
     id: string;
@@ -86,6 +85,8 @@ export const Likes = ({
         <Button
             onClick={handleClick}
             aria-label="Like"
+            // TODO
+            // eslint-disable-next-line react/forbid-component-props
             startIcon={isLiked ? <ThumbUp className="text-amber-500" /> : <ThumbUpOutlined />}
         >
             {likes}
