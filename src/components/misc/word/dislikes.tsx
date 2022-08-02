@@ -1,9 +1,8 @@
 import { ThumbDown, ThumbDownOutlined } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { useSnackbar } from "notistack";
+import { ReactElement } from "react";
 
-import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
-import { Variant } from "@components/variant";
 import { isConflictError } from "@services/errors/conflict-error";
 import { isNotFoundError } from "@services/errors/not-found-error";
 import { dislike, removeDislike } from "@services/reactions";
@@ -37,7 +36,7 @@ export const Dislikes = ({
         toggle: toggleIsLiked
     }
 }: Props): ReactElement => {
-    const { push: pushSnackbar }: ISnackbarsContext = useContext(SnackbarsContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     const handleClick = async (): Promise<void> => {
         toggleIsDisliked();
@@ -50,10 +49,10 @@ export const Dislikes = ({
             }
             catch (error: unknown) {
                 if (!isConflictError(error) && !isNotFoundError(error)) {
-                    pushSnackbar({
-                        label: "Un erreur inconnue s'est produite.",
-                        variant: Variant.Error
-                    });
+                    enqueueSnackbar(
+                        "Un erreur inconnue s'est produite.",
+                        { variant: "error" }
+                    );
                     return;
                 }
             }
@@ -71,10 +70,10 @@ export const Dislikes = ({
             }
             catch (error: unknown) {
                 if (!isConflictError(error)) {
-                    pushSnackbar({
-                        label: "Un erreur inconnue s'est produite.",
-                        variant: Variant.Error
-                    });
+                    enqueueSnackbar(
+                        "Un erreur inconnue s'est produite.",
+                        { variant: "error" }
+                    );
                     return;
                 }
             }

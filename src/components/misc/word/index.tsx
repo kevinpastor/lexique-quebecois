@@ -1,10 +1,9 @@
 import { Share } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, Typography } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { useSnackbar } from "notistack";
+import { ReactElement } from "react";
 
-import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
 import { Title } from "@components/typography/title";
-import { Variant } from "@components/variant";
 import { Word as IWord } from "@models/word";
 import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
 import { formatDate } from "@utils/misc/date";
@@ -17,24 +16,23 @@ interface Props {
 
 export const Word = ({ word }: Props): ReactElement => {
     const copy = useCopyToClipboard();
-    const { push: pushSnackbar }: ISnackbarsContext = useContext(SnackbarsContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     const handleClick = async (): Promise<void> => {
         try {
             await copy(`${document.location.origin}/mots/${word.slug}`);
         }
         catch {
-            pushSnackbar({
-                label: "Impossible de copier le lien.",
-                variant: Variant.Error
-            });
+            enqueueSnackbar(
+                "Impossible de copier le lien.",
+                { variant: "error" }
+            );
             return;
         }
 
-        pushSnackbar({
-            label: "Lien copié dans le presse-papiers.",
-            variant: Variant.Success
-        });
+        enqueueSnackbar("Lien copié dans le presse-papiers.",
+            { variant: "success" }
+        );
     };
 
     return (

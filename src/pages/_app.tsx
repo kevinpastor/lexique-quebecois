@@ -4,11 +4,11 @@ import { ThemeProvider } from "@mui/material";
 import classNames from "classnames";
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { SnackbarProvider } from "notistack";
 import { ReactElement } from "react";
 import { SWRConfig } from "swr";
 
 import { Snackbar } from "@components/feedback/snackbar";
-import { Snackbars } from "@components/feedback/snackbar/snackbars";
 import { Footer } from "@components/layout/footer";
 import { Navigation } from "@components/layout/navigation";
 import { Overlay } from "@components/layout/overlay";
@@ -27,7 +27,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Snackbars>
+            <SnackbarProvider>
                 <Head>
                     <title>Lexique Québécois</title>
                     <meta
@@ -81,7 +81,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                         variant={Variant.Error}
                     />
                 </noscript>
-            </Snackbars>
+            </SnackbarProvider>
         </ThemeProvider>
     );
 };

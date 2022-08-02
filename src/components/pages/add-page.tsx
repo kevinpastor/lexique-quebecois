@@ -4,12 +4,11 @@ import { Field, Form, Formik, FormikProps } from "formik";
 import { TextField } from "formik-mui";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
-import { ReactElement, useContext } from "react";
+import { useSnackbar } from "notistack";
+import { ReactElement } from "react";
 
-import { ISnackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
 import { Card } from "@components/misc/card";
 import { Title } from "@components/typography/title";
-import { Variant } from "@components/variant";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
 import { addWord } from "@services/words";
 
@@ -25,7 +24,7 @@ export const AddPage = (): ReactElement => {
         push: pushRoute,
         query: routeQuery
     }: NextRouter = useRouter();
-    const { push: pushSnackbar }: ISnackbarsContext = useContext(SnackbarsContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     const handleSubmit = async (wordRequest: WordRequest): Promise<void> => {
         const cleanedWordRequest: WordRequest = cleanupWordRequest(wordRequest);
@@ -33,17 +32,17 @@ export const AddPage = (): ReactElement => {
             await addWord(cleanedWordRequest);
         }
         catch {
-            pushSnackbar({
-                label: "Une erreur s'est produite. Veuillez réessayer plus tard.",
-                variant: Variant.Error
-            });
+            enqueueSnackbar(
+                "Une erreur s'est produite. Veuillez réessayer plus tard.",
+                { variant: "error" }
+            );
             return;
         }
 
-        pushSnackbar({
-            label: "Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu.",
-            variant: Variant.Success
-        });
+        enqueueSnackbar(
+            "Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu.",
+            { variant: "success" }
+        );
 
         await pushRoute("/");
     };

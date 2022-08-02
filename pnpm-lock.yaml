@@ -36,6 +36,7 @@ specifiers:
   next: ^12.1.6
   next-pwa: ^5.5.2
   next-sitemap: ^3.0.5
+  notistack: ^2.0.5
   postcss: ^8.4.6
   react: ^18.1.0
   react-dom: ^18.1.0
@@ -65,6 +66,7 @@ dependencies:
   mongodb: 4.7.0
   next: 12.1.6_ef5jwxihqo6n7gxfmzogljlgcm
   next-pwa: 5.5.4_next@12.1.6
+  notistack: 2.0.5_jf2g7qyej6c6upru4z23myipjy
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-transition-group: 4.4.2_ef5jwxihqo6n7gxfmzogljlgcm
@@ -5546,6 +5548,29 @@ packages:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /notistack/2.0.5_jf2g7qyej6c6upru4z23myipjy:
+    resolution: {integrity: sha512-Ig2T1Muqkc1PaSQcEDrK7diKv6cBxw02Iq6uv074ySfgq524TV5lK41diAb6OSsaiWfp3aRt+T3+0MF8m2EcJQ==}
+    peerDependencies:
+      '@emotion/react': ^11.4.1
+      '@emotion/styled': ^11.3.0
+      '@mui/material': ^5.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@emotion/styled':
+        optional: true
+    dependencies:
+      '@emotion/react': 11.9.3_cbpnieqasrszcwkqeh5i7z7nse
+      '@emotion/styled': 11.9.3_fclcjpexflswmyfozw2dyrvvua
+      '@mui/material': 5.9.1_lufg4r246lutmms4usx53hohe4
+      clsx: 1.2.1
+      hoist-non-react-statics: 3.3.2
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+    dev: false
 
   /npm-run-path/4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}

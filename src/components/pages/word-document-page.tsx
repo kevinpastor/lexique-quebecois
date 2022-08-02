@@ -3,21 +3,20 @@ import { Button, FormControl, FormLabel, IconButton } from "@mui/material";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { Switch, TextField } from "formik-mui";
 import { useRouter } from "next/router";
-import { ReactElement, useContext } from "react";
+import { useSnackbar } from "notistack";
+import { ReactElement } from "react";
 import useSWR from "swr";
 
-import { ISnackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
 import { Card } from "@components/misc/card";
 import { Section } from "@components/typography/section";
 import { Title } from "@components/typography/title";
-import { Variant } from "@components/variant";
 import { WordDocument } from "@models/word-document";
 import { deleteWordDocument, updateWordDocument } from "@services/word-document";
 import { WithStringId } from "@utils/types/with-string-id";
 
 export const WordDocumentPage = (): ReactElement => {
     const { push, query: { id } } = useRouter();
-    const { push: pushSnackbar }: ISnackbarsContext = useContext(SnackbarsContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     const { data } = useSWR<WithStringId<WordDocument>>(`/api/admin/${id}`, { revalidateOnMount: false });
 
@@ -35,17 +34,17 @@ export const WordDocumentPage = (): ReactElement => {
             await updateWordDocument(values);
         }
         catch {
-            pushSnackbar({
-                label: "Une erreur s'est produite. Veuillez réessayer plus tard.",
-                variant: Variant.Error
-            });
+            enqueueSnackbar(
+                "Une erreur s'est produite. Veuillez réessayer plus tard.",
+                { variant: "error" }
+            );
             return;
         }
 
-        pushSnackbar({
-            label: "Le document a été mis à jour avec succès.",
-            variant: Variant.Success
-        });
+        enqueueSnackbar(
+            "Le document a été mis à jour avec succès.",
+            { variant: "success" }
+        );
     };
 
     const handleDelete = async (): Promise<void> => {
@@ -53,17 +52,17 @@ export const WordDocumentPage = (): ReactElement => {
             await deleteWordDocument(id as string);
         }
         catch {
-            pushSnackbar({
-                label: "Une erreur s'est produite. Veuillez réessayer plus tard.",
-                variant: Variant.Error
-            });
+            enqueueSnackbar(
+                "Une erreur s'est produite. Veuillez réessayer plus tard.",
+                { variant: "error" }
+            );
             return;
         }
 
-        pushSnackbar({
-            label: "Le document a été supprimé avec succès.",
-            variant: Variant.Success
-        });
+        enqueueSnackbar(
+            "Le document a été supprimé avec succès.",
+            { variant: "success" }
+        );
 
         await push("/admin");
     };
