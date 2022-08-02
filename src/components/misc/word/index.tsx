@@ -1,5 +1,5 @@
 import { Share } from "@mui/icons-material";
-import { Button, Card, CardActions, CardContent } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 import { SnackbarsContext, ISnackbarsContext } from "@components/feedback/snackbar/context";
@@ -40,21 +40,24 @@ export const Word = ({ word }: Props): ReactElement => {
     return (
         <Card>
             <CardContent>
-                <div className="flex justify-between">
-                    <Title href={`/mots/${word.slug}`}>
-                        {word.label}
-                    </Title>
-                </div>
-                <div className="space-y-3 ml-4">
-                    <div className="font-semibold text-lg">
-                        {word.definition}
+                <div className="space-y-4">
+                    <div className="flex justify-between">
+                        <Title href={`/mots/${word.slug}`}>
+                            {word.label}
+                        </Title>
                     </div>
-                    <div className="italic text-lg">
-                        {word.example}
-                    </div>
-                    <div className="text-black/[.60] font-medium text-lg">
-                        {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                        par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
+                    <div className="space-y-3 ml-4">
+                        <Typography variant="body1">
+                            {word.definition}
+                        </Typography>
+                        <Typography variant="subtitle1">
+                            {word.example}
+                        </Typography>
+                        <Typography variant="subtitle2">
+                            {/* <div className="text-black/[.60] font-medium text-lg"> */}
+                            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                            par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
+                        </Typography>
                     </div>
                 </div>
             </CardContent>

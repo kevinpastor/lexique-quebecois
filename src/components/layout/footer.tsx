@@ -1,15 +1,14 @@
-/* eslint-disable react/no-unused-prop-types */
-import { faCopyright } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, Typography } from "@mui/material";
 import LinkComponent from "next/link";
 import { ReactElement } from "react";
 
-interface Link {
+/* eslint-disable react/no-unused-prop-types */
+interface ILink {
     label: string;
     href: string;
 }
 
-const links: Array<Link> = [
+const links: Array<ILink> = [
     {
         label: "Conditions",
         href: "/conditions"
@@ -27,22 +26,23 @@ const links: Array<Link> = [
 export const Footer = (): ReactElement => (
     <footer className="container mx-auto space-y-2">
         <div className="flex justify-center items-center gap-x-4 gap-y-2 flex-wrap">
-            {links.map(({ label, href }: Link): ReactElement => (
+            {links.map(({ label, href }: ILink): ReactElement => (
                 <LinkComponent
                     key={href}
                     href={href}
+                    passHref
                 >
-                    <a className="text-black/[.60] hover:text-black/[.87] transition font-bold">
+                    <Link variant="subtitle2">
                         {label}
-                    </a>
+                    </Link>
                 </LinkComponent>
             ))}
         </div>
-        <div className="text-center text-black/[.60] font-bold space-x-2">
-            <FontAwesomeIcon icon={faCopyright} />
-            <span>
-                2022 Lexique Québécois
-            </span>
-        </div>
+        <Typography
+            align="center"
+            variant="subtitle2"
+        >
+            &copy; 2022 Lexique Québécois
+        </Typography>
     </footer>
 );

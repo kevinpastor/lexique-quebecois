@@ -1,13 +1,77 @@
-import { createTheme, alpha } from "@mui/material";
-import colors from "tailwindcss/colors";
+import { createTheme, alpha, colors } from "@mui/material";
 
-const highEmphasyColor: string = alpha(colors.black, 0.87);
-const outlineColor: string = alpha(colors.black, 0.12);
+const highEmphasyColor: string = alpha(colors.common.black, 0.87);
+const mediumEmphasyColor: string = alpha(colors.common.black, 0.60);
+const outlineColor: string = alpha(colors.common.black, 0.12);
+
+const lineHeight: number = 1.5;
 
 export const theme = createTheme({
     typography: {
-        fontFamily: ["Lora"].join(","),
-        fontSize: 16
+        fontFamily: [
+            "Lora",
+            "ui-sans-serif",
+            "system-ui",
+            "-apple-system",
+            "BlinkMacSystemFont",
+            "Segoe UI",
+            "Roboto",
+            "Helvetica Neue",
+            "Arial",
+            "Noto Sans",
+            "sans-serif",
+            "Apple Color Emoji",
+            "Segoe UI Emoji",
+            "Segoe UI Symbol",
+            "Noto Color Emoji"
+        ].join(","),
+        fontSize: 18,
+        h1: {
+            fontSize: 40,
+            lineHeight
+        },
+        h2: {
+            fontSize: 36,
+            lineHeight
+        },
+        h3: {
+            fontSize: 32,
+            lineHeight
+        },
+        h4: {
+            fontSize: 28,
+            lineHeight
+        },
+        h5: {
+            fontSize: 24,
+            lineHeight
+        },
+        h6: {
+            fontSize: 20,
+            lineHeight
+        },
+        body1: {
+            color: highEmphasyColor,
+            fontSize: 18,
+            fontWeight: 600,
+            lineHeight
+        },
+        // TODO
+        // body2: {
+        // },
+        subtitle1: {
+            color: highEmphasyColor,
+            fontSize: 18,
+            fontStyle: "italic",
+            fontWeight: 400,
+            lineHeight
+        },
+        subtitle2: {
+            color: mediumEmphasyColor,
+            fontSize: 18,
+            fontWeight: 400,
+            lineHeight
+        }
     },
     components: {
         MuiButtonBase: {
@@ -51,10 +115,19 @@ export const theme = createTheme({
                 }
             }
         },
+        MuiCardContent: {
+            styleOverrides: {
+                root: {
+                    margin: "16px",
+                    padding: "0px"
+                }
+            }
+        },
         MuiCardActions: {
             styleOverrides: {
                 root: {
-                    padding: "16px"
+                    margin: "16px",
+                    padding: "0px"
                 }
             }
         }
