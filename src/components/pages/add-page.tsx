@@ -1,12 +1,12 @@
-import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { Form, Formik, FormikProps } from "formik";
+import { Check } from "@mui/icons-material";
+import { LoadingButton } from "@mui/lab";
+import { Field, Form, Formik, FormikProps } from "formik";
+import { TextField } from "formik-mui";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
 import { ISnackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
-import { Button } from "@components/form/button";
-import { Field } from "@components/form/field";
 import { Card } from "@components/misc/card";
 import { Title } from "@components/typography/title";
 import { Variant } from "@components/variant";
@@ -75,38 +75,51 @@ export const AddPage = (): ReactElement => {
                             </Title>
                             <div className="space-y-8">
                                 <div className="space-y-4">
-                                    <div className="sm:max-w-[225px]">
+                                    <div>
                                         <Field
+                                            component={TextField}
                                             label="Mot"
                                             name="label"
-                                            autofocus
+                                            autoFocus
+                                            required
                                         />
                                     </div>
-                                    <Field
-                                        label="Définition"
-                                        name="definition"
-                                        type="textarea"
-                                    />
-                                    <Field
-                                        label="Exemple"
-                                        name="example"
-                                        type="textarea"
-                                    />
-                                    <div className="sm:max-w-[225px]">
+                                    <div>
                                         <Field
+                                            component={TextField}
+                                            label="Définition"
+                                            name="definition"
+                                            multiline
+                                            required
+                                            fullWidth
+                                        />
+                                    </div>
+                                    <div>
+                                        <Field
+                                            component={TextField}
+                                            label="Exemple"
+                                            name="example"
+                                            multiline
+                                            required
+                                            fullWidth
+                                        />
+                                    </div>
+                                    <div>
+                                        <Field
+                                            component={TextField}
                                             label="Auteur"
                                             name="author"
-                                            optional
                                         />
                                     </div>
                                 </div>
                                 <div className="flex flex-row-reverse">
-                                    <Button
-                                        label="Envoyer"
-                                        isLoading={isSubmitting}
-                                        icon={faCloudArrowUp}
-                                        ariaLabel="Envoyer"
-                                    />
+                                    <LoadingButton
+                                        loading={isSubmitting}
+                                        startIcon={<Check />}
+                                        type="submit"
+                                    >
+                                        Envoyer
+                                    </LoadingButton>
                                 </div>
                             </div>
                         </Card>

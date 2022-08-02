@@ -1,8 +1,10 @@
+import type { } from "@mui/lab/themeAugmentation";
 import { createTheme, alpha, colors } from "@mui/material";
 
 const highEmphasyColor: string = alpha(colors.common.black, 0.87);
 const mediumEmphasyColor: string = alpha(colors.common.black, 0.60);
 const outlineColor: string = alpha(colors.common.black, 0.12);
+const hoveredOutlineColor: string = alpha(colors.common.black, 0.16);
 
 const lineHeight: number = 1.5;
 
@@ -105,6 +107,11 @@ export const theme = createTheme({
                 }
             }
         },
+        MuiLoadingButton: {
+            defaultProps: {
+                variant: "outlined"
+            }
+        },
         MuiCard: {
             defaultProps: {
                 variant: "outlined"
@@ -128,6 +135,18 @@ export const theme = createTheme({
                 root: {
                     margin: "16px",
                     padding: "0px"
+                }
+            }
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    "&:hover:not(.Mui-error) .MuiOutlinedInput-notchedOutline": {
+                        borderColor: hoveredOutlineColor
+                    }
+                },
+                notchedOutline: {
+                    border: `2px solid ${outlineColor}`
                 }
             }
         }
