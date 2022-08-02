@@ -1,13 +1,12 @@
 import { ChevronLeft } from "@mui/icons-material";
-import { Button, IconButton } from "@mui/material";
-import { Form, Formik, FormikProps } from "formik";
+import { Button, FormControl, FormLabel, IconButton } from "@mui/material";
+import { Field, Form, Formik, FormikProps } from "formik";
+import { Switch, TextField } from "formik-mui";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 import useSWR from "swr";
 
 import { ISnackbarsContext, SnackbarsContext } from "@components/feedback/snackbar/context";
-import { Field } from "@components/form/field";
-import { Switch } from "@components/form/switch";
 import { Card } from "@components/misc/card";
 import { Section } from "@components/typography/section";
 import { Title } from "@components/typography/title";
@@ -117,34 +116,61 @@ export const WordDocumentPage = (): ReactElement => {
                                         {wordDocument.ip}
                                     </div>
                                 </div>
-                                <Field
-                                    label="Mot"
-                                    name="label"
-                                    autofocus
-                                />
-                                <Field
-                                    label="Slug"
-                                    name="slug"
-                                    autofocus
-                                />
-                                <Field
-                                    label="Définition"
-                                    name="definition"
-                                    type="textarea"
-                                />
-                                <Field
-                                    label="Exemple"
-                                    name="example"
-                                    type="textarea"
-                                />
-                                <Field
-                                    label="Auteur"
-                                    name="author"
-                                />
-                                <Switch
-                                    label="Is Approved"
-                                    name="isApproved"
-                                />
+                                <div>
+                                    <Field
+                                        component={TextField}
+                                        label="Mot"
+                                        name="label"
+                                        autofocus
+                                    />
+                                </div>
+                                <div>
+                                    <Field
+                                        component={TextField}
+                                        label="Slug"
+                                        name="slug"
+                                        autofocus
+                                        fullWidth
+                                    />
+                                </div>
+                                <div>
+                                    <Field
+                                        component={TextField}
+                                        label="Définition"
+                                        name="definition"
+                                        multiline
+                                        fullWidth
+                                    />
+                                </div>
+                                <div>
+                                    <Field
+                                        component={TextField}
+                                        label="Exemple"
+                                        name="example"
+                                        multiline
+                                        fullWidth
+                                    />
+                                </div>
+                                <div>
+                                    <Field
+                                        component={TextField}
+                                        label="Auteur"
+                                        name="author"
+                                    />
+                                </div>
+                                <div>
+                                    <FormControl
+                                        component="fieldset"
+                                        variant="standard"
+                                    >
+                                        <FormLabel component="legend">Is Approved</FormLabel>
+                                        <Field
+                                            component={Switch}
+                                            type="checkbox"
+                                            name="isApproved"
+                                        />
+                                    </FormControl>
+                                </div>
                                 <div>
                                     <div className="font-medium">
                                         Likes

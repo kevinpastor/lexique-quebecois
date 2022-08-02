@@ -1,13 +1,13 @@
 import { Menu, Search } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import classNames from "classnames";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
+import { TextField } from "formik-mui";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useState } from "react";
 import * as yup from "yup";
 
-import { Field } from "@components/form/field";
 import { getSlug } from "@models/word-request";
 import { useLockedBody } from "@utils/hooks/use-locked-body";
 import { useScrollingDirection } from "@utils/hooks/use-scrolling-direction";
@@ -88,6 +88,7 @@ export const Navigation = (): ReactElement => {
                             >
                                 <Form className="grow">
                                     <Field
+                                        component={TextField}
                                         name="label"
                                         placeholder="Rechercher un mot"
                                         hideErrors
