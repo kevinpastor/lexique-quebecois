@@ -1,13 +1,12 @@
 /* eslint-disable react/no-unused-prop-types */
+import { Link, Typography } from "@mui/material";
 import Head from "next/head";
+import NextLink from "next/link";
 import { ReactElement, useMemo } from "react";
 import useSWR from "swr";
 
 import { Card } from "@components/misc/card";
-import { Heading } from "@components/typography/heading";
-import { Hyperlink } from "@components/typography/hyperlink";
 import { Section } from "@components/typography/section";
-import { Title } from "@components/typography/title";
 import { getSlug } from "@models/word-request";
 
 interface WordGroup {
@@ -54,22 +53,24 @@ export const IndexPage = (): ReactElement => {
                 <title>Index - Lexique Québécois</title>
             </Head>
             <Card>
-                <Title>
+                <Typography variant="h2">
                     Index
-                </Title>
+                </Typography>
                 {memoizedLetterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
                     <Section key={letter}>
-                        <Heading>
+                        <Typography variant="h3">
                             {letter}
-                        </Heading>
+                        </Typography>
                         {group.map(({ slug, word }: WordGroup): ReactElement => (
                             <div key={slug}>
-                                <Hyperlink
+                                <NextLink
                                     href={`/mots/${slug}`}
-                                    prefetch={false}
+                                    passHref
                                 >
-                                    {word}
-                                </Hyperlink>
+                                    <Link>
+                                        {word}
+                                    </Link>
+                                </NextLink>
                             </div>
                         ))}
                     </Section>

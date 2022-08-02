@@ -1,13 +1,12 @@
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, Typography } from "@mui/material";
+import NextLink from "next/link";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
 import { Card } from "@components/misc/card";
-import { Heading } from "@components/typography/heading";
-import { Hyperlink } from "@components/typography/hyperlink";
 import { Section } from "@components/typography/section";
-import { Title } from "@components/typography/title";
 import { WordDocument } from "@models/word-document";
 import { WithStringId } from "@utils/types/with-string-id";
 
@@ -19,24 +18,26 @@ export const WordDocumentsPage = (): ReactElement => {
 
     return (
         <Card>
-            <Title>
+            <Typography variant="h2">
                 Tableau de modération
-            </Title>
+            </Typography>
             <Section>
-                <Heading>
+                <Typography variant="h3">
                     Index
-                </Heading>
+                </Typography>
                 {wordDocuments.map(({ _id, label, isApproved }: WithStringId<WordDocument>): ReactElement => (
                     <div
                         key={_id}
                         className="flex gap-2"
                     >
-                        <Hyperlink
+                        <NextLink
                             href={`/admin/${_id}`}
-                            prefetch={false}
+                            passHref
                         >
-                            {label}
-                        </Hyperlink>
+                            <Link>
+                                {label}
+                            </Link>
+                        </NextLink>
                         {isApproved && (
                             <div className="text-black/[.60]">
                                 <FontAwesomeIcon

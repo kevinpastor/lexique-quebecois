@@ -1,8 +1,8 @@
+import { Typography } from "@mui/material";
 import Head from "next/head";
 import { ReactElement } from "react";
 
 import { Card } from "@components/misc/card";
-import { Title } from "@components/typography/title";
 
 export const InternalErrorPage = (): ReactElement => (
     <>
@@ -11,9 +11,9 @@ export const InternalErrorPage = (): ReactElement => (
             <title>Erreur inconnue - Lexique Québécois</title>
         </Head>
         <Card>
-            <Title>
+            <Typography variant="h2">
                 Une erreur s&apos;est produite
-            </Title>
+            </Typography>
             <div className="text-black/[.87] font-medium">
                 Impossible de charger l&apos;information
             </div>

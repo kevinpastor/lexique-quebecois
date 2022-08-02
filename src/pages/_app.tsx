@@ -8,13 +8,11 @@ import { SnackbarProvider } from "notistack";
 import { ReactElement } from "react";
 import { SWRConfig } from "swr";
 
-import { Snackbar } from "@components/feedback/snackbar";
 import { Footer } from "@components/layout/footer";
 import { Navigation } from "@components/layout/navigation";
 import { Overlay } from "@components/layout/overlay";
 import { Sidebar } from "@components/layout/sidebar";
 import { Loading } from "@components/misc/loading";
-import { Variant } from "@components/variant";
 import "@configs/styles.css";
 import { theme } from "@configs/theme";
 import { fetcher } from "@services/fetcher";
@@ -75,12 +73,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                         </div>
                     </main>
                 </Overlay>
-                <noscript>
-                    <Snackbar
-                        label="Ce site web requiert que JavaScript soit activé pour fonctionner correctement."
-                        variant={Variant.Error}
-                    />
-                </noscript>
             </SnackbarProvider>
         </ThemeProvider>
     );

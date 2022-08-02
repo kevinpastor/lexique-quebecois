@@ -1,5 +1,5 @@
 import { Add } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -9,7 +9,6 @@ import { Card } from "@components/misc/card";
 import { Word as WordComponent } from "@components/misc/word";
 import { Paragraph } from "@components/typography/paragraph";
 import { Section } from "@components/typography/section";
-import { Title } from "@components/typography/title";
 import { Word } from "@models/word";
 
 export const WordPage = (): ReactElement => {
@@ -31,9 +30,9 @@ export const WordPage = (): ReactElement => {
 
         return (
             <Card>
-                <Title>
+                <Typography variant="h2">
                     Ce mot n&apos;a pas été trouvé
-                </Title>
+                </Typography>
                 <Section>
                     <Paragraph>
                         Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple.

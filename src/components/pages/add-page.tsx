@@ -1,5 +1,6 @@
 import { Check } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
+import { Typography } from "@mui/material";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { TextField } from "formik-mui";
 import Head from "next/head";
@@ -8,7 +9,6 @@ import { useSnackbar } from "notistack";
 import { ReactElement } from "react";
 
 import { Card } from "@components/misc/card";
-import { Title } from "@components/typography/title";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
 import { addWord } from "@services/words";
 
@@ -69,9 +69,9 @@ export const AddPage = (): ReactElement => {
                 {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
                     <Form>
                         <Card>
-                            <Title>
+                            <Typography variant="h2">
                                 Ajouter un mot
-                            </Title>
+                            </Typography>
                             <div className="space-y-8">
                                 <div className="space-y-4">
                                     <div>

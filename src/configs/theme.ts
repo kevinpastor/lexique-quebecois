@@ -28,30 +28,36 @@ export const theme = createTheme({
             "Noto Color Emoji"
         ].join(","),
         fontSize: 18,
-        h1: {
-            fontSize: 40,
-            lineHeight
-        },
+        // h1: {
+        //     fontSize: 42,
+        //     fontWeight: 600,
+        //     lineHeight
+        // },
         h2: {
-            fontSize: 36,
+            fontSize: 26,
+            fontWeight: 600,
             lineHeight
         },
         h3: {
-            fontSize: 32,
+            fontSize: 22,
+            fontWeight: 600,
             lineHeight
         },
         h4: {
-            fontSize: 28,
-            lineHeight
-        },
-        h5: {
-            fontSize: 24,
-            lineHeight
-        },
-        h6: {
             fontSize: 20,
+            fontWeight: 600,
             lineHeight
         },
+        // h5: {
+        //     fontSize: 20,
+        //     fontWeight: 600,
+        //     lineHeight
+        // },
+        // h6: {
+        //     fontSize: 20,
+        //     fontWeight: 400,
+        //     lineHeight
+        // },
         body1: {
             color: highEmphasyColor,
             fontSize: 18,
@@ -59,8 +65,12 @@ export const theme = createTheme({
             lineHeight
         },
         // TODO
-        // body2: {
-        // },
+        body2: {
+            color: highEmphasyColor,
+            fontSize: 18,
+            fontWeight: 400,
+            lineHeight
+        },
         subtitle1: {
             color: highEmphasyColor,
             fontSize: 18,

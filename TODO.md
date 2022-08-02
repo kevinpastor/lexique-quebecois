@@ -7,6 +7,8 @@
 - Add pronounciation
 - Add alternative spelling
 - beforeunload on ajouter
+- Add noscript message
+- Fix URL text wrap
 
 Aggregation pipeline for fuzzy search by label
 

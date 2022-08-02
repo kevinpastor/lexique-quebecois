@@ -1,9 +1,9 @@
 import { Share } from "@mui/icons-material";
-import { Button, Card, CardActions, CardContent, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Link, Typography } from "@mui/material";
+import NextLink from "next/link";
 import { useSnackbar } from "notistack";
 import { ReactElement } from "react";
 
-import { Title } from "@components/typography/title";
 import { Word as IWord } from "@models/word";
 import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
 import { formatDate } from "@utils/misc/date";
@@ -40,9 +40,11 @@ export const Word = ({ word }: Props): ReactElement => {
             <CardContent>
                 <div className="space-y-4">
                     <div className="flex justify-between">
-                        <Title href={`/mots/${word.slug}`}>
-                            {word.label}
-                        </Title>
+                        <NextLink href={`/mots/${word.slug}`}>
+                            <Link variant="h2">
+                                {word.label}
+                            </Link>
+                        </NextLink>
                     </div>
                     <div className="space-y-3 ml-4">
                         <Typography variant="body1">

@@ -1,12 +1,11 @@
 import { Home } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
 import { Card } from "@components/misc/card";
 import { Paragraph } from "@components/typography/paragraph";
-import { Title } from "@components/typography/title";
 
 export const NotFoundPage = (): ReactElement => {
     const { push } = useRouter();
@@ -22,9 +21,9 @@ export const NotFoundPage = (): ReactElement => {
                 <title>404 - Lexique Québécois</title>
             </Head>
             <Card>
-                <Title>
+                <Typography variant="h2">
                     404
-                </Title>
+                </Typography>
                 <Paragraph>
                     Kossé tu fais icitte?! T&apos;es clairement pas le pogo le plus dégelé de la boite.
                 </Paragraph>

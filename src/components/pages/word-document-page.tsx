@@ -1,5 +1,5 @@
 import { ChevronLeft } from "@mui/icons-material";
-import { Button, FormControl, FormLabel, IconButton } from "@mui/material";
+import { Button, FormControl, FormLabel, IconButton, Typography } from "@mui/material";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { Switch, TextField } from "formik-mui";
 import { useRouter } from "next/router";
@@ -9,7 +9,6 @@ import useSWR from "swr";
 
 import { Card } from "@components/misc/card";
 import { Section } from "@components/typography/section";
-import { Title } from "@components/typography/title";
 import { WordDocument } from "@models/word-document";
 import { deleteWordDocument, updateWordDocument } from "@services/word-document";
 import { WithStringId } from "@utils/types/with-string-id";
@@ -75,7 +74,7 @@ export const WordDocumentPage = (): ReactElement => {
             {({ isSubmitting }: FormikProps<WithStringId<WordDocument>>): ReactElement => (
                 <Form>
                     <Card>
-                        <Title>
+                        <Typography variant="h2">
                             <div className="flex items-center">
                                 <div className="text-base font-normal">
                                     <IconButton
@@ -88,7 +87,7 @@ export const WordDocumentPage = (): ReactElement => {
                                 </div>
                                 {wordDocument.label}
                             </div>
-                        </Title>
+                        </Typography>
                         <Section>
                             <div className="space-y-4">
                                 <div>
