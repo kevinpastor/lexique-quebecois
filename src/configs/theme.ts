@@ -28,11 +28,11 @@ export const theme = createTheme({
             "Noto Color Emoji"
         ].join(","),
         fontSize: 18,
-        // h1: {
-        //     fontSize: 42,
-        //     fontWeight: 600,
-        //     lineHeight
-        // },
+        h1: {
+            fontSize: 20,
+            fontWeight: 700,
+            lineHeight
+        },
         h2: {
             fontSize: 26,
             fontWeight: 600,

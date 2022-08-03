@@ -9,12 +9,13 @@ export const useLockedBody = (): ReturnType => {
     const [locked, setLocked] = useState(false);
 
     useIsomorphicLayoutEffect((): (() => void) | undefined => {
-        if (!locked) {
-            return;
-        }
-
         const originalOverflow: string = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
+        if (locked) {
+            document.body.style.overflow = "hidden";
+        }
+        else {
+            document.body.style.overflow = "auto";
+        }
 
         return (): void => {
             document.body.style.overflow = originalOverflow;

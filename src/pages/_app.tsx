@@ -10,7 +10,6 @@ import { SWRConfig } from "swr";
 
 import { Footer } from "@components/layout/footer";
 import { Navigation } from "@components/layout/navigation";
-import { Overlay } from "@components/layout/overlay";
 import { Sidebar } from "@components/layout/sidebar";
 import { Loading } from "@components/misc/loading";
 import "@configs/styles.css";
@@ -42,37 +41,35 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                         content="Un peu comme Urban Dictionary, mais québécois."
                     />
                 </Head>
-                <Overlay>
-                    <Navigation />
-                    <main className="container mx-auto px-4 pt-2 pb-4 space-y-2">
-                        <div className="flex gap-4">
-                            <div className="basis-full lg:basis-2/3 lg:space-y-0">
-                                <Loading>
-                                    <SWRConfig value={{ fetcher }}>
-                                        <Component {...pageProps} />
-                                    </SWRConfig>
-                                </Loading>
-                            </div>
-                            <div
-                                className={classNames(
-                                    "hidden lg:block sticky lg:basis-1/3 space-y-4 h-min transition-all",
-                                    {
-                                        // 64px comes from the nav height (56px) and the top main padding (8px).
-                                        "top-[64px]": isScrollingUp,
-                                        // 8px comes from the bottom main padding (8px).
-                                        "top-2": !isScrollingUp
-                                    }
-                                )}
-                            >
-                                <Sidebar />
-                                <Footer />
-                            </div>
+                <Navigation />
+                <main className="container mx-auto px-4 pt-2 pb-4 space-y-2">
+                    <div className="flex gap-4">
+                        <div className="basis-full lg:basis-2/3 lg:space-y-0">
+                            <Loading>
+                                <SWRConfig value={{ fetcher }}>
+                                    <Component {...pageProps} />
+                                </SWRConfig>
+                            </Loading>
                         </div>
-                        <div className="lg:hidden">
+                        <div
+                            className={classNames(
+                                "hidden lg:block sticky lg:basis-1/3 space-y-4 h-min transition-all",
+                                {
+                                    // 64px comes from the nav height (56px) and the top main padding (8px).
+                                    "top-[64px]": isScrollingUp,
+                                    // 8px comes from the bottom main padding (8px).
+                                    "top-2": !isScrollingUp
+                                }
+                            )}
+                        >
+                            <Sidebar />
                             <Footer />
                         </div>
-                    </main>
-                </Overlay>
+                    </div>
+                    <div className="lg:hidden">
+                        <Footer />
+                    </div>
+                </main>
             </SnackbarProvider>
         </ThemeProvider>
     );
