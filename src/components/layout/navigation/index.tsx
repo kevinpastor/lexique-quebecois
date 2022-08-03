@@ -1,11 +1,11 @@
-import { Menu } from "@mui/icons-material";
-import { IconButton, Link } from "@mui/material";
+import { Link } from "@mui/material";
 import classNames from "classnames";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 
 import { useScrollingDirection } from "@utils/hooks/use-scrolling-direction";
 
+import { Menu } from "./menu";
 import { Search } from "./search";
 
 export const Navigation = (): ReactElement => {
@@ -27,9 +27,7 @@ export const Navigation = (): ReactElement => {
             <div className="relative container mx-auto h-14 px-2 flex justify-between gap-4">
                 <div className="grow flex justify-center items-center">
                     <div className="grow flex items-center gap-2">
-                        <IconButton>
-                            <Menu />
-                        </IconButton>
+                        <Menu />
                         <NextLink
                             href="/"
                             passHref

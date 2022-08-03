@@ -27,14 +27,14 @@ const validationSchema = yup
 export const Search = (): ReactElement => {
     const { push } = useRouter();
 
-    const [isFocused, setIsFocused] = useState(false);
+    const [isOpened, setIsOpened] = useState(false);
 
     const handleOpen = (): void => {
-        setIsFocused(true);
+        setIsOpened(true);
     };
 
     const handleClose = (): void => {
-        setIsFocused(false);
+        setIsOpened(false);
     };
 
     const onSubmit = async (values: FormValues): Promise<void> => {
@@ -56,7 +56,7 @@ export const Search = (): ReactElement => {
                 <SearchIcon />
             </IconButton>
             <Modal
-                open={isFocused}
+                open={isOpened}
                 onClose={handleClose}
             >
                 <Formik
