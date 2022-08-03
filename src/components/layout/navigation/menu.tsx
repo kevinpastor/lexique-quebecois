@@ -27,7 +27,7 @@ export const Menu = (): ReactElement => {
                 onOpen={handleOpen}
                 onClose={handleClose}
             >
-                <div className="w-64 divide-y-2 p-4">
+                <div className="w-64 sm:w-96 divide-y-2 p-4">
                     <div className="flex flex-col items-center gap-2 py-4">
                         <FontAwesomeIcon
                             icon={faBookReader}

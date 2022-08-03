@@ -65,7 +65,7 @@ export const Search = (): ReactElement => {
                     onSubmit={onSubmit}
                 >
                     <Form className="w-full bg-white">
-                        <div className="container mx-auto flex items-center gap-2 pl-2 pr-4 h-14">
+                        <div className="container mx-auto flex items-center gap-2 pr-6 h-14">
                             <IconButton onClick={handleClose}>
                                 <ArrowBack />
                             </IconButton>
