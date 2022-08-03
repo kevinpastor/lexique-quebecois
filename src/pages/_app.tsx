@@ -42,7 +42,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                     />
                 </Head>
                 <Navigation />
-                <main className="container mx-auto px-4 pt-2 pb-4 space-y-2">
+                <main className="container mx-auto px-4 pt-2 pb-4 space-y-4">
                     <div className="flex gap-4">
                         <div className="basis-full lg:basis-2/3 lg:space-y-0">
                             <Loading>
