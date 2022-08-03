@@ -1,18 +1,24 @@
+import { Card, CardContent, Typography } from "@mui/material";
 import { ReactElement } from "react";
-
-import { Card } from "@components/misc/card";
 
 export const Sidebar = (): ReactElement => (
     <aside className="space-y-4">
         <Card>
-            <div className="text-xl font-medium text-center">
-                Un peu comme Urban Dictionary, mais québécois.
-            </div>
+            <CardContent>
+                <Typography align="center">
+                    Un peu comme Urban Dictionary, mais tokébakicitte.
+                </Typography>
+            </CardContent>
         </Card>
         <Card>
-            <div className="text-center">
-                Une plateforme pour en apprendre plus sur la culture populaire, peu importe si t&apos;es un ado, un millénial, ou un boomer.
-            </div>
+            <CardContent>
+                <Typography
+                    variant="body2"
+                    align="center"
+                >
+                    Une plateforme pour en apprendre plus sur la culture populaire québecoisse, peu importe si t&apos;es un ado, un millénial, ou un boomer.
+                </Typography>
+            </CardContent>
         </Card>
     </aside>
 );

@@ -40,7 +40,10 @@ export const Word = ({ word }: Props): ReactElement => {
             <CardContent>
                 <div className="space-y-4">
                     <div className="flex justify-between">
-                        <NextLink href={`/mots/${word.slug}`}>
+                        <NextLink
+                            href={`/mots/${word.slug}`}
+                            passHref
+                        >
                             <Link variant="h2">
                                 {word.label}
                             </Link>

@@ -64,7 +64,6 @@ export const theme = createTheme({
             fontWeight: 600,
             lineHeight
         },
-        // TODO
         body2: {
             color: highEmphasyColor,
             fontSize: 18,
@@ -136,7 +135,10 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     margin: "16px",
-                    padding: "0px"
+                    padding: "0px",
+                    ":last-child": {
+                        paddingBottom: "0px"
+                    }
                 }
             }
         },
