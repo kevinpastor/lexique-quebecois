@@ -20,8 +20,8 @@ const validationSchema = yup
     .object({
         label: yup
             .string()
-            .min(2)
-            .max(32)
+            .min(2, "")
+            .max(32, "")
     });
 
 export const Search = (): ReactElement => {
@@ -59,28 +59,29 @@ export const Search = (): ReactElement => {
                 open={isOpened}
                 onClose={handleClose}
             >
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmit}
-                >
-                    <Form className="w-full bg-white">
-                        <div className="container mx-auto flex items-center gap-2 pr-6 h-14">
-                            <IconButton onClick={handleClose}>
-                                <ArrowBack />
-                            </IconButton>
-                            <Field
-                                component={TextField}
-                                name="label"
-                                placeholder="Rechercher un mot"
-                                hideErrors
-                                autofocus
-                                fullWidth
-                                size="small"
-                            />
-                        </div>
-                    </Form>
-                </Formik>
+                <div>
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={onSubmit}
+                    >
+                        <Form className="w-full bg-white">
+                            <div className="container mx-auto flex items-center gap-2 pl-2 pr-4 h-14">
+                                <IconButton onClick={handleClose}>
+                                    <ArrowBack />
+                                </IconButton>
+                                <Field
+                                    component={TextField}
+                                    name="label"
+                                    placeholder="Rechercher un mot"
+                                    autoFocus
+                                    fullWidth
+                                    size="small"
+                                />
+                            </div>
+                        </Form>
+                    </Formik>
+                </div>
             </Modal>
         </>
     );

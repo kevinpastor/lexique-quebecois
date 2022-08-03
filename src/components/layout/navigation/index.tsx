@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import classNames from "classnames";
 import NextLink from "next/link";
 import { ReactElement } from "react";
@@ -28,19 +28,20 @@ export const Navigation = (): ReactElement => {
                 <div className="grow flex justify-center items-center">
                     <div className="grow flex items-center gap-2">
                         <Menu />
-                        <NextLink
-                            href="/"
-                            passHref
-                        >
-                            <Link
-                                variant="h1"
-                                component="h1"
-                                color="inherit"
-                                underline="none"
+                        <Typography variant="h1">
+                            <NextLink
+                                href="/"
+                                passHref
                             >
-                                Lexique Québécois
-                            </Link>
-                        </NextLink>
+                                <Link
+                                    color="inherit"
+                                    underline="none"
+                                >
+                                    Lexique Québécois
+                                </Link>
+                            </NextLink>
+                        </Typography>
+
                     </div>
                     <Search />
                 </div>
