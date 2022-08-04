@@ -7,7 +7,7 @@
         "build": "pnpm run build:site && pnpm run build:sitemap",
         "build:site": "next build",
         "build:sitemap": "next-sitemap --config next-sitemap.config.js",
-        "exec": "next start",
+        "preview": "pnpm run build:site && next start",
         "lint": "next lint",
         "test": "jest",
         "test:verbose": "jest --verbose",

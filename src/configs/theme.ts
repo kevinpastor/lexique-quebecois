@@ -143,7 +143,8 @@ export const theme = createTheme({
         MuiCardHeader: {
             defaultProps: {
                 titleTypographyProps: {
-                    variant: "h2"
+                    variant: "h2",
+                    component: "h2"
                 }
             },
             styleOverrides: {
@@ -215,6 +216,14 @@ export const theme = createTheme({
         MuiTextField: {
             defaultProps: {
                 fullWidth: true
+            }
+        },
+        MuiTypography: {
+            defaultProps: {
+                variantMapping: {
+                    subtitle1: "p",
+                    subtitle2: "p"
+                }
             }
         }
     }
