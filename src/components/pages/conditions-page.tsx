@@ -6,7 +6,6 @@ import { ReactElement } from "react";
 export const ConditionsPage = (): ReactElement => (
     <>
         <Head>
-            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
             <title>Conditions - Lexique Québécois</title>
         </Head>
         <Card>

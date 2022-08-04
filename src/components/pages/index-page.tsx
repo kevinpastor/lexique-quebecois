@@ -47,7 +47,6 @@ export const IndexPage = (): ReactElement => {
     return (
         <>
             <Head>
-                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
                 <title>Index - Lexique Québécois</title>
             </Head>
             <Card>

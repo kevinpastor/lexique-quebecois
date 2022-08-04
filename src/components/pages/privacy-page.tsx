@@ -10,7 +10,6 @@ import { Section } from "@components/typography/section";
 export const PrivacyPage = (): ReactElement => (
     <>
         <Head>
-            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
             <title>Confidentialité - Lexique Québécois</title>
         </Head>
         <Card>
