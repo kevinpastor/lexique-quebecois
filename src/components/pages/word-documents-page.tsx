@@ -1,12 +1,10 @@
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
-import { Card } from "@components/misc/card";
-import { Section } from "@components/typography/section";
 import { WordDocument } from "@models/word-document";
 import { WithStringId } from "@utils/types/with-string-id";
 
@@ -18,10 +16,8 @@ export const WordDocumentsPage = (): ReactElement => {
 
     return (
         <Card>
-            <Typography variant="h2">
-                Tableau de modération
-            </Typography>
-            <Section>
+            <CardHeader title="Tableau de modération" />
+            <CardContent>
                 <Typography variant="h3">
                     Index
                 </Typography>
@@ -47,7 +43,7 @@ export const WordDocumentsPage = (): ReactElement => {
                         )}
                     </div>
                 ))}
-            </Section>
+            </CardContent>
         </Card>
     );
 };

@@ -1,6 +1,6 @@
 import { Check } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { Card, CardActions, CardContent, CardHeader } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { TextField } from "formik-mui";
 import Head from "next/head";
@@ -112,7 +112,10 @@ export const AddPage = (): ReactElement => {
                                 </div>
                             </CardContent>
                             <CardActions>
-                                <div className="w-full flex flex-row-reverse">
+                                <Stack
+                                    direction="row-reverse"
+                                    width="100%"
+                                >
                                     <LoadingButton
                                         loading={isSubmitting}
                                         startIcon={<Check />}
@@ -122,7 +125,7 @@ export const AddPage = (): ReactElement => {
                                     >
                                         Envoyer
                                     </LoadingButton>
-                                </div>
+                                </Stack>
                             </CardActions>
                         </Card>
                     </Form>

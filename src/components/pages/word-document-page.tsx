@@ -1,5 +1,5 @@
 import { ChevronLeft } from "@mui/icons-material";
-import { Button, FormControl, FormLabel, IconButton, Typography } from "@mui/material";
+import { Button, Card, CardContent, CardHeader, FormControl, FormLabel, IconButton, Typography } from "@mui/material";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { Switch, TextField } from "formik-mui";
 import { useRouter } from "next/router";
@@ -7,8 +7,6 @@ import { useSnackbar } from "notistack";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
-import { Card } from "@components/misc/card";
-import { Section } from "@components/typography/section";
 import { WordDocument } from "@models/word-document";
 import { deleteWordDocument, updateWordDocument } from "@services/word-document";
 import { WithStringId } from "@utils/types/with-string-id";
@@ -74,21 +72,26 @@ export const WordDocumentPage = (): ReactElement => {
             {({ isSubmitting }: FormikProps<WithStringId<WordDocument>>): ReactElement => (
                 <Form>
                     <Card>
-                        <Typography variant="h2">
-                            <div className="flex items-center">
-                                <div className="text-base font-normal">
-                                    <IconButton
-                                        aria-label="Cancel"
-                                        disabled={isSubmitting}
-                                        onClick={handleCancel}
-                                    >
-                                        <ChevronLeft />
-                                    </IconButton>
-                                </div>
-                                {wordDocument.label}
-                            </div>
-                        </Typography>
-                        <Section>
+                        <CardHeader
+                            title={
+                                <Typography variant="h2">
+                                    <div className="flex items-center">
+                                        <div className="text-base font-normal">
+                                            <IconButton
+                                                size="small"
+                                                aria-label="Cancel"
+                                                disabled={isSubmitting}
+                                                onClick={handleCancel}
+                                            >
+                                                <ChevronLeft />
+                                            </IconButton>
+                                        </div>
+                                        {wordDocument.label}
+                                    </div>
+                                </Typography>
+                            }
+                        />
+                        <CardContent>
                             <div className="space-y-4">
                                 <div>
                                     <div className="font-medium">
@@ -197,7 +200,7 @@ export const WordDocumentPage = (): ReactElement => {
                                     </Button>
                                 </div>
                             </div>
-                        </Section>
+                        </CardContent>
                     </Card>
                 </Form>
             )

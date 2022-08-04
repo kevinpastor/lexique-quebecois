@@ -36,3 +36,5 @@ export const sample = <T>(array: Array<T>, sampleSize: number, seed?: number): A
 
     return sampleArray;
 };
+
+export const getRandomInteger = (max: number): number => Math.floor(Math.random() * max);

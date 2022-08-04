@@ -69,13 +69,13 @@ export const theme = createTheme({
         body1: {
             color: highEmphasyColor,
             fontSize: 18,
-            fontWeight: 600,
+            fontWeight: 400,
             lineHeight
         },
         body2: {
             color: highEmphasyColor,
             fontSize: 18,
-            fontWeight: 400,
+            fontWeight: 600,
             lineHeight
         },
         subtitle1: {
@@ -205,6 +205,11 @@ export const theme = createTheme({
                 notchedOutline: {
                     border: `2px solid ${outlineColor}`
                 }
+            }
+        },
+        MuiSkeleton: {
+            defaultProps: {
+                animation: "wave"
             }
         },
         MuiTextField: {

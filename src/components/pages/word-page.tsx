@@ -1,14 +1,11 @@
 import { Add } from "@mui/icons-material";
-import { Button, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
-import { Card } from "@components/misc/card";
 import { Word as WordComponent } from "@components/misc/word";
-import { Paragraph } from "@components/typography/paragraph";
-import { Section } from "@components/typography/section";
 import { Word } from "@models/word";
 
 export const WordPage = (): ReactElement => {
@@ -30,22 +27,23 @@ export const WordPage = (): ReactElement => {
 
         return (
             <Card>
-                <Typography variant="h2">
-                    Ce mot n&apos;a pas été trouvé
-                </Typography>
-                <Section>
-                    <Paragraph>
-                        Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple.
-                    </Paragraph>
-                </Section>
-                <div className="flex flex-row-reverse">
-                    <Button
-                        onClick={handleClick}
-                        startIcon={<Add />}
+                <CardHeader title="Ce mot n'a pas été trouvé" />
+                <CardContent>
+                    Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple.
+                </CardContent>
+                <CardActions>
+                    <Stack
+                        direction="row-reverse"
+                        width="100%"
                     >
-                        Ajouter
-                    </Button>
-                </div>
+                        <Button
+                            onClick={handleClick}
+                            startIcon={<Add />}
+                        >
+                            Ajouter
+                        </Button>
+                    </Stack>
+                </CardActions>
             </Card>
         );
     }

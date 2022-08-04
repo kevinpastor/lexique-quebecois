@@ -1,12 +1,10 @@
 /* eslint-disable react/no-unused-prop-types */
-import { Link, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
 import { ReactElement, useMemo } from "react";
 import useSWR from "swr";
 
-import { Card } from "@components/misc/card";
-import { Section } from "@components/typography/section";
 import { getSlug } from "@models/word-request";
 
 interface WordGroup {
@@ -53,28 +51,30 @@ export const IndexPage = (): ReactElement => {
                 <title>Index - Lexique Québécois</title>
             </Head>
             <Card>
-                <Typography variant="h2">
-                    Index
-                </Typography>
-                {memoizedLetterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
-                    <Section key={letter}>
-                        <Typography variant="h3">
-                            {letter}
-                        </Typography>
-                        {group.map(({ slug, word }: WordGroup): ReactElement => (
-                            <div key={slug}>
-                                <NextLink
-                                    href={`/mots/${slug}`}
-                                    passHref
-                                >
-                                    <Link>
-                                        {word}
-                                    </Link>
-                                </NextLink>
+                <CardHeader title="Index" />
+                <CardContent>
+                    <Stack spacing={2}>
+                        {memoizedLetterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
+                            <div key={letter}>
+                                <Typography variant="h3">
+                                    {letter}
+                                </Typography>
+                                {group.map(({ slug, word }: WordGroup): ReactElement => (
+                                    <div key={slug}>
+                                        <NextLink
+                                            href={`/mots/${slug}`}
+                                            passHref
+                                        >
+                                            <Link>
+                                                {word}
+                                            </Link>
+                                        </NextLink>
+                                    </div>
+                                ))}
                             </div>
                         ))}
-                    </Section>
-                ))}
+                    </Stack>
+                </CardContent>
             </Card>
         </>
     );

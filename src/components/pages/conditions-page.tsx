@@ -15,7 +15,7 @@ export const ConditionsPage = (): ReactElement => (
                 <Stack spacing={2}>
                     <div>
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             component="div"
                         >
                             <p>
@@ -29,7 +29,7 @@ export const ConditionsPage = (): ReactElement => (
                             Modalités d&apos;utilisation
                         </Typography>
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             component="div"
                         >
                             <p>
@@ -72,7 +72,7 @@ export const ConditionsPage = (): ReactElement => (
                             Conduite des utilisateurs
                         </Typography>
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             component="div"
                         >
                             <p>
@@ -157,7 +157,7 @@ export const ConditionsPage = (): ReactElement => (
                             Droits d&apos;auteur et propriété
                         </Typography>
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             component="div"
                         >
                             <p>
@@ -204,7 +204,7 @@ export const ConditionsPage = (): ReactElement => (
                             Avis de non-responsabilité
                         </Typography>
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             component="div"
                         >
                             <p>
@@ -226,7 +226,7 @@ export const ConditionsPage = (): ReactElement => (
                             Politique relative aux idées non sollicitées
                         </Typography>
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             component="div"
                         >
                             <p>
@@ -237,7 +237,7 @@ export const ConditionsPage = (): ReactElement => (
                             Conditions de soumission d&apos;idées
                         </Typography>
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             component="div"
                         >
                             <p>
@@ -250,7 +250,7 @@ export const ConditionsPage = (): ReactElement => (
                             Commentaires et informations
                         </Typography>
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             component="div"
                         >
                             <p>
@@ -263,7 +263,7 @@ export const ConditionsPage = (): ReactElement => (
                             Publicité
                         </Typography>
                         <Typography
-                            variant="body2"
+                            variant="body1"
                             component="div"
                         >
                             <p>

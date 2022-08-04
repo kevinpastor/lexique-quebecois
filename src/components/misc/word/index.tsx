@@ -53,7 +53,7 @@ export const Word = ({ word }: Props): ReactElement => {
                     spacing={1.5}
                     ml={2}
                 >
-                    <Typography variant="body1">
+                    <Typography variant="body2">
                         {word.definition}
                     </Typography>
                     <Typography variant="subtitle1">
