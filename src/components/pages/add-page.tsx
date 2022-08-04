@@ -68,10 +68,7 @@ export const AddPage = (): ReactElement => {
                 {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
                     <Form>
                         <Card>
-                            <CardHeader
-                                title="Ajouter un mot"
-                                titleTypographyProps={{ variant: "h2" }}
-                            />
+                            <CardHeader title="Ajouter un mot" />
                             <CardContent>
                                 <div className="space-y-8">
                                     <div className="space-y-4">

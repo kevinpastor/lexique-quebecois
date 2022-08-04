@@ -5,10 +5,7 @@ import { metadata } from "@configs/metadata";
 import { Meta } from "@configs/metadata/meta";
 
 const Document = (): ReactElement => (
-    <Html
-        lang="fr"
-        className="h-full bg-white"
-    >
+    <Html lang="fr">
         <Head>
             <link
                 rel="preconnect"
@@ -43,7 +40,7 @@ const Document = (): ReactElement => (
                 />
             ))}
         </Head>
-        <body className="h-full">
+        <body>
             <Main />
             <NextScript />
         </body>

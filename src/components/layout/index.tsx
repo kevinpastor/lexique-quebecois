@@ -23,6 +23,9 @@ export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement =
                     <Grid
                         item
                         md={8}
+                        style={{
+                            width: "100%"
+                        }}
                     >
                         <Loading>
                             {children}

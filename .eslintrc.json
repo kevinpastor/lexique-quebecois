@@ -136,7 +136,10 @@
         "react/jsx-closing-tag-location": "warn",
         "react/jsx-curly-spacing": "warn",
         "react/jsx-equals-spacing": "warn",
-        "react/jsx-first-prop-new-line": "warn",
+        "react/jsx-first-prop-new-line": [
+            "warn",
+            "multiline"
+        ],
         "react/jsx-indent-props": "warn",
         "react/jsx-max-props-per-line": [
             "warn",

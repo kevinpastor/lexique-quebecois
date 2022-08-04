@@ -141,6 +141,11 @@ export const theme = createTheme({
             }
         },
         MuiCardHeader: {
+            defaultProps: {
+                titleTypographyProps: {
+                    variant: "h2"
+                }
+            },
             styleOverrides: {
                 root: {
                     margin: "16px",
@@ -176,7 +181,13 @@ export const theme = createTheme({
         },
         MuiLink: {
             defaultProps: {
-                color: "secondary"
+                color: "secondary",
+                noWrap: true,
+                style: {
+                    display: "inline-block",
+                    maxWidth: "100%",
+                    verticalAlign: "bottom"
+                }
             }
         },
         MuiLoadingButton: {
