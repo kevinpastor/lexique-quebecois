@@ -9,6 +9,7 @@
 - beforeunload on ajouter
 - Add noscript message
 - Fix URL text wrap
+- PWA
 
 Aggregation pipeline for fuzzy search by label
 

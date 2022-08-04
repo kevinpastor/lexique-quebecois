@@ -1,4 +1,8 @@
-# Elevation
+# Notes
+
+## Colors
+
+### Elevation
 
 | Elevation level | White overlay transparency |
 |-----------------|----------------------------|
@@ -13,7 +17,7 @@
 | 16dp            | 15%                        |
 | 24dp            | 16%                        |
 
-# Text
+### Text
 
 | Emphasis | White overlay transparency |
 |----------|----------------------------|
@@ -21,7 +25,7 @@
 | Medium   | 60%                        |
 | Disabled | 38%                        |
 
-# State
+### State
 
 | Status  | White overlay transparency |
 |---------|----------------------------|
@@ -30,10 +34,16 @@
 | Pressed | 10%                        |
 | Dragged | 8%                         |
 
-# Disabled
+### Disabled
 
 12% opacity
 
-# Outline
+### Outline
 
 12% opacity
+
+## Analysis Reports
+
+| Date       | Bundle (KB) | Source Map (KB) |
+|------------|-------------|-----------------|
+| 04/08/2022 | 792.66      | 793.66          |

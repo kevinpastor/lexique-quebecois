@@ -27,8 +27,12 @@ export const Menu = (): ReactElement => {
                 onOpen={handleOpen}
                 onClose={handleClose}
             >
-                {/* TODO Update className */}
-                <Box p={2} className="w-64 sm:w-96">
+                <Box
+                    p={2}
+                    // TODO Update className
+                    // eslint-disable-next-line react/forbid-component-props
+                    className="w-64 sm:w-96"
+                >
                     <Stack
                         my={2}
                         spacing={1}

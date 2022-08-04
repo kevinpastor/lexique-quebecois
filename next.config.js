@@ -1,14 +1,8 @@
-/** @type {import("next").NextConfig} */
-const withPWA = require("next-pwa")
 const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+const bundleAnalyzer = require("@next/bundle-analyzer");
 
-/** @type {import("next").NextConfig} */
-const pwaConfig = withPWA({
-    reactStrictMode: true,
-    pwa: {
-        dest: "public",
-        disable: process.env.NODE_ENV === "development",
-    }
+const withBundleAnalyzer = bundleAnalyzer({
+    enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
 
 /**
@@ -29,15 +23,15 @@ module.exports = (phase, { defaultConfig }) => {
 
     /** @type {import('next').NextConfig} */
     const nextConfig = {
-        // ...defaultConfig,
-        ...pwaConfig,
+        ...defaultConfig,
         pageExtensions: defaultPageExtensions.map((extension) => {
             const prodExtension = `(?<!local\.)${extension}`;
             const devExtension = `local\.${extension}`;
             return isDevServer ? [devExtension, extension] : prodExtension;
         })
-            .flat()
+            .flat(),
+        productionBrowserSourceMaps: process.env.ANALYZE_SOURCE_MAP === 'true'
     }
 
-    return nextConfig;
+    return withBundleAnalyzer(nextConfig);
 }; 
