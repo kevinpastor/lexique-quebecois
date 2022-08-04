@@ -1,3 +1,4 @@
+import { Container } from "@mui/material";
 import classNames from "classnames";
 import { PropsWithChildren, ReactElement } from "react";
 
@@ -13,32 +14,35 @@ export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement =
     return (
         <>
             <Navigation />
-            <main className="container mx-auto px-4 pt-2 pb-4 space-y-4">
-                <div className="flex gap-4">
-                    <div className="basis-full lg:basis-2/3 lg:space-y-0">
-                        <Loading>
-                            {children}
-                        </Loading>
+            <Container>
+                <main className="pt-2 pb-4 space-y-4">
+                    <div className="flex gap-4">
+                        <div className="basis-full lg:basis-2/3 lg:space-y-0">
+                            <Loading>
+                                {children}
+                            </Loading>
+                        </div>
+                        <div
+                            className={classNames(
+                                "hidden lg:block sticky lg:basis-1/3 space-y-4 h-min transition-all",
+                                {
+                                    // 64px comes from the nav height (56px) and the top main padding (8px).
+                                    "top-[64px]": isScrollingUp,
+                                    // 8px comes from the bottom main padding (8px).
+                                    "top-2": !isScrollingUp
+                                }
+                            )}
+                        >
+                            <Sidebar />
+                            <Footer />
+                        </div>
                     </div>
-                    <div
-                        className={classNames(
-                            "hidden lg:block sticky lg:basis-1/3 space-y-4 h-min transition-all",
-                            {
-                                // 64px comes from the nav height (56px) and the top main padding (8px).
-                                "top-[64px]": isScrollingUp,
-                                // 8px comes from the bottom main padding (8px).
-                                "top-2": !isScrollingUp
-                            }
-                        )}
-                    >
-                        <Sidebar />
+                    <div className="lg:hidden">
                         <Footer />
                     </div>
-                </div>
-                <div className="lg:hidden">
-                    <Footer />
-                </div>
-            </main>
+                </main>
+            </Container>
+
         </>
     );
 };

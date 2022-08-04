@@ -93,6 +93,17 @@ export const theme = createTheme({
         }
     },
     components: {
+        MuiAppBar: {
+            defaultProps: {
+                color: "default",
+                position: "sticky"
+            },
+            styleOverrides: {
+                colorDefault: {
+                    backgroundColor: colors.common.white
+                }
+            }
+        },
         MuiButton: {
             defaultProps: {
                 variant: "outlined"

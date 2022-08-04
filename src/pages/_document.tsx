@@ -43,7 +43,7 @@ const Document = (): ReactElement => (
                 />
             ))}
         </Head>
-        <body className="h-full text-black/[.87] font-serif">
+        <body className="h-full">
             <Main />
             <NextScript />
         </body>

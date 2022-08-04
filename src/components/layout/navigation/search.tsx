@@ -1,5 +1,5 @@
 import { ArrowBack, Search as SearchIcon } from "@mui/icons-material";
-import { IconButton, Modal, Stack } from "@mui/material";
+import { Box, Container, IconButton, Modal, Paper, Stack } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-mui";
 import { useRouter } from "next/router";
@@ -59,36 +59,45 @@ export const Search = (): ReactElement => {
                 open={isOpened}
                 onClose={handleClose}
             >
-                <div>
-                    <Formik
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmit}
-                    >
-                        <Form className="w-full bg-white">
-                            <div className="container mx-auto pl-2 pr-4 h-14">
-                                <Stack
-                                    direction="row"
-                                    alignItems="center"
-                                    spacing={1}
-                                    width="100%" // TODO Remove
-                                    height="100%" // TODO Remove
-                                >
-                                    <IconButton onClick={handleClose}>
-                                        <ArrowBack />
-                                    </IconButton>
-                                    <Field
-                                        component={TextField}
-                                        name="label"
-                                        placeholder="Rechercher un mot"
-                                        autoFocus
-                                        size="small"
-                                    />
-                                </Stack>
-                            </div>
-                        </Form>
-                    </Formik>
-                </div>
+                <Paper
+                    square
+                    elevation={0}
+                >
+                    <Container>
+                        <Box
+                            // TODO Fix padding on desktop with scrollbar
+                            px={-1}
+                            py={0.5}
+                        >
+                            <Formik
+                                initialValues={initialValues}
+                                validationSchema={validationSchema}
+                                onSubmit={onSubmit}
+                            >
+                                <Form>
+                                    <Stack
+                                        direction="row"
+                                        alignItems="center"
+                                        spacing={1}
+                                        width="100%" // TODO Remove
+                                        height="100%" // TODO Remove
+                                    >
+                                        <IconButton onClick={handleClose}>
+                                            <ArrowBack />
+                                        </IconButton>
+                                        <Field
+                                            component={TextField}
+                                            name="label"
+                                            placeholder="Rechercher un mot"
+                                            autoFocus
+                                            size="small"
+                                        />
+                                    </Stack>
+                                </Form>
+                            </Formik>
+                        </Box>
+                    </Container>
+                </Paper>
             </Modal>
         </>
     );
