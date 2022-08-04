@@ -1,8 +1,11 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
 export const Sidebar = (): ReactElement => (
-    <aside className="space-y-4">
+    <Stack
+        spacing={2}
+        component="aside"
+    >
         <Card>
             <CardContent>
                 <Typography align="center">
@@ -20,5 +23,5 @@ export const Sidebar = (): ReactElement => (
                 </Typography>
             </CardContent>
         </Card>
-    </aside>
+    </Stack>
 );

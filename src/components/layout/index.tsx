@@ -1,48 +1,61 @@
-import { Container } from "@mui/material";
-import classNames from "classnames";
+import { Box, Container, Grid, Stack } from "@mui/material";
 import { PropsWithChildren, ReactElement } from "react";
 
-import { Footer } from "@components/layout/footer";
-import { Navigation } from "@components/layout/navigation";
-import { Sidebar } from "@components/layout/sidebar";
 import { Loading } from "@components/misc/loading";
-import { useScrollingDirection } from "@utils/hooks/use-scrolling-direction";
 
-export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement => {
-    const { isScrollingUp } = useScrollingDirection();
+import { Footer } from "./footer";
+import { Navigation } from "./navigation";
+import { Sidebar } from "./sidebar";
 
-    return (
-        <>
-            <Navigation />
-            <Container>
-                <main className="pt-2 pb-4 space-y-4">
-                    <div className="flex gap-4">
-                        <div className="basis-full lg:basis-2/3 lg:space-y-0">
-                            <Loading>
-                                {children}
-                            </Loading>
-                        </div>
-                        <div
-                            className={classNames(
-                                "hidden lg:block sticky lg:basis-1/3 space-y-4 h-min transition-all",
-                                {
-                                    // 64px comes from the nav height (56px) and the top main padding (8px).
-                                    "top-[64px]": isScrollingUp,
-                                    // 8px comes from the bottom main padding (8px).
-                                    "top-2": !isScrollingUp
-                                }
-                            )}
+export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement => (
+    <>
+        <Navigation />
+        <Container>
+            <Stack
+                spacing={2}
+                pt={1}
+                pb={2}
+            >
+                <Grid
+                    container
+                    spacing={2}
+                >
+                    <Grid
+                        item
+                        md={8}
+                    >
+                        <Loading>
+                            {children}
+                        </Loading>
+                    </Grid>
+                    <Grid
+                        item
+                        md={4}
+                        display={{
+                            xs: "none",
+                            md: "block"
+                        }}
+                    >
+                        <Stack
+                            spacing={2}
+                            style={{
+                                position: "sticky",
+                                top: 54.84 + 8 // Comes from the AppBar height
+                            }}
                         >
                             <Sidebar />
                             <Footer />
-                        </div>
-                    </div>
-                    <div className="lg:hidden">
-                        <Footer />
-                    </div>
-                </main>
-            </Container>
-
-        </>
-    );
-};
+                        </Stack>
+                    </Grid>
+                </Grid>
+                <Box
+                    display={{
+                        md: "none"
+                    }}
+                >
+                    <Footer />
+                </Box>
+            </Stack>
+        </Container>
+    </>
+);
