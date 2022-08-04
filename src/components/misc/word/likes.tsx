@@ -84,9 +84,7 @@ export const Likes = ({
         <Button
             onClick={handleClick}
             aria-label="Like"
-            // TODO
-            // eslint-disable-next-line react/forbid-component-props
-            startIcon={isLiked ? <ThumbUp className="text-amber-500" /> : <ThumbUpOutlined />}
+            startIcon={isLiked ? <ThumbUp color="primary" /> : <ThumbUpOutlined />}
         >
             {likes}
         </Button>

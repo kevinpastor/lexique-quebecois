@@ -1,5 +1,5 @@
 import { Share } from "@mui/icons-material";
-import { Button, Card, CardActions, CardContent, Link, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { useSnackbar } from "notistack";
 import { ReactElement } from "react";
@@ -37,35 +37,41 @@ export const Word = ({ word }: Props): ReactElement => {
 
     return (
         <Card>
+            <CardHeader
+                title={
+                    <NextLink
+                        href={`/mots/${word.slug}`}
+                        passHref
+                    >
+                        <Link variant="h2">
+                            {word.label}
+                        </Link>
+                    </NextLink>}
+            />
             <CardContent>
-                <div className="space-y-4">
-                    <div className="flex justify-between">
-                        <NextLink
-                            href={`/mots/${word.slug}`}
-                            passHref
-                        >
-                            <Link variant="h2">
-                                {word.label}
-                            </Link>
-                        </NextLink>
-                    </div>
-                    <div className="space-y-3 ml-4">
-                        <Typography variant="body1">
-                            {word.definition}
-                        </Typography>
-                        <Typography variant="subtitle1">
-                            {word.example}
-                        </Typography>
-                        <Typography variant="subtitle2">
-                            {/* <div className="text-black/[.60] font-medium text-lg"> */}
-                            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                            par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
-                        </Typography>
-                    </div>
-                </div>
+                <Stack
+                    spacing={1.5}
+                    ml={2}
+                >
+                    <Typography variant="body1">
+                        {word.definition}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                        {word.example}
+                    </Typography>
+                    <Typography variant="subtitle2">
+                        {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                        par {word.author ?? "Anonyme"}, le {formatDate(word.timestamp)}
+                    </Typography>
+                </Stack>
             </CardContent>
             <CardActions>
-                <div className="w-full flex flex-row justify-between">
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    spacing={2}
+                    width="100%"
+                >
                     <Reactions word={word} />
                     <Button
                         onClick={handleClick}
@@ -73,7 +79,7 @@ export const Word = ({ word }: Props): ReactElement => {
                     >
                         Partager
                     </Button>
-                </div>
+                </Stack>
             </CardActions>
         </Card>
     );
