@@ -1,6 +1,6 @@
 import { Check } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { Typography } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader } from "@mui/material";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { TextField } from "formik-mui";
 import Head from "next/head";
@@ -8,7 +8,6 @@ import { NextRouter, useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { ReactElement } from "react";
 
-import { Card } from "@components/misc/card";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
 import { addWord } from "@services/words";
 
@@ -69,58 +68,65 @@ export const AddPage = (): ReactElement => {
                 {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
                     <Form>
                         <Card>
-                            <Typography variant="h2">
-                                Ajouter un mot
-                            </Typography>
-                            <div className="space-y-8">
-                                <div className="space-y-4">
-                                    <div>
-                                        <Field
-                                            component={TextField}
-                                            label="Mot"
-                                            name="label"
-                                            autoFocus
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <Field
-                                            component={TextField}
-                                            label="Définition"
-                                            name="definition"
-                                            multiline
-                                            required
-                                            fullWidth
-                                        />
-                                    </div>
-                                    <div>
-                                        <Field
-                                            component={TextField}
-                                            label="Exemple"
-                                            name="example"
-                                            multiline
-                                            required
-                                            fullWidth
-                                        />
-                                    </div>
-                                    <div>
-                                        <Field
-                                            component={TextField}
-                                            label="Auteur"
-                                            name="author"
-                                        />
+                            <CardHeader
+                                title="Ajouter un mot"
+                                titleTypographyProps={{ variant: "h2" }}
+                            />
+                            <CardContent>
+                                <div className="space-y-8">
+                                    <div className="space-y-4">
+                                        <div>
+                                            <Field
+                                                component={TextField}
+                                                label="Mot"
+                                                name="label"
+                                                required
+                                                autoFocus
+                                            />
+                                        </div>
+                                        <div>
+                                            <Field
+                                                component={TextField}
+                                                label="Définition"
+                                                name="definition"
+                                                required
+                                                multiline
+                                                minRows={2}
+                                            />
+                                        </div>
+                                        <div>
+                                            <Field
+                                                component={TextField}
+                                                label="Exemple"
+                                                name="example"
+                                                required
+                                                multiline
+                                                minRows={2}
+                                            />
+                                        </div>
+                                        <div>
+                                            <Field
+                                                component={TextField}
+                                                label="Auteur"
+                                                name="author"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex flex-row-reverse">
+                            </CardContent>
+                            <CardActions>
+                                <div className="w-full flex flex-row-reverse">
                                     <LoadingButton
                                         loading={isSubmitting}
                                         startIcon={<Check />}
                                         type="submit"
+                                        variant="contained"
+                                        color="primary"
                                     >
                                         Envoyer
                                     </LoadingButton>
                                 </div>
-                            </div>
+                            </CardActions>
                         </Card>
                     </Form>
                 )}

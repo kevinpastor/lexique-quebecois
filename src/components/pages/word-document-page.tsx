@@ -128,7 +128,6 @@ export const WordDocumentPage = (): ReactElement => {
                                         label="Slug"
                                         name="slug"
                                         autofocus
-                                        fullWidth
                                     />
                                 </div>
                                 <div>
@@ -137,7 +136,6 @@ export const WordDocumentPage = (): ReactElement => {
                                         label="Définition"
                                         name="definition"
                                         multiline
-                                        fullWidth
                                     />
                                 </div>
                                 <div>
@@ -146,7 +144,6 @@ export const WordDocumentPage = (): ReactElement => {
                                         label="Exemple"
                                         name="example"
                                         multiline
-                                        fullWidth
                                     />
                                 </div>
                                 <div>

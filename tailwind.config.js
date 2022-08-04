@@ -5,6 +5,9 @@ const plugin = require("tailwindcss/plugin");
 
 /** @type {import("tailwindcss/tailwind-config").TailwindConfig} */
 module.exports = {
+    corePlugins: {
+        preflight: false
+    },
     content: [
         "./src/pages/**/*.{js,ts,jsx,tsx}",
         "./src/components/**/*.{js,ts,jsx,tsx}"

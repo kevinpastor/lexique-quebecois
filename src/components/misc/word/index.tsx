@@ -65,7 +65,7 @@ export const Word = ({ word }: Props): ReactElement => {
                 </div>
             </CardContent>
             <CardActions>
-                <div className="flex flex-row justify-between w-full">
+                <div className="w-full flex flex-row justify-between">
                     <Reactions word={word} />
                     <Button
                         onClick={handleClick}

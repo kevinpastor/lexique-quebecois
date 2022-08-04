@@ -1,5 +1,5 @@
 import { ArrowBack, Search as SearchIcon } from "@mui/icons-material";
-import { IconButton, Modal } from "@mui/material";
+import { IconButton, Modal, Stack } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import { TextField } from "formik-mui";
 import { useRouter } from "next/router";
@@ -66,18 +66,25 @@ export const Search = (): ReactElement => {
                         onSubmit={onSubmit}
                     >
                         <Form className="w-full bg-white">
-                            <div className="container mx-auto flex items-center gap-2 pl-2 pr-4 h-14">
-                                <IconButton onClick={handleClose}>
-                                    <ArrowBack />
-                                </IconButton>
-                                <Field
-                                    component={TextField}
-                                    name="label"
-                                    placeholder="Rechercher un mot"
-                                    autoFocus
-                                    fullWidth
-                                    size="small"
-                                />
+                            <div className="container mx-auto pl-2 pr-4 h-14">
+                                <Stack
+                                    direction="row"
+                                    alignItems="center"
+                                    spacing={1}
+                                    width="100%" // TODO Remove
+                                    height="100%" // TODO Remove
+                                >
+                                    <IconButton onClick={handleClose}>
+                                        <ArrowBack />
+                                    </IconButton>
+                                    <Field
+                                        component={TextField}
+                                        name="label"
+                                        placeholder="Rechercher un mot"
+                                        autoFocus
+                                        size="small"
+                                    />
+                                </Stack>
                             </div>
                         </Form>
                     </Formik>

@@ -9,6 +9,14 @@ const hoveredOutlineColor: string = alpha(colors.common.black, 0.16);
 const lineHeight: number = 1.5;
 
 export const theme = createTheme({
+    palette: {
+        primary: {
+            main: "#f59e0b"
+        },
+        secondary: {
+            main: "#1976d2"
+        }
+    },
     typography: {
         fontFamily: [
             "Lora",
@@ -85,11 +93,6 @@ export const theme = createTheme({
         }
     },
     components: {
-        MuiButtonBase: {
-            defaultProps: {
-
-            }
-        },
         MuiButton: {
             defaultProps: {
                 variant: "outlined"
@@ -116,11 +119,6 @@ export const theme = createTheme({
                 }
             }
         },
-        MuiLoadingButton: {
-            defaultProps: {
-                variant: "outlined"
-            }
-        },
         MuiCard: {
             defaultProps: {
                 variant: "outlined"
@@ -128,6 +126,14 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     border: `2px solid ${outlineColor}`
+                }
+            }
+        },
+        MuiCardHeader: {
+            styleOverrides: {
+                root: {
+                    margin: "16px",
+                    padding: "0px"
                 }
             }
         },
@@ -150,6 +156,23 @@ export const theme = createTheme({
                 }
             }
         },
+        MuiDivider: {
+            styleOverrides: {
+                root: {
+                    borderBottomWidth: "2px"
+                }
+            }
+        },
+        MuiLink: {
+            defaultProps: {
+                color: "secondary"
+            }
+        },
+        MuiLoadingButton: {
+            defaultProps: {
+                variant: "outlined"
+            }
+        },
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
@@ -160,6 +183,11 @@ export const theme = createTheme({
                 notchedOutline: {
                     border: `2px solid ${outlineColor}`
                 }
+            }
+        },
+        MuiTextField: {
+            defaultProps: {
+                fullWidth: true
             }
         }
     }
