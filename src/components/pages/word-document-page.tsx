@@ -75,10 +75,10 @@ export const WordDocumentPage = (): ReactElement => {
                         <CardHeader
                             action={
                                 <IconButton
+                                    onClick={handleCancel}
+                                    disabled={isSubmitting}
                                     size="small"
                                     aria-label="Cancel"
-                                    disabled={isSubmitting}
-                                    onClick={handleCancel}
                                 >
                                     <Close />
                                 </IconButton>

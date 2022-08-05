@@ -10,6 +10,7 @@
 - Add noscript message
 - Fix URL text wrap
 - PWA
+- Investigate if React can be replace with Preact
 
 Aggregation pipeline for fuzzy search by label
 
