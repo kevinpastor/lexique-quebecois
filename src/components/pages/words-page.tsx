@@ -1,3 +1,4 @@
+import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
@@ -11,13 +12,13 @@ export const WordsPage = (): ReactElement => {
     const words: Array<Word> = data as Array<Word>;
 
     return (
-        <div className="space-y-4">
+        <Stack spacing={2}>
             {words.map((word: Word): ReactElement => (
                 <WordComponent
                     key={word.timestamp}
                     word={word}
                 />
             ))}
-        </div>
+        </Stack>
     );
 };

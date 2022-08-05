@@ -70,46 +70,36 @@ export const AddPage = (): ReactElement => {
                         <Card>
                             <CardHeader title="Ajouter un mot" />
                             <CardContent>
-                                <div className="space-y-8">
-                                    <div className="space-y-4">
-                                        <div>
-                                            <Field
-                                                component={TextField}
-                                                label="Mot"
-                                                name="label"
-                                                required
-                                                autoFocus
-                                            />
-                                        </div>
-                                        <div>
-                                            <Field
-                                                component={TextField}
-                                                label="Définition"
-                                                name="definition"
-                                                required
-                                                multiline
-                                                minRows={2}
-                                            />
-                                        </div>
-                                        <div>
-                                            <Field
-                                                component={TextField}
-                                                label="Exemple"
-                                                name="example"
-                                                required
-                                                multiline
-                                                minRows={2}
-                                            />
-                                        </div>
-                                        <div>
-                                            <Field
-                                                component={TextField}
-                                                label="Auteur"
-                                                name="author"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+                                <Stack spacing={2}>
+                                    <Field
+                                        component={TextField}
+                                        label="Mot"
+                                        name="label"
+                                        required
+                                        autoFocus
+                                    />
+                                    <Field
+                                        component={TextField}
+                                        label="Définition"
+                                        name="definition"
+                                        required
+                                        multiline
+                                        minRows={2}
+                                    />
+                                    <Field
+                                        component={TextField}
+                                        label="Exemple"
+                                        name="example"
+                                        required
+                                        multiline
+                                        minRows={2}
+                                    />
+                                    <Field
+                                        component={TextField}
+                                        label="Auteur"
+                                        name="author"
+                                    />
+                                </Stack>
                             </CardContent>
                             <CardActions>
                                 <Stack

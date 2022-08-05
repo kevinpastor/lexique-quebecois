@@ -59,14 +59,14 @@ export const WordPage = (): ReactElement => {
                     content={`${wordCollection[0].label} - ${wordCollection[0].definition}`}
                 />
             </Head>
-            <div className="space-y-4">
+            <Stack spacing={2}>
                 {wordCollection.map((word): ReactElement => (
                     <WordComponent
                         key={word.timestamp}
                         word={word}
                     />
                 ))}
-            </div>
+            </Stack>
         </>
     );
 };

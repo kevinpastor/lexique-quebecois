@@ -144,7 +144,7 @@ export const theme = createTheme({
             defaultProps: {
                 titleTypographyProps: {
                     variant: "h2",
-                    component: "h2"
+                    component: "h2" as "span" // MuiCardHeader seems to have a faulty type for the theme configuration
                 }
             },
             styleOverrides: {
