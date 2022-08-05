@@ -1,6 +1,7 @@
 # TODO
 
-- Add admin page
+- Create contact page
+- Create contribute page
 - Add word type (adjective, noun, verb, etc.)
 - Update test with @shelf/jest-mongodb
 - Add pronounciation

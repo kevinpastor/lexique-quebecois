@@ -1,4 +1,5 @@
-import { Add, AttachMoney, ChatBubble, Description, Home, ListAlt, LocalLibrary, PrivacyTip } from "@mui/icons-material";
+import { Add, Description, Home, ListAlt, LocalLibrary, PrivacyTip } from "@mui/icons-material";
+// import { AttachMoney, ChatBubble } from "@mui/icons-material";
 import { Box, Divider, List, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -61,6 +62,8 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
                 icon={<PrivacyTip />}
                 onClick={handleClose}
             />
+            {/*
+            // TODO Create both pages
             <MenuItem
                 label="Contact"
                 href="/contact"
@@ -73,6 +76,7 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
                 icon={<AttachMoney />}
                 onClick={handleClose}
             />
+            */}
         </List>
     </Box>
 );
