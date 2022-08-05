@@ -13,9 +13,9 @@ export const WordPage = (): ReactElement => {
     const { data } = useSWR<Array<Word>>(`/api/words/${query.slug}`);
 
     // `data` coming from `fallback`
-    const wordCollection: Array<Word> | undefined = data as Array<Word> | undefined;
+    const wordCollection: Array<Word> = data as Array<Word>;
 
-    if (!wordCollection || wordCollection.length === 0) {
+    if (wordCollection.length === 0) {
         const handleClick = async (): Promise<void> => {
             if (!query.label) {
                 await push("/ajouter");
@@ -51,8 +51,10 @@ export const WordPage = (): ReactElement => {
     return (
         <>
             <Head>
-                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                <title>{wordCollection[0].label} - Lexique Québécois</title>
+                <title>
+                    {`${wordCollection[0].label} - Lexique Québécois`}
+                    {/* having the sufix inline creates comment blocks inside the title tag */}
+                </title>
                 <meta
                     key="description"
                     name="description"

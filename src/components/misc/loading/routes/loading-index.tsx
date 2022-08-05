@@ -1,8 +1,6 @@
 import { Card, CardActions, CardContent, CardHeader, Skeleton, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
-import { getRandomInteger } from "@utils/misc/random";
-
 export const LoadingIndex = (): ReactElement => (
     <Stack spacing={2}>
         {[...Array(5)].map((_, index): ReactElement => (
@@ -15,13 +13,13 @@ export const LoadingIndex = (): ReactElement => (
                         ml={2}
                     >
                         <Typography variant="body2">
-                            <Skeleton width={`${50 + getRandomInteger(50)}%`} />
+                            <Skeleton width="100%" />
                         </Typography>
                         <Typography variant="subtitle1">
-                            <Skeleton width={`${50 + getRandomInteger(50)}%`} />
+                            <Skeleton width="100%" />
                         </Typography>
                         <Typography variant="subtitle2">
-                            <Skeleton width={`${50 + getRandomInteger(50)}%`} />
+                            <Skeleton width="100%" />
                         </Typography>
                     </Stack>
                 </CardContent>

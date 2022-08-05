@@ -62,8 +62,6 @@ export const SearchContent = ({ onClose: handleClose }: Props): ReactElement => 
                                 direction="row"
                                 alignItems="center"
                                 spacing={1}
-                                width="100%" // TODO Remove
-                                height="100%" // TODO Remove
                             >
                                 <IconButton
                                     onClick={handleClose}

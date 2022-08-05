@@ -107,7 +107,7 @@ describe("getWord", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const wordCollection: Array<Word> | undefined = await getWordCollection(slug, ip);
+        const wordCollection: Array<Word> = await getWordCollection(slug, ip);
 
         expect(wordCollection).toEqual([]);
     });
@@ -123,7 +123,7 @@ describe("getWord", (): void => {
             } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
         } as Partial<Db> as Db);
 
-        const wordCollection: Array<Word> | undefined = await getWordCollection(slug, ip);
+        const wordCollection: Array<Word> = await getWordCollection(slug, ip);
 
         expect(wordCollection).toEqual([wordsStub[0]]);
     });

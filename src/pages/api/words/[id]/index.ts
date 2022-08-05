@@ -27,13 +27,7 @@ const handler: Handler = createHandler({
 
         // ID is used here as the slug to get the word collection
         const slug: string = req.query.id;
-        const wordCollection: Array<Word> | undefined = await getWordCollection(slug, ip);
-
-        if (!wordCollection) {
-            res.status(Status.NotFound)
-                .end();
-            return;
-        }
+        const wordCollection: Array<Word> = await getWordCollection(slug, ip);
 
         res.status(Status.OK)
             .json(wordCollection);

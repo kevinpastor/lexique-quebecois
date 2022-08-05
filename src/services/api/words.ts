@@ -220,8 +220,7 @@ export const deleteWordDocument = async (id: string): Promise<Status> => {
     return Status.OK;
 };
 
-// ! TODO Remove undefined from return type
-export const getWordCollection = async (slug: string, ip: string = ""): Promise<Array<Word> | undefined> => {
+export const getWordCollection = async (slug: string, ip: string = ""): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
     const pipeline = [

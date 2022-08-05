@@ -115,13 +115,11 @@ export const WordDocumentPage = (): ReactElement => {
                                     component={TextField}
                                     label="Mot"
                                     name="label"
-                                    autofocus
                                 />
                                 <Field
                                     component={TextField}
                                     label="Slug"
                                     name="slug"
-                                    autofocus
                                 />
                                 <Field
                                     component={TextField}
@@ -175,7 +173,10 @@ export const WordDocumentPage = (): ReactElement => {
                                 width="100%"
                                 spacing={1}
                             >
-                                <Button disabled={isSubmitting}>
+                                <Button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                >
                                     Enregistrer
                                 </Button>
                                 <Button

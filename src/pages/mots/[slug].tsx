@@ -41,7 +41,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>):
     }
 
     const { slug } = params;
-    const wordCollection: Array<Word> | undefined = await getWordCollection(slug);
+    const wordCollection: Array<Word> = await getWordCollection(slug);
 
     return {
         props: {
