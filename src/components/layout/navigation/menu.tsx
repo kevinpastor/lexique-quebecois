@@ -1,6 +1,4 @@
-import { faBookReader } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Add, AttachMoney, ChatBubble, Description, Home, ListAlt, Menu as MenuIcon, PrivacyTip } from "@mui/icons-material";
+import { Add, AttachMoney, ChatBubble, Description, Home, ListAlt, LocalLibrary, Menu as MenuIcon, PrivacyTip } from "@mui/icons-material";
 import { Box, Divider, IconButton, List, Stack, SwipeableDrawer, Typography } from "@mui/material";
 import { ReactElement, useState } from "react";
 
@@ -34,11 +32,9 @@ export const Menu = (): ReactElement => {
                     <Stack
                         my={2}
                         spacing={1}
+                        alignItems="center"
                     >
-                        <FontAwesomeIcon
-                            icon={faBookReader}
-                            size="3x"
-                        />
+                        <LocalLibrary fontSize="large" />
                         <Typography
                             variant="h3"
                             align="center"

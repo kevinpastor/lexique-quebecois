@@ -1,5 +1,3 @@
-import { config } from "@fortawesome/fontawesome-svg-core";
-import "@fortawesome/fontawesome-svg-core/styles.css";
 import { CheckCircle, Error, Warning } from "@mui/icons-material";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
@@ -9,8 +7,6 @@ import { SWRConfig } from "swr";
 
 import { theme } from "@configs/theme";
 import { fetcher } from "@services/fetcher";
-
-config.autoAddCss = false;
 
 export const Providers = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <StyledEngineProvider injectFirst>
