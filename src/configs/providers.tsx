@@ -1,7 +1,7 @@
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { CheckCircle, Error, Warning } from "@mui/icons-material";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
 import { PropsWithChildren, ReactElement } from "react";
@@ -19,19 +19,19 @@ export const Providers = ({ children }: PropsWithChildren<unknown>): ReactElemen
             <SnackbarProvider
                 iconVariant={{
                     success: (
-                        <div className="mr-2">
+                        <Box mr={1}>
                             <CheckCircle fontSize="small" />
-                        </div>
+                        </Box>
                     ),
                     warning: (
-                        <div className="mr-2">
+                        <Box mr={1}>
                             <Warning fontSize="small" />
-                        </div>
+                        </Box>
                     ),
                     error: (
-                        <div className="mr-2">
+                        <Box mr={1}>
                             <Error fontSize="small" />
-                        </div>
+                        </Box>
                     )
                 }}
             >

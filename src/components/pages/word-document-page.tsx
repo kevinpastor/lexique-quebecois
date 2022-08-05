@@ -1,5 +1,5 @@
-import { ChevronLeft } from "@mui/icons-material";
-import { Button, Card, CardContent, CardHeader, FormControl, FormLabel, IconButton, Typography } from "@mui/material";
+import { Close } from "@mui/icons-material";
+import { Button, Card, CardActions, CardContent, CardHeader, FormControl, FormLabel, IconButton, Stack, Typography } from "@mui/material";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { Switch, TextField } from "formik-mui";
 import { useRouter } from "next/router";
@@ -73,134 +73,120 @@ export const WordDocumentPage = (): ReactElement => {
                 <Form>
                     <Card>
                         <CardHeader
-                            title={
-                                <Typography variant="h2">
-                                    <div className="flex items-center">
-                                        <div className="text-base font-normal">
-                                            <IconButton
-                                                size="small"
-                                                aria-label="Cancel"
-                                                disabled={isSubmitting}
-                                                onClick={handleCancel}
-                                            >
-                                                <ChevronLeft />
-                                            </IconButton>
-                                        </div>
-                                        {wordDocument.label}
-                                    </div>
-                                </Typography>
+                            action={
+                                <IconButton
+                                    size="small"
+                                    aria-label="Cancel"
+                                    disabled={isSubmitting}
+                                    onClick={handleCancel}
+                                >
+                                    <Close />
+                                </IconButton>
                             }
+                            title={wordDocument.label}
                         />
                         <CardContent>
-                            <div className="space-y-4">
+                            <Stack spacing={2}>
                                 <div>
-                                    <div className="font-medium">
+                                    <Typography variant="body2">
                                         ID
-                                    </div>
+                                    </Typography>
                                     <div>
                                         {wordDocument._id}
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="font-medium">
+                                    <Typography variant="body2">
                                         Timestamp
-                                    </div>
+                                    </Typography>
                                     <div>
                                         {new Date(timestamp).toISOString()}
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="font-medium">
+                                    <Typography variant="body2">
                                         IP
-                                    </div>
+                                    </Typography>
                                     <div>
                                         {wordDocument.ip}
                                     </div>
                                 </div>
-                                <div>
+                                <Field
+                                    component={TextField}
+                                    label="Mot"
+                                    name="label"
+                                    autofocus
+                                />
+                                <Field
+                                    component={TextField}
+                                    label="Slug"
+                                    name="slug"
+                                    autofocus
+                                />
+                                <Field
+                                    component={TextField}
+                                    label="Définition"
+                                    name="definition"
+                                    multiline
+                                />
+                                <Field
+                                    component={TextField}
+                                    label="Exemple"
+                                    name="example"
+                                    multiline
+                                />
+                                <Field
+                                    component={TextField}
+                                    label="Auteur"
+                                    name="author"
+                                />
+                                <FormControl
+                                    component="fieldset"
+                                    variant="standard"
+                                >
+                                    <FormLabel component="legend">Is Approved</FormLabel>
                                     <Field
-                                        component={TextField}
-                                        label="Mot"
-                                        name="label"
-                                        autofocus
+                                        component={Switch}
+                                        type="checkbox"
+                                        name="isApproved"
                                     />
-                                </div>
+                                </FormControl>
                                 <div>
-                                    <Field
-                                        component={TextField}
-                                        label="Slug"
-                                        name="slug"
-                                        autofocus
-                                    />
-                                </div>
-                                <div>
-                                    <Field
-                                        component={TextField}
-                                        label="Définition"
-                                        name="definition"
-                                        multiline
-                                    />
-                                </div>
-                                <div>
-                                    <Field
-                                        component={TextField}
-                                        label="Exemple"
-                                        name="example"
-                                        multiline
-                                    />
-                                </div>
-                                <div>
-                                    <Field
-                                        component={TextField}
-                                        label="Auteur"
-                                        name="author"
-                                    />
-                                </div>
-                                <div>
-                                    <FormControl
-                                        component="fieldset"
-                                        variant="standard"
-                                    >
-                                        <FormLabel component="legend">Is Approved</FormLabel>
-                                        <Field
-                                            component={Switch}
-                                            type="checkbox"
-                                            name="isApproved"
-                                        />
-                                    </FormControl>
-                                </div>
-                                <div>
-                                    <div className="font-medium">
+                                    <Typography variant="body2">
                                         Likes
-                                    </div>
+                                    </Typography>
                                     <div>
                                         {wordDocument.likes?.length ?? 0}
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="font-medium">
+                                    <Typography variant="body2">
                                         Dislikes
-                                    </div>
+                                    </Typography>
                                     <div>
                                         {wordDocument.dislikes?.length ?? 0}
                                     </div>
                                 </div>
-                                <div className="flex justify-end gap-2">
-                                    <Button
-                                        disabled={isSubmitting}
-                                        onClick={handleDelete}
-                                        color="error"
-                                    >
-                                        Supprimer
-                                    </Button>
-                                    <Button
-                                        disabled={isSubmitting}
-                                    >
-                                        Enregistrer
-                                    </Button>
-                                </div>
-                            </div>
+                            </Stack>
                         </CardContent>
+                        <CardActions>
+                            <Stack
+                                direction="row-reverse"
+                                width="100%"
+                                spacing={1}
+                            >
+                                <Button disabled={isSubmitting}>
+                                    Enregistrer
+                                </Button>
+                                <Button
+                                    disabled={isSubmitting}
+                                    onClick={handleDelete}
+                                    color="error"
+                                >
+                                    Supprimer
+                                </Button>
+                            </Stack>
+                        </CardActions>
                     </Card>
                 </Form>
             )

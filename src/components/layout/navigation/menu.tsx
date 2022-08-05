@@ -29,9 +29,7 @@ export const Menu = (): ReactElement => {
             >
                 <Box
                     p={2}
-                    // TODO Update className
-                    // eslint-disable-next-line react/forbid-component-props
-                    className="w-64 sm:w-96"
+                    width={256} // TODO Have it wider on desktop
                 >
                     <Stack
                         my={2}

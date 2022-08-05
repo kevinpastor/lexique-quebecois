@@ -1,6 +1,5 @@
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
+import { CheckCircle } from "@mui/icons-material";
+import { Card, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 import useSWR from "swr";
@@ -22,9 +21,10 @@ export const WordDocumentsPage = (): ReactElement => {
                     Index
                 </Typography>
                 {wordDocuments.map(({ _id, label, isApproved }: WithStringId<WordDocument>): ReactElement => (
-                    <div
+                    <Stack
                         key={_id}
-                        className="flex gap-2"
+                        direction="row"
+                        spacing={1}
                     >
                         <NextLink
                             href={`/admin/${_id}`}
@@ -35,13 +35,10 @@ export const WordDocumentsPage = (): ReactElement => {
                             </Link>
                         </NextLink>
                         {isApproved && (
-                            <div className="text-black/[.60]">
-                                <FontAwesomeIcon
-                                    icon={faCheckCircle}
-                                />
-                            </div>
+                            <CheckCircle fontSize="small" />
                         )}
-                    </div>
+                    </Stack>
+
                 ))}
             </CardContent>
         </Card>
