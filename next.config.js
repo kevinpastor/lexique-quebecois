@@ -2,7 +2,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 const bundleAnalyzer = require("@next/bundle-analyzer");
 
 const withBundleAnalyzer = bundleAnalyzer({
-    enabled: process.env.ANALYZE_BUNDLE === 'true',
+    enabled: process.env.ANALYZE_BUNDLE === "true",
 });
 
 /**
@@ -21,7 +21,7 @@ module.exports = (phase, { defaultConfig }) => {
         "js"
     ];
 
-    /** @type {import('next').NextConfig} */
+    /** @type {import("next").NextConfig} */
     const nextConfig = {
         ...defaultConfig,
         pageExtensions: defaultPageExtensions.map((extension) => {
@@ -30,7 +30,7 @@ module.exports = (phase, { defaultConfig }) => {
             return isDevServer ? [devExtension, extension] : prodExtension;
         })
             .flat(),
-        productionBrowserSourceMaps: process.env.ANALYZE_SOURCE_MAP === 'true'
+        productionBrowserSourceMaps: process.env.ANALYZE_SOURCE_MAP === "true",
     }
 
     return withBundleAnalyzer(nextConfig);
