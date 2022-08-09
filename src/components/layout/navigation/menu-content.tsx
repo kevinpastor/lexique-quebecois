@@ -1,9 +1,10 @@
 import { Add, Description, Home, ListAlt, LocalLibrary, PrivacyTip } from "@mui/icons-material";
 // import { AttachMoney, ChatBubble } from "@mui/icons-material";
-import { Box, Divider, List, Stack, Typography } from "@mui/material";
+import { Box, Divider, List, ListItem, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
 import { MenuItem } from "./menu-item";
+import { Theme } from "./theme";
 
 export interface Props {
     onClose: () => void;
@@ -77,6 +78,12 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
                 onClick={handleClose}
             />
             */}
+        </List>
+        <Divider />
+        <List>
+            <ListItem disableGutters>
+                <Theme />
+            </ListItem>
         </List>
     </Box>
 );

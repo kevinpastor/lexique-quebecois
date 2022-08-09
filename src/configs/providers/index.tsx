@@ -1,17 +1,17 @@
 import { CheckCircle, Error, Warning } from "@mui/icons-material";
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { Box } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
 import { PropsWithChildren, ReactElement } from "react";
 import { SWRConfig } from "swr";
 
-import { theme } from "@configs/theme";
 import { fetcher } from "@services/fetcher";
+
+import { ThemeProvider } from "./theme-provider";
 
 export const Providers = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
+        <ThemeProvider>
             <SnackbarProvider
                 iconVariant={{
                     success: (

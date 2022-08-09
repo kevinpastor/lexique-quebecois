@@ -3,6 +3,7 @@
 - fix: search autofocus on mobile
 - fix: add page autofocus on mobile
 - feat: skip static generation on preview build (https://nextjs.org/docs/basic-features/data-fetching/get-static-paths#generating-paths-on-demand)
+- feat: add dark theme browser favicon
 - feat: upgrade to next@12.2.3
 - feat: create contact page
 - feat: create contribute page
