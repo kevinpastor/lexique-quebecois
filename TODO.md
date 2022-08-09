@@ -1,15 +1,19 @@
 # TODO
 
-- Create contact page
-- Create contribute page
-- Add word type (adjective, noun, verb, etc.)
-- Update test with @shelf/jest-mongodb
-- Add pronounciation
-- Add alternative spelling
-- beforeunload on ajouter
-- Add noscript message
-- PWA
-- Investigate if React can be replace with Preact
+- fix: search autofocus on mobile
+- fix: add page autofocus on mobile
+- feat: skip static generation on preview build (https://nextjs.org/docs/basic-features/data-fetching/get-static-paths#generating-paths-on-demand)
+- feat: upgrade to next@12.2.3
+- feat: create contact page
+- feat: create contribute page
+- feat: add word type (adjective, noun, verb, etc.)
+- test: update test with @shelf/jest-mongodb
+- feat: add pronounciation
+- feat: add alternative spelling
+- feat: beforeunload on add page
+- feat: add noscript message
+- chore: investigate PWA
+- chore: investigate if React can be replace with Preact
 
 Aggregation pipeline for fuzzy search by label
 

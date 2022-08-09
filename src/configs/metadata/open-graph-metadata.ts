@@ -19,7 +19,7 @@ export const openGraphMetadata: Array<Meta> = [
     // },
     {
         name: "og:description",
-        content: "Un peu comme Urban Dictionary, mais québécois."
+        content: "Un peu comme Urban Dictionary, mais tokébakicitte."
     },
     {
         name: "og:locale",
