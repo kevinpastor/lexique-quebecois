@@ -1,15 +1,14 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactElement } from "react";
-import { useTernaryDarkMode } from "usehooks-ts";
 
-import { TernaryDarkMode } from "@configs/providers/theme-provider";
+import { useDarkMode, TernaryMode } from "@utils/hooks/use-dark-mode";
 
 export const Theme = (): ReactElement => {
-    const { ternaryDarkMode, setTernaryDarkMode } = useTernaryDarkMode();
+    const { ternaryMode, setMode } = useDarkMode();
 
-    const handleChange = (event: SelectChangeEvent<TernaryDarkMode>): void => {
-        const themeMode: TernaryDarkMode = event.target.value as TernaryDarkMode;
-        setTernaryDarkMode(themeMode);
+    const handleChange = (event: SelectChangeEvent<TernaryMode>): void => {
+        const themeMode: TernaryMode = event.target.value as TernaryMode;
+        setMode(themeMode);
     };
 
     return (
@@ -19,7 +18,7 @@ export const Theme = (): ReactElement => {
             </InputLabel>
             <Select
                 label="Thème"
-                value={ternaryDarkMode}
+                value={ternaryMode}
                 onChange={handleChange}
             >
                 <MenuItem value="system">Automatique</MenuItem>

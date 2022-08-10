@@ -1,23 +1,15 @@
-import { CssBaseline, PaletteMode, Theme, ThemeProvider as MuiThemeProvider, useMediaQuery } from "@mui/material";
+import { CssBaseline, Theme, ThemeProvider as MuiThemeProvider } from "@mui/material";
 import { PropsWithChildren, ReactElement, useMemo } from "react";
-import { useTernaryDarkMode } from "usehooks-ts";
 
 import { getTheme } from "@configs/theme";
-
-export type TernaryDarkMode = "system" | "light" | "dark";
+import { useDarkMode } from "@utils/hooks/use-dark-mode";
 
 export const ThemeProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => {
-    const { ternaryDarkMode } = useTernaryDarkMode();
-    const prefersDarkMode: boolean = useMediaQuery("(prefers-color-scheme: dark)");
-    const paletteMode: PaletteMode = ternaryDarkMode === "system"
-        ? prefersDarkMode
-            ? "dark"
-            : "light"
-        : ternaryDarkMode;
+    const { mode } = useDarkMode();
 
     const theme = useMemo((): Theme => (
-        getTheme(paletteMode)
-    ), [paletteMode]);
+        getTheme(mode)
+    ), [mode]);
 
     return (
         <MuiThemeProvider theme={theme}>
