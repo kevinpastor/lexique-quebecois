@@ -20,6 +20,7 @@
 - feat: center title
 - feat: remove card title underline
 - fix: form validation on mobile
+- feat: back button navigation
 
 Aggregation pipeline for fuzzy search by label
 
