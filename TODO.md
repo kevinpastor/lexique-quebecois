@@ -15,6 +15,12 @@
 - chore: investigate PWA
 - chore: investigate if React can be replace with Preact
 
+## Suggestions
+
+- feat: center title
+- feat: remove card title underline
+- fix: form validation on mobile
+
 Aggregation pipeline for fuzzy search by label
 
 ```

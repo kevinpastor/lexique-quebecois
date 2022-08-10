@@ -85,6 +85,7 @@ export const Dislikes = ({
             onClick={handleClick}
             aria-label="Dislike"
             startIcon={isDisliked ? <ThumbDown /> : <ThumbDownOutlined />}
+            size="small"
         >
             {dislikes}
         </Button>

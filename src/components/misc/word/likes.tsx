@@ -85,6 +85,7 @@ export const Likes = ({
             onClick={handleClick}
             aria-label="Like"
             startIcon={isLiked ? <ThumbUp color="primary" /> : <ThumbUpOutlined />}
+            size="small"
         >
             {likes}
         </Button>

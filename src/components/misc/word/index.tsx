@@ -76,6 +76,7 @@ export const Word = ({ word }: Props): ReactElement => {
                     <Button
                         onClick={handleClick}
                         startIcon={<Share />}
+                        size="small"
                     >
                         Partager
                     </Button>
