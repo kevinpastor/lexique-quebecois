@@ -32,7 +32,7 @@ export const SearchContent = ({ onClose: handleClose }: Props): ReactElement => 
     const { push } = useRouter();
 
     const onSubmit = async (values: FormValues): Promise<void> => {
-        const label: string = values.label;
+        const label: string = values.label.trim();
         const slug: string = getSlug(label);
         handleClose();
         await push(
