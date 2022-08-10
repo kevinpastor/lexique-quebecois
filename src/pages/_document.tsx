@@ -9,28 +9,63 @@ const Document = (): ReactElement => (
         <Head>
             <link
                 rel="icon"
-                href="/favicon.ico"
+                href="/favicon/light/16.ico"
                 sizes="16x16"
+                media="(prefers-color-scheme: light)"
             />
             <link
                 rel="icon"
-                href="/favicon-32.ico"
+                href="/favicon/light/32.ico"
                 sizes="32x32"
+                media="(prefers-color-scheme: light)"
             />
             <link
                 rel="icon"
-                href="/favicon-128.ico"
+                href="/favicon/light/128.ico"
                 sizes="128x128"
+                media="(prefers-color-scheme: light)"
             />
             <link
                 rel="icon"
-                href="/favicon-180.ico"
+                href="/favicon/light/180.ico"
                 sizes="180x180"
+                media="(prefers-color-scheme: light)"
             />
             <link
                 rel="icon"
-                href="/favicon-192.ico"
+                href="/favicon/light/192.ico"
                 sizes="192x192"
+                media="(prefers-color-scheme: light)"
+            />
+            <link
+                rel="icon"
+                href="/favicon/dark/16.ico"
+                sizes="16x16"
+                media="(prefers-color-scheme: dark)"
+            />
+            <link
+                rel="icon"
+                href="/favicon/dark/32.ico"
+                sizes="32x32"
+                media="(prefers-color-scheme: dark)"
+            />
+            <link
+                rel="icon"
+                href="/favicon/dark/128.ico"
+                sizes="128x128"
+                media="(prefers-color-scheme: dark)"
+            />
+            <link
+                rel="icon"
+                href="/favicon/dark/180.ico"
+                sizes="180x180"
+                media="(prefers-color-scheme: dark)"
+            />
+            <link
+                rel="icon"
+                href="/favicon/dark/192.ico"
+                sizes="192x192"
+                media="(prefers-color-scheme: dark)"
             />
             <link
                 rel="preconnect"

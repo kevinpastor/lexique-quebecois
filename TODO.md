@@ -2,8 +2,6 @@
 
 - fix: search autofocus on mobile
 - fix: add page autofocus on mobile
-- feat: add dark theme browser favicon
-- feat: upgrade to next@12.2.3
 - feat: create contact page
 - feat: create contribute page
 - feat: add word type (adjective, noun, verb, etc.)
@@ -14,6 +12,7 @@
 - feat: add noscript message
 - chore: investigate PWA
 - chore: investigate if React can be replace with Preact
+- chore: investigate CSS variables for MUI
 
 ## Suggestions
 
