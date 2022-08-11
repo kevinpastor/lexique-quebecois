@@ -6,7 +6,7 @@ import { ReactElement } from "react";
 
 import { Word as IWord } from "@models/word";
 import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
-// import { formatDate } from "@utils/misc/date";
+import { formatDate } from "@utils/misc/date";
 
 import { Reactions } from "./reactions";
 
@@ -61,8 +61,9 @@ export const Word = ({ word }: Props): ReactElement => {
                     </Typography>
                     <Typography variant="subtitle2">
                         {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                        par ${word.author ?? "Anonyme"}
-                        {/* , le ${formatDate(word.timestamp)} */}
+                        {/* par {word.author ?? "Anonyme"} */}
+                        , le
+                        {formatDate(word.timestamp)}
                     </Typography>
                 </Stack>
             </CardContent>
