@@ -1,4 +1,4 @@
-import { ScopedCssBaseline, Theme, ThemeProvider as MuiThemeProvider } from "@mui/material";
+import { CssBaseline, Theme, ThemeProvider as MuiThemeProvider } from "@mui/material";
 import { PropsWithChildren, ReactElement, useMemo } from "react";
 
 import { getTheme } from "@configs/theme";
@@ -17,11 +17,12 @@ export const ThemeProvider = ({ children }: PropsWithChildren<unknown>): ReactEl
         mode === "light" ? lightTheme : darkTheme
     ), [mode, lightTheme, darkTheme]);
 
+    const isClientSide: boolean = typeof window !== "undefined";
+
     return (
         <MuiThemeProvider theme={theme}>
-            <ScopedCssBaseline>
-                {children}
-            </ScopedCssBaseline>
+            {isClientSide && <CssBaseline />}
+            {children}
         </MuiThemeProvider>
     );
 };
