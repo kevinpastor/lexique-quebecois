@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 import useSWR from "swr";
