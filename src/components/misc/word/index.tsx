@@ -2,7 +2,7 @@ import { Share } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { useSnackbar } from "notistack";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 import { Word as IWord } from "@models/word";
 import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
@@ -17,6 +17,11 @@ interface Props {
 export const Word = ({ word }: Props): ReactElement => {
     const copy = useCopyToClipboard();
     const { enqueueSnackbar } = useSnackbar();
+
+    const [formattedTimestamp, setFormattedTimestamp] = useState<string | undefined>(undefined);
+    useEffect((): void => {
+        setFormattedTimestamp(formatDate(word.timestamp));
+    }, [word.timestamp]);
 
     const handleClick = async (): Promise<void> => {
         try {
@@ -60,8 +65,9 @@ export const Word = ({ word }: Props): ReactElement => {
                         {word.example}
                     </Typography>
                     <Typography variant="subtitle2">
-                        {/* par {word.author ?? "Anonyme"}, le */}
-                        {formatDate(word.timestamp)}
+                        {formattedTimestamp
+                            ? `par ${word.author ?? "Anonyme"}, le ${formattedTimestamp}`
+                            : `par ${word.author ?? "Anonyme"}`}
                     </Typography>
                 </Stack>
             </CardContent>
