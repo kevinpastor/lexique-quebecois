@@ -19,6 +19,12 @@ const getOutlineColor = (paletteMode: PaletteMode): string => (
         : alpha(colors.common.white, 0.12)
 );
 
+const getHalfOutlineColor = (paletteMode: PaletteMode): string => (
+    paletteMode === "light"
+        ? alpha(colors.common.black, 0.06)
+        : alpha(colors.common.white, 0.06)
+);
+
 const getHoveredOutlineColor = (paletteMode: PaletteMode): string => (
     paletteMode === "light"
         ? alpha(colors.common.black, 0.16)
@@ -36,7 +42,8 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
             },
             secondary: {
                 main: "#1976d2"
-            }
+            },
+            divider: getOutlineColor(paletteMode)
         },
         typography: {
             fontFamily: [
@@ -122,7 +129,8 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
             },
             MuiButton: {
                 defaultProps: {
-                    variant: "outlined"
+                    variant: "outlined",
+                    color: "inherit"
                 },
                 styleOverrides: {
                     root: {
@@ -130,18 +138,23 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                         textTransform: "none"
                     },
                     outlined: {
-                        border: `2px solid ${getOutlineColor(paletteMode)}`,
+                        borderWidth: 2,
+                        borderColor: getOutlineColor(paletteMode),
                         ":hover": {
-                            border: `2px solid ${getOutlineColor(paletteMode)}`
+                            borderWidth: 2,
+                            borderColor: getOutlineColor(paletteMode)
                         }
                     }
                 }
             },
             MuiButtonGroup: {
+                defaultProps: {
+                    color: "inherit"
+                },
                 styleOverrides: {
                     grouped: {
                         ":not(:last-of-type):hover": {
-                            borderRightColor: getOutlineColor(paletteMode)
+                            borderRightColor: getHalfOutlineColor(paletteMode)
                         }
                     }
                 }
@@ -152,7 +165,7 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                 },
                 styleOverrides: {
                     root: {
-                        border: `2px solid ${getOutlineColor(paletteMode)}`
+                        borderWidth: 2
                     }
                 }
             },
@@ -165,18 +178,18 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                 },
                 styleOverrides: {
                     root: {
-                        margin: "16px",
-                        padding: "0px"
+                        margin: 16,
+                        padding: 0
                     }
                 }
             },
             MuiCardContent: {
                 styleOverrides: {
                     root: {
-                        margin: "16px",
-                        padding: "0px",
+                        margin: 16,
+                        padding: 0,
                         ":last-child": {
-                            paddingBottom: "0px"
+                            paddingBottom: 0
                         }
                     }
                 }
@@ -184,15 +197,15 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
             MuiCardActions: {
                 styleOverrides: {
                     root: {
-                        margin: "16px",
-                        padding: "0px"
+                        margin: 16,
+                        padding: 0
                     }
                 }
             },
             MuiDivider: {
                 styleOverrides: {
                     root: {
-                        borderBottomWidth: "2px"
+                        borderBottomWidth: 2
                     }
                 }
             },
@@ -225,7 +238,8 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                         }
                     },
                     notchedOutline: {
-                        border: `2px solid ${getOutlineColor(paletteMode)}`
+                        borderWidth: 2,
+                        borderColor: getOutlineColor(paletteMode)
                     }
                 }
             },

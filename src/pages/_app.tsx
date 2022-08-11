@@ -6,7 +6,7 @@ import { Layout } from "@components/layout";
 import { Providers } from "@configs/providers";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
-    <Providers>
+    <>
         <Head>
             <title>Lexique Québécois</title>
             <meta
@@ -19,10 +19,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
                 content="Un peu comme Urban Dictionary, mais québécois."
             />
         </Head>
-        <Layout>
-            <Component {...pageProps} />
-        </Layout>
-    </Providers>
+        <Providers>
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+        </Providers>
+    </>
 );
 
 export default App;
