@@ -19,8 +19,13 @@ export const WordsPage = (): ReactElement | null => {
     }, [setTrue]);
 
     if (!isClientSide) {
+        console.log("I'm on the server.");
+        console.log(words);
         return null;
     }
+
+    console.log("I'm on the client.");
+    console.log(words);
 
     return (
         <Stack spacing={2}>
