@@ -60,9 +60,7 @@ export const Word = ({ word }: Props): ReactElement => {
                         {word.example}
                     </Typography>
                     <Typography variant="subtitle2">
-                        {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                        {/* par {word.author ?? "Anonyme"} */}
-                        , le
+                        {/* par {word.author ?? "Anonyme"}, le */}
                         {formatDate(word.timestamp)}
                     </Typography>
                 </Stack>
