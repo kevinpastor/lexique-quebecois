@@ -56,11 +56,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 module.exports = (phase, { defaultConfig }) => (
     withLocalPages(
         withSourceMapAnalyzer(
-            withBundleAnalyzer({
-                compiler: {
-                    styledComponents: true
-                }
-            })
+            withBundleAnalyzer()
         ),
         {
             phase,

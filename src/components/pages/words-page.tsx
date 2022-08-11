@@ -14,7 +14,7 @@ export const WordsPage = (): ReactElement | null => {
 
     return (
         <Stack spacing={2}>
-            {[words[0], words[1]].map((word: Word): ReactElement => (
+            {[words[0], words[1], words[2]].map((word: Word): ReactElement => (
                 <WordComponent
                     key={word.timestamp}
                     word={word}
