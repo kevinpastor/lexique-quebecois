@@ -59,9 +59,11 @@ export const Word = ({ word }: Props): ReactElement => {
                     <Typography variant="subtitle1">
                         {word.example}
                     </Typography>
-                    {/* <Typography variant="subtitle2">
-                        {`par ${word.author ?? "Anonyme"}, le ${formatDate(word.timestamp)}`}
-                    </Typography> */}
+                    <Typography variant="subtitle2">
+                        {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                        par ${word.author ?? "Anonyme"}
+                        {/* , le ${formatDate(word.timestamp)} */}
+                    </Typography>
                 </Stack>
             </CardContent>
             <CardActions>
