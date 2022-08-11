@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { Word as WordComponent } from "@components/misc/word";
 import { Word } from "@models/word";
 
-export const WordsPage = (): ReactElement | null => {
+export const WordsPage = (): ReactElement => {
     const { data } = useSWR<Array<Word>>("/api/words/sample");
 
     // `data` coming from `fallback`
