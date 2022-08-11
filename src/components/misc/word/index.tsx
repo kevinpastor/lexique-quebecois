@@ -6,7 +6,7 @@ import { ReactElement } from "react";
 
 import { Word as IWord } from "@models/word";
 import { useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
-import { formatDate } from "@utils/misc/date";
+// import { formatDate } from "@utils/misc/date";
 
 import { Reactions } from "./reactions";
 
@@ -59,9 +59,9 @@ export const Word = ({ word }: Props): ReactElement => {
                     <Typography variant="subtitle1">
                         {word.example}
                     </Typography>
-                    <Typography variant="subtitle2">
+                    {/* <Typography variant="subtitle2">
                         {`par ${word.author ?? "Anonyme"}, le ${formatDate(word.timestamp)}`}
-                    </Typography>
+                    </Typography> */}
                 </Stack>
             </CardContent>
             <CardActions>
