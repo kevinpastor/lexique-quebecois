@@ -1,15 +1,26 @@
 import { Stack } from "@mui/material";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import useSWR from "swr";
 
 import { Word as WordComponent } from "@components/misc/word";
 import { Word } from "@models/word";
+import { useBoolean } from "@utils/hooks/use-boolean";
 
-export const WordsPage = (): ReactElement => {
+export const WordsPage = (): ReactElement | null => {
     const { data } = useSWR<Array<Word>>("/api/words/sample");
 
     // `data` coming from `fallback`
     const words: Array<Word> = data as Array<Word>;
+
+    const { value: isClientSide, setTrue } = useBoolean(false);
+
+    useEffect((): void => {
+        setTrue();
+    }, [setTrue]);
+
+    if (!isClientSide) {
+        return null;
+    }
 
     return (
         <Stack spacing={2}>
