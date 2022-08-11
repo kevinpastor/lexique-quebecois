@@ -233,7 +233,7 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
             MuiOutlinedInput: {
                 styleOverrides: {
                     root: {
-                        "&:hover:not(.Mui-error) .MuiOutlinedInput-notchedOutline": {
+                        "&:hover:not(.Mui-error):not(.Mui-focused) .MuiOutlinedInput-notchedOutline": {
                             borderColor: getHoveredOutlineColor(paletteMode)
                         }
                     },

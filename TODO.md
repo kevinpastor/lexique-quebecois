@@ -1,10 +1,8 @@
 # TODO
 
-- fix: hyradation error
 - feat: update input color
 - fix: search autofocus on mobile
 - fix: add page autofocus on mobile
-- fix: update text field border color on hover
 - fix: update menu item border radius on hover
 - feat: create contact page
 - feat: create contribute page
