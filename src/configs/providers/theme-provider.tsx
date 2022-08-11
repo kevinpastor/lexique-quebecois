@@ -1,4 +1,4 @@
-import { CssBaseline, Theme, ThemeProvider as MuiThemeProvider } from "@mui/material";
+import { ScopedCssBaseline, Theme, ThemeProvider as MuiThemeProvider } from "@mui/material";
 import { PropsWithChildren, ReactElement, useMemo } from "react";
 
 import { getTheme } from "@configs/theme";
@@ -19,8 +19,9 @@ export const ThemeProvider = ({ children }: PropsWithChildren<unknown>): ReactEl
 
     return (
         <MuiThemeProvider theme={theme}>
-            <CssBaseline />
-            {children}
+            <ScopedCssBaseline>
+                {children}
+            </ScopedCssBaseline>
         </MuiThemeProvider>
     );
 };
