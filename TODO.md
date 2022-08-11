@@ -1,5 +1,6 @@
 # TODO
 
+- fix: hyradation error
 - feat: update input color
 - fix: search autofocus on mobile
 - fix: add page autofocus on mobile
