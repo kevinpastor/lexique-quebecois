@@ -35,6 +35,9 @@ export const Word = ({ word }: Props): ReactElement => {
         );
     };
 
+    // eslint-disable-next-line no-console
+    console.log(formatDate(word.timestamp));
+
     return (
         <Card>
             <CardHeader
