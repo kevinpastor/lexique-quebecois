@@ -1,4 +1,5 @@
 import { PaletteMode, useMediaQuery } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts"; // TODO Replace with custom implementation
 
 export type TernaryMode = "light" | "dark" | "system";
@@ -14,12 +15,17 @@ export const useDarkMode = (): ReturnType => {
 
     const prefersDarkMode: boolean = useMediaQuery("(prefers-color-scheme: dark)");
 
-    const mode: PaletteMode =
-        ternaryMode === "system"
+    const [mode, setMode] = useState<PaletteMode>("light");
+
+    useEffect((): void => {
+        const newMode: PaletteMode = ternaryMode === "system"
             ? prefersDarkMode
                 ? "dark"
                 : "light"
             : ternaryMode;
+
+        setMode(newMode);
+    }, [prefersDarkMode, ternaryMode]);
 
     return {
         mode,
