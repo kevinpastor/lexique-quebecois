@@ -1,5 +1,5 @@
 import type { } from "@mui/lab/themeAugmentation";
-import { createTheme, alpha, colors, PaletteMode, Theme } from "@mui/material";
+import { createTheme, alpha, colors, PaletteMode, Theme, lighten } from "@mui/material";
 
 const getHighEmphasyColor = (paletteMode: PaletteMode): string => (
     paletteMode === "light"
@@ -31,7 +31,44 @@ const getHoveredOutlineColor = (paletteMode: PaletteMode): string => (
         : alpha(colors.common.white, 0.16)
 );
 
+const getPaperBackgroundColor = (paletteMode: PaletteMode): string => (
+    paletteMode === "light"
+        ? colors.common.white
+        : "#121212"
+);
+
+interface ElevationOverlay {
+    [elevation: number]: number;
+}
+
+// Values taken from https://material.io/design/color/dark-theme.html
+const darkElevationOverlay: ElevationOverlay = {
+    [0]: 0,
+    [1]: 0.05,
+    [2]: 0.07,
+    [3]: 0.08,
+    [4]: 0.09,
+    [6]: 0.11,
+    [8]: 0.12,
+    [12]: 0.14,
+    [16]: 0.15,
+    [24]: 0.16
+};
+
+type DefinedEvelation = keyof typeof darkElevationOverlay;
+
+const definedElevations: Array<DefinedEvelation> = Object.keys(darkElevationOverlay)
+    .map((key): DefinedEvelation => parseInt(key, 10));
+
+const getElevationBackgroundColor = (paletteMode: PaletteMode, elevation: DefinedEvelation): string => (
+    paletteMode === "light"
+        ? getPaperBackgroundColor(paletteMode)
+        : lighten(getPaperBackgroundColor(paletteMode), darkElevationOverlay[elevation])
+);
+
 const lineHeight: number = 1.5;
+
+const borderRadius: number = 4;
 
 export const getTheme = (paletteMode: PaletteMode): Theme => (
     createTheme({
@@ -225,6 +262,13 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                     }
                 }
             },
+            MuiListItemButton: {
+                styleOverrides: {
+                    root: {
+                        borderRadius
+                    }
+                }
+            },
             MuiLoadingButton: {
                 defaultProps: {
                     variant: "outlined"
@@ -241,6 +285,21 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                         borderWidth: 2,
                         borderColor: getOutlineColor(paletteMode)
                     }
+                }
+            },
+            MuiPaper: {
+                styleOverrides: {
+                    root: {
+                        transitionDuration: "300ms",
+                        transitionProperty: "all",
+                        backgroundImage: "none"
+                    },
+                    ...definedElevations.reduce((accumulator, elevation) => ({
+                        ...accumulator,
+                        [`elevation${elevation}`]: {
+                            backgroundColor: getElevationBackgroundColor(paletteMode, elevation)
+                        }
+                    }), {})
                 }
             },
             MuiSelect: {

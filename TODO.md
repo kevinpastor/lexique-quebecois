@@ -1,9 +1,8 @@
 # TODO
 
-- fix: update menu item border radius on hover
+- feat: add word classes (adjective, noun, verb, etc.)
 - feat: create contact page
 - feat: create contribute page
-- feat: add word type (adjective, noun, verb, etc.)
 - test: update test with @shelf/jest-mongodb
 - feat: add pronounciation
 - feat: add alternative spelling
