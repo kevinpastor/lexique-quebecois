@@ -66,7 +66,7 @@ export const AddPage = (): ReactElement => {
                 validateOnChange={false}
             >
                 {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
-                    <Form>
+                    <Form noValidate>
                         <Card>
                             <CardHeader title="Ajouter un mot" />
                             <CardContent>

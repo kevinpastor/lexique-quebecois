@@ -115,6 +115,7 @@ export const WordDocumentPage = (): ReactElement => {
                                     component={TextField}
                                     label="Mot"
                                     name="label"
+                                    required
                                 />
                                 <Field
                                     component={TextField}

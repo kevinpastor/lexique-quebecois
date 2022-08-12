@@ -27,27 +27,27 @@ export const wordRequestValidationSchema = yup
         label: yup
             .string()
             .trim()
-            .min(2, "Ce champ ne peut pas avoir moins de 2 caractères.")
-            .max(32, "Ce champ ne peut pas dépasser 32 caractères.")
-            .matches(labelRegex, "Ce champ ne peut contenir que des lettres, des espaces ou des tirets.")
+            .min(2, "Ce champ doit contenir au moins 2 caractères.")
+            .max(32, "Ce champ doit contenir au maximum 32 caractères.")
+            .matches(labelRegex, "Ce champ peut contenir des lettres, des espaces ou des tirets.")
             .required("Ce champ est requis."),
         definition: yup
             .string()
             .trim()
-            .min(2, "Ce champ ne peut pas avoir moins de 2 caractères.")
-            .max(256, "Ce champ ne peut pas dépasser 256 caractères.")
+            .min(2, "Ce champ doit contenir au moins 2 caractères.")
+            .max(256, "Ce champ doit contenir au maximum 256 caractères.")
             .required("Ce champ est requis."),
         example: yup
             .string()
             .trim()
-            .min(2, "Ce champ ne peut pas avoir moins de 2 caractères.")
-            .max(256, "Ce champ ne peut pas dépasser 256 caractères.")
+            .min(2, "Ce champ doit contenir au moins 2 caractères.")
+            .max(256, "Ce champ doit contenir au maximum 256 caractères.")
             .required("Ce champ est requis."),
         author: yup
             .string()
             .trim()
-            .min(2, "Ce champ ne peut pas avoir moins de 2 caractères.")
-            .max(32, "Ce champ ne peut pas dépasser 32 caractères.")
+            .min(2, "Ce champ doit contenir au moins 2 caractères.")
+            .max(32, "Ce champ doit contenir au maximum 32 caractères.")
             .optional()
             .transform((value: unknown): unknown | undefined => (
                 value === "" ? undefined : value

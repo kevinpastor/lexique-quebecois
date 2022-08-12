@@ -1,7 +1,6 @@
 import { ArrowBack } from "@mui/icons-material";
-import { Box, Container, IconButton, Paper, Stack } from "@mui/material";
-import { Field, Form, Formik } from "formik";
-import { TextField } from "formik-mui";
+import { Box, Container, IconButton, Paper, Stack, TextField } from "@mui/material";
+import { Form, Formik, FormikProps } from "formik";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import * as yup from "yup";
@@ -20,8 +19,9 @@ const validationSchema = yup
     .object({
         label: yup
             .string()
-            .min(2, "")
-            .max(32, "")
+            .min(2, "Ce champ doit contenir au moins 2 caractères.")
+            .max(32, "Ce champ doit contenir au maximum 32 caractères.")
+            .required("Ce champ est requis.")
     });
 
 export interface Props {
@@ -41,6 +41,8 @@ export const SearchContent = ({ onClose: handleClose }: Props): ReactElement => 
         );
     };
 
+    const scrollbarWidth: number = window.innerWidth - document.body.clientWidth;
+
     return (
         <Paper
             square
@@ -48,8 +50,8 @@ export const SearchContent = ({ onClose: handleClose }: Props): ReactElement => 
         >
             <Container>
                 <Box
-                    // TODO Fix padding on desktop with scrollbar
-                    px={-1}
+                    ml={-1}
+                    mr={`${scrollbarWidth}px`}
                     py={0.5}
                 >
                     <Formik
@@ -57,27 +59,30 @@ export const SearchContent = ({ onClose: handleClose }: Props): ReactElement => 
                         validationSchema={validationSchema}
                         onSubmit={onSubmit}
                     >
-                        <Form>
-                            <Stack
-                                direction="row"
-                                alignItems="center"
-                                spacing={1}
-                            >
-                                <IconButton
-                                    onClick={handleClose}
-                                    aria-label="Retour"
+                        {({ values, handleChange, touched, errors }: FormikProps<FormValues>): ReactElement => (
+                            <Form>
+                                <Stack
+                                    direction="row"
+                                    alignItems="center"
+                                    spacing={1}
                                 >
-                                    <ArrowBack />
-                                </IconButton>
-                                <Field
-                                    component={TextField}
-                                    name="label"
-                                    placeholder="Rechercher un mot"
-                                    autoFocus
-                                    size="small"
-                                />
-                            </Stack>
-                        </Form>
+                                    <IconButton
+                                        onClick={handleClose}
+                                        aria-label="Retour"
+                                    >
+                                        <ArrowBack />
+                                    </IconButton>
+                                    <TextField
+                                        name="label"
+                                        placeholder="Rechercher un mot"
+                                        value={values.label}
+                                        onChange={handleChange}
+                                        error={touched.label && Boolean(errors.label)}
+                                        size="small"
+                                    />
+                                </Stack>
+                            </Form>
+                        )}
                     </Formik>
                 </Box>
             </Container>

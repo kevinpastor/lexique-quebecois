@@ -1,8 +1,5 @@
 # TODO
 
-- feat: update input color
-- fix: search autofocus on mobile
-- fix: add page autofocus on mobile
 - fix: update menu item border radius on hover
 - feat: create contact page
 - feat: create contribute page
@@ -12,9 +9,11 @@
 - feat: add alternative spelling
 - feat: beforeunload on add page
 - feat: add noscript message
+- fix: update search scrollbar padding on screen resize
 - chore: investigate PWA
-- chore: investigate if React can be replace with Preact
+- chore: investigate autofocus on iOS
 - chore: investigate CSS variables for MUI
+- chore: investigate if React can be replace with Preact
 
 ## Suggestions
 
@@ -22,6 +21,7 @@
 - feat: remove card title underline
 - fix: form validation on mobile
 - feat: back button navigation
+- feat: update input color
 
 Aggregation pipeline for fuzzy search by label
 
