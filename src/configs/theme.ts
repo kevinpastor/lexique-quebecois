@@ -7,6 +7,8 @@ const getHighEmphasyColor = (paletteMode: PaletteMode): string => (
         : alpha(colors.common.white, 0.87)
 );
 
+const highEmphasyColorOnPrimary: string = alpha(colors.common.white, 0.87);
+
 const getMediumEmphasyColor = (paletteMode: PaletteMode): string => (
     paletteMode === "light"
         ? alpha(colors.common.black, 0.60)
@@ -75,10 +77,10 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
         palette: {
             mode: paletteMode,
             primary: {
-                main: "#f59e0b"
+                main: "#2186d9"
             },
             secondary: {
-                main: "#1976d2"
+                main: "#f78104"
             },
             divider: getOutlineColor(paletteMode)
         },
@@ -171,7 +173,6 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                 },
                 styleOverrides: {
                     root: {
-                        color: getHighEmphasyColor(paletteMode),
                         textTransform: "none"
                     },
                     outlined: {
@@ -181,6 +182,9 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                             borderWidth: 2,
                             borderColor: getOutlineColor(paletteMode)
                         }
+                    },
+                    containedPrimary: {
+                        color: highEmphasyColorOnPrimary
                     }
                 }
             },
@@ -253,7 +257,6 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
             },
             MuiLink: {
                 defaultProps: {
-                    color: "secondary",
                     noWrap: true,
                     style: {
                         display: "inline-block",
