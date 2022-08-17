@@ -4,6 +4,7 @@ import { ReactElement } from "react";
 
 import { Layout } from "@components/layout";
 import { Providers } from "@configs/providers";
+import "@configs/styles.css";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
     <>
