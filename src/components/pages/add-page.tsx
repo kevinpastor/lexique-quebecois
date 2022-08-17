@@ -1,13 +1,14 @@
 import { Check } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, Checkbox, ListItemText, MenuItem, Stack } from "@mui/material";
 import { Field, Form, Formik, FormikProps } from "formik";
-import { TextField } from "formik-mui";
+import { Select, TextField } from "formik-mui";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import { useSnackbar } from "notistack";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
+import { WordClass, wordClasses } from "@models/classes";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
 import { addWord } from "@services/words";
 
@@ -15,7 +16,8 @@ const initialValues: WordRequest = {
     label: "",
     definition: "",
     example: "",
-    author: ""
+    author: "",
+    wordClasses: []
 };
 
 export const AddPage = (): ReactElement => {
@@ -65,7 +67,7 @@ export const AddPage = (): ReactElement => {
                 validateOnBlur={false}
                 validateOnChange={false}
             >
-                {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
+                {({ isSubmitting, values }: FormikProps<WordRequest>): ReactElement => (
                     <Form noValidate>
                         <Card>
                             <CardHeader title="Ajouter un mot" />
@@ -73,31 +75,48 @@ export const AddPage = (): ReactElement => {
                                 <Stack spacing={2}>
                                     <Field
                                         component={TextField}
-                                        label="Mot"
                                         name="label"
+                                        label="Mot"
                                         required
                                         autoFocus
                                     />
                                     <Field
+                                        component={Select}
+                                        name="wordClasses"
+                                        label="Classe(s)"
+                                        multiple
+                                        renderValue={(selected: Array<string>): ReactNode => (selected.join(", "))}
+                                    >
+                                        {wordClasses.map((wordClass: WordClass): ReactElement => (
+                                            <MenuItem
+                                                key={wordClass}
+                                                value={wordClass}
+                                            >
+                                                <Checkbox checked={values.wordClasses.includes(wordClass)} />
+                                                <ListItemText primary={wordClass} />
+                                            </MenuItem>
+                                        ))}
+                                    </Field>
+                                    <Field
                                         component={TextField}
-                                        label="Définition"
                                         name="definition"
+                                        label="Définition"
                                         required
                                         multiline
                                         minRows={2}
                                     />
                                     <Field
                                         component={TextField}
-                                        label="Exemple"
                                         name="example"
+                                        label="Exemple"
                                         required
                                         multiline
                                         minRows={2}
                                     />
                                     <Field
                                         component={TextField}
-                                        label="Auteur"
                                         name="author"
+                                        label="Auteur"
                                     />
                                 </Stack>
                             </CardContent>

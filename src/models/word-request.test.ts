@@ -51,6 +51,24 @@ describe("isValidWordRequest", (): void => {
         expect(result).toBeFalsy();
     });
 
+    it("should not allow no word class", (): void => {
+        const result: boolean = isValidWordRequest({
+            ...wordRequestStub,
+            wordClasses: undefined
+        });
+
+        expect(result).toBeFalsy();
+    });
+
+    it("should not allow invalid word class", (): void => {
+        const result: boolean = isValidWordRequest({
+            ...wordRequestStub,
+            wordClasses: ["foo"]
+        });
+
+        expect(result).toBeFalsy();
+    });
+
     it("should be a valid word request", (): void => {
         const result: boolean = isValidWordRequest(wordRequestStub);
 
