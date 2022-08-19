@@ -1,6 +1,5 @@
 # TODO
 
-- feat: add word classes (adjective, noun, verb, etc.)
 - feat: create contact page
 - feat: create contribute page
 - test: update test with @shelf/jest-mongodb

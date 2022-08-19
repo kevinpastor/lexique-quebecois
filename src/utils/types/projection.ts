@@ -8,7 +8,6 @@ export type ExclusiveProjection<Document, Type> = Record<
 
 type IdProjection<Document, Type> = Type extends { _id: InferIdType<Document> }
     ? { _id: 1 }
-    // eslint-disable-next-line @typescript-eslint/ban-types
     : { _id: 0 };
 
 type ConversionProjection<Document, Type> = Record<

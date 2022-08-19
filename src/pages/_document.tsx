@@ -68,14 +68,6 @@ const Document = (): ReactElement => (
                 media="(prefers-color-scheme: dark)"
             />
             <link
-                rel="preconnect"
-                href="https://fonts.googleapis.com"
-            />
-            <link
-                rel="preconnect"
-                href="https://fonts.gstatic.com"
-            />
-            <link
                 rel="manifest"
                 href="/manifest.json"
             />
