@@ -9,7 +9,9 @@ export const wordDocumentStub: WordDocument = {
     author: "Kevin",
     slug: "gyu",
     ip: "127.0.0.1",
-    isApproved: false
+    isApproved: false,
+    likes: [],
+    dislikes: []
 };
 
 export const anotherWordDocumentStub: WordDocument = {
@@ -20,5 +22,7 @@ export const anotherWordDocumentStub: WordDocument = {
     author: "Kevin",
     slug: "queteux",
     isApproved: true,
-    ip: "127.0.0.1"
+    ip: "127.0.0.1",
+    likes: [],
+    dislikes: []
 };

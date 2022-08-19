@@ -9,6 +9,6 @@ export interface WordDocument {
     author: string;
     ip: string;
     isApproved: boolean;
-    likes?: Array<string>;
-    dislikes?: Array<string>;
+    likes: Array<string>;
+    dislikes: Array<string>;
 }

@@ -1,4 +1,4 @@
-import { Collection, Db, InsertOneResult, WithId, ObjectId, UpdateFilter, UpdateResult, DeleteResult, Document } from "mongodb";
+import { Collection, Db, InsertOneResult, WithId, ObjectId, Document } from "mongodb";
 
 import { Status } from "@models/status";
 import { Word } from "@models/word";
@@ -10,7 +10,6 @@ import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-
 import { reviewSortStages } from "@utils/api/aggregation/stages/review-sort-stages";
 import { sample } from "@utils/misc/random";
 import { InclusiveProjection } from "@utils/types/projection";
-import { WithStringId } from "@utils/types/with-string-id";
 
 import { getDatabase } from "./database";
 
@@ -132,95 +131,6 @@ export const getWordsSample = async (ip: string = ""): Promise<Array<Word>> => {
     return words;
 };
 
-export const getWordDocuments = async (): Promise<Array<WithStringId<WordDocument>>> => {
-    const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const pipeline = [
-        {
-            $addFields: {
-                _id: {
-                    $toString: "$_id"
-                }
-            }
-        }
-    ];
-    const wordDocuments: Array<WithStringId<WordDocument>> = await collection.aggregate<WithStringId<WordDocument>>(pipeline)
-        .toArray();
-
-    return wordDocuments;
-};
-
-export const getWordDocument = async (id: string): Promise<WithStringId<WordDocument> | undefined> => {
-    const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const pipeline = [
-        {
-            $match: {
-                _id: new ObjectId(id)
-            }
-        },
-        {
-            $addFields: {
-                _id: {
-                    $toString: "$_id"
-                }
-            }
-        }
-    ];
-    const wordDocuments: Array<WithStringId<WordDocument>> = await collection.aggregate<WithStringId<WordDocument>>(pipeline)
-        .toArray();
-
-    if (wordDocuments.length !== 1) {
-        return;
-    }
-
-    return wordDocuments[0];
-};
-
-export const updateWordDocument = async (wordDocument: WithStringId<WordDocument>): Promise<Status> => {
-    const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const filter: Partial<WithId<WordDocument>> = {
-        _id: new ObjectId(wordDocument._id)
-    };
-    const update: UpdateFilter<WordDocument> = {
-        $set: {
-            author: wordDocument.author,
-            definition: wordDocument.definition,
-            example: wordDocument.example,
-            isApproved: wordDocument.isApproved,
-            label: wordDocument.label,
-            slug: wordDocument.slug
-        }
-    };
-    const result: UpdateResult = await collection.updateOne(filter, update);
-
-    if (result.matchedCount === 0) {
-        return Status.NotFound;
-    }
-
-    if (result.modifiedCount === 0) {
-        return Status.Conflict;
-    }
-
-    return Status.OK;
-};
-
-export const deleteWordDocument = async (id: string): Promise<Status> => {
-    const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const filter: Partial<WithId<WordDocument>> = {
-        _id: new ObjectId(id)
-    };
-    const result: DeleteResult = await collection.deleteOne(filter);
-
-    if (!result.acknowledged || result.deletedCount !== 1) {
-        return Status.NotFound;
-    }
-
-    return Status.OK;
-};
-
 export const getWordCollection = async (slug: string, ip: string = ""): Promise<Array<Word>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("definitions");
@@ -249,7 +159,9 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Sta
         author: wordRequest.author ?? "Anonyme",
         slug: getSlug(wordRequest.label),
         ip,
-        isApproved: false
+        isApproved: false,
+        likes: [],
+        dislikes: []
     };
 
     const database: Db = await getDatabase();
