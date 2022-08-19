@@ -1,9 +1,10 @@
 import { Socket } from "net";
 import { NextApiRequest } from "next";
 
+import { WordClass } from "@models/classes";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { wordRequestStub } from "@models/word-request.stub";
+import { WordRequest } from "@models/word-request";
 import { addWord } from "@services/api/words";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { createRequestStub } from "@utils/tests/request";
@@ -15,6 +16,14 @@ jest.mock("@services/api/words");
 const addWordMock = addWord as jest.MockedFunction<typeof addWord>;
 
 const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
+
+const wordRequestStub: WordRequest = {
+    label: "gyu",
+    wordClasses: [WordClass.Adjectif],
+    definition: "Bon/beau. Peut être utiliser comme adjectif pour de la bouffe qui goûte bonne, ou pour une belle personne.",
+    example: "Le poulet était tellement gyu!",
+    author: "Kevin"
+};
 
 describe("POST", (): void => {
     beforeEach((): void => {

@@ -13,6 +13,7 @@ export interface WordRequest {
     author?: string;
 }
 
+// TODO Move to word-document.ts
 export const getSlug = (label: string): string => {
     const spacelessLabel: string = label.replace(/\s/g, "-");
     return removeAccents(spacelessLabel)

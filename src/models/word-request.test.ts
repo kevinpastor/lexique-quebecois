@@ -1,17 +1,13 @@
-import { WordDocument } from "./word-document";
-import { wordDocumentStub } from "./word-document.stub";
-import { cleanupWordRequest, getSlug, isValidLabel, isValidWordRequest, WordRequest } from "./word-request";
-import { wordRequestStub } from "./word-request.stub";
+import { WordClass } from "./classes";
+import { cleanupWordRequest, isValidLabel, isValidWordRequest, WordRequest } from "./word-request";
 
-describe("getSlug", (): void => {
-    it("should get slug", (): void => {
-        const { label, slug }: WordDocument = wordDocumentStub;
-
-        const result: string = getSlug(label);
-
-        expect(result).toEqual(slug);
-    });
-});
+const wordRequestStub: WordRequest = {
+    label: "gyu",
+    wordClasses: [WordClass.Adjectif],
+    definition: "Bon/beau. Peut être utiliser comme adjectif pour de la bouffe qui goûte bonne, ou pour une belle personne.",
+    example: "Le poulet était tellement gyu!",
+    author: "Kevin"
+};
 
 // TODO Add test cases
 describe("isValidLabel", (): void => {

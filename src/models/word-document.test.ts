@@ -1,7 +1,8 @@
 import { WordClass } from "./classes";
 import { WordDocument } from "./word-document";
+import { getSlug } from "./word-request";
 
-export const wordDocumentStub: WordDocument = {
+const wordDocumentStub: WordDocument = {
     label: "gyu",
     wordClasses: [WordClass.Adjectif],
     definition: "Bon/beau. Peut être utiliser comme adjectif pour de la bouffe qui goûte bonne, ou pour une belle personne.",
@@ -14,15 +15,12 @@ export const wordDocumentStub: WordDocument = {
     dislikes: []
 };
 
-export const anotherWordDocumentStub: WordDocument = {
-    label: "quêteux",
-    wordClasses: [WordClass.Nom],
-    definition: "Expression pour désigner un mendiant.",
-    example: "Le quêteux sur le bord de la rue faisait pitié.",
-    author: "Kevin",
-    slug: "queteux",
-    isApproved: true,
-    ip: "127.0.0.1",
-    likes: [],
-    dislikes: []
-};
+describe("getSlug", (): void => {
+    it("should get slug", (): void => {
+        const { label, slug }: WordDocument = wordDocumentStub;
+
+        const result: string = getSlug(label);
+
+        expect(result).toEqual(slug);
+    });
+});

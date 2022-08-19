@@ -1,8 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+import { WordClass } from "@models/classes";
 import { Method } from "@models/method";
-import { wordRequestStub } from "@models/word-request.stub";
+import { WordRequest } from "@models/word-request";
 
 import { addWord } from "./words";
 
@@ -11,6 +12,14 @@ const fetchMock = jest.fn()
         ok: true
     } as Partial<Response> as Response);
 global.fetch = fetchMock;
+
+const wordRequestStub: WordRequest = {
+    label: "gyu",
+    wordClasses: [WordClass.Adjectif],
+    definition: "Bon/beau. Peut être utiliser comme adjectif pour de la bouffe qui goûte bonne, ou pour une belle personne.",
+    example: "Le poulet était tellement gyu!",
+    author: "Kevin"
+};
 
 describe("addWord", (): void => {
     beforeEach((): void => {

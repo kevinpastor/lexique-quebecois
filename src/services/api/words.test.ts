@@ -1,12 +1,10 @@
 import { AggregationCursor, Collection, Db, InsertOneResult } from "mongodb";
 
+import { WordClass } from "@models/classes";
 import { Status } from "@models/status";
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
-import { wordDocumentStub } from "@models/word-document.stub";
 import { WordRequest } from "@models/word-request";
-import { wordRequestStub } from "@models/word-request.stub";
-import { anotherWordStub, wordStub } from "@models/word.stub";
 
 import { getDatabase } from "./database";
 import { addWord, getWordCollection, getWordsSample } from "./words";
@@ -19,6 +17,58 @@ jest.mock("./database", (): typeof import("./database") => ({
 const getDatabaseMock = getDatabase as jest.MockedFunction<typeof getDatabase>;
 
 const ip: string = "127.0.0.1";
+
+const wordRequestStub: WordRequest = {
+    label: "gyu",
+    wordClasses: [WordClass.Adjectif],
+    definition: "Bon/beau. Peut être utiliser comme adjectif pour de la bouffe qui goûte bonne, ou pour une belle personne.",
+    example: "Le poulet était tellement gyu!",
+    author: "Kevin"
+};
+
+const wordDocumentStub: WordDocument = {
+    label: "gyu",
+    wordClasses: [WordClass.Adjectif],
+    definition: "Bon/beau. Peut être utiliser comme adjectif pour de la bouffe qui goûte bonne, ou pour une belle personne.",
+    example: "Le poulet était tellement gyu!",
+    author: "Kevin",
+    slug: "gyu",
+    ip: "127.0.0.1",
+    isApproved: false,
+    likes: [],
+    dislikes: []
+};
+
+const wordStub: Word = {
+    id: "507f1f77bcf86cd799439011",
+    label: "gyu",
+    wordClasses: [WordClass.Adjectif],
+    definition: "Bon/beau. Peut être utiliser comme adjectif pour de la bouffe qui goûte bonne, ou pour une belle personne.",
+    example: "Le poulet était tellement gyu!",
+    author: "Kevin",
+    timestamp: 1645120033319,
+    slug: "gyu",
+    likes: 2,
+    isLiked: true,
+    dislikes: 0,
+    isDisliked: false
+};
+
+const anotherWordStub: Word = {
+    id: "00000020f51bb4362eee2a4d",
+    label: "quêteux",
+    wordClasses: [WordClass.Nom],
+    definition: "Expression pour désigner un mendiant.",
+    example: "Le quêteux sur le bord de la rue faisait pitié.",
+    author: "Kevin",
+    timestamp: 1645122767705,
+    slug: "queteux",
+    likes: 3,
+    isLiked: false,
+    dislikes: 2,
+    isDisliked: true
+};
+
 const wordsStub: Array<Word> = [
     wordStub,
     anotherWordStub
