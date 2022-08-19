@@ -63,10 +63,10 @@ export const Word = ({ word }: Props): ReactElement => {
                             component="span"
                         >
                             {word.wordClasses.map((wordClass: WordClass, index: number): ReactElement => (
-                                <>
+                                <span key={wordClass}>
                                     {wordClassAbreviations[wordClass]}
                                     {index < word.wordClasses.length - 1 && ", "}
-                                </>
+                                </span>
                             ))}
                         </Typography>
                     </Stack>
