@@ -1,6 +1,7 @@
 import { PaletteMode, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useLocalStorage } from "usehooks-ts"; // TODO Replace with custom implementation
+
+import { useLocalStorage } from "@utils/hooks/use-local-storage";
 
 export type TernaryMode = "light" | "dark" | "system";
 

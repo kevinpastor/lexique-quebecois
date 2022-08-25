@@ -1,7 +1,8 @@
 # TODO
 
+- fix: remove dark theme ssr flicker
 - feat: create contact page
-- feat: create contribute page
+- feat: create contribute ($) page
 - test: update test with @shelf/jest-mongodb
 - feat: add pronounciation
 - feat: add alternative spelling
