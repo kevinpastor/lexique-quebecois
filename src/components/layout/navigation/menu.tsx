@@ -3,6 +3,8 @@ import { IconButton, SwipeableDrawer } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, ReactElement, useState } from "react";
 
+import { isIOS, isMacOS, isWindows } from "@utils/misc/device";
+
 import type { Props as MenuContentProps } from "./menu-content";
 
 const MenuContent = dynamic(async (): Promise<ComponentType<MenuContentProps>> => (
@@ -32,6 +34,8 @@ export const Menu = (): ReactElement => {
                 open={isOpened}
                 onOpen={handleOpen}
                 onClose={handleClose}
+                disableBackdropTransition={!isIOS && !isWindows && !isMacOS}
+                disableDiscovery={isIOS}
             >
                 <MenuContent onClose={handleClose} />
             </SwipeableDrawer>

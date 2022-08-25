@@ -294,7 +294,7 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                 styleOverrides: {
                     root: {
                         transitionDuration: "300ms",
-                        transitionProperty: "all",
+                        transitionProperty: "box-shadow, background-color",
                         backgroundImage: "none"
                     },
                     ...definedElevations.reduce((accumulator, elevation) => ({
