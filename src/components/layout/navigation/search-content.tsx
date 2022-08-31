@@ -41,51 +41,56 @@ export const SearchContent = ({ onClose: handleClose }: Props): ReactElement => 
         );
     };
 
-    const scrollbarWidth: number = window.innerWidth - document.body.clientWidth;
+    const scrollbarWidth: number = window.innerWidth - document.body.clientWidth; // Might not be accurate in the case where MUI scroll lock comes first.
+    const scrollbarPadding: string = scrollbarWidth === 0
+        ? document.body.style.paddingRight
+        : `${scrollbarWidth}px`;
 
     return (
         <Paper
             square
             elevation={0}
         >
-            <Container>
-                <Box
-                    ml={-1}
-                    mr={`${scrollbarWidth}px`}
-                    py={0.5}
-                >
-                    <Formik
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmit}
+            <Box pr={scrollbarPadding}>
+                <Container>
+                    <Box
+                        ml={-1}
+                        mr={0}
+                        py={0.5}
                     >
-                        {({ values, handleChange, touched, errors }: FormikProps<FormValues>): ReactElement => (
-                            <Form>
-                                <Stack
-                                    direction="row"
-                                    alignItems="center"
-                                    spacing={1}
-                                >
-                                    <IconButton
-                                        onClick={handleClose}
-                                        aria-label="Retour"
+                        <Formik
+                            initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={onSubmit}
+                        >
+                            {({ values, handleChange, touched, errors }: FormikProps<FormValues>): ReactElement => (
+                                <Form>
+                                    <Stack
+                                        direction="row"
+                                        alignItems="center"
+                                        spacing={1}
                                     >
-                                        <ArrowBack />
-                                    </IconButton>
-                                    <TextField
-                                        name="label"
-                                        placeholder="Rechercher un mot"
-                                        value={values.label}
-                                        onChange={handleChange}
-                                        error={touched.label && Boolean(errors.label)}
-                                        size="small"
-                                    />
-                                </Stack>
-                            </Form>
-                        )}
-                    </Formik>
-                </Box>
-            </Container>
+                                        <IconButton
+                                            onClick={handleClose}
+                                            aria-label="Retour"
+                                        >
+                                            <ArrowBack />
+                                        </IconButton>
+                                        <TextField
+                                            name="label"
+                                            placeholder="Rechercher un mot"
+                                            value={values.label}
+                                            onChange={handleChange}
+                                            error={touched.label && Boolean(errors.label)}
+                                            size="small"
+                                        />
+                                    </Stack>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Box>
+                </Container>
+            </Box>
         </Paper>
     );
 };
