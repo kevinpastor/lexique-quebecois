@@ -19,14 +19,18 @@ export const Reactions = ({ word }: Props): ReactElement => {
     const dislikes: NumberUtilities = useNumber(word.dislikes);
     const isDisliked: BooleanUtilities = useBoolean(word.isDisliked);
 
-    useEffect((): void => {
-        likes.setValue(word.likes);
-        isLiked.setValue(word.isLiked);
+    const { setValue: setLikes } = likes;
+    const { setValue: setIsLiked } = isLiked;
+    const { setValue: setDislikes } = dislikes;
+    const { setValue: setIsDisliked } = isDisliked;
 
-        dislikes.setValue(word.dislikes);
-        isDisliked.setValue(word.isDisliked);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [word]);
+    useEffect((): void => {
+        setLikes(word.likes);
+        setIsLiked(word.isLiked);
+
+        setDislikes(word.dislikes);
+        setIsDisliked(word.isDisliked);
+    }, [setDislikes, setIsDisliked, setIsLiked, setLikes, word]);
 
     return (
         <ButtonGroup>

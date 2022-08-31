@@ -33,11 +33,7 @@ const copyToClipboardFallback = (text: string): void => {
         }
     }
     catch (error: unknown) {
-        try {
-            document.body.removeChild(textarea);
-        }
-        // eslint-disable-next-line no-empty
-        catch { }
+        document.body.removeChild(textarea);
         throw error;
     }
 

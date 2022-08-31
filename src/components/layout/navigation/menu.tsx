@@ -1,8 +1,9 @@
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { IconButton, SwipeableDrawer } from "@mui/material";
 import dynamic from "next/dynamic";
-import { ComponentType, ReactElement, useState } from "react";
+import { ComponentType, ReactElement } from "react";
 
+import { useBoolean } from "@utils/hooks/use-boolean";
 import { isIOS, isMacOS, isWindows } from "@utils/misc/device";
 
 import type { Props as MenuContentProps } from "./menu-content";
@@ -12,15 +13,11 @@ const MenuContent = dynamic(async (): Promise<ComponentType<MenuContentProps>> =
 );
 
 export const Menu = (): ReactElement => {
-    const [isOpened, setIsOpened] = useState(false);
-
-    const handleOpen = (): void => {
-        setIsOpened(true);
-    };
-
-    const handleClose = (): void => {
-        setIsOpened(false);
-    };
+    const {
+        value: isOpened,
+        setTrue: handleOpen,
+        setFalse: handleClose
+    } = useBoolean(false);
 
     return (
         <>
