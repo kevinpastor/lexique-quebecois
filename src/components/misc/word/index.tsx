@@ -16,7 +16,7 @@ interface Props {
 
 export const Word = ({ word }: Props): ReactElement => {
     const formattedTimestamp = useFormattedTimestamp(word.timestamp);
-    const share = useShare();
+    const share = useShare(`mots/${word.slug}`);
 
     return (
         <Card>

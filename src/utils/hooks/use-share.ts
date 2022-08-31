@@ -3,15 +3,20 @@ import { useCallback } from "react";
 
 import { useCopyToClipboard } from "./use-copy-to-clipboard";
 
-export const useShare = (): (() => Promise<void>) => {
+export const useShare = (path?: string): (() => Promise<void>) => {
     const copy = useCopyToClipboard();
     const { enqueueSnackbar } = useSnackbar();
 
     const share = useCallback(async (): Promise<void> => {
+        const url: string = path
+            ? `${window.location.origin}/${path}`
+            : window.location.href;
+
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (navigator.share) {
             try {
-                await navigator.share({ url: window.location.href });
+                await navigator.share({ url });
+                return;
             }
             catch (error: unknown) {
                 // Dismissed by user
@@ -23,7 +28,7 @@ export const useShare = (): (() => Promise<void>) => {
         }
 
         try {
-            await copy(window.location.href);
+            await copy(url);
         }
         catch {
             enqueueSnackbar(
@@ -36,7 +41,7 @@ export const useShare = (): (() => Promise<void>) => {
         enqueueSnackbar("Lien copié dans le presse-papiers.",
             { variant: "success" }
         );
-    }, [copy, enqueueSnackbar]);
+    }, [copy, enqueueSnackbar, path]);
 
     return share;
 };
