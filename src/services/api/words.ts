@@ -174,3 +174,42 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Sta
 
     return Status.Created;
 };
+
+type WithScore<T> = T & {
+    score: number;
+};
+
+export const getAutocompletedWords = async (query: string): Promise<Array<string>> => {
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("definitions");
+    const pipeline = [
+        {
+            $search: { // This operator is only accepted as the first in the pipeline.
+                index: "labelAutocompleteSearchIndex",
+                autocomplete: {
+                    query,
+                    path: "label"
+                }
+            }
+        },
+        approvedWordStage(),
+        {
+            $addFields: {
+                score: {
+                    $meta: "searchScore"
+                }
+            }
+        },
+        {
+            $sort: {
+                score: -1
+            }
+        }
+    ];
+    const words: Array<WithScore<WordDocument>> = await collection.aggregate<WithScore<WordDocument>>(pipeline)
+        .toArray();
+
+    return words.map(({ label }: WithScore<WordDocument>): string => (
+        label
+    ));
+};

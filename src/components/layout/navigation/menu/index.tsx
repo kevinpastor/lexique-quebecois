@@ -24,6 +24,7 @@ export const Menu = (): ReactElement => {
             <IconButton
                 onClick={handleOpen}
                 aria-label="Menu"
+                edge="start"
             >
                 <MenuIcon />
             </IconButton>
