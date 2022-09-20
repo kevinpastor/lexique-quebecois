@@ -1,14 +1,14 @@
 import { Share } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { Fragment, ReactElement } from "react";
+import { ReactElement } from "react";
 
-import { WordClass, wordClassAbreviations } from "@models/classes";
 import { Word as IWord } from "@models/word";
 import { useFormattedTimestamp } from "@utils/hooks/use-formatted-timestamp";
 import { useShare } from "@utils/hooks/use-share";
 
 import { Reactions } from "./reactions";
+import { WordClasses } from "./word-classes";
 
 interface Props {
     word: IWord;
@@ -35,17 +35,7 @@ export const Word = ({ word }: Props): ReactElement => {
                                 {word.label}
                             </Link>
                         </NextLink>
-                        <Typography
-                            variant="subtitle2"
-                            component="span"
-                        >
-                            {word.wordClasses.map((wordClass: WordClass, index: number): ReactElement => (
-                                <Fragment key={wordClass}>
-                                    {wordClassAbreviations[wordClass]}
-                                    {index < word.wordClasses.length - 1 && ", "}
-                                </Fragment>
-                            ))}
-                        </Typography>
+                        <WordClasses wordClasses={word.wordClasses} />
                     </Stack>
                 }
             />
