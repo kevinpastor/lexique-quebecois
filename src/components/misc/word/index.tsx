@@ -1,7 +1,7 @@
 import { Share } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { ReactElement } from "react";
+import { Fragment, ReactElement } from "react";
 
 import { WordClass, wordClassAbreviations } from "@models/classes";
 import { Word as IWord } from "@models/word";
@@ -40,10 +40,10 @@ export const Word = ({ word }: Props): ReactElement => {
                             component="span"
                         >
                             {word.wordClasses.map((wordClass: WordClass, index: number): ReactElement => (
-                                <span key={wordClass}>
+                                <Fragment key={wordClass}>
                                     {wordClassAbreviations[wordClass]}
                                     {index < word.wordClasses.length - 1 && ", "}
-                                </span>
+                                </Fragment>
                             ))}
                         </Typography>
                     </Stack>
