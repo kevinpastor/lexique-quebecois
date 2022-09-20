@@ -1,5 +1,5 @@
 import { Search as SearchIcon } from "@mui/icons-material";
-import { IconButton, Modal } from "@mui/material";
+import { Fade, IconButton, Modal } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, ReactElement } from "react";
 
@@ -31,10 +31,13 @@ export const Search = (): ReactElement => {
             <Modal
                 open={isOpened}
                 onClose={handleClose}
+                keepMounted
             >
-                <div style={{ height: "100%" }}>
-                    <SearchContent onClose={handleClose} />
-                </div>
+                <Fade in={isOpened}>
+                    <div style={{ height: "100%" }}>
+                        <SearchContent onClose={handleClose} />
+                    </div>
+                </Fade>
             </Modal>
         </div>
     );

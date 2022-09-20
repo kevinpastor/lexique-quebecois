@@ -58,32 +58,27 @@ export const Content = ({ onClose: handleClose }: Props): ReactElement => {
             >
                 <Form>
                     <AppBar
-                        elevation={0}
-                        color="transparent"
+                        color="inherit"
+                        elevation={3}
                     >
-                        <Paper
-                            square
-                            elevation={3}
-                        >
-                            <Container>
-                                <Box my={0.5}>
-                                    <Stack
-                                        direction="row"
-                                        alignItems="center"
-                                        spacing={1}
+                        <Container>
+                            <Box my={0.5}>
+                                <Stack
+                                    direction="row"
+                                    alignItems="center"
+                                    spacing={1}
+                                >
+                                    <IconButton
+                                        onClick={handleClose}
+                                        aria-label="Retour"
+                                        edge="start"
                                     >
-                                        <IconButton
-                                            onClick={handleClose}
-                                            aria-label="Retour"
-                                            edge="start"
-                                        >
-                                            <ArrowBack />
-                                        </IconButton>
-                                        <Field />
-                                    </Stack>
-                                </Box>
-                            </Container>
-                        </Paper>
+                                        <ArrowBack />
+                                    </IconButton>
+                                    <Field />
+                                </Stack>
+                            </Box>
+                        </Container>
                     </AppBar>
                     <AutocompleteResults onClose={handleClose} />
                 </Form>

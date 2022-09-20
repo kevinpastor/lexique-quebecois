@@ -34,6 +34,9 @@ export const Menu = (): ReactElement => {
                 onClose={handleClose}
                 disableBackdropTransition={!isIOS && !isWindows && !isMacOS}
                 disableDiscovery={isIOS}
+                ModalProps={{
+                    keepMounted: true
+                }}
             >
                 <MenuContent onClose={handleClose} />
             </SwipeableDrawer>

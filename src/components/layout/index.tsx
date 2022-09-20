@@ -1,15 +1,11 @@
 import { Box, Container, Grid, Stack } from "@mui/material";
-import dynamic from "next/dynamic";
-import { ComponentType, PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 import { Loading } from "@components/misc/loading";
 
 import { Footer } from "./footer";
+import { Navigation } from "./navigation";
 import { Sidebar } from "./sidebar";
-
-const Navigation = dynamic(async (): Promise<ComponentType> => (
-    (await import("./navigation")).Navigation
-));
 
 export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <>

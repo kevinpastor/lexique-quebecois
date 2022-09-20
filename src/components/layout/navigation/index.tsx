@@ -1,4 +1,4 @@
-import { AppBar, Box, Container, Link, Paper, Stack, Typography, useScrollTrigger } from "@mui/material";
+import { AppBar, Box, Container, Link, Stack, Typography, useScrollTrigger } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 
@@ -13,48 +13,41 @@ export const Navigation = (): ReactElement => {
 
     return (
         <AppBar
-            elevation={0}
-            color="transparent"
+            color="inherit"
+            elevation={isAtPageTop ? 0 : 3}
         >
-            <Paper
-                square
-                elevation={isAtPageTop ? 0 : 3}
-            >
-                <Container>
-                    <Box
-                        my={0.5}
+            <Container>
+                <Box my={0.5}>
+                    <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        spacing={2}
                     >
                         <Stack
                             direction="row"
-                            justifyContent="space-between"
                             alignItems="center"
-                            spacing={2}
+                            spacing={1}
                         >
-                            <Stack
-                                direction="row"
-                                alignItems="center"
-                                spacing={1}
-                            >
-                                <Menu />
-                                <Typography variant="h1">
-                                    <NextLink
-                                        href="/"
-                                        passHref
+                            <Menu />
+                            <Typography variant="h1">
+                                <NextLink
+                                    href="/"
+                                    passHref
+                                >
+                                    <Link
+                                        color="inherit"
+                                        underline="none"
                                     >
-                                        <Link
-                                            color="inherit"
-                                            underline="none"
-                                        >
-                                            Lexique Québécois
-                                        </Link>
-                                    </NextLink>
-                                </Typography>
-                            </Stack>
-                            <Search />
+                                        Lexique Québécois
+                                    </Link>
+                                </NextLink>
+                            </Typography>
                         </Stack>
-                    </Box>
-                </Container>
-            </Paper>
+                        <Search />
+                    </Stack>
+                </Box>
+            </Container>
         </AppBar>
     );
 };
