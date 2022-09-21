@@ -3,22 +3,23 @@ import { ReactElement } from "react";
 
 export const LoadingWord = (): ReactElement => (
     <Card>
-        <CardHeader title={<Skeleton width={256} />} />
+        <CardHeader title={<Skeleton width={128} />} />
         <CardContent>
-            <Stack
-                spacing={1.5}
-                ml={2}
+            <Typography
+                variant="body2"
+                gutterBottom
             >
-                <Typography variant="body2">
-                    <Skeleton width="100%" />
-                </Typography>
-                <Typography variant="subtitle1">
-                    <Skeleton width="100%" />
-                </Typography>
-                <Typography variant="subtitle2">
-                    <Skeleton width="100%" />
-                </Typography>
-            </Stack>
+                <Skeleton width="100%" />
+            </Typography>
+            <Typography
+                variant="subtitle1"
+                gutterBottom
+            >
+                <Skeleton width="100%" />
+            </Typography>
+            <Typography variant="subtitle2">
+                <Skeleton width="100%" />
+            </Typography>
         </CardContent>
         <CardActions>
             <Stack

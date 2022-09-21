@@ -40,22 +40,23 @@ export const Word = ({ word }: Props): ReactElement => {
                 }
             />
             <CardContent>
-                <Stack
-                    spacing={1.5}
-                    ml={2}
+                <Typography
+                    variant="body2"
+                    gutterBottom
                 >
-                    <Typography variant="body2">
-                        {word.definition}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                        {word.example}
-                    </Typography>
-                    <Typography variant="subtitle2">
-                        {formattedTimestamp
-                            ? `par ${word.author ?? "Anonyme"}, le ${formattedTimestamp}`
-                            : `par ${word.author ?? "Anonyme"}`}
-                    </Typography>
-                </Stack>
+                    {word.definition}
+                </Typography>
+                <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                >
+                    {word.example}
+                </Typography>
+                <Typography variant="subtitle2">
+                    {formattedTimestamp
+                        ? `par ${word.author ?? "Anonyme"}, le ${formattedTimestamp}`
+                        : `par ${word.author ?? "Anonyme"}`}
+                </Typography>
             </CardContent>
             <CardActions>
                 <Stack

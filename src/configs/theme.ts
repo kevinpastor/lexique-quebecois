@@ -326,6 +326,11 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                         subtitle1: "p",
                         subtitle2: "p"
                     }
+                },
+                styleOverrides: {
+                    gutterBottom: {
+                        marginBottom: "0.5em"
+                    }
                 }
             }
         }

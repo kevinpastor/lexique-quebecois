@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unused-prop-types */
-import { Card, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
 import { ReactElement, useMemo } from "react";
@@ -52,27 +52,25 @@ export const IndexPage = (): ReactElement => {
             <Card>
                 <CardHeader title="Index" />
                 <CardContent>
-                    <Stack spacing={2}>
-                        {memoizedLetterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
-                            <div key={letter}>
-                                <Typography variant="h3">
-                                    {letter}
-                                </Typography>
-                                {group.map(({ slug, word }: WordGroup): ReactElement => (
-                                    <div key={slug}>
-                                        <NextLink
-                                            href={`/mots/${slug}`}
-                                            passHref
-                                        >
-                                            <Link>
-                                                {word}
-                                            </Link>
-                                        </NextLink>
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
-                    </Stack>
+                    {memoizedLetterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
+                        <div key={letter}>
+                            <Typography variant="h3">
+                                {letter}
+                            </Typography>
+                            {group.map(({ slug, word }: WordGroup, index: number): ReactElement => (
+                                <div key={slug}>
+                                    <NextLink
+                                        href={`/mots/${slug}`}
+                                        passHref
+                                    >
+                                        <Link gutterBottom={index === group.length - 1}>
+                                            {word}
+                                        </Link>
+                                    </NextLink>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
                 </CardContent>
             </Card>
         </>
