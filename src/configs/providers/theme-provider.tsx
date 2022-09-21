@@ -11,11 +11,9 @@ export const ThemeProvider = ({ children }: PropsWithChildren<unknown>): ReactEl
         getTheme(mode)
     ), [mode]);
 
-    const isClientSide: boolean = typeof window !== "undefined";
-
     return (
         <MuiThemeProvider theme={theme}>
-            {isClientSide && <CssBaseline />}
+            <CssBaseline />
             {children}
         </MuiThemeProvider>
     );

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { ComponentType, ReactElement } from "react";
 
 import { useBoolean } from "@utils/hooks/use-boolean";
-import { isIOS, isMacOS, isWindows } from "@utils/misc/device";
+import { isLowEndDevice } from "@utils/misc/device";
 
 import type { Props as MenuContentProps } from "./menu-content";
 
@@ -32,8 +32,8 @@ export const Menu = (): ReactElement => {
                 open={isOpened}
                 onOpen={handleOpen}
                 onClose={handleClose}
-                disableBackdropTransition={!isIOS && !isWindows && !isMacOS}
-                disableDiscovery={isIOS}
+                disableBackdropTransition={isLowEndDevice}
+                disableSwipeToOpen // Interferes with the navigation menu button.
                 ModalProps={{
                     keepMounted: true
                 }}
