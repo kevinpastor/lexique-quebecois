@@ -1,4 +1,4 @@
-import { Share } from "@mui/icons-material";
+import { Share as ShareIcon } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
@@ -68,7 +68,7 @@ export const Word = ({ word }: Props): ReactElement => {
                     <Reactions word={word} />
                     <Button
                         onClick={share}
-                        startIcon={<Share />}
+                        startIcon={<ShareIcon />}
                         size="small"
                     >
                         Partager
