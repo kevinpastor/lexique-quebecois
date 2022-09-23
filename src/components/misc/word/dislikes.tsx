@@ -1,5 +1,5 @@
 import { ThumbDown, ThumbDownOutlined } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { ReactElement } from "react";
 
@@ -81,13 +81,15 @@ export const Dislikes = ({
     };
 
     return (
-        <Button
-            onClick={handleClick}
-            aria-label="Dislike"
-            startIcon={isDisliked ? <ThumbDown /> : <ThumbDownOutlined />}
-            size="small"
-        >
-            {dislikes}
-        </Button>
+        <Tooltip title="Je n'aime pas">
+            <Button
+                onClick={handleClick}
+                aria-label="Je n'aime pas"
+                startIcon={isDisliked ? <ThumbDown /> : <ThumbDownOutlined />}
+                size="small"
+            >
+                {dislikes}
+            </Button>
+        </Tooltip>
     );
 };

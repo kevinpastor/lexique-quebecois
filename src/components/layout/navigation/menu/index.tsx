@@ -1,5 +1,5 @@
 import { Menu as MenuIcon } from "@mui/icons-material";
-import { IconButton, SwipeableDrawer } from "@mui/material";
+import { IconButton, SwipeableDrawer, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, ReactElement } from "react";
 
@@ -21,13 +21,15 @@ export const Menu = (): ReactElement => {
 
     return (
         <>
-            <IconButton
-                onClick={handleOpen}
-                aria-label="Menu"
-                edge="start"
-            >
-                <MenuIcon />
-            </IconButton>
+            <Tooltip title="Menu">
+                <IconButton
+                    onClick={handleOpen}
+                    aria-label="Menu"
+                    edge="start"
+                >
+                    <MenuIcon />
+                </IconButton>
+            </Tooltip>
             <SwipeableDrawer
                 open={isOpened}
                 onOpen={handleOpen}

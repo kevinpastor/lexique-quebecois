@@ -1,5 +1,5 @@
 import { Search as SearchIcon } from "@mui/icons-material";
-import { Fade, IconButton, Modal } from "@mui/material";
+import { Fade, IconButton, Modal, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, ReactElement } from "react";
 
@@ -21,13 +21,15 @@ export const Search = (): ReactElement => {
     // Wrapping div required for IconButton end edge
     return (
         <div>
-            <IconButton
-                onClick={handleOpen}
-                aria-label="Rechercher"
-                edge="end"
-            >
-                <SearchIcon />
-            </IconButton>
+            <Tooltip title="Rechercher">
+                <IconButton
+                    onClick={handleOpen}
+                    aria-label="Rechercher"
+                    edge="end"
+                >
+                    <SearchIcon />
+                </IconButton>
+            </Tooltip>
             <Modal
                 open={isOpened}
                 onClose={handleClose}

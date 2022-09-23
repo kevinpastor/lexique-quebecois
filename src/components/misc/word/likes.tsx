@@ -1,5 +1,5 @@
 import { ThumbUp, ThumbUpOutlined } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { ReactElement } from "react";
 
@@ -81,13 +81,15 @@ export const Likes = ({
     };
 
     return (
-        <Button
-            onClick={handleClick}
-            aria-label="Like"
-            startIcon={isLiked ? <ThumbUp color="primary" /> : <ThumbUpOutlined />}
-            size="small"
-        >
-            {likes}
-        </Button>
+        <Tooltip title="J'aime">
+            <Button
+                onClick={handleClick}
+                aria-label="J'aime"
+                startIcon={isLiked ? <ThumbUp color="primary" /> : <ThumbUpOutlined />}
+                size="small"
+            >
+                {likes}
+            </Button>
+        </Tooltip>
     );
 };
