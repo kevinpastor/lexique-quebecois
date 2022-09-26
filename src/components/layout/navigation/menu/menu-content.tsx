@@ -1,5 +1,4 @@
-import { Add, Description, Home, ListAlt, LocalLibrary, PrivacyTip } from "@mui/icons-material";
-// import { AttachMoney, ChatBubble } from "@mui/icons-material";
+import { Add, Home, ListAlt, LocalLibrary } from "@mui/icons-material";
 import { Box, Divider, List, ListItem, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -13,7 +12,7 @@ export interface Props {
 export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
     <Box
         p={2}
-        width={256} // TODO Have it wider on desktop
+        width={256}
     >
         <Stack
             my={2}
@@ -49,21 +48,9 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
                 onClick={handleClose}
             />
         </List>
+        {/*
         <Divider />
         <List>
-            <MenuItem
-                label="Conditions"
-                href="/conditions"
-                icon={<Description />}
-                onClick={handleClose}
-            />
-            <MenuItem
-                label="Confidentialité"
-                href="/confidentialite"
-                icon={<PrivacyTip />}
-                onClick={handleClose}
-            />
-            {/*
             // TODO Create both pages
             <MenuItem
                 label="Contact"
@@ -77,8 +64,8 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
                 icon={<AttachMoney />}
                 onClick={handleClose}
             />
-            */}
         </List>
+        */}
         <Divider />
         <List>
             <ListItem disableGutters>

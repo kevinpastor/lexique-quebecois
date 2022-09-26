@@ -1,6 +1,7 @@
-import { Box, Container, Grid, Stack } from "@mui/material";
+import { Container, Stack, Unstable_Grid2 as Grid } from "@mui/material";
 import { PropsWithChildren, ReactElement } from "react";
 
+import { DesktopOnly } from "@components/misc/desktop-only";
 import { Loading } from "@components/misc/loading";
 
 import { Footer } from "./footer";
@@ -11,54 +12,42 @@ export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement =
     <>
         <Navigation />
         <Container>
-            <Stack
+            <Grid
+                container
                 spacing={2}
                 pt={1}
                 pb={2}
             >
                 <Grid
-                    container
-                    spacing={2}
+                    xs={12}
+                    md={8}
                 >
-                    <Grid
-                        item
-                        md={8}
-                        style={{
-                            width: "100%"
-                        }}
-                    >
-                        <Loading>
-                            {children}
-                        </Loading>
-                    </Grid>
-                    <Grid
-                        item
-                        md={4}
-                        display={{
-                            xs: "none",
-                            md: "block"
-                        }}
-                    >
-                        <Stack
-                            spacing={2}
-                            style={{
-                                position: "sticky",
-                                top: 54.84 + 8 // Comes from the AppBar height
-                            }}
-                        >
-                            <Sidebar />
-                            <Footer />
-                        </Stack>
-                    </Grid>
+                    <Loading>
+                        {children}
+                    </Loading>
                 </Grid>
-                <Box
-                    display={{
-                        md: "none"
-                    }}
+                <Grid
+                    xs={12}
+                    md={4}
                 >
-                    <Footer />
-                </Box>
-            </Stack>
+                    <Stack
+                        spacing={2}
+                        sx={{
+                            position: {
+                                md: "sticky"
+                            },
+                            top: {
+                                md: 54.84 + 8 // Comes from the AppBar height
+                            }
+                        }}
+                    >
+                        <DesktopOnly>
+                            <Sidebar />
+                        </DesktopOnly>
+                        <Footer />
+                    </Stack>
+                </Grid>
+            </Grid>
         </Container>
     </>
 );
