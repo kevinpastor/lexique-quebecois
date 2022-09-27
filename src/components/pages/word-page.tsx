@@ -52,8 +52,8 @@ export const WordPage = (): ReactElement => {
         <>
             <Head>
                 <title>
+                    {/* Having the sufix inline creates comment blocks inside the title tag */}
                     {`${wordCollection[0].label} - Lexique Québécois`}
-                    {/* having the sufix inline creates comment blocks inside the title tag */}
                 </title>
                 <meta
                     key="description"

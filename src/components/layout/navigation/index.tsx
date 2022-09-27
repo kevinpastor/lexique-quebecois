@@ -1,4 +1,4 @@
-import { AppBar, Box, Container, Link, Stack, Typography, useScrollTrigger } from "@mui/material";
+import { AppBar, Container, Link, Stack, useScrollTrigger } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 
@@ -20,74 +20,68 @@ export const Navigation = (): ReactElement => {
             elevation={isAtPageTop ? 0 : 3}
         >
             <Container>
-                <Box my={0.5}>
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    spacing={2}
+                    my={0.5}
+                >
                     <Stack
                         direction="row"
-                        justifyContent="space-between"
                         alignItems="center"
-                        spacing={2}
+                        spacing={1}
                     >
+                        <MobileOnly>
+                            <Menu />
+                        </MobileOnly>
                         <Stack
                             direction="row"
-                            alignItems="center"
-                            spacing={1}
+                            alignItems="end"
+                            spacing={2}
                         >
-                            <MobileOnly>
-                                <Menu />
-                            </MobileOnly>
-                            <Stack
-                                direction="row"
-                                alignItems="end"
-                                spacing={2}
+                            <NextLink
+                                href="/"
+                                passHref
                             >
-                                <Typography variant="h1">
-                                    <NextLink
-                                        href="/"
-                                        passHref
+                                <Link
+                                    variant="h1"
+                                    color="inherit"
+                                    underline="none"
+                                >
+                                    Lexique Québécois
+                                </Link>
+                            </NextLink>
+                            <DesktopOnly>
+                                <NextLink
+                                    href="/ajouter"
+                                    passHref
+                                >
+                                    <Link
+                                        variant="subtitle2"
+                                        color="default"
+                                        underline="hover"
                                     >
-                                        <Link
-                                            color="inherit"
-                                            underline="none"
-                                        >
-                                            Lexique Québécois
-                                        </Link>
-                                    </NextLink>
-                                </Typography>
-                                <DesktopOnly>
-                                    <Typography variant="subtitle2">
-                                        <NextLink
-                                            href="/ajouter"
-                                            passHref
-                                        >
-                                            <Link
-                                                color="inherit"
-                                                underline="hover"
-                                            >
-                                                Ajouter
-                                            </Link>
-                                        </NextLink>
-                                    </Typography>
-                                </DesktopOnly>
-                                <DesktopOnly>
-                                    <Typography variant="subtitle2">
-                                        <NextLink
-                                            href="/mots"
-                                            passHref
-                                        >
-                                            <Link
-                                                color="inherit"
-                                                underline="hover"
-                                            >
-                                                Index
-                                            </Link>
-                                        </NextLink>
-                                    </Typography>
-                                </DesktopOnly>
-                            </Stack>
+                                        Ajouter
+                                    </Link>
+                                </NextLink>
+                                <NextLink
+                                    href="/mots"
+                                    passHref
+                                >
+                                    <Link
+                                        variant="subtitle2"
+                                        color="default"
+                                        underline="hover"
+                                    >
+                                        Index
+                                    </Link>
+                                </NextLink>
+                            </DesktopOnly>
                         </Stack>
-                        <Search />
                     </Stack>
-                </Box>
+                    <Search />
+                </Stack>
             </Container>
         </AppBar>
     );

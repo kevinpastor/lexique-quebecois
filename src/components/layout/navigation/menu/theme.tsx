@@ -31,7 +31,7 @@ export const Theme = (): ReactElement => {
     };
 
     return (
-        <FormControl>
+        <FormControl margin="normal">
             <InputLabel>
                 Thème
             </InputLabel>

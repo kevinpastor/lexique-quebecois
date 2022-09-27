@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
-import { ReactElement, useMemo } from "react";
+import { Fragment, ReactElement, useMemo } from "react";
 import useSWR from "swr";
 
 import { getSlug } from "@models/word-request";
@@ -53,7 +53,7 @@ export const IndexPage = (): ReactElement => {
                 <CardHeader title="Index" />
                 <CardContent>
                     {memoizedLetterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
-                        <div key={letter}>
+                        <div key={letter} /** Using div instead of Fragment for better HTML markup */>
                             <Typography variant="h3">
                                 {letter}
                             </Typography>

@@ -1,5 +1,5 @@
 import { Add, Home, ListAlt, LocalLibrary } from "@mui/icons-material";
-import { Box, Divider, List, ListItem, Stack, Typography } from "@mui/material";
+import { Divider, List, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
 import { MenuItem } from "./menu-item";
@@ -10,9 +10,10 @@ export interface Props {
 }
 
 export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
-    <Box
-        p={2}
+    <Stack
         width={256}
+        p={2}
+        divider={<Divider />}
     >
         <Stack
             my={2}
@@ -20,14 +21,10 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
             alignItems="center"
         >
             <LocalLibrary fontSize="large" />
-            <Typography
-                variant="h3"
-                align="center"
-            >
+            <Typography variant="h3">
                 Lexique Québecois
             </Typography>
         </Stack>
-        <Divider />
         <List>
             <MenuItem
                 label="Accueil"
@@ -49,7 +46,6 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
             />
         </List>
         {/*
-        <Divider />
         <List>
             // TODO Create both pages
             <MenuItem
@@ -66,11 +62,6 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
             />
         </List>
         */}
-        <Divider />
-        <List>
-            <ListItem disableGutters>
-                <Theme />
-            </ListItem>
-        </List>
-    </Box>
+        <Theme />
+    </Stack>
 );

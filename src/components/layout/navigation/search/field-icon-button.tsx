@@ -8,15 +8,17 @@ import { FormValues } from "./content";
 export const FieldIconButton = (): ReactElement => {
     const { validateForm, handleSubmit } = useFormikContext<FormValues>();
 
+    const handleClick = async (): Promise<void> => {
+        const { label: labelError } = await validateForm();
+
+        if (!labelError) {
+            handleSubmit();
+        }
+    };
+
     return (
         <IconButton
-            onClick={async (): Promise<void> => {
-                const { label: labelError } = await validateForm();
-
-                if (!labelError) {
-                    handleSubmit();
-                }
-            }}
+            onClick={handleClick}
             aria-label="Retour"
             size="small"
             edge="end"
