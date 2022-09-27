@@ -1,29 +1,19 @@
 import type { TooltipProps } from "@mui/material";
-import dynamic from "next/dynamic";
-import { ComponentType, ReactElement, useCallback, useMemo } from "react";
+import { ComponentType, ReactElement, useCallback } from "react";
+
+import { LazyWrapper } from "./lazy-wrapper";
 
 export const LazyTooltip = ({ children, ...rest }: TooltipProps): ReactElement => {
-    const fallback = useCallback((): ReactElement => (
-        <>
-            {children}
-        </>
-    ), [children]);
-
-    const DynamicTooltip = useMemo((): ComponentType<TooltipProps> => (
-        dynamic(
-            async (): Promise<ComponentType<TooltipProps>> => (
-                (await import("@mui/material/Tooltip")).default
-            ),
-            {
-                ssr: false,
-                loading: fallback
-            }
-        )
-    ), [fallback]);
+    const Wrapper = useCallback(async (): Promise<ComponentType<TooltipProps>> => (
+        (await import("@mui/material/Tooltip")).default
+    ), []);
 
     return (
-        <DynamicTooltip {...rest}>
+        <LazyWrapper
+            Wrapper={Wrapper}
+            {...rest}
+        >
             {children}
-        </DynamicTooltip>
+        </LazyWrapper>
     );
 };
