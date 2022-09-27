@@ -1,5 +1,5 @@
 import { ThumbDown, ThumbDownOutlined } from "@mui/icons-material";
-import { Button, Tooltip } from "@mui/material";
+import { Button } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { ReactElement } from "react";
 
@@ -8,6 +8,8 @@ import { isNotFoundError } from "@services/errors/not-found-error";
 import { dislike, removeDislike } from "@services/reactions";
 import { BooleanUtilities } from "@utils/hooks/use-boolean";
 import { NumberUtilities } from "@utils/hooks/use-number";
+
+import { LazyTooltip } from "../lazy-tooltip";
 
 interface Props {
     id: string;
@@ -81,7 +83,7 @@ export const Dislikes = ({
     };
 
     return (
-        <Tooltip title="Je n'aime pas">
+        <LazyTooltip title="Je n'aime pas">
             <Button
                 onClick={handleClick}
                 aria-label="Je n'aime pas"
@@ -90,6 +92,6 @@ export const Dislikes = ({
             >
                 {dislikes}
             </Button>
-        </Tooltip>
+        </LazyTooltip>
     );
 };

@@ -1,8 +1,9 @@
 import { Menu as MenuIcon } from "@mui/icons-material";
-import { IconButton, SwipeableDrawer, Tooltip } from "@mui/material";
+import { IconButton, SwipeableDrawer } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, ReactElement } from "react";
 
+import { LazyTooltip } from "@components/misc/lazy-tooltip";
 import { useBoolean } from "@utils/hooks/use-boolean";
 import { isLowEndDevice } from "@utils/misc/device";
 
@@ -21,7 +22,7 @@ export const Menu = (): ReactElement => {
 
     return (
         <>
-            <Tooltip title="Menu">
+            <LazyTooltip title="Menu">
                 <IconButton
                     onClick={handleOpen}
                     aria-label="Menu"
@@ -29,7 +30,7 @@ export const Menu = (): ReactElement => {
                 >
                     <MenuIcon />
                 </IconButton>
-            </Tooltip>
+            </LazyTooltip>
             <SwipeableDrawer
                 open={isOpened}
                 onOpen={handleOpen}

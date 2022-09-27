@@ -1,8 +1,9 @@
 import { Search as SearchIcon } from "@mui/icons-material";
-import { Fade, IconButton, Modal, Tooltip } from "@mui/material";
+import { Fade, IconButton, Modal } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, ReactElement } from "react";
 
+import { LazyTooltip } from "@components/misc/lazy-tooltip";
 import { useBoolean } from "@utils/hooks/use-boolean";
 
 import type { Props as SearchContentProps } from "./content";
@@ -21,7 +22,7 @@ export const Search = (): ReactElement => {
     // Wrapping div required for IconButton end edge
     return (
         <div>
-            <Tooltip title="Rechercher">
+            <LazyTooltip title="Rechercher">
                 <IconButton
                     onClick={handleOpen}
                     aria-label="Rechercher"
@@ -29,7 +30,7 @@ export const Search = (): ReactElement => {
                 >
                     <SearchIcon />
                 </IconButton>
-            </Tooltip>
+            </LazyTooltip>
             <Modal
                 open={isOpened}
                 onClose={handleClose}
