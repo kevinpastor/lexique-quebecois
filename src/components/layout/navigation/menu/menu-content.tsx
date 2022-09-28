@@ -3,7 +3,7 @@ import { Divider, List, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
 import { MenuItem } from "./menu-item";
-import { Theme } from "./theme";
+import { ThemeSelector } from "./theme-selector";
 
 export interface Props {
     onClose: () => void;
@@ -62,6 +62,6 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
             />
         </List>
         */}
-        <Theme />
+        <ThemeSelector />
     </Stack>
 );

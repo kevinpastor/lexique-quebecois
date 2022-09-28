@@ -1,8 +1,6 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Theme } from "./navigation/menu/theme";
-
 export const Sidebar = (): ReactElement => (
     <Stack
         spacing={2}
@@ -25,6 +23,5 @@ export const Sidebar = (): ReactElement => (
                 </Typography>
             </CardContent>
         </Card>
-        <Theme />
     </Stack>
 );

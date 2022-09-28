@@ -22,7 +22,7 @@ const modeLabels: ModeInfo<string> = {
     "dark": "Sombre"
 };
 
-export const Theme = (): ReactElement => {
+export const ThemeSelector = (): ReactElement => {
     const { ternaryMode, setMode } = useDarkMode();
 
     const handleChange = (event: SelectChangeEvent<TernaryMode>): void => {

@@ -1,12 +1,17 @@
 import { AppBar, Container, Link, Stack, useScrollTrigger } from "@mui/material";
+import dynamic from "next/dynamic";
 import NextLink from "next/link";
-import { ReactElement } from "react";
+import { ComponentType, ReactElement, Suspense } from "react";
 
 import { DesktopOnly } from "@components/misc/desktop-only";
 import { MobileOnly } from "@components/misc/mobile-only";
 
 import { Menu } from "./menu";
 import { Search } from "./search";
+
+const LazyIconThemeSelector = dynamic(async (): Promise<{ default: ComponentType }> => ({
+    default: (await import("./icon-theme-selector")).IconThemeSelector
+}), { suspense: true });
 
 export const Navigation = (): ReactElement => {
     const isAtPageTop: boolean = !useScrollTrigger({
@@ -80,7 +85,18 @@ export const Navigation = (): ReactElement => {
                             </DesktopOnly>
                         </Stack>
                     </Stack>
-                    <Search />
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                        spacing={1}
+                    >
+                        <DesktopOnly>
+                            <Suspense>
+                                <LazyIconThemeSelector />
+                            </Suspense>
+                        </DesktopOnly>
+                        <Search />
+                    </Stack>
                 </Stack>
             </Container>
         </AppBar>
