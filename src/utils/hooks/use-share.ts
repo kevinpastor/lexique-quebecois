@@ -1,11 +1,12 @@
-import { useSnackbar } from "notistack";
 import { useCallback } from "react";
+
+import { useAlerts } from "@utils/hooks/use-alerts";
 
 import { useCopyToClipboard } from "./use-copy-to-clipboard";
 
 export const useShare = (path?: string): (() => Promise<void>) => {
     const copy = useCopyToClipboard();
-    const { enqueueSnackbar } = useSnackbar();
+    const { enqueueSuccessAlert, enqueueErrorAlert } = useAlerts();
 
     const share = useCallback(async (): Promise<void> => {
         const url: string = path
@@ -31,17 +32,12 @@ export const useShare = (path?: string): (() => Promise<void>) => {
             await copy(url);
         }
         catch {
-            enqueueSnackbar(
-                "Impossible de copier le lien.",
-                { variant: "error" }
-            );
+            enqueueErrorAlert("Impossible de copier le lien.");
             return;
         }
 
-        enqueueSnackbar("Lien copié dans le presse-papiers.",
-            { variant: "success" }
-        );
-    }, [copy, enqueueSnackbar, path]);
+        enqueueSuccessAlert("Lien copié dans le presse-papiers.");
+    }, [copy, enqueueErrorAlert, enqueueSuccessAlert, path]);
 
     return share;
 };

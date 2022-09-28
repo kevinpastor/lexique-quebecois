@@ -29,7 +29,6 @@
         "formik-mui": "5.0.0-alpha.0",
         "mongodb": "^4.9.1",
         "next": "^12.3.0",
-        "notistack": "^2.0.5",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "request-ip": "^3.3.0",

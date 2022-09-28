@@ -160,6 +160,16 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
             }
         },
         components: {
+            MuiAlert: {
+                defaultProps: {
+                    variant: "filled",
+                    icon: false,
+                    elevation: 6,
+                    sx: {
+                        width: "100%"
+                    }
+                }
+            },
             MuiAppBar: {
                 defaultProps: {
                     color: "default",

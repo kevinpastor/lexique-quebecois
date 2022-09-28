@@ -1,11 +1,11 @@
 import { ThumbUp, ThumbUpOutlined } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import { useSnackbar } from "notistack";
 import { ReactElement } from "react";
 
 import { isConflictError } from "@services/errors/conflict-error";
 import { isNotFoundError } from "@services/errors/not-found-error";
 import { like, removeLike } from "@services/reactions";
+import { useAlerts } from "@utils/hooks/use-alerts";
 import { BooleanUtilities } from "@utils/hooks/use-boolean";
 import { NumberUtilities } from "@utils/hooks/use-number";
 
@@ -38,7 +38,7 @@ export const Likes = ({
         toggle: toggleIsDisliked
     }
 }: Props): ReactElement => {
-    const { enqueueSnackbar } = useSnackbar();
+    const { enqueueErrorAlert } = useAlerts();
 
     const handleClick = async (): Promise<void> => {
         toggleIsLiked();
@@ -51,10 +51,7 @@ export const Likes = ({
             }
             catch (error: unknown) {
                 if (!isConflictError(error) && !isNotFoundError(error)) {
-                    enqueueSnackbar(
-                        "Un erreur inconnue s'est produite.",
-                        { variant: "error" }
-                    );
+                    enqueueErrorAlert("Un erreur inconnue s'est produite.");
                     return;
                 }
             }
@@ -72,10 +69,7 @@ export const Likes = ({
             }
             catch (error: unknown) {
                 if (!isConflictError(error)) {
-                    enqueueSnackbar(
-                        "Un erreur inconnue s'est produite.",
-                        { variant: "error" }
-                    );
+                    enqueueErrorAlert("Un erreur inconnue s'est produite.");
                     return;
                 }
             }

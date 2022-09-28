@@ -1,15 +1,15 @@
 import { PropsWithChildren, ReactElement } from "react";
 
-import { SnackbarProvider } from "./snackbar-provider";
+import { AlertsProvider } from "./alerts-provider";
 import { SWRProvider } from "./swr-provider";
 import { ThemeProvider } from "./theme-provider";
 
 export const Providers = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <ThemeProvider>
-        <SnackbarProvider>
+        <AlertsProvider>
             <SWRProvider>
                 {children}
             </SWRProvider>
-        </SnackbarProvider>
+        </AlertsProvider>
     </ThemeProvider>
 );

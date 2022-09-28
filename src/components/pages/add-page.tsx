@@ -5,12 +5,12 @@ import { Field, Form, Formik, FormikProps } from "formik";
 import { Select, TextField } from "formik-mui";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
-import { useSnackbar } from "notistack";
 import { ReactElement, ReactNode } from "react";
 
 import { WordClass, wordClasses } from "@models/classes";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
 import { addWord } from "@services/words";
+import { useAlerts } from "@utils/hooks/use-alerts";
 
 const initialValues: WordRequest = {
     label: "",
@@ -25,7 +25,7 @@ export const AddPage = (): ReactElement => {
         push: pushRoute,
         query: routeQuery
     }: NextRouter = useRouter();
-    const { enqueueSnackbar } = useSnackbar();
+    const { enqueueSuccessAlert, enqueueErrorAlert } = useAlerts();
 
     const handleSubmit = async (wordRequest: WordRequest): Promise<void> => {
         const cleanedWordRequest: WordRequest = cleanupWordRequest(wordRequest);
@@ -33,17 +33,11 @@ export const AddPage = (): ReactElement => {
             await addWord(cleanedWordRequest);
         }
         catch {
-            enqueueSnackbar(
-                "Une erreur s'est produite. Veuillez réessayer plus tard.",
-                { variant: "error" }
-            );
+            enqueueErrorAlert("Une erreur s'est produite. Veuillez réessayer plus tard.");
             return;
         }
 
-        enqueueSnackbar(
-            "Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu.",
-            { variant: "success" }
-        );
+        enqueueSuccessAlert("Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu.");
 
         await pushRoute("/");
     };
