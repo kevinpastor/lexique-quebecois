@@ -1,16 +1,16 @@
 import { Search as SearchIcon } from "@mui/icons-material";
 import { Fade, IconButton, Modal } from "@mui/material";
 import dynamic from "next/dynamic";
-import { ComponentType, ReactElement } from "react";
+import { ComponentType, ReactElement, Suspense } from "react";
 
 import { LazyTooltip } from "@components/misc/lazy-tooltip";
 import { useBoolean } from "@utils/hooks/use-boolean";
 
 import type { Props as SearchContentProps } from "./content";
 
-const SearchContent = dynamic(async (): Promise<ComponentType<SearchContentProps>> => (
-    (await import("./content")).Content)
-);
+const LazySearchContent = dynamic(async (): Promise<{ default: ComponentType<SearchContentProps> }> => ({
+    default: (await import("./content")).Content
+}), { suspense: true });
 
 export const Search = (): ReactElement => {
     const {
@@ -38,7 +38,9 @@ export const Search = (): ReactElement => {
             >
                 <Fade in={isOpened}>
                     <div style={{ height: "100%" }}>
-                        <SearchContent onClose={handleClose} />
+                        <Suspense>
+                            <LazySearchContent onClose={handleClose} />
+                        </Suspense>
                     </div>
                 </Fade>
             </Modal>

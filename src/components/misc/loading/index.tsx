@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement, useEffect } from "react";
+import { PropsWithChildren, ReactElement, Suspense, useEffect } from "react";
 
 import { useLoadingUrl } from "@utils/hooks/use-loading-url";
 import { useLockedBody } from "@utils/hooks/use-locked-body";
@@ -26,7 +26,11 @@ export const Loading = ({ children }: PropsWithChildren<unknown>): ReactElement 
     if (loadingUrl) {
         for (const { matcher, Component } of routes) {
             if (matcher(loadingUrl)) {
-                return <Component />;
+                return (
+                    <Suspense>
+                        <Component />
+                    </Suspense>
+                );
             }
         }
 

@@ -8,9 +8,9 @@ import { Loading } from "@components/misc/loading";
 import { Footer } from "./footer";
 import { Navigation } from "./navigation";
 
-const Sidebar = dynamic(async (): Promise<ComponentType> => (
-    (await import("./sidebar")).Sidebar)
-);
+const LazySidebar = dynamic(async (): Promise<{ default: ComponentType }> => ({
+    default: (await import("./sidebar")).Sidebar
+}), { suspense: true });
 
 export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <>
@@ -43,7 +43,7 @@ export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement =
                         }}
                     >
                         <DesktopOnly>
-                            <Sidebar />
+                            <LazySidebar />
                         </DesktopOnly>
                         <Footer />
                     </Stack>

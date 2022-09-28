@@ -1,19 +1,18 @@
 import type { TooltipProps } from "@mui/material";
-import { ComponentType, ReactElement, useCallback } from "react";
+import dynamic from "next/dynamic";
+import { ComponentType, ReactElement, Suspense } from "react";
 
-import { LazyWrapper } from "./lazy-wrapper";
+const LazyMuiTooltip = dynamic(
+    async (): Promise<{ default: ComponentType<TooltipProps> }> => ({
+        default: (await import("@mui/material/Tooltip")).default
+    }),
+    { suspense: true }
+);
 
-export const LazyTooltip = ({ children, ...rest }: TooltipProps): ReactElement => {
-    const Wrapper = useCallback(async (): Promise<ComponentType<TooltipProps>> => (
-        (await import("@mui/material/Tooltip")).default
-    ), []);
-
-    return (
-        <LazyWrapper
-            Wrapper={Wrapper}
-            {...rest}
-        >
+export const LazyTooltip = ({ children, ...rest }: TooltipProps): ReactElement => (
+    <Suspense fallback={children}>
+        <LazyMuiTooltip {...rest}>
             {children}
-        </LazyWrapper>
-    );
-};
+        </LazyMuiTooltip>
+    </Suspense>
+);

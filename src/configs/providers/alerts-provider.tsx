@@ -11,14 +11,14 @@ export interface IAlertsContext {
 
 export const AlertsContext = createContext<IAlertsContext | null>(null);
 
-const DynamicSnackbar = dynamic(
+const LazySnackbar = dynamic(
     (): Promise<{ default: ComponentType<SnackbarProps> }> => (
         import("@mui/material/Snackbar")
     ),
     { suspense: true }
 );
 
-const DynamicAlert = dynamic(
+const LazyAlert = dynamic(
     (): Promise<{ default: ComponentType<AlertProps> }> => (
         import("@mui/material/Alert")
     ),
@@ -83,16 +83,16 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
     return (
         <AlertsContext.Provider value={value}>
             <Suspense>
-                <DynamicSnackbar
+                <LazySnackbar
                     open={isOpen}
                     onClose={handleClose}
                     TransitionProps={{ onExited: handleExited }}
                     autoHideDuration={1500}
                 >
-                    <DynamicAlert severity={alerts[0]?.severity}>
+                    <LazyAlert severity={alerts[0]?.severity}>
                         {alerts[0]?.message}
-                    </DynamicAlert>
-                </DynamicSnackbar>
+                    </LazyAlert>
+                </LazySnackbar>
             </Suspense>
             {children}
         </AlertsContext.Provider>

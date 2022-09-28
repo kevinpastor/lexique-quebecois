@@ -1,8 +1,6 @@
 import dynamic from "next/dynamic";
 import { ComponentType } from "react";
 
-import { ProgressIndicator } from "../progress-indicator";
-
 interface Route {
     matcher: (url: string) => boolean;
     Component: ComponentType;
@@ -14,12 +12,10 @@ export const routes: Array<Route> = [
             url === "/"
         ),
         Component: dynamic(
-            async (): Promise<ComponentType> => (
-                (await import("./loading-index")).LoadingIndex
-            ),
-            {
-                loading: ProgressIndicator
-            }
+            async (): Promise<{ default: ComponentType }> => ({
+                default: (await import("./loading-index")).LoadingIndex
+            }),
+            { suspense: true }
         )
     },
     {
@@ -27,12 +23,10 @@ export const routes: Array<Route> = [
             /^\/mots\/[a-z\s]+$/gi.test(url)
         ),
         Component: dynamic(
-            async (): Promise<ComponentType> => (
-                (await import("./loading-word")).LoadingWord
-            ),
-            {
-                loading: ProgressIndicator
-            }
+            async (): Promise<{ default: ComponentType }> => ({
+                default: (await import("./loading-word")).LoadingWord
+            }),
+            { suspense: true }
         )
     },
     {
@@ -40,12 +34,10 @@ export const routes: Array<Route> = [
             url === "/conditions"
         ),
         Component: dynamic(
-            async (): Promise<ComponentType> => (
-                (await import("./loading-terms")).LoadingTerms
-            ),
-            {
-                loading: ProgressIndicator
-            }
+            async (): Promise<{ default: ComponentType }> => ({
+                default: (await import("./loading-terms")).LoadingTerms
+            }),
+            { suspense: true }
         )
     },
     {
@@ -53,12 +45,10 @@ export const routes: Array<Route> = [
             url === "/confidentialite"
         ),
         Component: dynamic(
-            async (): Promise<ComponentType> => (
-                (await import("./loading-privacy")).LoadingPrivacy
-            ),
-            {
-                loading: ProgressIndicator
-            }
+            async (): Promise<{ default: ComponentType }> => ({
+                default: (await import("./loading-privacy")).LoadingPrivacy
+            }),
+            { suspense: true }
         )
     },
     {
@@ -66,12 +56,10 @@ export const routes: Array<Route> = [
             url === "/mots"
         ),
         Component: dynamic(
-            async (): Promise<ComponentType> => (
-                (await import("./loading-word-index")).LoadingWordIndex
-            ),
-            {
-                loading: ProgressIndicator
-            }
+            async (): Promise<{ default: ComponentType }> => ({
+                default: (await import("./loading-word-index")).LoadingWordIndex
+            }),
+            { suspense: true }
         )
     }
     // TODO

@@ -1,5 +1,5 @@
 import { Theme, useMediaQuery, useTheme } from "@mui/material";
-import { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement, Suspense } from "react";
 
 export const DesktopOnly = ({ children }: PropsWithChildren<unknown>): ReactElement | null => {
     const theme: Theme = useTheme();
@@ -10,8 +10,8 @@ export const DesktopOnly = ({ children }: PropsWithChildren<unknown>): ReactElem
     }
 
     return (
-        <>
+        <Suspense>
             {children}
-        </>
+        </Suspense>
     );
 };

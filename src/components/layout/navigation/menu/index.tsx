@@ -1,7 +1,7 @@
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { IconButton, SwipeableDrawer } from "@mui/material";
 import dynamic from "next/dynamic";
-import { ComponentType, ReactElement } from "react";
+import { ComponentType, ReactElement, Suspense } from "react";
 
 import { LazyTooltip } from "@components/misc/lazy-tooltip";
 import { useBoolean } from "@utils/hooks/use-boolean";
@@ -9,9 +9,9 @@ import { isLowEndDevice } from "@utils/misc/device";
 
 import type { Props as MenuContentProps } from "./menu-content";
 
-const MenuContent = dynamic(async (): Promise<ComponentType<MenuContentProps>> => (
-    (await import("./menu-content")).MenuContent)
-);
+const LazyMenuContent = dynamic(async (): Promise<{ default: ComponentType<MenuContentProps> }> => ({
+    default: (await import("./menu-content")).MenuContent
+}), { suspense: true });
 
 export const Menu = (): ReactElement => {
     const {
@@ -41,7 +41,9 @@ export const Menu = (): ReactElement => {
                     keepMounted: true
                 }}
             >
-                <MenuContent onClose={handleClose} />
+                <Suspense>
+                    <LazyMenuContent onClose={handleClose} />
+                </Suspense>
             </SwipeableDrawer>
         </>
     );

@@ -1,7 +1,7 @@
 import { AppBar, Container, Link, Stack, useScrollTrigger } from "@mui/material";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
-import { ComponentType, ReactElement, Suspense } from "react";
+import { ComponentType, ReactElement } from "react";
 
 import { DesktopOnly } from "@components/misc/desktop-only";
 import { MobileOnly } from "@components/misc/mobile-only";
@@ -91,9 +91,7 @@ export const Navigation = (): ReactElement => {
                         spacing={1}
                     >
                         <DesktopOnly>
-                            <Suspense>
-                                <LazyIconThemeSelector />
-                            </Suspense>
+                            <LazyIconThemeSelector />
                         </DesktopOnly>
                         <Search />
                     </Stack>
