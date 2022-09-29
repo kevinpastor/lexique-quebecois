@@ -1,3 +1,4 @@
+// @ts-check
 const { MongoClient } = require("mongodb");
 
 const getWordsPath = async (config) => {
@@ -64,10 +65,6 @@ module.exports = {
                 changefreq: "monthly",
                 priority: 0.4
             };
-        }
-
-        if (path === "/admin") {
-            return null;
         }
 
         return {
