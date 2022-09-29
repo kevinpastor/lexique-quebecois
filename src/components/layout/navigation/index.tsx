@@ -20,10 +20,7 @@ export const Navigation = (): ReactElement => {
     });
 
     return (
-        <AppBar
-            color="inherit"
-            elevation={isAtPageTop ? 0 : 3}
-        >
+        <AppBar elevation={isAtPageTop ? 0 : 3}>
             <Container>
                 <Stack
                     direction="row"

@@ -57,10 +57,7 @@ export const Content = ({ onClose: handleClose }: Props): ReactElement => {
                 }}
                 component={Form}
             >
-                <AppBar
-                    color="inherit"
-                    elevation={3}
-                >
+                <AppBar elevation={3}>
                     <Container>
                         <Stack
                             direction="row"

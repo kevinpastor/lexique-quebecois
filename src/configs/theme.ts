@@ -172,7 +172,7 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
             },
             MuiAppBar: {
                 defaultProps: {
-                    color: "default",
+                    color: "inherit",
                     position: "sticky"
                 }
             },
