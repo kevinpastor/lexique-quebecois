@@ -1,6 +1,8 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
+import { Ad } from "@components/misc/ad";
+
 export const Sidebar = (): ReactElement => (
     <Stack
         spacing={2}
@@ -23,15 +25,9 @@ export const Sidebar = (): ReactElement => (
                 </Typography>
             </CardContent>
         </Card>
-        <ins
-            className="adsbygoogle"
-            style={{
-                display: "block"
-            }}
-            data-ad-client="ca-pub-3996014859104973"
-            data-ad-slot="4892544775"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
+        <Ad
+            client="ca-pub-3996014859104973"
+            slot="4892544775"
         />
     </Stack>
 );
