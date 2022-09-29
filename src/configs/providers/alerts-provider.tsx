@@ -1,6 +1,6 @@
 import type { AlertProps, SnackbarProps } from "@mui/material";
 import dynamic from "next/dynamic";
-import { ComponentType, createContext, PropsWithChildren, ReactElement, Suspense, SyntheticEvent, useCallback, useMemo, useState } from "react";
+import { ComponentType, createContext, PropsWithChildren, ReactElement, Suspense, SyntheticEvent, useCallback, useEffect, useMemo, useState } from "react";
 
 import { useBoolean } from "@utils/hooks/use-boolean";
 
@@ -10,6 +10,7 @@ export interface IAlertsContext {
 }
 
 export const AlertsContext = createContext<IAlertsContext | null>(null);
+AlertsContext.displayName = "AlertsContext";
 
 const LazySnackbar = dynamic(
     (): Promise<{ default: ComponentType<SnackbarProps> }> => (
@@ -34,7 +35,28 @@ interface Alert {
 
 export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => {
     const { value: isOpen, setTrue: open, setFalse: close } = useBoolean(false);
+    const { value: isExited, setValue: setIsExited } = useBoolean(true);
     const [alerts, setAlerts] = useState<ReadonlyArray<Alert>>([]);
+
+    useEffect((): void => {
+        if (isExited && alerts.length >= 1) {
+            open();
+            setIsExited(false);
+        }
+    }, [alerts.length, isExited, open, setIsExited]);
+
+    const handleClose = useCallback((_: SyntheticEvent | Event, reason: string): void => {
+        if (reason === "timeout" || reason === "escapeKeyDown") {
+            close();
+        }
+    }, [close]);
+
+    const handleExited = useCallback((): void => {
+        setAlerts((prevState: ReadonlyArray<Alert>): ReadonlyArray<Alert> => (
+            prevState.slice(1)
+        ));
+        setIsExited(true);
+    }, [setIsExited]);
 
     const enqueueAlert = useCallback((severity: Severity) => (message: string): void => {
         setAlerts((prevState: ReadonlyArray<Alert>): ReadonlyArray<Alert> => ([
@@ -44,11 +66,7 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
                 severity
             }
         ]));
-
-        if (alerts.length === 0) {
-            open();
-        }
-    }, [alerts.length, open]);
+    }, []);
 
     const enqueueSuccessAlert = useCallback((message: string): void => {
         enqueueAlert("success")(message);
@@ -58,27 +76,10 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
         enqueueAlert("error")(message);
     }, [enqueueAlert]);
 
-    const value = useMemo((): IAlertsContext => ({
+    const value: IAlertsContext = useMemo((): IAlertsContext => ({
         enqueueSuccessAlert,
         enqueueErrorAlert
     }), [enqueueErrorAlert, enqueueSuccessAlert]);
-
-    const handleClose = useCallback((_: SyntheticEvent | Event, reason: string): void => {
-        if (reason !== "timeout" && reason !== "escapeKeyDown") {
-            return;
-        }
-        close();
-    }, [close]);
-
-    const handleExited = useCallback((): void => {
-        setAlerts((prevState: ReadonlyArray<Alert>): ReadonlyArray<Alert> => (
-            prevState.slice(1)
-        ));
-
-        if (alerts.length > 1) {
-            open();
-        }
-    }, [alerts.length, open]);
 
     return (
         <AlertsContext.Provider value={value}>

@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
-import { Fragment, ReactElement, useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import useSWR from "swr";
 
 import { getSlug } from "@models/word-request";
