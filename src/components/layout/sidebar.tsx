@@ -23,5 +23,15 @@ export const Sidebar = (): ReactElement => (
                 </Typography>
             </CardContent>
         </Card>
+        <ins
+            className="adsbygoogle"
+            style={{
+                display: "block"
+            }}
+            data-ad-client="ca-pub-3996014859104973"
+            data-ad-slot="4892544775"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+        />
     </Stack>
 );

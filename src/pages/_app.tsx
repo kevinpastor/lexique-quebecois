@@ -1,31 +1,52 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { ReactElement } from "react";
+import Script from "next/script";
+import { ReactElement, useEffect } from "react";
 
 import { Layout } from "@components/layout";
 import { Providers } from "@configs/providers";
 import "@configs/styles.css";
 
-const App = ({ Component, pageProps }: AppProps): ReactElement => (
-    <>
-        <Head>
-            <title>Lexique Québécois</title>
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
+declare global {
+    interface Window {
+        adsbygoogle?: Array<unknown>;
+    }
+}
+
+const App = ({ Component, pageProps }: AppProps): ReactElement => {
+    useEffect((): void => {
+        try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+        // eslint-disable-next-line no-empty
+        catch { }
+    }, []);
+
+    return (
+        <>
+            <Head>
+                <title>Lexique Québécois</title>
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1" />
+                <meta
+                    key="description"
+                    name="description"
+                    content="Un peu comme Urban Dictionary, mais québécois." />
+            </Head>
+            <Script
+                async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3996014859104973"
+                crossOrigin="anonymous"
+                strategy="afterInteractive"
             />
-            <meta
-                key="description"
-                name="description"
-                content="Un peu comme Urban Dictionary, mais québécois."
-            />
-        </Head>
-        <Providers>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
-        </Providers>
-    </>
-);
+            <Providers>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </Providers>
+        </>
+    );
+};
 
 export default App;
