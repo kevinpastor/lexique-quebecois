@@ -1,15 +1,8 @@
-export const formatDate = (date: number | Date): string => {
+export const formatDate = (date: Date): string => {
     const locale: string = "fr-CA";
     const options: Intl.DateTimeFormatOptions = {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
+        dateStyle: "long"
     };
-
-    if (typeof date === "number") {
-        return new Date(date)
-            .toLocaleDateString(locale, options);
-    }
 
     return date.toLocaleDateString(locale, options);
 };

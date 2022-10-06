@@ -1,8 +1,9 @@
 import type { AlertProps, SnackbarProps } from "@mui/material";
 import dynamic from "next/dynamic";
-import { ComponentType, createContext, PropsWithChildren, ReactElement, Suspense, SyntheticEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { ComponentType, createContext, PropsWithChildren, ReactElement, Suspense, SyntheticEvent, useCallback, useEffect, useMemo } from "react";
 
-import { useBoolean } from "@utils/hooks/use-boolean";
+import { BooleanUtilities, useBoolean } from "@utils/hooks/use-boolean";
+import { QueueUtility, useQueue } from "@utils/hooks/use-queue";
 
 export interface IAlertsContext {
     enqueueSuccessAlert: (message: string) => void;
@@ -34,9 +35,20 @@ interface Alert {
 }
 
 export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => {
-    const { value: isOpen, setTrue: open, setFalse: close } = useBoolean(false);
-    const { value: isExited, setValue: setIsExited } = useBoolean(true);
-    const [alerts, setAlerts] = useState<ReadonlyArray<Alert>>([]);
+    const {
+        value: isOpen,
+        setTrue: open,
+        setFalse: close
+    }: BooleanUtilities = useBoolean(false);
+    const {
+        value: isExited,
+        setValue: setIsExited
+    }: BooleanUtilities = useBoolean(true);
+    const {
+        queue: alerts,
+        enqueue: enqueueAlert,
+        dequeue: dequeueAlert
+    }: QueueUtility<Alert> = useQueue<Alert>();
 
     useEffect((): void => {
         if (isExited && alerts.length >= 1) {
@@ -52,28 +64,22 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
     }, [close]);
 
     const handleExited = useCallback((): void => {
-        setAlerts((prevState: ReadonlyArray<Alert>): ReadonlyArray<Alert> => (
-            prevState.slice(1)
-        ));
+        dequeueAlert();
         setIsExited(true);
-    }, [setIsExited]);
-
-    const enqueueAlert = useCallback((severity: Severity) => (message: string): void => {
-        setAlerts((prevState: ReadonlyArray<Alert>): ReadonlyArray<Alert> => ([
-            ...prevState,
-            {
-                message,
-                severity
-            }
-        ]));
-    }, []);
+    }, [dequeueAlert, setIsExited]);
 
     const enqueueSuccessAlert = useCallback((message: string): void => {
-        enqueueAlert("success")(message);
+        enqueueAlert({
+            message,
+            severity: "success"
+        });
     }, [enqueueAlert]);
 
     const enqueueErrorAlert = useCallback((message: string): void => {
-        enqueueAlert("error")(message);
+        enqueueAlert({
+            message,
+            severity: "error"
+        });
     }, [enqueueAlert]);
 
     const value: IAlertsContext = useMemo((): IAlertsContext => ({

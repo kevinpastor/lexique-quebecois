@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { ComponentType, ReactElement, Suspense } from "react";
 
 import { LazyTooltip } from "@components/misc/lazy-tooltip";
-import { useBoolean } from "@utils/hooks/use-boolean";
+import { BooleanUtilities, useBoolean } from "@utils/hooks/use-boolean";
 
 import type { Props as SearchContentProps } from "./content";
 
@@ -17,7 +17,7 @@ export const Search = (): ReactElement => {
         value: isOpened,
         setTrue: handleOpen,
         setFalse: handleClose
-    } = useBoolean(false);
+    }: BooleanUtilities = useBoolean(false);
 
     // Wrapping div required for IconButton end edge
     return (

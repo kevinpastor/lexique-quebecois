@@ -1,10 +1,10 @@
 import { Share as ShareIcon } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { ReactElement } from "react";
+import { ReactElement, useMemo } from "react";
 
 import { Word as IWord } from "@models/word";
-import { useFormattedTimestamp } from "@utils/hooks/use-formatted-timestamp";
+import { useFormattedDate } from "@utils/hooks/use-formatted-date";
 import { useShare } from "@utils/hooks/use-share";
 
 import { Reactions } from "./reactions";
@@ -15,7 +15,10 @@ interface Props {
 }
 
 export const Word = ({ word }: Props): ReactElement => {
-    const formattedTimestamp = useFormattedTimestamp(word.timestamp);
+    const date: Date = useMemo((): Date => (
+        new Date(word.timestamp)
+    ), [word.timestamp]);
+    const formattedDate: string | undefined = useFormattedDate(date);
     const share = useShare(`mots/${word.slug}`);
 
     return (
@@ -53,8 +56,8 @@ export const Word = ({ word }: Props): ReactElement => {
                     {word.example}
                 </Typography>
                 <Typography variant="subtitle2">
-                    {formattedTimestamp
-                        ? `par ${word.author ?? "Anonyme"}, le ${formattedTimestamp}`
+                    {formattedDate
+                        ? `par ${word.author ?? "Anonyme"}, le ${formattedDate}`
                         : `par ${word.author ?? "Anonyme"}`}
                 </Typography>
             </CardContent>

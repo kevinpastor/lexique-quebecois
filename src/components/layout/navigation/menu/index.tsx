@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { ComponentType, ReactElement, Suspense } from "react";
 
 import { LazyTooltip } from "@components/misc/lazy-tooltip";
-import { useBoolean } from "@utils/hooks/use-boolean";
+import { BooleanUtilities, useBoolean } from "@utils/hooks/use-boolean";
 import { isLowEndDevice } from "@utils/misc/device";
 
 import type { Props as MenuContentProps } from "./menu-content";
@@ -18,7 +18,7 @@ export const Menu = (): ReactElement => {
         value: isOpened,
         setTrue: handleOpen,
         setFalse: handleClose
-    } = useBoolean(false);
+    }: BooleanUtilities = useBoolean(false);
 
     return (
         <>
