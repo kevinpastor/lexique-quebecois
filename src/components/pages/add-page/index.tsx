@@ -1,16 +1,17 @@
 import { Check } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { Card, CardActions, CardContent, CardHeader, Checkbox, ListItemText, MenuItem, Stack } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
 import { Field, Form, Formik, FormikProps } from "formik";
-import { Select, TextField } from "formik-mui";
+import { TextField } from "formik-mui";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement } from "react";
 
-import { WordClass, wordClasses } from "@models/classes";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
 import { addWord } from "@services/words";
 import { useAlerts } from "@utils/hooks/use-alerts";
+
+import { WordClassPicker } from "./word-class-picker";
 
 const initialValues: WordRequest = {
     label: "",
@@ -61,7 +62,7 @@ export const AddPage = (): ReactElement => {
                 validateOnBlur={false}
                 validateOnChange={false}
             >
-                {({ isSubmitting, values }: FormikProps<WordRequest>): ReactElement => (
+                {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
                     <Form noValidate>
                         <Card>
                             <CardHeader title="Ajouter un mot" />
@@ -74,23 +75,7 @@ export const AddPage = (): ReactElement => {
                                         required
                                         autoFocus
                                     />
-                                    <Field
-                                        component={Select}
-                                        name="wordClasses"
-                                        label="Classe(s)"
-                                        multiple
-                                        renderValue={(selected: Array<string>): ReactNode => (selected.join(", "))}
-                                    >
-                                        {wordClasses.map((wordClass: WordClass): ReactElement => (
-                                            <MenuItem
-                                                key={wordClass}
-                                                value={wordClass}
-                                            >
-                                                <Checkbox checked={values.wordClasses.includes(wordClass)} />
-                                                <ListItemText primary={wordClass} />
-                                            </MenuItem>
-                                        ))}
-                                    </Field>
+                                    <WordClassPicker />
                                     <Field
                                         component={TextField}
                                         name="definition"
