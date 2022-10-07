@@ -20,11 +20,7 @@ export const wordClasses: Array<WordClass> = [
     WordClass.Conjonction
 ];
 
-type WordClassAbbreviations = {
-    [key in WordClass]: string
-};
-
-export const wordClassAbreviations: WordClassAbbreviations = {
+export const wordClassAbreviations: Record<WordClass, string> = {
     [WordClass.Nom]: "n.",
     [WordClass.Adjectif]: "adj.",
     [WordClass.Verbe]: "v.",

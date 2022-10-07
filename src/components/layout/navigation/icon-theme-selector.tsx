@@ -7,11 +7,7 @@ import { useDarkMode, TernaryMode } from "@utils/hooks/use-dark-mode";
 
 const modes: Array<TernaryMode> = ["system", "light", "dark"];
 
-type ModeIcons = {
-    [key in TernaryMode]: ReactElement;
-};
-
-const modeIcons: ModeIcons = {
+const modeIcons: Record<TernaryMode, ReactElement> = {
     "system": <SettingsBrightness />,
     "light": <LightMode />,
     "dark": <DarkMode />
