@@ -1,7 +1,7 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Ad } from "@components/misc/ad";
+// import { Ad } from "@components/misc/ad";
 
 export const Sidebar = (): ReactElement => (
     <Stack
@@ -25,9 +25,12 @@ export const Sidebar = (): ReactElement => (
                 </Typography>
             </CardContent>
         </Card>
+        {/*
+        TODO Show ad when AdSense is approved
         <Ad
             client="ca-pub-3996014859104973"
             slot="4892544775"
         />
+        */}
     </Stack>
 );
