@@ -1,14 +1,8 @@
-import { WordClass } from "./classes";
+import { WithId } from "mongodb";
+
+import { DefinitionDocument } from "./definition-document";
 
 export interface WordDocument {
-    slug: string;
-    label: string;
-    wordClasses: Array<WordClass>;
-    definition: string;
-    example: string;
-    author: string;
-    ip: string;
-    isApproved: boolean;
-    likes: Array<string>;
-    dislikes: Array<string>;
+    spellings: Array<string>;
+    definitions: Array<WithId<DefinitionDocument>>;
 }

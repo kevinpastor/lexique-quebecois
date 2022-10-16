@@ -3,7 +3,8 @@ import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typogr
 import NextLink from "next/link";
 import { ReactElement, useMemo } from "react";
 
-import { Word as IWord } from "@models/word";
+import { Definition as IWord } from "@models/definition";
+import { getSlug } from "@models/word-request";
 import { useFormattedDate } from "@utils/hooks/use-formatted-date";
 import { useShare } from "@utils/hooks/use-share";
 
@@ -19,7 +20,8 @@ export const Word = ({ word }: Props): ReactElement => {
         new Date(word.timestamp)
     ), [word.timestamp]);
     const formattedDate: string | undefined = useFormattedDate(date);
-    const share = useShare(`mots/${word.slug}`);
+    const slug = getSlug(word.label);
+    const share = useShare(`mots/${slug}`);
 
     return (
         <Card>
@@ -31,7 +33,7 @@ export const Word = ({ word }: Props): ReactElement => {
                         alignItems="baseline"
                     >
                         <NextLink
-                            href={`/mots/${word.slug}`}
+                            href={`/mots/${slug}`}
                             passHref
                         >
                             <Link variant="h2">

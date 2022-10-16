@@ -8,18 +8,22 @@ import { getDatabase } from "./database";
 // Inspired by https://stackoverflow.com/a/28006849/7817501
 export const like = async (id: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
+    const collection: Collection<WordDocument> = database.collection("words");
 
     const filter: Filter<WordDocument> = {
-        _id: new ObjectId(id),
-        isApproved: true
+        definitions: {
+            $elemMatch: {
+                _id: new ObjectId(id),
+                isApproved: true
+            }
+        }
     };
     const update: UpdateFilter<WordDocument> = {
         $addToSet: {
-            likes: ip
+            "definitions.$.reactions.likes": ip
         },
         $pull: {
-            dislikes: ip
+            "definitions.$.reactions.dislikes": ip
         }
     };
     const result: UpdateResult = await collection.updateOne(filter, update);
@@ -37,15 +41,19 @@ export const like = async (id: string, ip: string): Promise<Status> => {
 
 export const removeLike = async (id: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
+    const collection: Collection<WordDocument> = database.collection("words");
 
     const filter: Filter<WordDocument> = {
-        _id: new ObjectId(id),
-        isApproved: true
+        definitions: {
+            $elemMatch: {
+                _id: new ObjectId(id),
+                isApproved: true
+            }
+        }
     };
     const update: UpdateFilter<WordDocument> = {
         $pull: {
-            likes: ip
+            "definitions.$.reactions.likes": ip
         }
     };
     const result: UpdateResult = await collection.updateOne(filter, update);
@@ -63,18 +71,22 @@ export const removeLike = async (id: string, ip: string): Promise<Status> => {
 
 export const dislike = async (id: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
+    const collection: Collection<WordDocument> = database.collection("words");
 
     const filter: Filter<WordDocument> = {
-        _id: new ObjectId(id),
-        isApproved: true
+        definitions: {
+            $elemMatch: {
+                _id: new ObjectId(id),
+                isApproved: true
+            }
+        }
     };
     const update: UpdateFilter<WordDocument> = {
         $addToSet: {
-            dislikes: ip
+            "definitions.$.reactions.dislikes": ip
         },
         $pull: {
-            likes: ip
+            "definitions.$.reactions.likes": ip
         }
     };
     const result: UpdateResult = await collection.updateOne(filter, update);
@@ -92,15 +104,19 @@ export const dislike = async (id: string, ip: string): Promise<Status> => {
 
 export const removeDislike = async (id: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
+    const collection: Collection<WordDocument> = database.collection("words");
 
     const filter: Filter<WordDocument> = {
-        _id: new ObjectId(id),
-        isApproved: true
+        definitions: {
+            $elemMatch: {
+                _id: new ObjectId(id),
+                isApproved: true
+            }
+        }
     };
     const update: UpdateFilter<WordDocument> = {
         $pull: {
-            dislikes: ip
+            "definitions.$.reactions.dislikes": ip
         }
     };
     const result: UpdateResult = await collection.updateOne(filter, update);

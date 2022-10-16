@@ -1,215 +1,273 @@
-import { Collection, Db, InsertOneResult, WithId, ObjectId, Document } from "mongodb";
+import { Collection, Db, InsertOneResult, WithId, ObjectId, Document, Filter, UpdateFilter, UpdateResult } from "mongodb";
 
+import { Definition } from "@models/definition";
+import { DefinitionDocument } from "@models/definition-document";
 import { Status } from "@models/status";
-import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
-import { WordRequest, getSlug } from "@models/word-request";
+import { WordRequest } from "@models/word-request";
 import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { reviewSortStages } from "@utils/api/aggregation/stages/review-sort-stages";
 import { sample } from "@utils/misc/random";
-import { InclusiveProjection } from "@utils/types/projection";
 
 import { getDatabase } from "./database";
 
-const approvedWordStage = (): Document => ({
+const approvedDefinitionsStage = (): Document => ({
     $match: {
-        isApproved: true
+        definitions: {
+            $elemMatch: {
+                isApproved: true
+            }
+        }
     }
 });
 
-const wordProjectionOperation = (ip: string): InclusiveProjection<WordDocument, Word> => ({
+const definitionProjectionOperation = (ip: string): Document => ({
     _id: 0,
     id: {
         $toString: "$_id"
     },
     label: 1,
-    slug: 1,
-    wordClasses: 1,
+    wordClasses: "$classes",
     definition: 1,
     example: 1,
-    author: 1,
+    author: "$author.name",
     timestamp: timestampOperation(),
-    likes: countArrayOperation("$likes"),
-    isLiked: inArrayOperation("$likes", ip),
-    dislikes: countArrayOperation("$dislikes"),
-    isDisliked: inArrayOperation("$dislikes", ip)
+    likes: countArrayOperation("$reactions.likes"),
+    isLiked: inArrayOperation("$reactions.likes", ip),
+    dislikes: countArrayOperation("$reactions.dislikes"),
+    isDisliked: inArrayOperation("$reactions.dislikes", ip)
 });
 
-const wordProjectionStage = (ip: string): Document => ({
-    $project: wordProjectionOperation(ip)
+const definitionProjectionStage = (ip: string): Document => ({
+    $project: definitionProjectionOperation(ip)
 });
 
 export const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const pipeline = [
-        approvedWordStage(),
-        {
-            $sort: {
-                slug: 1
-            }
-        },
+    const collection: Collection<WordDocument> = database.collection("words");
+    const pipeline: Array<Document> = [
+        approvedDefinitionsStage(),
         {
             $project: {
                 _id: 0,
+                label: "$spellings"
+            }
+        },
+        {
+            $unwind: "$label"
+        },
+        {
+            $sort: {
                 label: 1
             }
         }
     ];
-    const wordIndex: Array<Pick<Word, "label">> = await collection.aggregate<Pick<Word, "label">>(pipeline)
-        .toArray();
 
-    return wordIndex.map(({ label }: Pick<Word, "label">): string => (
-        label
-    ));
+    return collection.aggregate<Pick<DefinitionDocument, "label">>(pipeline)
+        .map(({ label }: Pick<DefinitionDocument, "label">): string => (label))
+        .toArray();
 };
 
-export const getWordsSlug = async (): Promise<Array<string>> => {
+const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const pipeline = [
-        approvedWordStage(),
+    const collection: Collection<WordDocument> = database.collection("words");
+    const pipeline: Array<Document> = [
+        approvedDefinitionsStage(),
         {
-            $sort: {
-                slug: 1
-            }
+            $unwind: "$definitions"
         },
         {
-            $project: {
-                _id: 0,
-                slug: 1
+            $replaceRoot: {
+                newRoot: "$definitions"
             }
         }
     ];
-    const words: Array<Pick<Word, "slug">> = await collection.aggregate<Pick<Word, "slug">>(pipeline)
-        .toArray();
 
-    return words.map(({ slug }: Pick<Word, "slug">): string => (
-        slug
-    ));
+    return collection.aggregate<WithId<DefinitionDocument>>(pipeline)
+        .map(({ _id }: WithId<DefinitionDocument>): ObjectId => (_id))
+        .toArray();
 };
 
-export const getWordsSample = async (ip: string = ""): Promise<Array<Word>> => {
+export const getDefinitionsSample = async (ip: string = ""): Promise<Array<Definition>> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const idsPipeline = [
-        approvedWordStage(),
-        {
-            $project: {
-                _id: 1
-            }
-        }
-    ];
-    const ids: Array<ObjectId> = await collection.aggregate<WithId<unknown>>(idsPipeline)
-        .map(({ _id }: WithId<unknown>): ObjectId => (_id))
-        .toArray();
+    const collection: Collection<WordDocument> = database.collection("words");
 
+    const ids: Array<ObjectId> = await getDefinitionDocumentsId();
     const sampleSize: number = 5;
     const now: Date = new Date();
     const seed: number = Math.floor(now.getTime() / 86400000); // 1000ms * 60s * 60min * 24h
     const sampledIds: Array<ObjectId> = sample(ids, sampleSize, seed);
 
-    const wordsPipeline = [
+    const pipeline: Array<Document> = [
         {
             $match: {
-                _id: {
-                    $in: sampledIds
+                definitions: {
+                    $elemMatch: {
+                        _id: {
+                            $in: sampledIds
+                        }
+                    }
                 }
+            }
+        },
+        {
+            $unwind: "$definitions"
+        },
+        {
+            $replaceRoot: {
+                newRoot: "$definitions"
             }
         },
         // ...reviewSortStages(
         //     countArrayOperation("$likes"),
         //     countArrayOperation("$dislikes")
         // ),
-        wordProjectionStage(ip)
+        definitionProjectionStage(ip)
     ];
-    const words: Array<Word> = await collection.aggregate<Word>(wordsPipeline)
-        .toArray();
 
-    return words;
+    return collection.aggregate<Definition>(pipeline)
+        .toArray();
 };
 
-export const getWordCollection = async (slug: string, ip: string = ""): Promise<Array<Word>> => {
+export const getWordDefinitions = async (spelling: string, ip: string = ""): Promise<Array<Definition>> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const pipeline = [
+    const collection: Collection<WordDocument> = database.collection("words");
+    const pipeline: Array<Document> = [
         {
-            $match: {
-                slug,
-                isApproved: true
+            $search: {
+                index: "default",
+                text: {
+                    query: spelling,
+                    path: "spellings"
+                }
+            }
+        },
+        approvedDefinitionsStage(),
+        {
+            $unwind: "$definitions"
+        },
+        {
+            $replaceRoot: {
+                newRoot: "$definitions"
             }
         },
         ...reviewSortStages(
             countArrayOperation("$likes"),
             countArrayOperation("$dislikes")
         ),
-        wordProjectionStage(ip)
+        definitionProjectionStage(ip)
     ];
-    const wordCollection: Array<Word> = await collection.aggregate<Word>(pipeline)
-        .toArray();
 
-    return wordCollection;
+    return collection.aggregate<Definition>(pipeline)
+        .toArray();
 };
 
 export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Status> => {
-    const wordDocument: WordDocument = {
-        ...wordRequest,
-        author: wordRequest.author ?? "Anonyme",
-        slug: getSlug(wordRequest.label),
-        ip,
+    const database: Db = await getDatabase();
+    const collection: Collection<WordDocument> = database.collection("words");
+    const match: WithId<WordDocument> | null = await collection.findOne({ spellings: wordRequest.label });
+
+    const definition: WithId<DefinitionDocument> = {
+        _id: new ObjectId(),
+        label: wordRequest.label,
+        definition: wordRequest.definition,
+        example: wordRequest.example,
+        author: {
+            ip,
+            ...(wordRequest.author && { name: wordRequest.author })
+        },
+        classes: wordRequest.wordClasses,
         isApproved: false,
-        likes: [],
-        dislikes: []
+        reactions: {
+            likes: [],
+            dislikes: []
+        }
     };
 
-    const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const result: InsertOneResult = await collection.insertOne(wordDocument);
+    if (!match) {
+        const word: WordDocument = {
+            spellings: [wordRequest.label],
+            definitions: [definition]
+        };
 
-    if (!result.acknowledged) {
+        const result: InsertOneResult<WithId<WordDocument>> = await collection.insertOne(word);
+
+        if (!result.acknowledged) {
+            return Status.InternalError;
+        }
+
+        return Status.Created;
+    }
+
+    const filter: Filter<WordDocument> = {
+        _id: match._id
+    };
+    const update: UpdateFilter<WordDocument> = {
+        $push: {
+            definitions: definition
+        }
+    };
+    const result: UpdateResult = await collection.updateOne(filter, update);
+
+    if (!result.acknowledged || result.modifiedCount !== 1) {
         return Status.InternalError;
     }
 
     return Status.Created;
 };
 
-type WithScore<T> = T & {
-    score: number;
-};
+// type WithScore<T> = T & {
+//     score: number;
+// };
 
 export const getAutocompletedWords = async (query: string): Promise<Array<string>> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("definitions");
-    const pipeline = [
+    const collection: Collection<WordDocument> = database.collection("words");
+    const pipeline: Array<Document> = [
         {
             $search: { // This operator is only accepted as the first in the pipeline.
-                index: "labelAutocompleteSearchIndex",
-                autocomplete: {
-                    query,
-                    path: "label"
+                index: "default",
+                regex: {
+                    query: `${query}(.*)`,
+                    path: "spellings",
+                    allowAnalyzedField: true
                 }
             }
         },
-        approvedWordStage(),
+        approvedDefinitionsStage(),
         {
-            $addFields: {
-                score: {
-                    $meta: "searchScore"
-                }
+            $project: {
+                _id: 0,
+                label: "$spellings"
             }
+        },
+        {
+            $unwind: "$label"
         },
         {
             $sort: {
-                score: -1
+                label: 1
             }
         }
+        // {
+        //     $addFields: {
+        //         score: {
+        //             $meta: "searchScore"
+        //         }
+        //     }
+        // },
+        // {
+        //     $sort: {
+        //         score: -1
+        //     }
+        // }
     ];
-    const words: Array<WithScore<WordDocument>> = await collection.aggregate<WithScore<WordDocument>>(pipeline)
+    const words: Array<Pick<DefinitionDocument, "label">> = await collection.aggregate<Pick<DefinitionDocument, "label">>(pipeline)
         .toArray();
 
-    return words.map(({ label }: WithScore<WordDocument>): string => (
+    return words.map(({ label }: Pick<DefinitionDocument, "label">): string => (
         label
     ));
 };

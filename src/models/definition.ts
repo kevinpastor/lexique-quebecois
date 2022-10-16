@@ -1,8 +1,7 @@
 import { WordClass } from "./classes";
 
-export interface Word {
+export interface Definition {
     id: string;
-    slug: string;
     label: string;
     wordClasses: Array<WordClass>;
     definition: string;

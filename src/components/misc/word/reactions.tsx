@@ -1,7 +1,7 @@
 import { ButtonGroup } from "@mui/material";
 import { ReactElement, useEffect } from "react";
 
-import { Word } from "@models/word";
+import { Definition } from "@models/definition";
 import { BooleanUtilities, useBoolean } from "@utils/hooks/use-boolean";
 import { NumberUtilities, useNumber } from "@utils/hooks/use-number";
 
@@ -9,7 +9,7 @@ import { Dislikes } from "./dislikes";
 import { Likes } from "./likes";
 
 interface Props {
-    word: Word;
+    word: Definition;
 }
 
 export const Reactions = ({ word }: Props): ReactElement => {

@@ -64,3 +64,36 @@
 | 26/09/2022 | 154         | 804.42      | 805.89          | 435543         | 1309051       |
 | 28/09/2022 | 138         | 804.4       | 806.02          | 437633         | 1301838       |
 | 28/09/2022 | 138         | 804.45      | 806.07          | 438077         | 1303977       |
+| 07/10/2022 | 138         | 802.16      | 803.78          | 437443         | 1304402       |
+
+
+## OG Template
+
+<div
+  style={{
+    height: '100%',
+    width: '100%',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    fontSize: 128,
+    fontWeight: 600,
+    fontFamily: 'Lora',
+    color: "#000000DE"
+  }}
+>
+  <svg
+    height="256"
+    viewBox="0 0 144 165"
+    fill="#000000DE"
+    style={{ marginBottom: '16px' }}
+  >
+    <path
+      d="M72 76.4C53.12 58.8 27.84 48 0 48V136C27.84 136 53.12 146.8 72 164.4C90.88 146.88 116.16 136 144 136V48C116.16 48 90.88 58.8 72 76.4ZM72 48C85.28 48 96 37.28 96 24C96 10.72 85.28 0 72 0C58.72 0 48 10.72 48 24C48 37.28 58.72 48 72 48Z"
+    />
+  </svg>
+  tokébak
+</div>

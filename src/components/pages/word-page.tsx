@@ -6,14 +6,14 @@ import { ReactElement } from "react";
 import useSWR from "swr";
 
 import { Word as WordComponent } from "@components/misc/word";
-import { Word } from "@models/word";
+import { Definition } from "@models/definition";
 
 export const WordPage = (): ReactElement => {
     const { push, query } = useRouter();
-    const { data } = useSWR<Array<Word>>(`/api/words/${query.slug}`);
+    const { data } = useSWR<Array<Definition>>(`/api/words/${query.slug}`);
 
     // `data` coming from `fallback`
-    const wordCollection: Array<Word> = data as Array<Word>;
+    const wordCollection: Array<Definition> = data as Array<Definition>;
 
     if (wordCollection.length === 0) {
         const handleClick = async (): Promise<void> => {

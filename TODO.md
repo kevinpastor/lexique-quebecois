@@ -1,50 +1,19 @@
 # TODO
 
-- fix: remove dark theme ssr flicker
-- feat: create contact page
-- feat: create contribute ($) page
-- test: update test with @shelf/jest-mongodb
-- feat: add pronounciation
+- fix: disable classes selector on form submit
+- fix: form validation on mobile with typo
+- fix: add more padding to index links
 - feat: add alternative spelling
+- feat: reset form on navigation reclick
+- feat: add letter anchors to index
+- feat: create contribute ($) page
+- feat: create contact page
 - feat: beforeunload on add page
+- feat: add pronounciation
+- fix: remove dark theme ssr flicker
+- test: update test with @shelf/jest-mongodb
 - feat: add noscript message
-- fix: update search scrollbar padding on screen resize
 - chore: investigate PWA
 - chore: investigate autofocus on iOS
 - chore: investigate CSS variables for MUI
 - chore: investigate if React can be replace with Preact
-
-## Suggestions
-
-- feat: center title
-- feat: remove card title underline
-- fix: form validation on mobile
-- feat: back button navigation
-- feat: update input color
-
-Aggregation pipeline for fuzzy search by label
-
-```
-[
-  {
-    '$search': {
-      'index': 'default', 
-      'text': {
-        'query': 'clisse', // Replace query 
-        'path': 'label', 
-        'fuzzy': {}
-      }
-    }
-  }, {
-    '$addFields': {
-      'score': {
-        '$meta': 'searchScore'
-      }
-    }
-  }, {
-    '$sort': {
-      'score': -1
-    }
-  }
-]
-```

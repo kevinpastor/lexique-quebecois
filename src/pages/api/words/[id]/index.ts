@@ -3,8 +3,8 @@ import { getClientIp } from "request-ip";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { Word } from "@models/word";
-import { getWordCollection } from "@services/api/words";
+import { Definition } from "@models/definition";
+import { getWordDefinitions } from "@services/api/words";
 import {
     createHandler,
     Handler
@@ -25,12 +25,12 @@ const handler: Handler = createHandler({
             return;
         }
 
-        // ID is used here as the slug to get the word collection
-        const slug: string = req.query.id;
-        const wordCollection: Array<Word> = await getWordCollection(slug, ip);
+        // ID is used here as the spelling to get the word collection
+        const spelling: string = req.query.id;
+        const wordDefinitions: Array<Definition> = await getWordDefinitions(spelling, ip);
 
         res.status(Status.OK)
-            .json(wordCollection);
+            .json(wordDefinitions);
     }
 });
 

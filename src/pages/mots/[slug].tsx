@@ -5,8 +5,9 @@ import { SWRConfig } from "swr";
 
 import { LoadingWord } from "@components/misc/loading/routes/loading-word";
 import { WordPage } from "@components/pages/word-page";
-import { Word } from "@models/word";
-import { getWordCollection, getWordsSlug } from "@services/api/words";
+import { Definition } from "@models/definition";
+import { getSlug } from "@models/word-request";
+import { getWordDefinitions, getWordIndex } from "@services/api/words";
 
 type Params = {
     slug: string;
@@ -29,7 +30,8 @@ export const getStaticPaths = async (): Promise<GetStaticPathsResult<Params>> =>
         };
     }
 
-    const slugs: Array<string> = await getWordsSlug();
+    const labels: Array<string> = await getWordIndex();
+    const slugs: Array<string> = labels.map((label: string): string => getSlug(label));
     const paths: Paths = slugs.map((slug: string): Path => ({
         params: {
             slug
@@ -48,7 +50,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>):
     }
 
     const { slug } = params;
-    const wordCollection: Array<Word> = await getWordCollection(slug);
+    const wordCollection: Array<Definition> = await getWordDefinitions(slug);
 
     return {
         props: {
