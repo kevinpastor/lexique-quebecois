@@ -1,7 +1,19 @@
 // @ts-check
 const { MongoClient } = require("mongodb");
 
-const getWordsPath = async (config) => {
+// Taken from @utils/misc/string.ts
+const removeAccents = (input) => (
+    input.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+);
+
+// Taken from @models/word-request.ts
+const getSlug = (label) => {
+    const spacelessLabel = label.replace(/\s/g, "-");
+    return removeAccents(spacelessLabel)
+        .toLocaleLowerCase();
+};
+
+const getWordsPath = async (config = {}) => {
     if (!process.env.MONGODB_URI) {
         throw new Error("MONGODB_URI is missing in environment variables.");
     }
@@ -17,26 +29,90 @@ const getWordsPath = async (config) => {
     }
 
     const database = client.db("quebecoisUrbain");
-    const collection = database.collection("definitions");
+    const collection = database.collection("spellings");
 
     const pipeline = [
-        { $match: { isApproved: true } },
-        { $sort: { slug: 1 } }
+        {
+            $lookup: {
+                from: "words",
+                localField: "wordId",
+                foreignField: "_id",
+                as: "fromWords"
+            }
+        },
+        {
+            $match: {
+                fromWords: {
+                    $elemMatch: {
+                        definitions: {
+                            $elemMatch: {
+                                isApproved: true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                label: "$spelling",
+                timestamp: {
+                    $reduce: {
+                        input: {
+                            $map: {
+                                input: {
+                                    $getField: {
+                                        input: {
+                                            $arrayElemAt: [
+                                                "$fromWords",
+                                                0
+                                            ]
+                                        },
+                                        field: "definitions"
+                                    }
+                                },
+                                as: "definition",
+                                "in": {
+                                    $convert: {
+                                        input: "$$definition._id",
+                                        to: "date"
+                                    }
+                                }
+                            }
+                        },
+                        initialValue: 0,
+                        in: {
+                            $cond: [
+                                {
+                                    $gte: [
+                                        "$$this",
+                                        "$$value"
+                                    ]
+                                },
+                                "$$this",
+                                "$$value"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
     ];
     const words = await collection.aggregate(pipeline)
         .toArray();
-    const wordsPath = words.map(({ _id, slug }) => ({
-        loc: `/mots/${slug}`,
-        changefreq: "daily",
-        priority: config.priority,
-        lastmod: _id.getTimestamp().toISOString(),
+
+    const wordsPath = words.map(({ label, timestamp }) => ({
+        loc: `/mots/${getSlug(label)}`,
+        changefreq: "monthly",
+        priority: config.priority ?? 0.7,
+        lastmod: timestamp.toISOString(),
     }));
 
     await client.close();
 
     return wordsPath;
 };
-
 
 /** @type {import("next-sitemap").IConfig} */
 module.exports = {

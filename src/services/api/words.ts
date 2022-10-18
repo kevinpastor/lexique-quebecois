@@ -3,7 +3,7 @@ import { Collection, Db, InsertOneResult, WithId, ObjectId, Document, Filter, Up
 import { Definition } from "@models/definition";
 import { DefinitionDocument } from "@models/definition-document";
 import { Status } from "@models/status";
-import { WordDocument } from "@models/word-document";
+import { Spelling, WordDocument } from "@models/word-document";
 import { WordRequest } from "@models/word-request";
 import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
@@ -46,27 +46,48 @@ const definitionProjectionStage = (ip: string): Document => ({
 
 export const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("words");
+    const collection: Collection<WordDocument> = database.collection("spellings");
     const pipeline: Array<Document> = [
-        approvedDefinitionsStage(),
         {
-            $project: {
-                _id: 0,
-                label: "$spellings"
+            $lookup: {
+                from: "words",
+                localField: "wordId",
+                foreignField: "_id",
+                as: "fromWords"
             }
         },
         {
-            $unwind: "$label"
+            $match: {
+                fromWords: {
+                    $elemMatch: {
+                        definitions: {
+                            $elemMatch: {
+                                isApproved: true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                spelling: 1,
+                score: {
+                    $meta: "searchScore"
+                }
+            }
         },
         {
             $sort: {
-                label: 1
+                score: -1,
+                spelling: 1
             }
         }
     ];
 
-    return collection.aggregate<Pick<DefinitionDocument, "label">>(pipeline)
-        .map(({ label }: Pick<DefinitionDocument, "label">): string => (label))
+    return collection.aggregate<Spelling>(pipeline)
+        .map(({ spelling }: Spelling): string => (spelling))
         .toArray();
 };
 
@@ -133,18 +154,59 @@ export const getDefinitionsSample = async (ip: string = ""): Promise<Array<Defin
 
 export const getWordDefinitions = async (spelling: string, ip: string = ""): Promise<Array<Definition>> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("words");
+    const collection: Collection<WordDocument> = database.collection("spellings");
     const pipeline: Array<Document> = [
         {
             $search: {
                 index: "default",
                 text: {
                     query: spelling,
-                    path: "spellings"
+                    path: "spelling"
                 }
             }
         },
-        approvedDefinitionsStage(),
+        {
+            $group: {
+                _id: "$wordId",
+                wordId: {
+                    $first: "$wordId"
+                }
+            }
+        },
+        {
+            $lookup: {
+                from: "spellings",
+                localField: "wordId",
+                foreignField: "wordId",
+                as: "spellings"
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                spellings: "$spellings.spelling",
+                wordId: 1
+            }
+        },
+        {
+            $lookup: {
+                from: "words",
+                localField: "wordId",
+                foreignField: "_id",
+                as: "fromWords"
+            }
+        },
+        {
+            $project: {
+                spellings: 1,
+                definitions: {
+                    $arrayElemAt: [
+                        "$fromWords.definitions", 0
+                    ]
+                }
+            }
+        },
+        // TODO Remove when spellings are included
         {
             $unwind: "$definitions"
         },
@@ -153,6 +215,12 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
                 newRoot: "$definitions"
             }
         },
+        {
+            $match: {
+                isApproved: true
+            }
+        },
+        // TODO Keep the rest
         ...reviewSortStages(
             countArrayOperation("$likes"),
             countArrayOperation("$dislikes")
@@ -166,9 +234,10 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
 
 export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("words");
-    const match: WithId<WordDocument> | null = await collection.findOne({ spellings: wordRequest.label });
+    const spellingsCollection: Collection<Spelling> = database.collection("spellings");
+    const match: WithId<Spelling> | null = await spellingsCollection.findOne({ spelling: wordRequest.label });
 
+    const wordsCollection: Collection<WordDocument> = database.collection("words");
     const definition: WithId<DefinitionDocument> = {
         _id: new ObjectId(),
         label: wordRequest.label,
@@ -188,13 +257,21 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Sta
 
     if (!match) {
         const word: WordDocument = {
-            spellings: [wordRequest.label],
             definitions: [definition]
         };
 
-        const result: InsertOneResult<WithId<WordDocument>> = await collection.insertOne(word);
+        const wordResult: InsertOneResult<WithId<WordDocument>> = await wordsCollection.insertOne(word);
+        if (!wordResult.acknowledged) {
+            return Status.InternalError;
+        }
 
-        if (!result.acknowledged) {
+        const spelling: Spelling = {
+            spelling: wordRequest.label,
+            wordId: wordResult.insertedId
+        };
+
+        const spellingResult: InsertOneResult<WithId<Spelling>> = await spellingsCollection.insertOne(spelling);
+        if (!spellingResult.acknowledged) {
             return Status.InternalError;
         }
 
@@ -202,14 +279,14 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Sta
     }
 
     const filter: Filter<WordDocument> = {
-        _id: match._id
+        _id: match.wordId
     };
     const update: UpdateFilter<WordDocument> = {
         $push: {
             definitions: definition
         }
     };
-    const result: UpdateResult = await collection.updateOne(filter, update);
+    const result: UpdateResult = await wordsCollection.updateOne(filter, update);
 
     if (!result.acknowledged || result.modifiedCount !== 1) {
         return Status.InternalError;
@@ -218,56 +295,65 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Sta
     return Status.Created;
 };
 
-// type WithScore<T> = T & {
-//     score: number;
-// };
+type WithScore<T> = T & {
+    score: number;
+};
 
 export const getAutocompletedWords = async (query: string): Promise<Array<string>> => {
     const database: Db = await getDatabase();
-    const collection: Collection<WordDocument> = database.collection("words");
+    const collection: Collection<WordDocument> = database.collection("spellings");
     const pipeline: Array<Document> = [
         {
-            $search: { // This operator is only accepted as the first in the pipeline.
+            $search: {
                 index: "default",
-                regex: {
-                    query: `${query}(.*)`,
-                    path: "spellings",
-                    allowAnalyzedField: true
+                autocomplete: {
+                    query: query,
+                    path: "spelling"
                 }
             }
         },
-        approvedDefinitionsStage(),
+        {
+            $lookup: {
+                from: "words",
+                localField: "wordId",
+                foreignField: "_id",
+                as: "fromWords"
+            }
+        },
+        {
+            $match: {
+                fromWords: {
+                    $elemMatch: {
+                        definitions: {
+                            $elemMatch: {
+                                isApproved: true
+                            }
+                        }
+                    }
+                }
+            }
+        },
         {
             $project: {
                 _id: 0,
-                label: "$spellings"
+                spelling: 1,
+                score: {
+                    $meta: "searchScore"
+                }
             }
-        },
-        {
-            $unwind: "$label"
         },
         {
             $sort: {
-                label: 1
+                score: -1,
+                spelling: 1
             }
         }
-        // {
-        //     $addFields: {
-        //         score: {
-        //             $meta: "searchScore"
-        //         }
-        //     }
-        // },
-        // {
-        //     $sort: {
-        //         score: -1
-        //     }
-        // }
     ];
-    const words: Array<Pick<DefinitionDocument, "label">> = await collection.aggregate<Pick<DefinitionDocument, "label">>(pipeline)
+
+    const spellings: Array<WithScore<Spelling>> = await collection.aggregate<WithScore<Spelling>>(pipeline)
         .toArray();
 
-    return words.map(({ label }: Pick<DefinitionDocument, "label">): string => (
-        label
+    return spellings.map(({ spelling }: Spelling): string => (
+        spelling
     ));
 };
