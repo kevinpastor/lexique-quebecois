@@ -1,6 +1,5 @@
 # TODO
 
-- fix: disable classes selector on form submit
 - fix: form validation on mobile with typo
 - fix: add more padding to index links
 - feat: add alternative spelling

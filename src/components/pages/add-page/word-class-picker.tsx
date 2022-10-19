@@ -6,7 +6,7 @@ import { WordClass, wordClassAbreviations, wordClasses } from "@models/classes";
 import { WordRequest } from "@models/word-request";
 
 export const WordClassPicker = (): ReactElement => {
-    const { values, setFieldValue } = useFormikContext<WordRequest>();
+    const { values, setFieldValue, isSubmitting } = useFormikContext<WordRequest>();
     const id: string = useId();
 
     const handleChange = (event: SelectChangeEvent<Array<WordClass>>): void => {
@@ -29,6 +29,7 @@ export const WordClassPicker = (): ReactElement => {
                 )}
                 value={values.wordClasses}
                 onChange={handleChange}
+                disabled={isSubmitting}
             >
                 {wordClasses.map((wordClass: WordClass): ReactElement => (
                     <MenuItem
