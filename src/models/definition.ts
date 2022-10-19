@@ -6,10 +6,14 @@ export interface Definition {
     wordClasses: Array<WordClass>;
     definition: string;
     example: string;
-    author?: string;
+    author: {
+        name?: string;
+    };
     timestamp: number;
-    likes: number;
-    isLiked: boolean;
-    dislikes: number;
-    isDisliked: boolean;
+    reactions: {
+        likes: number;
+        isLiked: boolean;
+        dislikes: number;
+        isDisliked: boolean;
+    };
 }

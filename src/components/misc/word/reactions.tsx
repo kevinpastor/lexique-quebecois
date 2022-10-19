@@ -13,11 +13,11 @@ interface Props {
 }
 
 export const Reactions = ({ word }: Props): ReactElement => {
-    const likes: NumberUtilities = useNumber(word.likes);
-    const isLiked: BooleanUtilities = useBoolean(word.isLiked);
+    const likes: NumberUtilities = useNumber(word.reactions.likes);
+    const isLiked: BooleanUtilities = useBoolean(word.reactions.isLiked);
 
-    const dislikes: NumberUtilities = useNumber(word.dislikes);
-    const isDisliked: BooleanUtilities = useBoolean(word.isDisliked);
+    const dislikes: NumberUtilities = useNumber(word.reactions.dislikes);
+    const isDisliked: BooleanUtilities = useBoolean(word.reactions.isDisliked);
 
     const { setValue: setLikes } = likes;
     const { setValue: setIsLiked } = isLiked;
@@ -25,11 +25,11 @@ export const Reactions = ({ word }: Props): ReactElement => {
     const { setValue: setIsDisliked } = isDisliked;
 
     useEffect((): void => {
-        setLikes(word.likes);
-        setIsLiked(word.isLiked);
+        setLikes(word.reactions.likes);
+        setIsLiked(word.reactions.isLiked);
 
-        setDislikes(word.dislikes);
-        setIsDisliked(word.isDisliked);
+        setDislikes(word.reactions.dislikes);
+        setIsDisliked(word.reactions.isDisliked);
     }, [setDislikes, setIsDisliked, setIsLiked, setLikes, word]);
 
     return (

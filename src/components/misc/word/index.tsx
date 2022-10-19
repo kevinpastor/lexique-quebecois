@@ -59,8 +59,8 @@ export const Word = ({ word }: Props): ReactElement => {
                 </Typography>
                 <Typography variant="subtitle2">
                     {formattedDate
-                        ? `par ${word.author ?? "Anonyme"}, le ${formattedDate}`
-                        : `par ${word.author ?? "Anonyme"}`}
+                        ? `par ${word.author.name ?? "Anonyme"}, le ${formattedDate}`
+                        : `par ${word.author.name ?? "Anonyme"}`}
                 </Typography>
             </CardContent>
             <CardActions>
