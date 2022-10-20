@@ -114,12 +114,12 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                 lineHeight
             },
             h3: {
-                fontSize: 22,
+                fontSize: 20,
                 fontWeight: 600,
                 lineHeight
             },
             h4: {
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: 600,
                 lineHeight
             },

@@ -27,6 +27,7 @@ const handler: Handler = createHandler({
 
         // ID is used here as the spelling to get the word collection
         const spelling: string = req.query.id;
+        // ! TODO Update type
         const wordDefinitions: Array<Definition> = await getWordDefinitions(spelling, ip);
 
         res.status(Status.OK)

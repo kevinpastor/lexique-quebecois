@@ -3,7 +3,7 @@ import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typogr
 import NextLink from "next/link";
 import { ReactElement, useMemo } from "react";
 
-import { Definition as IWord } from "@models/definition";
+import { Definition as IDefinition } from "@models/definition";
 import { getSlug } from "@models/word-request";
 import { useFormattedDate } from "@utils/hooks/use-formatted-date";
 import { useShare } from "@utils/hooks/use-share";
@@ -12,10 +12,10 @@ import { Reactions } from "./reactions";
 import { WordClasses } from "./word-classes";
 
 interface Props {
-    word: IWord;
+    definition: IDefinition;
 }
 
-export const Word = ({ word }: Props): ReactElement => {
+export const Definition = ({ definition: word }: Props): ReactElement => {
     const date: Date = useMemo((): Date => (
         new Date(word.timestamp)
     ), [word.timestamp]);

@@ -69,31 +69,39 @@
 
 ## OG Template
 
-<div
-  style={{
-    height: '100%',
-    width: '100%',
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    fontSize: 128,
-    fontWeight: 600,
-    fontFamily: 'Lora',
-    color: "#000000DE"
-  }}
->
-  <svg
-    height="256"
-    viewBox="0 0 144 165"
-    fill="#000000DE"
-    style={{ marginBottom: '16px' }}
-  >
-    <path
-      d="M72 76.4C53.12 58.8 27.84 48 0 48V136C27.84 136 53.12 146.8 72 164.4C90.88 146.88 116.16 136 144 136V48C116.16 48 90.88 58.8 72 76.4ZM72 48C85.28 48 96 37.28 96 24C96 10.72 85.28 0 72 0C58.72 0 48 10.72 48 24C48 37.28 58.72 48 72 48Z"
-    />
-  </svg>
-  tokébak
-</div>
+
+const fontUrl: URL = new URL("./Lora-SemiBold-600.ttf", import.meta.url);
+// const fontUrl: URL = new URL("https://fonts.gstatic.com/s/lora/v26/0QI6MX1D_JOuGQbT0gvTJPa787zAvCJG.ttf");
+const font: Promise<ArrayBuffer> = fetch(fontUrl)
+    .then((response: Response): Promise<ArrayBuffer> => {
+        return response.arrayBuffer();
+    });
+
+const template = (title: string): ReactElement => (
+    <div
+        style={{
+            height: "100%",
+            width: "100%",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#fff",
+            fontSize: 128,
+            fontWeight: 600,
+            fontFamily: "Lora",
+            color: "#000000DE"
+        }}
+    >
+        <svg
+            height="256"
+            viewBox="0 0 144 165"
+            fill="#000000DE"
+            style={{ marginBottom: "16px" }}
+        >
+            <path d="M72 76.4C53.12 58.8 27.84 48 0 48V136C27.84 136 53.12 146.8 72 164.4C90.88 146.88 116.16 136 144 136V48C116.16 48 90.88 58.8 72 76.4ZM72 48C85.28 48 96 37.28 96 24C96 10.72 85.28 0 72 0C58.72 0 48 10.72 48 24C48 37.28 58.72 48 72 48Z" />
+        </svg>
+        {title}
+    </div>
+);

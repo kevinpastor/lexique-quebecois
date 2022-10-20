@@ -1,6 +1,6 @@
 # TODO
 
-- fix: form validation on mobile with typo
+- feat: add warning on rate limiting
 - fix: add more padding to index links
 - feat: add alternative spelling
 - feat: reset form on navigation reclick

@@ -6,7 +6,7 @@ const createJestConfig = nextJest({
     dir: "./",
 });
 
-/** @type {import("@jest/types/build/Config").GlobalConfig} */
+/** @type {import("jest").Config} */
 const customJestConfig = {
     collectCoverageFrom: [
         "**/*.ts"

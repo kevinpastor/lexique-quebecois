@@ -2,20 +2,22 @@ import { Add } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { Fragment, ReactElement } from "react";
 import useSWR from "swr";
 
-import { Word as WordComponent } from "@components/misc/word";
+import { Spellings } from "@components/misc/spellings";
+import { Definition as DefinitionComponent } from "@components/misc/word";
 import { Definition } from "@models/definition";
+import { Word } from "@models/word";
 
 export const WordPage = (): ReactElement => {
     const { push, query } = useRouter();
-    const { data } = useSWR<Array<Definition>>(`/api/words/${query.slug}`);
+    const { data } = useSWR<Word | undefined>(`/api/words/${query.slug}`);
 
     // `data` coming from `fallback`
-    const wordCollection: Array<Definition> = data as Array<Definition>;
+    const word: Word | undefined = data as Word | undefined;
 
-    if (wordCollection.length === 0) {
+    if (!word || word.definitions.length === 0) { // `definitions` should theoretically never be empty.
         const handleClick = async (): Promise<void> => {
             if (!query.label) {
                 await push("/ajouter");
@@ -53,19 +55,24 @@ export const WordPage = (): ReactElement => {
             <Head>
                 <title>
                     {/* Having the sufix inline creates comment blocks inside the title tag */}
-                    {`${wordCollection[0].label} - Lexique Québécois`}
+                    {`${query.slug} - Lexique Québécois`}
                 </title>
                 <meta
                     key="description"
                     name="description"
-                    content={`${wordCollection[0].label} - ${wordCollection[0].definition}`}
+                    content={`${query.label} - ${word.definitions[0].definition}`}
                 />
             </Head>
             <Stack spacing={2}>
-                {wordCollection.map((word): ReactElement => (
-                    <WordComponent
-                        key={word.timestamp}
-                        word={word}
+                <DefinitionComponent
+                    key={word.definitions[0].id}
+                    definition={word.definitions[0]}
+                />
+                <Spellings spellings={word.spellings} />
+                {word.definitions.slice(1).map((definition: Definition): ReactElement => (
+                    <DefinitionComponent
+                        key={definition.id}
+                        definition={definition}
                     />
                 ))}
             </Stack>

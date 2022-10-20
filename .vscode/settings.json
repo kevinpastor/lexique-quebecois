@@ -9,6 +9,7 @@
         "tsconfig.json": "tsconfig.*.json",
         "package.json": "package-lock.json, pnpm-lock.yaml, yarn.lock"
     },
+    "jest.autoRun": "off",
     "jest.showCoverageOnLoad": true,
     "jest.coverageFormatter": "GutterFormatter",
     "jest.coverageColors": {

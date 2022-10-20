@@ -1,15 +1,16 @@
-import { Collection, Db, InsertOneResult, WithId, ObjectId, Document, Filter, UpdateFilter, UpdateResult } from "mongodb";
+import { Collection, Db, InsertOneResult, WithId, ObjectId, Document, Filter, UpdateFilter, UpdateResult, AggregateOptions } from "mongodb";
 
 import { Definition } from "@models/definition";
 import { DefinitionDocument } from "@models/definition-document";
 import { SpellingDocument } from "@models/spelling-document";
 import { Status } from "@models/status";
+import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
 import { WordRequest } from "@models/word-request";
 import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
-import { reviewSortStages } from "@utils/api/aggregation/stages/review-sort-stages";
+import { getReviewScore } from "@utils/api/aggregation/stages/review-sort-stages";
 import { sample } from "@utils/misc/random";
 
 import { getDatabase } from "./database";
@@ -26,7 +27,7 @@ const definitionProjectionOperation = (ip: string): Document => ({
     author: {
         name: "$author.name"
     },
-    timestamp: timestampOperation(),
+    timestamp: timestampOperation("$_id"),
     reactions: {
         likes: countArrayOperation("$reactions.likes"),
         isLiked: inArrayOperation("$reactions.likes", ip),
@@ -38,6 +39,12 @@ const definitionProjectionOperation = (ip: string): Document => ({
 const definitionProjectionStage = (ip: string): Document => ({
     $project: definitionProjectionOperation(ip)
 });
+
+const defaultAggregateOptions: AggregateOptions = {
+    collation: {
+        locale: "fr_CA"
+    }
+};
 
 export const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
@@ -80,8 +87,7 @@ export const getWordIndex = async (): Promise<Array<string>> => {
             }
         }
     ];
-
-    return collection.aggregate<SpellingDocument>(pipeline)
+    return collection.aggregate<SpellingDocument>(pipeline, defaultAggregateOptions)
         .map(({ spelling }: SpellingDocument): string => (spelling))
         .toArray();
 };
@@ -109,11 +115,12 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
         }
     ];
 
-    return collection.aggregate<WithId<DefinitionDocument>>(pipeline)
+    return collection.aggregate<WithId<DefinitionDocument>>(pipeline, defaultAggregateOptions)
         .map(({ _id }: WithId<DefinitionDocument>): ObjectId => (_id))
         .toArray();
 };
 
+// ! TODO Make sure that definitions are unique
 export const getDefinitionsSample = async (ip: string = ""): Promise<Array<Definition>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
@@ -144,18 +151,14 @@ export const getDefinitionsSample = async (ip: string = ""): Promise<Array<Defin
                 newRoot: "$definitions"
             }
         },
-        // ...reviewSortStages(
-        //     countArrayOperation("$likes"),
-        //     countArrayOperation("$dislikes")
-        // ),
         definitionProjectionStage(ip)
     ];
 
-    return collection.aggregate<Definition>(pipeline)
+    return collection.aggregate<Definition>(pipeline, defaultAggregateOptions)
         .toArray();
 };
 
-export const getWordDefinitions = async (spelling: string, ip: string = ""): Promise<Array<Definition>> => {
+export const getWordDefinitions = async (spelling: string, ip: string = ""): Promise<Word | undefined> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("spellings");
     const pipeline: Array<Document> = [
@@ -203,36 +206,103 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
             $project: {
                 spellings: 1,
                 definitions: {
-                    $arrayElemAt: [
-                        "$fromWords.definitions", 0
-                    ]
+                    $map: {
+                        input: {
+                            $filter: {
+                                input: {
+                                    $arrayElemAt: [
+                                        "$fromWords.definitions", 0
+                                    ]
+                                },
+                                as: "definition",
+                                cond: {
+                                    $eq: [
+                                        "$$definition.isApproved", true
+                                    ]
+                                }
+                            }
+                        },
+                        as: "definition",
+                        in: {
+                            id: {
+                                $toString: "$$definition._id"
+                            },
+                            label: "$$definition.label",
+                            wordClasses: "$$definition.classes",
+                            definition: "$$definition.definition",
+                            example: "$$definition.example",
+                            author: {
+                                name: "$$definition.author.name"
+                            },
+                            timestamp: timestampOperation("$$definition._id"),
+                            reactions: {
+                                score: getReviewScore(
+                                    countArrayOperation("$$definition.reactions.likes"),
+                                    countArrayOperation("$$definition.reactions.dislikes")
+                                ),
+                                likes: countArrayOperation("$$definition.reactions.likes"),
+                                isLiked: inArrayOperation("$$definition.reactions.likes", ip),
+                                dislikes: countArrayOperation("$$definition.reactions.dislikes"),
+                                isDisliked: inArrayOperation("$$definition.reactions.dislikes", ip)
+                            }
+                        }
+                    }
                 }
             }
         },
-        // TODO Remove when spellings are included
         {
             $unwind: "$definitions"
         },
         {
-            $replaceRoot: {
-                newRoot: "$definitions"
+            $sort: {
+                "definitions.reactions.score": -1,
+                "definitions.timestamp": -1,
+                "definitions.label": 1
             }
         },
         {
-            $match: {
-                isApproved: true
+            $group: {
+                _id: "$definitions.id",
+                spellings: {
+                    $first: "$spellings"
+                },
+                definitions: {
+                    $push: "$definitions"
+                }
             }
         },
-        // TODO Keep the rest
-        ...reviewSortStages(
-            countArrayOperation("$likes"),
-            countArrayOperation("$dislikes")
-        ),
-        definitionProjectionStage(ip)
+        {
+            $unset: "definitions.reactions.score"
+        },
+        {
+            $unwind: "$spellings"
+        },
+        {
+            $sort: {
+                "spellings": 1
+            }
+        },
+        {
+            $group: {
+                _id: "$_id",
+                spellings: {
+                    $push: "$spellings"
+                },
+                definitions: {
+                    $first: "$definitions"
+                }
+            }
+        }
     ];
 
-    return collection.aggregate<Definition>(pipeline)
-        .toArray();
+    const word: Word | null = await collection.aggregate<Word>(pipeline, defaultAggregateOptions)
+        .next();
+
+    if (!word) {
+        return undefined;
+    }
+
+    return word;
 };
 
 export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Status> => {
@@ -311,7 +381,8 @@ export const getAutocompletedWords = async (query: string): Promise<Array<string
                 index: "default",
                 autocomplete: {
                     query: query,
-                    path: "spelling"
+                    path: "spelling",
+                    fuzzy: {}
                 }
             }
         },
@@ -353,7 +424,7 @@ export const getAutocompletedWords = async (query: string): Promise<Array<string
         }
     ];
 
-    const spellings: Array<WithScore<SpellingDocument>> = await collection.aggregate<WithScore<SpellingDocument>>(pipeline)
+    const spellings: Array<WithScore<SpellingDocument>> = await collection.aggregate<WithScore<SpellingDocument>>(pipeline, defaultAggregateOptions)
         .toArray();
 
     return spellings.map(({ spelling }: SpellingDocument): string => (
