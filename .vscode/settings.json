@@ -10,7 +10,7 @@
         "package.json": "package-lock.json, pnpm-lock.yaml, yarn.lock"
     },
     "jest.autoRun": "off",
-    "jest.showCoverageOnLoad": true,
+    "jest.showCoverageOnLoad": false,
     "jest.coverageFormatter": "GutterFormatter",
     "jest.coverageColors": {
         "covered": "rgba(9, 156, 65, 0.4)",

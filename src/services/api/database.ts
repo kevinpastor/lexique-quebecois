@@ -1,6 +1,6 @@
 import { Db, MongoClient } from "mongodb";
 
-import { isDevelopmentEnvironment, isTestEnvironment } from "@utils/misc/environment";
+import { isDevelopmentEnvironment } from "@utils/misc/environment";
 
 let mongoClientConnect: Promise<MongoClient> | undefined = undefined;
 
@@ -9,10 +9,6 @@ interface ExtendedGlobal {
 }
 
 export const getDatabase = async (): Promise<Db> => {
-    if (isTestEnvironment()) {
-        throw new Error("A MongoDB connection should not be made in a test environment.");
-    }
-
     // 2. Reassign database from cache
     /* istanbul ignore if */
     if (isDevelopmentEnvironment()) {
@@ -45,5 +41,5 @@ export const getDatabase = async (): Promise<Db> => {
         throw new Error(`Could not connect to database. \n${error}`);
     }
 
-    return mongoClient.db("quebecoisUrbain");
+    return mongoClient.db();
 };
