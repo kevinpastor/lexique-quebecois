@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 import useSWR from "swr";
 
 import { Highlight } from "@components/misc/highlight";
-import { getSlug } from "@models/word-request";
+import { getSlug } from "@models/definition";
 import { useDebounce } from "@utils/hooks/use-debounce";
 
 import { FormValues } from "./content";

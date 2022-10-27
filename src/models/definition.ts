@@ -1,5 +1,7 @@
 import { object, string, array, number, boolean } from "yup";
 
+import { removeAccents } from "@utils/misc/string";
+
 import { WordClass, wordClasses } from "./classes";
 
 export interface Definition {
@@ -19,6 +21,12 @@ export interface Definition {
         isDisliked: boolean;
     };
 }
+
+export const getSlug = (label: string): string => {
+    const spacelessLabel: string = label.replace(/\s/g, "-");
+    return removeAccents(spacelessLabel)
+        .toLocaleLowerCase();
+};
 
 const authorSchema = object({
     name: string()

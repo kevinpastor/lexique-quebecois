@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import * as yup from "yup";
 
-import { getSlug } from "@models/word-request";
+import { getSlug } from "@models/definition";
 
 import { AutocompleteResults } from "./autocomplete-results";
 import { Field } from "./field";

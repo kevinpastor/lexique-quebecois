@@ -3,8 +3,7 @@ import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typogr
 import NextLink from "next/link";
 import { ReactElement, useMemo } from "react";
 
-import { Definition as IDefinition } from "@models/definition";
-import { getSlug } from "@models/word-request";
+import { Definition as IDefinition, getSlug } from "@models/definition";
 import { useFormattedDate } from "@utils/hooks/use-formatted-date";
 import { useShare } from "@utils/hooks/use-share";
 
@@ -15,12 +14,12 @@ interface Props {
     definition: IDefinition;
 }
 
-export const Definition = ({ definition: word }: Props): ReactElement => {
+export const Definition = ({ definition }: Props): ReactElement => {
     const date: Date = useMemo((): Date => (
-        new Date(word.timestamp)
-    ), [word.timestamp]);
+        new Date(definition.timestamp)
+    ), [definition.timestamp]);
     const formattedDate: string | undefined = useFormattedDate(date);
-    const slug = getSlug(word.label);
+    const slug = getSlug(definition.label);
     const share = useShare(`mots/${slug}`);
 
     return (
@@ -37,10 +36,10 @@ export const Definition = ({ definition: word }: Props): ReactElement => {
                             passHref
                         >
                             <Link variant="h2">
-                                {word.label}
+                                {definition.label}
                             </Link>
                         </NextLink>
-                        <WordClasses wordClasses={word.wordClasses} />
+                        <WordClasses wordClasses={definition.wordClasses} />
                     </Stack>
                 }
             />
@@ -49,18 +48,18 @@ export const Definition = ({ definition: word }: Props): ReactElement => {
                     variant="body2"
                     gutterBottom
                 >
-                    {word.definition}
+                    {definition.definition}
                 </Typography>
                 <Typography
                     variant="subtitle1"
                     gutterBottom
                 >
-                    {word.example}
+                    {definition.example}
                 </Typography>
                 <Typography variant="subtitle2">
                     {formattedDate
-                        ? `par ${word.author.name ?? "Anonyme"}, le ${formattedDate}`
-                        : `par ${word.author.name ?? "Anonyme"}`}
+                        ? `par ${definition.author.name ?? "Anonyme"}, le ${formattedDate}`
+                        : `par ${definition.author.name ?? "Anonyme"}`}
                 </Typography>
             </CardContent>
             <CardActions>
@@ -70,7 +69,7 @@ export const Definition = ({ definition: word }: Props): ReactElement => {
                     spacing={2}
                     width="100%"
                 >
-                    <Reactions word={word} />
+                    <Reactions word={definition} />
                     <Button
                         onClick={share}
                         startIcon={<ShareIcon />}

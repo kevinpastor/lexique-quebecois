@@ -5,8 +5,8 @@ import { SWRConfig } from "swr";
 
 import { LoadingWord } from "@components/misc/loading/routes/loading-word";
 import { WordPage } from "@components/pages/word-page";
+import { getSlug } from "@models/definition";
 import { Word } from "@models/word";
-import { getSlug } from "@models/word-request";
 import { getWordDefinitions } from "@services/api/words/get-word-definitions";
 import { getWordIndex } from "@services/api/words/get-word-index";
 

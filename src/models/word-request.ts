@@ -1,6 +1,5 @@
 import * as yup from "yup";
 
-import { removeAccents } from "@utils/misc/string";
 import { cleanup, isValid } from "@utils/misc/validation";
 
 import { WordClass, wordClasses } from "./classes";
@@ -12,13 +11,6 @@ export interface WordRequest {
     example: string;
     author?: string;
 }
-
-// TODO Move to word-document.ts
-export const getSlug = (label: string): string => {
-    const spacelessLabel: string = label.replace(/\s/g, "-");
-    return removeAccents(spacelessLabel)
-        .toLocaleLowerCase();
-};
 
 export const labelRegex: RegExp = /^[a-zàâäéèêëïîôöùûüÿç\s-]*$/gi;
 

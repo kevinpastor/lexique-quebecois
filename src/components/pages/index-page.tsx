@@ -5,7 +5,7 @@ import NextLink from "next/link";
 import { ReactElement, useMemo } from "react";
 import useSWR from "swr";
 
-import { getSlug } from "@models/word-request";
+import { getSlug } from "@models/definition";
 
 interface WordGroup {
     slug: string;
