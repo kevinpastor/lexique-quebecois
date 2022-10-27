@@ -1,6 +1,6 @@
 import { ArrowBack } from "@mui/icons-material";
 import { AppBar, Container, IconButton, Paper, Stack } from "@mui/material";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikProps } from "formik";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import * as yup from "yup";
@@ -48,36 +48,46 @@ export const Content = ({ onClose: handleClose }: Props): ReactElement => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
-            <Paper
-                square
-                elevation={0}
-                sx={{
-                    height: "100%",
-                    overflowY: "auto"
-                }}
-                component={Form}
-            >
-                <AppBar elevation={3}>
-                    <Container>
-                        <Stack
-                            direction="row"
-                            alignItems="center"
-                            spacing={1}
-                            my={0.5}
-                        >
-                            <IconButton
-                                onClick={handleClose}
-                                aria-label="Retour"
-                                edge="start"
+            {({ resetForm }: FormikProps<FormValues>): ReactElement => (
+                <Paper
+                    square
+                    elevation={0}
+                    sx={{
+                        height: "100%",
+                        overflowY: "auto"
+                    }}
+                    component={Form}
+                >
+                    <AppBar elevation={3}>
+                        <Container>
+                            <Stack
+                                direction="row"
+                                alignItems="center"
+                                spacing={1}
+                                my={0.5}
                             >
-                                <ArrowBack />
-                            </IconButton>
-                            <Field />
-                        </Stack>
-                    </Container>
-                </AppBar>
-                <AutocompleteResults onClose={handleClose} />
-            </Paper>
+                                <IconButton
+                                    onClick={(): void => {
+                                        handleClose();
+                                        resetForm();
+                                    }}
+                                    aria-label="Retour"
+                                    edge="start"
+                                >
+                                    <ArrowBack />
+                                </IconButton>
+                                <Field />
+                            </Stack>
+                        </Container>
+                    </AppBar>
+                    <AutocompleteResults
+                        onClose={(): void => {
+                            handleClose();
+                            resetForm();
+                        }}
+                    />
+                </Paper>
+            )}
         </Formik>
     );
 };
