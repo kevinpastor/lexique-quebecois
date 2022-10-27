@@ -2,8 +2,8 @@
 
 - feat: add warning on rate limiting
 - fix: add more padding to index links
-- feat: add alternative spelling
 - feat: reset form on navigation reclick
+- feat: reset search on close
 - feat: add letter anchors to index
 - feat: create contribute ($) page
 - feat: create contact page

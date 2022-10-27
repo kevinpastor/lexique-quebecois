@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const Spellings = ({ spellings }: Props): ReactElement | null => {
-    if (spellings.length === 0) {
+    if (spellings.length <= 1) {
         return null;
     }
 
