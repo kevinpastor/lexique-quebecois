@@ -1,30 +1,36 @@
 import { Typography } from "@mui/material";
 import { ReactElement } from "react";
 
+import { removeAccents } from "@utils/misc/string";
+
 interface Props {
     word: string;
     highlight: string;
 }
 
 export const Highlight = ({ word, highlight }: Props): ReactElement => {
-    const parts: Array<string> = word.split(new RegExp(`(${highlight})`, "gi"));
+    const massagedWord: string = removeAccents(word).toLocaleLowerCase();
+    const massagedHighlight: string = removeAccents(highlight).toLocaleLowerCase();
+
+    if (!massagedWord.startsWith(massagedHighlight)) {
+        return (
+            <Typography>
+                {word}
+            </Typography>
+        );
+    }
 
     return (
         <>
-            {parts.map((part: string, index: number): ReactElement => (
-                <Typography
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={index}
-                    component="span"
-                    variant={
-                        part.toLocaleLowerCase() === highlight.toLocaleLowerCase()
-                            ? "body2"
-                            : "body1"
-                    }
-                >
-                    {part}
-                </Typography>
-            ))}
+            <Typography
+                component="span"
+                variant="body2"
+            >
+                {word.slice(0, highlight.length)}
+            </Typography>
+            <Typography component="span">
+                {word.slice(highlight.length)}
+            </Typography>
         </>
     );
 };

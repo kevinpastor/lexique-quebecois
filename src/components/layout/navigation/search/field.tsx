@@ -23,6 +23,7 @@ export const Field = (): ReactElement => {
                     </InputAdornment>
                 )
             }}
+            spellCheck={false}
         />
     );
 };
