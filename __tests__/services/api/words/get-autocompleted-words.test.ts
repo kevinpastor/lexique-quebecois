@@ -1,7 +1,7 @@
 import { _closeMongoClient } from "@services/api/database";
 import { getAutocompletedWords } from "@services/api/words/get-autocompleted-words";
 
-import "../../../helpers";
+import "../../../../src/utils/tests/helpers";
 
 afterAll(async (): Promise<void> => {
     await _closeMongoClient();

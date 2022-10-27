@@ -13,7 +13,7 @@ import { createResponseStub } from "@utils/tests/response";
 // TODO Create path alias
 import handler from "../../../../src/pages/api/words/index";
 
-jest.mock("@services/api/words");
+jest.mock("@services/api/words/add-word");
 const addWordMock = addWord as jest.MockedFunction<typeof addWord>;
 
 const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");

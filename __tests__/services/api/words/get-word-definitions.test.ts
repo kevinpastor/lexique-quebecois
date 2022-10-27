@@ -2,7 +2,7 @@ import { Word, wordSchema } from "@models/word";
 import { _closeMongoClient } from "@services/api/database";
 import { getWordDefinitions } from "@services/api/words/get-word-definitions";
 
-import "../../../helpers";
+import "../../../../src/utils/tests/helpers";
 
 const ip: string = "127.0.0.1";
 

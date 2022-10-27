@@ -2,7 +2,7 @@ import { Definition, definitionSchema } from "@models/definition";
 import { _closeMongoClient } from "@services/api/database";
 import { getDefinitionsSample } from "@services/api/words/get-definitions-sample";
 
-import "../../../helpers";
+import "../../../../src/utils/tests/helpers";
 
 const ip: string = "127.0.0.1";
 
