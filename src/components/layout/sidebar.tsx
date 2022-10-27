@@ -21,7 +21,7 @@ export const Sidebar = (): ReactElement => (
                     variant="body1"
                     align="center"
                 >
-                    Une plateforme pour en apprendre plus sur la culture populaire québecoisse, peu importe si t&apos;es un ado, un millénial, ou un boomer.
+                    Une plateforme pour en apprendre plus sur la culture populaire québecoise, peu importe si t&apos;es un ado, un millénial, ou un boomer.
                 </Typography>
             </CardContent>
         </Card>

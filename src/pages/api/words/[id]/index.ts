@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getClientIp } from "request-ip";
 
-import { Definition } from "@models/definition";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
+import { Word } from "@models/word";
 import { getWordDefinitions } from "@services/api/words/get-word-definitions";
 import {
     createHandler,
@@ -27,11 +27,10 @@ const handler: Handler = createHandler({
 
         // ID is used here as the spelling to get the word collection
         const spelling: string = req.query.id;
-        // ! TODO Update type
-        const wordDefinitions: Array<Definition> = await getWordDefinitions(spelling, ip);
+        const word: Word | null = await getWordDefinitions(spelling, ip);
 
         res.status(Status.OK)
-            .json(wordDefinitions);
+            .json(word);
     }
 });
 

@@ -20,7 +20,7 @@ const copyToClipboardFallback = (text: string): void => {
 
         const sel: Selection | null = window.getSelection();
         if (!sel) {
-            throw new Error("TODO");
+            throw new Error("Unable to get window selection.");
         }
         sel.removeAllRanges();
         sel.addRange(range);
@@ -29,7 +29,7 @@ const copyToClipboardFallback = (text: string): void => {
 
         const result: boolean = document.execCommand("copy");
         if (!result) {
-            throw new Error("TODO");
+            throw new Error("Unable to copy to clipboard.");
         }
     }
     catch (error: unknown) {

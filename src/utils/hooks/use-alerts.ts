@@ -5,7 +5,7 @@ import { AlertsContext, IAlertsContext } from "@configs/providers/alerts-provide
 export const useAlerts = (): IAlertsContext => {
     const context = useContext(AlertsContext);
     if (!context) {
-        throw new Error("useAlerts must be used within a SnackbarProvider");
+        throw new Error("useAlerts must be used within a SnackbarProvider.");
     }
     return context;
 };
