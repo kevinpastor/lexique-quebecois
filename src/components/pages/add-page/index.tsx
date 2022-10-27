@@ -8,6 +8,7 @@ import { NextRouter, useRouter } from "next/router";
 import { ReactElement } from "react";
 
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
+import { isTooManyRequestError } from "@services/errors/too-many-request-error";
 import { addWord } from "@services/words";
 import { useAlerts } from "@utils/hooks/use-alerts";
 
@@ -26,14 +27,19 @@ export const AddPage = (): ReactElement => {
         push: pushRoute,
         query: routeQuery
     }: NextRouter = useRouter();
-    const { enqueueSuccessAlert, enqueueErrorAlert } = useAlerts();
+    const { enqueueSuccessAlert, enqueueWarningAlert, enqueueErrorAlert } = useAlerts();
 
     const handleSubmit = async (wordRequest: WordRequest): Promise<void> => {
         const cleanedWordRequest: WordRequest = cleanupWordRequest(wordRequest);
         try {
             await addWord(cleanedWordRequest);
         }
-        catch {
+        catch (error: unknown) {
+            if (isTooManyRequestError(error)) {
+                enqueueWarningAlert("Trop de demandes. Veuillez réessayer plus tard.");
+                return;
+            }
+
             enqueueErrorAlert("Une erreur s'est produite. Veuillez réessayer plus tard.");
             return;
         }

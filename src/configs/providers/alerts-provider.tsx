@@ -7,6 +7,7 @@ import { QueueUtility, useQueue } from "@utils/hooks/use-queue";
 
 export interface IAlertsContext {
     enqueueSuccessAlert: (message: string) => void;
+    enqueueWarningAlert: (message: string) => void;
     enqueueErrorAlert: (message: string) => void;
 }
 
@@ -27,7 +28,7 @@ const LazyAlert = dynamic(
     { suspense: true }
 );
 
-type Severity = "success" | "error";
+type Severity = "success" | "warning" | "error";
 
 interface Alert {
     message: string;
@@ -75,6 +76,13 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
         });
     }, [enqueueAlert]);
 
+    const enqueueWarningAlert = useCallback((message: string): void => {
+        enqueueAlert({
+            message,
+            severity: "warning"
+        });
+    }, [enqueueAlert]);
+
     const enqueueErrorAlert = useCallback((message: string): void => {
         enqueueAlert({
             message,
@@ -84,8 +92,9 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
 
     const value: IAlertsContext = useMemo((): IAlertsContext => ({
         enqueueSuccessAlert,
+        enqueueWarningAlert,
         enqueueErrorAlert
-    }), [enqueueErrorAlert, enqueueSuccessAlert]);
+    }), [enqueueErrorAlert, enqueueSuccessAlert, enqueueWarningAlert]);
 
     return (
         <AlertsContext.Provider value={value}>
@@ -94,7 +103,7 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
                     open={isOpen}
                     onClose={handleClose}
                     TransitionProps={{ onExited: handleExited }}
-                    autoHideDuration={1500}
+                    autoHideDuration={5000}
                 >
                     <LazyAlert severity={alerts[0]?.severity}>
                         {alerts[0]?.message}

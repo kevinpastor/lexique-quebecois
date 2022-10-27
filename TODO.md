@@ -1,6 +1,5 @@
 # TODO
 
-- feat: add warning on rate limiting
 - fix: add more padding to index links
 - feat: reset form on navigation reclick
 - feat: reset search on close

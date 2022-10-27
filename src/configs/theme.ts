@@ -168,6 +168,11 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
                     sx: {
                         width: "100%"
                     }
+                },
+                styleOverrides: {
+                    filledWarning: {
+                        color: "white"
+                    }
                 }
             },
             MuiAppBar: {
