@@ -7,6 +7,7 @@ import { Loading } from "@components/misc/loading";
 
 import { Footer } from "./footer";
 import { Navigation } from "./navigation";
+import { NoScript } from "./no-script";
 
 const LazySidebar = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./sidebar")).Sidebar
@@ -14,6 +15,7 @@ const LazySidebar = dynamic(async (): Promise<{ default: ComponentType }> => ({
 
 export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <>
+        <NoScript />
         <Navigation />
         <Container>
             <Grid
