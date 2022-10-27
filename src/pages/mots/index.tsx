@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import { SWRConfig } from "swr";
 
 import { IndexPage } from "@components/pages/index-page";
-import { getWordIndex } from "@services/api/words";
+import { getWordIndex } from "@services/api/words/get-word-index";
 
 interface Props {
     fallback: {

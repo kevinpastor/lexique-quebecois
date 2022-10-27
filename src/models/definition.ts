@@ -1,4 +1,6 @@
-import { WordClass } from "./classes";
+import { object, string, array, number, boolean } from "yup";
+
+import { WordClass, wordClasses } from "./classes";
 
 export interface Definition {
     id: string;
@@ -17,3 +19,44 @@ export interface Definition {
         isDisliked: boolean;
     };
 }
+
+const authorSchema = object({
+    name: string()
+        .optional()
+})
+    .noUnknown();
+
+const reactionsSchema = object({
+    likes: number()
+        .required(),
+    isLiked: boolean()
+        .required(),
+    dislikes: number()
+        .required(),
+    isDisliked: boolean()
+        .required()
+})
+    .noUnknown();
+
+export const definitionSchema = object({
+    id: string()
+        .required(),
+    label: string()
+        .required(),
+    wordClasses: array()
+        .of(
+            string()
+                .oneOf(wordClasses)
+        )
+        .required(),
+    definition: string()
+        .required(),
+    example: string()
+        .required(),
+    author: authorSchema.required(),
+    timestamp: number()
+        .required(),
+    reactions: reactionsSchema.required()
+})
+    .noUnknown()
+    .required();

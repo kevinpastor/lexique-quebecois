@@ -4,7 +4,8 @@ import { getClientIp } from "request-ip";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { isValidWordRequest } from "@models/word-request";
-import { addWord, getWordIndex } from "@services/api/words";
+import { addWord } from "@services/api/words/add-word";
+import { getWordIndex } from "@services/api/words/get-word-index";
 import {
     createHandler,
     Handler

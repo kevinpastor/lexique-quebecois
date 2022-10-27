@@ -5,7 +5,7 @@ import { WordClass } from "@models/classes";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { WordRequest } from "@models/word-request";
-import { addWord } from "@services/api/words";
+import { addWord } from "@services/api/words/add-word";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { createRequestStub } from "@utils/tests/request";
 import { createResponseStub } from "@utils/tests/response";

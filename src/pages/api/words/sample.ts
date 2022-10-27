@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getClientIp } from "request-ip";
 
+import { Definition } from "@models/definition";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { Definition } from "@models/definition";
-import { getDefinitionsSample } from "@services/api/words";
+import { getDefinitionsSample } from "@services/api/words/get-definitions-sample";
 import {
     createHandler,
     Handler

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { getAutocompletedWords } from "@services/api/words";
+import { getAutocompletedWords } from "@services/api/words/get-autocompleted-words";
 import {
     createHandler,
     Handler

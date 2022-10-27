@@ -1,19 +1,23 @@
-import { Collection, Db, UpdateResult } from "mongodb";
-
 import { Status } from "@models/status";
-import { WordDocument } from "@models/word-document";
-import { getDatabase } from "@services/api/database";
+import { Word } from "@models/word";
+import { _closeMongoClient } from "@services/api/database";
 import { like, removeLike, dislike, removeDislike } from "@services/api/reactions";
+import { getWordDefinitions } from "@services/api/words/get-word-definitions";
 
-jest.mock("@services/api/database", (): typeof import("@services/api/database") => ({
-    ...jest.requireActual("@services/api/database"),
-    getDatabase: jest.fn() as jest.MockedFunction<typeof getDatabase>
-}));
-
-const getDatabaseMock = getDatabase as jest.MockedFunction<typeof getDatabase>;
-
-const id: string = "507f1f77bcf86cd799439011";
 const ip: string = "127.0.0.1";
+// eslint-disable-next-line @typescript-eslint/init-declarations
+let id: string;
+
+beforeAll(async (): Promise<void> => {
+    const word: Word | undefined = await getWordDefinitions("gyu", ip);
+    expect(word).toBeDefined();
+    expect(word?.definitions.length).toBeGreaterThan(0);
+    id = (word as Word).definitions[0].id;
+});
+
+afterAll(async (): Promise<void> => {
+    await _closeMongoClient();
+});
 
 describe("like", (): void => {
     beforeEach((): void => {
@@ -21,47 +25,23 @@ describe("like", (): void => {
     });
 
     it("should not like non existent word", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        matchedCount: 0
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
-
-        const result: Status = await like(id, ip);
+        const result: Status = await like("000000000000000000000000", ip);
 
         expect(result).toEqual(Status.NotFound);
     });
 
     it("should not like already liked word", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        modifiedCount: 0
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
+        await removeLike(id, ip);
+        await like(id, ip);
 
         const result: Status = await like(id, ip);
-
         expect(result).toEqual(Status.Conflict);
     });
 
     it("should like", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        modifiedCount: 1
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
+        await removeLike(id, ip);
 
         const result: Status = await like(id, ip);
-
         expect(result).toEqual(Status.OK);
     });
 });
@@ -72,29 +52,13 @@ describe("removeLike", (): void => {
     });
 
     it("should not remove like on non existant word", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        matchedCount: 0
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
-
-        const result: Status = await removeLike(id, ip);
+        const result: Status = await removeLike("000000000000000000000000", ip);
 
         expect(result).toEqual(Status.NotFound);
     });
 
     it("should not remove non existent like", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        modifiedCount: 0
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
+        await removeLike(id, ip);
 
         const result: Status = await removeLike(id, ip);
 
@@ -102,14 +66,7 @@ describe("removeLike", (): void => {
     });
 
     it("should remove like", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        modifiedCount: 1
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
+        await like(id, ip);
 
         const result: Status = await removeLike(id, ip);
 
@@ -123,47 +80,23 @@ describe("dislike", (): void => {
     });
 
     it("should not dislike non existent word", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        matchedCount: 0
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
-
-        const result: Status = await dislike(id, ip);
+        const result: Status = await dislike("000000000000000000000000", ip);
 
         expect(result).toEqual(Status.NotFound);
     });
 
     it("should not dislike already disliked word", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        modifiedCount: 0
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
+        await removeDislike(id, ip);
+        await dislike(id, ip);
 
         const result: Status = await dislike(id, ip);
-
         expect(result).toEqual(Status.Conflict);
     });
 
     it("should dislike", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        modifiedCount: 1
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
+        await removeDislike(id, ip);
 
         const result: Status = await dislike(id, ip);
-
         expect(result).toEqual(Status.OK);
     });
 });
@@ -174,29 +107,13 @@ describe("removeDislike", (): void => {
     });
 
     it("should not remove dislike on non existant word", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        matchedCount: 0
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
-
-        const result: Status = await removeDislike(id, ip);
+        const result: Status = await removeDislike("000000000000000000000000", ip);
 
         expect(result).toEqual(Status.NotFound);
     });
 
     it("should not remove non existent dislike", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        modifiedCount: 0
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
+        await removeDislike(id, ip);
 
         const result: Status = await removeDislike(id, ip);
 
@@ -204,14 +121,7 @@ describe("removeDislike", (): void => {
     });
 
     it("should remove dislike", async (): Promise<void> => {
-        getDatabaseMock.mockResolvedValue({
-            collection: (): Collection<WordDocument> => ({
-                updateOne: jest.fn()
-                    .mockResolvedValue({
-                        modifiedCount: 1
-                    } as Partial<UpdateResult> as UpdateResult)
-            } as Partial<Collection<WordDocument>> as Collection<WordDocument>)
-        } as Partial<Db> as Db);
+        await dislike(id, ip);
 
         const result: Status = await removeDislike(id, ip);
 

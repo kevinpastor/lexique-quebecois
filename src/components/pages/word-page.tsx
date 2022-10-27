@@ -12,10 +12,10 @@ import { Word } from "@models/word";
 
 export const WordPage = (): ReactElement => {
     const { push, query } = useRouter();
-    const { data } = useSWR<Word | undefined>(`/api/words/${query.slug}`);
+    const { data } = useSWR<Word | null>(`/api/words/${query.slug}`);
 
     // `data` coming from `fallback`
-    const word: Word | undefined = data as Word | undefined;
+    const word: Word | null = data as Word | null;
 
     if (!word || word.definitions.length === 0) { // `definitions` should theoretically never be empty.
         const handleClick = async (): Promise<void> => {

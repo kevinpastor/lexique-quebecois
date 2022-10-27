@@ -7,7 +7,8 @@ import { LoadingWord } from "@components/misc/loading/routes/loading-word";
 import { WordPage } from "@components/pages/word-page";
 import { Word } from "@models/word";
 import { getSlug } from "@models/word-request";
-import { getWordDefinitions, getWordIndex } from "@services/api/words";
+import { getWordDefinitions } from "@services/api/words/get-word-definitions";
+import { getWordIndex } from "@services/api/words/get-word-index";
 
 type Params = {
     slug: string;
@@ -50,7 +51,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext<Params>):
     }
 
     const { slug } = params;
-    const word: Word | undefined = await getWordDefinitions(slug);
+    const word: Word | null = await getWordDefinitions(slug);
 
     return {
         props: {

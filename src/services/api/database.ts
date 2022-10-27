@@ -1,4 +1,4 @@
-import { Db, MongoClient } from "mongodb";
+import { AggregateOptions, Db, MongoClient } from "mongodb";
 
 import { isDevelopmentEnvironment } from "@utils/misc/environment";
 
@@ -42,4 +42,18 @@ export const getDatabase = async (): Promise<Db> => {
     }
 
     return mongoClient.db();
+};
+
+export const _closeMongoClient = async (): Promise<void> => {
+    if (mongoClientConnect) {
+        const mongoClient: MongoClient = await mongoClientConnect;
+
+        await mongoClient.close();
+    }
+};
+
+export const defaultAggregateOptions: AggregateOptions = {
+    collation: {
+        locale: "fr_CA"
+    }
 };

@@ -4,7 +4,7 @@ import { SWRConfig } from "swr";
 
 import { WordsPage } from "@components/pages/words-page";
 import { Definition } from "@models/definition";
-import { getDefinitionsSample } from "@services/api/words";
+import { getDefinitionsSample } from "@services/api/words/get-definitions-sample";
 
 interface Props {
     fallback: {
