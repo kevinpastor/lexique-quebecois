@@ -45,6 +45,7 @@ export const Navigation = (): ReactElement => {
                             <NextLink
                                 href="/"
                                 passHref
+                                legacyBehavior
                             >
                                 <Link
                                     variant="h1"
@@ -58,6 +59,7 @@ export const Navigation = (): ReactElement => {
                                 <NextLink
                                     href="/ajouter"
                                     passHref
+                                    legacyBehavior
                                 >
                                     <Link
                                         variant="subtitle2"
@@ -70,6 +72,7 @@ export const Navigation = (): ReactElement => {
                                 <NextLink
                                     href="/mots"
                                     passHref
+                                    legacyBehavior
                                 >
                                     <Link
                                         variant="subtitle2"

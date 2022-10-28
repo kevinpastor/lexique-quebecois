@@ -15,6 +15,7 @@ export const Footer = (): ReactElement => (
             <NextLink
                 href="/conditions"
                 passHref
+                legacyBehavior
             >
                 <Link
                     variant="subtitle2"
@@ -27,6 +28,7 @@ export const Footer = (): ReactElement => (
             <NextLink
                 href="/confidentialite"
                 passHref
+                legacyBehavior
             >
                 <Link
                     variant="subtitle2"

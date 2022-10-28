@@ -14,6 +14,7 @@ export const MenuItem = ({ label, href, icon, onClick }: Props): ReactElement =>
         <Link
             href={href}
             passHref
+            legacyBehavior
         >
             <ListItemButton
                 component="a"

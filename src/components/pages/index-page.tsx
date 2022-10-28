@@ -62,6 +62,7 @@ export const IndexPage = (): ReactElement => {
                                     <NextLink
                                         href={`/mots/${slug}`}
                                         passHref
+                                        legacyBehavior
                                     >
                                         <Link gutterBottom={index === group.length - 1}>
                                             {word}

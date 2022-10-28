@@ -34,6 +34,7 @@ export const Definition = ({ definition }: Props): ReactElement => {
                         <NextLink
                             href={`/mots/${slug}`}
                             passHref
+                            legacyBehavior
                         >
                             <Link variant="h2">
                                 {definition.label}
