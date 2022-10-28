@@ -1,7 +1,7 @@
 import { Method } from "@models/method";
 import { WordRequest } from "@models/word-request";
 
-import { createError } from "./errors/http-error-factory";
+import { HttpError } from "./http-error";
 
 export const addWord = async (wordRequest: WordRequest): Promise<void> => {
     const options: RequestInit = {
@@ -14,7 +14,7 @@ export const addWord = async (wordRequest: WordRequest): Promise<void> => {
     const response: Response = await fetch("/api/words", options);
 
     if (!response.ok) {
-        throw createError(response.status);
+        throw new HttpError(response.status);
     }
 };
 
@@ -23,7 +23,7 @@ export const getAutocompletedWords = async (input: string): Promise<Array<string
     const response: Response = await fetch(url);
 
     if (!response.ok) {
-        throw createError(response.status);
+        throw new HttpError(response.status);
     }
 
     const autocompletedWords: Array<string> = await response.json();

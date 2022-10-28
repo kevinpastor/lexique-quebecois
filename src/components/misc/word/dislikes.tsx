@@ -2,8 +2,8 @@ import { ThumbDown, ThumbDownOutlined } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { ReactElement } from "react";
 
-import { isConflictError } from "@services/errors/conflict-error";
-import { isNotFoundError } from "@services/errors/not-found-error";
+import { Status } from "@models/status";
+import { isHttpError } from "@services/http-error";
 import { dislike, removeDislike } from "@services/reactions";
 import { useAlerts } from "@utils/hooks/use-alerts";
 import { BooleanUtilities } from "@utils/hooks/use-boolean";
@@ -50,29 +50,36 @@ export const Dislikes = ({
                 await removeDislike(id);
             }
             catch (error: unknown) {
-                if (!isConflictError(error) && !isNotFoundError(error)) {
-                    enqueueErrorAlert("Un erreur inconnue s'est produite.");
-                    return;
+                if (isHttpError(error)) {
+                    if (error.status === Status.Conflict || error.status === Status.NotFound) {
+                        return;
+                    }
                 }
+
+                enqueueErrorAlert("Un erreur inconnue s'est produite.");
             }
+
+            return;
         }
-        else {
-            if (isLiked) {
-                decrementLikes();
-                toggleIsLiked();
-            }
 
-            incrementDislikes();
+        if (isLiked) {
+            decrementLikes();
+            toggleIsLiked();
+        }
 
-            try {
-                await dislike(id);
-            }
-            catch (error: unknown) {
-                if (!isConflictError(error)) {
-                    enqueueErrorAlert("Un erreur inconnue s'est produite.");
+        incrementDislikes();
+
+        try {
+            await dislike(id);
+        }
+        catch (error: unknown) {
+            if (isHttpError(error)) {
+                if (error.status === Status.Conflict) {
                     return;
                 }
             }
+
+            enqueueErrorAlert("Un erreur inconnue s'est produite.");
         }
     };
 

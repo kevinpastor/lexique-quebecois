@@ -7,8 +7,9 @@ import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import { ReactElement } from "react";
 
+import { Status } from "@models/status";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
-import { isTooManyRequestError } from "@services/errors/too-many-request-error";
+import { isHttpError } from "@services/http-error";
 import { addWord } from "@services/words";
 import { useAlerts } from "@utils/hooks/use-alerts";
 
@@ -35,7 +36,7 @@ export const AddPage = (): ReactElement => {
             await addWord(cleanedWordRequest);
         }
         catch (error: unknown) {
-            if (isTooManyRequestError(error)) {
+            if (isHttpError(error) && error.status === Status.TooManyRequest) {
                 enqueueWarningAlert("Trop de demandes. Veuillez réessayer plus tard.");
                 return;
             }
