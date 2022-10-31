@@ -1,8 +1,4 @@
-import { Check } from "@mui/icons-material";
-import { LoadingButton } from "@mui/lab";
-import { Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
-import { Field, Form, Formik, FormikProps } from "formik";
-import { TextField } from "formik-mui";
+import { Form as FormikForm, Formik } from "formik";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -13,7 +9,7 @@ import { isHttpError } from "@services/http-error";
 import { addWord } from "@services/words";
 import { useAlerts } from "@utils/hooks/use-alerts";
 
-import { WordClassPicker } from "./word-class-picker";
+import { Form } from "./form";
 
 const initialValues: WordRequest = {
     label: "",
@@ -69,62 +65,9 @@ export const AddPage = (): ReactElement => {
                 validateOnBlur={false}
                 validateOnChange={false}
             >
-                {({ isSubmitting }: FormikProps<WordRequest>): ReactElement => (
-                    <Form noValidate>
-                        <Card>
-                            <CardHeader title="Ajouter un mot" />
-                            <CardContent>
-                                <Stack spacing={2}>
-                                    <Field
-                                        component={TextField}
-                                        name="label"
-                                        label="Mot"
-                                        required
-                                        autoFocus
-                                    />
-                                    <WordClassPicker />
-                                    <Field
-                                        component={TextField}
-                                        name="definition"
-                                        label="Définition"
-                                        required
-                                        multiline
-                                        minRows={2}
-                                    />
-                                    <Field
-                                        component={TextField}
-                                        name="example"
-                                        label="Exemple"
-                                        required
-                                        multiline
-                                        minRows={2}
-                                    />
-                                    <Field
-                                        component={TextField}
-                                        name="author"
-                                        label="Auteur"
-                                    />
-                                </Stack>
-                            </CardContent>
-                            <CardActions>
-                                <Stack
-                                    direction="row-reverse"
-                                    width="100%"
-                                >
-                                    <LoadingButton
-                                        loading={isSubmitting}
-                                        startIcon={<Check />}
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
-                                    >
-                                        Envoyer
-                                    </LoadingButton>
-                                </Stack>
-                            </CardActions>
-                        </Card>
-                    </Form>
-                )}
+                <FormikForm noValidate>
+                    <Form />
+                </FormikForm>
             </Formik>
         </>
     );
