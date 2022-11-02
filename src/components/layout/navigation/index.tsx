@@ -82,6 +82,19 @@ export const Navigation = (): ReactElement => {
                                         Index
                                     </Link>
                                 </NextLink>
+                                <NextLink
+                                    href="/contact"
+                                    passHref
+                                    legacyBehavior
+                                >
+                                    <Link
+                                        variant="subtitle2"
+                                        color="default"
+                                        underline="hover"
+                                    >
+                                        Contact
+                                    </Link>
+                                </NextLink>
                             </DesktopOnly>
                         </Stack>
                     </Stack>

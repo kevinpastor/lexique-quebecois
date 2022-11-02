@@ -72,15 +72,22 @@
 
 ## OG Template
 
+import { ImageResponse, ImageResponseOptions } from "@vercel/og";
+import { ReactElement } from "react";
 
-const fontUrl: URL = new URL("./Lora-SemiBold-600.ttf", import.meta.url);
-// const fontUrl: URL = new URL("https://fonts.gstatic.com/s/lora/v26/0QI6MX1D_JOuGQbT0gvTJPa787zAvCJG.ttf");
+import { Status } from "@models/status";
+
+export const config = {
+    runtime: "experimental-edge"
+};
+
+const fontUrl: URL = new URL("./Lora-SemiBold.ttf", import.meta.url);
 const font: Promise<ArrayBuffer> = fetch(fontUrl)
     .then((response: Response): Promise<ArrayBuffer> => {
         return response.arrayBuffer();
     });
 
-const template = (title: string): ReactElement => (
+const template = (): ReactElement => (
     <div
         style={{
             height: "100%",
@@ -91,20 +98,46 @@ const template = (title: string): ReactElement => (
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "#fff",
-            fontSize: 128,
+            fontSize: 112,
             fontWeight: 600,
             fontFamily: "Lora",
             color: "#000000DE"
         }}
     >
         <svg
-            height="256"
+            height="224"
             viewBox="0 0 144 165"
             fill="#000000DE"
             style={{ marginBottom: "16px" }}
         >
             <path d="M72 76.4C53.12 58.8 27.84 48 0 48V136C27.84 136 53.12 146.8 72 164.4C90.88 146.88 116.16 136 144 136V48C116.16 48 90.88 58.8 72 76.4ZM72 48C85.28 48 96 37.28 96 24C96 10.72 85.28 0 72 0C58.72 0 48 10.72 48 24C48 37.28 58.72 48 72 48Z" />
         </svg>
-        {title}
+        Lexique Québecois
     </div>
 );
+
+const handler = async (): Promise<Response | ImageResponse> => {
+    let fontData: ArrayBuffer | undefined = undefined;
+    try {
+        fontData = await font;
+    }
+    catch {
+        return new Response(undefined, { status: Status.InternalError });
+    }
+    const element: ReactElement = template();
+    const options: ImageResponseOptions = {
+        width: 1200,
+        height: 630,
+        fonts: [
+            {
+                name: "Lora",
+                data: fontData,
+                style: "normal"
+            }
+        ]
+    };
+
+    return new ImageResponse(element, options);
+};
+
+export default handler;

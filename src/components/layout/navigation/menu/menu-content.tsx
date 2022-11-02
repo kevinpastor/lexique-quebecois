@@ -1,4 +1,4 @@
-import { Add, Home, ListAlt, LocalLibrary } from "@mui/icons-material";
+import { Add, ChatBubble, Description, Home, ListAlt, LocalLibrary, PrivacyTip } from "@mui/icons-material";
 import { Divider, List, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -45,23 +45,26 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
                 onClick={handleClose}
             />
         </List>
-        {/*
         <List>
-            // TODO Create both pages
+            <MenuItem
+                label="Conditions"
+                href="/conditions"
+                icon={<Description />}
+                onClick={handleClose}
+            />
+            <MenuItem
+                label="Confidentialité"
+                href="/confidentialite"
+                icon={<PrivacyTip />}
+                onClick={handleClose}
+            />
             <MenuItem
                 label="Contact"
                 href="/contact"
                 icon={<ChatBubble />}
                 onClick={handleClose}
             />
-            <MenuItem
-                label="Contribuer"
-                href="/contribuer"
-                icon={<AttachMoney />}
-                onClick={handleClose}
-            />
         </List>
-        */}
         <ThemeSelector />
     </Stack>
 );

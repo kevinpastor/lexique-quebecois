@@ -1,6 +1,8 @@
-import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Typography } from "@mui/material";
 import Head from "next/head";
 import { ReactElement } from "react";
+
+import { Email, EmailType } from "@components/misc/email";
 
 export const PrivacyPage = (): ReactElement => (
     <>
@@ -85,7 +87,7 @@ export const PrivacyPage = (): ReactElement => (
                 </Typography>
                 <Typography gutterBottom>
                     {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                    Vous pouvez demander la divulgation et/ou la suppression de toute information que nous avons recueillie à votre sujet, en nous envoyant un courriel contenant les détails de votre demande à l&apos;adresse suivante&nbsp;: <Link href="mailto:info@lexiquequebecois.com">info@lexiquequebecois.com</Link>{/* TODO Replace with support@lexiquequebecois.com */}.
+                    Vous pouvez demander la divulgation et/ou la suppression de toute information que nous avons recueillie à votre sujet, en nous envoyant un courriel contenant les détails de votre demande à l&apos;adresse suivante&nbsp;: <Email type={EmailType.Support} />.
                 </Typography>
                 <Typography gutterBottom>
                     Nous vous contacterons après réception de votre demande pour vérifier votre identité et traiter votre demande. Veuillez noter que les demandes sont examinées au cas par cas et sont soumises aux exigences légales et à une vérification adéquate de l&apos;identité.
@@ -159,7 +161,7 @@ export const PrivacyPage = (): ReactElement => (
                 </Typography>
                 <Typography gutterBottom>
                     {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                    Toute question concernant la présente politique de confidentialité doit être adressée à l&apos;adresse suivante&nbsp;: <Link href="mailto:info@lexiquequebecois.com">info@lexiquequebecois.com</Link>{/* TODO Replace with legal@lexiquequebecois.com */}.
+                    Toute question concernant la présente politique de confidentialité doit être adressée à l&apos;adresse suivante&nbsp;: <Email type={EmailType.Legal} />.
                 </Typography>
                 <Typography
                     variant="subtitle2"

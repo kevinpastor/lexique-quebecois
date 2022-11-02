@@ -3,6 +3,8 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 
+import { Email, EmailType } from "@components/misc/email";
+
 export const ConditionsPage = (): ReactElement => (
     <>
         <Head>
@@ -13,7 +15,7 @@ export const ConditionsPage = (): ReactElement => (
             <CardContent>
                 <Typography gutterBottom>
                     {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                    Kevin Pastor (la &quot;société&quot;) propose Lexique Québécois (le &quot;site Web&quot;) conformément aux conditions de service déclarées ci-dessous. La société se réserve le droit de réviser ces conditions de temps à autre. Nous publierons un avis de toute révision importante sur le site Web. En continuant à utiliser le site Web, vous acceptez les présentes conditions. Les questions relatives aux conditions de service peuvent être envoyées à l&apos;adresse suivante&nbsp;: <Link href="mailto:info@lexiquequebecois.com">info@lexiquequebecois.com</Link>.
+                    Kevin Pastor (la &quot;société&quot;) propose Lexique Québécois (le &quot;site Web&quot;) conformément aux conditions de service déclarées ci-dessous. La société se réserve le droit de réviser ces conditions de temps à autre. Nous publierons un avis de toute révision importante sur le site Web. En continuant à utiliser le site Web, vous acceptez les présentes conditions. Les questions relatives aux conditions de service peuvent être envoyées à l&apos;adresse suivante&nbsp;: <Email type={EmailType.Info} />.
                 </Typography>
                 <Typography
                     variant="h3"
@@ -126,7 +128,7 @@ export const ConditionsPage = (): ReactElement => (
                 </Typography>
                 <Typography gutterBottom>
                     {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                    La société ne contrôle pas et ne peut pas contrôler tout le contenu publié par des tiers sur le site Web, et ne garantit pas l&apos;exactitude, l&apos;intégrité ou la qualité de ce contenu. Vous comprenez qu&apos;en utilisant le site Web, vous pouvez être exposé à du contenu que vous pouvez trouver offensant, indécent, incorrect ou répréhensible, et vous acceptez qu&apos;en aucun cas la société ne soit responsable de quelque manière que ce soit du contenu, y compris des erreurs ou omissions dans le contenu, ou de toute perte ou dommage de quelque nature que ce soit résultant de votre utilisation du contenu. Si vous souhaitez signaler des éléments répréhensibles, vous pouvez le problème à l&apos;adresse suivante&nbsp;: <Link href="mailto:info@lexiquequebecois.com">info@lexiquequebecois.com</Link> {/* TODO Replace with legal@lexiquequebecois.com */}.
+                    La société ne contrôle pas et ne peut pas contrôler tout le contenu publié par des tiers sur le site Web, et ne garantit pas l&apos;exactitude, l&apos;intégrité ou la qualité de ce contenu. Vous comprenez qu&apos;en utilisant le site Web, vous pouvez être exposé à du contenu que vous pouvez trouver offensant, indécent, incorrect ou répréhensible, et vous acceptez qu&apos;en aucun cas la société ne soit responsable de quelque manière que ce soit du contenu, y compris des erreurs ou omissions dans le contenu, ou de toute perte ou dommage de quelque nature que ce soit résultant de votre utilisation du contenu. Si vous souhaitez signaler des éléments répréhensibles, vous pouvez nous faire part du problème à l&apos;adresse suivante&nbsp;: <Email type={EmailType.Legal} />.
                 </Typography>
                 <Typography gutterBottom>
                     Vous êtes seul responsable de tout contenu que vous publiez sur le site Web, ainsi que des conséquences de la publication de ce contenu. Vous acceptez d&apos;indemniser, de défendre et de dégager de toute responsabilité la société, ses dirigeants, ses administrateurs, ses employés et ses agents en cas de réclamations, pertes, coûts, responsabilités, dommages, jugements, pénalités, intérêts et dépenses (y compris les honoraires d&apos;avocat raisonnables) découlant de ou liés à (1) toute violation réelle ou présumée de vos déclarations, garanties ou obligations énoncées dans les présentes conditions d&apos;utilisation, et (2) toute violation réelle ou présumée de tout droit de propriété intellectuelle ou de propriété par tout contenu ou toute autre information que vous publiez sur le site Web.
@@ -176,7 +178,7 @@ export const ConditionsPage = (): ReactElement => (
                 </ul>
                 <Typography gutterBottom>
                     {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                    L&apos;agent de la société chargé de notifier les réclamations relatives aux droits d&apos;auteur ou à toute autre violation de la propriété intellectuelle peut être contacté à l&apos;adresse suivante&nbsp;: <Link href="mailto:info@lexiquequebecois.com">info@lexiquequebecois.com</Link>{/* TODO Replace with legal@lexiquequebecois.com */}.
+                    L&apos;agent de la société chargé de notifier les réclamations relatives aux droits d&apos;auteur ou à toute autre violation de la propriété intellectuelle peut être contacté à l&apos;adresse suivante&nbsp;: <Email type={EmailType.Legal} />.
                 </Typography>
                 <Typography
                     variant="h3"
