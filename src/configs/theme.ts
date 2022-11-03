@@ -337,7 +337,6 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
             },
             MuiTypography: {
                 defaultProps: {
-                    // gutterBottom: true, // TODO Add this to remove all instances
                     variantMapping: {
                         subtitle1: "p",
                         subtitle2: "p"

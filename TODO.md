@@ -1,6 +1,5 @@
 # TODO
 
-- fix: remove underline on autocomplete
 - fix: investigate mobile hydration error
 - feat: add tooltip to word classes
 - feat: add arrow selection on search

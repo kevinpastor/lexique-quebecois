@@ -1,6 +1,6 @@
-import { Container, List, ListItem, ListItemButton } from "@mui/material";
+import { Container, Link, List, ListItem, ListItemButton } from "@mui/material";
 import { useFormikContext } from "formik";
-import Link from "next/link";
+import NextLink from "next/link";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
@@ -37,12 +37,13 @@ export const AutocompleteResults = ({ onClose: handleClose }: Props): ReactEleme
                         key={word}
                         disablePadding
                     >
-                        <Link
+                        <NextLink
                             href={`/mots/${getSlug(word)}`}
                             passHref
+                            legacyBehavior
                         >
                             <ListItemButton
-                                component="a"
+                                component={Link}
                                 onClick={handleClose}
                             >
                                 <Highlight
@@ -50,7 +51,7 @@ export const AutocompleteResults = ({ onClose: handleClose }: Props): ReactEleme
                                     highlight={debouncedLabel}
                                 />
                             </ListItemButton>
-                        </Link>
+                        </NextLink>
                     </ListItem>
                 ))}
             </List>
