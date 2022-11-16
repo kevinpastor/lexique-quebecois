@@ -12,4 +12,4 @@
 - chore: investigate CSS variables for MUI
 - chore: investigate autofocus on iOS
 - chore: investigate onbeforeunload support for iOS
-- chore: investigate if React can be replace with Preact
+- chore: investigate if react@^18.0.0 can be replace with preact@^11.0.0
