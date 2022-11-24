@@ -1,20 +1,22 @@
 import { Container, Link, List, ListItem, ListItemButton } from "@mui/material";
 import { useFormikContext } from "formik";
 import NextLink from "next/link";
-import { ReactElement } from "react";
+import { ReactElement, RefObject, useEffect } from "react";
 import useSWR from "swr";
 
 import { Highlight } from "@components/misc/highlight";
 import { getSlug } from "@models/definition";
 import { useDebounce } from "@utils/hooks/use-debounce";
+import { KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "@utils/hooks/use-keyboard-focus-selection";
 
 import { FormValues } from "./content";
 
 export interface Props {
+    inputRef: RefObject<HTMLInputElement>;
     onClose: () => void;
 }
 
-export const AutocompleteResults = ({ onClose: handleClose }: Props): ReactElement | null => {
+export const AutocompleteResults = ({ inputRef, onClose: handleClose }: Props): ReactElement | null => {
     const { values: { label } } = useFormikContext<FormValues>();
     const debouncedLabel: string = useDebounce(label);
     const { data, error } = useSWR<Array<string>>(
@@ -25,6 +27,12 @@ export const AutocompleteResults = ({ onClose: handleClose }: Props): ReactEleme
         }
     );
 
+    const { itemRef }: KeyboardFocusSelectionUtility = useKeyboardFocusSelection();
+
+    useEffect((): void => {
+        itemRef(0)(inputRef.current);
+    }, [inputRef, itemRef]);
+
     if (error || !data) {
         return null;
     }
@@ -32,7 +40,7 @@ export const AutocompleteResults = ({ onClose: handleClose }: Props): ReactEleme
     return (
         <Container>
             <List>
-                {data.map((word: string): ReactElement => (
+                {data.map((word: string, index: number): ReactElement => (
                     <ListItem
                         key={word}
                         disablePadding
@@ -45,6 +53,7 @@ export const AutocompleteResults = ({ onClose: handleClose }: Props): ReactEleme
                             <ListItemButton
                                 component={Link}
                                 onClick={handleClose}
+                                ref={itemRef(index + 1)}
                             >
                                 <Highlight
                                     word={word}

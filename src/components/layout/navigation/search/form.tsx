@@ -1,7 +1,7 @@
 import { ArrowBack } from "@mui/icons-material";
 import { AppBar, Container, IconButton, Paper, Stack } from "@mui/material";
 import { Form as FormikForm, useFormikContext } from "formik";
-import { ReactElement } from "react";
+import { ReactElement, useRef } from "react";
 
 import { AutocompleteResults } from "./autocomplete-results";
 import { FormValues } from "./content";
@@ -18,6 +18,8 @@ export const Form = ({ onClose: handleClose }: Props): ReactElement => {
         handleClose();
         resetForm();
     };
+
+    const inputRef = useRef<HTMLInputElement>(null);
 
     return (
         <Paper
@@ -44,11 +46,12 @@ export const Form = ({ onClose: handleClose }: Props): ReactElement => {
                         >
                             <ArrowBack />
                         </IconButton>
-                        <Field />
+                        <Field ref={inputRef} />
                     </Stack>
                 </Container>
             </AppBar>
             <AutocompleteResults
+                inputRef={inputRef}
                 onClose={handleBack}
             />
         </Paper>

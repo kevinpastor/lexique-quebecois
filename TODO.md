@@ -1,8 +1,8 @@
 # TODO
 
+- feat: migrate to tRPC
 - fix: investigate mobile hydration error
 - feat: add tooltip to word classes
-- feat: add arrow selection on search
 - feat: add @next/font
 - feat: make use of Next.js next layout architecture
 - feat: add pronounciation

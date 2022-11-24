@@ -1,15 +1,16 @@
 import { InputAdornment, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
-import { ReactElement } from "react";
+import { forwardRef, ReactElement } from "react";
 
 import { FormValues } from "./content";
 import { FieldIconButton } from "./field-icon-button";
 
-export const Field = (): ReactElement => {
+export const Field = forwardRef<HTMLInputElement>((_, ref): ReactElement => {
     const { values, errors, touched, handleChange } = useFormikContext<FormValues>();
 
     return (
         <TextField
+            inputRef={ref}
             name="label"
             placeholder="Rechercher un mot"
             value={values.label}
@@ -26,4 +27,6 @@ export const Field = (): ReactElement => {
             spellCheck={false}
         />
     );
-};
+});
+
+Field.displayName = "Field";
