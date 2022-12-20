@@ -27,5 +27,6 @@ export const useLeavePageConfirmation = (
         return (): void => {
             router.events.off("routeChangeStart", handler);
         };
+    // `requestConfirmationRef` has no real effect on the hook, but it's required to avoid an linter warning.
     }, [router.events, requestConfirmationRef, message]);
 };

@@ -12,7 +12,7 @@ import { WordClassPicker } from "./word-class-picker";
 export const Form = (): ReactElement => {
     const { dirty, isSubmitting } = useFormikContext();
 
-    useLeavePageConfirmation(dirty, "Votre mot n'a pas encore été soumis, êtes-vous sûr de vouloir l'abandonner?");
+    useLeavePageConfirmation(dirty && !isSubmitting, "Votre mot n'a pas encore été soumis, êtes-vous sûr de vouloir l'abandonner?");
 
     return (
         <Card>
