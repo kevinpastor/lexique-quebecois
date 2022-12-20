@@ -20,6 +20,7 @@
         "incremental": true,
         "baseUrl": ".",
         "noImplicitAny": true,
+        "noPropertyAccessFromIndexSignature": true,
         "downlevelIteration": true,
         "paths": {
             "@components/*": [
@@ -37,7 +38,8 @@
             "@utils/*": [
                 "./src/utils/*"
             ]
-        }
+        },
+        "noUncheckedIndexedAccess": true
     },
     "exclude": [
         "node_modules"
