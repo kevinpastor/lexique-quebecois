@@ -24,7 +24,7 @@ interface Props {
 }
 
 export const getStaticPaths = async (): Promise<GetStaticPathsResult<Params>> => {
-    if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    if (process.env["SKIP_BUILD_STATIC_GENERATION"]) {
         return {
             paths: [],
             fallback: "blocking"

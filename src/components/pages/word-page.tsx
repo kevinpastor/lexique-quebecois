@@ -12,18 +12,18 @@ import { Word } from "@models/word";
 
 export const WordPage = (): ReactElement => {
     const { push, query } = useRouter();
-    const { data } = useSWR<Word | null>(`/api/words/${query.slug}`);
+    const { data } = useSWR<Word | null>(`/api/words/${query["slug"]}`);
 
     // `data` coming from `fallback`
     const word: Word | null = data as Word | null;
 
     if (!word || word.definitions.length === 0) { // `definitions` should theoretically never be empty.
         const handleClick = async (): Promise<void> => {
-            if (!query.label) {
+            if (!query["label"]) {
                 await push("/ajouter");
             }
             else {
-                await push(`/ajouter?label=${query.label}`, "/ajouter");
+                await push(`/ajouter?label=${query["label"]}`, "/ajouter");
             }
         };
 
@@ -55,12 +55,12 @@ export const WordPage = (): ReactElement => {
             <Head>
                 <title>
                     {/* Having the sufix inline creates comment blocks inside the title tag */}
-                    {`${query.slug} - Lexique Québécois`}
+                    {`${query["slug"]} - Lexique Québécois`}
                 </title>
                 <meta
                     key="description"
                     name="description"
-                    content={`${query.label} - ${word.definitions[0].definition}`}
+                    content={`${query["label"]} - ${word.definitions[0].definition}`}
                 />
             </Head>
             <Stack spacing={2}>

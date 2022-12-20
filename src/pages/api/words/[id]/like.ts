@@ -29,13 +29,13 @@ const handler: Handler = createHandler({
             return;
         }
 
-        if (!req.query.id || Array.isArray(req.query.id)) {
+        if (!req.query["id"] || Array.isArray(req.query["id"])) {
             res.status(Status.BadRequest)
                 .end();
             return;
         }
 
-        const id: string = req.query.id;
+        const id: string = req.query["id"];
         const result: Status = await like(id, ip);
 
         res.status(result)
@@ -55,13 +55,13 @@ const handler: Handler = createHandler({
             return;
         }
 
-        if (!req.query.id || Array.isArray(req.query.id)) {
+        if (!req.query["id"] || Array.isArray(req.query["id"])) {
             res.status(Status.BadRequest)
                 .end();
             return;
         }
 
-        const id: string = req.query.id;
+        const id: string = req.query["id"];
         const result: Status = await removeLike(id, ip);
 
         res.status(result)

@@ -19,14 +19,14 @@ const handler: Handler = createHandler({
             return;
         }
 
-        if (!req.query.id || Array.isArray(req.query.id)) {
+        if (!req.query["id"] || Array.isArray(req.query["id"])) {
             res.status(Status.BadRequest)
                 .end();
             return;
         }
 
         // ID is used here as the spelling to get the word collection
-        const spelling: string = req.query.id;
+        const spelling: string = req.query["id"];
         const word: Word | null = await getWordDefinitions(spelling, ip);
 
         res.status(Status.OK)

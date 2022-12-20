@@ -10,13 +10,13 @@ import {
 
 const handler: Handler = createHandler({
     [Method.GET]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-        if (!req.query.input || Array.isArray(req.query.input)) {
+        if (!req.query["input"] || Array.isArray(req.query["input"])) {
             res.status(Status.BadRequest)
                 .end();
             return;
         }
 
-        const input: string = req.query.input;
+        const input: string = req.query["input"];
         const words: Array<string> = await getAutocompletedWords(input);
 
         res.status(Status.OK)

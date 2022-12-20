@@ -55,9 +55,9 @@ export const AddPage = (): ReactElement => {
                 initialValues={{
                     ...initialValues,
                     ...(
-                        routeQuery.label
-                        && !Array.isArray(routeQuery.label)
-                        && { label: routeQuery.label }
+                        routeQuery["label"]
+                        && !Array.isArray(routeQuery["label"])
+                        && { label: routeQuery["label"] }
                     )
                 }}
                 onSubmit={handleSubmit}

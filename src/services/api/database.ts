@@ -16,11 +16,11 @@ export const getDatabase = async (): Promise<Db> => {
     }
 
     if (!mongoClientConnect) {
-        if (!process.env.MONGODB_URI) {
+        if (!process.env["MONGODB_URI"]) {
             throw new Error("MONGODB_URI is missing in environment variables.");
         }
 
-        const uri: string = process.env.MONGODB_URI;
+        const uri: string = process.env["MONGODB_URI"];
         const mongoClient: MongoClient = new MongoClient(uri);
 
         mongoClientConnect = mongoClient.connect();
