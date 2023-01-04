@@ -1,5 +1,6 @@
 import type { } from "@mui/lab/themeAugmentation";
 import { createTheme, alpha, colors, PaletteMode, Theme, lighten } from "@mui/material";
+import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 
 const getHighEmphasyColor = (paletteMode: PaletteMode): string => (
     paletteMode === "light"
@@ -295,7 +296,7 @@ export const getTheme = (paletteMode: PaletteMode): Theme => (
             MuiOutlinedInput: {
                 styleOverrides: {
                     root: {
-                        "&:hover:not(.Mui-error):not(.Mui-focused) .MuiOutlinedInput-notchedOutline": {
+                        [`&:hover:not(.Mui-error):not(.Mui-focused) .${outlinedInputClasses.notchedOutline}`]: {
                             borderColor: getHoveredOutlineColor(paletteMode)
                         }
                     },

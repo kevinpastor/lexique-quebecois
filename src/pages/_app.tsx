@@ -4,6 +4,7 @@ import Script from "next/script";
 import { ReactElement } from "react";
 
 import { Layout } from "@components/layout";
+import "@configs/mui-class-name-setup";
 import { Providers } from "@configs/providers";
 import "@configs/styles.css";
 

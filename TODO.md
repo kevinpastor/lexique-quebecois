@@ -1,15 +1,22 @@
 # TODO
 
+- feat: make title h1
+- fix: make use of react-error-boundary
+- feat: migrate to zod
+- feat: migrate to React Hook Form
 - feat: migrate to tRPC
 - fix: investigate mobile hydration error
 - feat: add tooltip to word classes
 - feat: add @next/font
 - feat: make use of Next.js next layout architecture
 - feat: add pronounciation
-- feat: add letter anchors (id) to index page (navbar overlaps...)
+- feat: add letter anchors (id) to index page
+    - blocked: navbar overlaps
 - fix: remove dark theme ssr flicker
 - chore: investigate PWA
 - chore: investigate CSS variables for MUI
 - chore: investigate autofocus on iOS
+    - blocked: iOS doesn't support autofocus
 - chore: investigate onbeforeunload support for iOS
+    - blocked: iOS doesn't properly support before unload
 - chore: investigate if react@^18.0.0 can be replace with preact@^11.0.0
