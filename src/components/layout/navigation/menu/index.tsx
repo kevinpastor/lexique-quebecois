@@ -11,7 +11,7 @@ import type { Props as MenuContentProps } from "./menu-content";
 
 const LazyMenuContent = dynamic(async (): Promise<{ default: ComponentType<MenuContentProps> }> => ({
     default: (await import("./menu-content")).MenuContent
-}), { suspense: true });
+}));
 
 export const Menu = (): ReactElement => {
     const {

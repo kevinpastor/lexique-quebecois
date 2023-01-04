@@ -11,7 +11,7 @@ import { Search } from "./search";
 
 const LazyIconThemeSelector = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./icon-theme-selector")).IconThemeSelector
-}), { suspense: true });
+}));
 
 export const Navigation = (): ReactElement => {
     const isAtPageTop: boolean = !useScrollTrigger({

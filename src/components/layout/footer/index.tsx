@@ -6,7 +6,7 @@ import { DesktopOnly } from "@components/misc/desktop-only";
 
 const LazyLinks = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./links")).Links
-}), { suspense: true });
+}));
 
 export const Footer = (): ReactElement => (
     <Stack

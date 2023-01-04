@@ -14,19 +14,13 @@ export interface IAlertsContext {
 export const AlertsContext = createContext<IAlertsContext | null>(null);
 AlertsContext.displayName = "AlertsContext";
 
-const LazySnackbar = dynamic(
-    (): Promise<{ default: ComponentType<SnackbarProps> }> => (
-        import("@mui/material/Snackbar")
-    ),
-    { suspense: true }
-);
+const LazySnackbar = dynamic((): Promise<{ default: ComponentType<SnackbarProps> }> => (
+    import("@mui/material/Snackbar")
+));
 
-const LazyAlert = dynamic(
-    (): Promise<{ default: ComponentType<AlertProps> }> => (
-        import("@mui/material/Alert")
-    ),
-    { suspense: true }
-);
+const LazyAlert = dynamic((): Promise<{ default: ComponentType<AlertProps> }> => (
+    import("@mui/material/Alert")
+));
 
 type Severity = "success" | "warning" | "error";
 

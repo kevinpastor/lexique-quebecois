@@ -11,7 +11,7 @@ import { NoScript } from "./no-script";
 
 const LazySidebar = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./sidebar")).Sidebar
-}), { suspense: true });
+}));
 
 export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <>

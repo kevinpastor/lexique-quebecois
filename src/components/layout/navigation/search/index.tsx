@@ -10,7 +10,7 @@ import type { Props as SearchContentProps } from "./content";
 
 const LazySearchContent = dynamic(async (): Promise<{ default: ComponentType<SearchContentProps> }> => ({
     default: (await import("./content")).Content
-}), { suspense: true });
+}));
 
 export const Search = (): ReactElement => {
     const {
