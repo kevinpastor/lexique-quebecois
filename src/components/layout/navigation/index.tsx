@@ -1,4 +1,4 @@
-import { AppBar, Container, Link, Stack, useScrollTrigger } from "@mui/material";
+import { AppBar, Container, Link, Stack, Typography, useScrollTrigger } from "@mui/material";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { ComponentType, ReactElement } from "react";
@@ -42,19 +42,20 @@ export const Navigation = (): ReactElement => {
                             alignItems="end"
                             spacing={2}
                         >
-                            <NextLink
-                                href="/"
-                                passHref
-                                legacyBehavior
-                            >
-                                <Link
-                                    variant="h1"
-                                    color="inherit"
-                                    underline="none"
+                            <Typography variant="h1">
+                                <NextLink
+                                    href="/"
+                                    passHref
+                                    legacyBehavior
                                 >
-                                    Lexique Québécois
-                                </Link>
-                            </NextLink>
+                                    <Link
+                                        color="inherit"
+                                        underline="none"
+                                    >
+                                        Lexique Québécois
+                                    </Link>
+                                </NextLink>
+                            </Typography>
                             <DesktopOnly>
                                 <NextLink
                                     href="/ajouter"

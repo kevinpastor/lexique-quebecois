@@ -21,7 +21,10 @@ export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
             alignItems="center"
         >
             <LocalLibrary fontSize="large" />
-            <Typography variant="h3">
+            <Typography
+                component="h1"
+                variant="h3"
+            >
                 Lexique Québecois
             </Typography>
         </Stack>

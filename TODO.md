@@ -3,7 +3,6 @@
 - fix: update like/dislike button group
     - is caused by the mui class name generator
 - chore: investigate if lazy tooltip works as expected
-- feat: make title h1
 - fix: make use of react-error-boundary
 - feat: migrate to zod
 - feat: migrate to React Hook Form
