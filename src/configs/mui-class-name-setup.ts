@@ -1,5 +1,14 @@
 import { unstable_ClassNameGenerator as ClassNameGenerator } from "@mui/material/className";
 
-ClassNameGenerator.configure((componentName: string): string => (
-    componentName.replace("Mui", "")
-));
+import { isProductionEnvironment } from "@utils/misc/environment";
+
+export const setupClassNameGenerator = (): void => {
+    if (!isProductionEnvironment()) {
+        return;
+    }
+
+    ClassNameGenerator.configure((componentName: string): string => (
+        componentName.replace("Mui", "")
+    ));
+};
+
