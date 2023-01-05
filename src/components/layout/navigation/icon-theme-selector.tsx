@@ -1,8 +1,7 @@
 import { DarkMode, LightMode, SettingsBrightness } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { ReactElement } from "react";
 
-import { LazyTooltip } from "@components/misc/lazy-tooltip";
 import { useDarkMode, TernaryMode } from "@utils/hooks/use-dark-mode";
 
 const modes: Array<TernaryMode> = ["system", "light", "dark"];
@@ -22,10 +21,10 @@ export const IconThemeSelector = (): ReactElement => {
     };
 
     return (
-        <LazyTooltip title="Thème">
+        <Tooltip title="Thème">
             <IconButton onClick={handleClick}>
                 {modeIcons[ternaryMode]}
             </IconButton>
-        </LazyTooltip>
+        </Tooltip>
     );
 };

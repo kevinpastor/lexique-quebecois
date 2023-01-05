@@ -24,4 +24,5 @@ module.exports = withSourceMapAnalyzer(withBundleAnalyzer({
             transform: '@mui/icons-material/{{member}}',
         }
     },
+    reactStrictMode: true,
 }));

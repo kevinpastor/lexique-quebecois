@@ -1,6 +1,5 @@
 # TODO
 
-- chore: investigate if lazy tooltip works as expected
 - fix: make use of react-error-boundary
 - feat: migrate to zod
 - feat: migrate to React Hook Form
@@ -13,6 +12,8 @@
 - feat: add letter anchors (id) to index page
     - blocked: navbar overlaps
 - fix: remove dark theme ssr flicker
+- feat: make a LazyTooltip out of MUI Tooltip
+    - blocked: `dynamic` doesn't seem to work because `@mui/material` is already loaded
 - chore: investigate PWA
 - chore: investigate CSS variables for MUI
 - chore: investigate autofocus on iOS
