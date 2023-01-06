@@ -10,6 +10,12 @@ import "@configs/styles.css";
 
 setupClassNameGenerator();
 
+declare global {
+    interface Window {
+        adsbygoogle?: Array<unknown>;
+    }
+}
+
 const App = ({ Component, pageProps }: AppProps): ReactElement => (
     <>
         <Head>
