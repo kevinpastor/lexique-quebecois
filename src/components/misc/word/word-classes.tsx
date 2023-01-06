@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Tooltip, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
 import { WordClass, wordClassAbreviations } from "@models/classes";
@@ -12,10 +12,18 @@ export const WordClasses = ({ wordClasses }: Props): ReactElement => (
         variant="subtitle2"
         component="span"
     >
-        {wordClasses
-            .map((wordClass: WordClass): string => (
-                wordClassAbreviations[wordClass]
-            ))
-            .join(", ")}
+        {wordClasses.map((wordClass: WordClass, index: number): ReactElement => (
+            <>
+                <Tooltip
+                    title={wordClass}
+                    arrow
+                >
+                    <span style={{ cursor: "help" }}>
+                        {wordClassAbreviations[wordClass]}
+                    </span>
+                </Tooltip>
+                {index < wordClasses.length - 1 && ", "}
+            </>
+        ))}
     </Typography>
 );

@@ -1,11 +1,10 @@
 # TODO
 
 - fix: make use of react-error-boundary
-- feat: migrate to zod
-- feat: migrate to React Hook Form
 - feat: migrate to tRPC
+- feat: update swr
+    - seems to have a weird behaviour in the autocomplete results
 - fix: investigate mobile hydration error
-- feat: add tooltip to word classes
 - feat: add @next/font
 - feat: make use of Next.js next layout architecture
 - feat: add pronounciation
