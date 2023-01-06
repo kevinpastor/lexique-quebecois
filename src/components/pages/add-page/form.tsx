@@ -1,50 +1,46 @@
 import { Check } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { Card, CardHeader, CardContent, Stack, CardActions } from "@mui/material";
-import { Field, useFormikContext } from "formik";
-import { TextField } from "formik-mui";
 import { ReactElement } from "react";
+import { useFormState } from "react-hook-form";
 
+import { TextField } from "@components/react-hook-form/text-field";
 import { useLeavePageConfirmation } from "@utils/hooks/use-leave-page-confirm";
 
 import { WordClassPicker } from "./word-class-picker";
 
 export const Form = (): ReactElement => {
-    const { dirty, isSubmitting } = useFormikContext();
+    const { isDirty, isSubmitting } = useFormState();
 
-    useLeavePageConfirmation(dirty && !isSubmitting, "Votre mot n'a pas encore été soumis, êtes-vous sûr de vouloir l'abandonner?");
+    useLeavePageConfirmation(isDirty && !isSubmitting, "Votre mot n'a pas encore été soumis, êtes-vous sûr de vouloir l'abandonner?");
 
     return (
         <Card>
             <CardHeader title="Ajouter un mot" />
             <CardContent>
                 <Stack spacing={2}>
-                    <Field
-                        component={TextField}
+                    <TextField
                         name="label"
                         label="Mot"
-                        required
                         autoFocus
+                        required
                     />
                     <WordClassPicker />
-                    <Field
-                        component={TextField}
+                    <TextField
                         name="definition"
                         label="Définition"
                         required
                         multiline
                         minRows={2}
                     />
-                    <Field
-                        component={TextField}
+                    <TextField
                         name="example"
                         label="Exemple"
                         required
                         multiline
                         minRows={2}
                     />
-                    <Field
-                        component={TextField}
+                    <TextField
                         name="author"
                         label="Auteur"
                     />

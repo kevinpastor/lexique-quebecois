@@ -4,6 +4,7 @@ specifiers:
   '@babel/core': ^7.20.5
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
+  '@hookform/resolvers': ^2.9.10
   '@mui/icons-material': ^5.10.16
   '@mui/lab': 5.0.0-alpha.108
   '@mui/material': ^5.10.16
@@ -33,6 +34,8 @@ specifiers:
   next-sitemap: ^3.1.32
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-hook-form: ^7.41.5
+  react-hook-form-mui: ^5.12.3
   request-ip: ^3.3.0
   seedrandom: ^3.0.5
   source-map-explorer: ^2.5.3
@@ -46,6 +49,7 @@ dependencies:
   '@babel/core': 7.20.5
   '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
   '@emotion/styled': 11.10.5_3djhvnr4jirfvebjqpipo7gthy
+  '@hookform/resolvers': 2.9.10_react-hook-form@7.41.5
   '@mui/icons-material': 5.10.16_zzl2rsknh5hqp4j37lz5gcfppu
   '@mui/lab': 5.0.0-alpha.108_xohncm2rmuq4tmcvinl42rafe4
   '@mui/material': 5.10.16_lskpmcsdi7ipu6qpuapyu56ihm
@@ -56,6 +60,8 @@ dependencies:
   next: 13.1.1_672uxklweod7ene3nqtsh262ca
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.41.5_react@18.2.0
+  react-hook-form-mui: 5.12.3_oubwgxn3piashzxhroobwyl2zy
   request-ip: 3.3.0
   seedrandom: 3.0.5
   swr: 1.3.0_react@18.2.0
@@ -1365,6 +1371,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@hookform/resolvers/2.9.10_react-hook-form@7.41.5:
+    resolution: {integrity: sha512-JIL1DgJIlH9yuxcNGtyhsWX/PgNltz+5Gr6+8SX9fhXc/hPbEIk6wPI82nhgvp3uUb6ZfAM5mqg/x7KR7NAb+A==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.41.5_react@18.2.0
+    dev: false
 
   /@humanwhocodes/config-array/0.11.7:
     resolution: {integrity: sha512-kBbPWzN8oVMLb0hOUYXhmxggL/1cJE6ydvjDIGi9EnAGUyA7cLVKQg+d/Dsm+KZwx2czGHrCmMVLiyg8s5JPKw==}
@@ -5497,6 +5511,36 @@ packages:
 
   /react-fast-compare/2.0.4:
     resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
+    dev: false
+
+  /react-hook-form-mui/5.12.3_oubwgxn3piashzxhroobwyl2zy:
+    resolution: {integrity: sha512-W7OnpBrWd0L0SJydAQaNcbeXXzWBsGjtg0Lx7U5IwwmpBZAS/xyVNXOGvH+SgsYkaukmtu5806TV+5r2VH9zDw==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@mui/icons-material': '>= 5.x <6'
+      '@mui/material': '>= 5.x <6'
+      '@mui/x-date-pickers': '>=5.0.0-alpha.6 <6'
+      react: '>=17 <19'
+      react-hook-form: '>=7.33.1'
+    peerDependenciesMeta:
+      '@mui/icons-material':
+        optional: true
+      '@mui/x-date-pickers':
+        optional: true
+    dependencies:
+      '@mui/icons-material': 5.10.16_zzl2rsknh5hqp4j37lz5gcfppu
+      '@mui/material': 5.10.16_lskpmcsdi7ipu6qpuapyu56ihm
+      react: 18.2.0
+      react-hook-form: 7.41.5_react@18.2.0
+    dev: false
+
+  /react-hook-form/7.41.5_react@18.2.0:
+    resolution: {integrity: sha512-DAKjSJ7X9f16oQrP3TW2/eD9N6HOgrmIahP4LOdFphEWVfGZ2LulFd6f6AQ/YS/0cx/5oc4j8a1PXxuaurWp/Q==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

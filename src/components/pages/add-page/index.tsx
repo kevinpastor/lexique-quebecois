@@ -1,9 +1,9 @@
-import { Form as FormikForm, Formik } from "formik";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import { ReactElement } from "react";
-import { toFormikValidationSchema } from "zod-formik-adapter";
 
+import { FormContainer } from "@components/react-hook-form/form-container";
 import { Status } from "@models/status";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
 import { isHttpError } from "@services/http-error";
@@ -52,24 +52,22 @@ export const AddPage = (): ReactElement => {
             <Head>
                 <title>Ajouter - Lexique Québécois</title>
             </Head>
-            <Formik
-                initialValues={{
-                    ...initialValues,
-                    ...(
-                        routeQuery["label"]
-                        && !Array.isArray(routeQuery["label"])
-                        && { label: routeQuery["label"] }
-                    )
+            <FormContainer
+                useFormProps={{
+                    defaultValues: {
+                        ...initialValues,
+                        ...(
+                            routeQuery["label"]
+                            && !Array.isArray(routeQuery["label"])
+                            && { label: routeQuery["label"] }
+                        )
+                    },
+                    resolver: zodResolver(wordRequestValidationSchema)
                 }}
-                onSubmit={handleSubmit}
-                validationSchema={toFormikValidationSchema(wordRequestValidationSchema)}
-                validateOnBlur={false}
-                validateOnChange={false}
+                onSuccess={handleSubmit}
             >
-                <FormikForm noValidate>
-                    <Form />
-                </FormikForm>
-            </Formik>
+                <Form />
+            </FormContainer>
         </>
     );
 };
