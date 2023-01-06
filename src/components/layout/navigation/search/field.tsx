@@ -1,32 +1,25 @@
-import { InputAdornment, TextField } from "@mui/material";
-import { useFormikContext } from "formik";
+import { InputAdornment } from "@mui/material";
 import { forwardRef, ReactElement } from "react";
 
-import { FormValues } from "./content";
+import { TextField } from "@components/react-hook-form/text-field";
+
 import { FieldIconButton } from "./field-icon-button";
 
-export const Field = forwardRef<HTMLInputElement>((_, ref): ReactElement => {
-    const { values, errors, touched, handleChange } = useFormikContext<FormValues>();
-
-    return (
-        <TextField
-            inputRef={ref}
-            name="label"
-            placeholder="Rechercher un mot"
-            value={values.label}
-            onChange={handleChange}
-            error={touched.label && Boolean(errors.label)}
-            size="small"
-            InputProps={{
-                endAdornment: (
-                    <InputAdornment position="end">
-                        <FieldIconButton />
-                    </InputAdornment>
-                )
-            }}
-            spellCheck={false}
-        />
-    );
-});
+export const Field = forwardRef<HTMLInputElement>((_, ref): ReactElement => (
+    <TextField
+        inputRef={ref}
+        name="label"
+        placeholder="Rechercher un mot"
+        size="small"
+        InputProps={{
+            endAdornment: (
+                <InputAdornment position="end">
+                    <FieldIconButton />
+                </InputAdornment>
+            )
+        }}
+        spellCheck={false}
+    />
+));
 
 Field.displayName = "Field";

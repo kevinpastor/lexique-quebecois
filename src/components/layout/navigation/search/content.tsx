@@ -1,9 +1,9 @@
-import { Formik } from "formik";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { z } from "zod";
-import { toFormikValidationSchema } from "zod-formik-adapter";
 
+import { FormContainer } from "@components/react-hook-form/form-container";
 import { getSlug } from "@models/definition";
 
 import { Form } from "./form";
@@ -18,7 +18,7 @@ const initialValues: FormValues = {
 
 const validationSchema = z
     .object({
-        label: z.string({ required_error: "Ce champ est requis." })
+        label: z.string()
     });
 
 export interface Props {
@@ -43,12 +43,17 @@ export const Content = ({ onClose: handleClose }: Props): ReactElement => {
     };
 
     return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={toFormikValidationSchema(validationSchema)}
-            onSubmit={handleSubmit}
+        <FormContainer
+            useFormProps={{
+                defaultValues: initialValues,
+                resolver: zodResolver(validationSchema)
+            }}
+            onSuccess={handleSubmit}
+            FormProps={{
+                style: { height: "100%" }
+            }}
         >
             <Form onClose={handleClose} />
-        </Formik>
+        </FormContainer>
     );
 };

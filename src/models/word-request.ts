@@ -53,7 +53,7 @@ export const wordRequestValidationSchema = z
                 z
                     .string()
                     .trim()
-                    .length(0, "Ce champ doit contenir au moins 2 caractères."), // The error message is not necessary, but is there to be safe.
+                    .length(0, "Ce champ doit contenir au moins 2 caractères.") // The error message is not necessary, but is there to be safe.
             ])
             .optional()
             .transform((value?: string): string | undefined => value === "" ? undefined : value)

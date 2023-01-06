@@ -1,7 +1,7 @@
 import { ArrowBack } from "@mui/icons-material";
 import { AppBar, Container, IconButton, Paper, Stack } from "@mui/material";
-import { Form as FormikForm, useFormikContext } from "formik";
 import { ReactElement, useRef } from "react";
+import { useFormContext } from "react-hook-form";
 
 import { AutocompleteResults } from "./autocomplete-results";
 import { FormValues } from "./content";
@@ -12,11 +12,11 @@ export interface Props {
 }
 
 export const Form = ({ onClose: handleClose }: Props): ReactElement => {
-    const { resetForm } = useFormikContext<FormValues>();
+    const { reset } = useFormContext<FormValues>();
 
     const handleBack = (): void => {
         handleClose();
-        resetForm();
+        reset();
     };
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -29,7 +29,6 @@ export const Form = ({ onClose: handleClose }: Props): ReactElement => {
                 height: "100%",
                 overflowY: "auto"
             }}
-            component={FormikForm}
         >
             <AppBar elevation={3}>
                 <Container>

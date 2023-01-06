@@ -62,7 +62,8 @@ export const AddPage = (): ReactElement => {
                             && { label: routeQuery["label"] }
                         )
                     },
-                    resolver: zodResolver(wordRequestValidationSchema)
+                    resolver: zodResolver(wordRequestValidationSchema),
+                    reValidateMode: "onBlur"
                 }}
                 onSuccess={handleSubmit}
             >

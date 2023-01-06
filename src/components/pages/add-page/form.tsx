@@ -5,12 +5,13 @@ import { ReactElement } from "react";
 import { useFormState } from "react-hook-form";
 
 import { TextField } from "@components/react-hook-form/text-field";
+import { WordRequest } from "@models/word-request";
 import { useLeavePageConfirmation } from "@utils/hooks/use-leave-page-confirm";
 
 import { WordClassPicker } from "./word-class-picker";
 
 export const Form = (): ReactElement => {
-    const { isDirty, isSubmitting } = useFormState();
+    const { isDirty, isSubmitting } = useFormState<WordRequest>();
 
     useLeavePageConfirmation(isDirty && !isSubmitting, "Votre mot n'a pas encore été soumis, êtes-vous sûr de vouloir l'abandonner?");
 

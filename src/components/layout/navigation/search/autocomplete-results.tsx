@@ -1,7 +1,7 @@
 import { Container, Link, List, ListItem, ListItemButton } from "@mui/material";
-import { useFormikContext } from "formik";
 import NextLink from "next/link";
 import { ReactElement, RefObject, useEffect } from "react";
+import { useWatch } from "react-hook-form";
 import useSWR from "swr";
 
 import { Highlight } from "@components/misc/highlight";
@@ -17,7 +17,7 @@ export interface Props {
 }
 
 export const AutocompleteResults = ({ inputRef, onClose: handleClose }: Props): ReactElement | null => {
-    const { values: { label } } = useFormikContext<FormValues>();
+    const label = useWatch<FormValues>({ name: "label" });
     const debouncedLabel: string = useDebounce(label);
     const { data, error } = useSWR<Array<string>>(
         `/api/words/autocomplete?input=${debouncedLabel}`,

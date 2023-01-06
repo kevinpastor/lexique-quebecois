@@ -24,8 +24,6 @@ specifiers:
   eslint-config-next: ^13.1.1
   eslint-plugin-import: ^2.26.0
   eslint-plugin-promise: ^6.1.1
-  formik: ^2.2.9
-  formik-mui: 5.0.0-alpha.0
   jest: ^29.3.1
   jest-environment-jsdom: ^29.3.1
   local-ssl-proxy: ^1.3.0
@@ -35,7 +33,6 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-hook-form: ^7.41.5
-  react-hook-form-mui: ^5.12.3
   request-ip: ^3.3.0
   seedrandom: ^3.0.5
   source-map-explorer: ^2.5.3
@@ -43,7 +40,6 @@ specifiers:
   tiny-warning: ^1.0.3
   typescript: ^4.9.3
   zod: ^3.20.2
-  zod-formik-adapter: ^1.2.0
 
 dependencies:
   '@babel/core': 7.20.5
@@ -54,20 +50,16 @@ dependencies:
   '@mui/lab': 5.0.0-alpha.108_xohncm2rmuq4tmcvinl42rafe4
   '@mui/material': 5.10.16_lskpmcsdi7ipu6qpuapyu56ihm
   '@next/env': 13.1.1
-  formik: 2.2.9_react@18.2.0
-  formik-mui: 5.0.0-alpha.0_67otqpam5weupwskiwivoazckq
   mongodb: 4.12.1
   next: 13.1.1_672uxklweod7ene3nqtsh262ca
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.41.5_react@18.2.0
-  react-hook-form-mui: 5.12.3_oubwgxn3piashzxhroobwyl2zy
   request-ip: 3.3.0
   seedrandom: 3.0.5
   swr: 1.3.0_react@18.2.0
   tiny-warning: 1.0.3
   zod: 3.20.2
-  zod-formik-adapter: 1.2.0_formik@2.2.9+zod@3.20.2
 
 devDependencies:
   '@next/bundle-analyzer': 13.1.1
@@ -3037,11 +3029,6 @@ packages:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
     dev: true
 
-  /deepmerge/2.2.1:
-    resolution: {integrity: sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==}
-    engines: {node: '>=0.10.0'}
-    dev: false
-
   /deepmerge/4.2.2:
     resolution: {integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==}
     engines: {node: '>=0.10.0'}
@@ -3773,39 +3760,6 @@ packages:
       combined-stream: 1.0.8
       mime-types: 2.1.35
     dev: true
-
-  /formik-mui/5.0.0-alpha.0_67otqpam5weupwskiwivoazckq:
-    resolution: {integrity: sha512-tcY8B4I3N2UK9ghgVpeBWsXGMDe1y4LVKwI8GiUbLKGB86fI/CN9UMr4FuNo6kzNXvO42LFNmCxdEVzovNCyYQ==}
-    peerDependencies:
-      '@emotion/react': '>=11.5.0'
-      '@emotion/styled': '>=11.3.0'
-      '@mui/material': '>=5.2.3'
-      formik: '>=2.2.9'
-      react: '>=17.0.2'
-      tiny-warning: '>=1.0.3'
-    dependencies:
-      '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
-      '@emotion/styled': 11.10.5_3djhvnr4jirfvebjqpipo7gthy
-      '@mui/material': 5.10.16_lskpmcsdi7ipu6qpuapyu56ihm
-      formik: 2.2.9_react@18.2.0
-      react: 18.2.0
-      tiny-warning: 1.0.3
-    dev: false
-
-  /formik/2.2.9_react@18.2.0:
-    resolution: {integrity: sha512-LQLcISMmf1r5at4/gyJigGn0gOwFbeEAlji+N9InZF6LIMXnFNkO42sCI8Jt84YZggpD4cPWObAZaxpEFtSzNA==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      deepmerge: 2.2.1
-      hoist-non-react-statics: 3.3.2
-      lodash: 4.17.21
-      lodash-es: 4.17.21
-      react: 18.2.0
-      react-fast-compare: 2.0.4
-      tiny-warning: 1.0.3
-      tslib: 1.14.1
-    dev: false
 
   /fs.realpath/1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
@@ -4970,16 +4924,13 @@ packages:
       p-locate: 5.0.0
     dev: true
 
-  /lodash-es/4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: false
-
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: true
 
   /loose-envify/1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
@@ -5508,31 +5459,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-
-  /react-fast-compare/2.0.4:
-    resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
-    dev: false
-
-  /react-hook-form-mui/5.12.3_oubwgxn3piashzxhroobwyl2zy:
-    resolution: {integrity: sha512-W7OnpBrWd0L0SJydAQaNcbeXXzWBsGjtg0Lx7U5IwwmpBZAS/xyVNXOGvH+SgsYkaukmtu5806TV+5r2VH9zDw==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@mui/icons-material': '>= 5.x <6'
-      '@mui/material': '>= 5.x <6'
-      '@mui/x-date-pickers': '>=5.0.0-alpha.6 <6'
-      react: '>=17 <19'
-      react-hook-form: '>=7.33.1'
-    peerDependenciesMeta:
-      '@mui/icons-material':
-        optional: true
-      '@mui/x-date-pickers':
-        optional: true
-    dependencies:
-      '@mui/icons-material': 5.10.16_zzl2rsknh5hqp4j37lz5gcfppu
-      '@mui/material': 5.10.16_lskpmcsdi7ipu6qpuapyu56ihm
-      react: 18.2.0
-      react-hook-form: 7.41.5_react@18.2.0
-    dev: false
 
   /react-hook-form/7.41.5_react@18.2.0:
     resolution: {integrity: sha512-DAKjSJ7X9f16oQrP3TW2/eD9N6HOgrmIahP4LOdFphEWVfGZ2LulFd6f6AQ/YS/0cx/5oc4j8a1PXxuaurWp/Q==}
@@ -6397,16 +6323,6 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
-
-  /zod-formik-adapter/1.2.0_formik@2.2.9+zod@3.20.2:
-    resolution: {integrity: sha512-62U+Mf8U05pvLsIMUTC1H6d4K5SmsrXM+YgiZhCpPin5GNhnVuXCGySmJCs0FHuTJCBy7Et5Z1i8KF5ffuLttg==}
-    peerDependencies:
-      formik: ^2.2.9
-      zod: ^3.14.4
-    dependencies:
-      formik: 2.2.9_react@18.2.0
-      zod: 3.20.2
-    dev: false
 
   /zod/3.20.2:
     resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
