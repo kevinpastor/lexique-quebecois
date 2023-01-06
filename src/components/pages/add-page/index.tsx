@@ -2,6 +2,7 @@ import { Form as FormikForm, Formik } from "formik";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import { ReactElement } from "react";
+import { toFormikValidationSchema } from "zod-formik-adapter";
 
 import { Status } from "@models/status";
 import { cleanupWordRequest, WordRequest, wordRequestValidationSchema } from "@models/word-request";
@@ -61,7 +62,7 @@ export const AddPage = (): ReactElement => {
                     )
                 }}
                 onSubmit={handleSubmit}
-                validationSchema={wordRequestValidationSchema}
+                validationSchema={toFormikValidationSchema(wordRequestValidationSchema)}
                 validateOnBlur={false}
                 validateOnChange={false}
             >

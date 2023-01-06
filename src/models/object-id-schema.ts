@@ -1,13 +1,13 @@
-import { object, string } from "yup";
+import { z } from "zod";
 
-export const objectIdSchema = object({
-    _oid: string()
-        .required()
-})
-    .noUnknown();
+export const objectIdSchema = z
+    .object({
+        _oid: z.string()
+    })
+    .strict();
 
-export const objectWithIdSchema = object({
-    _id: objectIdSchema
-        .required()
-})
-    .noUnknown();
+export const objectWithIdSchema = z
+    .object({
+        _id: objectIdSchema
+    })
+    .strict();

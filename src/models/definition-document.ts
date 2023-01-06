@@ -1,8 +1,8 @@
 import { ObjectId } from "mongodb";
-import { array, boolean, object, string } from "yup";
+import { z } from "zod";
 
 import { AuthorDocument, authorDocumentSchema } from "./author-document";
-import { WordClass, wordClasses } from "./classes";
+import { WordClass } from "./classes";
 import { objectIdSchema } from "./object-id-schema";
 import { ReactionsDocument, reactionsDocumentSchema } from "./reactions-document";
 
@@ -17,25 +17,15 @@ export interface DefinitionDocument {
     reactions: ReactionsDocument;
 }
 
-export const definitionDocumentSchema = object({
-    _id: objectIdSchema
-        .required(),
-    label: string()
-        .required(),
-    definition: string()
-        .required(),
-    example: string()
-        .required(),
-    author: authorDocumentSchema,
-    classe: array()
-        .of(
-            string()
-                .oneOf(wordClasses)
-        )
-        .required(),
-    isApproved: boolean()
-        .required(),
-    reactions: reactionsDocumentSchema
-})
-    .noUnknown()
-    .required();
+export const definitionDocumentSchema = z
+    .object({
+        _id: objectIdSchema,
+        label: z.string(),
+        definition: z.string(),
+        example: z.string(),
+        author: authorDocumentSchema,
+        classe: z.array(z.nativeEnum(WordClass)),
+        isApproved: z.boolean(),
+        reactions: reactionsDocumentSchema
+    })
+    .strict();

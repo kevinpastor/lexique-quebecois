@@ -1,7 +1,8 @@
 import { Formik } from "formik";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
-import * as yup from "yup";
+import { z } from "zod";
+import { toFormikValidationSchema } from "zod-formik-adapter";
 
 import { getSlug } from "@models/definition";
 
@@ -15,11 +16,9 @@ const initialValues: FormValues = {
     label: ""
 };
 
-const validationSchema = yup
+const validationSchema = z
     .object({
-        label: yup
-            .string()
-            .required("Ce champ est requis.")
+        label: z.string({ required_error: "Ce champ est requis." })
     });
 
 export interface Props {
@@ -46,7 +45,7 @@ export const Content = ({ onClose: handleClose }: Props): ReactElement => {
     return (
         <Formik
             initialValues={initialValues}
-            validationSchema={validationSchema}
+            validationSchema={toFormikValidationSchema(validationSchema)}
             onSubmit={handleSubmit}
         >
             <Form onClose={handleClose} />

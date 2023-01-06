@@ -1,8 +1,8 @@
-import { object, string, array, number, boolean } from "yup";
+import { z } from "zod";
 
 import { removeAccents } from "@utils/misc/string";
 
-import { WordClass, wordClasses } from "./classes";
+import { WordClass } from "./classes";
 
 export interface Definition {
     id: string;
@@ -28,43 +28,31 @@ export const getSlug = (label: string): string => {
         .toLocaleLowerCase();
 };
 
-const authorSchema = object({
-    name: string()
-        .optional()
-})
-    .noUnknown();
+const authorSchema = z
+    .object({
+        name: z.string()
+            .optional()
+    })
+    .strict();
 
-const reactionsSchema = object({
-    likes: number()
-        .required(),
-    isLiked: boolean()
-        .required(),
-    dislikes: number()
-        .required(),
-    isDisliked: boolean()
-        .required()
-})
-    .noUnknown();
+const reactionsSchema = z
+    .object({
+        likes: z.number(),
+        isLiked: z.boolean(),
+        dislikes: z.number(),
+        isDisliked: z.boolean()
+    })
+    .strict();
 
-export const definitionSchema = object({
-    id: string()
-        .required(),
-    label: string()
-        .required(),
-    wordClasses: array()
-        .of(
-            string()
-                .oneOf(wordClasses)
-        )
-        .required(),
-    definition: string()
-        .required(),
-    example: string()
-        .required(),
-    author: authorSchema.required(),
-    timestamp: number()
-        .required(),
-    reactions: reactionsSchema.required()
-})
-    .noUnknown()
-    .required();
+export const definitionSchema = z
+    .object({
+        id: z.string(),
+        label: z.string(),
+        wordClasses: z.array(z.nativeEnum(WordClass)),
+        definition: z.string(),
+        example: z.string(),
+        author: authorSchema,
+        timestamp: z.number(),
+        reactions: reactionsSchema
+    })
+    .strict();

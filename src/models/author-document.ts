@@ -1,15 +1,15 @@
-import { object, string } from "yup";
+import { z } from "zod";
 
 export interface AuthorDocument {
     name?: string;
     ip: string;
 }
 
-export const authorDocumentSchema = object({
-    name: string()
-        .optional(),
-    ip: string()
-        .required()
-})
-    .noUnknown()
-    .required();
+export const authorDocumentSchema = z
+    .object({
+        name: z.
+            string()
+            .optional(),
+        ip: z.string()
+    })
+    .strict();

@@ -1,4 +1,4 @@
-import { object, array, string } from "yup";
+import { z } from "zod";
 
 import { Definition, definitionSchema } from "./definition";
 
@@ -7,13 +7,9 @@ export interface Word {
     definitions: Array<Definition>;
 }
 
-export const wordSchema = object({
-    spellings: array()
-        .of(string())
-        .required(),
-    definitions: array()
-        .of(definitionSchema)
-        .required()
-})
-    .noUnknown()
-    .required();
+export const wordSchema = z
+    .object({
+        spellings: z.array(z.string()),
+        definitions: z.array(definitionSchema)
+    })
+    .strict();

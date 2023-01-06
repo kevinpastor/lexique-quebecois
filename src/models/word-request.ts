@@ -1,6 +1,4 @@
-import * as yup from "yup";
-
-import { cleanup, isValid } from "@utils/misc/validation";
+import { z } from "zod";
 
 import { WordClass, wordClasses } from "./classes";
 
@@ -18,52 +16,54 @@ export const isValidLabel = (label: string): boolean => {
     return labelRegex.test(label);
 };
 
-export const wordRequestValidationSchema = yup
+export const wordRequestValidationSchema = z
     .object({
-        label: yup
-            .string()
+        label: z
+            .string({ required_error: "Ce champ est requis." })
             .trim()
-            .min(2, "Ce champ doit contenir au moins ${min} caractères.")
-            .max(32, "Ce champ doit contenir au maximum ${max} caractères.")
-            .matches(labelRegex, "Ce champ peut contenir des lettres, des espaces ou des tirets.")
-            .required("Ce champ est requis."),
-        wordClasses: yup
-            .array()
-            .of(
-                yup.string()
-                    .oneOf(wordClasses, "Ce champ doit contenir une des valeurs proposées.")
+            .min(2, "Ce champ doit contenir au moins 2 caractères.")
+            .max(32, "Ce champ doit contenir au maximum 32 caractères.")
+            .regex(labelRegex, "Ce champ peut contenir des lettres, des espaces ou des tirets."),
+        wordClasses: z
+            .array(
+                z.nativeEnum(
+                    WordClass,
+                    { invalid_type_error: "Ce champ doit contenir une des valeurs proposées." }
+                ),
+                { required_error: "Ce champ est requis." }
             )
-            .max(wordClasses.length, "Ce champ doit contenir au maximum ${max} options.")
-            .required("Ce champ est requis."),
-        definition: yup
-            .string()
+            .max(wordClasses.length, `Ce champ doit contenir au maximum ${wordClasses.length} options.`),
+        definition: z
+            .string({ required_error: "Ce champ est requis." })
             .trim()
-            .min(2, "Ce champ doit contenir au moins ${min} caractères.")
-            .max(256, "Ce champ doit contenir au maximum ${max} caractères.")
-            .required("Ce champ est requis."),
-        example: yup
-            .string()
+            .min(2, "Ce champ doit contenir au moins 2 caractères.")
+            .max(256, "Ce champ doit contenir au maximum 256 caractères."),
+        example: z
+            .string({ required_error: "Ce champ est requis." })
             .trim()
-            .min(2, "Ce champ doit contenir au moins ${min} caractères.")
-            .max(256, "Ce champ doit contenir au maximum ${max} caractères.")
-            .required("Ce champ est requis."),
-        author: yup
-            .string()
-            .trim()
-            .min(2, "Ce champ doit contenir au moins ${min} caractères.")
-            .max(32, "Ce champ doit contenir au maximum ${max} caractères.")
+            .min(2, "Ce champ doit contenir au moins 2 caractères.")
+            .max(256, "Ce champ doit contenir au maximum 256 caractères."),
+        author: z
+            .union([
+                z
+                    .string()
+                    .trim()
+                    .length(0),
+                z
+                    .string()
+                    .trim()
+                    .min(2, "Ce champ doit contenir au moins 2 caractères.")
+                    .max(32, "Ce champ doit contenir au maximum 32 caractères.")
+            ])
             .optional()
-            .transform((value: unknown): unknown | undefined => (
-                value === "" ? undefined : value
-            ))
+            .transform((value?: string) => value === "" ? undefined : value)
     })
-    .noUnknown()
-    .required();
+    .strict();
 
 export const isValidWordRequest = (value: unknown): value is WordRequest => (
-    isValid<WordRequest>(value, wordRequestValidationSchema)
+    wordRequestValidationSchema.safeParse(value).success
 );
 
 export const cleanupWordRequest = (value: WordRequest): WordRequest => (
-    cleanup(value, wordRequestValidationSchema)
+    wordRequestValidationSchema.parse(value)
 );

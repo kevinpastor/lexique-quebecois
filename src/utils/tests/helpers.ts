@@ -1,9 +1,9 @@
-import { AnySchema, ValidationError } from "yup";
+import { Schema, ZodError } from "zod";
 
 expect.extend({
-    toMatchSchema: (value: unknown, schema: AnySchema) => {
+    toMatchSchema: (value: unknown, schema: Schema) => {
         try {
-            schema.validateSync(value, { strict: true });
+            schema.parse(value);
             return {
                 message: (): string => "expected value to match schema",
                 pass: true
@@ -11,7 +11,7 @@ expect.extend({
         }
         catch (error: unknown) {
             return {
-                message: (): string => (error as ValidationError).message,
+                message: (): string => (error as ZodError).message,
                 pass: false
             };
         }
@@ -22,7 +22,7 @@ declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace jest {
         interface Matchers<R> {
-            toMatchSchema: (schema: AnySchema) => R;
+            toMatchSchema: (schema: Schema) => R;
         }
     }
 }
