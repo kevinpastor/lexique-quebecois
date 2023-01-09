@@ -1,4 +1,4 @@
-import { Container, Link, List, ListItem, ListItemButton } from "@mui/material";
+import { Container, Link, List, ListItem, ListItemButton, Skeleton } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement, RefObject, useEffect } from "react";
 import { useWatch } from "react-hook-form";
@@ -23,7 +23,7 @@ export const AutocompleteResults = ({ inputRef, onClose: handleClose }: Props): 
         `/api/words/autocomplete?input=${debouncedLabel}`,
         null,
         {
-            isPaused: (): boolean => (!debouncedLabel)
+            isPaused: (): boolean => (debouncedLabel.length === 0)
         }
     );
 
@@ -33,7 +33,58 @@ export const AutocompleteResults = ({ inputRef, onClose: handleClose }: Props): 
         itemRef(0)(inputRef.current);
     }, [inputRef, itemRef]);
 
-    if (error || !data) {
+    const isLoading: boolean = label.length > 0 && data === undefined && !error;
+
+    if (isLoading) {
+        return (
+            <Container>
+                <List>
+                    <ListItem disablePadding>
+                        <ListItemButton disabled>
+                            <Skeleton
+                                variant="text"
+                                width={125}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton disabled>
+                            <Skeleton
+                                variant="text"
+                                width={100}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton disabled>
+                            <Skeleton
+                                variant="text"
+                                width={150}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton disabled>
+                            <Skeleton
+                                variant="text"
+                                width={130}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton disabled>
+                            <Skeleton
+                                variant="text"
+                                width={120}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+            </Container>
+        );
+    }
+
+    if (error || data === undefined) {
         return null;
     }
 
