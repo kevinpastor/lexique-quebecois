@@ -273,6 +273,13 @@ export const theme = extendTheme({
                 fullWidth: true
             }
         },
+        MuiFormLabel: {
+            styleOverrides: {
+                root: ({ theme: { vars: { palette } } }) => ({
+                    color: palette.text.primary
+                })
+            }
+        },
         MuiLink: {
             defaultProps: {
                 noWrap: true,
