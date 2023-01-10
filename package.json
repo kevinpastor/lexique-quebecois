@@ -24,6 +24,7 @@
         "@mui/icons-material": "^5.10.16",
         "@mui/lab": "5.0.0-alpha.108",
         "@mui/material": "^5.10.16",
+        "@mui/system": "^5.11.4",
         "@next/env": "^13.1.1",
         "mongodb": "^4.12.1",
         "next": "^13.1.1",

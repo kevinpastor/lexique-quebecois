@@ -1,29 +1,20 @@
-import { DarkMode, LightMode, SettingsBrightness } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
 import { ReactElement } from "react";
 
-import { useDarkMode, TernaryMode } from "@utils/hooks/use-dark-mode";
+import { useThemeMode, modeIcons } from "@utils/hooks/use-theme-mode";
 
-const modes: Array<TernaryMode> = ["system", "light", "dark"];
+export const IconThemeSelector = (): ReactElement | null => {
+    const { mode, cycle } = useThemeMode();
 
-const modeIcons: Record<TernaryMode, ReactElement> = {
-    "system": <SettingsBrightness />,
-    "light": <LightMode />,
-    "dark": <DarkMode />
-};
-
-export const IconThemeSelector = (): ReactElement => {
-    const { ternaryMode, setMode } = useDarkMode();
-
-    const handleClick = (): void => {
-        const nextMode: TernaryMode = modes[(modes.indexOf(ternaryMode) + 1) % modes.length];
-        setMode(nextMode);
-    };
+    if (mode === undefined) {
+        // TODO Replace with a loading indicator. This condition is there for SSR.
+        return null;
+    }
 
     return (
         <Tooltip title="Thème">
-            <IconButton onClick={handleClick}>
-                {modeIcons[ternaryMode]}
+            <IconButton onClick={cycle}>
+                {modeIcons[mode]}
             </IconButton>
         </Tooltip>
     );

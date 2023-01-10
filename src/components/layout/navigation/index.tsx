@@ -20,6 +20,7 @@ export const Navigation = (): ReactElement => {
     });
 
     return (
+        // TODO Add transition between elevation change. Currently limited by `background-image`, which is not supported.
         <AppBar elevation={isAtPageTop ? 0 : 3}>
             <Container>
                 <Stack

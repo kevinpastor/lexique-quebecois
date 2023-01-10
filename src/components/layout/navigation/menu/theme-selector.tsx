@@ -1,29 +1,14 @@
-import { DarkMode, LightMode, SettingsBrightness } from "@mui/icons-material";
 import { FormControl, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, Stack } from "@mui/material";
 import { ReactElement } from "react";
 
-import { useDarkMode, TernaryMode } from "@utils/hooks/use-dark-mode";
-
-const modes: Array<TernaryMode> = ["system", "light", "dark"];
-
-const modeIcons: Record<TernaryMode, ReactElement> = {
-    "system": <SettingsBrightness />,
-    "light": <LightMode />,
-    "dark": <DarkMode />
-};
-
-const modeLabels: Record<TernaryMode, string> = {
-    "system": "Automatique",
-    "light": "Clair",
-    "dark": "Sombre"
-};
+import { useThemeMode, ThemeMode, modes, modeIcons, modeLabels } from "@utils/hooks/use-theme-mode";
 
 export const ThemeSelector = (): ReactElement => {
-    const { ternaryMode, setMode } = useDarkMode();
+    const { mode, setMode } = useThemeMode();
 
-    const handleChange = (event: SelectChangeEvent<TernaryMode>): void => {
-        const themeMode: TernaryMode = event.target.value as TernaryMode;
-        setMode(themeMode);
+    const handleChange = (event: SelectChangeEvent<ThemeMode>): void => {
+        const newThemeMode: ThemeMode = event.target.value as ThemeMode;
+        setMode(newThemeMode);
     };
 
     return (
@@ -33,9 +18,9 @@ export const ThemeSelector = (): ReactElement => {
             </InputLabel>
             <Select
                 label="Thème"
-                value={ternaryMode}
+                value={mode}
                 onChange={handleChange}
-                renderValue={(value: TernaryMode): ReactElement => (
+                renderValue={(value: ThemeMode): ReactElement => (
                     <Stack
                         direction="row"
                         alignItems="center"
@@ -48,16 +33,16 @@ export const ThemeSelector = (): ReactElement => {
                     </Stack>
                 )}
             >
-                {modes.map((mode: TernaryMode): ReactElement => (
+                {modes.map((value: ThemeMode): ReactElement => (
                     <MenuItem
-                        key={mode}
-                        value={mode}
+                        key={value}
+                        value={value}
                     >
                         <ListItemIcon>
-                            {modeIcons[mode]}
+                            {modeIcons[value]}
                         </ListItemIcon>
                         <ListItemText>
-                            {modeLabels[mode]}
+                            {modeLabels[value]}
                         </ListItemText>
                     </MenuItem>
                 ))}

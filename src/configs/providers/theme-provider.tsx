@@ -1,20 +1,14 @@
-import { CssBaseline, Theme, ThemeProvider as MuiThemeProvider } from "@mui/material";
-import { PropsWithChildren, ReactElement, useMemo } from "react";
+import { CssBaseline, Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material";
+import { PropsWithChildren, ReactElement } from "react";
 
-import { getTheme } from "@configs/theme";
-import { useDarkMode } from "@utils/hooks/use-dark-mode";
+import { theme } from "@configs/theme";
 
-export const ThemeProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => {
-    const { mode } = useDarkMode();
-
-    const theme = useMemo((): Theme => (
-        getTheme(mode)
-    ), [mode]);
-
-    return (
-        <MuiThemeProvider theme={theme}>
-            <CssBaseline />
-            {children}
-        </MuiThemeProvider>
-    );
-};
+export const ThemeProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => (
+    <CssVarsProvider
+        theme={theme}
+        defaultMode="system"
+    >
+        <CssBaseline />
+        {children}
+    </CssVarsProvider>
+);

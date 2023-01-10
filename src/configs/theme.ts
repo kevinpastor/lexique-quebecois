@@ -1,44 +1,28 @@
 import type { } from "@mui/lab/themeAugmentation";
-import { createTheme, alpha, colors, PaletteMode, Theme, lighten } from "@mui/material";
+import { alpha, colors, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 
-const getHighEmphasyColor = (paletteMode: PaletteMode): string => (
-    paletteMode === "light"
-        ? alpha(colors.common.black, 0.87)
-        : alpha(colors.common.white, 0.87)
-);
+declare module "@mui/material/styles" {
+    interface CustomTokens {
+        highEmphasis: string;
+        mediumEmphasis: string;
+        outline: string;
+        halfOutline: string;
+        hoveredOutline: string;
+        elevationBackground: {
+            [key: number]: string;
+        };
+        highEmphasyColorOnPrimary: string;
+    }
 
-const highEmphasyColorOnPrimary: string = alpha(colors.common.white, 0.87);
+    interface PaletteOptions {
+        customTokens: CustomTokens;
+    }
 
-const getMediumEmphasyColor = (paletteMode: PaletteMode): string => (
-    paletteMode === "light"
-        ? alpha(colors.common.black, 0.60)
-        : alpha(colors.common.white, 0.60)
-);
-
-const getOutlineColor = (paletteMode: PaletteMode): string => (
-    paletteMode === "light"
-        ? alpha(colors.common.black, 0.12)
-        : alpha(colors.common.white, 0.12)
-);
-
-const getHalfOutlineColor = (paletteMode: PaletteMode): string => (
-    paletteMode === "light"
-        ? alpha(colors.common.black, 0.06)
-        : alpha(colors.common.white, 0.06)
-);
-
-const getHoveredOutlineColor = (paletteMode: PaletteMode): string => (
-    paletteMode === "light"
-        ? alpha(colors.common.black, 0.16)
-        : alpha(colors.common.white, 0.16)
-);
-
-const getPaperBackgroundColor = (paletteMode: PaletteMode): string => (
-    paletteMode === "light"
-        ? colors.common.white
-        : "#121212"
-);
+    interface Palette {
+        customTokens: CustomTokens;
+    }
+}
 
 interface ElevationOverlay {
     [elevation: number]: number;
@@ -63,292 +47,342 @@ type DefinedEvelation = keyof typeof darkElevationOverlay;
 const definedElevations: Array<DefinedEvelation> = Object.keys(darkElevationOverlay)
     .map((key): DefinedEvelation => parseInt(key, 10));
 
-const getElevationBackgroundColor = (paletteMode: PaletteMode, elevation: DefinedEvelation): string => (
-    paletteMode === "light"
-        ? getPaperBackgroundColor(paletteMode)
-        : lighten(getPaperBackgroundColor(paletteMode), darkElevationOverlay[elevation])
-);
-
 const lineHeight: number = 1.5;
 
-const borderRadius: number = 4;
-
-export const getTheme = (paletteMode: PaletteMode): Theme => (
-    createTheme({
-        palette: {
-            mode: paletteMode,
-            primary: {
-                main: "#2186d9"
-            },
-            secondary: {
-                main: "#f78104"
-            },
-            divider: getOutlineColor(paletteMode)
-        },
-        typography: {
-            fontFamily: [
-                "Lora",
-                "ui-sans-serif",
-                "system-ui",
-                "-apple-system",
-                "BlinkMacSystemFont",
-                "Segoe UI",
-                "Roboto",
-                "Helvetica Neue",
-                "Arial",
-                "Noto Sans",
-                "sans-serif",
-                "Apple Color Emoji",
-                "Segoe UI Emoji",
-                "Segoe UI Symbol",
-                "Noto Color Emoji"
-            ].join(","),
-            fontSize: 18,
-            h1: {
-                fontSize: 20,
-                fontWeight: 700,
-                lineHeight
-            },
-            h2: {
-                fontSize: 26,
-                fontWeight: 600,
-                lineHeight
-            },
-            h3: {
-                fontSize: 20,
-                fontWeight: 600,
-                lineHeight
-            },
-            h4: {
-                fontSize: 18,
-                fontWeight: 600,
-                lineHeight
-            },
-            // h5: {
-            //     fontSize: 20,
-            //     fontWeight: 600,
-            //     lineHeight
-            // },
-            // h6: {
-            //     fontSize: 20,
-            //     fontWeight: 400,
-            //     lineHeight
-            // },
-            body1: {
-                color: getHighEmphasyColor(paletteMode),
-                fontSize: 18,
-                fontWeight: 400,
-                lineHeight
-            },
-            body2: {
-                color: getHighEmphasyColor(paletteMode),
-                fontSize: 18,
-                fontWeight: 600,
-                lineHeight
-            },
-            subtitle1: {
-                color: getHighEmphasyColor(paletteMode),
-                fontSize: 18,
-                fontStyle: "italic",
-                fontWeight: 400,
-                lineHeight
-            },
-            subtitle2: {
-                color: getMediumEmphasyColor(paletteMode),
-                fontSize: 18,
-                fontWeight: 400,
-                lineHeight
+export const theme = extendTheme({
+    cssVarPrefix: "",
+    colorSchemes: {
+        light: {
+            palette: {
+                primary: {
+                    main: "#2186d9"
+                },
+                secondary: {
+                    main: "#f78104"
+                },
+                divider: alpha(colors.common.black, 0.12),
+                customTokens: {
+                    highEmphasis: alpha(colors.common.black, 0.87),
+                    mediumEmphasis: alpha(colors.common.black, 0.60),
+                    outline: alpha(colors.common.black, 0.12),
+                    halfOutline: alpha(colors.common.black, 0.06),
+                    hoveredOutline: alpha(colors.common.black, 0.16),
+                    elevationBackground: definedElevations.reduce((accumulator, elevation) => ({
+                        ...accumulator,
+                        [elevation]: {
+                            backgroundColor: colors.common.white
+                        }
+                    }), {}),
+                    highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87)
+                }
             }
         },
-        components: {
-            MuiAlert: {
-                defaultProps: {
-                    variant: "filled",
-                    icon: false,
-                    elevation: 6,
-                    sx: {
-                        width: "100%"
-                    }
+        dark: {
+            palette: {
+                primary: {
+                    main: "#2186d9"
                 },
-                styleOverrides: {
-                    filledWarning: {
-                        color: "white"
-                    }
-                }
-            },
-            MuiAppBar: {
-                defaultProps: {
-                    color: "inherit",
-                    position: "sticky"
-                }
-            },
-            MuiButton: {
-                defaultProps: {
-                    variant: "outlined",
-                    color: "inherit"
+                secondary: {
+                    main: "#f78104"
                 },
-                styleOverrides: {
-                    root: {
-                        textTransform: "none"
-                    },
-                    outlined: {
-                        borderWidth: 2,
-                        borderColor: getOutlineColor(paletteMode),
-                        ":hover": {
-                            borderWidth: 2,
-                            borderColor: getOutlineColor(paletteMode)
-                        }
-                    },
-                    containedPrimary: {
-                        color: highEmphasyColorOnPrimary
-                    }
-                }
-            },
-            MuiButtonGroup: {
-                defaultProps: {
-                    color: "inherit"
-                },
-                styleOverrides: {
-                    grouped: {
-                        ":not(:last-of-type):hover": {
-                            borderRightColor: getHalfOutlineColor(paletteMode)
-                        }
-                    }
-                }
-            },
-            MuiCard: {
-                defaultProps: {
-                    variant: "outlined"
-                },
-                styleOverrides: {
-                    root: {
-                        borderWidth: 2
-                    }
-                }
-            },
-            MuiCardHeader: {
-                defaultProps: {
-                    titleTypographyProps: {
-                        variant: "h2",
-                        component: "h2" as "span" // MuiCardHeader seems to have a faulty type for the theme configuration
-                    }
-                },
-                styleOverrides: {
-                    root: {
-                        margin: 16,
-                        padding: 0
-                    }
-                }
-            },
-            MuiCardContent: {
-                styleOverrides: {
-                    root: {
-                        margin: 16,
-                        padding: 0,
-                        ":last-child": {
-                            paddingBottom: 0
-                        }
-                    }
-                }
-            },
-            MuiCardActions: {
-                styleOverrides: {
-                    root: {
-                        margin: 16,
-                        padding: 0
-                    }
-                }
-            },
-            MuiDivider: {
-                styleOverrides: {
-                    root: {
-                        borderBottomWidth: 2
-                    }
-                }
-            },
-            MuiFormControl: {
-                defaultProps: {
-                    fullWidth: true
-                }
-            },
-            MuiLink: {
-                defaultProps: {
-                    noWrap: true,
-                    style: {
-                        display: "inline-block",
-                        maxWidth: "100%",
-                        verticalAlign: "bottom"
-                    }
-                }
-            },
-            MuiListItemButton: {
-                styleOverrides: {
-                    root: {
-                        borderRadius
-                    }
-                }
-            },
-            MuiLoadingButton: {
-                defaultProps: {
-                    variant: "outlined"
-                }
-            },
-            MuiOutlinedInput: {
-                styleOverrides: {
-                    root: {
-                        [`&:hover:not(.Mui-error):not(.Mui-focused) .${outlinedInputClasses.notchedOutline}`]: {
-                            borderColor: getHoveredOutlineColor(paletteMode)
-                        }
-                    },
-                    notchedOutline: {
-                        borderWidth: 2,
-                        borderColor: getOutlineColor(paletteMode)
-                    }
-                }
-            },
-            MuiPaper: {
-                styleOverrides: {
-                    root: {
-                        transitionDuration: "300ms",
-                        transitionProperty: "box-shadow, background-color",
-                        backgroundImage: "none"
-                    },
-                    ...definedElevations.reduce((accumulator, elevation) => ({
+                divider: alpha(colors.common.white, 0.12),
+                customTokens: {
+                    highEmphasis: alpha(colors.common.white, 0.87),
+                    mediumEmphasis: alpha(colors.common.white, 0.60),
+                    outline: alpha(colors.common.white, 0.12),
+                    halfOutline: alpha(colors.common.white, 0.06),
+                    hoveredOutline: alpha(colors.common.white, 0.16),
+                    elevationBackground: definedElevations.reduce((accumulator, elevation) => ({
                         ...accumulator,
-                        [`elevation${elevation}`]: {
-                            backgroundColor: getElevationBackgroundColor(paletteMode, elevation)
+                        [elevation]: {
+                            backgroundColor: lighten("#121212", darkElevationOverlay[elevation])
                         }
-                    }), {})
-                }
-            },
-            MuiSelect: {
-                defaultProps: {
-                    fullWidth: true
-                }
-            },
-            MuiSkeleton: {
-                defaultProps: {
-                    animation: "wave"
-                }
-            },
-            MuiTextField: {
-                defaultProps: {
-                    fullWidth: true
-                }
-            },
-            MuiTypography: {
-                defaultProps: {
-                    variantMapping: {
-                        subtitle1: "p",
-                        subtitle2: "p"
-                    }
-                },
-                styleOverrides: {
-                    gutterBottom: {
-                        marginBottom: "0.5em"
-                    }
+                    }), {}),
+                    highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87)
                 }
             }
         }
-    })
-);
+    },
+    typography: {
+        fontFamily: [
+            "Lora",
+            "ui-sans-serif",
+            "system-ui",
+            "-apple-system",
+            "BlinkMacSystemFont",
+            "Segoe UI",
+            "Roboto",
+            "Helvetica Neue",
+            "Arial",
+            "Noto Sans",
+            "sans-serif",
+            "Apple Color Emoji",
+            "Segoe UI Emoji",
+            "Segoe UI Symbol",
+            "Noto Color Emoji"
+        ].join(","),
+        fontSize: 18,
+        allVariants: {
+            lineHeight
+        },
+        h1: {
+            fontSize: 20,
+            fontWeight: 700
+        },
+        h2: {
+            fontSize: 26,
+            fontWeight: 600
+        },
+        h3: {
+            fontSize: 20,
+            fontWeight: 600
+        },
+        h4: {
+            fontSize: 18,
+            fontWeight: 600
+        },
+        // h5: {
+        //     fontSize: 20,
+        //     fontWeight: 600
+        // },
+        // h6: {
+        //     fontSize: 20,
+        //     fontWeight: 400
+        // },
+        body1: {
+            fontSize: 18,
+            fontWeight: 400
+        },
+        body2: {
+            fontSize: 18,
+            fontWeight: 600
+        },
+        subtitle1: {
+            fontSize: 18,
+            fontStyle: "italic",
+            fontWeight: 400
+        },
+        subtitle2: {
+            fontSize: 18,
+            fontWeight: 400
+        }
+    },
+    components: {
+        MuiAlert: {
+            defaultProps: {
+                variant: "filled",
+                icon: false,
+                elevation: 6,
+                sx: {
+                    width: "100%"
+                }
+            },
+            styleOverrides: {
+                filledWarning: {
+                    color: "white"
+                }
+            }
+        },
+        MuiAppBar: {
+            defaultProps: {
+                color: "default",
+                position: "sticky"
+            },
+            styleOverrides: {
+                colorDefault: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
+                    backgroundColor: palette.background.default
+                })
+            }
+        },
+        MuiButton: {
+            defaultProps: {
+                variant: "outlined",
+                color: "inherit"
+            },
+            styleOverrides: {
+                root: {
+                    textTransform: "none"
+                },
+                outlined: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
+                    borderWidth: 2,
+                    borderColor: palette.customTokens.outline,
+                    ":hover": {
+                        borderWidth: 2,
+                        borderColor: palette.customTokens.outline
+                    }
+                }),
+                // outlined: {
+                //     borderWidth: 2,
+                //     borderColor: getOutlineColor(paletteMode),
+                //     ":hover": {
+                //         borderWidth: 2,
+                //         borderColor: getOutlineColor(paletteMode)
+                //     }
+                // },
+                containedPrimary: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
+                    color: palette.customTokens.highEmphasyColorOnPrimary
+                })
+            }
+        },
+        MuiButtonGroup: {
+            defaultProps: {
+                color: "inherit"
+            },
+            styleOverrides: {
+                grouped: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
+                    ":not(:last-of-type):hover": {
+                        borderRightColor: palette.customTokens.halfOutline
+                    }
+                })
+            }
+        },
+        MuiCard: {
+            defaultProps: {
+                variant: "outlined"
+            },
+            styleOverrides: {
+                root: {
+                    borderWidth: 2
+                }
+            }
+        },
+        MuiCardHeader: {
+            defaultProps: {
+                titleTypographyProps: {
+                    variant: "h2",
+                    component: "h2" as "span" // MuiCardHeader seems to have a faulty type for the theme configuration
+                }
+            },
+            styleOverrides: {
+                root: {
+                    margin: 16,
+                    padding: 0
+                }
+            }
+        },
+        MuiCardContent: {
+            styleOverrides: {
+                root: {
+                    margin: 16,
+                    padding: 0,
+                    ":last-child": {
+                        paddingBottom: 0
+                    }
+                }
+            }
+        },
+        MuiCardActions: {
+            styleOverrides: {
+                root: {
+                    margin: 16,
+                    padding: 0
+                }
+            }
+        },
+        MuiDivider: {
+            styleOverrides: {
+                root: {
+                    borderBottomWidth: 2
+                }
+            }
+        },
+        MuiFormControl: {
+            defaultProps: {
+                fullWidth: true
+            }
+        },
+        MuiLink: {
+            defaultProps: {
+                noWrap: true,
+                style: {
+                    display: "inline-block",
+                    maxWidth: "100%",
+                    verticalAlign: "bottom"
+                }
+            }
+        },
+        MuiListItemButton: {
+            styleOverrides: {
+                root: ({ theme: { vars } }) => ({
+                    borderRadius: vars.shape.borderRadius
+                })
+            }
+        },
+        MuiLoadingButton: {
+            defaultProps: {
+                variant: "outlined"
+            }
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
+                    [`&:hover:not(.Mui-error):not(.Mui-focused) .${outlinedInputClasses.notchedOutline}`]: {
+                        borderColor: palette.customTokens.hoveredOutline
+                    }
+                }),
+                notchedOutline: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
+                    borderWidth: 2,
+                    borderColor: palette.customTokens.outline
+                })
+            }
+        },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    // Smooths out the theme transition.
+                    transitionDuration: "300ms",
+                    transitionProperty: "box-shadow, background-color, background-image"
+                },
+                ...definedElevations.reduce((accumulator, elevation) => ({
+                    ...accumulator,
+                    [`elevation${elevation}`]: ({ theme: { vars: { palette } } }: { theme: Omit<Theme, "palette" | "components"> & CssVarsTheme }): CSSInterpolation => ({
+                        backgroundColor: palette.customTokens.elevationBackground[elevation]
+                    })
+                }), {})
+            }
+        },
+        MuiSelect: {
+            defaultProps: {
+                fullWidth: true
+            }
+        },
+        MuiSkeleton: {
+            defaultProps: {
+                animation: "wave"
+            }
+        },
+        MuiTextField: {
+            defaultProps: {
+                fullWidth: true
+            }
+        },
+        MuiTypography: {
+            defaultProps: {
+                variantMapping: {
+                    subtitle1: "p",
+                    subtitle2: "p"
+                }
+            },
+            styleOverrides: {
+                root: ({ theme: { vars: { palette } } }) => ({
+                    color: palette.common.onBackground
+                }),
+                gutterBottom: {
+                    marginBottom: "0.5em"
+                },
+                body1: ({ theme: { vars: { palette } } }) => ({
+                    color: palette.customTokens.highEmphasis
+                }),
+                body2: ({ theme: { vars: { palette } } }) => ({
+                    color: palette.customTokens.highEmphasis
+                }),
+                subtitle1: ({ theme: { vars: { palette } } }) => ({
+                    color: palette.customTokens.highEmphasis
+                }),
+                subtitle2: ({ theme: { vars: { palette } } }) => ({
+                    color: palette.customTokens.mediumEmphasis
+                })
+            }
+        }
+    }
+});
