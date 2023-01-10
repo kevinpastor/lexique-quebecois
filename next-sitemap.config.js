@@ -28,27 +28,14 @@ const getWordsPath = async (config = {}) => {
         throw new Error(`Could not connect to database. \n${error}`);
     }
 
-    const database = client.db("quebecoisUrbain");
-    const collection = database.collection("spellings");
-
+    const database = client.db("live");
+    const collection = database.collection("words");
     const pipeline = [
         {
-            $lookup: {
-                from: "words",
-                localField: "wordId",
-                foreignField: "_id",
-                as: "fromWords"
-            }
-        },
-        {
             $match: {
-                fromWords: {
+                definitions: {
                     $elemMatch: {
-                        definitions: {
-                            $elemMatch: {
-                                isApproved: true
-                            }
-                        }
+                        isApproved: true
                     }
                 }
             }
@@ -56,22 +43,31 @@ const getWordsPath = async (config = {}) => {
         {
             $project: {
                 _id: 0,
-                label: "$spelling",
+                spelling: {
+                    $filter: {
+                        input: [
+                            "$spelling",
+                            "$spellingAlt",
+                            "$spellingAlt2",
+                            "$spellingAlt3",
+                            "$spellingAlt4"
+                        ],
+                        as: "value",
+                        cond: {
+                            $not: {
+                                $eq: [
+                                    "$$value",
+                                    null
+                                ]
+                            }
+                        }
+                    }
+                },
                 timestamp: {
                     $reduce: {
                         input: {
                             $map: {
-                                input: {
-                                    $getField: {
-                                        input: {
-                                            $arrayElemAt: [
-                                                "$fromWords",
-                                                0
-                                            ]
-                                        },
-                                        field: "definitions"
-                                    }
-                                },
+                                input: "$definitions",
                                 as: "definition",
                                 "in": {
                                     $convert: {
@@ -97,13 +93,26 @@ const getWordsPath = async (config = {}) => {
                     }
                 }
             }
+        },
+        {
+            $unwind: "$spelling"
+        },
+        {
+            $sort: {
+                spelling: 1
+            }
         }
     ];
-    const words = await collection.aggregate(pipeline)
+    const defaultAggregateOptions = {
+        collation: {
+            locale: "fr_CA"
+        }
+    };
+    const words = await collection.aggregate(pipeline, defaultAggregateOptions)
         .toArray();
 
-    const wordsPath = words.map(({ label, timestamp }) => ({
-        loc: `/mots/${getSlug(label)}`,
+    const wordsPath = words.map(({ spelling, timestamp }) => ({
+        loc: `/mots/${getSlug(spelling)}`,
         changefreq: "monthly",
         priority: config.priority ?? 0.7,
         lastmod: timestamp.toISOString(),
