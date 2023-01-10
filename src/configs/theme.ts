@@ -47,8 +47,6 @@ type DefinedEvelation = keyof typeof darkElevationOverlay;
 const definedElevations: Array<DefinedEvelation> = Object.keys(darkElevationOverlay)
     .map((key): DefinedEvelation => parseInt(key, 10));
 
-const lineHeight: number = 1.5;
-
 export const theme = extendTheme({
     cssVarPrefix: "",
     colorSchemes: {
@@ -67,11 +65,9 @@ export const theme = extendTheme({
                     outline: alpha(colors.common.black, 0.12),
                     halfOutline: alpha(colors.common.black, 0.06),
                     hoveredOutline: alpha(colors.common.black, 0.16),
-                    elevationBackground: definedElevations.reduce((accumulator, elevation) => ({
+                    elevationBackground: definedElevations.reduce<{ [key: number]: string }>((accumulator, elevation) => ({
                         ...accumulator,
-                        [elevation]: {
-                            backgroundColor: colors.common.white
-                        }
+                        [elevation]: colors.common.white
                     }), {}),
                     highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87)
                 }
@@ -92,11 +88,9 @@ export const theme = extendTheme({
                     outline: alpha(colors.common.white, 0.12),
                     halfOutline: alpha(colors.common.white, 0.06),
                     hoveredOutline: alpha(colors.common.white, 0.16),
-                    elevationBackground: definedElevations.reduce((accumulator, elevation) => ({
+                    elevationBackground: definedElevations.reduce<{ [key: number]: string }>((accumulator, elevation) => ({
                         ...accumulator,
-                        [elevation]: {
-                            backgroundColor: lighten("#121212", darkElevationOverlay[elevation])
-                        }
+                        [elevation]: lighten("#121212", darkElevationOverlay[elevation])
                     }), {}),
                     highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87)
                 }
@@ -106,24 +100,12 @@ export const theme = extendTheme({
     typography: {
         fontFamily: [
             "Lora",
-            "ui-sans-serif",
-            "system-ui",
-            "-apple-system",
-            "BlinkMacSystemFont",
-            "Segoe UI",
-            "Roboto",
-            "Helvetica Neue",
-            "Arial",
-            "Noto Sans",
-            "sans-serif",
-            "Apple Color Emoji",
-            "Segoe UI Emoji",
-            "Segoe UI Symbol",
-            "Noto Color Emoji"
+            "Georgia",
+            "serif"
         ].join(","),
         fontSize: 18,
         allVariants: {
-            lineHeight
+            lineHeight: 1.5
         },
         h1: {
             fontSize: 20,
@@ -185,7 +167,7 @@ export const theme = extendTheme({
         },
         MuiAppBar: {
             defaultProps: {
-                color: "default",
+                color: "inherit",
                 position: "sticky"
             },
             styleOverrides: {
@@ -329,6 +311,7 @@ export const theme = extendTheme({
         MuiPaper: {
             styleOverrides: {
                 root: {
+                    backgroundImage: "none",
                     // Smooths out the theme transition.
                     transitionDuration: "300ms",
                     transitionProperty: "box-shadow, background-color, background-image"
@@ -336,7 +319,8 @@ export const theme = extendTheme({
                 ...definedElevations.reduce((accumulator, elevation) => ({
                     ...accumulator,
                     [`elevation${elevation}`]: ({ theme: { vars: { palette } } }: { theme: Omit<Theme, "palette" | "components"> & CssVarsTheme }): CSSInterpolation => ({
-                        backgroundColor: palette.customTokens.elevationBackground[elevation]
+                        // This CSS variable seems to be undefined in dark mode.
+                        "--AppBar-background": palette.customTokens.elevationBackground[elevation]
                     })
                 }), {})
             }
