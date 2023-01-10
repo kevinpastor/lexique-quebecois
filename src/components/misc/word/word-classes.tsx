@@ -1,5 +1,5 @@
 import { Tooltip, Typography } from "@mui/material";
-import { ReactElement } from "react";
+import { Fragment, ReactElement } from "react";
 
 import { WordClass, wordClassAbreviations } from "@models/classes";
 
@@ -13,7 +13,7 @@ export const WordClasses = ({ wordClasses }: Props): ReactElement => (
         component="span"
     >
         {wordClasses.map((wordClass: WordClass, index: number): ReactElement => (
-            <>
+            <Fragment key={wordClass}>
                 <Tooltip
                     title={wordClass}
                     arrow
@@ -23,7 +23,7 @@ export const WordClasses = ({ wordClasses }: Props): ReactElement => (
                     </span>
                 </Tooltip>
                 {index < wordClasses.length - 1 && ", "}
-            </>
+            </Fragment>
         ))}
     </Typography>
 );
