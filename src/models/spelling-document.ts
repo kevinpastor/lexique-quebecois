@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { z } from "zod";
+import { object, string } from "zod";
 
 import { objectIdSchema, objectWithIdSchema } from "./object-id-schema";
 
@@ -8,11 +8,10 @@ export interface SpellingDocument {
     wordId: ObjectId;
 }
 
-export const spellingDocumentSchema = z
-    .object({
-        spelling: z.string(),
-        wordId: objectIdSchema
-    })
+export const spellingDocumentSchema = object({
+    spelling: string(),
+    wordId: objectIdSchema
+})
     .strict();
 
 export const spellingDocumentWithIdSchema = spellingDocumentSchema.merge(objectWithIdSchema);

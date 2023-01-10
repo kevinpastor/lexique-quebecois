@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
-import { z } from "zod";
+import { object, string } from "zod";
 
 import { FormContainer } from "@components/react-hook-form/form-container";
 import { getSlug } from "@models/definition";
@@ -16,10 +16,9 @@ const initialValues: FormValues = {
     label: ""
 };
 
-const validationSchema = z
-    .object({
-        label: z.string()
-    });
+const validationSchema = object({
+    label: string()
+});
 
 export interface Props {
     onClose: () => void;

@@ -1,13 +1,11 @@
-import { z } from "zod";
+import { object, string } from "zod";
 
-export const objectIdSchema = z
-    .object({
-        _oid: z.string()
-    })
+export const objectIdSchema = object({
+    _oid: string()
+})
     .strict();
 
-export const objectWithIdSchema = z
-    .object({
-        _id: objectIdSchema
-    })
+export const objectWithIdSchema = object({
+    _id: objectIdSchema
+})
     .strict();

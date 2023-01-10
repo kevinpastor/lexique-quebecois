@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { array, object, string } from "zod";
 
 import { DefinitionDocument, definitionDocumentSchema } from "./definition-document";
 import { objectIdSchema, objectWithIdSchema } from "./object-id-schema";
@@ -12,24 +12,19 @@ export interface WordDocument {
     definitions: Array<DefinitionDocument>;
 }
 
-export const wordDocumentSchema = z
-    .object({
-        _id: objectIdSchema,
-        spelling: z.string(),
-        spellingAlt: z
-            .string()
-            .optional(),
-        spellingAlt2: z
-            .string()
-            .optional(),
-        spellingAlt3: z
-            .string()
-            .optional(),
-        spellingAlt4: z
-            .string()
-            .optional(),
-        definitions: z.array(definitionDocumentSchema)
-    })
+export const wordDocumentSchema = object({
+    _id: objectIdSchema,
+    spelling: string(),
+    spellingAlt: string()
+        .optional(),
+    spellingAlt2: string()
+        .optional(),
+    spellingAlt3: string()
+        .optional(),
+    spellingAlt4: string()
+        .optional(),
+    definitions: array(definitionDocumentSchema)
+})
     .strict();
 
 export const wordDocumentWithIdSchema = wordDocumentSchema.merge(objectWithIdSchema);

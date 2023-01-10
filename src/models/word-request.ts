@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { array, nativeEnum, object, string, union } from "zod";
 
 import { WordClass, wordClasses } from "./classes";
 
@@ -16,48 +16,40 @@ export const isValidLabel = (label: string): boolean => {
     return labelRegex.test(label);
 };
 
-export const wordRequestValidationSchema = z
-    .object({
-        label: z
-            .string()
+export const wordRequestValidationSchema = object({
+    label: string()
+        .trim()
+        .min(1, "Ce champ est requis.")
+        .min(2, "Ce champ doit contenir au moins 2 caractères.")
+        .max(32, "Ce champ doit contenir au maximum 32 caractères.")
+        .regex(labelRegex, "Ce champ peut contenir des lettres, des espaces ou des tirets."),
+    wordClasses: array(nativeEnum(
+        WordClass,
+        { invalid_type_error: "Ce champ doit contenir une des valeurs proposées." }
+    ))
+        .max(wordClasses.length, `Ce champ doit contenir au maximum ${wordClasses.length} options.`),
+    definition: string()
+        .trim()
+        .min(1, "Ce champ est requis.")
+        .min(2, "Ce champ doit contenir au moins 2 caractères.")
+        .max(256, "Ce champ doit contenir au maximum 256 caractères."),
+    example: string()
+        .trim()
+        .min(1, "Ce champ est requis.")
+        .min(2, "Ce champ doit contenir au moins 2 caractères.")
+        .max(256, "Ce champ doit contenir au maximum 256 caractères."),
+    author: union([ // The order of the union is important to get the correct error message.
+        string()
             .trim()
-            .min(1, "Ce champ est requis.")
             .min(2, "Ce champ doit contenir au moins 2 caractères.")
-            .max(32, "Ce champ doit contenir au maximum 32 caractères.")
-            .regex(labelRegex, "Ce champ peut contenir des lettres, des espaces ou des tirets."),
-        wordClasses: z
-            .array(z.nativeEnum(
-                WordClass,
-                { invalid_type_error: "Ce champ doit contenir une des valeurs proposées." }
-            ))
-            .max(wordClasses.length, `Ce champ doit contenir au maximum ${wordClasses.length} options.`),
-        definition: z
-            .string()
+            .max(32, "Ce champ doit contenir au maximum 32 caractères."),
+        string()
             .trim()
-            .min(1, "Ce champ est requis.")
-            .min(2, "Ce champ doit contenir au moins 2 caractères.")
-            .max(256, "Ce champ doit contenir au maximum 256 caractères."),
-        example: z
-            .string()
-            .trim()
-            .min(1, "Ce champ est requis.")
-            .min(2, "Ce champ doit contenir au moins 2 caractères.")
-            .max(256, "Ce champ doit contenir au maximum 256 caractères."),
-        author: z
-            .union([ // The order of the union is important to get the correct error message.
-                z
-                    .string()
-                    .trim()
-                    .min(2, "Ce champ doit contenir au moins 2 caractères.")
-                    .max(32, "Ce champ doit contenir au maximum 32 caractères."),
-                z
-                    .string()
-                    .trim()
-                    .length(0, "Ce champ doit contenir au moins 2 caractères.") // The error message is not necessary, but is there to be safe.
-            ])
-            .optional()
-            .transform((value?: string): string | undefined => value === "" ? undefined : value)
-    })
+            .length(0, "Ce champ doit contenir au moins 2 caractères.") // The error message is not necessary, but is there to be safe.
+    ])
+        .optional()
+        .transform((value?: string): string | undefined => value === "" ? undefined : value)
+})
     .strict();
 
 export const isValidWordRequest = (value: unknown): value is WordRequest => (

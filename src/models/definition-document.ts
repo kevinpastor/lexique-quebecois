@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { z } from "zod";
+import { array, boolean, nativeEnum, object, string } from "zod";
 
 import { AuthorDocument, authorDocumentSchema } from "./author-document";
 import { WordClass } from "./classes";
@@ -17,15 +17,14 @@ export interface DefinitionDocument {
     reactions: ReactionsDocument;
 }
 
-export const definitionDocumentSchema = z
-    .object({
-        _id: objectIdSchema,
-        label: z.string(),
-        definition: z.string(),
-        example: z.string(),
-        author: authorDocumentSchema,
-        classe: z.array(z.nativeEnum(WordClass)),
-        isApproved: z.boolean(),
-        reactions: reactionsDocumentSchema
-    })
+export const definitionDocumentSchema = object({
+    _id: objectIdSchema,
+    label: string(),
+    definition: string(),
+    example: string(),
+    author: authorDocumentSchema,
+    classe: array(nativeEnum(WordClass)),
+    isApproved: boolean(),
+    reactions: reactionsDocumentSchema
+})
     .strict();

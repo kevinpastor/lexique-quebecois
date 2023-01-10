@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { array, boolean, nativeEnum, number, object, string } from "zod";
 
 import { removeAccents } from "@utils/misc/string";
 
@@ -28,31 +28,28 @@ export const getSlug = (label: string): string => {
         .toLocaleLowerCase();
 };
 
-const authorSchema = z
-    .object({
-        name: z.string()
-            .optional()
-    })
+const authorSchema = object({
+    name: string()
+        .optional()
+})
     .strict();
 
-const reactionsSchema = z
-    .object({
-        likes: z.number(),
-        isLiked: z.boolean(),
-        dislikes: z.number(),
-        isDisliked: z.boolean()
-    })
+const reactionsSchema = object({
+    likes: number(),
+    isLiked: boolean(),
+    dislikes: number(),
+    isDisliked: boolean()
+})
     .strict();
 
-export const definitionSchema = z
-    .object({
-        id: z.string(),
-        label: z.string(),
-        wordClasses: z.array(z.nativeEnum(WordClass)),
-        definition: z.string(),
-        example: z.string(),
-        author: authorSchema,
-        timestamp: z.number(),
-        reactions: reactionsSchema
-    })
+export const definitionSchema = object({
+    id: string(),
+    label: string(),
+    wordClasses: array(nativeEnum(WordClass)),
+    definition: string(),
+    example: string(),
+    author: authorSchema,
+    timestamp: number(),
+    reactions: reactionsSchema
+})
     .strict();

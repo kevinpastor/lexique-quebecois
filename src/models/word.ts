@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { array, object, string } from "zod";
 
 import { Definition, definitionSchema } from "./definition";
 
@@ -7,9 +7,8 @@ export interface Word {
     definitions: Array<Definition>;
 }
 
-export const wordSchema = z
-    .object({
-        spellings: z.array(z.string()),
-        definitions: z.array(definitionSchema)
-    })
+export const wordSchema = object({
+    spellings: array(string()),
+    definitions: array(definitionSchema)
+})
     .strict();
