@@ -48,7 +48,6 @@ const definedElevations: Array<DefinedEvelation> = Object.keys(darkElevationOver
     .map((key): DefinedEvelation => parseInt(key, 10));
 
 export const theme = extendTheme({
-    cssVarPrefix: "",
     colorSchemes: {
         light: {
             palette: {
