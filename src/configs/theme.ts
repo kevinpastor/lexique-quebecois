@@ -171,6 +171,14 @@ export const theme = extendTheme({
                 position: "sticky"
             },
             styleOverrides: {
+                root:{
+                    // Allows elevation change.
+                    backgroundImage: "none",
+                    // Smooths out the theme transition.
+                    // NOTE: This isn't perfect when changing theme.
+                    transitionDuration: "300ms",
+                    transitionProperty: "box-shadow, background-color, background-image"
+                },
                 colorDefault: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
                     backgroundColor: palette.background.default
                 })
@@ -193,14 +201,6 @@ export const theme = extendTheme({
                         borderColor: palette.customTokens.outline
                     }
                 }),
-                // outlined: {
-                //     borderWidth: 2,
-                //     borderColor: getOutlineColor(paletteMode),
-                //     ":hover": {
-                //         borderWidth: 2,
-                //         borderColor: getOutlineColor(paletteMode)
-                //     }
-                // },
                 containedPrimary: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
                     color: palette.customTokens.highEmphasyColorOnPrimary
                 })
@@ -318,10 +318,6 @@ export const theme = extendTheme({
         MuiPaper: {
             styleOverrides: {
                 root: {
-                    backgroundImage: "none",
-                    // Smooths out the theme transition.
-                    transitionDuration: "300ms",
-                    transitionProperty: "box-shadow, background-color, background-image"
                 },
                 ...definedElevations.reduce((accumulator, elevation) => ({
                     ...accumulator,

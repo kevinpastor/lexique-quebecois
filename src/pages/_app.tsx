@@ -6,7 +6,6 @@ import { ReactElement } from "react";
 import { Layout } from "@components/layout";
 import { setupClassNameGenerator } from "@configs/mui-class-name-setup";
 import { Providers } from "@configs/providers";
-import "@configs/styles.css";
 
 setupClassNameGenerator();
 
