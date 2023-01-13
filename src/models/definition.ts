@@ -4,6 +4,13 @@ import { removeAccents } from "@utils/misc/string";
 
 import { WordClass } from "./classes";
 
+export interface Reactions {
+    likes: number;
+    isLiked: boolean;
+    dislikes: number;
+    isDisliked: boolean;
+}
+
 export interface Definition {
     id: string;
     label: string;
@@ -14,12 +21,7 @@ export interface Definition {
         name?: string;
     };
     timestamp: number;
-    reactions: {
-        likes: number;
-        isLiked: boolean;
-        dislikes: number;
-        isDisliked: boolean;
-    };
+    reactions: Reactions;
 }
 
 export const getSlug = (label: string): string => {
