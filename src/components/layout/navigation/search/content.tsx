@@ -1,4 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { object, string } from "zod";
@@ -17,7 +16,7 @@ const initialValues: FormValues = {
 };
 
 const validationSchema = object({
-    label: string()
+    label: string().min(1)
 });
 
 export interface Props {
@@ -43,9 +42,9 @@ export const Content = ({ onClose: handleClose }: Props): ReactElement => {
 
     return (
         <FormContainer
-            useFormProps={{
-                defaultValues: initialValues,
-                resolver: zodResolver(validationSchema)
+            useZodFormProps={{
+                schema: validationSchema,
+                defaultValues: initialValues
             }}
             onSuccess={handleSubmit}
             FormProps={{

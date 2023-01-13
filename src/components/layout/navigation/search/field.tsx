@@ -1,11 +1,11 @@
 import { InputAdornment } from "@mui/material";
-import { forwardRef, ReactElement } from "react";
+import { ForwardedRef, forwardRef, ReactElement } from "react";
 
 import { TextField } from "@components/react-hook-form/text-field";
 
 import { FieldIconButton } from "./field-icon-button";
 
-export const Field = forwardRef<HTMLInputElement>((_, ref): ReactElement => (
+export const Field = forwardRef((_: unknown, ref: ForwardedRef<HTMLInputElement>): ReactElement => (
     <TextField
         inputRef={ref}
         name="label"
@@ -19,6 +19,7 @@ export const Field = forwardRef<HTMLInputElement>((_, ref): ReactElement => (
             )
         }}
         spellCheck={false}
+        hideError
     />
 ));
 

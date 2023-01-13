@@ -1,4 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import Head from "next/head";
 import { NextRouter, useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -53,7 +52,8 @@ export const AddPage = (): ReactElement => {
                 <title>Ajouter - Lexique Québécois</title>
             </Head>
             <FormContainer
-                useFormProps={{
+                useZodFormProps={{
+                    schema: wordRequestValidationSchema,
                     defaultValues: {
                         ...initialValues,
                         ...(
@@ -62,7 +62,6 @@ export const AddPage = (): ReactElement => {
                             && { label: routeQuery["label"] }
                         )
                     },
-                    resolver: zodResolver(wordRequestValidationSchema),
                     reValidateMode: "onBlur"
                 }}
                 onSuccess={handleSubmit}

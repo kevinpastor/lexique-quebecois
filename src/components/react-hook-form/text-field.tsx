@@ -1,36 +1,19 @@
 import { TextField as MuiTextField, TextFieldProps } from "@mui/material";
-import { ReactElement, ReactNode } from "react";
-import {
-    Control,
-    Controller,
-    ControllerProps,
-    FieldError,
-    FieldValues,
-    Path
-} from "react-hook-form";
+import { ReactElement } from "react";
+import { Controller, FieldValues, Path } from "react-hook-form";
 
-type Props<T extends FieldValues = FieldValues> =
-    Omit<TextFieldProps, "name">
-    & {
-        validation?: ControllerProps["rules"];
-        name: Path<T>;
-        parseError?: (error: FieldError) => ReactNode;
-        control?: Control<T>;
-    };
+interface Props<T extends FieldValues = FieldValues> extends Omit<TextFieldProps, "name"> {
+    name: Path<T>;
+    hideError?: boolean;
+}
 
 export const TextField = <TFieldValues extends FieldValues = FieldValues>({
-    validation = {},
-    parseError = ({ message }: FieldError): ReactNode => (message),
-    type,
-    required,
     name,
-    control,
+    hideError = false,
     ...rest
 }: Props<TFieldValues>): ReactElement => (
     <Controller
         name={name}
-        control={control}
-        rules={validation}
         render={({
             field: { value, onChange, onBlur, ref },
             fieldState: { error }
@@ -46,12 +29,10 @@ export const TextField = <TFieldValues extends FieldValues = FieldValues>({
                     }
                 }}
                 onBlur={onBlur}
-                required={required}
-                type={type}
-                error={error !== undefined}
+                error={!hideError && error !== undefined}
                 helperText={
-                    error
-                        ? parseError(error)
+                    !hideError && error
+                        ? error.message
                         : rest.helperText
                 }
                 inputRef={ref}

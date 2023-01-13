@@ -1,21 +1,22 @@
 import { FormHTMLAttributes, PropsWithChildren, ReactElement } from "react";
-import { FieldValues, FormProvider, SubmitHandler, useForm, UseFormProps } from "react-hook-form";
+import { FormProvider, SubmitHandler } from "react-hook-form";
+import { TypeOf, ZodSchema } from "zod";
 
-export type FormContainerProps<T extends FieldValues = FieldValues> = PropsWithChildren<{
-    onSuccess?: SubmitHandler<T>;
+import { useZodForm, UseZodFormProps } from "./use-zod-form";
+
+type Props<Z extends ZodSchema> = PropsWithChildren<{
+    useZodFormProps: UseZodFormProps<Z>;
+    onSuccess: SubmitHandler<TypeOf<Z>>;
     FormProps?: FormHTMLAttributes<HTMLFormElement>;
-    useFormProps?: UseFormProps<T>;
 }>;
 
-export const FormContainer = <TFieldValues extends FieldValues = FieldValues>({
-    children,
+export const FormContainer = <Z extends ZodSchema>({
+    useZodFormProps,
+    onSuccess,
     FormProps,
-    onSuccess = (): void => {
-        console.warn("`onSuccess` is missing.");
-    },
-    useFormProps
-}: PropsWithChildren<FormContainerProps<TFieldValues>>): ReactElement => {
-    const methods = useForm<TFieldValues>(useFormProps);
+    children
+}: PropsWithChildren<Props<Z>>): ReactElement => {
+    const methods = useZodForm(useZodFormProps);
     const { handleSubmit } = methods;
 
     return (
