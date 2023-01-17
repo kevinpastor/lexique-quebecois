@@ -2,7 +2,7 @@ import { Word, wordSchema } from "@models/word";
 import { _closeMongoClient } from "@services/api/database";
 import { getWordDefinitions } from "@services/api/words/get-word-definitions";
 
-import "../../../../src/utils/tests/helpers";
+import "../../../../../src/utils/tests/helpers";
 
 const ip: string = "127.0.0.1";
 
@@ -14,13 +14,13 @@ describe("getWordDefinitions", (): void => {
     const slug: string = "tokébak";
 
     it("should not find word", async (): Promise<void> => {
-        const word: Word | undefined = await getWordDefinitions("inexisting-word", ip);
+        const word: Word | null = await getWordDefinitions("inexisting-word", ip);
 
-        expect(word).toBeUndefined();
+        expect(word).toBeNull();
     });
 
     it("should get word", async (): Promise<void> => {
-        const word: Word | undefined = await getWordDefinitions(slug, ip);
+        const word: Word | null = await getWordDefinitions(slug, ip);
 
         expect(word).toBeDefined();
         expect(word).toMatchSchema(wordSchema);

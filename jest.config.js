@@ -32,7 +32,11 @@ const customJestConfig = {
     ].reduce((accumulator, value) => ({
         ...accumulator,
         [`^@${value}\\/(.*)$`]: `<rootDir>/src/${value}/$1`
-    }), {})
+    }), {}),
+    testPathIgnorePatterns: [
+        "/node_modules/",
+        "/e2e/"
+    ]
 };
 
 module.exports = createJestConfig(customJestConfig);

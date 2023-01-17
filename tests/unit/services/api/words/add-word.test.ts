@@ -4,7 +4,7 @@ import { WordRequest } from "@models/word-request";
 import { _closeMongoClient } from "@services/api/database";
 import { addWord } from "@services/api/words/add-word";
 
-import "../../../../src/utils/tests/helpers";
+import "../../../../../src/utils/tests/helpers";
 
 const ip: string = "127.0.0.1";
 
