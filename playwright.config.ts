@@ -1,6 +1,18 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
+const getWebServerUrl = (): string => {
+    if (process.env["CI"]) {
+        if (!process.env["BASE_URL"]) {
+            throw new Error("BASE_URL environment variable is not set.");
+        }
+
+        return process.env["BASE_URL"];
+    }
+
+    return "http://localhost:3000";
+};
+
 const config: PlaywrightTestConfig = {
     testDir: "./tests/e2e",
     forbidOnly: Boolean(process.env["CI"]),
@@ -20,10 +32,8 @@ const config: PlaywrightTestConfig = {
     outputDir: "./tests/e2e/results/",
     webServer: {
         command: "pnpm preview",
-        url: process.env["CI"]
-            ? process.env["BASE_URL"] ?? "http://localhost:3000"
-            : "http://localhost:3000",
-        reuseExistingServer: !process.env["CI"]
+        url: getWebServerUrl(),
+        reuseExistingServer: true
     },
     projects: [
         {
