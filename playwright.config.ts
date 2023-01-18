@@ -18,13 +18,13 @@ const getWebServerUrl = (): string => {
 };
 
 const config: PlaywrightTestConfig = {
-    testDir: "./tests/e2e",
+    testDir: "./e2e",
     forbidOnly: isCIEnvironment(),
     reporter: [
         [
             "html",
             {
-                outputFolder: "./tests/e2e/report"
+                outputFolder: "./e2e/report"
             }
         ]
     ],
@@ -34,7 +34,7 @@ const config: PlaywrightTestConfig = {
         trace: "on-first-retry",
         video: "on-first-retry"
     },
-    outputDir: "./tests/e2e/results/",
+    outputDir: "./e2e/results/",
     webServer: {
         command: "pnpm preview",
         url: getWebServerUrl(),

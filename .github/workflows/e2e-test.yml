@@ -96,5 +96,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: playwright-report
-          path: tests/e2e/report
+          path: e2e/report
           retention-days: 5

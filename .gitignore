@@ -14,8 +14,8 @@ node_modules/
 
 # testing
 coverage/
-tests/e2e/results/
-tests/e2e/report/
+e2e/results/
+e2e/report/
 
 # next.js
 .next/
@@ -30,6 +30,3 @@ tests/e2e/report/
 .env.development.local
 .env.test.local
 .env.production.local
-/test-results/
-/playwright-report/
-/playwright/.cache/
