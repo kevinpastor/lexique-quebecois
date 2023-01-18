@@ -14,6 +14,13 @@ const withBundleAnalyzer = bundleAnalyzer({
     enabled: process.env.ANALYZE_BUNDLE === "true",
 });
 
+const defaultPageExtensions = [
+    ".tsx",
+    ".ts",
+    ".jsx",
+    ".js"
+]
+
 module.exports = withSourceMapAnalyzer(withBundleAnalyzer({
     modularizeImports: {
         // TODO Create regex for @mui/material. `useTheme` is not working.
