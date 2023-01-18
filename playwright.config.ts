@@ -6,27 +6,15 @@ const isCIEnvironment = (): boolean => (
 );
 
 const getWebServerUrl = (): string => {
-    console.log("a");
     if (isCIEnvironment()) {
-        console.log("b");
         if (!process.env["BASE_URL"]) {
-            console.log("c");
             throw new Error("BASE_URL environment variable is not set.");
         }
-        console.log("d");
 
         return process.env["BASE_URL"];
     }
-    console.log("e");
 
     return "http://localhost:3000";
-};
-
-const debug = (): string => {
-    const value = getWebServerUrl();
-    console.log(value);
-
-    return value;
 };
 
 const config: PlaywrightTestConfig = {
@@ -41,14 +29,14 @@ const config: PlaywrightTestConfig = {
         ]
     ],
     use: {
-        baseURL: "http://localhost:3000",
+        baseURL: getWebServerUrl(),
         trace: "on-first-retry",
         video: "on-first-retry"
     },
     outputDir: "./tests/e2e/results/",
     webServer: {
         command: "pnpm preview",
-        url: debug(),
+        url: getWebServerUrl(),
         reuseExistingServer: true
     },
     projects: [
