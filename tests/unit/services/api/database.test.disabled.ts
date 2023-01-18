@@ -19,7 +19,8 @@ describe("getDatabase", (): void => {
     });
 
     it("should throw without MONGODB_URI environment variable", async (): Promise<void> => {
-        delete (process.env as Record<string, string>).MONGODB_URI;
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete process.env["MONGODB_URI"];
 
         await expect(getDatabase()).rejects.toBeDefined();
     });

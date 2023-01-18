@@ -9,7 +9,7 @@ const ip: string = "127.0.0.1";
 let id: string;
 
 beforeAll(async (): Promise<void> => {
-    const word: Word | undefined = await getWordDefinitions("gyu", ip);
+    const word: Word | null = await getWordDefinitions("gyu", ip);
     expect(word).toBeDefined();
     expect(word?.definitions.length).toBeGreaterThan(0);
     id = (word as Word).definitions[0].id;
