@@ -13,6 +13,8 @@
         "test": "jest",
         "test:verbose": "jest --verbose",
         "test:coverage": "jest --coverage",
+        "e2e": "playwright test",
+        "e2e:report": "playwright show-report",
         "analyze:bundle": "cross-env ANALYZE_BUNDLE=true next build",
         "analyze:source-map": "cross-env ANALYZE_SOURCE_MAP=true next build && source-map-explorer .next/static/**/*.js"
     },
@@ -39,6 +41,7 @@
     },
     "devDependencies": {
         "@next/bundle-analyzer": "^13.1.1",
+        "@playwright/test": "^1.29.2",
         "@testing-library/react": "^13.4.0",
         "@types/jest": "^29.2.5",
         "@types/node": "^18.11.18",

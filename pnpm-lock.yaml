@@ -11,6 +11,7 @@ specifiers:
   '@mui/system': ^5.11.4
   '@next/bundle-analyzer': ^13.1.1
   '@next/env': ^13.1.1
+  '@playwright/test': ^1.29.2
   '@testing-library/react': ^13.4.0
   '@types/jest': ^29.2.5
   '@types/node': ^18.11.18
@@ -65,6 +66,7 @@ dependencies:
 
 devDependencies:
   '@next/bundle-analyzer': 13.1.1
+  '@playwright/test': 1.29.2
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@types/jest': 29.2.5
   '@types/node': 18.11.18
@@ -2027,6 +2029,15 @@ packages:
       picocolors: 1.0.0
       tiny-glob: 0.2.9
       tslib: 2.4.1
+    dev: true
+
+  /@playwright/test/1.29.2:
+    resolution: {integrity: sha512-+3/GPwOgcoF0xLz/opTnahel1/y42PdcgZ4hs+BZGIUjtmEFSXGg+nFoaH3NSmuc7a6GSFwXDJ5L7VXpqzigNg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      '@types/node': 18.11.18
+      playwright-core: 1.29.2
     dev: true
 
   /@polka/url/1.0.0-next.21:
@@ -5407,6 +5418,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+    dev: true
+
+  /playwright-core/1.29.2:
+    resolution: {integrity: sha512-94QXm4PMgFoHAhlCuoWyaBYKb92yOcGVHdQLoxQ7Wjlc7Flg4aC/jbFW7xMR52OfXMVkWicue4WXE7QEegbIRA==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /postcss/8.4.14:

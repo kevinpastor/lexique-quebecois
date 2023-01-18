@@ -1,16 +1,15 @@
 # TODO
 
 - fix: make use of react-error-boundary
+- test: write e2e tests
 - feat: migrate to tRPC
 - feat: update swr
     - seems to have a weird behaviour in the autocomplete results
-- fix: investigate mobile hydration error
 - feat: add @next/font
 - feat: make use of Next.js next layout architecture
 - feat: add pronounciation
 - feat: add letter anchors (id) to index page
     - blocked: navbar overlaps
-- fix: remove dark theme ssr flicker
 - feat: make a LazyTooltip out of MUI Tooltip
     - blocked: `dynamic` doesn't seem to work because `@mui/material` is already loaded
 - chore: investigate PWA
@@ -20,3 +19,4 @@
 - chore: investigate onbeforeunload support for iOS
     - blocked: iOS doesn't properly support before unload
 - chore: investigate if react@^18.0.0 can be replace with preact@^11.0.0
+    - blocked: one of the hook provided by React isn't available yet
