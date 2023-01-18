@@ -2,95 +2,25 @@ import { ThumbUp, ThumbUpOutlined } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Status } from "@models/status";
-import { isHttpError } from "@services/http-error";
-import { like, removeLike } from "@services/reactions";
-import { useAlerts } from "@utils/hooks/use-alerts";
-import { BooleanUtilities } from "@utils/hooks/use-boolean";
-import { NumberUtilities } from "@utils/hooks/use-number";
-
 interface Props {
-    id: string;
-    likes: NumberUtilities;
-    isLiked: BooleanUtilities;
-    dislikes: NumberUtilities;
-    isDisliked: BooleanUtilities;
+    likes: number;
+    isLiked: boolean;
+    toggleLike: () => void;
 }
 
 export const Likes = ({
-    id,
-    likes: {
-        value: likes,
-        increment: incrementLikes,
-        decrement: decrementLikes
-    },
-    isLiked: {
-        value: isLiked,
-        toggle: toggleIsLiked
-    },
-    dislikes: {
-        decrement: decrementDislikes
-    },
-    isDisliked: {
-        value: isDisliked,
-        toggle: toggleIsDisliked
-    }
-}: Props): ReactElement => {
-    const { enqueueErrorAlert } = useAlerts();
-
-    const handleClick = async (): Promise<void> => {
-        toggleIsLiked();
-
-        if (isLiked) {
-            decrementLikes();
-
-            try {
-                await removeLike(id);
-            }
-            catch (error: unknown) {
-                if (isHttpError(error)) {
-                    if (error.status === Status.Conflict || error.status === Status.NotFound) {
-                        return;
-                    }
-                }
-
-                enqueueErrorAlert("Un erreur inconnue s'est produite.");
-            }
-
-            return;
-        }
-
-        if (isDisliked) {
-            decrementDislikes();
-            toggleIsDisliked();
-        }
-
-        incrementLikes();
-
-        try {
-            await like(id);
-        }
-        catch (error: unknown) {
-            if (isHttpError(error)) {
-                if (error.status === Status.Conflict) {
-                    return;
-                }
-            }
-
-            enqueueErrorAlert("Un erreur inconnue s'est produite.");
-        }
-    };
-
-    return (
-        <Tooltip title="J'aime">
-            <Button
-                onClick={handleClick}
-                aria-label="J'aime"
-                startIcon={isLiked ? <ThumbUp color="primary" /> : <ThumbUpOutlined />}
-                size="small"
-            >
-                {likes}
-            </Button>
-        </Tooltip>
-    );
-};
+    likes,
+    isLiked,
+    toggleLike
+}: Props): ReactElement => (
+    <Tooltip title="J'aime">
+        <Button
+            onClick={toggleLike}
+            aria-label="J'aime"
+            startIcon={isLiked ? <ThumbUp color="primary" /> : <ThumbUpOutlined />}
+            size="small"
+        >
+            {likes}
+        </Button>
+    </Tooltip>
+);
