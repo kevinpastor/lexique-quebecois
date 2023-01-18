@@ -20,7 +20,9 @@ const config: PlaywrightTestConfig = {
     outputDir: "./tests/e2e/results/",
     webServer: {
         command: "pnpm preview",
-        url: "http://127.0.0.1:3000",
+        url: process.env["CI"]
+            ? process.env["BASE_URL"] ?? "http://localhost:3000"
+            : "http://localhost:3000",
         reuseExistingServer: !process.env["CI"]
     },
     projects: [
