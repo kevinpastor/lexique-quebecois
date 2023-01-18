@@ -46,7 +46,11 @@ jobs:
 
       - name: Initialize Playwright
         run: pnpm exec playwright install --with-deps
-      
+
+      - name: Print environment variables
+        run: |
+          env
+
       - name: Run E2E tests
         run: pnpm e2e
         env:
