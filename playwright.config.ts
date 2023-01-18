@@ -28,6 +28,7 @@ const config: PlaywrightTestConfig = {
             }
         ]
     ],
+    retries: isCIEnvironment() ? 1 : 0,
     use: {
         baseURL: getWebServerUrl(),
         trace: "on-first-retry",

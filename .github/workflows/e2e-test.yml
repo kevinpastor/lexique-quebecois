@@ -47,11 +47,15 @@ jobs:
       - name: Initialize Playwright
         run: pnpm exec playwright install --with-deps
 
-      - name: Print environment variables
-        run: |
-          env
-
       - name: Run E2E tests
         run: pnpm e2e
         env:
           BASE_URL: ${{ github.event.deployment_status.target_url }}
+              
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: tests/e2e/report
+          retention-days: 5
