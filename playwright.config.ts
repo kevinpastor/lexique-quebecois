@@ -1,8 +1,15 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
+const isCIEnvironment = (): boolean => (
+    Boolean(process.env["CI"])
+);
+
 const getWebServerUrl = (): string => {
-    if (process.env["CI"]) {
+    console.log("UIBHEAIUHBEUIAHBUIHEAUIHBUIH");
+    console.log(process.env["CI"]);
+
+    if (isCIEnvironment()) {
         if (!process.env["BASE_URL"]) {
             throw new Error("BASE_URL environment variable is not set.");
         }
@@ -15,7 +22,7 @@ const getWebServerUrl = (): string => {
 
 const config: PlaywrightTestConfig = {
     testDir: "./tests/e2e",
-    forbidOnly: Boolean(process.env["CI"]),
+    forbidOnly: isCIEnvironment(),
     reporter: [
         [
             "html",
