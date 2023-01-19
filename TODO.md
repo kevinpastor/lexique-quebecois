@@ -1,6 +1,5 @@
 # TODO
 
-- fix: make use of react-error-boundary
 - feat: migrate to tRPC
 - feat: update swr
     - seems to have a weird behaviour in the autocomplete results
@@ -13,7 +12,6 @@
 - feat: make a LazyTooltip out of MUI Tooltip
     - blocked: `dynamic` doesn't seem to work because `@mui/material` is already loaded
 - chore: investigate PWA
-- chore: investigate CSS variables for MUI
 - chore: investigate autofocus on iOS
     - blocked: iOS doesn't support autofocus
 - chore: investigate onbeforeunload support for iOS
