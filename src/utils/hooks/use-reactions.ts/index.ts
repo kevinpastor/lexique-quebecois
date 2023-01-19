@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 import { Reactions } from "@models/definition";
 import { Status } from "@models/status";
@@ -28,10 +28,18 @@ export const useReactions = (id: string, reactions: Reactions): ReturnType => {
         dispatch
     ] = useReducer(reducer, reactions);
 
+    // Update the state if the external value changes.
+    useEffect((): void => {
+        dispatch({
+            type: "reset",
+            payload: reactions
+        });
+    }, [reactions]);
+
     const { enqueueErrorAlert } = useAlerts();
 
     const toggleLike = async (): Promise<void> => {
-        dispatch("toggleLike");
+        dispatch({ type: "toggleLike" });
 
         if (isLiked) {
             try {
@@ -65,7 +73,7 @@ export const useReactions = (id: string, reactions: Reactions): ReturnType => {
     };
 
     const toggleDislike = async (): Promise<void> => {
-        dispatch("toggleDislike");
+        dispatch({ type: "toggleDislike" });
 
         if (isDisliked) {
             try {

@@ -52,8 +52,27 @@ const toggleDislike = (state: Reactions): Reactions => {
     };
 };
 
-export const reducer = (state: Reactions, action: "toggleLike" | "toggleDislike"): Reactions => {
-    switch (action) {
+interface ToggleLikeAction {
+    type: "toggleLike";
+}
+
+interface ToggleDislikeAction {
+    type: "toggleDislike";
+}
+
+interface ResetAction {
+    type: "reset";
+    payload: Reactions;
+}
+
+type Action = ToggleLikeAction | ToggleDislikeAction | ResetAction;
+
+export const reducer = (state: Reactions, action: Action): Reactions => {
+    switch (action.type) {
+        case "reset": {
+            return action.payload;
+        }
+
         case "toggleLike": {
             return toggleLike(state);
         }
