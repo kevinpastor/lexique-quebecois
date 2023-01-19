@@ -1,7 +1,7 @@
 import { _closeMongoClient } from "@services/api/database";
 import { getWordIndex } from "@services/api/words/get-word-index";
 
-import "../../../../../src/utils/tests/helpers";
+import "../../../utils/tests/helpers";
 
 afterAll(async (): Promise<void> => {
     await _closeMongoClient();
