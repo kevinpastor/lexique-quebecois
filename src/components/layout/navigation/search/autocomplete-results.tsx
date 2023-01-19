@@ -19,12 +19,12 @@ export interface Props {
 export const AutocompleteResults = ({ inputRef, onClose: handleClose }: Props): ReactElement | null => {
     const label = useWatch<FormValues>({ name: "label" });
     const debouncedLabel: string = useDebounce(label);
+
+    const shouldFetch: boolean = debouncedLabel.length > 0;
     const { data, error } = useSWR<Array<string>>(
-        `/api/words/autocomplete?input=${debouncedLabel}`,
-        null,
-        {
-            isPaused: (): boolean => (debouncedLabel.length === 0)
-        }
+        shouldFetch
+            ? `/api/words/autocomplete?input=${debouncedLabel}`
+            : null
     );
 
     const { itemRef }: KeyboardFocusSelectionUtility = useKeyboardFocusSelection();
