@@ -28,11 +28,6 @@ test.describe("Theme", (): void => {
     test.describe("Desktop only", (): void => {
         test.skip(({ isMobile }): boolean => Boolean(isMobile));
 
-        test("should have a theme button directly", async ({ page }): Promise<void> => {
-            const themeButton: Locator = page.getByRole("button", { name: "Thème" });
-            await expect(themeButton).toHaveCount(0);
-        });
-
         test("should update theme", async ({ page }): Promise<void> => {
             await expect(page.getByRole("button", { name: "Thème" })).toBeVisible();
 
@@ -52,21 +47,8 @@ test.describe("Theme", (): void => {
         });
     });
 
-    // TODO Fix mobile tests
-    test.describe.skip("Mobile only", (): void => {
+    test.describe("Mobile only", (): void => {
         test.skip(({ isMobile }): boolean => !isMobile);
-
-        test("should not have a theme button directly", async ({ page }): Promise<void> => {
-            const themeButton: Locator = page.getByRole("button", { name: "Thème" });
-            await expect(themeButton).toHaveCount(0);
-        });
-
-        test("should have a theme selector in the menu", async ({ page }): Promise<void> => {
-            await page.getByRole("button", { name: "Menu" }).click();
-
-            const themeSelector: Locator = page.getByRole("button", { name: "Automatique" });
-            await expect(themeSelector).toHaveCount(1);
-        });
 
         test("should update theme", async ({ page }): Promise<void> => {
             await page.getByRole("button", { name: "Menu" }).click();
