@@ -1,5 +1,7 @@
 import { expect, Locator, test } from "@playwright/test";
 
+test.describe.configure({ mode: "parallel" });
+
 test.describe("Homepage", (): void => {
     test.beforeEach(async ({ page }): Promise<void> => {
         await page.goto("/");
