@@ -1,6 +1,5 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
-import Script from "next/script";
 import { ReactElement } from "react";
 
 import { Layout } from "@components/layout";
@@ -26,12 +25,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
                 content="Un peu comme Urban Dictionary, mais québécois."
             />
         </Head>
-        <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3996014859104973"
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-        />
         <Providers>
             <Layout>
                 <Component {...pageProps} />
