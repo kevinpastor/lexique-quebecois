@@ -18,7 +18,7 @@ export const Search = (): ReactElement => {
         setFalse: handleClose
     }: BooleanUtilities = useBoolean(false);
 
-    // Wrapping div required for IconButton end edge
+    // Wrapping div required for IconButton end edge on desktop.
     return (
         <div>
             <Tooltip title="Rechercher">
@@ -38,7 +38,10 @@ export const Search = (): ReactElement => {
                 <Fade in={isOpened}>
                     <div style={{ height: "100%" }}>
                         <Suspense>
-                            <LazySearchContent onClose={handleClose} />
+                            <LazySearchContent
+                                onClose={handleClose}
+                                isOpened={isOpened}
+                            />
                         </Suspense>
                     </div>
                 </Fade>

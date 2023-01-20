@@ -1,6 +1,6 @@
 import { ArrowBack } from "@mui/icons-material";
 import { AppBar, Container, IconButton, Paper, Stack } from "@mui/material";
-import { ReactElement, useRef } from "react";
+import { ReactElement, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { AutocompleteResults } from "./autocomplete-results";
@@ -9,9 +9,10 @@ import { Field } from "./field";
 
 export interface Props {
     onClose: () => void;
+    isOpened: boolean;
 }
 
-export const Form = ({ onClose: handleClose }: Props): ReactElement => {
+export const Form = ({ onClose: handleClose, isOpened }: Props): ReactElement => {
     const { reset } = useFormContext<FormValues>();
 
     const handleBack = (): void => {
@@ -20,6 +21,15 @@ export const Form = ({ onClose: handleClose }: Props): ReactElement => {
     };
 
     const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect((): void => {
+        if (isOpened) {
+            inputRef.current?.focus();
+        }
+        else {
+            inputRef.current?.blur();
+        }
+    }, [isOpened]);
 
     return (
         <Paper

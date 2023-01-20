@@ -21,9 +21,10 @@ const validationSchema = object({
 
 export interface Props {
     onClose: () => void;
+    isOpened: boolean;
 }
 
-export const Content = ({ onClose: handleClose }: Props): ReactElement => {
+export const Content = ({ onClose: handleClose, isOpened }: Props): ReactElement => {
     const { push } = useRouter();
 
     const navigate = async (label: string): Promise<void> => {
@@ -51,7 +52,10 @@ export const Content = ({ onClose: handleClose }: Props): ReactElement => {
                 style: { height: "100%" }
             }}
         >
-            <Form onClose={handleClose} />
+            <Form
+                onClose={handleClose}
+                isOpened={isOpened}
+            />
         </FormContainer>
     );
 };

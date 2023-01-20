@@ -12,8 +12,6 @@
 - feat: make a LazyTooltip out of MUI Tooltip
     - blocked: `dynamic` doesn't seem to work because `@mui/material` is already loaded
 - chore: investigate PWA
-- chore: investigate autofocus on iOS
-    - blocked: iOS doesn't support autofocus
 - chore: investigate onbeforeunload support for iOS
     - blocked: iOS doesn't properly support before unload
 - chore: investigate if react@^18.0.0 can be replace with preact@^11.0.0
