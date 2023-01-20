@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unused-prop-types */
-import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Link, Typography, Unstable_Grid2 as Grid } from "@mui/material";
 import Head from "next/head";
 import NextLink from "next/link";
-import { ReactElement, useMemo } from "react";
+import { ReactElement } from "react";
 import useSWR from "swr";
 
 import { getSlug } from "@models/definition";
@@ -23,26 +23,24 @@ export const IndexPage = (): ReactElement => {
 
     // `data` coming from `fallback`
     const words: Array<string> = data as Array<string>;
-    const memoizedLetterGroups = useMemo((): Array<LetterGroup> => (
-        words.reduce((wordGroups: Array<LetterGroup>, word: string): Array<LetterGroup> => {
-            const slug: string = getSlug(word);
-            const letter: string = slug[0];
+    const letterGroups = words.reduce((wordGroups: Array<LetterGroup>, word: string): Array<LetterGroup> => {
+        const slug: string = getSlug(word);
+        const letter: string = slug[0];
 
-            if (wordGroups.length === 0 || wordGroups[wordGroups.length - 1].letter !== letter) {
-                wordGroups.push({
-                    letter,
-                    group: []
-                });
-            }
-
-            wordGroups[wordGroups.length - 1].group.push({
-                slug,
-                word
+        if (wordGroups.length === 0 || wordGroups[wordGroups.length - 1].letter !== letter) {
+            wordGroups.push({
+                letter,
+                group: []
             });
+        }
 
-            return wordGroups;
-        }, [])
-    ), [words]);
+        wordGroups[wordGroups.length - 1].group.push({
+            slug,
+            word
+        });
+
+        return wordGroups;
+    }, []);
 
     return (
         <>
@@ -52,24 +50,37 @@ export const IndexPage = (): ReactElement => {
             <Card>
                 <CardHeader title="Index" />
                 <CardContent>
-                    {memoizedLetterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
-                        <div key={letter} /** Using div instead of Fragment for better HTML markup */>
+                    {letterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
+                        // Using div instead of Fragment for better HTML markup.
+                        <div key={letter}>
                             <Typography variant="h3">
                                 {letter}
                             </Typography>
-                            {group.map(({ slug, word }: WordGroup, index: number): ReactElement => (
-                                <div key={slug}>
-                                    <NextLink
-                                        href={`/mots/${slug}`}
-                                        passHref
-                                        legacyBehavior
+                            <Grid
+                                container
+                                spacing={2}
+                                paddingX={0}
+                            >
+                                {group.map(({ slug, word }: WordGroup, index: number): ReactElement => (
+                                    <Grid
+                                        key={slug}
+                                        xs={12}
+                                        sm={6}
+                                        md={4}
+                                        paddingY={0.5}
                                     >
-                                        <Link gutterBottom={index === group.length - 1}>
-                                            {word}
-                                        </Link>
-                                    </NextLink>
-                                </div>
-                            ))}
+                                        <NextLink
+                                            href={`/mots/${slug}`}
+                                            passHref
+                                            legacyBehavior
+                                        >
+                                            <Link gutterBottom={index === group.length - 1}>
+                                                {word}
+                                            </Link>
+                                        </NextLink>
+                                    </Grid>
+                                ))}
+                            </Grid>
                         </div>
                     ))}
                 </CardContent>

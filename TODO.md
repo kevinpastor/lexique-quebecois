@@ -1,8 +1,5 @@
 # TODO
 
-- feat: migrate to tRPC
-- feat: update swr
-    - seems to have a weird behaviour in the autocomplete results
 - feat: add @next/font
 - feat: make use of Next.js next layout architecture
     - blocked: `wakeable.then is not a function` (https://github.com/vercel/next.js/issues/43389)

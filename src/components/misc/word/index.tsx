@@ -1,7 +1,7 @@
 import { Share as ShareIcon } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { ReactElement, useMemo } from "react";
+import { ReactElement } from "react";
 
 import { Definition as IDefinition, getSlug } from "@models/definition";
 import { useFormattedDate } from "@utils/hooks/use-formatted-date";
@@ -15,9 +15,7 @@ interface Props {
 }
 
 export const Definition = ({ definition }: Props): ReactElement => {
-    const date: Date = useMemo((): Date => (
-        new Date(definition.timestamp)
-    ), [definition.timestamp]);
+    const date: Date = new Date(definition.timestamp);
     const formattedDate: string | undefined = useFormattedDate(date);
     const slug = getSlug(definition.label);
     const share = useShare(`mots/${slug}`);
