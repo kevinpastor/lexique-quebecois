@@ -20,13 +20,11 @@ e2e/report/
 # next.js
 .next/
 .swc/
+next-env.d.ts
 
 # misc
 .DS_Store
 *.pem
 
 # local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*.local
