@@ -1,10 +1,11 @@
 import { TextField as MuiTextField, TextFieldProps } from "@mui/material";
-import { MutableRefObject, ReactElement } from "react";
+import { ForwardedRef, ReactElement } from "react";
 import { Controller, FieldValues, Path } from "react-hook-form";
 
-interface Props<T extends FieldValues = FieldValues> extends Omit<TextFieldProps, "name"> {
+interface Props<T extends FieldValues = FieldValues> extends Omit<TextFieldProps, "name" | "inputRef"> {
     name: Path<T>;
     hideError?: boolean;
+    inputRef?: ForwardedRef<HTMLInputElement>;
 }
 
 export const TextField = <TFieldValues extends FieldValues = FieldValues>({
@@ -38,7 +39,17 @@ export const TextField = <TFieldValues extends FieldValues = FieldValues>({
                 }
                 inputRef={(instance: HTMLInputElement): void => {
                     ref(instance);
-                    (inputRef as MutableRefObject<HTMLInputElement>).current = instance;
+
+                    if (!inputRef) {
+                        return;
+                    }
+
+                    if (typeof inputRef === "function") {
+                        inputRef(instance);
+                        return;
+                    }
+
+                    inputRef.current = instance;
                 }}
             />
         )}
