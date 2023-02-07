@@ -12,7 +12,6 @@ export interface IAlertsContext {
 }
 
 export const AlertsContext = createContext<IAlertsContext | null>(null);
-AlertsContext.displayName = "AlertsContext";
 
 const LazySnackbar = dynamic((): Promise<{ default: ComponentType<SnackbarProps> }> => (
     import("@mui/material/Snackbar")

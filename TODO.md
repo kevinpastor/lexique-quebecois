@@ -1,5 +1,6 @@
 # TODO
 
+- feat: add reCAPTCHA
 - feat: add @next/font
 - feat: make use of Next.js next layout architecture
     - blocked: `wakeable.then is not a function` (https://github.com/vercel/next.js/issues/43389)
