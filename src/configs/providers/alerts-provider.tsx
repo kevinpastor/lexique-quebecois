@@ -1,4 +1,5 @@
-import type { AlertProps, SnackbarProps } from "@mui/material";
+import type { SnackbarProps } from "@mui/material";
+import { Alert as MuiAlert } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, createContext, PropsWithChildren, ReactElement, Suspense, SyntheticEvent, useCallback, useEffect, useMemo } from "react";
 
@@ -15,10 +16,6 @@ export const AlertsContext = createContext<IAlertsContext | null>(null);
 
 const LazySnackbar = dynamic((): Promise<{ default: ComponentType<SnackbarProps> }> => (
     import("@mui/material/Snackbar")
-));
-
-const LazyAlert = dynamic((): Promise<{ default: ComponentType<AlertProps> }> => (
-    import("@mui/material/Alert")
 ));
 
 type Severity = "success" | "warning" | "error";
@@ -89,6 +86,7 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
         enqueueErrorAlert
     }), [enqueueErrorAlert, enqueueSuccessAlert, enqueueWarningAlert]);
 
+    // TODO Look into why Alert can't be lazy loaded
     return (
         <AlertsContext.Provider value={value}>
             <Suspense>
@@ -98,9 +96,9 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
                     TransitionProps={{ onExited: handleExited }}
                     autoHideDuration={5000}
                 >
-                    <LazyAlert severity={alerts[0]?.severity}>
+                    <MuiAlert severity={alerts[0]?.severity}>
                         {alerts[0]?.message}
-                    </LazyAlert>
+                    </MuiAlert>
                 </LazySnackbar>
             </Suspense>
             {children}
