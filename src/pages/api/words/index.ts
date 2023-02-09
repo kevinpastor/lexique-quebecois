@@ -11,6 +11,7 @@ import {
     Handler
 } from "@utils/api/handler";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
+import { verifyHCaptcha } from "@utils/misc/hcaptcha";
 
 const window: number = 1000 * 60 * 15;
 const tokens: number = 5;
@@ -31,13 +32,34 @@ const handler: Handler = createHandler({
             return;
         }
 
-        if (!isValidWordRequest(req.body)) {
+        if (!req.body.captchaToken) {
+            res.status(Status.Unauthorized)
+                .end();
+            return;
+        }
+        if (typeof req.body.captchaToken !== "string") {
+            res.status(Status.BadRequest)
+                .end();
+            return;
+        }
+        const captchaToken: string = req.body.captchaToken;
+
+        const isValidCaptcha: boolean = await verifyHCaptcha(captchaToken);
+        if (!isValidCaptcha) {
+            res.status(Status.Unauthorized)
+                .end();
+            return;
+        }
+
+        const { captchaToken: _, ...wordRequest } = req.body;
+
+        if (!isValidWordRequest(wordRequest)) {
             res.status(Status.BadRequest)
                 .end();
             return;
         }
 
-        const result: Status = await addWord(req.body, ip);
+        const result: Status = await addWord(wordRequest, ip);
 
         res.status(result)
             .end();

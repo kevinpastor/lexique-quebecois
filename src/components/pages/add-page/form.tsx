@@ -8,6 +8,7 @@ import { TextField } from "@components/react-hook-form/text-field";
 import { WordRequest } from "@models/word-request";
 import { useLeavePageConfirmation } from "@utils/hooks/use-leave-page-confirm";
 
+import { Captcha } from "./captcha";
 import { WordClassPicker } from "./word-class-picker";
 
 export const Form = (): ReactElement => {
@@ -45,6 +46,7 @@ export const Form = (): ReactElement => {
                         name="author"
                         label="Auteur"
                     />
+                    <Captcha />
                 </Stack>
             </CardContent>
             <CardActions>

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
 import Head from "next/head";
 import { ReactElement } from "react";
 
@@ -143,6 +143,16 @@ export const PrivacyPage = (): ReactElement => (
                 </Typography>
                 <Typography gutterBottom>
                     Les enfants âgés de 13 ans ou plus ne peuvent pas soumettre d&apos;informations personnelles sans l&apos;autorisation de leurs parents ou tuteurs. En utilisant le site Web, vous déclarez avoir au moins 18 ans, ou avoir au moins 13 ans et avoir l&apos;autorisation de vos parents ou tuteurs d&apos;utiliser le service.
+                </Typography>
+                <Typography
+                    variant="h3"
+                    gutterBottom
+                >
+                    hCaptcha
+                </Typography>
+                <Typography gutterBottom>
+                    {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                    Nous utilisons le service anti-robot hCaptcha (ci-après &ldquo;hCaptcha&rdquo;) sur notre site web. Ce service est fourni par Intuition Machines, Inc., une société américaine de Delaware (&ldquo;IMI&rdquo;). hCaptcha est utilisé pour vérifier si les données entrées sur notre site web (comme sur une page de connexion ou un formulaire de contact) ont été entrées par un humain ou par un programme automatisé. Pour ce faire, hCaptcha analyse le comportement du visiteur du site web en fonction de diverses caractéristiques. Cette analyse commence automatiquement dès que le visiteur du site web entre une partie du site web avec hCaptcha activé. Pour l&apos;analyse, hCaptcha évalue diverses informations (par exemple, l&apos;adresse IP, le temps que le visiteur a passé sur le site web ou l&apos;application, ou les mouvements de souris effectués par l&apos;utilisateur). Les données collectées pendant l&apos;analyse seront transmises à IMI. L&apos;analyse hCaptcha en mode &ldquo;invisible&rdquo; peut avoir lieu complètement en arrière-plan. Les visiteurs du site web ne sont pas informés que cette analyse a lieu si l&apos;utilisateur n&apos;est pas confronté à un défi. Le traitement des données est basé sur l&apos;Article 6(1)(f) du RGPD (DSGVO) : l&apos;exploitant du site web a un intérêt légitime à protéger son site contre les crawling automatisés abusifs et le spam. IMI agit en tant que &ldquo;traitant de données&rdquo; agissant en tant que représentant de ses clients tels que définis dans le RGPD et en tant que &ldquo;prestataire de services&rdquo; aux fins du California Consumer Privacy Act (CCPA). Pour plus d&apos;informations sur hCaptcha et la politique de confidentialité et les conditions d&apos;utilisation d&apos;IMI, veuillez consulter les liens suivants : <Link href="https://www.hcaptcha.com/privacy">https://www.hcaptcha.com/privacy</Link> et <Link href="https://www.hcaptcha.com/terms">https://www.hcaptcha.com/terms</Link>.
                 </Typography>
                 <Typography
                     variant="h3"

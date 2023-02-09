@@ -1,6 +1,8 @@
 # TODO
 
-- feat: add reCAPTCHA
+- fix: investigate hyrdation error
+    - seems to only on desktop when the dev tools isn't opened
+- chore: replace straight apostrophes by curved ones
 - feat: add @next/font
 - feat: make use of Next.js next layout architecture
     - blocked: `wakeable.then is not a function` (https://github.com/vercel/next.js/issues/43389)

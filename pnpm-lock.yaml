@@ -4,6 +4,7 @@ specifiers:
   '@babel/core': ^7.20.12
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
+  '@hcaptcha/react-hcaptcha': ^1.4.4
   '@hookform/resolvers': ^2.9.10
   '@mui/icons-material': ^5.11.0
   '@mui/lab': 5.0.0-alpha.117
@@ -44,6 +45,7 @@ dependencies:
   '@babel/core': 7.20.12
   '@emotion/react': 11.10.5_yxdp3dl3eazy3vwpbmv4fq727a
   '@emotion/styled': 11.10.5_4erqsq3n444jecyuvaxwc5b3vi
+  '@hcaptcha/react-hcaptcha': 1.4.4_biqbaboplfbrettd7655fr4n2y
   '@hookform/resolvers': 2.9.10_react-hook-form@7.42.1
   '@mui/icons-material': 5.11.0_j5wvuqirnhynb4halegp2mqooy
   '@mui/lab': 5.0.0-alpha.117_pht22kiaujpoq7nmpt7dw6t4hq
@@ -1382,6 +1384,17 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@hcaptcha/react-hcaptcha/1.4.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-Aen217LDnf5ywbPSwBG5CsoqBLIHIAS9lhj3zQjXJuO13doQ6/ubkCWNuY8jmwYLefoFt3V3MrZmCdKDaFoTuQ==}
+    peerDependencies:
+      react: '>= 16.3.0'
+      react-dom: '>= 16.3.0'
+    dependencies:
+      '@babel/runtime': 7.20.13
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@hookform/resolvers/2.9.10_react-hook-form@7.42.1:
     resolution: {integrity: sha512-JIL1DgJIlH9yuxcNGtyhsWX/PgNltz+5Gr6+8SX9fhXc/hPbEIk6wPI82nhgvp3uUb6ZfAM5mqg/x7KR7NAb+A==}
