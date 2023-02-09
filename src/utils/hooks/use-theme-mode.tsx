@@ -22,10 +22,11 @@ export type ReturnType = {
     mode: ThemeMode | undefined;
     setMode: (ternaryMode: ThemeMode) => void;
     cycle: () => void;
+    activeMode?: Exclude<ThemeMode, "system">;
 };
 
 export const useThemeMode = (): ReturnType => {
-    const { mode, setMode } = useColorScheme();
+    const { mode, setMode, systemMode } = useColorScheme();
 
     const cycle = useCallback((): void => {
         if (mode === undefined) {
@@ -36,9 +37,14 @@ export const useThemeMode = (): ReturnType => {
         setMode(nextMode);
     }, [mode, setMode]);
 
+    const activeMode: Exclude<ThemeMode, "system"> | undefined = mode === "system"
+        ? systemMode
+        : mode;
+
     return {
         mode,
         setMode,
-        cycle
+        cycle,
+        activeMode
     };
 };
