@@ -12,12 +12,13 @@ import { useAlerts } from "@utils/hooks/use-alerts";
 
 import { Form } from "./form";
 
-const initialValues: WordRequest = {
+const initialValues: WithCaptchaToken<WordRequest> = {
     label: "",
     definition: "",
     example: "",
     author: "",
-    wordClasses: []
+    wordClasses: [],
+    captchaToken: ""
 };
 
 export const AddPage = (): ReactElement => {

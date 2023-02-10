@@ -3,9 +3,11 @@ import { ReactElement, ReactNode, useId } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { WordClass, wordClassAbreviations, wordClasses } from "@models/classes";
+import { WithCaptchaToken } from "@models/with-captcha-token";
+import { WordRequest } from "@models/word-request";
 
 export const WordClassPicker = (): ReactElement => {
-    const { control } = useFormContext();
+    const { control } = useFormContext<WithCaptchaToken<WordRequest>>();
 
     const id: string = useId();
 
