@@ -18,7 +18,7 @@ const tokens: number = 5;
 const rateLimiter = new RateLimiter(window, tokens);
 
 const handler: Handler = createHandler({
-    [Method.GET]: async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+    [Method.GET]: async (_: NextApiRequest, res: NextApiResponse): Promise<void> => {
         const words: Array<string> = await getWordIndex();
 
         res.status(Status.OK)
