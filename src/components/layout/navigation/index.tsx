@@ -20,7 +20,6 @@ export const Navigation = (): ReactElement => {
     });
 
     return (
-        // TODO Add transition between elevation change. Currently limited by `background-image`, which is not supported.
         <AppBar elevation={isAtPageTop ? 0 : 3}>
             <Container>
                 <Stack
@@ -30,75 +29,69 @@ export const Navigation = (): ReactElement => {
                     spacing={2}
                     my={0.5}
                 >
+                    <MobileOnly>
+                        <Menu />
+                    </MobileOnly>
                     <Stack
                         direction="row"
-                        alignItems="center"
-                        spacing={1}
+                        alignItems="end"
+                        spacing={2}
                     >
-                        <MobileOnly>
-                            <Menu />
-                        </MobileOnly>
-                        <Stack
-                            direction="row"
-                            alignItems="end"
-                            spacing={2}
-                        >
-                            <Typography variant="h1">
-                                <NextLink
-                                    href="/"
-                                    passHref
-                                    legacyBehavior
+                        <Typography variant="h1">
+                            <NextLink
+                                href="/"
+                                passHref
+                                legacyBehavior
+                            >
+                                <Link
+                                    color="inherit"
+                                    underline="none"
                                 >
-                                    <Link
-                                        color="inherit"
-                                        underline="none"
-                                    >
-                                        Lexique Québécois
-                                    </Link>
-                                </NextLink>
-                            </Typography>
-                            <DesktopOnly>
-                                <NextLink
-                                    href="/ajouter"
-                                    passHref
-                                    legacyBehavior
+                                    Lexique Québécois
+                                </Link>
+                            </NextLink>
+                        </Typography>
+                        <DesktopOnly>
+                            <NextLink
+                                href="/ajouter"
+                                passHref
+                                legacyBehavior
+                            >
+                                <Link
+                                    variant="subtitle2"
+                                    color="default"
+                                    underline="hover"
                                 >
-                                    <Link
-                                        variant="subtitle2"
-                                        color="default"
-                                        underline="hover"
-                                    >
-                                        Ajouter
-                                    </Link>
-                                </NextLink>
-                                <NextLink
-                                    href="/mots"
-                                    passHref
-                                    legacyBehavior
+                                    Ajouter
+                                </Link>
+                            </NextLink>
+                            <NextLink
+                                href="/mots"
+                                passHref
+                                legacyBehavior
+                            >
+                                <Link
+                                    variant="subtitle2"
+                                    color="default"
+                                    underline="hover"
                                 >
-                                    <Link
-                                        variant="subtitle2"
-                                        color="default"
-                                        underline="hover"
-                                    >
-                                        Index
-                                    </Link>
-                                </NextLink>
-                                <NextLink
-                                    href="/contact"
-                                    passHref
-                                    legacyBehavior
+                                    Index
+                                </Link>
+                            </NextLink>
+                            <NextLink
+                                href="/contact"
+                                passHref
+                                legacyBehavior
+                            >
+                                <Link
+                                    variant="subtitle2"
+                                    color="default"
+                                    underline="hover"
                                 >
-                                    <Link
-                                        variant="subtitle2"
-                                        color="default"
-                                        underline="hover"
-                                    >
-                                        Contact
-                                    </Link>
-                                </NextLink>
-                            </DesktopOnly>
-                        </Stack>
+                                    Contact
+                                </Link>
+                            </NextLink>
+                        </DesktopOnly>
                     </Stack>
                     <Stack
                         direction="row"
