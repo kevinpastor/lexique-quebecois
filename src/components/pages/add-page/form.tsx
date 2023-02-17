@@ -1,6 +1,7 @@
 import { Check } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { Card, CardHeader, CardContent, Stack, CardActions } from "@mui/material";
+import { Card, CardHeader, CardContent, Link, Stack, CardActions, Typography } from "@mui/material";
+import NextLink from "next/link";
 import { ReactElement } from "react";
 import { useFormState } from "react-hook-form";
 
@@ -22,6 +23,10 @@ export const Form = (): ReactElement => {
             <CardHeader title="Ajouter un mot" />
             <CardContent>
                 <Stack spacing={2}>
+                    <Typography>
+                        {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
+                        Assure-toi d&apos;avoir pris connaissance de la <NextLink href="/contenu" passHref legacyBehavior><Link>politique sur le contenu</Link></NextLink> avant d&apos;ajouter un mot.
+                    </Typography>
                     <TextField
                         name="label"
                         label="Mot"
