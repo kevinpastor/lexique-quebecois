@@ -83,7 +83,7 @@ export const ContentPage = (): ReactElement => (
                     variant="subtitle2"
                     align="right"
                 >
-                    Mis à jour le 16 février 2022
+                    Mis à jour le 16 février 2023
                 </Typography>
             </CardContent>
         </Card >

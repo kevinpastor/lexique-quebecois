@@ -20,7 +20,7 @@ export const Footer = (): ReactElement => (
             align="center"
             variant="subtitle2"
         >
-            &copy; 2022 Lexique Québécois
+            &copy; 2023 Lexique Québécois
         </Typography>
     </Stack>
 );
