@@ -7,7 +7,7 @@ export const IconThemeSelector = (): ReactElement | null => {
     const { mode, cycle } = useThemeMode();
 
     if (mode === undefined) {
-        // TODO Replace with a loading indicator. This condition is there for SSR.
+        // This condition is there for SSR, but should never occur since the component is lazy-loaded.
         return null;
     }
 

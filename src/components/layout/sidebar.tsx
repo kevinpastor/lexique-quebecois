@@ -1,4 +1,5 @@
-import { Card, CardContent, Stack, Typography } from "@mui/material";
+import { Card, CardContent, Link, Stack, Typography } from "@mui/material";
+import NextLink from "next/link";
 import { ReactElement } from "react";
 
 // import { Ad } from "@components/misc/ad";
@@ -10,18 +11,19 @@ export const Sidebar = (): ReactElement => (
     >
         <Card>
             <CardContent>
-                <Typography align="center">
-                    Un peu comme Urban Dictionary, mais tokébakicitte.
+                <Typography
+                    variant="body1"
+                    align="center"
+                >
+                    Le Lexique Québécois est la plateforme pour en apprendre plus sur la culture populaire québecoise, peu importe si t&apos;es un ado, un millénial, ou un boomer.
                 </Typography>
             </CardContent>
         </Card>
         <Card>
             <CardContent>
-                <Typography
-                    variant="body1"
-                    align="center"
-                >
-                    Une plateforme pour en apprendre plus sur la culture populaire québecoise, peu importe si t&apos;es un ado, un millénial, ou un boomer.
+                <Typography align="center">
+                    {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
+                    C&apos;est un peu comme Urban Dictionary, mais <NextLink href="/mots/tokebakicitte" passHref legacyBehavior><Link>tokébakicitte</Link></NextLink>.
                 </Typography>
             </CardContent>
         </Card>
