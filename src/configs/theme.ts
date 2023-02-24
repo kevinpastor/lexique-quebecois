@@ -1,6 +1,7 @@
 import type { } from "@mui/lab/themeAugmentation";
 import { alpha, colors, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { Lora } from "next/font/google";
 
 declare module "@mui/material/styles" {
     interface CustomTokens {
@@ -46,6 +47,13 @@ type DefinedEvelation = keyof typeof darkElevationOverlay;
 
 const definedElevations: Array<DefinedEvelation> = Object.keys(darkElevationOverlay)
     .map((key): DefinedEvelation => parseInt(key, 10));
+
+type NextFont = ReturnType<typeof Lora>;
+
+const lora: NextFont = Lora({
+    style: ["normal", "italic"],
+    subsets: ["latin"]
+});
 
 export const theme = extendTheme({
     colorSchemes: {
@@ -97,11 +105,7 @@ export const theme = extendTheme({
         }
     },
     typography: {
-        fontFamily: [
-            "Lora",
-            "Georgia",
-            "serif"
-        ].join(","),
+        fontFamily: lora.style.fontFamily,
         fontSize: 18,
         allVariants: {
             lineHeight: 1.5
@@ -170,7 +174,7 @@ export const theme = extendTheme({
                 position: "sticky"
             },
             styleOverrides: {
-                root:{
+                root: {
                     // Allows elevation change.
                     backgroundImage: "none",
                     // Smooths out the theme transition.

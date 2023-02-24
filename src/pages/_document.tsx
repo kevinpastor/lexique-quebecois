@@ -1,4 +1,3 @@
-import { getInitColorSchemeScript } from "@mui/material/styles";
 import { Html, Head, Main, NextScript } from "next/document";
 import { ReactElement } from "react";
 
@@ -72,10 +71,6 @@ const Document = (): ReactElement => (
                 rel="manifest"
                 href="/manifest.json"
             />
-            <link
-                rel="stylesheet"
-                href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-            />
             {metadata.map(({ name, content }: Meta): ReactElement => (
                 <meta
                     key={name}
@@ -85,7 +80,6 @@ const Document = (): ReactElement => (
             ))}
         </Head>
         <body>
-            {getInitColorSchemeScript({ defaultMode: "system" })}
             <Main />
             <NextScript />
         </body>
