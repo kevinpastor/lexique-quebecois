@@ -3,8 +3,14 @@ import { SWRConfig } from "swr";
 
 import { fetcher } from "@services/fetcher";
 
+type Config = Parameters<typeof SWRConfig>[0]["value"];
+
+const value: Config = {
+    fetcher
+};
+
 export const SWRProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => (
-    <SWRConfig value={{ fetcher }}>
+    <SWRConfig value={value}>
         {children}
     </SWRConfig>
 );
