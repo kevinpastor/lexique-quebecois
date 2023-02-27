@@ -5,9 +5,10 @@ import { AlertsProvider } from "./alerts-provider";
 import { SWRProvider } from "./swr-provider";
 import { ThemeColorMetaTag } from "./theme-color-meta-tag";
 import { ThemeProvider } from "./theme-provider";
+import { TrackingProvider } from "./tracking-provider";
 
 export const Providers = ({ children }: PropsWithChildren<unknown>): ReactElement => (
-    <>
+    <TrackingProvider>
         <AdProvider />
         <ThemeProvider>
             <ThemeColorMetaTag />
@@ -17,5 +18,5 @@ export const Providers = ({ children }: PropsWithChildren<unknown>): ReactElemen
                 </SWRProvider>
             </AlertsProvider>
         </ThemeProvider>
-    </>
+    </TrackingProvider>
 );
