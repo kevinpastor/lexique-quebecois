@@ -172,7 +172,10 @@
         ],
         "eol-last": "error",
         "eqeqeq": "error",
-        "linebreak-style": "off",
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
         "no-await-in-loop": "error",
         "no-console": [
             "error",
