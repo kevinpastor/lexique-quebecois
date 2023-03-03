@@ -11,6 +11,8 @@ export const NoScript = (): ReactElement => (
                 {" "}
                 <a
                     href="https://www.enable-javascript.com/fr/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{ color: "inherit" }}
                 >
                     activer JavaScript

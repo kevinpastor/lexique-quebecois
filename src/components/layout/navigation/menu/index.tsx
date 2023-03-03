@@ -6,7 +6,7 @@ import { ComponentType, ReactElement, Suspense } from "react";
 import { BooleanUtilities, useBoolean } from "@utils/hooks/use-boolean";
 import { isLowEndDevice } from "@utils/misc/device";
 
-import type { Props as MenuContentProps } from "./menu-content";
+import type { MenuContentProps } from "./menu-content";
 
 const LazyMenuContent = dynamic(async (): Promise<{ default: ComponentType<MenuContentProps> }> => ({
     default: (await import("./menu-content")).MenuContent

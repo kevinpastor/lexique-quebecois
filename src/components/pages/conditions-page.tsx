@@ -236,37 +236,65 @@ export const ConditionsPage = (): ReactElement => (
                 </Typography>
                 <ul>
                     <li>
-                        <Link href="https://thenai.org/opt-out/">
+                        <Link
+                            href="https://thenai.org/opt-out/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             https://thenai.org/opt-out/
                         </Link>
                     </li>
                     <li>
-                        <Link href="http://aboutads.info/choices/">
+                        <Link
+                            href="http://aboutads.info/choices/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             http://aboutads.info/choices/
                         </Link>
                     </li>
                     <li>
-                        <Link href="http://youronlinechoices.eu">
+                        <Link
+                            href="http://youronlinechoices.eu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             http://youronlinechoices.eu
                         </Link>
                     </li>
                     <li>
-                        <Link href="http://networkadvertising.org/choices/">
+                        <Link
+                            href="http://networkadvertising.org/choices/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             http://networkadvertising.org/choices/
                         </Link>
                     </li>
                     <li>
-                        <Link href="http://aboutads.info/">
+                        <Link
+                            href="http://aboutads.info/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             http://aboutads.info/
                         </Link>
                     </li>
                     <li>
-                        <Link href="https://rhythmone.com/opt-out">
+                        <Link
+                            href="https://rhythmone.com/opt-out"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             https://rhythmone.com/opt-out
                         </Link>
                     </li>
                     <li>
-                        <Link href="https://google.com/policies/privacy/partners/">
+                        <Link
+                            href="https://google.com/policies/privacy/partners/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             https://google.com/policies/privacy/partners/
                         </Link>
                     </li>

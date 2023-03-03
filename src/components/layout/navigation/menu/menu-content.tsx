@@ -5,11 +5,11 @@ import { ReactElement } from "react";
 import { MenuItem } from "./menu-item";
 import { ThemeSelector } from "./theme-selector";
 
-export interface Props {
+export interface MenuContentProps {
     onClose: () => void;
 }
 
-export const MenuContent = ({ onClose: handleClose }: Props): ReactElement => (
+export const MenuContent = ({ onClose: handleClose }: MenuContentProps): ReactElement => (
     <Stack
         width={256}
         p={2}

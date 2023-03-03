@@ -4,8 +4,8 @@ import { ReactElement, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { AutocompleteResults } from "./autocomplete-results";
-import { FormValues } from "./content";
 import { Field } from "./field";
+import { FormValues } from "./search-content";
 
 export interface Props {
     onClose: () => void;

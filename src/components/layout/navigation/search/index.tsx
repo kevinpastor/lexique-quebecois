@@ -5,10 +5,10 @@ import { ComponentType, ReactElement, Suspense } from "react";
 
 import { BooleanUtilities, useBoolean } from "@utils/hooks/use-boolean";
 
-import type { Props as SearchContentProps } from "./content";
+import type { SearchContentProps } from "./search-content";
 
 const LazySearchContent = dynamic(async (): Promise<{ default: ComponentType<SearchContentProps> }> => ({
-    default: (await import("./content")).Content
+    default: (await import("./search-content")).SearchContent
 }));
 
 export const Search = (): ReactElement => {

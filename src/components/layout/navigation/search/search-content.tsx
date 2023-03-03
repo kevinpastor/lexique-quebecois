@@ -19,12 +19,12 @@ const validationSchema = object({
     label: string().min(1)
 });
 
-export interface Props {
+export interface SearchContentProps {
     onClose: () => void;
     isOpened: boolean;
 }
 
-export const Content = ({ onClose: handleClose, isOpened }: Props): ReactElement => {
+export const SearchContent = ({ onClose: handleClose, isOpened }: SearchContentProps): ReactElement => {
     const { push } = useRouter();
 
     const navigate = async (label: string): Promise<void> => {

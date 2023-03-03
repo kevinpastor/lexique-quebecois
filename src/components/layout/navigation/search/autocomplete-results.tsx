@@ -9,7 +9,7 @@ import { getSlug } from "@models/definition";
 import { useDebounce } from "@utils/hooks/use-debounce";
 import { KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "@utils/hooks/use-keyboard-focus-selection";
 
-import { FormValues } from "./content";
+import { FormValues } from "./search-content";
 
 export interface Props {
     inputRef: RefObject<HTMLInputElement>;
