@@ -3,6 +3,8 @@ import { PropsWithChildren, ReactElement, useEffect } from "react";
 import { useTracking, Options } from "react-tracking";
 
 import { TrackingData } from "./tracking-data";
+import { Consent } from "../consent-provider/consent";
+import { useConsent } from "../consent-provider/consent-context";
 
 const getAmplitudeApiKey = (): string => {
     if (!process.env["NEXT_PUBLIC_AMPLITUDE_API_KEY"]) {
@@ -13,11 +15,17 @@ const getAmplitudeApiKey = (): string => {
 };
 
 export const ReactTrackingProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => {
+    const { consent } = useConsent();
+
     useEffect((): void => {
+        if (consent !== Consent.Accepted) {
+            return;
+        }
+
         const apiKey: string = getAmplitudeApiKey();
 
         init(apiKey);
-    }, []);
+    }, [consent]);
 
     const options: Options<TrackingData> = {
         dispatch: ({ event, properties }: TrackingData): void => {

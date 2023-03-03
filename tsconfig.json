@@ -30,7 +30,7 @@
                 "./src/configs/*"
             ],
             "@models/*": [
-                "src/models/*"
+                "./src/models/*"
             ],
             "@services/*": [
                 "./src/services/*"
@@ -40,13 +40,12 @@
             ]
         }
     },
-    "exclude": [
-        "node_modules"
-    ],
     "include": [
         "next-env.d.ts",
         "**/*.ts",
-        "**/*.tsx",
-        "**/*.d.ts"
+        "**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }
