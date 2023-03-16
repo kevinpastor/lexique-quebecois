@@ -1,14 +1,13 @@
-import { Share as ShareIcon } from "@mui/icons-material";
-import { Button, Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 
 import { Definition as IDefinition, getSlug } from "@models/definition";
-import { useFormattedDate } from "@utils/hooks/use-formatted-date";
-import { useShare } from "@utils/hooks/use-share";
+import { formatDate } from "@utils/misc/date";
 
 import { Reactions } from "./reactions";
 import { WordClasses } from "./word-classes";
+import { ShareButton } from "../share-button";
 
 interface Props {
     definition: IDefinition;
@@ -16,9 +15,8 @@ interface Props {
 
 export const Definition = ({ definition }: Props): ReactElement => {
     const date: Date = new Date(definition.timestamp);
-    const formattedDate: string | undefined = useFormattedDate(date);
+    const formattedDate: string | undefined = formatDate(date);
     const slug = getSlug(definition.label);
-    const share = useShare(`mots/${slug}`);
 
     return (
         <Card>
@@ -69,13 +67,7 @@ export const Definition = ({ definition }: Props): ReactElement => {
                     width="100%"
                 >
                     <Reactions word={definition} />
-                    <Button
-                        onClick={share}
-                        startIcon={<ShareIcon />}
-                        size="small"
-                    >
-                        Partager
-                    </Button>
+                    <ShareButton url={`mots/${slug}`} />
                 </Stack>
             </CardActions>
         </Card>

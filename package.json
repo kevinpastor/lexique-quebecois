@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "start": "next dev",
-        "start:https": "local-ssl-proxy --source 3030 --target 3000",
+        "serve:https": "local-ssl-proxy --source 3030 --target 3000",
         "build": "pnpm run build:site && pnpm run build:sitemap",
         "build:site": "next build",
         "build:sitemap": "next-sitemap --config next-sitemap.config.js",

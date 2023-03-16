@@ -34,7 +34,7 @@ export const Menu = (): ReactElement => {
                 open={isOpened}
                 onOpen={handleOpen}
                 onClose={handleClose}
-                disableBackdropTransition={isLowEndDevice}
+                disableBackdropTransition={isLowEndDevice()}
                 disableSwipeToOpen // Interferes with the navigation menu button.
                 ModalProps={{
                     keepMounted: true
