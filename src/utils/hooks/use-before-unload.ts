@@ -14,7 +14,9 @@ export const useBeforeUnload = (hasUnsavedChanges: boolean, message: string): vo
 
         event.preventDefault();
         event.returnValue = message;
+
         return message;
+    // Since `hasUnsavedChangesRef` is a ref, it will never change.
     }, [hasUnsavedChangesRef, message]);
 
     useEventListener("beforeunload", onBeforeUnload);

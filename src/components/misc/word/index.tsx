@@ -15,7 +15,7 @@ interface Props {
 
 export const Definition = ({ definition }: Props): ReactElement => {
     const date: Date = new Date(definition.timestamp);
-    const formattedDate: string | undefined = formatDate(date);
+    const formattedDate: string = formatDate(date);
     const slug = getSlug(definition.label);
 
     return (
@@ -54,9 +54,8 @@ export const Definition = ({ definition }: Props): ReactElement => {
                     {definition.example}
                 </Typography>
                 <Typography variant="subtitle2">
-                    {formattedDate
-                        ? `par ${definition.author.name ?? "Anonyme"}, le ${formattedDate}`
-                        : `par ${definition.author.name ?? "Anonyme"}`}
+                    {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                    par {definition.author.name ?? "Anonyme"}, le {formattedDate}
                 </Typography>
             </CardContent>
             <CardActions>

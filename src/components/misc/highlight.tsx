@@ -8,9 +8,13 @@ interface Props {
     highlight: string;
 }
 
+const massageString = (value: string): string => (
+    removeAccents(value).toLocaleLowerCase()
+);
+
 export const Highlight = ({ word, highlight }: Props): ReactElement => {
-    const massagedWord: string = removeAccents(word).toLocaleLowerCase();
-    const massagedHighlight: string = removeAccents(highlight).toLocaleLowerCase();
+    const massagedWord: string = massageString(word);
+    const massagedHighlight: string = massageString(highlight);
 
     if (!massagedWord.startsWith(massagedHighlight)) {
         return (

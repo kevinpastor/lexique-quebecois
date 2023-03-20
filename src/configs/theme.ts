@@ -77,6 +77,9 @@ export const theme = extendTheme({
                         [elevation]: colors.common.white
                     }), {}),
                     highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87)
+                },
+                Tooltip: {
+                    bg: "#6D6D6D"
                 }
             }
         },
@@ -100,6 +103,9 @@ export const theme = extendTheme({
                         [elevation]: lighten("#121212", darkElevationOverlay[elevation])
                     }), {}),
                     highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87)
+                },
+                Tooltip: {
+                    bg: "#6D6D6D"
                 }
             }
         }
@@ -344,6 +350,11 @@ export const theme = extendTheme({
         MuiTextField: {
             defaultProps: {
                 fullWidth: true
+            }
+        },
+        MuiTooltip: {
+            defaultProps: {
+                arrow: true
             }
         },
         MuiTypography: {

@@ -17,7 +17,11 @@ export const Likes = ({
         <Button
             onClick={toggleLike}
             aria-label="J'aime"
-            startIcon={isLiked ? <ThumbUp color="primary" /> : <ThumbUpOutlined />}
+            startIcon={
+                isLiked
+                    ? <ThumbUp color="primary" />
+                    : <ThumbUpOutlined />
+            }
             size="small"
         >
             {likes}

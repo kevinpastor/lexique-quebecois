@@ -17,7 +17,11 @@ export const Dislikes = ({
         <Button
             onClick={toggleDislike}
             aria-label="Je n'aime pas"
-            startIcon={isDisliked ? <ThumbDown /> : <ThumbDownOutlined />}
+            startIcon={
+                isDisliked
+                    ? <ThumbDown />
+                    : <ThumbDownOutlined />
+            }
             size="small"
         >
             {dislikes}

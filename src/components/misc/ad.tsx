@@ -10,7 +10,6 @@ export const Ad = ({ client, slot }: Props): ReactElement => {
         try {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
-        // eslint-disable-next-line no-empty
         catch (error: unknown) {
             console.warn("An error occured while loading an ad: ", error);
         }
