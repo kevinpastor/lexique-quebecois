@@ -66,6 +66,13 @@ export const options: AuthOptions = {
 
             return typeof email === "string" && whitelist.includes(email);
         }
+    },
+    pages: {
+        signIn: "/connexion",
+        // signOut: "/",
+        // error: "/",
+        // verifyRequest: "/",
+        newUser: "/"
     }
 };
 
