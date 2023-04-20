@@ -11,7 +11,13 @@ declare global {
     }
 }
 
-const App = ({ Component, pageProps }: AppProps): ReactElement => (
+const App = ({
+    Component,
+    pageProps: {
+        session,
+        ...pageProps
+    }
+}: AppProps): ReactElement => (
     <>
         <Head>
             <title>Lexique Québécois</title>
@@ -25,7 +31,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => (
                 content="Un peu comme Urban Dictionary, mais québécois."
             />
         </Head>
-        <Providers>
+        <Providers session={session}>
             <Layout>
                 <Component {...pageProps} />
             </Layout>

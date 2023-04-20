@@ -8,7 +8,7 @@ interface ExtendedGlobal {
     _mongoClientConnect?: Promise<MongoClient>;
 }
 
-export const getDatabase = async (): Promise<Db> => {
+export const getMongoClient = async (): Promise<MongoClient> => {
     // 2. Reassign database from cache
     /* istanbul ignore if */
     if (isDevelopmentEnvironment()) {
@@ -40,6 +40,12 @@ export const getDatabase = async (): Promise<Db> => {
     catch (error: unknown) {
         throw new Error(`Could not connect to database. \n${error}`);
     }
+
+    return mongoClient;
+};
+
+export const getDatabase = async (): Promise<Db> => {
+    const mongoClient: MongoClient = await getMongoClient();
 
     return mongoClient.db();
 };
