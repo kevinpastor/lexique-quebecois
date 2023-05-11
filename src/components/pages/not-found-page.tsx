@@ -1,4 +1,4 @@
-import { Home } from "@mui/icons-material";
+import { Home as HomeIcon } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -28,7 +28,7 @@ export const NotFoundPage = (): ReactElement => {
                     >
                         <Button
                             onClick={handleClick}
-                            startIcon={<Home />}
+                            startIcon={<HomeIcon />}
                         >
                             Accueil
                         </Button>

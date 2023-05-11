@@ -70,8 +70,8 @@ export const options: AuthOptions = {
     pages: {
         signIn: "/connexion",
         // signOut: "/",
-        // error: "/",
-        // verifyRequest: "/",
+        error: "/?connexion",
+        verifyRequest: "/?connexion&verification",
         newUser: "/"
     }
 };
