@@ -1,11 +1,11 @@
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import NextAuth, { AuthOptions } from "next-auth";
-import EmailProvider from "next-auth/providers/email";
+import EmailProvider, { EmailUserConfig } from "next-auth/providers/email";
 
 import { getMongoClient } from "@services/api/database";
 import { isInteger } from "@utils/misc/number";
 
-const getEmailProviderOptions = (): Parameters<typeof EmailProvider>[0] => {
+const getEmailProviderOptions = (): EmailUserConfig => {
     if (!process.env["EMAIL_SERVER_HOST"]) {
         throw new Error("EMAIL_SERVER_HOST is missing in environment variables.");
     }
@@ -70,8 +70,8 @@ export const options: AuthOptions = {
     pages: {
         signIn: "/connexion",
         // signOut: "/",
-        error: "/?connexion",
-        verifyRequest: "/?connexion&verification",
+        error: "/",
+        verifyRequest: "/",
         newUser: "/"
     }
 };

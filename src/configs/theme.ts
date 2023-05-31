@@ -1,6 +1,5 @@
 import type { } from "@mui/lab/themeAugmentation";
-import { alpha, colors, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation } from "@mui/material";
-import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { alpha, colors, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation, outlinedInputClasses } from "@mui/material";
 import { Lora } from "next/font/google";
 
 declare module "@mui/material/styles" {
