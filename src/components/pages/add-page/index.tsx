@@ -1,5 +1,6 @@
-import Head from "next/head";
-import { NextRouter, useRouter } from "next/router";
+"use client";
+
+import { useRouter } from "next/navigation";
 import { ReactElement } from "react";
 
 import { FormContainer } from "@components/react-hook-form/form-container";
@@ -22,7 +23,7 @@ const defaultValues: WithCaptchaToken<WordRequest> = {
 };
 
 export const AddPage = (): ReactElement => {
-    const { push }: NextRouter = useRouter();
+    const { push } = useRouter();
     const { enqueueSuccessAlert, enqueueWarningAlert, enqueueErrorAlert } = useAlerts();
 
     const handleSubmit = async (wordRequestWithCaptchaToken: WithCaptchaToken<WordRequest>): Promise<void> => {
@@ -42,24 +43,19 @@ export const AddPage = (): ReactElement => {
 
         enqueueSuccessAlert("Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu.");
 
-        await push("/");
+        push("/");
     };
 
     return (
-        <>
-            <Head>
-                <title>Ajouter - Lexique Québécois</title>
-            </Head>
-            <FormContainer
-                useZodFormProps={{
-                    schema: wordRequestValidationWithCaptchaTokenSchema,
-                    defaultValues,
-                    reValidateMode: "onBlur"
-                }}
-                onSuccess={handleSubmit}
-            >
-                <Form />
-            </FormContainer>
-        </>
+        <FormContainer
+            useZodFormProps={{
+                schema: wordRequestValidationWithCaptchaTokenSchema,
+                defaultValues,
+                reValidateMode: "onBlur"
+            }}
+            onSuccess={handleSubmit}
+        >
+            <Form />
+        </FormContainer>
     );
 };

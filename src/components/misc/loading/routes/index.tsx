@@ -31,11 +31,4 @@ export const routes: Array<Route> = [
             default: (await import("./loading-word-index")).LoadingWordIndex
         }))
     }
-    // TODO
-    // {
-    //     matcher: (url: string): boolean => (
-    //         url === "/ajouter"
-    //     ),
-    //     Component: (): ReactElement => ()
-    // },
 ];
