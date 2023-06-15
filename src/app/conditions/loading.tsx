@@ -1,7 +1,9 @@
+"use client";
+
 import { Card, CardContent, CardHeader, Skeleton } from "@mui/material";
 import { ReactElement } from "react";
 
-export const LoadingTerms = (): ReactElement => (
+const Loading = (): ReactElement => (
     <Card>
         <CardHeader title={<Skeleton width={256} />} />
         <CardContent>
@@ -15,3 +17,5 @@ export const LoadingTerms = (): ReactElement => (
         </CardContent>
     </Card>
 );
+
+export default Loading;

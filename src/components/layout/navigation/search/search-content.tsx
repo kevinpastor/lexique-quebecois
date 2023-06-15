@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { ReactElement } from "react";
 import { object, string } from "zod";
 
@@ -27,18 +27,15 @@ export interface SearchContentProps {
 export const SearchContent = ({ onClose: handleClose, isOpened }: SearchContentProps): ReactElement => {
     const { push } = useRouter();
 
-    const navigate = async (label: string): Promise<void> => {
+    const navigate = (label: string): void => {
         const slug: string = getSlug(label);
         handleClose();
-        await push(
-            `/mots/${slug}?label=${label}`, // Used for add form prefilling
-            `/mots/${slug}`
-        );
+        push(`/mots/${slug}`);
     };
 
-    const handleSubmit = async (values: FormValues): Promise<void> => {
+    const handleSubmit = (values: FormValues): void => {
         const label: string = values.label.trim();
-        await navigate(label);
+        navigate(label);
     };
 
     return (

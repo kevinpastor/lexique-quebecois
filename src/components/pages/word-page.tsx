@@ -19,12 +19,7 @@ export const WordPage = (): ReactElement => {
 
     if (!word || word.definitions.length === 0) { // `definitions` should theoretically never be empty.
         const handleClick = async (): Promise<void> => {
-            if (!query["label"]) {
-                await push("/ajouter");
-            }
-            else {
-                await push(`/ajouter?label=${query["label"]}`, "/ajouter");
-            }
+            await push("/ajouter");
         };
 
         return (

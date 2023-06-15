@@ -12,7 +12,7 @@ import { useAlerts } from "@utils/hooks/use-alerts";
 
 import { Form } from "./form";
 
-const initialValues: WithCaptchaToken<WordRequest> = {
+const defaultValues: WithCaptchaToken<WordRequest> = {
     label: "",
     definition: "",
     example: "",
@@ -22,10 +22,7 @@ const initialValues: WithCaptchaToken<WordRequest> = {
 };
 
 export const AddPage = (): ReactElement => {
-    const {
-        push: pushRoute,
-        query: routeQuery
-    }: NextRouter = useRouter();
+    const { push }: NextRouter = useRouter();
     const { enqueueSuccessAlert, enqueueWarningAlert, enqueueErrorAlert } = useAlerts();
 
     const handleSubmit = async (wordRequestWithCaptchaToken: WithCaptchaToken<WordRequest>): Promise<void> => {
@@ -45,7 +42,7 @@ export const AddPage = (): ReactElement => {
 
         enqueueSuccessAlert("Votre contribution a bel et bien été enregistrée. Elle sera examinée sous peu.");
 
-        await pushRoute("/");
+        await push("/");
     };
 
     return (
@@ -56,14 +53,7 @@ export const AddPage = (): ReactElement => {
             <FormContainer
                 useZodFormProps={{
                     schema: wordRequestValidationWithCaptchaTokenSchema,
-                    defaultValues: {
-                        ...initialValues,
-                        ...(
-                            routeQuery["label"]
-                            && !Array.isArray(routeQuery["label"])
-                            && { label: routeQuery["label"] }
-                        )
-                    },
+                    defaultValues,
                     reValidateMode: "onBlur"
                 }}
                 onSuccess={handleSubmit}
