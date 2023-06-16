@@ -4,7 +4,7 @@ import { WordsPage } from "@components/pages/words-page";
 import { Definition } from "@models/definition";
 import { getDefinitionsSample } from "@services/api/words/get-definitions-sample";
 
-export const revalidate: number = 86400; // Every day
+export const revalidate: number = 86400; // Revalidate every day
 
 const Page = async (): Promise<ReactElement> => {
     const words: Array<Definition> = await getDefinitionsSample();

@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const WordsPage = ({ fallback }: Props): ReactElement => {
-    const { data } = useSWR<Array<Definition>>("/api/words/sample", null, { fallback });
+    const { data } = useSWR<Array<Definition>>("/api/words/sample", { fallback });
 
     // `data` coming from `fallback`
     const definitions: Array<Definition> = data as Array<Definition>;

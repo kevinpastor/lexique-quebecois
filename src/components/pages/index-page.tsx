@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable react/no-unused-prop-types */
 import { Card, CardContent, CardHeader, Link, Typography, Unstable_Grid2 as Grid } from "@mui/material";
 import Head from "next/head";
@@ -17,9 +19,21 @@ interface LetterGroup {
     group: Array<WordGroup>;
 }
 
-export const IndexPage = (): ReactElement => {
+interface Props {
+    fallback: {
+        [endpoint: string]: unknown;
+    };
+}
+
+export const IndexPage = ({ fallback }: Props): ReactElement => {
     // TODO Rename route
-    const { data } = useSWR<Array<string>>("/api/words", { revalidateOnMount: false });
+    const { data } = useSWR<Array<string>>(
+        "/api/words",
+        {
+            revalidateOnMount: false,
+            fallback
+        }
+    );
 
     // `data` coming from `fallback`
     const words: Array<string> = data as Array<string>;
