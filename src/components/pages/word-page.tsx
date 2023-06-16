@@ -1,8 +1,9 @@
+"use client";
+
 import { Add } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { Fragment, ReactElement } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { ReactElement } from "react";
 import useSWR from "swr";
 
 import { Spellings } from "@components/misc/spellings";
@@ -10,16 +11,24 @@ import { Definition as DefinitionComponent } from "@components/misc/word";
 import { Definition } from "@models/definition";
 import { Word } from "@models/word";
 
-export const WordPage = (): ReactElement => {
-    const { push, query } = useRouter();
-    const { data } = useSWR<Word | null>(`/api/words/${query["slug"]}`);
+interface Props {
+    fallback: {
+        [endpoint: string]: unknown;
+    };
+}
+
+export const WordPage = ({ fallback }: Props): ReactElement => {
+    const params = useParams();
+    const { data } = useSWR<Word | null>(`/api/words/${params["slug"]}`, { fallback });
 
     // `data` coming from `fallback`
     const word: Word | null = data as Word | null;
 
+    const { push } = useRouter();
+
     if (!word || word.definitions.length === 0) { // `definitions` should theoretically never be empty.
-        const handleClick = async (): Promise<void> => {
-            await push("/ajouter");
+        const handleClick = (): void => {
+            push("/ajouter");
         };
 
         return (
@@ -46,31 +55,18 @@ export const WordPage = (): ReactElement => {
     }
 
     return (
-        <>
-            <Head>
-                <title>
-                    {/* Having the sufix inline creates comment blocks inside the title tag */}
-                    {`${query["slug"]} - Lexique Québécois`}
-                </title>
-                <meta
-                    key="description"
-                    name="description"
-                    content={`${query["label"]} - ${word.definitions[0].definition}`}
-                />
-            </Head>
-            <Stack spacing={2}>
+        <Stack spacing={2}>
+            <DefinitionComponent
+                key={word.definitions[0].id}
+                definition={word.definitions[0]}
+            />
+            <Spellings spellings={word.spellings} />
+            {word.definitions.slice(1).map((definition: Definition): ReactElement => (
                 <DefinitionComponent
-                    key={word.definitions[0].id}
-                    definition={word.definitions[0]}
+                    key={definition.id}
+                    definition={definition}
                 />
-                <Spellings spellings={word.spellings} />
-                {word.definitions.slice(1).map((definition: Definition): ReactElement => (
-                    <DefinitionComponent
-                        key={definition.id}
-                        definition={definition}
-                    />
-                ))}
-            </Stack>
-        </>
+            ))}
+        </Stack>
     );
 };
