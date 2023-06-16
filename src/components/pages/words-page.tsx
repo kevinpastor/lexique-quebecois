@@ -1,3 +1,5 @@
+"use client";
+
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 import useSWR from "swr";
@@ -5,8 +7,14 @@ import useSWR from "swr";
 import { Definition as WordComponent } from "@components/misc/word";
 import { Definition } from "@models/definition";
 
-export const WordsPage = (): ReactElement => {
-    const { data } = useSWR<Array<Definition>>("/api/words/sample");
+interface Props {
+    fallback: {
+        [endpoint: string]: unknown;
+    };
+}
+
+export const WordsPage = ({ fallback }: Props): ReactElement => {
+    const { data } = useSWR<Array<Definition>>("/api/words/sample", null, { fallback });
 
     // `data` coming from `fallback`
     const definitions: Array<Definition> = data as Array<Definition>;
