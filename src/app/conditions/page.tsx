@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { ConditionsPage } from "@components/pages/conditions-page";
+import { ConditionsPage } from "./component";
 
 export const metadata: Metadata = {
     title: "Conditions - Lexique Québécois"
