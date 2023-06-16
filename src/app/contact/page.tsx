@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { ContactPage } from "@components/pages/contact-page";
+import { ContactPage } from "./component";
 
 export const metadata: Metadata = {
     title: "Contact - Lexique Québécois"
