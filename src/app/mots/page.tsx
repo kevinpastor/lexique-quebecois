@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
 
-import { IndexPage } from "@components/pages/index-page";
 import { getWordIndex } from "@services/api/words/get-word-index";
+
+import { IndexPage } from "./component";
 
 export const revalidate: number = 86400; // Revalidate every day
 

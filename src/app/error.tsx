@@ -2,10 +2,10 @@
 
 import { ReactElement } from "react";
 
-import { InternalErrorPage } from "@components/pages/internal-error-page";
+import { UnexpectedError } from "@components/misc/unexpected-error";
 
 const Error = (): ReactElement => (
-    <InternalErrorPage />
+    <UnexpectedError />
 );
 
 export default Error;

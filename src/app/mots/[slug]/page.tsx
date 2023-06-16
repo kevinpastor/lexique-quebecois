@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { WordPage } from "@components/pages/word-page";
 import { getSlug } from "@models/definition";
 import { Word } from "@models/word";
 import { getWordDefinitions } from "@services/api/words/get-word-definitions";
 import { getWordIndex } from "@services/api/words/get-word-index";
+
+import { WordPage } from "./component";
 
 interface Params {
     slug: string;

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { PrivacyPage } from "@components/pages/privacy-page";
+import { PrivacyPage } from "./component";
 
 export const metadata: Metadata = {
     title: "Confidentialité - Lexique Québécois"

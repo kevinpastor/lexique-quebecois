@@ -19,6 +19,7 @@ interface Props {
 
 export const WordPage = ({ fallback }: Props): ReactElement => {
     const params = useParams();
+    // ! TODO Fix type error
     const { data } = useSWR<Word | null>(`/api/words/${params["slug"]}`, { fallback });
 
     // `data` coming from `fallback`
