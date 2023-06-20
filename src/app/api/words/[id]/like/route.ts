@@ -13,7 +13,7 @@ interface Params {
     id: string;
 }
 
-export const PUT = async (request: NextRequest, { params }: { params: Params }): Promise<NextResponse> => {
+export const PUT = async (request: NextRequest, { params: { id } }: { params: Params }): Promise<NextResponse> => {
     const ip: string | undefined = getRequestIp(request);
     if (!ip) {
         return NextResponse.json(null, { status: Status.Unauthorized });
@@ -23,13 +23,12 @@ export const PUT = async (request: NextRequest, { params }: { params: Params }):
         return NextResponse.json(null, { status: Status.TooManyRequest });
     }
 
-    const id: string = params.id;
     const result: Status = await like(id, ip);
 
     return NextResponse.json(null, { status: result });
 };
 
-export const DELETE = async (request: NextRequest, { params }: { params: Params }): Promise<NextResponse> => {
+export const DELETE = async (request: NextRequest, { params: { id } }: { params: Params }): Promise<NextResponse> => {
     const ip: string | undefined = getRequestIp(request);
     if (!ip) {
         return NextResponse.json(null, { status: Status.Unauthorized });
@@ -39,7 +38,6 @@ export const DELETE = async (request: NextRequest, { params }: { params: Params 
         return NextResponse.json(null, { status: Status.TooManyRequest });
     }
 
-    const id: string = params.id;
     const result: Status = await removeLike(id, ip);
 
     return NextResponse.json(null, { status: result });

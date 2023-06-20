@@ -8,11 +8,10 @@ interface Params {
     id: string;
 }
 
-export const GET = async (request: NextRequest, { params }: { params: Params }): Promise<NextResponse> => {
+// ID is used here as the spelling to get the word collection
+export const GET = async (request: NextRequest, { params: { id: spelling } }: { params: Params }): Promise<NextResponse> => {
     const ip: string | undefined = getRequestIp(request);
 
-    // ID is used here as the spelling to get the word collection
-    const spelling: string = params.id;
     const word: Word | null = await getWordDefinitions(spelling, ip);
 
     return NextResponse.json(word);
