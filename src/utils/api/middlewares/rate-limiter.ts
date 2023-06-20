@@ -1,5 +1,3 @@
-export type RateLimiterMiddleware = (key: string) => boolean;
-
 export class RateLimiter {
 
     private readonly cache: Map<string, Array<Date>>;

@@ -18,16 +18,3 @@ export const addWord = async (wordRequestWithCaptchaToken: WithCaptchaToken<Word
         throw new HttpError(response.status);
     }
 };
-
-export const getAutocompletedWords = async (input: string): Promise<Array<string>> => {
-    const url: string = `/api/words/autocomplete?input=${input}`;
-    const response: Response = await fetch(url);
-
-    if (!response.ok) {
-        throw new HttpError(response.status);
-    }
-
-    const autocompletedWords: Array<string> = await response.json();
-
-    return autocompletedWords;
-};
