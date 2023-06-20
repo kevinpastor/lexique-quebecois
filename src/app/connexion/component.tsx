@@ -1,4 +1,6 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { ReactElement, useEffect } from "react";
 import { object, string } from "zod";
@@ -22,14 +24,14 @@ const defaultValues: FormValues = {
 };
 
 export const LoginPage = (): ReactElement => {
-    const { query } = useRouter();
+    const searchParams = useSearchParams();
     const { enqueueErrorAlert } = useAlerts();
 
     useEffect((): void => {
-        if (query["error"]) {
+        if (searchParams?.get("error")) {
             enqueueErrorAlert("Une erreur s'est produite. Veuillez réessayer plus tard.");
         }
-    }, [enqueueErrorAlert, query]);
+    }, [enqueueErrorAlert, searchParams]);
 
     const handleSubmit = async ({ email }: FormValues): Promise<void> => {
         await signIn("email", { email });

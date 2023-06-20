@@ -5,7 +5,7 @@ import { useFormState } from "react-hook-form";
 
 import { TextField } from "@components/react-hook-form/text-field";
 
-import { FormValues } from "./login-page";
+import { FormValues } from "./component";
 
 export const Form = (): ReactElement => {
     const { isSubmitting } = useFormState<FormValues>();
