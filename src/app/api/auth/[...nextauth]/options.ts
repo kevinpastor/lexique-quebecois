@@ -1,5 +1,5 @@
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import NextAuth, { AuthOptions } from "next-auth";
+import { AuthOptions } from "next-auth";
 import EmailProvider, { EmailUserConfig } from "next-auth/providers/email";
 
 import { getMongoClient } from "@services/api/database";
@@ -61,7 +61,6 @@ export const options: AuthOptions = {
                 console.error("AUTHENTICATION_WHITELIST is missing in environment variables.");
                 return false;
             }
-
             const whitelist: Array<string> = process.env["AUTHENTICATION_WHITELIST"].split(",");
 
             return typeof email === "string" && whitelist.includes(email);
@@ -75,5 +74,3 @@ export const options: AuthOptions = {
         newUser: "/"
     }
 };
-
-export default NextAuth(options);
