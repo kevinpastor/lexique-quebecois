@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { ReactElement } from "react";
 
 export const Actions = (): ReactElement | null => {
-    const { status, data: session } = useSession();
+    const { status } = useSession();
 
     if (status !== "authenticated") {
         return null;

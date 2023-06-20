@@ -28,7 +28,7 @@ export const LoginPage = (): ReactElement => {
     const { enqueueErrorAlert } = useAlerts();
 
     useEffect((): void => {
-        if (searchParams?.get("error")) {
+        if (searchParams.get("error")) {
             enqueueErrorAlert("Une erreur s'est produite. Veuillez réessayer plus tard.");
         }
     }, [enqueueErrorAlert, searchParams]);
