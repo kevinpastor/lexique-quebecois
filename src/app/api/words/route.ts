@@ -4,6 +4,7 @@ import { Status } from "@models/status";
 import { isValidWordRequest } from "@models/word-request";
 import { addWord } from "@services/api/words/add-word";
 import { getWordIndex } from "@services/api/words/get-word-index";
+import { getRequestIp } from "@utils/api/ip";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "@utils/misc/hcaptcha";
 
@@ -18,7 +19,13 @@ export const GET = async (): Promise<NextResponse> => {
 };
 
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
-    if (rateLimiter.consume(request.ip ?? "")) {
+    const ip: string | undefined = getRequestIp(request);
+
+    if (!ip) {
+        return NextResponse.json(null, { status: Status.Unauthorized });
+    }
+
+    if (rateLimiter.consume(ip)) {
         return NextResponse.json(null, { status: Status.TooManyRequest });
     }
 
@@ -42,7 +49,7 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
         return NextResponse.json(null, { status: Status.BadRequest });
     }
 
-    const result: Status = await addWord(wordRequest, request.ip);
+    const result: Status = await addWord(wordRequest, ip);
 
     return NextResponse.json(null, { status: result });
 };
