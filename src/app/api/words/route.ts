@@ -1,0 +1,48 @@
+import { NextRequest, NextResponse } from "next/server";
+
+import { Status } from "@models/status";
+import { isValidWordRequest } from "@models/word-request";
+import { addWord } from "@services/api/words/add-word";
+import { getWordIndex } from "@services/api/words/get-word-index";
+import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
+import { verifyHCaptcha } from "@utils/misc/hcaptcha";
+
+const window: number = 1000 * 60 * 15;
+const tokens: number = 5;
+const rateLimiter = new RateLimiter(window, tokens);
+
+export const GET = async (): Promise<NextResponse> => {
+    const words: Array<string> = await getWordIndex();
+
+    return NextResponse.json(words);
+};
+
+export const POST = async (request: NextRequest): Promise<NextResponse> => {
+    if (rateLimiter.consume(request.ip ?? "")) {
+        return NextResponse.json(null, { status: Status.TooManyRequest });
+    }
+
+    const body = await request.json();
+
+    if (!body.captchaToken) {
+        return NextResponse.json(null, { status: Status.Unauthorized });
+    }
+    if (typeof body.captchaToken !== "string") {
+        return NextResponse.json(null, { status: Status.BadRequest });
+    }
+
+    const captchaToken: string = body.captchaToken;
+    const isValidCaptcha: boolean = await verifyHCaptcha(captchaToken);
+    if (!isValidCaptcha) {
+        return NextResponse.json(null, { status: Status.Unauthorized });
+    }
+
+    const { captchaToken: _, ...wordRequest } = body;
+    if (!isValidWordRequest(wordRequest)) {
+        return NextResponse.json(null, { status: Status.BadRequest });
+    }
+
+    const result: Status = await addWord(wordRequest, request.ip);
+
+    return NextResponse.json(null, { status: result });
+};
