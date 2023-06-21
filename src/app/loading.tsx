@@ -1,9 +1,11 @@
+"use client";
+
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 
-import { LoadingWord } from "./loading-word";
+import { LoadingWord } from "@components/misc/loading-word";
 
-export const LoadingIndex = (): ReactElement => (
+const Loading = (): ReactElement => (
     <Stack spacing={2}>
         {[...Array(5)].map((_: undefined, index: number): ReactElement => (
             // eslint-disable-next-line react/no-array-index-key
@@ -11,3 +13,5 @@ export const LoadingIndex = (): ReactElement => (
         ))}
     </Stack>
 );
+
+export default Loading;

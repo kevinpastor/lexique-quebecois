@@ -1,7 +1,9 @@
+"use client";
+
 import { Card, CardContent, CardHeader, Skeleton, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
-export const LoadingWordIndex = (): ReactElement => (
+const Loading = (): ReactElement => (
     <Card>
         <CardHeader title={<Skeleton width={256} />} />
         <CardContent>
@@ -25,3 +27,5 @@ export const LoadingWordIndex = (): ReactElement => (
         </CardContent>
     </Card>
 );
+
+export default Loading;
