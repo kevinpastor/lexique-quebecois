@@ -1,25 +1,35 @@
 {
     "root": true,
     "plugins": [
-        "@typescript-eslint",
-        "promise"
+        "@typescript-eslint"
     ],
     "parserOptions": {
         "project": "./tsconfig.json"
     },
     "extends": [
-        "next/core-web-vitals",
         "eslint:recommended",
-        "next",
         "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended",
-        "plugin:react/jsx-runtime",
-        "plugin:import/recommended",
-        "plugin:import/typescript"
+        "plugin:eslint-plugin-react/recommended",
+        "plugin:eslint-plugin-react/jsx-runtime",
+        "plugin:eslint-plugin-import/recommended",
+        "plugin:eslint-plugin-import/typescript",
+        "eslint-config-next/core-web-vitals",
+        "plugin:promise/recommended"
     ],
     "ignorePatterns": [
         "**/*.js"
     ],
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [
+                ".ts",
+                ".tsx"
+            ]
+        },
+        "import/resolver": {
+            "typescript": true
+        }
+    },
     "rules": {
         "react/boolean-prop-naming": "error",
         "react/button-has-type": "off",
