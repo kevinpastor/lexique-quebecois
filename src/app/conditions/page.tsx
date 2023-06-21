@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import { ConditionsPage } from "./component";
 
 export const metadata: Metadata = {
-    title: "Conditions - Lexique Québécois"
+    title: "Conditions"
 };
 
 const Page = (): ReactElement => (

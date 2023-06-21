@@ -2,18 +2,24 @@ import { Metadata } from "next";
 import { PropsWithChildren, ReactElement } from "react";
 
 import { Layout } from "@components/layout";
-import { metadata as meta } from "@configs/metadata";
-import { Meta } from "@configs/metadata/meta";
 import { Providers } from "@configs/providers";
 
 export const metadata: Metadata = {
-    title: "Lexique Québécois",
-    manifest: "/manifest.json",
-    viewport: {
-        width: "device-width",
-        initialScale: 1
+    title: {
+        default: "Lexique Québécois",
+        template: "%s - Lexique Québécois"
     },
-    description: "Un peu comme Urban Dictionary, mais québécois.",
+    description: "Un peu comme Urban Dictionary, mais tokébakicitte.",
+    applicationName: "Lexique Québécois",
+    metadataBase: new URL("https://lexiquequebecois.com/"),
+    openGraph: {
+        title: "Lexique Québécois",
+        description: "Un peu comme Urban Dictionary, mais tokébakicitte.",
+        url: "https://lexiquequebecois.com/",
+        siteName: "Lexique Québécois",
+        locale: "fr_CA",
+        type: "website"
+    },
     icons: [
         {
             url: "/favicon/light/16.ico",
@@ -65,7 +71,17 @@ export const metadata: Metadata = {
             sizes: "192x192",
             media: "(prefers-color-scheme: dark)"
         }
-    ]
+    ],
+    manifest: "/manifest.json",
+    viewport: {
+        width: "device-width",
+        initialScale: 1,
+        maximumScale: 10
+    },
+    appleWebApp: {
+        title: "Lexique Québécois",
+        statusBarStyle: "default"
+    }
 };
 
 const RootLayout = ({ children }: PropsWithChildren<unknown>): ReactElement => (
@@ -73,15 +89,6 @@ const RootLayout = ({ children }: PropsWithChildren<unknown>): ReactElement => (
         lang="fr-CA"
         suppressHydrationWarning // Removes the error: "Extra attributes from the server: data-mui-color-scheme".
     >
-        <head>
-            {meta.map(({ name, content }: Meta): ReactElement => (
-                <meta
-                    key={name}
-                    name={name}
-                    content={content}
-                />
-            ))}
-        </head>
         <body>
             <Providers>
                 <Layout>

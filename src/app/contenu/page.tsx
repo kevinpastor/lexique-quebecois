@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import { ContentPage } from "./component";
 
 export const metadata: Metadata = {
-    title: "Politique sur le contenu - Lexique Québécois"
+    title: "Politique sur le contenu"
 };
 
 const Page = (): ReactElement => (

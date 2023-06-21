@@ -2,7 +2,6 @@
 
 /* eslint-disable react/no-unused-prop-types */
 import { Card, CardContent, CardHeader, Link, Typography, Unstable_Grid2 as Grid } from "@mui/material";
-import Head from "next/head";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 import useSWR from "swr";
@@ -57,48 +56,43 @@ export const IndexPage = ({ fallback }: Props): ReactElement => {
     }, []);
 
     return (
-        <>
-            <Head>
-                <title>Index - Lexique Québécois</title>
-            </Head>
-            <Card>
-                <CardHeader title="Index" />
-                <CardContent>
-                    {letterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
-                        // Using div instead of Fragment for better HTML markup.
-                        <div key={letter}>
-                            <Typography variant="h3">
-                                {letter}
-                            </Typography>
-                            <Grid
-                                container
-                                spacing={2}
-                                paddingX={0}
-                            >
-                                {group.map(({ slug, word }: WordGroup, index: number): ReactElement => (
-                                    <Grid
-                                        key={slug}
-                                        xs={12}
-                                        sm={6}
-                                        md={4}
-                                        paddingY={0.5}
+        <Card>
+            <CardHeader title="Index" />
+            <CardContent>
+                {letterGroups.map(({ letter, group }: LetterGroup): ReactElement => (
+                    // Using div instead of Fragment for better HTML markup.
+                    <div key={letter}>
+                        <Typography variant="h3">
+                            {letter}
+                        </Typography>
+                        <Grid
+                            container
+                            spacing={2}
+                            paddingX={0}
+                        >
+                            {group.map(({ slug, word }: WordGroup, index: number): ReactElement => (
+                                <Grid
+                                    key={slug}
+                                    xs={12}
+                                    sm={6}
+                                    md={4}
+                                    paddingY={0.5}
+                                >
+                                    <NextLink
+                                        href={`/mots/${slug}`}
+                                        passHref
+                                        legacyBehavior
                                     >
-                                        <NextLink
-                                            href={`/mots/${slug}`}
-                                            passHref
-                                            legacyBehavior
-                                        >
-                                            <Link gutterBottom={index === group.length - 1}>
-                                                {word}
-                                            </Link>
-                                        </NextLink>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </div>
-                    ))}
-                </CardContent>
-            </Card>
-        </>
+                                        <Link gutterBottom={index === group.length - 1}>
+                                            {word}
+                                        </Link>
+                                    </NextLink>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div>
+                ))}
+            </CardContent>
+        </Card>
     );
 };

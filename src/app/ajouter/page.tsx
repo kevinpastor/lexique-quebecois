@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import { AddPage } from "./component";
 
 export const metadata: Metadata = {
-    title: "Ajouter - Lexique Québécois"
+    title: "Ajouter"
 };
 
 const Page = (): ReactElement => (

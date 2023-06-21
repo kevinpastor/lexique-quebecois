@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import { ContactPage } from "./component";
 
 export const metadata: Metadata = {
-    title: "Contact - Lexique Québécois"
+    title: "Contact"
 };
 
 const Page = (): ReactElement => (

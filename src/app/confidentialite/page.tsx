@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import { PrivacyPage } from "./component";
 
 export const metadata: Metadata = {
-    title: "Confidentialité - Lexique Québécois"
+    title: "Confidentialité"
 };
 
 const Page = (): ReactElement => (

@@ -22,8 +22,6 @@ export const generateStaticParams = async (): Promise<Array<Params>> => {
     return staticParams;
 };
 
-export const revalidate: number = 86400; // Revalidate every day
-
 export const generateMetadata = async ({ params }: { params: Params }): Promise<Metadata> => {
     const word: Word | null = await getWordDefinitions(params.slug);
 
@@ -31,7 +29,7 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
         return {};
     }
 
-    const title: string = `${word.definitions[0].label} - Lexique Québécois`;
+    const title: string = word.definitions[0].label;
     const description: string = `${word.definitions[0].label} - ${word.definitions[0].definition}`;
 
     return {
@@ -39,6 +37,8 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
         description
     };
 };
+
+export const revalidate: number = 86400; // Revalidate every day
 
 const Page = async ({ params }: { params: Params }): Promise<ReactElement> => {
     const { slug } = params;
