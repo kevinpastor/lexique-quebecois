@@ -78,15 +78,13 @@ export const IndexPage = ({ fallback }: Props): ReactElement => {
                                     md={4}
                                     paddingY={0.5}
                                 >
-                                    <NextLink
+                                    <Link
+                                        component={NextLink}
                                         href={`/mots/${slug}`}
-                                        passHref
-                                        legacyBehavior
+                                        gutterBottom={index === group.length - 1}
                                     >
-                                        <Link gutterBottom={index === group.length - 1}>
-                                            {word}
-                                        </Link>
-                                    </NextLink>
+                                        {word}
+                                    </Link>
                                 </Grid>
                             ))}
                         </Grid>

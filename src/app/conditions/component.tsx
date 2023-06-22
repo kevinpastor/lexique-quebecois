@@ -132,7 +132,7 @@ export const ConditionsPage = (): ReactElement => (
             </Typography>
             <Typography gutterBottom>
                 {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
-                L&apos;utilisation du site Web est également régie par notre politique de confidentialité, dont une copie se trouve actuellement à l&apos;adresse suivante&nbsp;: <NextLink href="/confidentialite" passHref legacyBehavior><Link>https://lexiquequebecois.com/confidentialite</Link></NextLink>.
+                L&apos;utilisation du site Web est également régie par notre politique de confidentialité, dont une copie se trouve actuellement à l&apos;adresse suivante&nbsp;: <Link component={NextLink} href="/confidentialite">https://lexiquequebecois.com/confidentialite</Link>.
             </Typography>
             <Typography
                 variant="h3"

@@ -28,15 +28,13 @@ export const Definition = ({ definition }: Props): ReactElement => {
                         spacing={1}
                         alignItems="baseline"
                     >
-                        <NextLink
+                        <Link
+                            component={NextLink}
                             href={`/mots/${slug}`}
-                            passHref
-                            legacyBehavior
+                            variant="h2"
                         >
-                            <Link variant="h2">
-                                {definition.label}
-                            </Link>
-                        </NextLink>
+                            {definition.label}
+                        </Link>
                         <WordClasses wordClasses={definition.wordClasses} />
                     </Stack>
                 }

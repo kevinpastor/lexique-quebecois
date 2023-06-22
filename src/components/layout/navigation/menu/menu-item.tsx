@@ -11,20 +11,15 @@ interface Props {
 
 export const MenuItem = ({ label, href, icon, onClick }: Props): ReactElement => (
     <ListItem disableGutters>
-        <Link
+        <ListItemButton
+            component={Link}
             href={href}
-            passHref
-            legacyBehavior
+            onClick={onClick}
         >
-            <ListItemButton
-                component="a"
-                onClick={onClick}
-            >
-                <ListItemIcon>
-                    {icon}
-                </ListItemIcon>
-                <ListItemText primary={label} />
-            </ListItemButton>
-        </Link>
+            <ListItemIcon>
+                {icon}
+            </ListItemIcon>
+            <ListItemText primary={label} />
+        </ListItemButton>
     </ListItem>
 );

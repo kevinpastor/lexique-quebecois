@@ -1,5 +1,5 @@
-import { Container, Link, List, ListItem, ListItemButton, Skeleton } from "@mui/material";
-import NextLink from "next/link";
+import { Container, List, ListItem, ListItemButton, Skeleton } from "@mui/material";
+import Link from "next/link";
 import { ReactElement, RefObject, useEffect } from "react";
 import { useWatch } from "react-hook-form";
 import useSWR from "swr";
@@ -96,22 +96,17 @@ export const AutocompleteResults = ({ inputRef, onClose: handleClose }: Props): 
                         key={word}
                         disablePadding
                     >
-                        <NextLink
+                        <ListItemButton
+                            component={Link}
                             href={`/mots/${getSlug(word)}`}
-                            passHref
-                            legacyBehavior
+                            onClick={handleClose}
+                            ref={itemRef(index + 1)}
                         >
-                            <ListItemButton
-                                component={Link}
-                                onClick={handleClose}
-                                ref={itemRef(index + 1)}
-                            >
-                                <Highlight
-                                    word={word}
-                                    highlight={debouncedLabel}
-                                />
-                            </ListItemButton>
-                        </NextLink>
+                            <Highlight
+                                word={word}
+                                highlight={debouncedLabel}
+                            />
+                        </ListItemButton>
                     </ListItem>
                 ))}
             </List>

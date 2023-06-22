@@ -36,7 +36,7 @@ export const ConsentSnackbar = ({ isOpen, onAccept: handleAccept, onRefuse: hand
                 subheader={
                     <>
                         {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
-                        En acceptant, tu consentes à ce que l&apos;on utilise des cookies conformément à notre <NextLink href="/confidentialite" passHref legacyBehavior><Link>politique de confidentialité</Link></NextLink>.
+                        En acceptant, tu consentes à ce que l&apos;on utilise des cookies conformément à notre <Link component={NextLink} href="/confidentialite">politique de confidentialité</Link>.
                     </>
                 }
                 subheaderTypographyProps={{

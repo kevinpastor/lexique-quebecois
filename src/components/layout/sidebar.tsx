@@ -23,7 +23,7 @@ export const Sidebar = (): ReactElement => (
             <CardContent>
                 <Typography align="center">
                     {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
-                    C&apos;est un peu comme Urban Dictionary, mais <NextLink href="/mots/tokebakicitte" passHref legacyBehavior><Link>tokébakicitte</Link></NextLink>.
+                    C&apos;est un peu comme Urban Dictionary, mais <Link component={NextLink} href="/mots/tokebakicitte">tokébakicitte</Link>.
                 </Typography>
             </CardContent>
         </Card>

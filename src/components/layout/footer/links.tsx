@@ -8,31 +8,23 @@ export const Links = (): ReactElement => (
         justifyContent="center"
         spacing={2}
     >
-        <NextLink
+        <Link
+            component={NextLink}
             href="/conditions"
-            passHref
-            legacyBehavior
+            variant="subtitle2"
+            color="default"
+            underline="hover"
         >
-            <Link
-                variant="subtitle2"
-                color="default"
-                underline="hover"
-            >
-                Conditions
-            </Link>
-        </NextLink>
-        <NextLink
+            Conditions
+        </Link>
+        <Link
+            component={NextLink}
             href="/confidentialite"
-            passHref
-            legacyBehavior
+            variant="subtitle2"
+            color="default"
+            underline="hover"
         >
-            <Link
-                variant="subtitle2"
-                color="default"
-                underline="hover"
-            >
-                Confidentialité
-            </Link>
-        </NextLink>
+            Confidentialité
+        </Link>
     </Stack>
 );

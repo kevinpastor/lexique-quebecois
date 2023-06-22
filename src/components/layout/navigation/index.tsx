@@ -38,59 +38,43 @@ export const Navigation = (): ReactElement => {
                         spacing={2}
                     >
                         <Typography variant="h1">
-                            <NextLink
+                            <Link
+                                component={NextLink}
                                 href="/"
-                                passHref
-                                legacyBehavior
+                                color="inherit"
+                                underline="none"
                             >
-                                <Link
-                                    color="inherit"
-                                    underline="none"
-                                >
-                                    Lexique Québécois
-                                </Link>
-                            </NextLink>
+                                Lexique Québécois
+                            </Link>
                         </Typography>
                         <DesktopOnly>
-                            <NextLink
+                            <Link
+                                component={NextLink}
                                 href="/ajouter"
-                                passHref
-                                legacyBehavior
+                                variant="subtitle2"
+                                color="default"
+                                underline="hover"
                             >
-                                <Link
-                                    variant="subtitle2"
-                                    color="default"
-                                    underline="hover"
-                                >
-                                    Ajouter
-                                </Link>
-                            </NextLink>
-                            <NextLink
+                                Ajouter
+                            </Link>
+                            <Link
+                                component={NextLink}
                                 href="/mots"
-                                passHref
-                                legacyBehavior
+                                variant="subtitle2"
+                                color="default"
+                                underline="hover"
                             >
-                                <Link
-                                    variant="subtitle2"
-                                    color="default"
-                                    underline="hover"
-                                >
-                                    Index
-                                </Link>
-                            </NextLink>
-                            <NextLink
+                                Index
+                            </Link>
+                            <Link
+                                component={NextLink}
                                 href="/contact"
-                                passHref
-                                legacyBehavior
+                                variant="subtitle2"
+                                color="default"
+                                underline="hover"
                             >
-                                <Link
-                                    variant="subtitle2"
-                                    color="default"
-                                    underline="hover"
-                                >
-                                    Contact
-                                </Link>
-                            </NextLink>
+                                Contact
+                            </Link>
                         </DesktopOnly>
                     </Stack>
                     <Stack

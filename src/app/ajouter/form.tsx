@@ -26,7 +26,7 @@ export const Form = (): ReactElement => {
                 <Stack spacing={2}>
                     <Typography>
                         {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
-                        Assure-toi d&apos;avoir pris connaissance de la <NextLink href="/contenu" passHref legacyBehavior><Link>politique sur le contenu</Link></NextLink> avant d&apos;ajouter un mot.
+                        Assure-toi d&apos;avoir pris connaissance de la <Link component={NextLink} href="/contenu">politique sur le contenu</Link> avant d&apos;ajouter un mot.
                     </Typography>
                     <TextField
                         name="label"
