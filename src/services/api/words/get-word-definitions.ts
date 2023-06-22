@@ -6,8 +6,7 @@ import { countArrayOperation } from "@utils/api/aggregation/operations/count-arr
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { getReviewScore } from "@utils/api/aggregation/stages/review-sort-stages";
-
-import { defaultAggregateOptions, getDatabase } from "../database";
+import { defaultAggregateOptions, getDatabase } from "src/app/api/database";
 
 const createSearchStage = (query: string, fields: Array<string | Document>): Document => {
     const operators: Array<Document> = fields.map((field: string | Document): Document => ({

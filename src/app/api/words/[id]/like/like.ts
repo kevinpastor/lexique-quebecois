@@ -2,7 +2,7 @@ import { Collection, Db, Filter, ObjectId, UpdateFilter, UpdateResult } from "mo
 
 import { Status } from "@models/status";
 import { WordDocument } from "@models/word-document";
-import { getDatabase } from "@services/api/database";
+import { getDatabase } from "src/app/api/database";
 
 // Inspired by https://stackoverflow.com/a/28006849/7817501
 export const like = async (id: string, ip: string): Promise<Status> => {

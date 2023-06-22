@@ -2,7 +2,7 @@ import { Collection, Db, Filter, ObjectId, UpdateFilter, UpdateResult } from "mo
 
 import { Status } from "@models/status";
 import { WordDocument } from "@models/word-document";
-import { getDatabase } from "@services/api/database";
+import { getDatabase } from "src/app/api/database";
 
 export const dislike = async (id: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();

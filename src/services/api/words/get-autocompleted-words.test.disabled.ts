@@ -1,5 +1,5 @@
-import { _closeMongoClient } from "@services/api/database";
 import { getAutocompletedWords } from "@services/api/words/get-autocompleted-words";
+import { _closeMongoClient } from "src/app/api/database";
 
 import "../../../utils/tests/helpers";
 

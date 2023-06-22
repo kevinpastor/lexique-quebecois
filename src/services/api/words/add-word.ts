@@ -4,8 +4,7 @@ import { DefinitionDocument } from "@models/definition-document";
 import { Status } from "@models/status";
 import { WordDocument } from "@models/word-document";
 import { WordRequest } from "@models/word-request";
-
-import { defaultAggregateOptions, getDatabase } from "../database";
+import { defaultAggregateOptions, getDatabase } from "src/app/api/database";
 
 const createSearchStage = (query: string, fields: Array<string | Document>): Document => {
     const operators: Array<Document> = fields.map((field: string | Document): Document => ({

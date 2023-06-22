@@ -8,8 +8,7 @@ import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-ope
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { getReviewScore } from "@utils/api/aggregation/stages/review-sort-stages";
 import { sample } from "@utils/misc/random";
-
-import { defaultAggregateOptions, getDatabase } from "../database";
+import { defaultAggregateOptions, getDatabase } from "src/app/api/database";
 
 const definitionProjectionOperation = (ip: string): Document => ({
     _id: 0,

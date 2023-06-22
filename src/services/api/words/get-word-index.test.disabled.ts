@@ -1,5 +1,5 @@
-import { _closeMongoClient } from "@services/api/database";
 import { getWordIndex } from "@services/api/words/get-word-index";
+import { _closeMongoClient } from "src/app/api/database";
 
 import "../../../utils/tests/helpers";
 

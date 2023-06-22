@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 
 import { getSlug } from "@models/definition";
 import { WordDocument } from "@models/word-document";
-import { defaultAggregateOptions, getDatabase } from "@services/api/database";
+import { defaultAggregateOptions, getDatabase } from "src/app/api/database";
 
 import { host } from "./robots";
 

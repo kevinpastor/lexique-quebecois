@@ -1,8 +1,7 @@
 import { Collection, Db, Document } from "mongodb";
 
 import { WordDocument } from "@models/word-document";
-
-import { defaultAggregateOptions, getDatabase } from "../database";
+import { defaultAggregateOptions, getDatabase } from "src/app/api/database";
 
 const createAutocompleteSearchWithBitmaskScore = (query: string, fields: Array<string | Document>): Document => {
     const operators: Array<Document> = fields.map((field: string | Document, index: number): Document => ({
