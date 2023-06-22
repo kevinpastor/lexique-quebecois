@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { Status } from "@models/status";
-import { dislike, removeDislike } from "@services/api/reactions";
 import { getRequestIp } from "@utils/api/ip";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
+
+import { dislike } from "./dislike";
+import { removeDislike } from "./remove-dislike";
 
 const window: number = 1000 * 60 * 15;
 const tokens: number = 100;
