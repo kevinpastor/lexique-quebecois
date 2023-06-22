@@ -1,7 +1,7 @@
 import { Status } from "@models/status";
 import { Word } from "@models/word";
 import { _closeMongoClient } from "@services/api/database";
-import { like, removeLike, dislike, removeDislike } from "@services/api/reactions";
+import { dislike, removeDislike } from "@services/api/reactions";
 import { getWordDefinitions } from "@services/api/words/get-word-definitions";
 
 const ip: string = "127.0.0.1";
@@ -17,61 +17,6 @@ beforeAll(async (): Promise<void> => {
 
 afterAll(async (): Promise<void> => {
     await _closeMongoClient();
-});
-
-describe("like", (): void => {
-    beforeEach((): void => {
-        jest.resetAllMocks();
-    });
-
-    it("should not like non existent word", async (): Promise<void> => {
-        const result: Status = await like("000000000000000000000000", ip);
-
-        expect(result).toEqual(Status.NotFound);
-    });
-
-    it("should not like already liked word", async (): Promise<void> => {
-        await removeLike(id, ip);
-        await like(id, ip);
-
-        const result: Status = await like(id, ip);
-        expect(result).toEqual(Status.Conflict);
-    });
-
-    it("should like", async (): Promise<void> => {
-        await removeLike(id, ip);
-
-        const result: Status = await like(id, ip);
-        expect(result).toEqual(Status.OK);
-    });
-});
-
-describe("removeLike", (): void => {
-    beforeEach((): void => {
-        jest.resetAllMocks();
-    });
-
-    it("should not remove like on non existant word", async (): Promise<void> => {
-        const result: Status = await removeLike("000000000000000000000000", ip);
-
-        expect(result).toEqual(Status.NotFound);
-    });
-
-    it("should not remove non existent like", async (): Promise<void> => {
-        await removeLike(id, ip);
-
-        const result: Status = await removeLike(id, ip);
-
-        expect(result).toEqual(Status.Conflict);
-    });
-
-    it("should remove like", async (): Promise<void> => {
-        await like(id, ip);
-
-        const result: Status = await removeLike(id, ip);
-
-        expect(result).toEqual(Status.OK);
-    });
 });
 
 describe("dislike", (): void => {

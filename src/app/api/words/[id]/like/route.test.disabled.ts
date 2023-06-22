@@ -3,11 +3,12 @@ import { NextApiRequest } from "next";
 
 import { Method } from "@models/method";
 import { Status } from "@models/status";
-import { like, removeLike } from "@services/api/reactions";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { createRequestStub } from "@utils/tests/request";
 import { createResponseStub } from "@utils/tests/response";
 
+import { like } from "./like";
+import { removeLike } from "./remove-like";
 // TODO Create path alias
 import handler from "./route";
 
