@@ -6,7 +6,6 @@ import { ComponentType, PropsWithChildren, ReactElement } from "react";
 
 import { ErrorBoundary } from "@components/error-boundary";
 import { DesktopOnly } from "@components/misc/desktop-only";
-// import { Loading } from "@components/misc/loading";
 
 import { Footer } from "./footer";
 import { Navigation } from "./navigation";
@@ -30,10 +29,7 @@ export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement =
             >
                 <Grid xs>
                     <ErrorBoundary fallback={<UnexpectedError />}>
-                        {/* TODO Bring back loading screens */}
-                        {/* <Loading> */}
                         {children}
-                        {/* </Loading> */}
                     </ErrorBoundary>
                 </Grid>
                 <Grid

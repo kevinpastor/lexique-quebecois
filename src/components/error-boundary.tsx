@@ -8,7 +8,6 @@ interface State {
     hasError: boolean;
 }
 
-// eslint-disable-next-line react/require-optimization
 export class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
 
     public static getDerivedStateFromError(): State {
@@ -18,6 +17,10 @@ export class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
     public constructor(props: Props) {
         super(props);
         this.state = { hasError: false };
+    }
+
+    public shouldComponentUpdate(): boolean {
+        return true;
     }
 
     public render(): ReactElement {
