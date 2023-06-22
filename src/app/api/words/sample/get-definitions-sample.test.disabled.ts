@@ -1,8 +1,8 @@
 import { Definition, definitionSchema } from "@models/definition";
-import { getDefinitionsSample } from "@services/api/words/get-definitions-sample";
 import { _closeMongoClient } from "src/app/api/database";
 
-import "../../../utils/tests/helpers";
+import { getDefinitionsSample } from "./get-definitions-sample";
+import "../../../../utils/tests/helpers";
 
 const ip: string = "127.0.0.1";
 
@@ -10,7 +10,7 @@ afterAll(async (): Promise<void> => {
     await _closeMongoClient();
 });
 
-describe("getWordsSample", (): void => {
+describe("getDefinitionsSample", (): void => {
     it("should get word sample", async (): Promise<void> => {
         const words: Array<Definition> = await getDefinitionsSample(ip);
 
