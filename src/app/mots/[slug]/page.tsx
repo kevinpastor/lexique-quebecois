@@ -3,8 +3,8 @@ import { ReactElement } from "react";
 
 import { getSlug } from "@models/definition";
 import { Word } from "@models/word";
-import { getWordIndex } from "@services/api/words/get-word-index";
 import { getWordDefinitions } from "src/app/api/words/[id]/get-word-definitions";
+import { getWordIndex } from "src/app/api/words/get-word-index";
 
 import { WordPage } from "./component";
 

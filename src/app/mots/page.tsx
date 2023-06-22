@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { getWordIndex } from "@services/api/words/get-word-index";
+import { getWordIndex } from "src/app/api/words/get-word-index";
 
 import { IndexPage } from "./component";
 

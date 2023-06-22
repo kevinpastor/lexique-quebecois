@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { Status } from "@models/status";
 import { isValidWordRequest } from "@models/word-request";
-import { getWordIndex } from "@services/api/words/get-word-index";
 import { getRequestIp } from "@utils/api/ip";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "@utils/misc/hcaptcha";
 
 import { addWord } from "./add-word";
+import { getWordIndex } from "./get-word-index";
 
 const window: number = 1000 * 60 * 15;
 const tokens: number = 5;

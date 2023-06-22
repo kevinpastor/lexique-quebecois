@@ -1,6 +1,6 @@
-import { getWordIndex } from "@services/api/words/get-word-index";
 import { _closeMongoClient } from "src/app/api/database";
 
+import { getWordIndex } from "./get-word-index";
 import "../../../utils/tests/helpers";
 
 afterAll(async (): Promise<void> => {
