@@ -1,9 +1,9 @@
 import { WordClass } from "@models/classes";
 import { Status } from "@models/status";
 import { WordRequest } from "@models/word-request";
-import { addWord } from "@services/api/words/add-word";
 import { _closeMongoClient } from "src/app/api/database";
 
+import { addWord } from "./add-word";
 import "../../../utils/tests/helpers";
 
 const ip: string = "127.0.0.1";
