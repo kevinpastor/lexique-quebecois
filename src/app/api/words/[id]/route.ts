@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { Word } from "@models/word";
-import { getWordDefinitions } from "@services/api/words/get-word-definitions";
 import { getRequestIp } from "@utils/api/ip";
+
+import { getWordDefinitions } from "./get-word-definitions";
 
 interface Params {
     id: string;
