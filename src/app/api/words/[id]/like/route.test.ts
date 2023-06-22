@@ -3,18 +3,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { Status } from "@models/status";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 
-import { dislike } from "./dislike";
-import { removeDislike } from "./remove-dislike";
+import { like } from "./like";
+import { removeLike } from "./remove-like";
 import { PUT, DELETE } from "./route";
 
-jest.mock("./dislike", () => ({
-    dislike: jest.fn()
+jest.mock("./like", () => ({
+    like: jest.fn()
 }));
-const dislikeMock = dislike as jest.MockedFunction<typeof dislike>;
-jest.mock("./remove-dislike", () => ({
-    removeDislike: jest.fn()
+const likeMock = like as jest.MockedFunction<typeof like>;
+jest.mock("./remove-like", () => ({
+    removeLike: jest.fn()
 }));
-const removeDislikeMock = removeDislike as jest.MockedFunction<typeof removeDislike>;
+const removeLikeMock = removeLike as jest.MockedFunction<typeof removeLike>;
 
 const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
 
@@ -42,7 +42,7 @@ describe("PUT", (): void => {
         jest.resetAllMocks();
     });
 
-    it("should not dislike with no ip", async (): Promise<void> => {
+    it("should not like with no ip", async (): Promise<void> => {
         const response: NextResponse = await PUT(requestStubWithoutIp, options);
 
         expect(response.status).toBe(Status.Unauthorized);
@@ -56,24 +56,24 @@ describe("PUT", (): void => {
         expect(response.status).toBe(Status.TooManyRequest);
     });
 
-    it("should not dislike non existent word", async (): Promise<void> => {
-        dislikeMock.mockResolvedValue(Status.NotFound);
+    it("should not like non existent word", async (): Promise<void> => {
+        likeMock.mockResolvedValue(Status.NotFound);
 
         const response: NextResponse = await PUT(requestStub, options);
 
         expect(response.status).toBe(Status.NotFound);
     });
 
-    it("should not dislike already disliked word", async (): Promise<void> => {
-        dislikeMock.mockResolvedValue(Status.Conflict);
+    it("should not like already liked word", async (): Promise<void> => {
+        likeMock.mockResolvedValue(Status.Conflict);
 
         const response: NextResponse = await PUT(requestStub, options);
 
         expect(response.status).toBe(Status.Conflict);
     });
 
-    it("should dislike", async (): Promise<void> => {
-        dislikeMock.mockResolvedValue(Status.OK);
+    it("should like", async (): Promise<void> => {
+        likeMock.mockResolvedValue(Status.OK);
 
         const response: NextResponse = await PUT(requestStub, options);
 
@@ -87,15 +87,17 @@ describe("DELETE", (): void => {
     });
 
     afterEach((): void => {
-        jest.resetAllMocks();
+        consumeMock.mockReset();
+        removeLikeMock.mockReset();
     });
 
-    it("should not remove dislike with no ip", async (): Promise<void> => {
+    it("should not remove like with no ip", async (): Promise<void> => {
         const response: NextResponse = await DELETE(requestStubWithoutIp, options);
 
         expect(response.status).toBe(Status.Unauthorized);
     });
 
+    // TODO Find alternative so that tests are isolated for rate limiting
     it("should limit request rate", async (): Promise<void> => {
         consumeMock.mockReturnValue(true);
 
@@ -104,25 +106,23 @@ describe("DELETE", (): void => {
         expect(response.status).toBe(Status.TooManyRequest);
     });
 
-    it("should not remove dislike on non existent word", async (): Promise<void> => {
-        removeDislikeMock.mockResolvedValue(Status.NotFound);
+    it("should not remove like on non existent word", async (): Promise<void> => {
+        removeLikeMock.mockResolvedValue(Status.NotFound);
 
         const response: NextResponse = await DELETE(requestStub, options);
 
         expect(response.status).toBe(Status.NotFound);
     });
 
-    it("should not remove non existent dislike", async (): Promise<void> => {
-        removeDislikeMock.mockResolvedValue(Status.Conflict);
+    it("should not remove non existent like", async (): Promise<void> => {
+        removeLikeMock.mockResolvedValue(Status.Conflict);
 
         const response: NextResponse = await DELETE(requestStub, options);
 
         expect(response.status).toBe(Status.Conflict);
     });
 
-    it("should remove dislike", async (): Promise<void> => {
-        removeDislikeMock.mockResolvedValue(Status.OK);
-
+    it("should remove like", async (): Promise<void> => {
         const response: NextResponse = await DELETE(requestStub, options);
 
         expect(response.status).toBe(Status.OK);
