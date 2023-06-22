@@ -14,5 +14,5 @@ const massageRequest = (request: NextRequest): Parameters<typeof getClientIp>[0]
 });
 
 export const getRequestIp = (request: NextRequest): string | undefined => (
-    getClientIp(massageRequest(request)) ?? undefined
+    request.ip ?? getClientIp(massageRequest(request)) ?? undefined
 );
