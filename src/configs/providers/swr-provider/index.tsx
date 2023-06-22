@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactElement } from "react";
 import { SWRConfig } from "swr";
 
-import { fetcher } from "@services/fetcher";
+import { fetcher } from "./fetcher";
 
 type Config = Parameters<typeof SWRConfig>[0]["value"];
 
