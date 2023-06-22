@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { Status } from "@models/status";
-import { getAutocompletedWords } from "@services/api/words/get-autocompleted-words";
+
+import { getAutocompletedWords } from "./get-autocompleted-words";
 
 export const GET = async (request: NextRequest): Promise<NextResponse> => {
     if (!request.nextUrl.searchParams.has("input")) {
