@@ -1,6 +1,6 @@
 "use client";
 
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 import { PropsWithChildren, ReactElement } from "react";
 
 import { AdProvider } from "./ad-provider";
