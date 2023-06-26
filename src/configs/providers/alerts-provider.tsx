@@ -13,6 +13,7 @@ export interface IAlertsContext {
 }
 
 export const AlertsContext = createContext<IAlertsContext | undefined>(undefined);
+AlertsContext.displayName = "AlertsContext";
 
 const LazySnackbar = dynamic((): Promise<{ default: ComponentType<SnackbarProps> }> => (
     import("@mui/material/Snackbar")
@@ -86,8 +87,8 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
         enqueueErrorAlert
     }), [enqueueErrorAlert, enqueueSuccessAlert, enqueueWarningAlert]);
 
-    // TODO Look into why Alert can't be lazy loaded
     return (
+        // TODO Investigate if the context provider can be moved in its own component.
         <AlertsContext.Provider value={value}>
             <Suspense>
                 <LazySnackbar
@@ -96,6 +97,7 @@ export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactE
                     TransitionProps={{ onExited: handleExited }}
                     autoHideDuration={5000}
                 >
+                    {/** TODO Look into why Alert can't be lazy loaded */}
                     <MuiAlert severity={alerts[0]?.severity}>
                         {alerts[0]?.message}
                     </MuiAlert>
