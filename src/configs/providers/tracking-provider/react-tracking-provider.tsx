@@ -24,7 +24,7 @@ export const ReactTrackingProvider = ({ children }: PropsWithChildren<unknown>):
 
         const apiKey: string = getAmplitudeApiKey();
 
-        init(apiKey);
+        init(apiKey, { defaultTracking: false });
     }, [consent]);
 
     const options: Options<TrackingData> = {
