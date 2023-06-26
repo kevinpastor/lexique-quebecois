@@ -4,10 +4,10 @@ import { ComponentType, ReactElement, Suspense } from "react";
 import { useLocalStorage } from "@utils/hooks/use-local-storage";
 
 import { Consent } from "./consent";
-import type { ConsentSnackbarProps } from "./consent-snackbar";
+import type { ConsentSnackbarProps } from "./snackbar";
 
 const LazyConsentSnackbar = dynamic(async (): Promise<{ default: ComponentType<ConsentSnackbarProps> }> => ({
-    default: (await import("./consent-snackbar")).ConsentSnackbar
+    default: (await import("./snackbar")).ConsentSnackbar
 }));
 
 export const ConsentForm = (): ReactElement | null => {

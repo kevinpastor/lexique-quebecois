@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 import { Consent } from "./consent-provider/consent";
-import { useConsent } from "./consent-provider/consent-context";
+import { useConsent } from "./consent-provider/context";
 
 export const AdProvider = (): ReactElement | null => {
     const { consent } = useConsent();

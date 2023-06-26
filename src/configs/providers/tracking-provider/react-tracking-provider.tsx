@@ -4,7 +4,7 @@ import { useTracking, Options } from "react-tracking";
 
 import { TrackingData } from "./tracking-data";
 import { Consent } from "../consent-provider/consent";
-import { useConsent } from "../consent-provider/consent-context";
+import { useConsent } from "../consent-provider/context";
 
 const getAmplitudeApiKey = (): string => {
     if (!process.env["NEXT_PUBLIC_AMPLITUDE_API_KEY"]) {
