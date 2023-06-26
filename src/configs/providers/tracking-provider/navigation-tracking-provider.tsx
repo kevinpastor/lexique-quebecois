@@ -1,19 +1,19 @@
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { PropsWithChildren, ReactElement, useEffect } from "react";
 import { useTracking as useReactTracking } from "react-tracking";
 
 import { TrackingData } from "./tracking-data";
 
 export const NavigationTrackingProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => {
-    const { asPath } = useRouter();
+    const pathname = usePathname();
     const { trackEvent } = useReactTracking<TrackingData>();
 
     useEffect((): void => {
         trackEvent({
             event: "view page",
-            properties: { path: asPath }
+            properties: { path: pathname }
         });
-    }, [asPath, trackEvent]);
+    }, [pathname, trackEvent]);
 
     return (
         <>
