@@ -12,7 +12,7 @@ export interface IAlertsContext {
     enqueueErrorAlert: (message: string) => void;
 }
 
-export const AlertsContext = createContext<IAlertsContext | null>(null);
+export const AlertsContext = createContext<IAlertsContext | undefined>(undefined);
 
 const LazySnackbar = dynamic((): Promise<{ default: ComponentType<SnackbarProps> }> => (
     import("@mui/material/Snackbar")
