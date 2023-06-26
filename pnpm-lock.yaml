@@ -38,6 +38,9 @@ dependencies:
   '@next/env':
     specifier: ^13.4.7
     version: 13.4.7
+  '@vercel/analytics':
+    specifier: ^1.0.1
+    version: 1.0.1
   mongodb:
     specifier: ^5.6.0
     version: 5.6.0
@@ -1732,6 +1735,10 @@ packages:
       '@typescript-eslint/types': 5.60.1
       eslint-visitor-keys: 3.4.1
     dev: true
+
+  /@vercel/analytics@1.0.1:
+    resolution: {integrity: sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==}
+    dev: false
 
   /abab@2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}

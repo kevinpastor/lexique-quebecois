@@ -1,5 +1,6 @@
 "use client";
 
+import { Analytics } from '@vercel/analytics/react';
 import { PropsWithChildren, ReactElement } from "react";
 
 import { AdProvider } from "./ad-provider";
@@ -14,19 +15,22 @@ import { TrackingProvider } from "./tracking-provider";
 type Props = AuthenticationProviderProps;
 
 export const Providers = ({ session, children }: PropsWithChildren<Props>): ReactElement => (
-    <AuthenticationProvider session={session}>
-        <ThemeProvider>
-            <ThemeColorMetaTag />
-            <ConsentProvider>
-                <TrackingProvider>
-                    <AdProvider />
-                    <AlertsProvider>
-                        <SWRProvider>
-                            {children}
-                        </SWRProvider>
-                    </AlertsProvider>
-                </TrackingProvider>
-            </ConsentProvider>
-        </ThemeProvider>
-    </AuthenticationProvider>
+    <>
+        <Analytics />
+        <AuthenticationProvider session={session}>
+            <ThemeProvider>
+                <ThemeColorMetaTag />
+                <ConsentProvider>
+                    <TrackingProvider>
+                        <AdProvider />
+                        <AlertsProvider>
+                            <SWRProvider>
+                                {children}
+                            </SWRProvider>
+                        </AlertsProvider>
+                    </TrackingProvider>
+                </ConsentProvider>
+            </ThemeProvider>
+        </AuthenticationProvider>
+    </>
 );
