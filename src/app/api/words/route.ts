@@ -21,15 +21,16 @@ export const GET = async (): Promise<NextResponse> => {
 
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
     const ip: string | undefined = getRequestIp(request);
-
     if (!ip) {
         return NextResponse.json(null, { status: Status.Unauthorized });
     }
-
     if (rateLimiter.consume(ip)) {
         return NextResponse.json(null, { status: Status.TooManyRequest });
     }
 
+    if (request.body === null) {
+        return NextResponse.json(null, { status: Status.BadRequest });
+    }
     const body = await request.json();
 
     if (!body.captchaToken) {

@@ -8,17 +8,22 @@
             "command": "pnpm start"
         },
         {
-            "name": "Debug Jest Tests",
             "type": "node",
+            "name": "vscode-jest-tests.v2",
             "request": "launch",
-            "runtimeArgs": [
-                "--inspect-brk",
-                "${workspaceRoot}/node_modules/jest/bin/jest.js",
-                "--runInBand"
+            "args": [
+                "test",
+                "--",
+                "--runInBand",
+                "--watchAll=false",
+                "--testNamePattern",
+                "${jest.testNamePattern}",
+                "--runTestsByPath",
+                "${jest.testFile}"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "port": 9229
+            "runtimeExecutable": "pnpm"
         }
     ]
 }
