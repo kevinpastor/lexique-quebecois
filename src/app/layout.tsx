@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { PropsWithChildren, ReactElement } from "react";
 
-import { Layout } from "@components/layout";
 import { Providers } from "@configs/providers";
+
+import { Layout } from "./_components/layout";
 
 export const metadata: Metadata = {
     title: {

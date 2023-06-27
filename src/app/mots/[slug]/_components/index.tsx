@@ -6,10 +6,11 @@ import { useParams, useRouter } from "next/navigation";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
-import { Spellings } from "@components/misc/spellings";
 import { Definition as DefinitionComponent } from "@components/misc/word";
 import { Definition } from "@models/definition";
 import { Word } from "@models/word";
+
+import { Spellings } from "./spellings";
 
 interface Props {
     fallback: {
