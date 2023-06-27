@@ -1,7 +1,7 @@
+import { _closeMongoClient } from "@app/api/database";
+import { getWordDefinitions } from "@app/api/words/[id]/get-word-definitions";
 import { Status } from "@models/status";
 import { Word } from "@models/word";
-import { _closeMongoClient } from "src/app/api/database";
-import { getWordDefinitions } from "src/app/api/words/[id]/get-word-definitions";
 
 import { dislike } from "./dislike";
 import { removeDislike } from "./remove-dislike";

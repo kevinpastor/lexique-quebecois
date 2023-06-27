@@ -2,13 +2,13 @@ import { Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } f
 import NextLink from "next/link";
 import { ReactElement } from "react";
 
+import { ShareButton } from "@components/share-button";
 import { Definition as IDefinition, getSlug } from "@models/definition";
 import { formatDate } from "@utils/misc/date";
 
 import { Actions } from "./actions";
 import { Reactions } from "./reactions";
 import { WordClasses } from "./word-classes";
-import { ShareButton } from "../share-button";
 
 interface Props {
     definition: IDefinition;

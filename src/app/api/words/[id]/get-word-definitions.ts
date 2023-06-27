@@ -1,12 +1,12 @@
 import { Collection, Db, Document } from "mongodb";
 
+import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
 import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { getReviewScore } from "@utils/api/aggregation/stages/review-sort-stages";
-import { defaultAggregateOptions, getDatabase } from "src/app/api/database";
 
 const createSearchStage = (query: string, fields: Array<string | Document>): Document => {
     const operators: Array<Document> = fields.map((field: string | Document): Document => ({

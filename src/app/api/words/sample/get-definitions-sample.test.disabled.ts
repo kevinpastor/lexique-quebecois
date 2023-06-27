@@ -1,8 +1,8 @@
+import { _closeMongoClient } from "@app/api/database";
 import { Definition, definitionSchema } from "@models/definition";
-import { _closeMongoClient } from "src/app/api/database";
+import "@utils/tests/helpers";
 
 import { getDefinitionsSample } from "./get-definitions-sample";
-import "../../../../utils/tests/helpers";
 
 const ip: string = "127.0.0.1";
 

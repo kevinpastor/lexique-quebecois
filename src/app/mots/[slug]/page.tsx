@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
+import { getWordDefinitions } from "@app/api/words/[id]/get-word-definitions";
+import { getWordIndex } from "@app/api/words/get-word-index";
 import { getSlug } from "@models/definition";
 import { Word } from "@models/word";
-import { getWordDefinitions } from "src/app/api/words/[id]/get-word-definitions";
-import { getWordIndex } from "src/app/api/words/get-word-index";
 
 import { WordPage } from "./_components";
 

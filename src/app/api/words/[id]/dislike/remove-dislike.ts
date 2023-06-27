@@ -1,8 +1,8 @@
 import { Collection, Db, Filter, ObjectId, UpdateFilter, UpdateResult } from "mongodb";
 
+import { getDatabase } from "@app/api/database";
 import { Status } from "@models/status";
 import { WordDocument } from "@models/word-document";
-import { getDatabase } from "src/app/api/database";
 
 export const removeDislike = async (id: string, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();

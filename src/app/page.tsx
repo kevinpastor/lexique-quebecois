@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
+import { getDefinitionsSample } from "@app/api/words/sample/get-definitions-sample";
 import { Definition } from "@models/definition";
-import { getDefinitionsSample } from "src/app/api/words/sample/get-definitions-sample";
 
 import { WordsPage } from "./_components";
 

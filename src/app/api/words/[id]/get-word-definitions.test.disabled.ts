@@ -1,8 +1,8 @@
+import { _closeMongoClient } from "@app/api/database";
 import { Word, wordSchema } from "@models/word";
-import { _closeMongoClient } from "src/app/api/database";
+import "@utils/tests/helpers";
 
 import { getWordDefinitions } from "./get-word-definitions";
-import "../../../../utils/tests/helpers";
 
 const ip: string = "127.0.0.1";
 

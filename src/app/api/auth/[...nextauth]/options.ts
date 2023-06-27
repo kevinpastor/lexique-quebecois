@@ -2,8 +2,8 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { AuthOptions } from "next-auth";
 import EmailProvider, { EmailUserConfig } from "next-auth/providers/email";
 
+import { getMongoClient } from "@app/api/database";
 import { isInteger } from "@utils/misc/number";
-import { getMongoClient } from "src/app/api/database";
 
 const getEmailProviderOptions = (): EmailUserConfig => {
     if (!process.env["EMAIL_SERVER_HOST"]) {

@@ -1,5 +1,6 @@
 import { Collection, Db, WithId, ObjectId, Document } from "mongodb";
 
+import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { Definition } from "@models/definition";
 import { DefinitionDocument } from "@models/definition-document";
 import { WordDocument } from "@models/word-document";
@@ -8,7 +9,6 @@ import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-ope
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { getReviewScore } from "@utils/api/aggregation/stages/review-sort-stages";
 import { sample } from "@utils/misc/random";
-import { defaultAggregateOptions, getDatabase } from "src/app/api/database";
 
 const definitionProjectionOperation = (ip: string): Document => ({
     _id: 0,

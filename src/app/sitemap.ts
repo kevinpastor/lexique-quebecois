@@ -1,9 +1,9 @@
 import { Collection, Db, Document } from "mongodb";
 import { MetadataRoute } from "next";
 
+import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { getSlug } from "@models/definition";
 import { WordDocument } from "@models/word-document";
-import { defaultAggregateOptions, getDatabase } from "src/app/api/database";
 
 import { host } from "./robots";
 

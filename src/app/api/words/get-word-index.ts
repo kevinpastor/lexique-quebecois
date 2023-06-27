@@ -1,7 +1,7 @@
 import { Collection, Db, Document } from "mongodb";
 
+import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { WordDocument } from "@models/word-document";
-import { defaultAggregateOptions, getDatabase } from "src/app/api/database";
 
 export const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();

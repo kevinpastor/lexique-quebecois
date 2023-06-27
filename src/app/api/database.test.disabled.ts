@@ -4,11 +4,11 @@ describe("getDatabase", (): void => {
     const environment: NodeJS.ProcessEnv = process.env;
 
     // eslint-disable-next-line @typescript-eslint/init-declarations
-    let getDatabase!: typeof import("src/app/api/database").getDatabase;
+    let getDatabase!: typeof import("@app/api/database").getDatabase;
 
     beforeEach(async (): Promise<void> => {
         jest.resetAllMocks();
-        getDatabase = (await import("src/app/api/database")).getDatabase;
+        getDatabase = (await import("@app/api/database")).getDatabase;
         jest.resetModules();
 
         process.env = { ...environment };

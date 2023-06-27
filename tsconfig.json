@@ -23,11 +23,11 @@
         "noPropertyAccessFromIndexSignature": true,
         "downlevelIteration": true,
         "paths": {
+            "@app/*": [
+                "./src/app/*"
+            ],
             "@components/*": [
                 "./src/components/*"
-            ],
-            "@configs/*": [
-                "./src/configs/*"
             ],
             "@models/*": [
                 "./src/models/*"
