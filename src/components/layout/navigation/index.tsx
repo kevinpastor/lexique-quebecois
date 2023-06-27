@@ -1,3 +1,5 @@
+"use client";
+
 import { AppBar, Container, Link, Stack, Typography, useScrollTrigger } from "@mui/material";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";

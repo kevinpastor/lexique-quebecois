@@ -2,15 +2,19 @@ import { CssBaseline, Experimental_CssVarsProvider as CssVarsProvider, getInitCo
 import { PropsWithChildren, ReactElement } from "react";
 
 import { theme } from "@configs/theme";
+import { ThemeMode } from "@utils/hooks/use-theme-mode";
+
+const defaultMode: ThemeMode = "system";
 
 export const ThemeProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <>
-        {getInitColorSchemeScript({ defaultMode: "system" })}
+        {getInitColorSchemeScript({ defaultMode })}
         <CssVarsProvider
             theme={theme}
-            defaultMode="system"
+            defaultMode={defaultMode}
+            disableTransitionOnChange
         >
-            <CssBaseline />
+            <CssBaseline enableColorScheme />
             {children}
         </CssVarsProvider>
     </>

@@ -181,11 +181,7 @@ export const theme = extendTheme({
             styleOverrides: {
                 root: {
                     // Allows elevation change.
-                    backgroundImage: "none",
-                    // Smooths out the theme transition.
-                    // NOTE: This isn't perfect when changing theme.
-                    transitionDuration: "300ms",
-                    transitionProperty: "box-shadow, background-color, background-image"
+                    backgroundImage: "none"
                 },
                 colorDefault: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
                     backgroundColor: palette.background.default
