@@ -87,7 +87,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: PropsWithChildren<unknown>): ReactElement => (
     <html
         lang="fr-CA"
-        suppressHydrationWarning // Removes the error: "Extra attributes from the server: data-mui-color-scheme".
+        suppressHydrationWarning // Removes the hydration error: "Extra attributes from the server: data-mui-color-scheme".
     >
         <body>
             <Providers>

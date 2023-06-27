@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { NotFoundPage } from "@components/pages/not-found-page";
+import { NotFoundPage } from "./_components/not-found-page";
 
 export const metadata: Metadata = {
     title: "404"
