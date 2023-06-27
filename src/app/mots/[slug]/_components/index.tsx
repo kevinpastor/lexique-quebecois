@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
-import { Definition as DefinitionComponent } from "@components/misc/word";
+import { Definition as DefinitionComponent } from "@components/word";
 import { Definition } from "@models/definition";
 import { Word } from "@models/word";
 

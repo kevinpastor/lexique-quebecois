@@ -4,7 +4,7 @@ import { ReactElement, RefObject, useEffect } from "react";
 import { useWatch } from "react-hook-form";
 import useSWR from "swr";
 
-import { Highlight } from "@components/misc/highlight";
+import { Highlight } from "@components/highlight";
 import { getSlug } from "@models/definition";
 import { useDebounce } from "@utils/hooks/use-debounce";
 import { KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "@utils/hooks/use-keyboard-focus-selection";

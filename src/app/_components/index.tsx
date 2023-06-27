@@ -4,7 +4,7 @@ import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
-import { Definition as WordComponent } from "@components/misc/word";
+import { Definition as WordComponent } from "@components/word";
 import { Definition } from "@models/definition";
 
 interface Props {

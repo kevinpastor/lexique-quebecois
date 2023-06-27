@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { ComponentType, PropsWithChildren, ReactElement } from "react";
 
 import { ErrorBoundary } from "@components/layout/error-boundary";
-import { DesktopOnly } from "@components/misc/desktop-only";
+import { DesktopOnly } from "@components/desktop-only";
 
 import { Footer } from "./footer";
 import { UnexpectedError } from "../misc/unexpected-error";

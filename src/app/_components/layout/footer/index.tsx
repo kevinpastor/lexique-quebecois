@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, ReactElement } from "react";
 
-import { DesktopOnly } from "@components/misc/desktop-only";
+import { DesktopOnly } from "@components/desktop-only";
 
 const LazyLinks = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./links")).Links

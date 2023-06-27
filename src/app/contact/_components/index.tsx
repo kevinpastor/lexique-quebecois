@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Email, EmailType } from "@components/misc/email";
+import { Email, EmailType } from "@components/email";
 
 export const ContactPage = (): ReactElement => (
     <Card>
