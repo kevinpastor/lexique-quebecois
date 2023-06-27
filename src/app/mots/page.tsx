@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 
 import { getWordIndex } from "src/app/api/words/get-word-index";
 
-import { IndexPage } from "./component";
+import { IndexPage } from "./_components";
 
 export const metadata: Metadata = {
     title: "Index"

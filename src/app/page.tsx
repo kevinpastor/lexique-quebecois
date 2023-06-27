@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import { Definition } from "@models/definition";
 import { getDefinitionsSample } from "src/app/api/words/sample/get-definitions-sample";
 
-import { WordsPage } from "./component";
+import { WordsPage } from "./_components";
 
 export const revalidate: number = 86400; // Revalidate every day
 

@@ -6,7 +6,7 @@ import { Word } from "@models/word";
 import { getWordDefinitions } from "src/app/api/words/[id]/get-word-definitions";
 import { getWordIndex } from "src/app/api/words/get-word-index";
 
-import { WordPage } from "./component";
+import { WordPage } from "./_components";
 
 interface Params {
     slug: string;

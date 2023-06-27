@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { ContentPage } from "./component";
+import { ContentPage } from "./_components";
 
 export const metadata: Metadata = {
     title: "Politique sur le contenu"

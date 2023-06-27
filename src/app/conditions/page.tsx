@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { ConditionsPage } from "./component";
+import { ConditionsPage } from "./_components";
 
 export const metadata: Metadata = {
     title: "Conditions"
