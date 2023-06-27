@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { AlertsContext, IAlertsContext } from "@configs/providers/alerts-provider";
+import { AlertsContext, IAlertsContext } from "src/app/_components/providers/alerts-provider";
 
 export const useAlerts = (): IAlertsContext => {
     const context = useContext(AlertsContext);

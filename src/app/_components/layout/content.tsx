@@ -4,11 +4,11 @@ import { Container, Stack, Unstable_Grid2 as Grid } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, PropsWithChildren, ReactElement } from "react";
 
-import { ErrorBoundary } from "@components/layout/error-boundary";
 import { DesktopOnly } from "@components/desktop-only";
 
+import { ErrorBoundary } from "./error-boundary";
 import { Footer } from "./footer";
-import { UnexpectedError } from "../misc/unexpected-error";
+import { UnexpectedError } from "../unexpected-error";
 
 const LazySidebar = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./sidebar")).Sidebar
