@@ -1,5 +1,3 @@
-"use client";
-
 import { Container, Stack, Unstable_Grid2 as Grid } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, PropsWithChildren, ReactElement } from "react";

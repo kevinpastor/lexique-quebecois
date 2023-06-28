@@ -1,3 +1,5 @@
+"use client";
+
 import { Theme, useMediaQuery, useTheme } from "@mui/material";
 import { PropsWithChildren, ReactElement, Suspense } from "react";
 

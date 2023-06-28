@@ -1,3 +1,5 @@
+"use client";
+
 import { Search as SearchIcon } from "@mui/icons-material";
 import { Fade, IconButton, Modal, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";

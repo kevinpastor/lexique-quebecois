@@ -1,3 +1,5 @@
+"use client";
+
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { IconButton, SwipeableDrawer, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";

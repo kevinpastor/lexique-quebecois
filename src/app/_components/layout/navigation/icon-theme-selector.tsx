@@ -1,3 +1,5 @@
+"use client";
+
 import { IconButton, Tooltip } from "@mui/material";
 import { ReactElement } from "react";
 
