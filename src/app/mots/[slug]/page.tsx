@@ -45,7 +45,7 @@ const Page = async ({ params }: { params: Params }): Promise<ReactElement> => {
     const word: Word | null = await getWordDefinitions(slug);
 
     return (
-        <WordPage fallback={{ [`/api/words/${slug}`]: word }} />
+        <WordPage word={word} />
     );
 };
 

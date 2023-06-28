@@ -1,9 +1,5 @@
-"use client";
-
 import { Stack } from "@mui/material";
-import { useParams } from "next/navigation";
 import { ReactElement } from "react";
-import useSWR from "swr";
 
 import { Definition as DefinitionComponent } from "@components/word";
 import { Definition } from "@models/definition";
@@ -13,19 +9,10 @@ import { MissingWord } from "./missing-word";
 import { Spellings } from "./spellings";
 
 interface Props {
-    fallback: {
-        [endpoint: string]: unknown;
-    };
+    word: Word | null;
 }
 
-export const WordPage = ({ fallback }: Props): ReactElement => {
-    const params = useParams();
-    // ! TODO Fix type error
-    const { data } = useSWR<Word | null>(`/api/words/${params["slug"]}`, { fallback });
-
-    // `data` coming from `fallback`
-    const word: Word | null = data as Word | null;
-
+export const WordPage = ({ word }: Props): ReactElement => {
     if (!word || word.definitions.length === 0) { // `definitions` should theoretically never be empty.
         return <MissingWord />;
     }

@@ -1,7 +1,8 @@
-import { Add } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
 import Link from "next/link";
 import { ReactElement } from "react";
+
+import { AddIcon } from "./add-icon";
 
 export const MissingWord = (): ReactElement => (
     <Card>
@@ -17,7 +18,7 @@ export const MissingWord = (): ReactElement => (
                 <Button
                     component={Link}
                     href="/ajouter"
-                    startIcon={<Add />}
+                    startIcon={<AddIcon />}
                 >
                     Ajouter
                 </Button>

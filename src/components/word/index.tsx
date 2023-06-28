@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
