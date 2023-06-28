@@ -1,9 +1,7 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
-const isCIEnvironment = (): boolean => (
-    Boolean(process.env["CI"])
-);
+import { isCIEnvironment } from "@utils/misc/environment";
 
 const getWebServerUrl = (): string => {
     if (isCIEnvironment()) {
@@ -31,8 +29,8 @@ const config: PlaywrightTestConfig = {
     retries: isCIEnvironment() ? 1 : 0,
     use: {
         baseURL: getWebServerUrl(),
-        trace: "on-first-retry",
-        video: "on-first-retry"
+        video: "retain-on-failure",
+        trace: "retain-on-failure"
     },
     outputDir: "./e2e/results/",
     webServer: {

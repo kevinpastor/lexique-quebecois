@@ -5,6 +5,7 @@ test.describe.configure({ mode: "parallel" });
 test.describe("Theme", (): void => {
     test.beforeEach(async ({ page }): Promise<void> => {
         await page.goto("/");
+        await page.getByRole("button", { name: "Accepter" }).click();
     });
 
     test.describe("Color Scheme", (): void => {
