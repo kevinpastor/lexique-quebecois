@@ -17,7 +17,7 @@ export const Form = (): ReactElement => {
     const { isDirty: _, isSubmitting } = useFormState<WithCaptchaToken<WordRequest>>();
 
     // TODO Bring back onBeforeUnload
-    // useLeavePageConfirmation(isDirty && !isSubmitting, "Votre mot n'a pas encore été soumis, êtes-vous sûr de vouloir l'abandonner?");
+    // useLeavePageConfirmation(isDirty && !isSubmitting, "Ton mot n'a pas encore été soumis, est-tu sûr de vouloir l'abandonner?");
 
     return (
         <Card>

@@ -8,7 +8,7 @@ export const MissingWord = (): ReactElement => (
     <Card>
         <CardHeader title="Ce mot n'a pas été trouvé" />
         <CardContent>
-            Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple.
+            Si tu connais ce mot, tu peux contribuer en fournissant une définition et un exemple.
         </CardContent>
         <CardActions>
             <Stack

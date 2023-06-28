@@ -24,7 +24,7 @@ export const Captcha = (): ReactElement => {
 
     const { enqueueErrorAlert } = useAlerts();
     const handleError = (): void => {
-        enqueueErrorAlert("Impossible de vérifier que vous n'êtes pas un robot. Veuillez réessayer plus tard.");
+        enqueueErrorAlert("Impossible de vérifier que tu n'est pas un robot. Réessaie plus tard.");
     };
 
     const { activeMode } = useThemeMode();
