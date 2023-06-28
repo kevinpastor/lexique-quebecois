@@ -11,7 +11,7 @@ const Page = async (): Promise<ReactElement> => {
     const words: Array<Definition> = await getDefinitionsSample();
 
     return (
-        <WordsPage fallback={{ "/api/words/sample": words }} />
+        <WordsPage definitions={words} />
     );
 };
 
