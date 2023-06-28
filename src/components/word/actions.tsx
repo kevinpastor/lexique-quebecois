@@ -1,3 +1,5 @@
+"use client";
+
 import { Edit as EditIcon } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { useSession } from "next-auth/react";

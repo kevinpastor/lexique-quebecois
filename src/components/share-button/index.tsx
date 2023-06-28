@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@mui/material";
 import { ReactElement } from "react";
 
