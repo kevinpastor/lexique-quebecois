@@ -25,6 +25,7 @@ const createSearchStage = (query: string, fields: Array<string | Document>): Doc
     };
 };
 
+// TODO Move closer to usage.
 export const getWordDefinitions = async (spelling: string, ip: string = ""): Promise<Word | null> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
