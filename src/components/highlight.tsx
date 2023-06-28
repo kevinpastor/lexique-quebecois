@@ -3,14 +3,14 @@ import { ReactElement } from "react";
 
 import { removeAccents } from "@utils/misc/string";
 
+const massageString = (value: string): string => (
+    removeAccents(value).toLocaleLowerCase()
+);
+
 interface Props {
     word: string;
     highlight: string;
 }
-
-const massageString = (value: string): string => (
-    removeAccents(value).toLocaleLowerCase()
-);
 
 export const Highlight = ({ word, highlight }: Props): ReactElement => {
     const massagedWord: string = massageString(word);

@@ -1,23 +1,15 @@
-"use client";
-
-import { Home as HomeIcon } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { ReactElement } from "react";
 
-export const HomeButton = (): ReactElement => {
-    const { push } = useRouter();
+import { HomeIcon } from "./home-icon";
 
-    const handleClick = (): void => {
-        push("/");
-    };
-
-    return (
-        <Button
-            onClick={handleClick}
-            startIcon={<HomeIcon />}
-        >
-            Accueil
-        </Button>
-    );
-};
+export const HomeButton = (): ReactElement => (
+    <Button
+        component={Link}
+        href="/"
+        startIcon={<HomeIcon />}
+    >
+        Accueil
+    </Button>
+);

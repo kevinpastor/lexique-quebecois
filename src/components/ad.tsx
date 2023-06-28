@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactElement, useEffect } from "react";
 
 declare global {
