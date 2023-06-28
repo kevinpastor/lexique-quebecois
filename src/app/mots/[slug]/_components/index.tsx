@@ -1,8 +1,7 @@
 "use client";
 
-import { Add } from "@mui/icons-material";
-import { Button, Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
-import { useParams, useRouter } from "next/navigation";
+import { Stack } from "@mui/material";
+import { useParams } from "next/navigation";
 import { ReactElement } from "react";
 import useSWR from "swr";
 
@@ -10,6 +9,7 @@ import { Definition as DefinitionComponent } from "@components/word";
 import { Definition } from "@models/definition";
 import { Word } from "@models/word";
 
+import { MissingWord } from "./missing-word";
 import { Spellings } from "./spellings";
 
 interface Props {
@@ -26,34 +26,8 @@ export const WordPage = ({ fallback }: Props): ReactElement => {
     // `data` coming from `fallback`
     const word: Word | null = data as Word | null;
 
-    const { push } = useRouter();
-
     if (!word || word.definitions.length === 0) { // `definitions` should theoretically never be empty.
-        const handleClick = (): void => {
-            push("/ajouter");
-        };
-
-        return (
-            <Card>
-                <CardHeader title="Ce mot n'a pas été trouvé" />
-                <CardContent>
-                    Si vous connaissez ce mot, vous pouvez contributer en fournissant une définition et un exemple.
-                </CardContent>
-                <CardActions>
-                    <Stack
-                        direction="row-reverse"
-                        width="100%"
-                    >
-                        <Button
-                            onClick={handleClick}
-                            startIcon={<Add />}
-                        >
-                            Ajouter
-                        </Button>
-                    </Stack>
-                </CardActions>
-            </Card>
-        );
+        return <MissingWord />;
     }
 
     return (
