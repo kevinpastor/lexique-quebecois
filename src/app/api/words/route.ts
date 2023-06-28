@@ -7,17 +7,10 @@ import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "@utils/misc/hcaptcha";
 
 import { addWord } from "./add-word";
-import { getWordIndex } from "./get-word-index";
 
 const window: number = 1000 * 60 * 15;
 const tokens: number = 5;
 const rateLimiter = new RateLimiter(window, tokens);
-
-export const GET = async (): Promise<NextResponse> => {
-    const words: Array<string> = await getWordIndex();
-
-    return NextResponse.json(words);
-};
 
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
     const ip: string | undefined = getRequestIp(request);

@@ -15,7 +15,7 @@ const Page = async (): Promise<ReactElement> => {
     const words: Array<string> = await getWordIndex();
 
     return (
-        <IndexPage fallback={{ "/api/words": words }} />
+        <IndexPage words={words} />
     );
 };
 
