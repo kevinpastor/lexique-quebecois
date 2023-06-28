@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, CardContent, CardHeader, Skeleton } from "@mui/material";
 import { ReactElement } from "react";
 

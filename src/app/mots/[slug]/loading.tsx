@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactElement } from "react";
 
 import { LoadingWord } from "@components/loading-word";
