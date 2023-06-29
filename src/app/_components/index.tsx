@@ -1,17 +1,17 @@
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Definition as WordComponent } from "@components/word";
-import { Definition } from "@models/definition";
+import { Definition } from "@components/word";
+import { Definition as IDefinition } from "@models/definition";
 
 interface Props {
-    definitions: Array<Definition>;
+    definitions: Array<IDefinition>;
 }
 
 export const WordsPage = ({ definitions }: Props): ReactElement => (
     <Stack spacing={2}>
-        {definitions.map((definition: Definition): ReactElement => (
-            <WordComponent
+        {definitions.map((definition: IDefinition): ReactElement => (
+            <Definition
                 key={definition.id}
                 definition={definition}
             />
