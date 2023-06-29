@@ -4,7 +4,7 @@ import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { Definition } from "@models/definition";
 import { DefinitionDocument } from "@models/definition-document";
 import { WordDocument } from "@models/word-document";
-import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
+import { safeInOperator } from "@utils/api/aggregation/operations/safe-in-operator";
 import { safeSizeOperator } from "@utils/api/aggregation/operations/safe-size-operator";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { getRatingExpression } from "@utils/api/aggregation/stages/review-sort-stages";
@@ -25,9 +25,9 @@ const definitionProjectionOperation = (ip: string): Document => ({
     timestamp: timestampOperation("$_id"),
     reactions: {
         likes: safeSizeOperator("$reactions.likes"),
-        isLiked: inArrayOperation("$reactions.likes", ip),
+        isLiked: safeInOperator("$reactions.likes", ip),
         dislikes: safeSizeOperator("$reactions.dislikes"),
-        isDisliked: inArrayOperation("$reactions.dislikes", ip)
+        isDisliked: safeInOperator("$reactions.dislikes", ip)
     }
 });
 

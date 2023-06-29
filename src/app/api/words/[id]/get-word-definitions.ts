@@ -3,7 +3,7 @@ import { Collection, Db, Document } from "mongodb";
 import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
-import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
+import { safeInOperator } from "@utils/api/aggregation/operations/safe-in-operator";
 import { safeSizeOperator } from "@utils/api/aggregation/operations/safe-size-operator";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { getRatingExpression } from "@utils/api/aggregation/stages/review-sort-stages";
@@ -96,9 +96,9 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
                                     safeSizeOperator("$$definition.reactions.dislikes")
                                 ),
                                 likes: safeSizeOperator("$$definition.reactions.likes"),
-                                isLiked: inArrayOperation("$$definition.reactions.likes", ip),
+                                isLiked: safeInOperator("$$definition.reactions.likes", ip),
                                 dislikes: safeSizeOperator("$$definition.reactions.dislikes"),
-                                isDisliked: inArrayOperation("$$definition.reactions.dislikes", ip)
+                                isDisliked: safeInOperator("$$definition.reactions.dislikes", ip)
                             }
                         }
                     }
