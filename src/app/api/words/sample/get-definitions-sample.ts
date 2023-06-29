@@ -4,8 +4,8 @@ import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { Definition } from "@models/definition";
 import { DefinitionDocument } from "@models/definition-document";
 import { WordDocument } from "@models/word-document";
-import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
+import { safeSizeOperator } from "@utils/api/aggregation/operations/safe-size-operator";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { getRatingExpression } from "@utils/api/aggregation/stages/review-sort-stages";
 import { sample } from "@utils/misc/random";
@@ -24,9 +24,9 @@ const definitionProjectionOperation = (ip: string): Document => ({
     },
     timestamp: timestampOperation("$_id"),
     reactions: {
-        likes: countArrayOperation("$reactions.likes"),
+        likes: safeSizeOperator("$reactions.likes"),
         isLiked: inArrayOperation("$reactions.likes", ip),
-        dislikes: countArrayOperation("$reactions.dislikes"),
+        dislikes: safeSizeOperator("$reactions.dislikes"),
         isDisliked: inArrayOperation("$reactions.dislikes", ip)
     }
 });
@@ -70,12 +70,12 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
                                 if: {
                                     $gt: [
                                         getRatingExpression(
-                                            countArrayOperation("$$value.reactions.likes"),
-                                            countArrayOperation("$$value.reactions.dislikes")
+                                            safeSizeOperator("$$value.reactions.likes"),
+                                            safeSizeOperator("$$value.reactions.dislikes")
                                         ),
                                         getRatingExpression(
-                                            countArrayOperation("$$this.reactions.likes"),
-                                            countArrayOperation("$$this.reactions.dislikes")
+                                            safeSizeOperator("$$this.reactions.likes"),
+                                            safeSizeOperator("$$this.reactions.dislikes")
                                         )
                                     ]
                                 },

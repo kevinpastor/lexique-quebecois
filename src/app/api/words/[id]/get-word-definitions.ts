@@ -3,8 +3,8 @@ import { Collection, Db, Document } from "mongodb";
 import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
-import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
+import { safeSizeOperator } from "@utils/api/aggregation/operations/safe-size-operator";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
 import { getRatingExpression } from "@utils/api/aggregation/stages/review-sort-stages";
 
@@ -92,12 +92,12 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
                             timestamp: timestampOperation("$$definition._id"),
                             reactions: {
                                 rating: getRatingExpression(
-                                    countArrayOperation("$$definition.reactions.likes"),
-                                    countArrayOperation("$$definition.reactions.dislikes")
+                                    safeSizeOperator("$$definition.reactions.likes"),
+                                    safeSizeOperator("$$definition.reactions.dislikes")
                                 ),
-                                likes: countArrayOperation("$$definition.reactions.likes"),
+                                likes: safeSizeOperator("$$definition.reactions.likes"),
                                 isLiked: inArrayOperation("$$definition.reactions.likes", ip),
-                                dislikes: countArrayOperation("$$definition.reactions.dislikes"),
+                                dislikes: safeSizeOperator("$$definition.reactions.dislikes"),
                                 isDisliked: inArrayOperation("$$definition.reactions.dislikes", ip)
                             }
                         }
