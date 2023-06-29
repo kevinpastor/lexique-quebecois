@@ -25,7 +25,7 @@ export const useShare = (
     const copy = useCopyToClipboard();
     const { enqueueSuccessAlert, enqueueErrorAlert } = useAlerts();
 
-    const share = useCallback(async (): Promise<void> => {
+    return useCallback(async (): Promise<void> => {
         const url: string = path
             ? `${window.location.origin}/${path}`
             : window.location.href;
@@ -59,6 +59,4 @@ export const useShare = (
 
         enqueueSuccessAlert("Lien copié!");
     }, [copy, desktopBehavior, enqueueErrorAlert, enqueueSuccessAlert, mobileBehavior, path]);
-
-    return share;
 };

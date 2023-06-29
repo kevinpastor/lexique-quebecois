@@ -46,10 +46,8 @@ export const useReactions = (id: string, reactions: Reactions): ReturnType => {
                 await removeLike(id);
             }
             catch (error: unknown) {
-                if (isHttpError(error)) {
-                    if (error.status === Status.Conflict || error.status === Status.NotFound) {
-                        return;
-                    }
+                if (isHttpError(error) && (error.status === Status.Conflict || error.status === Status.NotFound)) {
+                    return;
                 }
 
                 enqueueErrorAlert("Une erreur inconnue s'est produite.");
@@ -62,10 +60,8 @@ export const useReactions = (id: string, reactions: Reactions): ReturnType => {
             await like(id);
         }
         catch (error: unknown) {
-            if (isHttpError(error)) {
-                if (error.status === Status.Conflict) {
-                    return;
-                }
+            if (isHttpError(error) && (error.status === Status.Conflict)) {
+                return;
             }
 
             enqueueErrorAlert("Une erreur inconnue s'est produite.");
@@ -80,10 +76,8 @@ export const useReactions = (id: string, reactions: Reactions): ReturnType => {
                 await removeDislike(id);
             }
             catch (error: unknown) {
-                if (isHttpError(error)) {
-                    if (error.status === Status.Conflict || error.status === Status.NotFound) {
-                        return;
-                    }
+                if (isHttpError(error) && (error.status === Status.Conflict || error.status === Status.NotFound)) {
+                    return;
                 }
 
                 enqueueErrorAlert("Une erreur inconnue s'est produite.");
@@ -96,10 +90,8 @@ export const useReactions = (id: string, reactions: Reactions): ReturnType => {
             await dislike(id);
         }
         catch (error: unknown) {
-            if (isHttpError(error)) {
-                if (error.status === Status.Conflict) {
-                    return;
-                }
+            if (isHttpError(error) && (error.status === Status.Conflict)) {
+                return;
             }
 
             enqueueErrorAlert("Une erreur inconnue s'est produite.");

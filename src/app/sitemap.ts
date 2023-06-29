@@ -7,12 +7,12 @@ import { WordDocument } from "@models/word-document";
 
 import { host } from "./robots";
 
-interface Foo {
+interface WordInformation {
     spelling: string;
     timestamp: Date;
 }
 
-const getWords = async (): Promise<Array<Foo>> => {
+const getWordsInformation = async (): Promise<Array<WordInformation>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
@@ -90,19 +90,17 @@ const getWords = async (): Promise<Array<Foo>> => {
         }
     ];
 
-    return collection.aggregate<Foo>(pipeline, defaultAggregateOptions)
+    return collection.aggregate<WordInformation>(pipeline, defaultAggregateOptions)
         .toArray();
 };
 
 const getWordsPath = async (): Promise<MetadataRoute.Sitemap> => {
-    const words = await getWords();
+    const wordsInformation: Array<WordInformation> = await getWordsInformation();
 
-    const wordsPath = words.map(({ spelling, timestamp }) => ({
+    return wordsInformation.map(({ spelling, timestamp }: WordInformation) => ({
         url: `${host}/mots/${getSlug(spelling)}`,
         lastModified: timestamp
     }));
-
-    return wordsPath;
 };
 
 const generateSitemap = async (): Promise<MetadataRoute.Sitemap> => {

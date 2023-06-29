@@ -15,7 +15,7 @@ export const Sidebar = (): ReactElement => (
                     variant="body1"
                     align="center"
                 >
-                    Le Lexique Québécois est la plateforme pour en apprendre plus sur la culture populaire québecoise, peu importe si t&apos;es un ado, un millénial, ou un boomer.
+                    Le Lexique Québécois est la plateforme pour en apprendre plus sur la culture populaire québécoise, peu importe si t&apos;es un ado, un millénial, ou un boomer.
                 </Typography>
             </CardContent>
         </Card>

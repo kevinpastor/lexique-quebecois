@@ -14,7 +14,9 @@
         "plugin:eslint-plugin-import/recommended",
         "plugin:eslint-plugin-import/typescript",
         "eslint-config-next/core-web-vitals",
-        "plugin:promise/recommended"
+        "plugin:promise/recommended",
+        "plugin:jsx-a11y/strict", // eslint-plugin-jsx-a11y
+        "plugin:eslint-plugin-sonarjs/recommended"
     ],
     "ignorePatterns": [
         "**/*.js"
@@ -395,6 +397,9 @@
                 "named": "never",
                 "asyncArrow": "always"
             }
-        ]
+        ],
+        "jsx-a11y/no-autofocus": "off",
+        "sonarjs/no-duplicate-string": "off",
+        "sonarjs/prefer-immediate-return": "warn"
     }
 }
