@@ -6,7 +6,7 @@ import { WordDocument } from "@models/word-document";
 import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
-import { getReviewScore } from "@utils/api/aggregation/stages/review-sort-stages";
+import { getRatingExpression } from "@utils/api/aggregation/stages/review-sort-stages";
 
 const createSearchStage = (query: string, fields: Array<string | Document>): Document => {
     const operators: Array<Document> = fields.map((field: string | Document): Document => ({
@@ -91,7 +91,7 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
                             },
                             timestamp: timestampOperation("$$definition._id"),
                             reactions: {
-                                score: getReviewScore(
+                                rating: getRatingExpression(
                                     countArrayOperation("$$definition.reactions.likes"),
                                     countArrayOperation("$$definition.reactions.dislikes")
                                 ),
@@ -110,7 +110,7 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
         },
         {
             $sort: {
-                "definitions.reactions.score": -1,
+                "definitions.reactions.rating": -1,
                 "definitions.timestamp": -1,
                 "definitions.label": 1
             }
@@ -127,7 +127,7 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
             }
         },
         {
-            $unset: "definitions.reactions.score"
+            $unset: "definitions.reactions.rating"
         },
         {
             $unwind: "$spellings"

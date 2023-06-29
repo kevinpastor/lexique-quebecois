@@ -7,7 +7,7 @@ import { WordDocument } from "@models/word-document";
 import { countArrayOperation } from "@utils/api/aggregation/operations/count-array-operation";
 import { inArrayOperation } from "@utils/api/aggregation/operations/in-array-operation";
 import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
-import { getReviewScore } from "@utils/api/aggregation/stages/review-sort-stages";
+import { getRatingExpression } from "@utils/api/aggregation/stages/review-sort-stages";
 import { sample } from "@utils/misc/random";
 
 const definitionProjectionOperation = (ip: string): Document => ({
@@ -69,11 +69,11 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
                             $cond: {
                                 if: {
                                     $gt: [
-                                        getReviewScore(
+                                        getRatingExpression(
                                             countArrayOperation("$$value.reactions.likes"),
                                             countArrayOperation("$$value.reactions.dislikes")
                                         ),
-                                        getReviewScore(
+                                        getRatingExpression(
                                             countArrayOperation("$$this.reactions.likes"),
                                             countArrayOperation("$$this.reactions.dislikes")
                                         )
