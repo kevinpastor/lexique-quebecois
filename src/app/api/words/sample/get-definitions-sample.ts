@@ -7,7 +7,7 @@ import { WordDocument } from "@models/word-document";
 import { safeInOperator } from "@utils/api/aggregation/operations/safe-in-operator";
 import { safeSizeOperator } from "@utils/api/aggregation/operations/safe-size-operator";
 import { timestampOperator } from "@utils/api/aggregation/operations/timestamp-operator";
-import { getRatingExpression } from "@utils/api/aggregation/stages/review-sort-stages";
+import { ratingOperator } from "@utils/api/aggregation/stages/rating-operator";
 import { sample } from "@utils/misc/random";
 
 const definitionProjectionOperation = (ip: string): Document => ({
@@ -69,11 +69,11 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
                             $cond: {
                                 if: {
                                     $gt: [
-                                        getRatingExpression(
+                                        ratingOperator(
                                             safeSizeOperator("$$value.reactions.likes"),
                                             safeSizeOperator("$$value.reactions.dislikes")
                                         ),
-                                        getRatingExpression(
+                                        ratingOperator(
                                             safeSizeOperator("$$this.reactions.likes"),
                                             safeSizeOperator("$$this.reactions.dislikes")
                                         )

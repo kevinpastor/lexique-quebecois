@@ -12,9 +12,9 @@ import { Document } from "mongodb";
  * https://stackoverflow.com/a/55857323/7817501. However, we have decided to
  * use a different formula that is simpler to understand and to implement.
  *
- * @param positiveReviewsExpression
+ * @param positiveReviewsOperator
  * Expression that evaluates to the number of positive ratings.
- * @param negativeReviewsExpression
+ * @param negativeReviewsOperator
  * Expression that evaluates to the number of negative ratings.
  * @param certaintyGrowthScale
  * The scale of the growth of certainty. SteamDB uses a value of 10 which means
@@ -22,17 +22,17 @@ import { Document } from "mongodb";
  * rating is correct.
  * @returns Expression that evaluates the rating of an entry.
  */
-export const getRatingExpression = (
-    positiveReviewsExpression: Document | string,
-    negativeReviewsExpression: Document | string,
+export const ratingOperator = (
+    positiveReviewsOperator: Document | string,
+    negativeReviewsOperator: Document | string,
     certaintyGrowthScale: number = 3
 ): Document => ({
     $let: {
         vars: {
             total: {
                 $add: [
-                    positiveReviewsExpression,
-                    negativeReviewsExpression
+                    positiveReviewsOperator,
+                    negativeReviewsOperator
                 ]
             }
         },
@@ -50,7 +50,7 @@ export const getRatingExpression = (
                         vars: {
                             score: {
                                 $divide: [
-                                    positiveReviewsExpression,
+                                    positiveReviewsOperator,
                                     "$$total"
                                 ]
                             }
