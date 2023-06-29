@@ -5,7 +5,7 @@ import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
 import { safeInOperator } from "@utils/api/aggregation/operations/safe-in-operator";
 import { safeSizeOperator } from "@utils/api/aggregation/operations/safe-size-operator";
-import { timestampOperation } from "@utils/api/aggregation/operations/timestamp-operation";
+import { timestampOperator } from "@utils/api/aggregation/operations/timestamp-operator";
 import { getRatingExpression } from "@utils/api/aggregation/stages/review-sort-stages";
 
 const createSearchStage = (query: string, fields: Array<string | Document>): Document => {
@@ -89,7 +89,7 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
                             author: {
                                 name: "$$definition.author.name"
                             },
-                            timestamp: timestampOperation("$$definition._id"),
+                            timestamp: timestampOperator("$$definition._id"),
                             reactions: {
                                 rating: getRatingExpression(
                                     safeSizeOperator("$$definition.reactions.likes"),
