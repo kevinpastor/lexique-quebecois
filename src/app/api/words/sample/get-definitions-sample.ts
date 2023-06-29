@@ -94,6 +94,7 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
         .toArray();
 };
 
+// TODO Move closer to usage.
 export const getDefinitionsSample = async (ip: string = ""): Promise<Array<Definition>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
