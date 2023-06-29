@@ -4,10 +4,10 @@ import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { Definition } from "@models/definition";
 import { DefinitionDocument } from "@models/definition-document";
 import { WordDocument } from "@models/word-document";
-import { safeInOperator } from "@utils/api/aggregation/operations/safe-in-operator";
-import { safeSizeOperator } from "@utils/api/aggregation/operations/safe-size-operator";
-import { timestampOperator } from "@utils/api/aggregation/operations/timestamp-operator";
-import { ratingOperator } from "@utils/api/aggregation/stages/rating-operator";
+import { ratingOperator } from "@utils/api/aggregation/rating-operator";
+import { safeInOperator } from "@utils/api/aggregation/safe-in-operator";
+import { safeSizeOperator } from "@utils/api/aggregation/safe-size-operator";
+import { timestampOperator } from "@utils/api/aggregation/timestamp-operator";
 import { sample } from "@utils/misc/random";
 
 const definitionProjectionOperation = (ip: string): Document => ({
