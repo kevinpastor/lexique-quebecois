@@ -6,7 +6,7 @@ export const getHCaptchaSiteKey = (): string => {
     return process.env["NEXT_PUBLIC_HCAPTCHA_SITE_KEY"];
 };
 
-export const getHCaptchaSecret = (): string => {
+const getHCaptchaSecret = (): string => {
     if (!process.env["HCAPTHCA_SECRET"]) {
         throw new Error("HCAPTHCA_SECRET environment variable is not set.");
     }
