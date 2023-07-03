@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, Stack } from "@mui/material";
-import { ReactElement } from "react";
+import { ReactElement, useId } from "react";
 
 import { useThemeMode, ThemeMode, modes, modeIcons, modeLabels } from "@hooks/use-theme-mode";
 
@@ -11,13 +11,16 @@ export const ThemeSelector = (): ReactElement => {
         setMode(newThemeMode);
     };
 
+    const id: string = useId();
+
     return (
         <FormControl margin="normal">
-            <InputLabel>
+            <InputLabel id={id}>
                 Thème
             </InputLabel>
             <Select
                 label="Thème"
+                labelId={id}
                 value={mode}
                 onChange={handleChange}
                 renderValue={(value: ThemeMode): ReactElement => (

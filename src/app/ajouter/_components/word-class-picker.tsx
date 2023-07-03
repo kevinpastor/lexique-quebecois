@@ -25,8 +25,8 @@ export const WordClassPicker = (): ReactElement => {
                         Classe(s)
                     </InputLabel>
                     <Select
-                        labelId={id}
                         label="Classe(s)"
+                        labelId={id}
                         multiple
                         renderValue={(selected: Array<WordClass>): ReactNode => (
                             selected.map((wordClass: WordClass): string => (
