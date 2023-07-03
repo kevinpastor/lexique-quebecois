@@ -1,5 +1,6 @@
 import { Status } from "@models/status";
-import { HttpError, isHttpError } from "@services/http-error";
+
+import { HttpError, isHttpError } from "./http-error";
 
 describe("isHttpError", (): void => {
     it("should not be a HttpError", (): void => {

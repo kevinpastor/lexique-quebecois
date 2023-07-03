@@ -7,8 +7,8 @@ import { FormContainer } from "@components/react-hook-form/form-container";
 import { Status } from "@models/status";
 import { WithCaptchaToken } from "@models/with-captcha-token";
 import { cleanupWordRequestWithCaptchaToken, WordRequest, wordRequestValidationWithCaptchaTokenSchema } from "@models/word-request";
-import { isHttpError } from "@services/http-error";
 import { useAlerts } from "@utils/hooks/use-alerts";
+import { isHttpError } from "@utils/http-error";
 
 import { addWord } from "./add-word";
 import { Form } from "./form";
