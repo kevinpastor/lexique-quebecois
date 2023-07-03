@@ -5,7 +5,7 @@ import { Fade, IconButton, Modal, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, ReactElement, Suspense } from "react";
 
-import { BooleanUtilities, useBoolean } from "@utils/hooks/use-boolean";
+import { BooleanUtilities, useBoolean } from "@hooks/use-boolean";
 
 import type { SearchContentProps } from "./search-content";
 

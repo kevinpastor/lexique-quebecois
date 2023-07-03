@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 
-import { useAlerts } from "@utils/hooks/use-alerts";
 import { isMobile } from "@utils/misc/device";
 
+import { useAlerts } from "./use-alerts";
 import { useCopyToClipboard } from "./use-copy-to-clipboard";
 
 enum ShareBehavior {

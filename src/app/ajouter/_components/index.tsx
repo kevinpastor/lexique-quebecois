@@ -4,10 +4,10 @@ import { useRouter } from "next/navigation";
 import { ReactElement } from "react";
 
 import { FormContainer } from "@components/react-hook-form/form-container";
+import { useAlerts } from "@hooks/use-alerts";
 import { Status } from "@models/status";
 import { WithCaptchaToken } from "@models/with-captcha-token";
 import { cleanupWordRequestWithCaptchaToken, WordRequest, wordRequestValidationWithCaptchaTokenSchema } from "@models/word-request";
-import { useAlerts } from "@utils/hooks/use-alerts";
 import { isHttpError } from "@utils/http-error";
 
 import { addWord } from "./add-word";

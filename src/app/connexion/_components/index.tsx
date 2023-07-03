@@ -6,7 +6,7 @@ import { ReactElement, useEffect } from "react";
 import { object, string } from "zod";
 
 import { FormContainer } from "@components/react-hook-form/form-container";
-import { useAlerts } from "@utils/hooks/use-alerts";
+import { useAlerts } from "@hooks/use-alerts";
 
 import { Form } from "./form";
 

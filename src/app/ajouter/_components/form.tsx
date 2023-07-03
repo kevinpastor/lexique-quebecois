@@ -8,7 +8,6 @@ import { useFormState } from "react-hook-form";
 import { TextField } from "@components/react-hook-form/text-field";
 import { WithCaptchaToken } from "@models/with-captcha-token";
 import { WordRequest } from "@models/word-request";
-// import { useLeavePageConfirmation } from "@utils/hooks/use-leave-page-confirm";
 
 import { Captcha } from "./captcha";
 import { WordClassPicker } from "./word-class-picker";

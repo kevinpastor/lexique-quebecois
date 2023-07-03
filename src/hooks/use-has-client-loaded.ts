@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { useBoolean } from "@utils/hooks/use-boolean";
+import { useBoolean } from "./use-boolean";
 
 export const useHasClientLoaded = (): boolean => {
     const { value, setTrue } = useBoolean(false);

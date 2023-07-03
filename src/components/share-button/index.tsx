@@ -3,7 +3,7 @@
 import { Button } from "@mui/material";
 import { ReactElement } from "react";
 
-import { useShare } from "@utils/hooks/use-share";
+import { useShare } from "@hooks/use-share";
 
 import { ShareIcon } from "./share-icon";
 

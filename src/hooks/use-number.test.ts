@@ -3,7 +3,7 @@
  */
 import { act, renderHook } from "@testing-library/react";
 
-import { NumberUtilities, useNumber } from "@utils/hooks/use-number";
+import { NumberUtilities, useNumber } from "./use-number";
 
 describe("useNumber", (): void => {
     it("should initialize", (): void => {

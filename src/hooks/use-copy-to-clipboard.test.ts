@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { CopyFunction, useCopyToClipboard } from "@utils/hooks/use-copy-to-clipboard";
+import { CopyFunction, useCopyToClipboard } from "./use-copy-to-clipboard";
 
 describe("useCopyToClipboard", (): void => {
     const writeTextMock = jest.fn()

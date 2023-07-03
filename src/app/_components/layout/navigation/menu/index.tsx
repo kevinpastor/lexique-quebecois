@@ -5,7 +5,7 @@ import { IconButton, SwipeableDrawer, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, ReactElement, Suspense } from "react";
 
-import { BooleanUtilities, useBoolean } from "@utils/hooks/use-boolean";
+import { BooleanUtilities, useBoolean } from "@hooks/use-boolean";
 import { isLowEndDevice } from "@utils/misc/device";
 
 import type { MenuContentProps } from "./menu-content";

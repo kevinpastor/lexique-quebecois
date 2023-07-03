@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, ReactElement, useContext, useMemo } from "react";
 
-import { useLocalStorage } from "@utils/hooks/use-local-storage";
+import { useLocalStorage } from "@hooks/use-local-storage";
 
 import { Consent } from "./consent";
 

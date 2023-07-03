@@ -1,6 +1,6 @@
 import { MutableRefObject, useCallback, useRef } from "react";
 
-import { useEventListener } from "@utils/hooks/use-event-listener";
+import { useEventListener } from "./use-event-listener";
 
 export interface KeyboardFocusSelectionUtility {
     itemRef: (index: number) => (element: HTMLElement | null) => void;

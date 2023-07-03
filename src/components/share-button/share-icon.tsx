@@ -2,8 +2,8 @@ import { IosShare as IosShareIcon, Link as DesktopShareIcon, Share as AndroidSha
 import { Fade } from "@mui/material";
 import { ReactElement } from "react";
 
-import { useHasClientLoaded } from "@utils/hooks/use-has-client-loaded";
-import { usePlatformVariant } from "@utils/hooks/use-platform-variant";
+import { useHasClientLoaded } from "@hooks/use-has-client-loaded";
+import { usePlatformVariant } from "@hooks/use-platform-variant";
 
 export const ShareIcon = (): ReactElement => {
     const hasClientLoaded: boolean = useHasClientLoaded();

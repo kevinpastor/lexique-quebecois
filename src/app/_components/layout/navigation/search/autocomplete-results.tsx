@@ -5,9 +5,9 @@ import { useWatch } from "react-hook-form";
 import useSWR from "swr";
 
 import { Highlight } from "@components/highlight";
+import { useDebounce } from "@hooks/use-debounce";
+import { KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "@hooks/use-keyboard-focus-selection";
 import { getSlug } from "@models/definition";
-import { useDebounce } from "@utils/hooks/use-debounce";
-import { KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "@utils/hooks/use-keyboard-focus-selection";
 
 import { FormValues } from "./search-content";
 
