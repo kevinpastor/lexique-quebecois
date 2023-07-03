@@ -4,10 +4,10 @@ import { ButtonGroup } from "@mui/material";
 import { ReactElement } from "react";
 
 import { Definition } from "@models/definition";
-import { useReactions } from "@utils/hooks/use-reactions.ts";
 
 import { Dislikes } from "./dislikes";
 import { Likes } from "./likes";
+import { useReactions } from "./use-reactions";
 
 interface Props {
     word: Definition;
