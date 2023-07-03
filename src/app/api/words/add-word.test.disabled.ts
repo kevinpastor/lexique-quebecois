@@ -1,6 +1,6 @@
 import { _closeMongoClient } from "@app/api/database";
-import { WordClass } from "@models/classes";
 import { Status } from "@models/status";
+import { WordClass } from "@models/word-class";
 import { WordRequest } from "@models/word-request";
 import "@utils/tests/helpers";
 

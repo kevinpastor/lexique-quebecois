@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Definition } from "@components/word";
+import { Definition } from "@components/definition";
 import { Definition as IDefinition } from "@models/definition";
 import { Word } from "@models/word";
 

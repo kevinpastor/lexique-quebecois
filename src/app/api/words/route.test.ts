@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { WordClass } from "@models/classes";
 import { Method } from "@models/method";
 import { Status } from "@models/status";
 import { WithCaptchaToken } from "@models/with-captcha-token";
+import { WordClass } from "@models/word-class";
 import { WordRequest } from "@models/word-request";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "@utils/misc/hcaptcha";

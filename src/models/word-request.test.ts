@@ -1,4 +1,4 @@
-import { WordClass } from "@models/classes";
+import { WordClass } from "@models/word-class";
 import { cleanupWordRequest, isValidLabel, isValidWordRequest, WordRequest } from "@models/word-request";
 
 const wordRequestStub: WordRequest = {

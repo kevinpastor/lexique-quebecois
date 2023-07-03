@@ -1,7 +1,7 @@
 import { array, nativeEnum, object, string, union } from "zod";
 
-import { WordClass, wordClasses } from "./classes";
 import { WithCaptchaToken, withCaptchaTokenSchema } from "./with-captcha-token";
+import { WordClass, wordClasses } from "./word-class";
 
 export interface WordRequest {
     label: string;

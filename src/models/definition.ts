@@ -2,7 +2,7 @@ import { array, boolean, nativeEnum, number, object, string } from "zod";
 
 import { removeAccents } from "@utils/misc/string";
 
-import { WordClass } from "./classes";
+import { WordClass } from "./word-class";
 
 export interface Reactions {
     likes: number;

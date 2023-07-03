@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { WordClass } from "@models/classes";
 import { Method } from "@models/method";
 import { WithCaptchaToken } from "@models/with-captcha-token";
+import { WordClass } from "@models/word-class";
 import { WordRequest } from "@models/word-request";
 
 import { addWord } from "./add-word";

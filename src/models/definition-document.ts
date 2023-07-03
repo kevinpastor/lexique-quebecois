@@ -2,9 +2,9 @@ import { ObjectId } from "mongodb";
 import { array, boolean, nativeEnum, object, string } from "zod";
 
 import { AuthorDocument, authorDocumentSchema } from "./author-document";
-import { WordClass } from "./classes";
 import { objectIdSchema } from "./object-id-schema";
 import { ReactionsDocument, reactionsDocumentSchema } from "./reactions-document";
+import { WordClass } from "./word-class";
 
 export interface DefinitionDocument {
     _id: ObjectId;

@@ -2,8 +2,8 @@ import { Checkbox, FormControl, FormHelperText, InputLabel, ListItemText, MenuIt
 import { ReactElement, ReactNode, useId } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { WordClass, wordClassAbreviations, wordClasses } from "@models/classes";
 import { WithCaptchaToken } from "@models/with-captcha-token";
+import { WordClass, wordClassAbreviations, wordClasses } from "@models/word-class";
 import { WordRequest } from "@models/word-request";
 
 export const WordClassPicker = (): ReactElement => {
