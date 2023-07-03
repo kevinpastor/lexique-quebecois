@@ -3,9 +3,9 @@ import { useEffect, useReducer } from "react";
 import { Reactions } from "@models/definition";
 import { Status } from "@models/status";
 import { isHttpError } from "@services/http-error";
-import { dislike, like, removeDislike, removeLike } from "@services/reactions";
 import { useAlerts } from "@utils/hooks/use-alerts";
 
+import { dislike, like, removeDislike, removeLike } from "./reactions";
 import { reducer } from "./reducer";
 
 interface ReturnType {
