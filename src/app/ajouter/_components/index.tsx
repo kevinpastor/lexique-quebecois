@@ -8,9 +8,9 @@ import { Status } from "@models/status";
 import { WithCaptchaToken } from "@models/with-captcha-token";
 import { cleanupWordRequestWithCaptchaToken, WordRequest, wordRequestValidationWithCaptchaTokenSchema } from "@models/word-request";
 import { isHttpError } from "@services/http-error";
-import { addWord } from "@services/words";
 import { useAlerts } from "@utils/hooks/use-alerts";
 
+import { addWord } from "./add-word";
 import { Form } from "./form";
 
 const defaultValues: WithCaptchaToken<WordRequest> = {

@@ -3,8 +3,10 @@
  */
 import { WordClass } from "@models/classes";
 import { Method } from "@models/method";
+import { WithCaptchaToken } from "@models/with-captcha-token";
 import { WordRequest } from "@models/word-request";
-import { addWord } from "@services/words";
+
+import { addWord } from "./add-word";
 
 const fetchMock = jest.fn()
     .mockResolvedValue({
@@ -20,6 +22,11 @@ const wordRequestStub: WordRequest = {
     author: "Kevin"
 };
 
+const wordRequestWithCaptchaTokenStub: WithCaptchaToken<WordRequest> = {
+    ...wordRequestStub,
+    captchaToken: "captchaToken"
+};
+
 describe("addWord", (): void => {
     beforeEach((): void => {
         fetchMock.mockClear();
@@ -31,7 +38,7 @@ describe("addWord", (): void => {
                 ok: true
             } as Partial<Response> as Response);
 
-        await addWord(wordRequestStub);
+        await addWord(wordRequestWithCaptchaTokenStub);
 
         expect(fetchMock).toBeCalledWith(
             "/api/words",
@@ -47,7 +54,7 @@ describe("addWord", (): void => {
                 ok: false
             } as Partial<Response> as Response);
 
-        await expect(addWord(wordRequestStub)).rejects.toBeDefined();
+        await expect(addWord(wordRequestWithCaptchaTokenStub)).rejects.toBeDefined();
 
         expect(fetchMock).toBeCalledWith(
             "/api/words",
