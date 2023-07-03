@@ -13,7 +13,8 @@ const customJestConfig = {
     ],
     coveragePathIgnorePatterns: [
         "<rootDir>/node_modules/",
-        "<rootDir>/src/utils/tests/"
+        "<rootDir>/src/utils/tests/",
+        "<rootDir>/e2e/",
     ],
     coverageThreshold: {
         global: {
@@ -24,10 +25,9 @@ const customJestConfig = {
         }
     },
     moduleNameMapper: [
+        "app",
         "components",
-        "configs",
         "models",
-        "services",
         "utils"
     ].reduce((accumulator, value) => ({
         ...accumulator,
