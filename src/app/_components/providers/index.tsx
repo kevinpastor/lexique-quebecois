@@ -10,7 +10,6 @@ import { ConsentProvider } from "./consent-provider";
 import { SWRProvider } from "./swr-provider";
 import { ThemeColorMetaTag } from "./theme-color-meta-tag";
 import { ThemeProvider } from "./theme-provider";
-import { TrackingProvider } from "./tracking-provider";
 
 type Props = AuthenticationProviderProps;
 
@@ -21,14 +20,12 @@ export const Providers = ({ session, children }: PropsWithChildren<Props>): Reac
             <ThemeProvider>
                 <ThemeColorMetaTag />
                 <ConsentProvider>
-                    <TrackingProvider>
-                        <AdProvider />
-                        <AlertsProvider>
-                            <SWRProvider>
-                                {children}
-                            </SWRProvider>
-                        </AlertsProvider>
-                    </TrackingProvider>
+                    <AdProvider />
+                    <AlertsProvider>
+                        <SWRProvider>
+                            {children}
+                        </SWRProvider>
+                    </AlertsProvider>
                 </ConsentProvider>
             </ThemeProvider>
         </AuthenticationProvider>
