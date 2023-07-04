@@ -6,7 +6,6 @@ import { ShareButton } from "@components/share-button";
 import { Definition as IDefinition, getSlug } from "@models/definition";
 import { formatDate } from "@utils/misc/date";
 
-import { Actions } from "./actions";
 import { Reactions } from "./reactions";
 import { WordClasses } from "./word-classes";
 
@@ -38,7 +37,6 @@ export const Definition = ({ definition }: Props): ReactElement => {
                         <WordClasses wordClasses={definition.wordClasses} />
                     </Stack>
                 }
-                action={<Actions />}
             />
             <CardContent>
                 <Typography
