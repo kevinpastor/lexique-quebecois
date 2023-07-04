@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { Status } from "@models/status";
-import { getRequestIp } from "@utils/api/ip";
+import { getIpFromRequest } from "@utils/api/ip";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 
 import { like } from "./like";
@@ -16,7 +16,7 @@ interface Params {
 }
 
 export const PUT = async (request: NextRequest, { params: { id } }: { params: Params }): Promise<NextResponse> => {
-    const ip: string | undefined = getRequestIp(request);
+    const ip: string | undefined = getIpFromRequest(request);
     if (!ip) {
         return NextResponse.json(null, { status: Status.Unauthorized });
     }
@@ -31,7 +31,7 @@ export const PUT = async (request: NextRequest, { params: { id } }: { params: Pa
 };
 
 export const DELETE = async (request: NextRequest, { params: { id } }: { params: Params }): Promise<NextResponse> => {
-    const ip: string | undefined = getRequestIp(request);
+    const ip: string | undefined = getIpFromRequest(request);
     if (!ip) {
         return NextResponse.json(null, { status: Status.Unauthorized });
     }

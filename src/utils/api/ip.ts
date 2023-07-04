@@ -1,18 +1,22 @@
 import { NextRequest } from "next/server";
 import { getClientIp } from "request-ip";
 
-const massageRequest = (request: NextRequest): Parameters<typeof getClientIp>[0] => ({
+const massageRequest = (headers: Headers): Parameters<typeof getClientIp>[0] => ({
     headers: {
-        "x-client-ip": request.headers.get("x-client-ip") ?? undefined,
-        "x-forwarded-for": request.headers.get("x-forwarded-for") ?? undefined,
-        "x-real-ip": request.headers.get("x-real-ip") ?? undefined,
-        "x-cluster-client-ip": request.headers.get("x-cluster-client-ip") ?? undefined,
-        "x-forwarded": request.headers.get("x-forwarded") ?? undefined,
-        "forwarded-for": request.headers.get("forwarded-for") ?? undefined,
-        "forwarded": request.headers.get("forwarded") ?? undefined
+        "x-client-ip": headers.get("x-client-ip") ?? undefined,
+        "x-forwarded-for": headers.get("x-forwarded-for") ?? undefined,
+        "x-real-ip": headers.get("x-real-ip") ?? undefined,
+        "x-cluster-client-ip": headers.get("x-cluster-client-ip") ?? undefined,
+        "x-forwarded": headers.get("x-forwarded") ?? undefined,
+        "forwarded-for": headers.get("forwarded-for") ?? undefined,
+        "forwarded": headers.get("forwarded") ?? undefined
     }
 });
 
-export const getRequestIp = (request: NextRequest): string | undefined => (
-    request.ip ?? getClientIp(massageRequest(request)) ?? undefined
+export const getIpFromHeaders = (headers: Headers): string | undefined => (
+    getClientIp(massageRequest(headers)) ?? undefined
+);
+
+export const getIpFromRequest = (request: NextRequest): string | undefined => (
+    request.ip ?? getIpFromHeaders(request.headers)
 );

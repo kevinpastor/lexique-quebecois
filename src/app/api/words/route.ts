@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { Status } from "@models/status";
 import { isValidWordRequest } from "@models/word-request";
-import { getRequestIp } from "@utils/api/ip";
+import { getIpFromRequest } from "@utils/api/ip";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "@utils/misc/hcaptcha";
 
@@ -13,7 +13,7 @@ const tokens: number = 5;
 const rateLimiter = new RateLimiter(window, tokens);
 
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
-    const ip: string | undefined = getRequestIp(request);
+    const ip: string | undefined = getIpFromRequest(request);
     if (!ip) {
         return NextResponse.json(null, { status: Status.Unauthorized });
     }
