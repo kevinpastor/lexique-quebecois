@@ -15,7 +15,11 @@ interface Params {
     id: string;
 }
 
-export const PUT = async (request: NextRequest, { params: { id } }: { params: Params }): Promise<NextResponse> => {
+interface Context {
+    params: Params;
+}
+
+export const PUT = async (request: NextRequest, { params: { id } }: Context): Promise<NextResponse> => {
     const ip: string | undefined = getIpFromRequest(request);
     if (!ip) {
         return NextResponse.json(null, { status: Status.Unauthorized });
@@ -30,7 +34,7 @@ export const PUT = async (request: NextRequest, { params: { id } }: { params: Pa
     return NextResponse.json(null, { status: result });
 };
 
-export const DELETE = async (request: NextRequest, { params: { id } }: { params: Params }): Promise<NextResponse> => {
+export const DELETE = async (request: NextRequest, { params: { id } }: Context): Promise<NextResponse> => {
     const ip: string | undefined = getIpFromRequest(request);
     if (!ip) {
         return NextResponse.json(null, { status: Status.Unauthorized });
