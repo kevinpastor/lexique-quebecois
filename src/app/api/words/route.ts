@@ -7,6 +7,7 @@ import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "@utils/misc/hcaptcha";
 
 import { addWord } from "./add-word";
+import { sendEmail } from "./send-email";
 
 const window: number = 1000 * 60 * 15;
 const tokens: number = 5;
@@ -45,6 +46,13 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
     }
 
     const result: Status = await addWord(wordRequest, ip);
+
+    try {
+        await sendEmail(wordRequest);
+    }
+    catch (error: unknown) {
+        console.error(error);
+    }
 
     return NextResponse.json(null, { status: result });
 };
