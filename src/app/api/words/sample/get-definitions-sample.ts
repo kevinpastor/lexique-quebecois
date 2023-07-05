@@ -79,6 +79,7 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
                                         )
                                     ]
                                 },
+                                // Order of `$$value` and `$$this` is important.
                                 then: "$$value",
                                 else: "$$this"
                             }

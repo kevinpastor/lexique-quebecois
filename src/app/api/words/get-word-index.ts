@@ -3,6 +3,10 @@ import { Collection, Db, Document } from "mongodb";
 import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { WordDocument } from "@models/word-document";
 
+interface OutputDocument {
+    spellings: string;
+}
+
 // TODO Move closer to usage.
 export const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
@@ -18,40 +22,16 @@ export const getWordIndex = async (): Promise<Array<string>> => {
             }
         },
         {
-            $project: {
-                _id: 0,
-                spelling: {
-                    $filter: {
-                        input: [
-                            "$spelling",
-                            "$spellingAlt",
-                            "$spellingAlt2",
-                            "$spellingAlt3",
-                            "$spellingAlt4"
-                        ],
-                        as: "value",
-                        cond: {
-                            $not: {
-                                $eq: [
-                                    "$$value",
-                                    null
-                                ]
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        {
-            $unwind: "$spelling"
+            $unwind: "$spellings"
         },
         {
             $sort: {
-                spelling: 1
+                spellings: 1
             }
         }
     ];
-    return collection.aggregate<{ spelling: string }>(pipeline, defaultAggregateOptions)
-        .map(({ spelling }: { spelling: string }): string => (spelling))
+
+    return collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
+        .map(({ spellings }: OutputDocument): string => (spellings))
         .toArray();
 };

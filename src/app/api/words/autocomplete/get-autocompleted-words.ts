@@ -1,86 +1,40 @@
-import { Collection, Db, Document } from "mongodb";
+import { Collection, Db, Document, ObjectId } from "mongodb";
 
 import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { WordDocument } from "@models/word-document";
 
-const createAutocompleteSearchWithBitmaskScore = (query: string, fields: Array<string | Document>): Document => {
-    const operators: Array<Document> = fields.map((field: string | Document, index: number): Document => ({
-        autocomplete: {
-            path: field,
-            query,
-            score: {
-                constant: {
-                    value: Math.pow(2, index)
-                }
-            }
-        }
-    }));
+interface HighlightText {
+    value: string;
+    type: "hit" | "text";
+}
 
-    return {
-        $search: {
-            compound: {
-                should: operators
-            }
-        }
-    };
-};
+interface HighlightDocument {
+    path: string;
+    texts: Array<HighlightText>;
+    score: number;
+}
 
-const getIndexesFromMask = (mask: number): Array<number> => {
-    const indexes: Array<number> = [];
-
-    let index = 0;
-    while (mask > 0) {
-        if (mask & 1) {
-            indexes.push(index);
-        }
-
-        mask >>= 1;
-        index++;
-    }
-
-    return indexes;
-};
-
-const createBitmaskedArray = (bitmask: string | Document, elements: Array<string | Document>): Document => {
-    const size: number = Math.pow(2, elements.length) - 1;
-
-    const branches: Array<Document> = [];
-    for (let i = 0; i < size; i++) {
-        const indexes: Array<number> = getIndexesFromMask(i + 1);
-
-        const branch: Document = {
-            case: {
-                $eq: [bitmask, i + 1]
-            },
-            then: indexes.map((index: number): string | Document => elements[index])
-        };
-
-        branches.push(branch);
-    }
-
-    return {
-        $switch: {
-            branches,
-            default: []
-        }
-    };
-};
+interface OutputDocument {
+    _id: ObjectId;
+    highlight: HighlightDocument;
+}
 
 export const getAutocompletedWords = async (query: string): Promise<Array<string>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
     const pipeline: Array<Document> = [
-        createAutocompleteSearchWithBitmaskScore(
-            query,
-            [
-                "spelling",
-                "spellingAlt",
-                "spellingAlt2",
-                "spellingAlt3",
-                "spellingAlt4"
-            ]
-        ),
+        {
+            $search: {
+                autocomplete: {
+                    path: "spellings",
+                    query
+                },
+                highlight: {
+                    path: "spellings"
+                }
+            }
+        },
         {
             $match: {
                 definitions: {
@@ -92,27 +46,22 @@ export const getAutocompletedWords = async (query: string): Promise<Array<string
         },
         {
             $project: {
-                _id: 0,
-                spelling: createBitmaskedArray(
-                    {
-                        $meta: "searchScore"
-                    },
-                    [
-                        "$spelling",
-                        "$spellingAlt",
-                        "$spellingAlt2",
-                        "$spellingAlt3",
-                        "$spellingAlt4"
-                    ]
-                )
+                highlight: {
+                    $meta: "searchHighlights"
+                }
             }
         },
         {
-            $unwind: "$spelling"
+            $unwind: "$highlight"
+        },
+        {
+            $sort: {
+                "highlight.score": -1
+            }
         }
     ];
 
-    return collection.aggregate<{ spelling: string }>(pipeline, defaultAggregateOptions)
-        .map(({ spelling }: { spelling: string }): string => (spelling))
+    return collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
+        .map(({ highlight: { texts: [{ value: spelling }] } }: OutputDocument): string => (spelling))
         .toArray();
 };

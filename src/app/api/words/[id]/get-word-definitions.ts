@@ -8,64 +8,26 @@ import { safeInOperator } from "@utils/api/aggregation/safe-in-operator";
 import { safeSizeOperator } from "@utils/api/aggregation/safe-size-operator";
 import { timestampOperator } from "@utils/api/aggregation/timestamp-operator";
 
-const createSearchStage = (query: string, fields: Array<string | Document>): Document => {
-    const operators: Array<Document> = fields.map((field: string | Document): Document => ({
-        text: {
-            path: field,
-            query
-        }
-    }));
-
-    return {
-        $search: {
-            compound: {
-                should: operators
-            }
-        }
-    };
-};
-
 // TODO Move closer to usage.
 export const getWordDefinitions = async (spelling: string, ip: string = ""): Promise<Word | null> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
     const pipeline: Array<Document> = [
-        createSearchStage(
-            spelling,
-            [
-                "spelling",
-                "spellingAlt",
-                "spellingAlt2",
-                "spellingAlt3",
-                "spellingAlt4"
-            ]
-        ),
+        {
+            $search: {
+                text: {
+                    path: "spellings",
+                    query: spelling
+                }
+            }
+        },
         {
             $limit: 1
         },
         {
             $project: {
-                spellings: {
-                    $filter: {
-                        input: [
-                            "$spelling",
-                            "$spellingAlt",
-                            "$spellingAlt2",
-                            "$spellingAlt3",
-                            "$spellingAlt4"
-                        ],
-                        as: "value",
-                        cond: {
-                            $not: {
-                                $eq: [
-                                    "$$value",
-                                    null
-                                ]
-                            }
-                        }
-                    }
-                },
+                spellings: true,
                 definitions: {
                     $map: {
                         input: {
@@ -73,7 +35,10 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
                                 input: "$definitions",
                                 as: "definition",
                                 cond: {
-                                    $eq: ["$$definition.isApproved", true]
+                                    $eq: [
+                                        "$$definition.isApproved",
+                                        true
+                                    ]
                                 }
                             }
                         },
@@ -110,9 +75,7 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
         },
         {
             $sort: {
-                "definitions.reactions.rating": -1,
-                "definitions.timestamp": -1,
-                "definitions.label": 1
+                "definitions.reactions.rating": -1
             }
         },
         {
@@ -127,29 +90,10 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
             }
         },
         {
-            $unset: "definitions.reactions.rating"
-        },
-        {
-            $unwind: "$spellings"
-        },
-        {
-            $sort: {
-                "spellings": 1
-            }
-        },
-        {
-            $group: {
-                _id: "$_id",
-                spellings: {
-                    $push: "$spellings"
-                },
-                definitions: {
-                    $first: "$definitions"
-                }
-            }
-        },
-        {
-            $unset: "_id"
+            $unset: [
+                "_id",
+                "definitions.reactions.rating"
+            ]
         }
     ];
 

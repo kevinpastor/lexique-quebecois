@@ -4,25 +4,13 @@ import { DefinitionDocument, definitionDocumentSchema } from "./definition-docum
 import { objectIdSchema, objectWithIdSchema } from "./object-id-schema";
 
 export interface WordDocument {
-    spelling: string;
-    spellingAlt?: string;
-    spellingAlt2?: string;
-    spellingAlt3?: string;
-    spellingAlt4?: string;
+    spellings: Array<string>;
     definitions: Array<DefinitionDocument>;
 }
 
 export const wordDocumentSchema = object({
     _id: objectIdSchema,
-    spelling: string(),
-    spellingAlt: string()
-        .optional(),
-    spellingAlt2: string()
-        .optional(),
-    spellingAlt3: string()
-        .optional(),
-    spellingAlt4: string()
-        .optional(),
+    spellings: array(string()),
     definitions: array(definitionDocumentSchema)
 })
     .strict();

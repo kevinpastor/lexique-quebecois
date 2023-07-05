@@ -7,6 +7,11 @@ import { WordDocument } from "@models/word-document";
 
 import { host } from "./robots";
 
+interface OutputDocument {
+    spellings: string;
+    timestamp: Date;
+}
+
 interface WordInformation {
     spelling: string;
     timestamp: Date;
@@ -28,34 +33,15 @@ const getWordsInformation = async (): Promise<Array<WordInformation>> => {
         },
         {
             $project: {
-                _id: 0,
-                spelling: {
-                    $filter: {
-                        input: [
-                            "$spelling",
-                            "$spellingAlt",
-                            "$spellingAlt2",
-                            "$spellingAlt3",
-                            "$spellingAlt4"
-                        ],
-                        as: "value",
-                        cond: {
-                            $not: {
-                                $eq: [
-                                    "$$value",
-                                    null
-                                ]
-                            }
-                        }
-                    }
-                },
+                _id: false,
+                spellings: true,
                 timestamp: {
                     $reduce: {
                         input: {
                             $map: {
                                 input: "$definitions",
                                 as: "definition",
-                                "in": {
+                                in: {
                                     $convert: {
                                         input: "$$definition._id",
                                         to: "date"
@@ -81,16 +67,20 @@ const getWordsInformation = async (): Promise<Array<WordInformation>> => {
             }
         },
         {
-            $unwind: "$spelling"
+            $unwind: "$spellings"
         },
         {
             $sort: {
-                spelling: 1
+                spellings: 1
             }
         }
     ];
 
-    return collection.aggregate<WordInformation>(pipeline, defaultAggregateOptions)
+    return collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
+        .map(({ spellings: spelling, timestamp }: OutputDocument): WordInformation => ({
+            spelling,
+            timestamp
+        }))
         .toArray();
 };
 
