@@ -1,6 +1,6 @@
 import { AggregateOptions, Db, MongoClient } from "mongodb";
 
-import { isDevelopmentEnvironment } from "@utils/misc/environment";
+import { isDevelopmentEnvironment, isTestEnvironment } from "@utils/misc/environment";
 
 let mongoClientConnect: Promise<MongoClient> | undefined = undefined;
 
@@ -8,7 +8,11 @@ interface ExtendedGlobal {
     _mongoClientConnect?: Promise<MongoClient>;
 }
 
-export const getMongoClient = async (): Promise<MongoClient> => {
+const getMongoClient = async (): Promise<MongoClient> => {
+    if (isTestEnvironment()) {
+        throw new Error("getMongoClient should not be called in test environment.");
+    }
+
     // 2. Reassign database from cache
     /* istanbul ignore if */
     if (isDevelopmentEnvironment()) {
@@ -48,14 +52,6 @@ export const getDatabase = async (): Promise<Db> => {
     const mongoClient: MongoClient = await getMongoClient();
 
     return mongoClient.db();
-};
-
-export const _closeMongoClient = async (): Promise<void> => {
-    if (mongoClientConnect) {
-        const mongoClient: MongoClient = await mongoClientConnect;
-
-        await mongoClient.close();
-    }
 };
 
 export const defaultAggregateOptions: AggregateOptions = {

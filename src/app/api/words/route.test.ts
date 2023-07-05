@@ -9,21 +9,23 @@ import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "@utils/misc/hcaptcha";
 
 import { addWord } from "./add-word";
-// TODO Create path alias
 import { POST } from "./route";
+import { sendEmail } from "./send-email";
 
 jest.mock("./add-word", () => ({
     addWord: jest.fn()
 }));
 const addWordMock = addWord as jest.MockedFunction<typeof addWord>;
-jest.mock("./get-word-index", () => ({
-    getWordIndex: jest.fn()
-}));
 
 jest.mock("@utils/misc/hcaptcha", () => ({
     verifyHCaptcha: jest.fn()
 }));
 const verifyHCaptchaMock = verifyHCaptcha as jest.MockedFunction<typeof verifyHCaptcha>;
+
+jest.mock("./send-email", () => ({
+    sendEmail: jest.fn()
+}));
+const sendEmailMock = sendEmail as jest.MockedFunction<typeof sendEmail>;
 
 const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
 
@@ -54,6 +56,7 @@ describe("POST", (): void => {
         verifyHCaptchaMock.mockImplementation((token: string): Promise<boolean> => (
             Promise.resolve(token ? true : false)
         ));
+        sendEmailMock.mockResolvedValue(undefined);
     });
 
     afterEach((): void => {
