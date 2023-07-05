@@ -1,4 +1,4 @@
-import { getSlug } from "@models/definition";
+import { getSlug } from "./definition";
 
 describe("getSlug", (): void => {
     it.each([

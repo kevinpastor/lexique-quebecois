@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { headers } from "next/headers";
 import { ReactElement } from "react";
 
-import { Word } from "@models/word";
+import { Word } from "~types/word";
 import { getIpFromHeaders } from "@utils/api/ip";
 
 import { WordPage } from "./_components";

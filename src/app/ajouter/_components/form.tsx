@@ -6,8 +6,8 @@ import { ReactElement } from "react";
 import { useFormState } from "react-hook-form";
 
 import { TextField } from "@components/react-hook-form/text-field";
-import { WithCaptchaToken } from "@models/with-captcha-token";
-import { WordRequest } from "@models/word-request";
+import { WithCaptchaToken } from "~types/with-captcha-token";
+import { WordRequest } from "~types/word-request";
 
 import { Captcha } from "./captcha";
 import { WordClassPicker } from "./word-class-picker";

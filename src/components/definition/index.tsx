@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { ReactElement } from "react";
 
 import { ShareButton } from "@components/share-button";
-import { Definition as IDefinition, getSlug } from "@models/definition";
+import { Definition as IDefinition, getSlug } from "~types/definition";
 import { formatDate } from "@utils/misc/date";
 
 import { Reactions } from "./reactions";

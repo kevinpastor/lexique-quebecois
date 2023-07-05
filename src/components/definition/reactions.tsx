@@ -3,7 +3,7 @@
 import { ButtonGroup } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Definition } from "@models/definition";
+import { Definition } from "~types/definition";
 
 import { Dislikes } from "./dislikes";
 import { Likes } from "./likes";

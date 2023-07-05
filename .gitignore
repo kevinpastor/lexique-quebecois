@@ -21,3 +21,4 @@ next-env.d.ts
 # other
 TODO.md
 NOTES.md
+*.mongodb.js

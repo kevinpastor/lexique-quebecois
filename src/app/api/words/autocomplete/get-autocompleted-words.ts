@@ -1,6 +1,6 @@
 import { Collection, Db, Document, ObjectId } from "mongodb";
 
-import { WordDocument } from "@models/word-document";
+import { WordDocument } from "~types/word-document";
 import { defaultAggregateOptions, getDatabase } from "@services/database";
 
 interface HighlightText {

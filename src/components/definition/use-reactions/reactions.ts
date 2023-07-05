@@ -1,4 +1,4 @@
-import { Method } from "@models/method";
+import { Method } from "~types/method";
 import { HttpError } from "@utils/http-error";
 
 export const like = async (id: string): Promise<void> => {

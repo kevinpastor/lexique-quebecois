@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { ReactElement } from "react";
 
-import { Definition } from "@models/definition";
+import { Definition } from "~types/definition";
 import { getIpFromHeaders } from "@utils/api/ip";
 
 import { WordsPage } from "./_components";

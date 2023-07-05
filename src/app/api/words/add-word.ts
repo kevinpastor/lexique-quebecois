@@ -1,9 +1,9 @@
 import { Collection, Db, InsertOneResult, WithId, ObjectId, Filter, UpdateFilter, UpdateResult, Document } from "mongodb";
 
-import { DefinitionDocument } from "@models/definition-document";
-import { Status } from "@models/status";
-import { WordDocument } from "@models/word-document";
-import { WordRequest } from "@models/word-request";
+import { DefinitionDocument } from "~types/definition-document";
+import { Status } from "~types/status";
+import { WordDocument } from "~types/word-document";
+import { WordRequest } from "~types/word-request";
 import { defaultAggregateOptions, getDatabase } from "@services/database";
 
 export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Status> => {

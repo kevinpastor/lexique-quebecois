@@ -1,7 +1,7 @@
 import { Transporter, createTransport } from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
-import { WordRequest } from "@models/word-request";
+import { WordRequest } from "~types/word-request";
 import { isInteger } from "@utils/misc/number";
 
 export const sendEmail = async (wordRequest: WordRequest): Promise<void> => {

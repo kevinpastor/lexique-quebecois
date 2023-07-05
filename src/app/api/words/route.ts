@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { Status } from "@models/status";
-import { isValidWordRequest } from "@models/word-request";
+import { Status } from "~types/status";
+import { isValidWordRequest } from "~types/word-request";
 import { getIpFromRequest } from "@utils/api/ip";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "@utils/misc/hcaptcha";

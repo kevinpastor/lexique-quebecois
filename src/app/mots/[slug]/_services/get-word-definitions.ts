@@ -1,7 +1,7 @@
 import { Collection, Db, Document } from "mongodb";
 
-import { Word } from "@models/word";
-import { WordDocument } from "@models/word-document";
+import { Word } from "~types/word";
+import { WordDocument } from "~types/word-document";
 import { defaultAggregateOptions, getDatabase } from "@services/database";
 import { ratingOperator } from "@utils/api/aggregation/rating-operator";
 import { safeInOperator } from "@utils/api/aggregation/safe-in-operator";

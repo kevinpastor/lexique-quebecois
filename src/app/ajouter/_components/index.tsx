@@ -5,9 +5,9 @@ import { ReactElement } from "react";
 
 import { FormContainer } from "@components/react-hook-form/form-container";
 import { useAlerts } from "@hooks/use-alerts";
-import { Status } from "@models/status";
-import { WithCaptchaToken } from "@models/with-captcha-token";
-import { cleanupWordRequestWithCaptchaToken, WordRequest, wordRequestValidationWithCaptchaTokenSchema } from "@models/word-request";
+import { Status } from "~types/status";
+import { WithCaptchaToken } from "~types/with-captcha-token";
+import { cleanupWordRequestWithCaptchaToken, WordRequest, wordRequestValidationWithCaptchaTokenSchema } from "~types/word-request";
 import { isHttpError } from "@utils/http-error";
 
 import { addWord } from "./add-word";

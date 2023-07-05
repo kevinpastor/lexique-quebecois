@@ -1,7 +1,7 @@
 import { Collection, Db, Filter, ObjectId, UpdateFilter, UpdateResult } from "mongodb";
 
-import { Status } from "@models/status";
-import { WordDocument } from "@models/word-document";
+import { Status } from "~types/status";
+import { WordDocument } from "~types/word-document";
 import { getDatabase } from "@services/database";
 
 export const removeDislike = async (id: string, ip: string): Promise<Status> => {

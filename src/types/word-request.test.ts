@@ -1,5 +1,5 @@
-import { WordClass } from "@models/word-class";
-import { cleanupWordRequest, isValidLabel, isValidWordRequest, WordRequest } from "@models/word-request";
+import { WordClass } from "./word-class";
+import { cleanupWordRequest, isValidLabel, isValidWordRequest, WordRequest } from "./word-request";
 
 const wordRequestStub: WordRequest = {
     label: "gyu",

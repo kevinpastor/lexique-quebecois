@@ -1,8 +1,8 @@
 import { Collection, Db, WithId, ObjectId, Document } from "mongodb";
 
-import { Definition } from "@models/definition";
-import { DefinitionDocument } from "@models/definition-document";
-import { WordDocument } from "@models/word-document";
+import { Definition } from "~types/definition";
+import { DefinitionDocument } from "~types/definition-document";
+import { WordDocument } from "~types/word-document";
 import { defaultAggregateOptions, getDatabase } from "@services/database";
 import { ratingOperator } from "@utils/api/aggregation/rating-operator";
 import { safeInOperator } from "@utils/api/aggregation/safe-in-operator";

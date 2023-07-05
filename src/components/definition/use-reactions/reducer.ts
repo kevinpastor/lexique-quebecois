@@ -1,4 +1,4 @@
-import { Reactions } from "@models/definition";
+import { Reactions } from "~types/definition";
 
 const toggleLike = (state: Reactions): Reactions => {
     if (state.isLiked) {

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { Status } from "@models/status";
+import { Status } from "~types/status";
 import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
 
 import { like } from "./like";
