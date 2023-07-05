@@ -1,7 +1,7 @@
-import { _closeMongoClient } from "@app/api/database";
 import { Status } from "@models/status";
 import { WordClass } from "@models/word-class";
 import { WordRequest } from "@models/word-request";
+import { _closeMongoClient } from "@services/database";
 import "@utils/tests/helpers";
 
 import { addWord } from "./add-word";

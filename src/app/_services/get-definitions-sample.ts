@@ -1,9 +1,9 @@
 import { Collection, Db, WithId, ObjectId, Document } from "mongodb";
 
-import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { Definition } from "@models/definition";
 import { DefinitionDocument } from "@models/definition-document";
 import { WordDocument } from "@models/word-document";
+import { defaultAggregateOptions, getDatabase } from "@services/database";
 import { ratingOperator } from "@utils/api/aggregation/rating-operator";
 import { safeInOperator } from "@utils/api/aggregation/safe-in-operator";
 import { safeSizeOperator } from "@utils/api/aggregation/safe-size-operator";
@@ -95,7 +95,6 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
         .toArray();
 };
 
-// TODO Move closer to usage.
 export const getDefinitionsSample = async (ip: string = ""): Promise<Array<Definition>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");

@@ -1,14 +1,13 @@
 import { Collection, Db, Document } from "mongodb";
 
-import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { Word } from "@models/word";
 import { WordDocument } from "@models/word-document";
+import { defaultAggregateOptions, getDatabase } from "@services/database";
 import { ratingOperator } from "@utils/api/aggregation/rating-operator";
 import { safeInOperator } from "@utils/api/aggregation/safe-in-operator";
 import { safeSizeOperator } from "@utils/api/aggregation/safe-size-operator";
 import { timestampOperator } from "@utils/api/aggregation/timestamp-operator";
 
-// TODO Move closer to usage.
 export const getWordDefinitions = async (spelling: string, ip: string = ""): Promise<Word | null> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");

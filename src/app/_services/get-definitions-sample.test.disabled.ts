@@ -1,5 +1,5 @@
-import { _closeMongoClient } from "@app/api/database";
 import { Definition, definitionSchema } from "@models/definition";
+import { _closeMongoClient } from "@services/database";
 import "@utils/tests/helpers";
 
 import { getDefinitionsSample } from "./get-definitions-sample";

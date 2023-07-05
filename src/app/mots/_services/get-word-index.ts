@@ -1,13 +1,12 @@
 import { Collection, Db, Document } from "mongodb";
 
-import { defaultAggregateOptions, getDatabase } from "@app/api/database";
 import { WordDocument } from "@models/word-document";
+import { defaultAggregateOptions, getDatabase } from "@services/database";
 
 interface OutputDocument {
     spellings: string;
 }
 
-// TODO Move closer to usage.
 export const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");

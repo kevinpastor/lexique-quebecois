@@ -1,5 +1,5 @@
-import { _closeMongoClient } from "@app/api/database";
 import { Word, wordSchema } from "@models/word";
+import { _closeMongoClient } from "@services/database";
 import "@utils/tests/helpers";
 
 import { getWordDefinitions } from "./get-word-definitions";

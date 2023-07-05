@@ -1,9 +1,8 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { getWordIndex } from "@app/api/words/get-word-index";
-
 import { IndexPage } from "./_components";
+import { getWordIndex } from "./_services/get-word-index";
 
 export const metadata: Metadata = {
     title: "Index"
