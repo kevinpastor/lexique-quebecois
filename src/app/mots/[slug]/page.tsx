@@ -32,7 +32,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     };
 };
 
-export const revalidate: number = 0; // Revalidate every day
+export const revalidate: number = 0; // Dynamically render
 
 const Page = async ({ params }: Props): Promise<ReactElement> => {
     const { slug } = params;
