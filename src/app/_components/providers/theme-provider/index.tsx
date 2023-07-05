@@ -2,7 +2,7 @@ import { CssBaseline, Experimental_CssVarsProvider as CssVarsProvider, getInitCo
 import { PropsWithChildren, ReactElement } from "react";
 import { NextAppDirEmotionCacheProvider, NextAppDirEmotionCacheProviderProps } from "tss-react/next/appDir";
 
-import { ThemeMode } from "@hooks/use-theme-mode";
+import { ThemeMode } from "~hooks/use-theme-mode";
 
 import { theme } from "./theme";
 

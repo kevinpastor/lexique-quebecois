@@ -1,9 +1,9 @@
 import { useEffect, useReducer } from "react";
 
-import { useAlerts } from "@hooks/use-alerts";
+import { useAlerts } from "~hooks/use-alerts";
 import { Reactions } from "~types/definition";
 import { Status } from "~types/status";
-import { isHttpError } from "@utils/http-error";
+import { isHttpError } from "~utils/http-error";
 
 import { dislike, like, removeDislike, removeLike } from "./reactions";
 import { reducer } from "./reducer";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { isAndroid, isIOS } from "@utils/misc/device";
+import { isAndroid, isIOS } from "~utils/misc/device";
 
 export const usePlatformVariant = <T>(initialValue: T, ios: T, android: T, desktop: T): T => {
     const [value, setValue] = useState(initialValue);

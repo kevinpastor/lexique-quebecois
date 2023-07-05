@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { ReactElement } from "react";
 import { object, string } from "zod";
 
-import { FormContainer } from "@components/react-hook-form/form-container";
+import { FormContainer } from "~components/react-hook-form/form-container";
 import { getSlug } from "~types/definition";
 
 import { Form } from "./form";

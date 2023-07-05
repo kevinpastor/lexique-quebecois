@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Email, EmailType } from "@components/email";
+import { Email, EmailType } from "~components/email";
 
 export const PrivacyPage = (): ReactElement => (
     <Card>

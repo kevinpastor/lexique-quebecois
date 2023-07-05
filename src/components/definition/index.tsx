@@ -2,9 +2,9 @@ import { Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } f
 import NextLink from "next/link";
 import { ReactElement } from "react";
 
-import { ShareButton } from "@components/share-button";
+import { ShareButton } from "~components/share-button";
 import { Definition as IDefinition, getSlug } from "~types/definition";
-import { formatDate } from "@utils/misc/date";
+import { formatDate } from "~utils/misc/date";
 
 import { Reactions } from "./reactions";
 import { WordClasses } from "./word-classes";

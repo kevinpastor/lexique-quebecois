@@ -2,7 +2,7 @@ import { Transporter, createTransport } from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 import { WordRequest } from "~types/word-request";
-import { isInteger } from "@utils/misc/number";
+import { isInteger } from "~utils/misc/number";
 
 export const sendEmail = async (wordRequest: WordRequest): Promise<void> => {
     if (!process.env["EMAIL_SERVER_HOST"]) {

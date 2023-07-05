@@ -29,7 +29,7 @@ const customJestConfig = {
         "utils"
     ].reduce((accumulator, value) => ({
         ...accumulator,
-        [`^@${value}\\/(.*)$`]: `<rootDir>/src/${value}/$1`
+        [`^~${value}\\/(.*)$`]: `<rootDir>/src/${value}/$1`
     }), {}),
     testPathIgnorePatterns: [
         "/node_modules/",

@@ -218,7 +218,7 @@
                 ],
                 "pathGroups": [
                     {
-                        "pattern": "@(components|configs|models|services|utils)/**",
+                        "pattern": "~(app|components|hooks|services|types|utils)/**",
                         "group": "internal"
                     },
                     // Since we have a path alias for the library, it is considered as internal. With this, we can group it as external.

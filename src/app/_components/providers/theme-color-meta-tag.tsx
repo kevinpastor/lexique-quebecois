@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { ReactElement } from "react";
 
-import { useThemeMode } from "@hooks/use-theme-mode";
+import { useThemeMode } from "~hooks/use-theme-mode";
 
 export const ThemeColorMetaTag = (): ReactElement => {
     const { activeMode } = useThemeMode();

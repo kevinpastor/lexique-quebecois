@@ -2,7 +2,7 @@ import { Container, Stack, Unstable_Grid2 as Grid } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, PropsWithChildren, ReactElement } from "react";
 
-import { DesktopOnly } from "@components/desktop-only";
+import { DesktopOnly } from "~components/desktop-only";
 
 import { ErrorBoundary } from "./error-boundary";
 import { Footer } from "./footer";

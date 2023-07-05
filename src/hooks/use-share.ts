@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { isMobile } from "@utils/misc/device";
+import { isMobile } from "~utils/misc/device";
 
 import { useAlerts } from "./use-alerts";
 import { useCopyToClipboard } from "./use-copy-to-clipboard";

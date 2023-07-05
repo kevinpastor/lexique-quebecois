@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { ReactElement } from "react";
 
-import { removeAccents } from "@utils/misc/string";
+import { removeAccents } from "~utils/misc/string";
 
 const massageString = (value: string): string => (
     removeAccents(value).toLocaleLowerCase()

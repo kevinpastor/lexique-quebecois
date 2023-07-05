@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { ReactElement } from "react";
 
 import { Word } from "~types/word";
-import { getIpFromHeaders } from "@utils/api/ip";
+import { getIpFromHeaders } from "~utils/api/ip";
 
 import { WordPage } from "./_components";
 import { getWordDefinitions } from "./_services/get-word-definitions";

@@ -27,22 +27,22 @@
             "@mui/material": [
                 "./src/material"
             ],
-            "@app/*": [
+            "~app/*": [
                 "./src/app/*"
             ],
-            "@components/*": [
+            "~components/*": [
                 "./src/components/*"
             ],
-            "@hooks/*": [
+            "~hooks/*": [
                 "./src/hooks/*"
             ],
-            "@services/*": [
+            "~services/*": [
                 "./src/services/*"
             ],
             "~types/*": [
                 "./src/types/*"
             ],
-            "@utils/*": [
+            "~utils/*": [
                 "./src/utils/*"
             ]
         },

@@ -3,8 +3,8 @@ import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { ComponentType, ReactElement } from "react";
 
-import { DesktopOnly } from "@components/desktop-only";
-import { MobileOnly } from "@components/mobile-only";
+import { DesktopOnly } from "~components/desktop-only";
+import { MobileOnly } from "~components/mobile-only";
 
 import { Menu } from "./menu";
 import { NavigationContainer } from "./navigation-container";

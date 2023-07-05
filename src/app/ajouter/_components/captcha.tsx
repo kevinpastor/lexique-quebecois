@@ -2,10 +2,10 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { ReactElement } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
-import { useAlerts } from "@hooks/use-alerts";
-import { useThemeMode } from "@hooks/use-theme-mode";
+import { useAlerts } from "~hooks/use-alerts";
+import { useThemeMode } from "~hooks/use-theme-mode";
 import { WithCaptchaToken } from "~types/with-captcha-token";
-import { getHCaptchaSiteKey } from "@utils/misc/hcaptcha";
+import { getHCaptchaSiteKey } from "~utils/misc/hcaptcha";
 
 export const Captcha = (): ReactElement => {
     const { setValue, resetField } = useFormContext<WithCaptchaToken<unknown>>();

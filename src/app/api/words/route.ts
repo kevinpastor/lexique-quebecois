@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { Status } from "~types/status";
 import { isValidWordRequest } from "~types/word-request";
-import { getIpFromRequest } from "@utils/api/ip";
-import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
-import { verifyHCaptcha } from "@utils/misc/hcaptcha";
+import { getIpFromRequest } from "~utils/api/ip";
+import { RateLimiter } from "~utils/api/middlewares/rate-limiter";
+import { verifyHCaptcha } from "~utils/misc/hcaptcha";
 
 import { addWord } from "./add-word";
 import { sendEmail } from "./send-email";

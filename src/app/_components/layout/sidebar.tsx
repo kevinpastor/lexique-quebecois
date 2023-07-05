@@ -2,7 +2,7 @@ import { Card, CardContent, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 
-// import { Ad } from "@components/misc/ad";
+// import { Ad } from "~components/misc/ad";
 
 export const Sidebar = (): ReactElement => (
     <Stack

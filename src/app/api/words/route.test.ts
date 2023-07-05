@@ -5,8 +5,8 @@ import { Status } from "~types/status";
 import { WithCaptchaToken } from "~types/with-captcha-token";
 import { WordClass } from "~types/word-class";
 import { WordRequest } from "~types/word-request";
-import { RateLimiter } from "@utils/api/middlewares/rate-limiter";
-import { verifyHCaptcha } from "@utils/misc/hcaptcha";
+import { RateLimiter } from "~utils/api/middlewares/rate-limiter";
+import { verifyHCaptcha } from "~utils/misc/hcaptcha";
 
 import { addWord } from "./add-word";
 import { POST } from "./route";
@@ -17,7 +17,7 @@ jest.mock("./add-word", () => ({
 }));
 const addWordMock = addWord as jest.MockedFunction<typeof addWord>;
 
-jest.mock("@utils/misc/hcaptcha", () => ({
+jest.mock("~utils/misc/hcaptcha", () => ({
     verifyHCaptcha: jest.fn()
 }));
 const verifyHCaptchaMock = verifyHCaptcha as jest.MockedFunction<typeof verifyHCaptcha>;

@@ -1,7 +1,7 @@
 import { Method } from "~types/method";
 import { WithCaptchaToken } from "~types/with-captcha-token";
 import { WordRequest } from "~types/word-request";
-import { HttpError } from "@utils/http-error";
+import { HttpError } from "~utils/http-error";
 
 export const addWord = async (wordRequestWithCaptchaToken: WithCaptchaToken<WordRequest>): Promise<void> => {
     const options: RequestInit = {

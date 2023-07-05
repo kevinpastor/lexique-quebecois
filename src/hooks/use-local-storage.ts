@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useDebugValue, useEffect, useState } from "react";
 
-import { parseJSON } from "@utils/misc/string";
+import { parseJSON } from "~utils/misc/string";
 
 import { useBoolean } from "./use-boolean";
 import { useEventCallback } from "./use-event-callback";

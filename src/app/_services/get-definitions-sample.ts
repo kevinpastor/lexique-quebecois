@@ -1,14 +1,14 @@
 import { Collection, Db, WithId, ObjectId, Document } from "mongodb";
 
+import { defaultAggregateOptions, getDatabase } from "~services/database";
 import { Definition } from "~types/definition";
 import { DefinitionDocument } from "~types/definition-document";
 import { WordDocument } from "~types/word-document";
-import { defaultAggregateOptions, getDatabase } from "@services/database";
-import { ratingOperator } from "@utils/api/aggregation/rating-operator";
-import { safeInOperator } from "@utils/api/aggregation/safe-in-operator";
-import { safeSizeOperator } from "@utils/api/aggregation/safe-size-operator";
-import { timestampOperator } from "@utils/api/aggregation/timestamp-operator";
-import { sample } from "@utils/misc/random";
+import { ratingOperator } from "~utils/api/aggregation/rating-operator";
+import { safeInOperator } from "~utils/api/aggregation/safe-in-operator";
+import { safeSizeOperator } from "~utils/api/aggregation/safe-size-operator";
+import { timestampOperator } from "~utils/api/aggregation/timestamp-operator";
+import { sample } from "~utils/misc/random";
 
 const definitionProjectionOperation = (ip: string): Document => ({
     _id: 0,

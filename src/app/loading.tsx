@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 
-import { LoadingWord } from "@components/loading-word";
+import { LoadingWord } from "~components/loading-word";
 
 const Loading = (): ReactElement => (
     <Stack spacing={2}>
