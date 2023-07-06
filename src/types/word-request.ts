@@ -1,6 +1,6 @@
 import { array, nativeEnum, object, string, union } from "zod";
 
-import { WithCaptchaToken, withCaptchaTokenSchema } from "./with-captcha-token";
+import { WithToken, withTokenSchema } from "./with-token";
 import { WordClass, wordClasses } from "./word-class";
 
 export interface WordRequest {
@@ -49,12 +49,12 @@ const wordRequestSchema = object({
 })
     .strict();
 
-export const wordRequestWithTokenSchema = wordRequestSchema.merge(withCaptchaTokenSchema);
+export const wordRequestWithTokenSchema = wordRequestSchema.merge(withTokenSchema);
 
-export const cleanWordRequestWithToken = (value: WithCaptchaToken<WordRequest>): WithCaptchaToken<WordRequest> => (
+export const cleanWordRequestWithToken = (value: WithToken<WordRequest>): WithToken<WordRequest> => (
     wordRequestWithTokenSchema.parse(value)
 );
 
-export const isWordRequestWithToken = (value: unknown): value is WithCaptchaToken<WordRequest> => (
+export const isWordRequestWithToken = (value: unknown): value is WithToken<WordRequest> => (
     wordRequestWithTokenSchema.safeParse(value).success
 );

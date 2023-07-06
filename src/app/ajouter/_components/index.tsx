@@ -6,28 +6,28 @@ import { ReactElement } from "react";
 import { FormContainer } from "~components/react-hook-form/form-container";
 import { useAlerts } from "~hooks/use-alerts";
 import { Status } from "~types/status";
-import { WithCaptchaToken } from "~types/with-captcha-token";
+import { WithToken } from "~types/with-token";
 import { cleanWordRequestWithToken, WordRequest, wordRequestWithTokenSchema } from "~types/word-request";
 import { isHttpError } from "~utils/http-error";
 
 import { addWord } from "./add-word";
 import { Form } from "./form";
 
-const defaultValues: WithCaptchaToken<WordRequest> = {
+const defaultValues: WithToken<WordRequest> = {
     label: "",
     definition: "",
     example: "",
     author: "",
     wordClasses: [],
-    captchaToken: ""
+    token: ""
 };
 
 export const AddPage = (): ReactElement => {
     const { push } = useRouter();
     const { enqueueSuccessAlert, enqueueWarningAlert, enqueueErrorAlert } = useAlerts();
 
-    const handleSubmit = async (wordRequestWithCaptchaToken: WithCaptchaToken<WordRequest>): Promise<void> => {
-        const cleanedWordRequestWithToken: WithCaptchaToken<WordRequest> = cleanWordRequestWithToken(wordRequestWithCaptchaToken);
+    const handleSubmit = async (wordRequestWithToken: WithToken<WordRequest>): Promise<void> => {
+        const cleanedWordRequestWithToken: WithToken<WordRequest> = cleanWordRequestWithToken(wordRequestWithToken);
         try {
             await addWord(cleanedWordRequestWithToken);
         }

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { Method } from "~types/method";
-import { WithCaptchaToken } from "~types/with-captcha-token";
+import { WithToken } from "~types/with-token";
 import { WordClass } from "~types/word-class";
 import { WordRequest } from "~types/word-request";
 
@@ -22,9 +22,9 @@ const wordRequestStub: WordRequest = {
     author: "Kevin"
 };
 
-const wordRequestWithCaptchaTokenStub: WithCaptchaToken<WordRequest> = {
+const wordRequestWithCaptchaTokenStub: WithToken<WordRequest> = {
     ...wordRequestStub,
-    captchaToken: "captchaToken"
+    token: "token"
 };
 
 describe("addWord", (): void => {

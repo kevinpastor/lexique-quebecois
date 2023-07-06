@@ -1,22 +1,23 @@
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { FormControl, FormHelperText } from "@mui/material";
 import { ReactElement } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
 import { useAlerts } from "~hooks/use-alerts";
 import { useThemeMode } from "~hooks/use-theme-mode";
-import { WithCaptchaToken } from "~types/with-captcha-token";
+import { WithToken } from "~types/with-token";
 import { getHCaptchaSiteKey } from "~utils/misc/hcaptcha";
 
 export const Captcha = (): ReactElement => {
-    const { setValue, resetField } = useFormContext<WithCaptchaToken<unknown>>();
+    const { setValue, resetField } = useFormContext<WithToken<unknown>>();
     const handleVerify = (token: string): void => {
-        setValue("captchaToken", token);
+        setValue("token", token);
     };
 
     // Needs to be called in order to be able to reset the captcha field.
-    useController<WithCaptchaToken<unknown>>({ name: "captchaToken" });
+    const { fieldState: { error } } = useController<WithToken<unknown>>({ name: "token" });
     const handleExpire = (): void => {
-        resetField("captchaToken", {
+        resetField("token", {
             keepDirty: true,
             keepTouched: true
         });
@@ -24,19 +25,26 @@ export const Captcha = (): ReactElement => {
 
     const { enqueueErrorAlert } = useAlerts();
     const handleError = (): void => {
-        enqueueErrorAlert("Impossible de vérifier que tu n'est pas un robot. Réessaie plus tard.");
+        enqueueErrorAlert("Impossible de vérifier que tu n'es pas un robot. Réessaie plus tard.");
     };
 
     const { activeMode } = useThemeMode();
 
     return (
-        <HCaptcha
-            sitekey={getHCaptchaSiteKey()}
-            onVerify={handleVerify}
-            onExpire={handleExpire}
-            onError={handleError}
-            theme={activeMode}
-            languageOverride="fr"
-        />
+        <FormControl fullWidth>
+            <HCaptcha
+                sitekey={getHCaptchaSiteKey()}
+                onVerify={handleVerify}
+                onExpire={handleExpire}
+                onError={handleError}
+                theme={activeMode}
+                languageOverride="fr"
+            />
+            {error && (
+                <FormHelperText error>
+                    {error.message}
+                </FormHelperText>
+            )}
+        </FormControl>
     );
 };

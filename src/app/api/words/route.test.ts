@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { Method } from "~types/method";
 import { Status } from "~types/status";
-import { WithCaptchaToken } from "~types/with-captcha-token";
+import { WithToken } from "~types/with-token";
 import { WordClass } from "~types/word-class";
 import { WordRequest } from "~types/word-request";
 import { RateLimiter } from "~utils/api/middlewares/rate-limiter";
@@ -36,9 +36,9 @@ const wordRequestStub: WordRequest = {
     example: "Le poulet était tellement gyu!",
     author: "Kevin"
 };
-const wordRequestWithCaptchaStub: WithCaptchaToken<WordRequest> = {
+const wordRequestWithCaptchaStub: WithToken<WordRequest> = {
     ...wordRequestStub,
-    captchaToken: "10000000-aaaa-bbbb-cccc-000000000001"
+    token: "10000000-aaaa-bbbb-cccc-000000000001"
 };
 
 const requestStub: NextRequest = new NextRequest(
@@ -113,7 +113,7 @@ describe("POST", (): void => {
                 ip: "127.0.0.1",
                 method: Method.POST,
                 body: JSON.stringify({
-                    captchaToken: "10000000-aaaa-bbbb-cccc-000000000001",
+                    token: "10000000-aaaa-bbbb-cccc-000000000001",
                     label: "gyu"
                 })
             }

@@ -6,14 +6,14 @@ import { ReactElement } from "react";
 import { useFormState } from "react-hook-form";
 
 import { TextField } from "~components/react-hook-form/text-field";
-import { WithCaptchaToken } from "~types/with-captcha-token";
+import { WithToken } from "~types/with-token";
 import { WordRequest } from "~types/word-request";
 
 import { Captcha } from "./captcha";
 import { WordClassPicker } from "./word-class-picker";
 
 export const Form = (): ReactElement => {
-    const { isDirty: _, isSubmitting } = useFormState<WithCaptchaToken<WordRequest>>();
+    const { isDirty: _, isSubmitting } = useFormState<WithToken<WordRequest>>();
 
     // TODO Bring back onBeforeUnload
     // useLeavePageConfirmation(isDirty && !isSubmitting, "Ton mot n'a pas encore été soumis, est-tu sûr de vouloir l'abandonner?");

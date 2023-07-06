@@ -37,8 +37,8 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
         return NextResponse.json(null, { status: Status.BadRequest });
     }
 
-    const { captchaToken, ...wordRequest } = body;
-    const isValidCaptcha: boolean = await verifyHCaptcha(captchaToken);
+    const { token, ...wordRequest } = body;
+    const isValidCaptcha: boolean = await verifyHCaptcha(token);
     if (!isValidCaptcha) {
         return NextResponse.json(null, { status: Status.Unauthorized });
     }
