@@ -7,7 +7,7 @@ import { FormContainer } from "~components/react-hook-form/form-container";
 import { useAlerts } from "~hooks/use-alerts";
 import { Status } from "~types/status";
 import { WithCaptchaToken } from "~types/with-captcha-token";
-import { cleanupWordRequestWithCaptchaToken, WordRequest, wordRequestValidationWithCaptchaTokenSchema } from "~types/word-request";
+import { cleanWordRequestWithToken, WordRequest, wordRequestWithTokenSchema } from "~types/word-request";
 import { isHttpError } from "~utils/http-error";
 
 import { addWord } from "./add-word";
@@ -27,9 +27,9 @@ export const AddPage = (): ReactElement => {
     const { enqueueSuccessAlert, enqueueWarningAlert, enqueueErrorAlert } = useAlerts();
 
     const handleSubmit = async (wordRequestWithCaptchaToken: WithCaptchaToken<WordRequest>): Promise<void> => {
-        const cleanedWordRequestWithCaptchaToken: WithCaptchaToken<WordRequest> = cleanupWordRequestWithCaptchaToken(wordRequestWithCaptchaToken);
+        const cleanedWordRequestWithToken: WithCaptchaToken<WordRequest> = cleanWordRequestWithToken(wordRequestWithCaptchaToken);
         try {
-            await addWord(cleanedWordRequestWithCaptchaToken);
+            await addWord(cleanedWordRequestWithToken);
         }
         catch (error: unknown) {
             if (isHttpError(error) && error.status === Status.TooManyRequest) {
@@ -49,7 +49,7 @@ export const AddPage = (): ReactElement => {
     return (
         <FormContainer
             useZodFormProps={{
-                schema: wordRequestValidationWithCaptchaTokenSchema,
+                schema: wordRequestWithTokenSchema,
                 defaultValues,
                 reValidateMode: "onBlur"
             }}

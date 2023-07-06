@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { Status } from "~types/status";
-import { isValidWordRequest } from "~types/word-request";
+import { isWordRequestWithToken } from "~types/word-request";
 import { getIpFromRequest } from "~utils/api/ip";
 import { RateLimiter } from "~utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "~utils/misc/hcaptcha";
@@ -25,24 +25,22 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
     if (request.body === null) {
         return NextResponse.json(null, { status: Status.BadRequest });
     }
-    const body = await request.json();
 
-    if (!body.captchaToken) {
-        return NextResponse.json(null, { status: Status.Unauthorized });
+    let body: unknown = undefined;
+    try {
+        body = await request.json();
     }
-    if (typeof body.captchaToken !== "string") {
+    catch {
+        return NextResponse.json(null, { status: Status.BadRequest });
+    }
+    if (!isWordRequestWithToken(body)) {
         return NextResponse.json(null, { status: Status.BadRequest });
     }
 
-    const captchaToken: string = body.captchaToken;
+    const { captchaToken, ...wordRequest } = body;
     const isValidCaptcha: boolean = await verifyHCaptcha(captchaToken);
     if (!isValidCaptcha) {
         return NextResponse.json(null, { status: Status.Unauthorized });
-    }
-
-    const { captchaToken: _, ...wordRequest } = body;
-    if (!isValidWordRequest(wordRequest)) {
-        return NextResponse.json(null, { status: Status.BadRequest });
     }
 
     const result: Status = await addWord(wordRequest, ip);

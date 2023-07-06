@@ -11,13 +11,9 @@ export interface WordRequest {
     author?: string;
 }
 
-export const labelRegex: RegExp = /^[a-zàâäéèêëïîôöùûüÿæœç\s-]*$/gi;
+const labelRegex: RegExp = /^[a-zàâäéèêëïîôöùûüÿæœç\s-]*$/gi;
 
-export const isValidLabel = (label: string): boolean => {
-    return labelRegex.test(label);
-};
-
-export const wordRequestValidationSchema = object({
+const wordRequestSchema = object({
     label: string()
         .trim()
         .min(1, "Ce champ est requis.")
@@ -53,16 +49,12 @@ export const wordRequestValidationSchema = object({
 })
     .strict();
 
-export const wordRequestValidationWithCaptchaTokenSchema = wordRequestValidationSchema.merge(withCaptchaTokenSchema);
+export const wordRequestWithTokenSchema = wordRequestSchema.merge(withCaptchaTokenSchema);
 
-export const isValidWordRequest = (value: unknown): value is WordRequest => (
-    wordRequestValidationSchema.safeParse(value).success
+export const cleanWordRequestWithToken = (value: WithCaptchaToken<WordRequest>): WithCaptchaToken<WordRequest> => (
+    wordRequestWithTokenSchema.parse(value)
 );
 
-export const cleanupWordRequest = (value: WordRequest): WordRequest => (
-    wordRequestValidationSchema.parse(value)
-);
-
-export const cleanupWordRequestWithCaptchaToken = (value: WithCaptchaToken<WordRequest>): WithCaptchaToken<WordRequest> => (
-    wordRequestValidationWithCaptchaTokenSchema.parse(value)
+export const isWordRequestWithToken = (value: unknown): value is WithCaptchaToken<WordRequest> => (
+    wordRequestWithTokenSchema.safeParse(value).success
 );
