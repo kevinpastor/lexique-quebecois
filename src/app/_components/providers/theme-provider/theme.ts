@@ -9,10 +9,9 @@ declare module "@mui/material/styles" {
         outline: string;
         halfOutline: string;
         hoveredOutline: string;
-        elevationBackground: {
-            [key: number]: string;
-        };
+        elevationBackground: Record<number, string>;
         highEmphasyColorOnPrimary: string;
+        foo: string;
     }
 
     interface PaletteOptions {
@@ -24,9 +23,7 @@ declare module "@mui/material/styles" {
     }
 }
 
-interface ElevationOverlay {
-    [elevation: number]: number;
-}
+type ElevationOverlay = Record<number, number>;
 
 // Values taken from https://material.io/design/color/dark-theme.html
 const darkElevationOverlay: ElevationOverlay = {
@@ -71,11 +68,12 @@ export const theme = extendTheme({
                     outline: alpha(colors.common.black, 0.12),
                     halfOutline: alpha(colors.common.black, 0.06),
                     hoveredOutline: alpha(colors.common.black, 0.16),
-                    elevationBackground: definedElevations.reduce<{ [key: number]: string }>((accumulator, elevation) => ({
+                    elevationBackground: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
                         [elevation]: colors.common.white
                     }), {}),
-                    highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87)
+                    highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87),
+                    foo: alpha(colors.common.white, 0.3)
                 },
                 Tooltip: {
                     bg: "#6D6D6D"
@@ -97,11 +95,12 @@ export const theme = extendTheme({
                     outline: alpha(colors.common.white, 0.12),
                     halfOutline: alpha(colors.common.white, 0.06),
                     hoveredOutline: alpha(colors.common.white, 0.16),
-                    elevationBackground: definedElevations.reduce<{ [key: number]: string }>((accumulator, elevation) => ({
+                    elevationBackground: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
                         [elevation]: lighten("#121212", darkElevationOverlay[elevation])
                     }), {}),
-                    highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87)
+                    highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87),
+                    foo: alpha("#121212", 0.3)
                 },
                 Tooltip: {
                     bg: "#6D6D6D"

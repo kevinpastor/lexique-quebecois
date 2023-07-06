@@ -401,6 +401,7 @@
                 "asyncArrow": "always"
             }
         ],
+        "@typescript-eslint/non-nullable-type-assertion-style": "off",
         "jsx-a11y/no-autofocus": "off",
         "sonarjs/no-duplicate-string": "off",
         "sonarjs/prefer-immediate-return": "warn"

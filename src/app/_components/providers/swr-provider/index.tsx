@@ -9,7 +9,7 @@ const value: Config = {
     fetcher
 };
 
-export const SWRProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => (
+export const SWRProvider = ({ children }: PropsWithChildren): ReactElement => (
     <SWRConfig value={value}>
         {children}
     </SWRConfig>

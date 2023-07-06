@@ -4,7 +4,7 @@ import { Content } from "./content";
 import { Navigation } from "./navigation";
 import { NoScript } from "./no-script";
 
-export const Layout = ({ children }: PropsWithChildren<unknown>): ReactElement => (
+export const Layout = ({ children }: PropsWithChildren): ReactElement => (
     <>
         <NoScript />
         <Navigation />

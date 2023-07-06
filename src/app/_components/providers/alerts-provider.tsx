@@ -26,7 +26,7 @@ interface Alert {
     severity: Severity;
 }
 
-export const AlertsProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => {
+export const AlertsProvider = ({ children }: PropsWithChildren): ReactElement => {
     const {
         value: isOpen,
         setTrue: open,

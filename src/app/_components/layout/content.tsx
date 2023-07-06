@@ -12,7 +12,7 @@ const LazySidebar = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./sidebar")).Sidebar
 }));
 
-export const Content = ({ children }: PropsWithChildren<unknown>): ReactElement => (
+export const Content = ({ children }: PropsWithChildren): ReactElement => (
     <Container>
         <Grid
             container

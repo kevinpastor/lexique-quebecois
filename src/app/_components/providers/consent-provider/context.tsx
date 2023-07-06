@@ -10,7 +10,7 @@ interface IConsentContext {
 const ConsentContext = createContext<IConsentContext | undefined>(undefined);
 ConsentContext.displayName = "ConsentContext";
 
-export const ConsentContextProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => {
+export const ConsentContextProvider = ({ children }: PropsWithChildren): ReactElement => {
     const { value: consent } = useLocalStorage("consent", Consent.Pending);
 
     const value = useMemo((): IConsentContext => ({

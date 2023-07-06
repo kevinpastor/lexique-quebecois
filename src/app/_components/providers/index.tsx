@@ -10,7 +10,7 @@ import { SWRProvider } from "./swr-provider";
 import { ThemeColorMetaTag } from "./theme-color-meta-tag";
 import { ThemeProvider } from "./theme-provider";
 
-export const Providers = ({ children }: PropsWithChildren<unknown>): ReactElement => (
+export const Providers = ({ children }: PropsWithChildren): ReactElement => (
     <>
         <Analytics />
         <ThemeProvider>

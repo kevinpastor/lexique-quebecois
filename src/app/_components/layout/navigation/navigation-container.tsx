@@ -3,7 +3,7 @@
 import { AppBar, Container, Stack, useScrollTrigger } from "@mui/material";
 import { PropsWithChildren, ReactElement } from "react";
 
-export const NavigationContainer = ({ children }: PropsWithChildren<unknown>): ReactElement => {
+export const NavigationContainer = ({ children }: PropsWithChildren): ReactElement => {
     const isAtPageTop: boolean = !useScrollTrigger({
         disableHysteresis: true,
         threshold: 0

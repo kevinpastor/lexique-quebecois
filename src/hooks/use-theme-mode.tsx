@@ -18,12 +18,12 @@ export const modeLabels: Record<ThemeMode, string> = {
     "dark": "Sombre"
 };
 
-export type ReturnType = {
+export interface ReturnType {
     mode: ThemeMode | undefined;
     setMode: (ternaryMode: ThemeMode) => void;
     cycle: () => void;
     activeMode?: Exclude<ThemeMode, "system">;
-};
+}
 
 export const useThemeMode = (): ReturnType => {
     const { mode, setMode, systemMode } = useColorScheme();

@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactElement } from "react";
 
 // Vaguely imitates the behavior of the Snackbar component of MUI.
-export const LightweightSnackbar = ({ children }: PropsWithChildren<unknown>): ReactElement => (
+export const LightweightSnackbar = ({ children }: PropsWithChildren): ReactElement => (
     <div
         style={{
             zIndex: 1400,

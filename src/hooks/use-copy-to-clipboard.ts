@@ -44,7 +44,7 @@ const copyToClipboardFallback = (text: string): void => {
 export const useCopyToClipboard = (): CopyFunction => {
     return async (text: string): Promise<void> => {
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (!navigator || !navigator.clipboard) {
+        if (!navigator?.clipboard) {
             copyToClipboardFallback(text);
             return;
         }

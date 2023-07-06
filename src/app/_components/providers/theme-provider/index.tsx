@@ -9,7 +9,7 @@ import { theme } from "./theme";
 const options: NextAppDirEmotionCacheProviderProps["options"] = { key: "css" };
 const defaultMode: ThemeMode = "system";
 
-export const ThemeProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => (
+export const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => (
     // TODO Replace with the native Emotion cache provider when it will be available for /app.
     <NextAppDirEmotionCacheProvider options={options}>
         {getInitColorSchemeScript({ defaultMode })}

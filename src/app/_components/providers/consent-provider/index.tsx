@@ -3,7 +3,7 @@ import { PropsWithChildren, ReactElement } from "react";
 import { ConsentContextProvider } from "./context";
 import { ConsentForm } from "./form";
 
-export const ConsentProvider = ({ children }: PropsWithChildren<unknown>): ReactElement => (
+export const ConsentProvider = ({ children }: PropsWithChildren): ReactElement => (
     <>
         <ConsentForm />
         <ConsentContextProvider>
