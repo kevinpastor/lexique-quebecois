@@ -2,14 +2,14 @@ export class RateLimiter {
 
     private readonly cache: Map<string, Array<Date>>;
 
-    constructor(
+    public constructor(
         private readonly window: number,
         private readonly tokens: number
     ) {
         this.cache = new Map<string, Array<Date>>();
     }
 
-    consume(key: string): boolean {
+    public consume(key: string): boolean {
         if (!this.cache.has(key)) {
             this.cache.set(key, []);
         }
