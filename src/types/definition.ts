@@ -4,6 +4,10 @@ import { removeAccents } from "~utils/misc/string";
 
 import { WordClass } from "./word-class";
 
+interface Author {
+    name?: string;
+}
+
 export interface Reactions {
     likes: number;
     isLiked: boolean;
@@ -17,9 +21,7 @@ export interface Definition {
     wordClasses: Array<WordClass>;
     definition: string;
     example: string;
-    author: {
-        name?: string;
-    };
+    author: Author;
     timestamp: number;
     reactions: Reactions;
 }
