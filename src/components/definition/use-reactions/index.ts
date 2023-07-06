@@ -11,10 +11,10 @@ import { reducer } from "./reducer";
 interface ReturnType {
     likes: number;
     isLiked: boolean;
-    toggleLike: () => void;
+    toggleLike: () => Promise<void>;
     dislikes: number;
     isDisliked: boolean;
-    toggleDislike: () => void;
+    toggleDislike: () => Promise<void>;
 }
 
 export const useReactions = (id: string, reactions: Reactions): ReturnType => {

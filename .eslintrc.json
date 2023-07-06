@@ -9,6 +9,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:@typescript-eslint/strict",
         "plugin:eslint-plugin-react/recommended",
         "plugin:eslint-plugin-react/jsx-runtime",
         "plugin:eslint-plugin-import/recommended",

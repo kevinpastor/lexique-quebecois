@@ -5,7 +5,7 @@ const Loading = (): ReactElement => (
     <Card>
         <CardHeader title={<Skeleton width={256} />} />
         <CardContent>
-            {[...Array(5)].map((_, index): ReactElement => (
+            {[...Array<unknown>(5)].map((_: unknown, index: number): ReactElement => (
                 // eslint-disable-next-line react/no-array-index-key
                 <div key={index}>
                     <Typography variant="h3">
