@@ -1,3 +1,5 @@
+import { boolean, object } from "zod";
+
 export const getHCaptchaSiteKey = (): string => {
     if (!process.env["NEXT_PUBLIC_HCAPTCHA_SITE_KEY"]) {
         throw new Error("NEXT_PUBLIC_HCAPTCHA_SITE_KEY environment variable is not set.");
@@ -13,6 +15,18 @@ const getHCaptchaSecret = (): string => {
 
     return process.env["HCAPTHCA_SECRET"];
 };
+
+interface HCapthcaVerifyResponse {
+    success: boolean;
+}
+
+const hCaptchaVerifyResponseSchema = object({
+    success: boolean()
+});
+
+const isHCaptchaVerifyResponse = (value: unknown): value is HCapthcaVerifyResponse => (
+    hCaptchaVerifyResponseSchema.safeParse(value).success
+);
 
 export const verifyHCaptcha = async (token: string): Promise<boolean> => {
     const siteKey: string = getHCaptchaSiteKey();
@@ -30,7 +44,11 @@ export const verifyHCaptcha = async (token: string): Promise<boolean> => {
         })
     });
 
-    const result = await response.json();
+    const result: unknown = await response.json();
+
+    if (!isHCaptchaVerifyResponse(result)) {
+        throw new Error("Unexpected response from hCaptcha API.");
+    }
 
     return result.success;
 };
