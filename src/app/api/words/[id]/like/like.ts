@@ -1,8 +1,8 @@
 import { Collection, Db, Filter, ObjectId, UpdateFilter, UpdateResult } from "mongodb";
 
-import { getDatabase } from "~services/database";
-import { Status } from "~types/status";
-import { WordDocument } from "~types/word-document";
+import { getDatabase } from "~/services/database";
+import { Status } from "~/types/status";
+import { WordDocument } from "~/types/word-document";
 
 // Inspired by https://stackoverflow.com/a/28006849/7817501
 export const like = async (id: string, ip: string): Promise<Status> => {

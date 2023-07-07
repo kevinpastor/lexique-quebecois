@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { Method } from "~types/method";
+import { Method } from "~/types/method";
 
 import { like, removeLike, dislike, removeDislike } from "./reactions";
 

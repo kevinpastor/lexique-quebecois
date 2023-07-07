@@ -4,10 +4,10 @@ import { ReactElement, RefObject, useEffect } from "react";
 import { useWatch } from "react-hook-form";
 import useSWR from "swr";
 
-import { Highlight } from "~components/highlight";
-import { useDebounce } from "~hooks/use-debounce";
-import { KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "~hooks/use-keyboard-focus-selection";
-import { getSlug } from "~types/definition";
+import { Highlight } from "~/components/highlight";
+import { useDebounce } from "~/hooks/use-debounce";
+import { KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "~/hooks/use-keyboard-focus-selection";
+import { getSlug } from "~/types/definition";
 
 import { FormValues } from "./search-content";
 

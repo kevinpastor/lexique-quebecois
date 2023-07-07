@@ -1,9 +1,9 @@
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Definition } from "~components/definition";
-import { Definition as IDefinition } from "~types/definition";
-import { Word } from "~types/word";
+import { Definition } from "~/components/definition";
+import { Definition as IDefinition } from "~/types/definition";
+import { Word } from "~/types/word";
 
 import { MissingWord } from "./missing-word";
 import { Spellings } from "./spellings";

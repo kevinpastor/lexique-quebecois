@@ -1,7 +1,7 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 import { devices } from "@playwright/test";
 
-import { isCIEnvironment } from "~utils/misc/environment";
+import { isCIEnvironment } from "~/utils/misc/environment";
 
 const getWebServerUrl = (): string => {
     if (isCIEnvironment()) {

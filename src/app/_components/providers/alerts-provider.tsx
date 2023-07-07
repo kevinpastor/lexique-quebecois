@@ -3,8 +3,8 @@ import { Alert as MuiAlert } from "@mui/material";
 import dynamic from "next/dynamic";
 import { ComponentType, createContext, PropsWithChildren, ReactElement, Suspense, SyntheticEvent, useCallback, useEffect, useMemo } from "react";
 
-import { BooleanUtilities, useBoolean } from "~hooks/use-boolean";
-import { QueueUtility, useQueue } from "~hooks/use-queue";
+import { BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
+import { QueueUtility, useQueue } from "~/hooks/use-queue";
 
 export interface IAlertsContext {
     enqueueSuccessAlert: (message: string) => void;

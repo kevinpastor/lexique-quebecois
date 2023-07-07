@@ -3,12 +3,12 @@
 import { useRouter } from "next/navigation";
 import { ReactElement } from "react";
 
-import { FormContainer } from "~components/react-hook-form/form-container";
-import { useAlerts } from "~hooks/use-alerts";
-import { Status } from "~types/status";
-import { WithToken } from "~types/with-token";
-import { cleanWordRequestWithToken, WordRequest, wordRequestWithTokenSchema } from "~types/word-request";
-import { isHttpError } from "~utils/http-error";
+import { FormContainer } from "~/components/react-hook-form/form-container";
+import { useAlerts } from "~/hooks/use-alerts";
+import { Status } from "~/types/status";
+import { WithToken } from "~/types/with-token";
+import { cleanWordRequestWithToken, WordRequest, wordRequestWithTokenSchema } from "~/types/word-request";
+import { isHttpError } from "~/utils/http-error";
 
 import { addWord } from "./add-word";
 import { Form } from "./form";

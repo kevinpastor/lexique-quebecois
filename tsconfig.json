@@ -27,24 +27,9 @@
             "@mui/material": [
                 "./src/material"
             ],
-            "~app/*": [
-                "./src/app/*"
+            "~/*": [
+                "./src/*"
             ],
-            "~components/*": [
-                "./src/components/*"
-            ],
-            "~hooks/*": [
-                "./src/hooks/*"
-            ],
-            "~services/*": [
-                "./src/services/*"
-            ],
-            "~types/*": [
-                "./src/types/*"
-            ],
-            "~utils/*": [
-                "./src/utils/*"
-            ]
         },
         "plugins": [
             {

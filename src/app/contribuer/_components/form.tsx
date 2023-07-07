@@ -5,9 +5,9 @@ import NextLink from "next/link";
 import { ReactElement } from "react";
 import { useFormState } from "react-hook-form";
 
-import { TextField } from "~components/react-hook-form/text-field";
-import { WithToken } from "~types/with-token";
-import { WordRequest } from "~types/word-request";
+import { TextField } from "~/components/react-hook-form/text-field";
+import { WithToken } from "~/types/with-token";
+import { WordRequest } from "~/types/word-request";
 
 import { Captcha } from "./captcha";
 import { WordClassPicker } from "./word-class-picker";

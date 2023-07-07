@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { Status } from "~types/status";
-import { RateLimiter } from "~utils/api/middlewares/rate-limiter";
+import { Status } from "~/types/status";
+import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 
 import { dislike } from "./dislike";
 import { removeDislike } from "./remove-dislike";

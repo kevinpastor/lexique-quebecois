@@ -1,4 +1,4 @@
-import { RateLimiter } from "~utils/api/middlewares/rate-limiter";
+import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 
 describe("RateLimiter", (): void => {
     const window: number = 1000 * 60 * 15;

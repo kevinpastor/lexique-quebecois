@@ -22,15 +22,9 @@ const customJestConfig = {
             // statements: 70
         }
     },
-    moduleNameMapper: [
-        "app",
-        "components",
-        "models",
-        "utils"
-    ].reduce((accumulator, value) => ({
-        ...accumulator,
-        [`^~${value}\\/(.*)$`]: `<rootDir>/src/${value}/$1`
-    }), {}),
+    moduleNameMapper: {
+        "^~\\/(.*)$": "<rootDir>/src/$1"
+    },
     testPathIgnorePatterns: [
         "/node_modules/",
         "/e2e/"

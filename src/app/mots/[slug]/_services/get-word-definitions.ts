@@ -1,12 +1,12 @@
 import { Collection, Db, Document } from "mongodb";
 
-import { defaultAggregateOptions, getDatabase } from "~services/database";
-import { Word } from "~types/word";
-import { WordDocument } from "~types/word-document";
-import { ratingOperator } from "~utils/api/aggregation/rating-operator";
-import { safeInOperator } from "~utils/api/aggregation/safe-in-operator";
-import { safeSizeOperator } from "~utils/api/aggregation/safe-size-operator";
-import { timestampOperator } from "~utils/api/aggregation/timestamp-operator";
+import { defaultAggregateOptions, getDatabase } from "~/services/database";
+import { Word } from "~/types/word";
+import { WordDocument } from "~/types/word-document";
+import { ratingOperator } from "~/utils/api/aggregation/rating-operator";
+import { safeInOperator } from "~/utils/api/aggregation/safe-in-operator";
+import { safeSizeOperator } from "~/utils/api/aggregation/safe-size-operator";
+import { timestampOperator } from "~/utils/api/aggregation/timestamp-operator";
 
 export const getWordDefinitions = async (spelling: string, ip: string = ""): Promise<Word | null> => {
     const database: Db = await getDatabase();

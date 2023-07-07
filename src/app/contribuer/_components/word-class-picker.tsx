@@ -2,9 +2,9 @@ import { Checkbox, FormControl, FormHelperText, InputLabel, ListItemText, MenuIt
 import { ReactElement, ReactNode, useId } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { WithToken } from "~types/with-token";
-import { WordClass, wordClassAbreviations, wordClasses } from "~types/word-class";
-import { WordRequest } from "~types/word-request";
+import { WithToken } from "~/types/with-token";
+import { WordClass, wordClassAbreviations, wordClasses } from "~/types/word-class";
+import { WordRequest } from "~/types/word-request";
 
 export const WordClassPicker = (): ReactElement => {
     const { control } = useFormContext<WithToken<WordRequest>>();

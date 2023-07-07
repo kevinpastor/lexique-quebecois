@@ -1,4 +1,4 @@
-import { HttpError } from "~utils/http-error";
+import { HttpError } from "~/utils/http-error";
 
 export const fetcher = async (url: string): Promise<unknown> => {
     const response: Response = await fetch(url);

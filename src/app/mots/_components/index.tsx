@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
 import { ReactElement } from "react";
 
-import { groupByFirstLetter } from "~utils/misc/string";
+import { groupByFirstLetter } from "~/utils/misc/string";
 
 import { LetterSection } from "./letter-section";
 

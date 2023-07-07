@@ -1,4 +1,4 @@
-import { formatDate } from "~utils/misc/date";
+import { formatDate } from "~/utils/misc/date";
 
 describe("formatDate", (): void => {
     // TODO Add test cases.

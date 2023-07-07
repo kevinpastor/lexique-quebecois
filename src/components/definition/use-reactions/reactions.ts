@@ -1,5 +1,5 @@
-import { Method } from "~types/method";
-import { HttpError } from "~utils/http-error";
+import { Method } from "~/types/method";
+import { HttpError } from "~/utils/http-error";
 
 export const like = async (id: string): Promise<void> => {
     const options: RequestInit = {

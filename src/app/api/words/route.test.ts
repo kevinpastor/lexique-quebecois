@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { Method } from "~types/method";
-import { Status } from "~types/status";
-import { WithToken } from "~types/with-token";
-import { WordClass } from "~types/word-class";
-import { WordRequest } from "~types/word-request";
-import { RateLimiter } from "~utils/api/middlewares/rate-limiter";
-import { verifyHCaptcha } from "~utils/misc/hcaptcha";
+import { Method } from "~/types/method";
+import { Status } from "~/types/status";
+import { WithToken } from "~/types/with-token";
+import { WordClass } from "~/types/word-class";
+import { WordRequest } from "~/types/word-request";
+import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
+import { verifyHCaptcha } from "~/utils/misc/hcaptcha";
 
 import { addWord } from "./add-word";
 import { POST } from "./route";
@@ -17,7 +17,7 @@ jest.mock("./add-word", () => ({
 }));
 const addWordMock = addWord as jest.MockedFunction<typeof addWord>;
 
-jest.mock("~utils/misc/hcaptcha", () => ({
+jest.mock("~/utils/misc/hcaptcha", () => ({
     verifyHCaptcha: jest.fn()
 }));
 const verifyHCaptchaMock = verifyHCaptcha as jest.MockedFunction<typeof verifyHCaptcha>;

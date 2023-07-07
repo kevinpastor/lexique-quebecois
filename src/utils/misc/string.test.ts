@@ -1,4 +1,4 @@
-import { removeAccents } from "~utils/misc/string";
+import { removeAccents } from "~/utils/misc/string";
 
 describe("removeAccents", (): void => {
     it.each([

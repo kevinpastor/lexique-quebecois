@@ -1,8 +1,8 @@
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 
-import { Definition } from "~components/definition";
-import { Definition as IDefinition } from "~types/definition";
+import { Definition } from "~/components/definition";
+import { Definition as IDefinition } from "~/types/definition";
 
 interface Props {
     definitions: Array<IDefinition>;

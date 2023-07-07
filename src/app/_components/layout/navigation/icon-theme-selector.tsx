@@ -3,7 +3,7 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { ReactElement } from "react";
 
-import { useThemeMode, modeIcons } from "~hooks/use-theme-mode";
+import { useThemeMode, modeIcons } from "~/hooks/use-theme-mode";
 
 export const IconThemeSelector = (): ReactElement | null => {
     const { mode, cycle } = useThemeMode();

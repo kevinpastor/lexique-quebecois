@@ -1,7 +1,7 @@
 import { InputAdornment } from "@mui/material";
 import { ForwardedRef, forwardRef, ReactElement } from "react";
 
-import { TextField } from "~components/react-hook-form/text-field";
+import { TextField } from "~/components/react-hook-form/text-field";
 
 import { FieldIconButton } from "./field-icon-button";
 
