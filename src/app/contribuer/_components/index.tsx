@@ -22,7 +22,7 @@ const defaultValues: WithToken<WordRequest> = {
     token: ""
 };
 
-export const AddPage = (): ReactElement => {
+export const ContributePage = (): ReactElement => {
     const { push } = useRouter();
     const { enqueueSuccessAlert, enqueueWarningAlert, enqueueErrorAlert } = useAlerts();
 

@@ -38,12 +38,12 @@ export const Navigation = (): ReactElement => {
                 <DesktopOnly>
                     <Link
                         component={NextLink}
-                        href="/ajouter"
+                        href="/contribuer"
                         variant="subtitle2"
                         color="default"
                         underline="hover"
                     >
-                        Ajouter
+                        Contribuer
                     </Link>
                     <Link
                         component={NextLink}

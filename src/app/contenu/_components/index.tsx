@@ -6,7 +6,7 @@ export const ContentPage = (): ReactElement => (
         <CardHeader title="Politique sur le contenu" />
         <CardContent>
             <Typography gutterBottom>
-                N&apos;importe qui peut ajouter un mot, mais afin de rendre l&apos;expérience le fun pour tout le monde, on te demande de suivre quelques règles de base.
+                N&apos;importe qui peut contribuer un mot, mais afin de rendre l&apos;expérience le fun pour tout le monde, on te demande de suivre quelques règles de base.
             </Typography>
             <Typography
                 variant="h3"

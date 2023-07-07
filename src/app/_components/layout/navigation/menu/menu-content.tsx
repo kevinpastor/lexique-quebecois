@@ -1,4 +1,4 @@
-import { Add, ChatBubble, Description, Home, ListAlt, LocalLibrary, PrivacyTip } from "@mui/icons-material";
+import { Add, Description, Home, LocalLibrary, QuestionAnswer, Security, Toc } from "@mui/icons-material";
 import { Divider, List, Stack, Typography } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -36,15 +36,15 @@ export const MenuContent = ({ onClose: handleClose }: MenuContentProps): ReactEl
                 onClick={handleClose}
             />
             <MenuItem
-                label="Ajouter"
-                href="/ajouter"
+                label="Contribuer"
+                href="/contribuer"
                 icon={<Add />}
                 onClick={handleClose}
             />
             <MenuItem
                 label="Index"
                 href="/mots"
-                icon={<ListAlt />}
+                icon={<Toc />}
                 onClick={handleClose}
             />
         </List>
@@ -58,13 +58,13 @@ export const MenuContent = ({ onClose: handleClose }: MenuContentProps): ReactEl
             <MenuItem
                 label="Confidentialité"
                 href="/confidentialite"
-                icon={<PrivacyTip />}
+                icon={<Security />}
                 onClick={handleClose}
             />
             <MenuItem
                 label="Contact"
                 href="/contact"
-                icon={<ChatBubble />}
+                icon={<QuestionAnswer />}
                 onClick={handleClose}
             />
         </List>

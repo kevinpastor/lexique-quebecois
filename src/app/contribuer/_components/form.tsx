@@ -20,12 +20,12 @@ export const Form = (): ReactElement => {
 
     return (
         <Card>
-            <CardHeader title="Ajouter un mot" />
+            <CardHeader title="Contribuer un mot" />
             <CardContent>
                 <Stack spacing={2}>
                     <Typography>
                         {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
-                        Assure-toi d&apos;avoir pris connaissance de la <Link component={NextLink} href="/contenu">politique sur le contenu</Link> avant d&apos;ajouter un mot.
+                        Assure-toi d&apos;avoir pris connaissance de la <Link component={NextLink} href="/contenu">politique sur le contenu</Link> avant de contribuer un mot.
                     </Typography>
                     <TextField
                         name="label"
@@ -67,7 +67,7 @@ export const Form = (): ReactElement => {
                         variant="contained"
                         color="primary"
                     >
-                        Envoyer
+                        Soumettre
                     </LoadingButton>
                 </Stack>
             </CardActions>

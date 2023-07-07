@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 import { ReactElement } from "react";
 
-import { AddPage } from "./_components";
+import { ContributePage } from "./_components";
 
 export const metadata: Metadata = {
-    title: "Ajouter"
+    title: "Contribuer"
 };
 
 const Page = (): ReactElement => (
-    <AddPage />
+    <ContributePage />
 );
 
 export default Page;

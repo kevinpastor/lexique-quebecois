@@ -17,10 +17,10 @@ export const MissingWord = (): ReactElement => (
             >
                 <Button
                     component={Link}
-                    href="/ajouter"
+                    href="/contribuer"
                     startIcon={<AddIcon />}
                 >
-                    Ajouter
+                    Contribuer
                 </Button>
             </Stack>
         </CardActions>

@@ -101,9 +101,6 @@ const generateSitemap = async (): Promise<MetadataRoute.Sitemap> => {
             url: `${host}`
         },
         {
-            url: `${host}/ajouter`
-        },
-        {
             url: `${host}/conditions`
         },
         {
@@ -111,6 +108,9 @@ const generateSitemap = async (): Promise<MetadataRoute.Sitemap> => {
         },
         {
             url: `${host}/contact`
+        },
+        {
+            url: `${host}/contribuer`
         },
         {
             url: `${host}/contenu`
