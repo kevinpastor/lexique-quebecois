@@ -11,7 +11,7 @@ declare module "@mui/material/styles" {
         hoveredOutline: string;
         elevationBackground: Record<number, string>;
         highEmphasyColorOnPrimary: string;
-        foo: string;
+        elevationGlassBackground: Record<number, string>;
     }
 
     interface PaletteOptions {
@@ -73,7 +73,10 @@ export const theme = extendTheme({
                         [elevation]: colors.common.white
                     }), {}),
                     highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87),
-                    foo: alpha(colors.common.white, 0.3)
+                    elevationGlassBackground: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
+                        ...accumulator,
+                        [elevation]: alpha(colors.common.white, 0.8)
+                    }), {})
                 },
                 Tooltip: {
                     bg: "#6D6D6D"
@@ -100,7 +103,10 @@ export const theme = extendTheme({
                         [elevation]: lighten("#121212", darkElevationOverlay[elevation])
                     }), {}),
                     highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87),
-                    foo: alpha("#121212", 0.3)
+                    elevationGlassBackground: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
+                        ...accumulator,
+                        [elevation]: alpha(lighten("#121212", darkElevationOverlay[elevation]), 0.8)
+                    }), {})
                 },
                 Tooltip: {
                     bg: "#6D6D6D"
@@ -180,11 +186,11 @@ export const theme = extendTheme({
             styleOverrides: {
                 root: {
                     // Allows elevation change.
-                    backgroundImage: "none"
-                },
-                colorDefault: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
-                    backgroundColor: palette.background.default
-                })
+                    backgroundImage: "none",
+                    // NOTE: This isn't perfect when changing theme.
+                    transitionDuration: "300ms",
+                    transitionProperty: "box-shadow, background-color"
+                }
             }
         },
         MuiButton: {
@@ -326,7 +332,11 @@ export const theme = extendTheme({
                     ...accumulator,
                     [`elevation${elevation}`]: ({ theme: { vars: { palette } } }: { theme: Omit<Theme, "palette" | "components"> & CssVarsTheme }): CSSInterpolation => ({
                         // This CSS variable seems to be undefined in dark mode.
-                        "--AppBar-background": palette.customTokens.elevationBackground[elevation]
+                        "--AppBar-background": palette.customTokens.elevationBackground[elevation],
+                        "@supports ((backdrop-filter: saturate(180%) blur(20px)) or (-webkit-backdrop-filter: saturate(180%) blur(20px)))": {
+                            backgroundColor: palette.customTokens.elevationGlassBackground[elevation],
+                            backdropFilter: "saturate(180%) blur(20px)"
+                        }
                     })
                 }), {})
             }
