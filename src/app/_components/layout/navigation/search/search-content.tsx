@@ -25,6 +25,7 @@ export interface SearchContentProps {
 }
 
 export const SearchContent = ({ onClose: handleClose, isOpened }: SearchContentProps): ReactElement => {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { push } = useRouter();
 
     const navigate = (label: string): void => {

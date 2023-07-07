@@ -42,6 +42,7 @@ const getMongoClient = async (): Promise<MongoClient> => {
         mongoClient = await mongoClientConnect;
     }
     catch (error: unknown) {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`Could not connect to database. \n${error}`);
     }
 

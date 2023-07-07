@@ -27,7 +27,7 @@ export const useLocalStorage = <T>(key: string, initialValue: T): LocalStorageUt
         try {
             const item: string | null = window.localStorage.getItem(key);
             return item
-                ? parseJSON<T>(item)
+                ? parseJSON(item) as T // We take for granted that the type is correct.
                 : initialValue;
         }
         catch (error: unknown) {

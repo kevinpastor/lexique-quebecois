@@ -1,40 +1,51 @@
+import { WithToken } from "./with-token";
 import { WordClass } from "./word-class";
-import { cleanupWordRequest, isValidLabel, isValidWordRequest, WordRequest } from "./word-request";
+import { WordRequest, cleanWordRequestWithToken, isWordRequestWithToken } from "./word-request";
 
-const wordRequestStub: WordRequest = {
+const wordRequestWithTokenStub: WithToken<WordRequest> = {
     label: "gyu",
     wordClasses: [WordClass.Adjectif],
     definition: "Bon/beau. Peut être utiliser comme adjectif pour de la bouffe qui goûte bonne, ou pour une belle personne.",
     example: "Le poulet était tellement gyu!",
-    author: "Kevin"
+    author: "Kevin",
+    token: "token"
 };
 
-// TODO Add test cases
-describe("isValidLabel", (): void => {
+describe("isWordRequestWithToken", (): void => {
+    // TODO Add test cases
     it.each([
         ["1"],
-        ["&"]
-    ])("should not consider \"%s\" as valid", (value: string): void => {
-        const result: boolean = isValidLabel(value);
+        ["&"],
+        ["a"]
+    ])("should not consider \"%s\" as a valid label", (label: string): void => {
+        const value: WithToken<WordRequest> = {
+            ...wordRequestWithTokenStub,
+            label
+        };
+
+        const result: boolean = isWordRequestWithToken(value);
 
         expect(result).toBeFalsy();
     });
 
     it.each([
-        ["a"]
-        // ["à"] // TODO Fix failing test
-    ])("should consider \"%s\" as valid", (value: string): void => {
-        const result: boolean = isValidLabel(value);
+        ["aa"],
+        ["àà"]
+    ])("should consider \"%s\" as a valid label", (label: string): void => {
+        const value: WithToken<WordRequest> = {
+            ...wordRequestWithTokenStub,
+            label
+        };
+
+        const result: boolean = isWordRequestWithToken(value);
 
         expect(result).toBeTruthy();
     });
-});
 
-describe("isValidWordRequest", (): void => {
     it("should not allow undefined", (): void => {
         const value: unknown = undefined;
 
-        const result: boolean = isValidWordRequest(value);
+        const result: boolean = isWordRequestWithToken(value);
 
         expect(result).toBeFalsy();
     });
@@ -42,14 +53,14 @@ describe("isValidWordRequest", (): void => {
     it("should not be a valid word request", (): void => {
         const value: unknown = {};
 
-        const result: boolean = isValidWordRequest(value);
+        const result: boolean = isWordRequestWithToken(value);
 
         expect(result).toBeFalsy();
     });
 
     it("should not allow no word class", (): void => {
-        const result: boolean = isValidWordRequest({
-            ...wordRequestStub,
+        const result: boolean = isWordRequestWithToken({
+            ...wordRequestWithTokenStub,
             wordClasses: undefined
         });
 
@@ -57,8 +68,8 @@ describe("isValidWordRequest", (): void => {
     });
 
     it("should not allow invalid word class", (): void => {
-        const result: boolean = isValidWordRequest({
-            ...wordRequestStub,
+        const result: boolean = isWordRequestWithToken({
+            ...wordRequestWithTokenStub,
             wordClasses: ["foo"]
         });
 
@@ -66,38 +77,38 @@ describe("isValidWordRequest", (): void => {
     });
 
     it("should be a valid word request", (): void => {
-        const result: boolean = isValidWordRequest(wordRequestStub);
+        const result: boolean = isWordRequestWithToken(wordRequestWithTokenStub);
 
         expect(result).toBeTruthy();
     });
 });
 
-describe("cleanupWordRequest", (): void => {
+describe("cleanWordRequestWithToken", (): void => {
     it("should not cleanup the word request", (): void => {
-        const result: WordRequest = cleanupWordRequest(wordRequestStub);
+        const result: WordRequest = cleanWordRequestWithToken(wordRequestWithTokenStub);
 
-        expect(result).toEqual(wordRequestStub);
+        expect(result).toEqual(wordRequestWithTokenStub);
     });
 
     it("should remove empty author", (): void => {
-        const value: WordRequest = {
-            ...wordRequestStub,
+        const value: WithToken<WordRequest> = {
+            ...wordRequestWithTokenStub,
             author: ""
         };
 
-        const result: WordRequest = cleanupWordRequest(value);
+        const result: WordRequest = cleanWordRequestWithToken(value);
 
         expect(result).not.toEqual(value);
         expect(result.author).toBeUndefined();
     });
 
     it("should trim attributes", (): void => {
-        const value: WordRequest = {
-            ...wordRequestStub,
+        const value: WithToken<WordRequest> = {
+            ...wordRequestWithTokenStub,
             author: "   John Doe   "
         };
 
-        const result: WordRequest = cleanupWordRequest(value);
+        const result: WordRequest = cleanWordRequestWithToken(value);
 
         expect(result).not.toEqual(value);
         expect(result.author).toBeDefined();

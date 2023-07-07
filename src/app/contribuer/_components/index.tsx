@@ -23,6 +23,7 @@ const defaultValues: WithToken<WordRequest> = {
 };
 
 export const ContributePage = (): ReactElement => {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { push } = useRouter();
     const { enqueueSuccessAlert, enqueueWarningAlert, enqueueErrorAlert } = useAlerts();
 

@@ -402,6 +402,14 @@
             }
         ],
         "@typescript-eslint/non-nullable-type-assertion-style": "off",
+        "@typescript-eslint/no-misused-promises": [
+            "error", 
+            {
+                "checksVoidReturn": {
+                    "attributes": false
+                }
+            }
+        ],
         "jsx-a11y/no-autofocus": "off",
         "sonarjs/no-duplicate-string": "off",
         "sonarjs/prefer-immediate-return": "warn"

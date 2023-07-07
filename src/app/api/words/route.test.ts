@@ -103,7 +103,7 @@ describe("POST", (): void => {
 
         const response: NextResponse = await POST(requestStubWithWrongBody);
 
-        expect(response.status).toBe(Status.Unauthorized);
+        expect(response.status).toBe(Status.BadRequest);
     });
 
     it("should not allow invalid request", async (): Promise<void> => {

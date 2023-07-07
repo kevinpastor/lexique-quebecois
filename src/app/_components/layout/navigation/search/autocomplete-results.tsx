@@ -21,7 +21,7 @@ export const AutocompleteResults = ({ inputRef, onClose: handleClose }: Props): 
     const debouncedLabel: string = useDebounce(label);
 
     const shouldFetch: boolean = debouncedLabel.length > 0;
-    const { data, error } = useSWR<Array<string>>(
+    const { data, error } = useSWR<Array<string>, unknown>(
         shouldFetch
             ? `/api/words/autocomplete?input=${debouncedLabel}`
             : null
