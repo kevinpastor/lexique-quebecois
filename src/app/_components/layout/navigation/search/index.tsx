@@ -36,6 +36,7 @@ export const Search = (): ReactElement => {
                 open={isOpened}
                 onClose={handleClose}
                 keepMounted
+                hideBackdrop
             >
                 <Fade in={isOpened}>
                     <div style={{ height: "100%" }}>

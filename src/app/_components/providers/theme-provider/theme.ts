@@ -4,22 +4,22 @@ import { Lora } from "next/font/google";
 
 declare module "@mui/material/styles" {
     interface CustomTokens {
-        highEmphasis: string;
-        mediumEmphasis: string;
+        ["high-emphasis"]: string;
+        ["medium-emphasis"]: string;
         outline: string;
-        halfOutline: string;
-        hoveredOutline: string;
-        elevationBackground: Record<number, string>;
-        highEmphasyColorOnPrimary: string;
-        elevationGlassBackground: Record<number, string>;
+        ["half-outline"]: string;
+        ["hovered-outline"]: string;
+        background: Record<number, string>;
+        ["high-emphasy-color-on-primary"]: string;
+        ["glass-background"]: Record<number, string>;
     }
 
     interface PaletteOptions {
-        customTokens: CustomTokens;
+        custom: CustomTokens;
     }
 
     interface Palette {
-        customTokens: CustomTokens;
+        custom: CustomTokens;
     }
 }
 
@@ -62,18 +62,18 @@ export const theme = extendTheme({
                     main: "#f78104"
                 },
                 divider: alpha(colors.common.black, 0.12),
-                customTokens: {
-                    highEmphasis: alpha(colors.common.black, 0.87),
-                    mediumEmphasis: alpha(colors.common.black, 0.60),
+                custom: {
+                    ["high-emphasis"]: alpha(colors.common.black, 0.87),
+                    ["medium-emphasis"]: alpha(colors.common.black, 0.60),
                     outline: alpha(colors.common.black, 0.12),
-                    halfOutline: alpha(colors.common.black, 0.06),
-                    hoveredOutline: alpha(colors.common.black, 0.16),
-                    elevationBackground: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
+                    ["half-outline"]: alpha(colors.common.black, 0.06),
+                    ["hovered-outline"]: alpha(colors.common.black, 0.16),
+                    background: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
                         [elevation]: colors.common.white
                     }), {}),
-                    highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87),
-                    elevationGlassBackground: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
+                    ["high-emphasy-color-on-primary"]: alpha(colors.common.white, 0.87),
+                    ["glass-background"]: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
                         [elevation]: alpha(colors.common.white, 0.8)
                     }), {})
@@ -92,18 +92,18 @@ export const theme = extendTheme({
                     main: "#f78104"
                 },
                 divider: alpha(colors.common.white, 0.12),
-                customTokens: {
-                    highEmphasis: alpha(colors.common.white, 0.87),
-                    mediumEmphasis: alpha(colors.common.white, 0.60),
+                custom: {
+                    ["high-emphasis"]: alpha(colors.common.white, 0.87),
+                    ["medium-emphasis"]: alpha(colors.common.white, 0.60),
                     outline: alpha(colors.common.white, 0.12),
-                    halfOutline: alpha(colors.common.white, 0.06),
-                    hoveredOutline: alpha(colors.common.white, 0.16),
-                    elevationBackground: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
+                    ["half-outline"]: alpha(colors.common.white, 0.06),
+                    ["hovered-outline"]: alpha(colors.common.white, 0.16),
+                    background: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
                         [elevation]: lighten("#121212", darkElevationOverlay[elevation])
                     }), {}),
-                    highEmphasyColorOnPrimary: alpha(colors.common.white, 0.87),
-                    elevationGlassBackground: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
+                    ["high-emphasy-color-on-primary"]: alpha(colors.common.white, 0.87),
+                    ["glass-background"]: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
                         [elevation]: alpha(lighten("#121212", darkElevationOverlay[elevation]), 0.8)
                     }), {})
@@ -189,7 +189,11 @@ export const theme = extendTheme({
                     backgroundImage: "none",
                     // NOTE: This isn't perfect when changing theme.
                     transitionDuration: "300ms",
-                    transitionProperty: "box-shadow, background-color"
+                    transitionProperty: "box-shadow, background-color",
+                    "@supports ((backdrop-filter: var(--glass-backdrop-filter)) or (-webkit-backdrop-filter: var(--glass-backdrop-filter)))": {
+                        backdropFilter: "var(--glass-backdrop-filter)",
+                        backgroundColor: "var(--glass-background)"
+                    }
                 }
             }
         },
@@ -204,14 +208,14 @@ export const theme = extendTheme({
                 },
                 outlined: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
                     borderWidth: 2,
-                    borderColor: palette.customTokens.outline,
+                    borderColor: palette.custom.outline,
                     ":hover": {
                         borderWidth: 2,
-                        borderColor: palette.customTokens.outline
+                        borderColor: palette.custom.outline
                     }
                 }),
                 containedPrimary: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
-                    color: palette.customTokens.highEmphasyColorOnPrimary
+                    color: palette.custom["high-emphasy-color-on-primary"]
                 })
             }
         },
@@ -222,7 +226,7 @@ export const theme = extendTheme({
             styleOverrides: {
                 grouped: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
                     ":not(:last-of-type):hover": {
-                        borderRightColor: palette.customTokens.halfOutline
+                        borderRightColor: palette.custom["half-outline"]
                     }
                 })
             }
@@ -315,12 +319,12 @@ export const theme = extendTheme({
             styleOverrides: {
                 root: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
                     [`&:hover:not(.Mui-error):not(.Mui-focused) .${outlinedInputClasses.notchedOutline}`]: {
-                        borderColor: palette.customTokens.hoveredOutline
+                        borderColor: palette.custom["hovered-outline"]
                     }
                 }),
                 notchedOutline: ({ theme: { vars: { palette } } }): CSSInterpolation => ({
                     borderWidth: 2,
-                    borderColor: palette.customTokens.outline
+                    borderColor: palette.custom.outline
                 })
             }
         },
@@ -332,11 +336,9 @@ export const theme = extendTheme({
                     ...accumulator,
                     [`elevation${elevation}`]: ({ theme: { vars: { palette } } }: { theme: Omit<Theme, "palette" | "components"> & CssVarsTheme }): CSSInterpolation => ({
                         // This CSS variable seems to be undefined in dark mode.
-                        "--AppBar-background": palette.customTokens.elevationBackground[elevation],
-                        "@supports ((backdrop-filter: saturate(180%) blur(20px)) or (-webkit-backdrop-filter: saturate(180%) blur(20px)))": {
-                            backgroundColor: palette.customTokens.elevationGlassBackground[elevation],
-                            backdropFilter: "saturate(180%) blur(20px)"
-                        }
+                        "--AppBar-background": palette.custom.background[elevation],
+                        "--glass-background": palette.custom["glass-background"][elevation],
+                        "--glass-backdrop-filter": "blur(20px) saturate(180%)"
                     })
                 }), {})
             }
@@ -376,16 +378,16 @@ export const theme = extendTheme({
                     marginBottom: "0.5em"
                 },
                 body1: ({ theme: { vars: { palette } } }) => ({
-                    color: palette.customTokens.highEmphasis
+                    color: palette.custom["high-emphasis"]
                 }),
                 body2: ({ theme: { vars: { palette } } }) => ({
-                    color: palette.customTokens.highEmphasis
+                    color: palette.custom["high-emphasis"]
                 }),
                 subtitle1: ({ theme: { vars: { palette } } }) => ({
-                    color: palette.customTokens.highEmphasis
+                    color: palette.custom["high-emphasis"]
                 }),
                 subtitle2: ({ theme: { vars: { palette } } }) => ({
-                    color: palette.customTokens.mediumEmphasis
+                    color: palette.custom["medium-emphasis"]
                 })
             }
         }
