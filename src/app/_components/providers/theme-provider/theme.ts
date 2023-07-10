@@ -1,5 +1,5 @@
 import type { } from "@mui/lab/themeAugmentation";
-import { alpha, colors, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation, outlinedInputClasses } from "@mui/material";
+import { alpha, colors, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation, outlinedInputClasses, Slide } from "@mui/material";
 import { Lora } from "next/font/google";
 
 declare module "@mui/material/styles" {
@@ -351,6 +351,11 @@ export const theme = extendTheme({
         MuiSkeleton: {
             defaultProps: {
                 animation: "wave"
+            }
+        },
+        MuiSnackbar: {
+            defaultProps: {
+                TransitionComponent: Slide
             }
         },
         MuiTextField: {
