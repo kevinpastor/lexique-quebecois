@@ -1,5 +1,5 @@
 import { ArrowBack } from "@mui/icons-material";
-import { AppBar, Container, IconButton, Paper, Stack } from "@mui/material";
+import { AppBar, Container, IconButton, Stack } from "@mui/material";
 import { ReactElement, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -32,14 +32,7 @@ export const Form = ({ onClose: handleClose, isOpened }: Props): ReactElement =>
     }, [isOpened]);
 
     return (
-        <Paper
-            square
-            elevation={0}
-            sx={{
-                height: "100%",
-                overflowY: "auto"
-            }}
-        >
+        <>
             <AppBar elevation={3}>
                 <Container>
                     <Stack
@@ -63,6 +56,6 @@ export const Form = ({ onClose: handleClose, isOpened }: Props): ReactElement =>
                 inputRef={inputRef}
                 onClose={handleBack}
             />
-        </Paper>
+        </>
     );
 };

@@ -75,7 +75,7 @@ export const theme = extendTheme({
                     ["high-emphasy-color-on-primary"]: alpha(colors.common.white, 0.87),
                     ["glass-background"]: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
-                        [elevation]: alpha(colors.common.white, 0.8)
+                        [elevation]: alpha(colors.common.white, 0.6)
                     }), {})
                 },
                 Tooltip: {
@@ -105,7 +105,7 @@ export const theme = extendTheme({
                     ["high-emphasy-color-on-primary"]: alpha(colors.common.white, 0.87),
                     ["glass-background"]: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
-                        [elevation]: alpha(lighten("#121212", darkElevationOverlay[elevation]), 0.8)
+                        [elevation]: alpha(lighten("#121212", darkElevationOverlay[elevation]), 0.6)
                     }), {})
                 },
                 Tooltip: {
@@ -185,15 +185,11 @@ export const theme = extendTheme({
             },
             styleOverrides: {
                 root: {
-                    // Allows elevation change.
+                    // Allows background color with transparency.
                     backgroundImage: "none",
-                    // NOTE: This isn't perfect when changing theme.
+                    // Allows elevation change.
                     transitionDuration: "300ms",
-                    transitionProperty: "box-shadow, background-color",
-                    "@supports ((backdrop-filter: var(--glass-backdrop-filter)) or (-webkit-backdrop-filter: var(--glass-backdrop-filter)))": {
-                        backdropFilter: "var(--glass-backdrop-filter)",
-                        backgroundColor: "var(--glass-background)"
-                    }
+                    transitionProperty: "box-shadow, background-color"
                 }
             }
         },
@@ -281,6 +277,20 @@ export const theme = extendTheme({
                 }
             }
         },
+        MuiDrawer: {
+            styleOverrides: {
+                paper: {
+                    // Fixes a bug where a drawer using `backdrop-filter` is visible when the modal is hidden.
+                    ".MuiModal-hidden &": {
+                        opacity: 0
+                    },
+                    // A border seems to be required in order to make the backdrop filter properly work on iOS.
+                    "@supports (backdrop-filter: none) or (-webkit-backdrop-filter: none)": {
+                        borderRight: "1px solid transparent"
+                    }
+                }
+            }
+        },
         MuiFormControl: {
             defaultProps: {
                 fullWidth: true
@@ -338,7 +348,14 @@ export const theme = extendTheme({
                         // This CSS variable seems to be undefined in dark mode.
                         "--AppBar-background": palette.custom.background[elevation],
                         "--glass-background": palette.custom["glass-background"][elevation],
-                        "--glass-backdrop-filter": "blur(20px) saturate(180%)"
+                        "@supports (backdrop-filter: none) or (-webkit-backdrop-filter: none)": {
+                            backgroundImage: "none",
+                            backgroundColor: "var(--glass-background)",
+                            backdropFilter: "blur(20px) saturate(180%)",
+                            ".MuiBackdrop-root ~ &": {
+                                backdropFilter: "blur(20px) saturate(180%) brightness(200%)"
+                            }
+                        }
                     })
                 }), {})
             }

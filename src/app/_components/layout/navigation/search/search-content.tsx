@@ -19,12 +19,12 @@ const validationSchema = object({
     label: string().min(1)
 });
 
-export interface SearchContentProps {
+interface Props {
     onClose: () => void;
     isOpened: boolean;
 }
 
-export const SearchContent = ({ onClose: handleClose, isOpened }: SearchContentProps): ReactElement => {
+export const SearchContent = ({ onClose: handleClose, isOpened }: Props): ReactElement => {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { push } = useRouter();
 
@@ -46,9 +46,6 @@ export const SearchContent = ({ onClose: handleClose, isOpened }: SearchContentP
                 defaultValues: initialValues
             }}
             onSuccess={handleSubmit}
-            FormProps={{
-                style: { height: "100%" }
-            }}
         >
             <Form
                 onClose={handleClose}
