@@ -23,6 +23,10 @@
         "noPropertyAccessFromIndexSignature": true,
         "downlevelIteration": true,
         "paths": {
+            // Workaround while the library isn't marked with `"use client"`. This path is also referenced in the ESLint configuration.
+            "@mui/material": [
+                "./src/material"
+            ],
             "~/*": [
                 "./src/*"
             ],
