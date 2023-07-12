@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@babel/core": "^7.22.8",
+        "@ctrl/react-adsense": "^1.7.0",
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@hcaptcha/react-hcaptcha": "^1.8.1",
@@ -55,8 +56,8 @@
         "@types/react-helmet": "^6.1.6",
         "@types/request-ip": "^0.0.38",
         "@types/seedrandom": "^3.0.5",
-        "@typescript-eslint/eslint-plugin": "^6.0.0",
-        "@typescript-eslint/parser": "^6.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.61.0",
+        "@typescript-eslint/parser": "^5.61.0",
         "cross-env": "^7.0.3",
         "eslint": "^8.44.0",
         "eslint-config-next": "^13.4.9",

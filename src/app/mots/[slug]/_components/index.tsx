@@ -1,6 +1,7 @@
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 
+import { InFeedAd } from "~/components/ads/in-feed-ad";
 import { Definition } from "~/components/definition";
 import { Definition as IDefinition } from "~/types/definition";
 import { Word } from "~/types/word";
@@ -24,6 +25,7 @@ export const WordPage = ({ word }: Props): ReactElement => {
                 definition={word.definitions[0]}
             />
             <Spellings spellings={word.spellings} />
+            <InFeedAd />
             {word.definitions.slice(1).map((definition: IDefinition): ReactElement => (
                 <Definition
                     key={definition.id}
