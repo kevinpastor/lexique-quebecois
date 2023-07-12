@@ -220,13 +220,8 @@
                 ],
                 "pathGroups": [
                     {
-                        "pattern": "~(app|components|hooks|services|types|utils)/**",
+                        "pattern": "~**",
                         "group": "internal"
-                    },
-                    // Since we have a path alias for the library, it is considered as internal. With this, we can group it as external.
-                    {
-                        "pattern": "@mui/material",
-                        "group": "external"
                     }
                 ],
                 "pathGroupsExcludedImportTypes": [],

@@ -16,10 +16,9 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 module.exports = withSourceMapAnalyzer(withBundleAnalyzer({
     modularizeImports: {
-        // TODO Create regex for @mui/material. `useTheme` is not working.
-        // '@mui/material': {
-        //     transform: '@mui/material/{{member}}',
-        // },
+        '@mui/material': {
+            transform: '@mui/material/{{member}}',
+        },
         '@mui/icons-material': {
             transform: '@mui/icons-material/{{member}}',
             preventFullImport: true,

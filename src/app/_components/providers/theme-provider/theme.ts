@@ -1,5 +1,8 @@
 import type { } from "@mui/lab/themeAugmentation";
-import { alpha, colors, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation, outlinedInputClasses, Slide } from "@mui/material";
+import { Slide } from "@mui/material";
+import { common } from "@mui/material/colors";
+import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { alpha, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation } from "@mui/material/styles";
 import { Lora } from "next/font/google";
 
 declare module "@mui/material/styles" {
@@ -61,21 +64,21 @@ export const theme = extendTheme({
                 secondary: {
                     main: "#f78104"
                 },
-                divider: alpha(colors.common.black, 0.12),
+                divider: alpha(common.black, 0.12),
                 custom: {
-                    ["high-emphasis"]: alpha(colors.common.black, 0.87),
-                    ["medium-emphasis"]: alpha(colors.common.black, 0.60),
-                    outline: alpha(colors.common.black, 0.12),
-                    ["half-outline"]: alpha(colors.common.black, 0.06),
-                    ["hovered-outline"]: alpha(colors.common.black, 0.16),
+                    ["high-emphasis"]: alpha(common.black, 0.87),
+                    ["medium-emphasis"]: alpha(common.black, 0.60),
+                    outline: alpha(common.black, 0.12),
+                    ["half-outline"]: alpha(common.black, 0.06),
+                    ["hovered-outline"]: alpha(common.black, 0.16),
                     background: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
-                        [elevation]: colors.common.white
+                        [elevation]: common.white
                     }), {}),
-                    ["high-emphasy-color-on-primary"]: alpha(colors.common.white, 0.87),
+                    ["high-emphasy-color-on-primary"]: alpha(common.white, 0.87),
                     ["glass-background"]: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
-                        [elevation]: alpha(colors.common.white, 0.6)
+                        [elevation]: alpha(common.white, 0.6)
                     }), {})
                 },
                 Tooltip: {
@@ -91,18 +94,18 @@ export const theme = extendTheme({
                 secondary: {
                     main: "#f78104"
                 },
-                divider: alpha(colors.common.white, 0.12),
+                divider: alpha(common.white, 0.12),
                 custom: {
-                    ["high-emphasis"]: alpha(colors.common.white, 0.87),
-                    ["medium-emphasis"]: alpha(colors.common.white, 0.60),
-                    outline: alpha(colors.common.white, 0.12),
-                    ["half-outline"]: alpha(colors.common.white, 0.06),
-                    ["hovered-outline"]: alpha(colors.common.white, 0.16),
+                    ["high-emphasis"]: alpha(common.white, 0.87),
+                    ["medium-emphasis"]: alpha(common.white, 0.60),
+                    outline: alpha(common.white, 0.12),
+                    ["half-outline"]: alpha(common.white, 0.06),
+                    ["hovered-outline"]: alpha(common.white, 0.16),
                     background: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
                         [elevation]: lighten("#121212", darkElevationOverlay[elevation])
                     }), {}),
-                    ["high-emphasy-color-on-primary"]: alpha(colors.common.white, 0.87),
+                    ["high-emphasy-color-on-primary"]: alpha(common.white, 0.87),
                     ["glass-background"]: definedElevations.reduce<Record<number, string>>((accumulator, elevation) => ({
                         ...accumulator,
                         [elevation]: alpha(lighten("#121212", darkElevationOverlay[elevation]), 0.6)
