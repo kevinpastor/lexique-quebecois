@@ -26,4 +26,17 @@ module.exports = withSourceMapAnalyzer(withBundleAnalyzer({
         }
     },
     reactStrictMode: true,
+    experimental: {
+        swcPlugins: [
+            [
+                "use-client",
+                {
+                    include: [
+                        "@mui/material",
+                        "@mui/icons-material"
+                    ]
+                }
+            ]
+        ]
+    }
 }));

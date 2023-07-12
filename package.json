@@ -67,6 +67,7 @@
         "jest-environment-jsdom": "^29.6.0",
         "local-ssl-proxy": "^2.0.5",
         "source-map-explorer": "^2.5.3",
-        "typescript": "^5.1.6"
+        "typescript": "^5.1.6",
+        "use-client": "^1.0.4"
     }
 }

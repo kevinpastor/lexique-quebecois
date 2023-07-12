@@ -142,6 +142,9 @@ devDependencies:
   typescript:
     specifier: ^5.1.6
     version: 5.1.6
+  use-client:
+    specifier: ^1.0.4
+    version: 1.0.4
 
 packages:
 
@@ -5404,6 +5407,10 @@ packages:
     dependencies:
       querystringify: 2.2.0
       requires-port: 1.0.0
+    dev: true
+
+  /use-client@1.0.4:
+    resolution: {integrity: sha512-z2RfLMMgj0h+GUeWXC4LwVtAEJpKSEVcTG9o74ohSBFvtaOnd+7UFqA7KeSENHJJ7AcXkvrIb2G0Vt/dggcJnQ==}
     dev: true
 
   /use-sync-external-store@1.2.0(react@18.2.0):
