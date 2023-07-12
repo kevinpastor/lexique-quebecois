@@ -1,6 +1,7 @@
 "use client";
 
-import { Theme, useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { Theme, useTheme } from "@mui/material/styles";
 import { PropsWithChildren, ReactElement } from "react";
 
 export const MobileOnly = ({ children }: PropsWithChildren): ReactElement | null => {

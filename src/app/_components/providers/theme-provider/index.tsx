@@ -1,4 +1,5 @@
-import { CssBaseline, Experimental_CssVarsProvider as CssVarsProvider, getInitColorSchemeScript } from "@mui/material";
+import { CssBaseline } from "@mui/material";
+import { Experimental_CssVarsProvider as CssVarsProvider, getInitColorSchemeScript } from "@mui/material/styles";
 import { PropsWithChildren, ReactElement } from "react";
 import { NextAppDirEmotionCacheProvider, NextAppDirEmotionCacheProviderProps } from "tss-react/next/appDir";
 
