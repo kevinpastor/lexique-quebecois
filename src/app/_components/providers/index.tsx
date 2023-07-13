@@ -2,6 +2,7 @@
 
 import { Analytics } from "@vercel/analytics/react";
 import { PropsWithChildren, ReactElement } from "react";
+import { HelmetProvider } from "react-helmet-async";
 
 import { AdProvider } from "./ad-provider";
 import { AlertsProvider } from "./alerts-provider";
@@ -11,7 +12,7 @@ import { ThemeColorMetaTag } from "./theme-color-meta-tag";
 import { ThemeProvider } from "./theme-provider";
 
 export const Providers = ({ children }: PropsWithChildren): ReactElement => (
-    <>
+    <HelmetProvider>
         <Analytics />
         <ThemeProvider>
             <ThemeColorMetaTag />
@@ -24,5 +25,5 @@ export const Providers = ({ children }: PropsWithChildren): ReactElement => (
                 </AlertsProvider>
             </ConsentProvider>
         </ThemeProvider>
-    </>
+    </HelmetProvider>
 );

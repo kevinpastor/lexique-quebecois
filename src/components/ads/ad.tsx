@@ -25,7 +25,7 @@ interface Props {
     style?: CSSProperties;
     layout?: string;
     format?: string;
-    fullWidthResponsive?: boolean;
+    fullWidthResponsive?: "true" | "false";
 }
 
 export const Ad = ({
@@ -34,7 +34,7 @@ export const Ad = ({
     layout,
     format,
     layoutKey,
-    fullWidthResponsive
+    fullWidthResponsive = "true"
 }: Props): ReactElement | null => {
     const { consent } = useConsent();
 

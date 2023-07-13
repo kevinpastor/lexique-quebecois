@@ -3,7 +3,7 @@
 import { Stack } from "@mui/material";
 import { ReactElement } from "react";
 
-import { InFeedAd } from "~/components/ads/in-feed-ad";
+import { DefinitionsAd } from "~/components/ads/definitions-ad";
 import { Definition } from "~/components/definition";
 import { Definition as IDefinition } from "~/types/definition";
 
@@ -27,8 +27,8 @@ export const WordsPage = ({ definitions }: Props): ReactElement => (
                     definition={definition}
                 />
             )),
-            1,
-            <InFeedAd key="ad" />
+            3,
+            <DefinitionsAd key="ad" />
         )}
     </Stack>
 );
