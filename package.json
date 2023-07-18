@@ -17,8 +17,7 @@
         "test:coverage": "jest --coverage",
         "e2e": "playwright test",
         "e2e:report": "playwright show-report",
-        "analyze:bundle": "cross-env ANALYZE_BUNDLE=true next build",
-        "analyze:source-map": "cross-env ANALYZE_SOURCE_MAP=true next build && source-map-explorer .next/static/**/*.js"
+        "analyze": "cross-env ANALYZE=true next build && source-map-explorer .next/static/**/*.js"
     },
     "dependencies": {
         "@babel/core": "^7.22.9",
@@ -56,8 +55,8 @@
         "@types/react-helmet": "^6.1.6",
         "@types/request-ip": "^0.0.38",
         "@types/seedrandom": "^3.0.5",
-        "@typescript-eslint/eslint-plugin": "^6.1.0",
-        "@typescript-eslint/parser": "^6.1.0",
+        "@typescript-eslint/eslint-plugin": "^5.61.0",
+        "@typescript-eslint/parser": "^5.61.0",
         "cross-env": "^7.0.3",
         "eslint": "^8.45.0",
         "eslint-config-next": "^13.4.10",
