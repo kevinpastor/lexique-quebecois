@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-import { headers } from "next/headers";
 import { ReactElement } from "react";
 
 import { Word } from "~/types/word";
-import { getIpFromHeaders } from "~/utils/api/ip";
 
 import { WordPage } from "./_components";
 import { getWordDefinitions } from "./_services/get-word-definitions";
@@ -32,12 +30,11 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     };
 };
 
-export const revalidate: number = 0; // Dynamically render
+export const revalidate: number = 86400; // Revalidate every day.
 
 const Page = async ({ params }: Props): Promise<ReactElement> => {
     const { slug } = params;
-    const ip: string | undefined = getIpFromHeaders(headers());
-    const word: Word | null = await getWordDefinitions(slug, ip);
+    const word: Word | null = await getWordDefinitions(slug);
 
     return (
         <WordPage word={word} />

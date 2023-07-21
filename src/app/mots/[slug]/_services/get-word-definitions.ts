@@ -4,11 +4,10 @@ import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { Word } from "~/types/word";
 import { WordDocument } from "~/types/word-document";
 import { ratingOperator } from "~/utils/api/aggregation/rating-operator";
-import { safeInOperator } from "~/utils/api/aggregation/safe-in-operator";
 import { safeSizeOperator } from "~/utils/api/aggregation/safe-size-operator";
 import { timestampOperator } from "~/utils/api/aggregation/timestamp-operator";
 
-export const getWordDefinitions = async (spelling: string, ip: string = ""): Promise<Word | null> => {
+export const getWordDefinitions = async (spelling: string): Promise<Word | null> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
@@ -58,11 +57,7 @@ export const getWordDefinitions = async (spelling: string, ip: string = ""): Pro
                                 rating: ratingOperator(
                                     safeSizeOperator("$$definition.reactions.likes"),
                                     safeSizeOperator("$$definition.reactions.dislikes")
-                                ),
-                                likes: safeSizeOperator("$$definition.reactions.likes"),
-                                isLiked: safeInOperator("$$definition.reactions.likes", ip),
-                                dislikes: safeSizeOperator("$$definition.reactions.dislikes"),
-                                isDisliked: safeInOperator("$$definition.reactions.dislikes", ip)
+                                )
                             }
                         }
                     }

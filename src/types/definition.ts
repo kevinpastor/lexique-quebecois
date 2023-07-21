@@ -21,7 +21,6 @@ export interface Definition {
     example: string;
     author: Author;
     timestamp: number;
-    reactions: Reactions;
 }
 
 export const getSlug = (label: string): string => {

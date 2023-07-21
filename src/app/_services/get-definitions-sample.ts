@@ -5,12 +5,11 @@ import { Definition } from "~/types/definition";
 import { DefinitionDocument } from "~/types/definition-document";
 import { WordDocument } from "~/types/word-document";
 import { ratingOperator } from "~/utils/api/aggregation/rating-operator";
-import { safeInOperator } from "~/utils/api/aggregation/safe-in-operator";
 import { safeSizeOperator } from "~/utils/api/aggregation/safe-size-operator";
 import { timestampOperator } from "~/utils/api/aggregation/timestamp-operator";
 import { sample } from "~/utils/misc/random";
 
-const definitionProjectionOperation = (ip: string): Document => ({
+const definitionProjectionOperation = (): Document => ({
     _id: 0,
     id: {
         $toString: "$_id"
@@ -22,17 +21,11 @@ const definitionProjectionOperation = (ip: string): Document => ({
     author: {
         name: "$author.name"
     },
-    timestamp: timestampOperator("$_id"),
-    reactions: {
-        likes: safeSizeOperator("$reactions.likes"),
-        isLiked: safeInOperator("$reactions.likes", ip),
-        dislikes: safeSizeOperator("$reactions.dislikes"),
-        isDisliked: safeInOperator("$reactions.dislikes", ip)
-    }
+    timestamp: timestampOperator("$_id")
 });
 
-const definitionProjectionStage = (ip: string): Document => ({
-    $project: definitionProjectionOperation(ip)
+const definitionProjectionStage = (): Document => ({
+    $project: definitionProjectionOperation()
 });
 
 const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
@@ -95,7 +88,7 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
         .toArray();
 };
 
-export const getDefinitionsSample = async (ip: string = ""): Promise<Array<Definition>> => {
+export const getDefinitionsSample = async (): Promise<Array<Definition>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
@@ -132,7 +125,7 @@ export const getDefinitionsSample = async (ip: string = ""): Promise<Array<Defin
                 }
             }
         },
-        definitionProjectionStage(ip)
+        definitionProjectionStage()
     ];
 
     return collection.aggregate<Definition>(pipeline, defaultAggregateOptions)
