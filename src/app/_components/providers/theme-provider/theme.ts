@@ -3,7 +3,8 @@ import { Slide } from "@mui/material";
 import { common } from "@mui/material/colors";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { alpha, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation } from "@mui/material/styles";
-import { Lora } from "next/font/google";
+
+import { font } from "./font";
 
 declare module "@mui/material/styles" {
     interface CustomTokens {
@@ -46,13 +47,6 @@ type DefinedEvelation = keyof typeof darkElevationOverlay;
 
 const definedElevations: Array<DefinedEvelation> = Object.keys(darkElevationOverlay)
     .map((key): DefinedEvelation => parseInt(key, 10));
-
-type NextFont = ReturnType<typeof Lora>;
-
-const lora: NextFont = Lora({
-    style: ["normal", "italic"],
-    subsets: ["latin"]
-});
 
 export const theme = extendTheme({
     colorSchemes: {
@@ -118,7 +112,7 @@ export const theme = extendTheme({
         }
     },
     typography: {
-        fontFamily: lora.style.fontFamily,
+        fontFamily: font.style.fontFamily,
         fontSize: 18,
         allVariants: {
             lineHeight: 1.5
