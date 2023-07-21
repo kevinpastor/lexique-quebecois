@@ -1,6 +1,90 @@
 import { Reactions } from "~/types/definition";
 
-const toggleLike = (state: Reactions): Reactions => {
+type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+type LoadableReactions = Optional<Reactions, "likes" | "dislikes">;
+
+const hasLoaded = (state: LoadableReactions): state is Reactions => (
+    state.likes !== undefined && state.dislikes !== undefined
+);
+
+const load = (state: LoadableReactions, payload: Reactions): LoadableReactions => {
+    if (state.isLiked) {
+        if (payload.isLiked) {
+            return {
+                ...state,
+                likes: payload.likes,
+                dislikes: payload.dislikes
+            };
+        }
+
+        if (payload.isDisliked) {
+            return {
+                ...state,
+                likes: payload.likes + 1,
+                dislikes: payload.dislikes - 1
+            };
+        }
+
+        return {
+            ...state,
+            likes: payload.likes + 1,
+            dislikes: payload.dislikes
+        };
+    }
+
+    if (state.isDisliked) {
+        if (payload.isDisliked) {
+            return {
+                ...state,
+                likes: payload.likes,
+                dislikes: payload.dislikes
+            };
+        }
+
+        if (payload.isLiked) {
+            return {
+                ...state,
+                likes: payload.likes - 1,
+                dislikes: payload.dislikes + 1
+            };
+        }
+
+        return {
+            ...state,
+            likes: payload.likes,
+            dislikes: payload.dislikes + 1
+        };
+    }
+
+    return {
+        ...payload
+    };
+};
+
+const toggleLike = (state: LoadableReactions): LoadableReactions => {
+    if (!hasLoaded(state)) {
+        if (state.isLiked) {
+            return {
+                ...state,
+                isLiked: false
+            };
+        }
+
+        if (state.isDisliked) {
+            return {
+                ...state,
+                isLiked: true,
+                isDisliked: false
+            };
+        }
+
+        return {
+            ...state,
+            isLiked: true
+        };
+    }
+
     if (state.isLiked) {
         return {
             ...state,
@@ -26,7 +110,29 @@ const toggleLike = (state: Reactions): Reactions => {
     };
 };
 
-const toggleDislike = (state: Reactions): Reactions => {
+const toggleDislike = (state: LoadableReactions): LoadableReactions => {
+    if (!hasLoaded(state)) {
+        if (state.isDisliked) {
+            return {
+                ...state,
+                isDisliked: false
+            };
+        }
+
+        if (state.isLiked) {
+            return {
+                ...state,
+                isLiked: false,
+                isDisliked: true
+            };
+        }
+
+        return {
+            ...state,
+            isDisliked: true
+        };
+    }
+
     if (state.isDisliked) {
         return {
             ...state,
@@ -65,12 +171,21 @@ interface ResetAction {
     payload: Reactions;
 }
 
-type Action = ToggleLikeAction | ToggleDislikeAction | ResetAction;
+interface LoadAction {
+    type: "load";
+    payload: Reactions;
+}
 
-export const reducer = (state: Reactions, action: Action): Reactions => {
+type Action = ToggleLikeAction | ToggleDislikeAction | LoadAction | ResetAction;
+
+export const reducer = (state: LoadableReactions, action: Action): LoadableReactions => {
     switch (action.type) {
         case "reset": {
             return action.payload;
+        }
+
+        case "load": {
+            return load(state, action.payload);
         }
 
         case "toggleLike": {

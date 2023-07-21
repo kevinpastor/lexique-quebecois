@@ -1,3 +1,5 @@
+"use client"; // ! TODO Remove
+
 import { Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
@@ -63,7 +65,7 @@ export const Definition = ({ definition }: Props): ReactElement => {
                     spacing={2}
                     width="100%"
                 >
-                    <Reactions word={definition} />
+                    <Reactions definitionId={definition.id} />
                     <ShareButton url={`mots/${slug}`} />
                 </Stack>
             </CardActions>

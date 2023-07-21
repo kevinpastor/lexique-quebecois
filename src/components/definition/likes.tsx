@@ -3,7 +3,7 @@ import { Button, Tooltip } from "@mui/material";
 import { ReactElement } from "react";
 
 interface Props {
-    likes: number;
+    likes?: number;
     isLiked: boolean;
     toggleLike: () => void;
 }
@@ -23,8 +23,9 @@ export const Likes = ({
                     : <ThumbUpOutlined />
             }
             size="small"
+            aria-busy={likes === undefined}
         >
-            {likes}
+            {likes === undefined ? "–" : likes}
         </Button>
     </Tooltip>
 );

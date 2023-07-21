@@ -9,15 +9,20 @@ import { dislike, like, removeDislike, removeLike } from "./reactions";
 import { reducer } from "./reducer";
 
 interface ReturnType {
-    likes: number;
+    likes?: number;
     isLiked: boolean;
     toggleLike: () => Promise<void>;
-    dislikes: number;
+    dislikes?: number;
     isDisliked: boolean;
     toggleDislike: () => Promise<void>;
 }
 
-export const useReactions = (id: string, reactions: Reactions): ReturnType => {
+const initialState = {
+    isLiked: false,
+    isDisliked: false
+};
+
+export const useReactions = (id: string, reactions?: Reactions): ReturnType => {
     const [
         {
             likes,
@@ -26,12 +31,24 @@ export const useReactions = (id: string, reactions: Reactions): ReturnType => {
             isDisliked
         },
         dispatch
-    ] = useReducer(reducer, reactions);
+    ] = useReducer(reducer, initialState);
 
-    // Update the state if the external value changes.
+    // TODO
+    // // Update the state if the external value changes.
+    // useEffect((): void => {
+    //     dispatch({
+    //         type: "reset",
+    //         payload: reactions
+    //     });
+    // }, [id, reactions]);
+
     useEffect((): void => {
+        if (!reactions) {
+            return;
+        }
+
         dispatch({
-            type: "reset",
+            type: "load",
             payload: reactions
         });
     }, [reactions]);
