@@ -5,7 +5,7 @@ import { TextField } from "~/components/react-hook-form/text-field";
 
 import { FieldIconButton } from "./field-icon-button";
 
-export const Field = forwardRef((_: unknown, ref: ForwardedRef<HTMLInputElement>): ReactElement => (
+export const Field = forwardRef((_: undefined, ref: ForwardedRef<HTMLInputElement>): ReactElement => (
     <TextField
         inputRef={ref}
         name="label"
