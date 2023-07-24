@@ -102,7 +102,7 @@
         "react/no-will-update-set-state": "error",
         "react/prefer-es6-class": "error",
         "react/prefer-exact-props": "error",
-        "react/prefer-read-only-props": "error",
+        "react/prefer-read-only-props": "off",
         "react/prefer-stateless-function": "error",
         "react/prop-types": "error",
         "react/react-in-jsx-scope": "off",
