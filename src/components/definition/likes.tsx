@@ -2,6 +2,8 @@ import { ThumbUp, ThumbUpOutlined } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
 import { ReactElement } from "react";
 
+import { CrossfadeLoad } from "./loading-count";
+
 interface Props {
     likes?: number;
     isLiked: boolean;
@@ -24,8 +26,9 @@ export const Likes = ({
             }
             size="small"
             aria-busy={likes === undefined}
+            style={{ overflow: "hidden" }}
         >
-            {likes === undefined ? "–" : likes}
+            <CrossfadeLoad value={likes} />
         </Button>
     </Tooltip>
 );
