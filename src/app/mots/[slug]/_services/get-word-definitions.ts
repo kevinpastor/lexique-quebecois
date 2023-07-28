@@ -91,6 +91,6 @@ export const getWordDefinitions = async (spelling: string): Promise<Word | null>
         }
     ];
 
-    return collection.aggregate<Word>(pipeline, defaultAggregateOptions)
+    return await collection.aggregate<Word>(pipeline, defaultAggregateOptions)
         .next();
 };

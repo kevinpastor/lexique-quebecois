@@ -45,6 +45,6 @@ export const getReactions = async (definitionIds: Array<string>, ip: string | un
         }
     ];
 
-    return collection.aggregate<Reactions>(pipeline, defaultAggregateOptions)
+    return await collection.aggregate<Reactions>(pipeline, defaultAggregateOptions)
         .toArray();
 };

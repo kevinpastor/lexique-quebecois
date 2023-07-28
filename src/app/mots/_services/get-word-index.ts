@@ -30,7 +30,7 @@ export const getWordIndex = async (): Promise<Array<string>> => {
         }
     ];
 
-    return collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
+    return await collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
         .map(({ spellings }: OutputDocument): string => (spellings))
         .toArray();
 };

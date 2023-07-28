@@ -76,7 +76,7 @@ const getWordsInformation = async (): Promise<Array<WordInformation>> => {
         }
     ];
 
-    return collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
+    return await collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
         .map(({ spellings: spelling, timestamp }: OutputDocument): WordInformation => ({
             spelling,
             timestamp

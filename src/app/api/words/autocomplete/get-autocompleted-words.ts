@@ -61,7 +61,7 @@ export const getAutocompletedWords = async (query: string): Promise<Array<string
         }
     ];
 
-    return collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
+    return await collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
         .map(({ highlight: { texts: [{ value: spelling }] } }: OutputDocument): string => (spelling))
         .toArray();
 };

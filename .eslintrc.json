@@ -384,7 +384,10 @@
             "double"
         ],
         "no-return-await": "off",
-        "@typescript-eslint/return-await": "error",
+        "@typescript-eslint/return-await": [
+            "error",
+            "always"
+        ],
         "semi": "off",
         "@typescript-eslint/semi": "error",
         "space-before-function-paren": "off",
@@ -398,7 +401,7 @@
         ],
         "@typescript-eslint/non-nullable-type-assertion-style": "off",
         "@typescript-eslint/no-misused-promises": [
-            "error", 
+            "error",
             {
                 "checksVoidReturn": {
                     "attributes": false

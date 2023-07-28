@@ -7,5 +7,5 @@ export const fetcher = async (url: string): Promise<unknown> => {
         throw new HttpError(response.status);
     }
 
-    return response.json();
+    return await response.json() as unknown;
 };

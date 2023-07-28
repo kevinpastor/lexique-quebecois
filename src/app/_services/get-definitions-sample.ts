@@ -83,7 +83,7 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
         }
     ];
 
-    return collection.aggregate<WithId<DefinitionDocument>>(pipeline, defaultAggregateOptions)
+    return await collection.aggregate<WithId<DefinitionDocument>>(pipeline, defaultAggregateOptions)
         .map(({ _id }: DefinitionDocument): ObjectId => (_id))
         .toArray();
 };
@@ -128,6 +128,6 @@ export const getDefinitionsSample = async (): Promise<Array<Definition>> => {
         definitionProjectionStage()
     ];
 
-    return collection.aggregate<Definition>(pipeline, defaultAggregateOptions)
+    return await collection.aggregate<Definition>(pipeline, defaultAggregateOptions)
         .toArray();
 };
