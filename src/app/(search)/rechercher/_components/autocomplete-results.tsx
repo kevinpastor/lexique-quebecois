@@ -9,14 +9,13 @@ import { useDebounce } from "~/hooks/use-debounce";
 import { KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "~/hooks/use-keyboard-focus-selection";
 import { getSlug } from "~/types/definition";
 
-import { FormValues } from "./search-content";
+import { FormValues } from ".";
 
 export interface Props {
     inputRef: RefObject<HTMLInputElement>;
-    onClose: () => void;
 }
 
-export const AutocompleteResults = ({ inputRef, onClose: handleClose }: Props): ReactElement | null => {
+export const AutocompleteResults = ({ inputRef }: Props): ReactElement | null => {
     const label = useWatch<FormValues>({ name: "label" });
     const debouncedLabel: string = useDebounce(label);
 
@@ -99,7 +98,6 @@ export const AutocompleteResults = ({ inputRef, onClose: handleClose }: Props): 
                         <ListItemButton
                             component={Link}
                             href={`/mots/${getSlug(word)}`}
-                            onClick={handleClose}
                             ref={itemRef(index + 1)}
                         >
                             <Highlight

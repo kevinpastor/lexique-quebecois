@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { PropsWithChildren, ReactElement } from "react";
 
-import { Layout } from "./_components/layout";
 import { Providers } from "./_components/providers";
 
 export const metadata: Metadata = {
@@ -91,9 +90,7 @@ const RootLayout = ({ children }: PropsWithChildren): ReactElement => (
     >
         <body>
             <Providers>
-                <Layout>
-                    {children}
-                </Layout>
+                {children}
             </Providers>
         </body>
     </html>

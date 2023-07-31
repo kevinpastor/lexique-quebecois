@@ -20,6 +20,7 @@ export const Field = forwardRef((_: unknown, ref: ForwardedRef<HTMLInputElement>
         }}
         spellCheck={false}
         hideError
+        autoFocus
     />
 ));
 
