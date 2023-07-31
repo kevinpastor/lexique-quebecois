@@ -16,7 +16,7 @@ export const NavigationContainer = ({ children }: PropsWithChildren): ReactEleme
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
-                    spacing={2}
+                    spacing={1}
                     my={0.5}
                 >
                     {children}

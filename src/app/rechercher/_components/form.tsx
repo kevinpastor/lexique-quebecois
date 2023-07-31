@@ -3,7 +3,7 @@ import { IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { ReactElement, useRef } from "react";
 
-import { NavigationContainer } from "~/app/(root)/_components/layout/navigation/navigation-container";
+import { NavigationContainer } from "~/components/navigation-container";
 
 import { AutocompleteResults } from "./autocomplete-results";
 import { Field } from "./field";

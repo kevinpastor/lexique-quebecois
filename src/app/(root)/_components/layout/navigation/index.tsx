@@ -8,7 +8,7 @@ import { DesktopOnly } from "~/components/desktop-only";
 import { MobileOnly } from "~/components/mobile-only";
 
 import { Menu } from "./menu";
-import { NavigationContainer } from "./navigation-container";
+import { NavigationContainer } from "../../../../../components/navigation-container";
 
 const LazyIconThemeSelector = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./icon-theme-selector")).IconThemeSelector
