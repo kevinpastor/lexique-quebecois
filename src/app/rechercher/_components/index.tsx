@@ -8,7 +8,7 @@ import { BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
 
 import { SearchContent } from "./search-content";
 
-export const Search = (): ReactElement => {
+export const SearchPage = (): ReactElement => {
     const {
         value: isOpened,
         setTrue: handleOpen,
