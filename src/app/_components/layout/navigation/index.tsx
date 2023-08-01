@@ -6,9 +6,9 @@ import { ComponentType, ReactElement } from "react";
 
 import { DesktopOnly } from "~/components/desktop-only";
 import { MobileOnly } from "~/components/mobile-only";
+import { NavigationContainer } from "~/components/navigation-container";
 
 import { Menu } from "./menu";
-import { NavigationContainer } from "../../../../../components/navigation-container";
 
 const LazyIconThemeSelector = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./icon-theme-selector")).IconThemeSelector
