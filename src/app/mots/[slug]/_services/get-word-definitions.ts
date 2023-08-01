@@ -13,10 +13,9 @@ export const getWordDefinitions = async (spelling: string): Promise<Word | null>
 
     const pipeline: Array<Document> = [
         {
-            $search: {
-                text: {
-                    path: "spellings",
-                    query: spelling
+            $match: {
+                $text: {
+                    $search: spelling
                 }
             }
         },

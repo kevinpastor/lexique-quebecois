@@ -11,10 +11,9 @@ export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Sta
     const collection: Collection<WordDocument> = database.collection("words");
     const pipeline: Array<Document> = [
         {
-            $search: {
-                text: {
-                    path: "spellings",
-                    query: wordRequest.label
+            $match: {
+                $text: {
+                    $search: wordRequest.label
                 }
             }
         }
