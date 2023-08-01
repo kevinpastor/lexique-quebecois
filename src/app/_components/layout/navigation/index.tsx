@@ -73,6 +73,7 @@ export const Navigation = (): ReactElement => {
                 <DesktopOnly>
                     <LazyIconThemeSelector />
                 </DesktopOnly>
+                {/* Wrapper required for alignment on desktop. */}
                 <div>
                     <Tooltip title="Rechercher">
                         <IconButton
