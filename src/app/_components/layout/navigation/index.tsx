@@ -1,14 +1,14 @@
-import { Link, Stack, Typography } from "@mui/material";
+import { Search as SearchIcon } from "@mui/icons-material";
+import { IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { ComponentType, ReactElement } from "react";
 
 import { DesktopOnly } from "~/components/desktop-only";
 import { MobileOnly } from "~/components/mobile-only";
+import { NavigationContainer } from "~/components/navigation-container";
 
 import { Menu } from "./menu";
-import { NavigationContainer } from "./navigation-container";
-import { Search } from "./search";
 
 const LazyIconThemeSelector = dynamic(async (): Promise<{ default: ComponentType }> => ({
     default: (await import("./icon-theme-selector")).IconThemeSelector
@@ -73,7 +73,19 @@ export const Navigation = (): ReactElement => {
                 <DesktopOnly>
                     <LazyIconThemeSelector />
                 </DesktopOnly>
-                <Search />
+                {/* Wrapper required for alignment on desktop. */}
+                <div>
+                    <Tooltip title="Rechercher">
+                        <IconButton
+                            component={NextLink}
+                            aria-label="Rechercher"
+                            edge="end"
+                            href="/rechercher"
+                        >
+                            <SearchIcon />
+                        </IconButton>
+                    </Tooltip>
+                </div>
             </Stack>
         </NavigationContainer>
     );

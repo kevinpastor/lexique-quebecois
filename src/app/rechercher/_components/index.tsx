@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { ReactElement } from "react";
 import { object, string } from "zod";
@@ -19,18 +21,12 @@ const validationSchema = object({
     label: string().min(1)
 });
 
-interface Props {
-    onClose: () => void;
-    isOpened: boolean;
-}
-
-export const SearchContent = ({ onClose: handleClose, isOpened }: Props): ReactElement => {
+export const SearchPage = (): ReactElement => {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { push } = useRouter();
 
     const navigate = (label: string): void => {
         const slug: string = getSlug(label);
-        handleClose();
         push(`/mots/${slug}`);
     };
 
@@ -47,10 +43,7 @@ export const SearchContent = ({ onClose: handleClose, isOpened }: Props): ReactE
             }}
             onSuccess={handleSubmit}
         >
-            <Form
-                onClose={handleClose}
-                isOpened={isOpened}
-            />
+            <Form />
         </FormContainer>
     );
 };
