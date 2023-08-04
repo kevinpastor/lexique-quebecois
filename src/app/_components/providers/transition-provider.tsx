@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren, ReactElement } from "react";
 
@@ -13,7 +13,7 @@ export const TransitionProvider = ({ children }: PropsWithChildren): ReactElemen
             initial={false}
             mode="wait"
         >
-            <motion.div
+            <m.div
                 key={pathname}
                 transition={{
                     type: "tween",
@@ -33,7 +33,7 @@ export const TransitionProvider = ({ children }: PropsWithChildren): ReactElemen
                 }}
             >
                 {children}
-            </motion.div>
+            </m.div>
         </AnimatePresence>
     );
 };

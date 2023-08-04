@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ReactElement } from "react";
 
 interface Props {
@@ -10,7 +10,7 @@ export const CrossfadeLoad = ({ value }: Props): ReactElement => (
         initial={false}
         mode="wait"
     >
-        <motion.span
+        <m.span
             key={value === undefined ? "loading" : "loaded"}
             transition={{ duration: 0.1 }}
             initial={{ opacity: 0 }}
@@ -18,6 +18,6 @@ export const CrossfadeLoad = ({ value }: Props): ReactElement => (
             exit={{ opacity: 0 }}
         >
             {value ?? "–"}
-        </motion.span>
+        </m.span>
     </AnimatePresence>
 );
