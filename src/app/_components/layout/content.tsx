@@ -17,8 +17,7 @@ export const Content = ({ children }: PropsWithChildren): ReactElement => (
         <Grid
             container
             spacing={2}
-            pt={1}
-            pb={2}
+            py={2}
         >
             <Grid xs>
                 <ErrorBoundary fallback={<UnexpectedError />}>
