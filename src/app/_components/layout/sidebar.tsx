@@ -2,7 +2,7 @@ import { Card, CardContent, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 
-// import { Ad } from "~/components/misc/ad";
+import { DefinitionsAd } from "~/components/ads/definitions-ad";
 
 export const Sidebar = (): ReactElement => (
     <Stack
@@ -25,6 +25,7 @@ export const Sidebar = (): ReactElement => (
                 </Typography>
             </CardContent>
         </Card>
+        <DefinitionsAd />
         <Card>
             <CardContent>
                 <Typography align="center">
@@ -33,12 +34,5 @@ export const Sidebar = (): ReactElement => (
                 </Typography>
             </CardContent>
         </Card>
-        {/*
-        TODO Show ad when AdSense is approved
-        <Ad
-            client="ca-pub-3996014859104973"
-            slot="4892544775"
-        />
-        */}
     </Stack>
 );
