@@ -28,6 +28,11 @@ export const Menu = (): ReactElement => {
                     onClick={handleOpen}
                     aria-label="Menu"
                     edge="start"
+                    sx={{
+                        display: {
+                            md: "none"
+                        }
+                    }}
                 >
                     <MenuIcon />
                 </IconButton>

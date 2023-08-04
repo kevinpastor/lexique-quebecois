@@ -1,11 +1,10 @@
 import { Search as SearchIcon } from "@mui/icons-material";
-import { IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
+import { IconButton, Link, Stack, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { ComponentType, ReactElement } from "react";
 
 import { DesktopOnly } from "~/components/desktop-only";
-import { MobileOnly } from "~/components/mobile-only";
 import { NavigationContainer } from "~/components/navigation-container";
 
 import { Menu } from "./menu";
@@ -17,25 +16,37 @@ const LazyIconThemeSelector = dynamic(async (): Promise<{ default: ComponentType
 export const Navigation = (): ReactElement => {
     return (
         <NavigationContainer>
-            <MobileOnly>
-                <Menu />
-            </MobileOnly>
+            <Menu />
             <Stack
                 direction="row"
                 alignItems="end"
                 spacing={2}
+                sx={{
+                    marginLeft: {
+                        md: "0px !important" // Workaround for CLS issue coming from the Menu component.
+                    }
+                }}
             >
-                <Typography variant="h1">
-                    <Link
-                        component={NextLink}
-                        href="/"
-                        color="inherit"
-                        underline="none"
-                    >
-                        Lexique Québécois
-                    </Link>
-                </Typography>
-                <DesktopOnly>
+                <Link
+                    component={NextLink}
+                    href="/"
+                    color="inherit"
+                    underline="none"
+                    typography="h1"
+                >
+                    Lexique Québécois
+                </Link>
+                <Stack
+                    direction="row"
+                    alignItems="end"
+                    spacing={2}
+                    sx={{
+                        display: {
+                            xs: "none",
+                            md: "inherit"
+                        }
+                    }}
+                >
                     <Link
                         component={NextLink}
                         href="/contribuer"
@@ -63,7 +74,7 @@ export const Navigation = (): ReactElement => {
                     >
                         Contact
                     </Link>
-                </DesktopOnly>
+                </Stack>
             </Stack>
             <Stack
                 direction="row"
