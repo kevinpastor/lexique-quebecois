@@ -42,22 +42,27 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
             }
         },
         {
+            $project: {
+                filteredDefinitions: {
+                    $filter: {
+                        input: "$definitions",
+                        as: "definition",
+                        cond: {
+                            $eq: [
+                                "$$definition.isApproved",
+                                true
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
             $replaceRoot: {
                 newRoot: {
                     $reduce: {
-                        input: {
-                            $filter: {
-                                input: "$definitions",
-                                as: "definition",
-                                cond: {
-                                    $eq: [
-                                        "$$definition.isApproved",
-                                        true
-                                    ]
-                                }
-                            }
-                        },
-                        initialValue: {},
+                        input: "$filteredDefinitions",
+                        initialValue: { $arrayElemAt: ["$filteredDefinitions", 0] },
                         in: {
                             $cond: {
                                 if: {
