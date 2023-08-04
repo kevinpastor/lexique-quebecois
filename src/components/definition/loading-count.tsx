@@ -1,24 +1,23 @@
-import { Fade } from "@mui/material";
+import { AnimatePresence, motion } from "framer-motion";
 import { ReactElement } from "react";
-
-import { useBoolean } from "~/hooks/use-boolean";
 
 interface Props {
     value?: number;
 }
 
-export const CrossfadeLoad = ({ value }: Props): ReactElement => {
-    const { value: hasLoaded, setTrue: load } = useBoolean(false);
-
-    return (
-        <Fade
-            in={value === undefined || hasLoaded}
-            appear={false}
-            onExited={load}
+export const CrossfadeLoad = ({ value }: Props): ReactElement => (
+    <AnimatePresence
+        initial={false}
+        mode="wait"
+    >
+        <motion.span
+            key={value === undefined ? "loading" : "loaded"}
+            transition={{ duration: 0.1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
         >
-            <span>
-                {hasLoaded ? value : "–"}
-            </span>
-        </Fade>
-    );
-};
+            {value ?? "–"}
+        </motion.span>
+    </AnimatePresence>
+);

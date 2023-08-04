@@ -2,7 +2,7 @@ import { Reactions } from "~/types/definition";
 
 type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
-type LoadableReactions = Optional<Reactions, "likes" | "dislikes">;
+export type LoadableReactions = Optional<Reactions, "likes" | "dislikes">;
 
 const hasLoaded = (state: LoadableReactions): state is Reactions => (
     state.likes !== undefined && state.dislikes !== undefined
