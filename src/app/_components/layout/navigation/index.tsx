@@ -22,8 +22,10 @@ export const Navigation = (): ReactElement => {
                 alignItems="end"
                 spacing={2}
                 sx={{
+                    // Workaround for CLS issue coming from the Menu component.
+                    // Could be fixed using `useFlexGap`, but it's not supported everywhere.
                     marginLeft: {
-                        md: "0px !important" // Workaround for CLS issue coming from the Menu component.
+                        md: "0px !important"
                     }
                 }}
             >

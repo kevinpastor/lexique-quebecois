@@ -23,7 +23,10 @@ export const Content = ({ children }: PropsWithChildren): ReactElement => (
                 md={4}
             >
                 <Stack
-                    spacing={2}
+                    spacing={{
+                        xs: 0,
+                        md: 2
+                    }}
                     sx={{
                         position: {
                             md: "sticky"
