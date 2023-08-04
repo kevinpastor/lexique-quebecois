@@ -1,16 +1,10 @@
 import { Container, Stack, Unstable_Grid2 as Grid } from "@mui/material";
-import dynamic from "next/dynamic";
-import { ComponentType, PropsWithChildren, ReactElement } from "react";
-
-import { DesktopOnly } from "~/components/desktop-only";
+import { PropsWithChildren, ReactElement } from "react";
 
 import { ErrorBoundary } from "./error-boundary";
 import { Footer } from "./footer";
+import { Sidebar } from "./sidebar";
 import { UnexpectedError } from "../unexpected-error";
-
-const LazySidebar = dynamic(async (): Promise<{ default: ComponentType }> => ({
-    default: (await import("./sidebar")).Sidebar
-}));
 
 export const Content = ({ children }: PropsWithChildren): ReactElement => (
     <Container>
@@ -39,9 +33,7 @@ export const Content = ({ children }: PropsWithChildren): ReactElement => (
                         }
                     }}
                 >
-                    <DesktopOnly>
-                        <LazySidebar />
-                    </DesktopOnly>
+                    <Sidebar />
                     <Footer />
                 </Stack>
             </Grid>

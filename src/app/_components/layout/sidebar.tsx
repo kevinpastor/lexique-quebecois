@@ -8,6 +8,12 @@ export const Sidebar = (): ReactElement => (
     <Stack
         spacing={2}
         component="aside"
+        sx={{
+            display: {
+                xs: "none",
+                md: "inherit"
+            }
+        }}
     >
         <Card>
             <CardContent>
