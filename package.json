@@ -32,6 +32,7 @@
         "@next/env": "^13.4.12",
         "@vercel/analytics": "^1.0.1",
         "dataloader": "^2.2.2",
+        "framer-motion": "^10.15.0",
         "mongodb": "^5.7.0",
         "next": "^13.4.12",
         "nodemailer": "^6.9.4",

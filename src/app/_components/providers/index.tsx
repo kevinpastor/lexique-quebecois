@@ -10,8 +10,10 @@ import { ConsentProvider } from "./consent-provider";
 import { SWRProvider } from "./swr-provider";
 import { ThemeColorMetaTag } from "./theme-color-meta-tag";
 import { ThemeProvider } from "./theme-provider";
+// import { TransitionProvider } from "./transition-provider";
 
 export const Providers = ({ children }: PropsWithChildren): ReactElement => (
+    // <TransitionProvider>
     <HelmetProvider>
         <Analytics />
         <ThemeProvider>
@@ -26,4 +28,5 @@ export const Providers = ({ children }: PropsWithChildren): ReactElement => (
             </ConsentProvider>
         </ThemeProvider>
     </HelmetProvider>
+    // </TransitionProvider>
 );
