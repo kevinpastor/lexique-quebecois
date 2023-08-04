@@ -98,7 +98,7 @@ export const getDefinitionsSample = async (): Promise<Array<Definition>> => {
     const collection: Collection<WordDocument> = database.collection("words");
 
     const ids: Array<ObjectId> = await getDefinitionDocumentsId();
-    const sampleSize: number = 5;
+    const sampleSize: number = 7;
     const now: Date = new Date();
     const seed: number = Math.floor(now.getTime() / 86400000); // 1000ms * 60s * 60min * 24h
     const sampledIds: Array<ObjectId> = sample(ids, sampleSize, seed);
