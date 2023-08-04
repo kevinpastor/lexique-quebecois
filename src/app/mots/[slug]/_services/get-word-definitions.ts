@@ -10,12 +10,12 @@ import { timestampOperator } from "~/utils/api/aggregation/timestamp-operator";
 export const getWordDefinitions = async (spelling: string): Promise<Word | null> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
-
     const pipeline: Array<Document> = [
         {
-            $match: {
-                $text: {
-                    $search: spelling
+            $search: {
+                text: {
+                    path: "spellings",
+                    query: spelling
                 }
             }
         },
