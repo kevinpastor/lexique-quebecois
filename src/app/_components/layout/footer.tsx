@@ -5,7 +5,10 @@ import { ReactElement } from "react";
 export const Footer = (): ReactElement => (
     <Stack
         component="footer"
-        spacing={1}
+        spacing={{
+            xs: 0,
+            md: 1
+        }}
     >
         <Stack
             direction="row"
