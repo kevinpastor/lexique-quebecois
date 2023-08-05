@@ -177,8 +177,7 @@ export const theme = extendTheme({
         },
         MuiAppBar: {
             defaultProps: {
-                color: "inherit",
-                position: "sticky"
+                color: "inherit"
             },
             styleOverrides: {
                 root: {

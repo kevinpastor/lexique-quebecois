@@ -32,7 +32,7 @@ export const Content = ({ children }: PropsWithChildren): ReactElement => (
                             md: "sticky"
                         },
                         top: {
-                            md: 54.84 + 16 // Comes from the AppBar height
+                            md: 56 + 16 // Comes from the AppBar height
                         }
                     }}
                 >
