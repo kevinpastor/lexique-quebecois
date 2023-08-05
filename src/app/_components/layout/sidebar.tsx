@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import { type ReactElement } from "react";
 
 import { DefinitionsAd } from "~/components/ads/definitions-ad";
+import { DesktopOnly } from "~/components/desktop-only";
 
 export const Sidebar = (): ReactElement => (
     <Stack
@@ -25,7 +26,10 @@ export const Sidebar = (): ReactElement => (
                 </Typography>
             </CardContent>
         </Card>
-        <DefinitionsAd />
+        {/** We have to make sure the ad isn't loaded on mobile or else we get an error from Adsense about the available width being 0. */}
+        <DesktopOnly>
+            <DefinitionsAd />
+        </DesktopOnly>
         <Card>
             <CardContent>
                 <Typography align="center">
