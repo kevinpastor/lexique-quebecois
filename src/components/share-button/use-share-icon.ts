@@ -1,4 +1,4 @@
-import { IosShare as IosShareIcon, Link as DesktopShareIcon, Share as AndroidShareIcon, SvgIconComponent } from "@mui/icons-material";
+import { IosShare, Link, Share, type SvgIconComponent } from "@mui/icons-material";
 
 import { PlatformName, usePlatformName } from "~/app/_components/providers/platform-provider";
 
@@ -6,16 +6,16 @@ export const useShareIcon = (): SvgIconComponent => {
     const platformName: PlatformName | undefined = usePlatformName();
 
     if (platformName === undefined || platformName === PlatformName.Unknown) {
-        return IosShareIcon;
+        return IosShare;
     }
 
     if (platformName === PlatformName.iOS) {
-        return IosShareIcon;
+        return IosShare;
     }
 
     if (platformName === PlatformName.Android) {
-        return AndroidShareIcon;
+        return Share;
     }
 
-    return DesktopShareIcon;
+    return Link;
 };

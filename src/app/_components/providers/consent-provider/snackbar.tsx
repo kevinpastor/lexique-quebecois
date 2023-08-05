@@ -1,4 +1,4 @@
-import { Cookie as CookieIcon } from "@mui/icons-material";
+import { Cookie } from "@mui/icons-material";
 import { Button, Card, CardActions, CardHeader, Link, Snackbar, Stack } from "@mui/material";
 import NextLink from "next/link";
 import { type ReactElement } from "react";
@@ -24,7 +24,7 @@ export const ConsentSnackbar = ({ isOpen, onAccept: handleAccept, onRefuse: hand
                         direction="row"
                         spacing={1}
                     >
-                        <CookieIcon fontSize="small" />
+                        <Cookie fontSize="small" />
                         <div>
                             Cookies
                         </div>

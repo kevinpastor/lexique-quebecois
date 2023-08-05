@@ -1,4 +1,4 @@
-import { Search as SearchIcon } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
 import { IconButton, Link, Stack, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
@@ -95,7 +95,7 @@ export const Navigation = (): ReactElement => {
                             edge="end"
                             href="/rechercher"
                         >
-                            <SearchIcon />
+                            <Search />
                         </IconButton>
                     </Tooltip>
                 </div>
