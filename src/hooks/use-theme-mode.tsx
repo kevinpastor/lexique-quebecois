@@ -1,6 +1,6 @@
 import { DarkMode, LightMode, SettingsBrightness } from "@mui/icons-material";
 import { useColorScheme } from "@mui/material/styles";
-import { ReactElement, useCallback } from "react";
+import { type ReactElement, useCallback } from "react";
 
 export type ThemeMode = "light" | "dark" | "system";
 

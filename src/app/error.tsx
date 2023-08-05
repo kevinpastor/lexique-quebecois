@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { UnexpectedError } from "./_components/unexpected-error";
 

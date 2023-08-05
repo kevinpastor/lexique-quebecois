@@ -1,7 +1,7 @@
 "use client";
 
 import { Analytics } from "@vercel/analytics/react";
-import { PropsWithChildren, ReactElement } from "react";
+import { type PropsWithChildren, type ReactElement } from "react";
 import { HelmetProvider } from "react-helmet-async";
 
 import { AdProvider } from "./ad-provider";

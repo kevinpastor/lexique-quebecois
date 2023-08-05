@@ -1,6 +1,6 @@
 "use client";
 
-import { Component, PropsWithChildren, ReactElement, ReactNode } from "react";
+import { Component, type PropsWithChildren, type ReactElement, type ReactNode } from "react";
 
 interface Props {
     fallback: ReactNode;

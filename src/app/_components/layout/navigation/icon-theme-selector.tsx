@@ -1,7 +1,7 @@
 "use client";
 
 import { IconButton, Tooltip } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { useThemeMode, modeIcons } from "~/hooks/use-theme-mode";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { object, string } from "zod";
 
 import { FormContainer } from "~/components/react-hook-form/form-container";

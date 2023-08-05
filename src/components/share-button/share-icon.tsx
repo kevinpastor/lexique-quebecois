@@ -1,6 +1,6 @@
-import { SvgIconComponent } from "@mui/icons-material";
+import { type SvgIconComponent } from "@mui/icons-material";
 import { AnimatePresence, m } from "framer-motion";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { PlatformName, usePlatformName } from "~/app/_components/providers/platform-provider";
 

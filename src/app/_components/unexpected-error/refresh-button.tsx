@@ -2,7 +2,7 @@
 
 import { Refresh } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 export const RefreshButton = (): ReactElement => {
     const handleClick = (): void => {

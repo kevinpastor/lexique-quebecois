@@ -1,7 +1,7 @@
-import { Collection, Db, Document } from "mongodb";
+import { type Collection, type Db, type Document } from "mongodb";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
-import { WordDocument } from "~/types/word-document";
+import { type WordDocument } from "~/types/word-document";
 
 interface OutputDocument {
     spellings: string;

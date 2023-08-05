@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { LightweightErrorAlert } from "./lightweight-error-alert";
 import { LightweightSnackbar } from "./lightweight-snackbar";

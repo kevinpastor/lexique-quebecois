@@ -1,7 +1,7 @@
 import { ChevronLeft } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 export const BackButton = (): ReactElement => {
     // eslint-disable-next-line @typescript-eslint/unbound-method

@@ -1,5 +1,5 @@
 import { Typography, Unstable_Grid2 as Grid } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { WordLink } from "./word-link";
 

@@ -1,4 +1,4 @@
-import { DefinitionDocument } from "./definition-document";
+import { type DefinitionDocument } from "./definition-document";
 
 export interface WordDocument {
     spellings: Array<string>;

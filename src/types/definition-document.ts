@@ -1,8 +1,8 @@
-import { ObjectId } from "mongodb";
+import { type ObjectId } from "mongodb";
 
-import { AuthorDocument } from "./author-document";
-import { ReactionsDocument } from "./reactions-document";
-import { WordClass } from "./word-class";
+import { type AuthorDocument } from "./author-document";
+import { type ReactionsDocument } from "./reactions-document";
+import { type WordClass } from "./word-class";
 
 export interface DefinitionDocument {
     _id: ObjectId;

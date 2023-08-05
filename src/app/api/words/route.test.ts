@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, type NextResponse } from "next/server";
 
 import { Method } from "~/types/method";
 import { Status } from "~/types/status";
-import { WithToken } from "~/types/with-token";
+import { type WithToken } from "~/types/with-token";
 import { WordClass } from "~/types/word-class";
-import { WordRequest } from "~/types/word-request";
+import { type WordRequest } from "~/types/word-request";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "~/utils/misc/hcaptcha";
 

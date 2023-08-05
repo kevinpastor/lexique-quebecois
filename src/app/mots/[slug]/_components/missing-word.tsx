@@ -1,7 +1,7 @@
 import { Add } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
 import Link from "next/link";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 export const MissingWord = (): ReactElement => (
     <Card>

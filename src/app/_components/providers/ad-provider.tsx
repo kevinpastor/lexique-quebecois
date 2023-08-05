@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { Helmet } from "react-helmet-async";
 
 import { Consent } from "./consent-provider/consent";

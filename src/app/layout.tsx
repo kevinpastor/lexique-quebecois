@@ -1,5 +1,5 @@
-import { Metadata } from "next";
-import { PropsWithChildren, ReactElement } from "react";
+import { type Metadata } from "next";
+import { type PropsWithChildren, type ReactElement } from "react";
 
 import { Layout } from "./_components/layout";
 import { Providers } from "./_components/providers";

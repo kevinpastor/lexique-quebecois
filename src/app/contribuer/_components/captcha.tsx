@@ -1,11 +1,11 @@
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { FormControl, FormHelperText } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
 import { useAlerts } from "~/hooks/use-alerts";
 import { useThemeMode } from "~/hooks/use-theme-mode";
-import { WithToken } from "~/types/with-token";
+import { type WithToken } from "~/types/with-token";
 import { getHCaptchaSiteKey } from "~/utils/misc/hcaptcha";
 
 export const Captcha = (): ReactElement => {

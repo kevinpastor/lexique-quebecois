@@ -31,7 +31,8 @@
             {
                 "name": "next"
             }
-        ]
+        ],
+        "verbatimModuleSyntax": true
     },
     "include": [
         ".next/types/**/*.ts",

@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, ReactElement, useEffect } from "react";
+import { type CSSProperties, type ReactElement, useEffect } from "react";
 
 import { Consent } from "~/app/_components/providers/consent-provider/consent";
 import { useConsent } from "~/app/_components/providers/consent-provider/context";

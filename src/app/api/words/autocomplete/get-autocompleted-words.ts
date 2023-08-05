@@ -1,7 +1,7 @@
-import { Collection, Db, Document, ObjectId } from "mongodb";
+import { type Collection, type Db, type Document, type ObjectId } from "mongodb";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
-import { WordDocument } from "~/types/word-document";
+import { type WordDocument } from "~/types/word-document";
 
 interface HighlightText {
     value: string;

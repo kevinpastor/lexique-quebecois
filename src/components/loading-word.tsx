@@ -1,5 +1,5 @@
 import { Card, CardActions, CardContent, CardHeader, Skeleton, Stack, Typography } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 export const LoadingWord = (): ReactElement => (
     <Card>

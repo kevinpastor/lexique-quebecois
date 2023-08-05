@@ -1,5 +1,5 @@
 // Taken from https://usehooks-ts.com/react-hook/use-boolean
-import { Dispatch, SetStateAction, useCallback, useDebugValue, useEffect, useMemo, useState } from "react";
+import { type Dispatch, type SetStateAction, useCallback, useDebugValue, useEffect, useMemo, useState } from "react";
 
 export interface BooleanUtilities {
     value: boolean;

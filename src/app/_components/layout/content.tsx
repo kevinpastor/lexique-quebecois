@@ -1,5 +1,5 @@
 import { Container, Stack, Unstable_Grid2 as Grid } from "@mui/material";
-import { PropsWithChildren, ReactElement } from "react";
+import { type PropsWithChildren, type ReactElement } from "react";
 
 import { ErrorBoundary } from "./error-boundary";
 import { Footer } from "./footer";

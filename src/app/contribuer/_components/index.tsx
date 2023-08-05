@@ -1,13 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { FormContainer } from "~/components/react-hook-form/form-container";
 import { useAlerts } from "~/hooks/use-alerts";
 import { Status } from "~/types/status";
-import { WithToken } from "~/types/with-token";
-import { cleanWordRequestWithToken, WordRequest, wordRequestWithTokenSchema } from "~/types/word-request";
+import { type WithToken } from "~/types/with-token";
+import { cleanWordRequestWithToken, type WordRequest, wordRequestWithTokenSchema } from "~/types/word-request";
 import { isHttpError } from "~/utils/http-error";
 
 import { addWord } from "./add-word";

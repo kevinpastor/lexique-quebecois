@@ -1,4 +1,4 @@
-import { ReactElement, useRef } from "react";
+import { type ReactElement, useRef } from "react";
 
 import { NavigationContainer } from "~/components/navigation-container";
 import { TextField } from "~/components/react-hook-form/text-field";

@@ -1,4 +1,4 @@
-import { Document } from "mongodb";
+import { type Document } from "mongodb";
 
 /**
  * Uses Laplace's rule of succession: `rating = (likes + 1) / (total + 2)`.

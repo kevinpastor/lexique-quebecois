@@ -1,9 +1,9 @@
-import { Collection, Db, Document } from "mongodb";
-import { MetadataRoute } from "next";
+import { type Collection, type Db, type Document } from "mongodb";
+import { type MetadataRoute } from "next";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { getSlug } from "~/types/definition";
-import { WordDocument } from "~/types/word-document";
+import { type WordDocument } from "~/types/word-document";
 
 import { host } from "./robots";
 

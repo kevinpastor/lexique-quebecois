@@ -1,6 +1,6 @@
 import { Add, Description, Home, LocalLibrary, QuestionAnswer, Security, Toc } from "@mui/icons-material";
 import { Divider, List, Stack, Typography } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { MenuItem } from "./menu-item";
 import { ThemeSelector } from "./theme-selector";

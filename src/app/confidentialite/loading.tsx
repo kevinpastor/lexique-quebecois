@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, Skeleton } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 const Loading = (): ReactElement => (
     <Card>

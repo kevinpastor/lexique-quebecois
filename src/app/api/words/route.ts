@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 import { Status } from "~/types/status";
 import { isWordRequestWithToken } from "~/types/word-request";

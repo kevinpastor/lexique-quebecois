@@ -3,7 +3,7 @@
  */
 import { act, renderHook } from "@testing-library/react";
 
-import { BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
+import { type BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
 
 describe("useBoolean", (): void => {
     it("should initialize to true", (): void => {

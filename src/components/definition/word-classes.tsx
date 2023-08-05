@@ -1,7 +1,7 @@
 import { Tooltip, Typography } from "@mui/material";
-import { Fragment, ReactElement } from "react";
+import { Fragment, type ReactElement } from "react";
 
-import { WordClass, wordClassAbreviations } from "~/types/word-class";
+import { type WordClass, wordClassAbreviations } from "~/types/word-class";
 
 interface Props {
     wordClasses: Array<WordClass>;

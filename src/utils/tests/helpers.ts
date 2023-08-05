@@ -1,4 +1,4 @@
-import { Schema, ZodError } from "zod";
+import { type Schema, type ZodError } from "zod";
 
 expect.extend({
     toMatchSchema: (value: unknown, schema: Schema) => {

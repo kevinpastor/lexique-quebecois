@@ -1,10 +1,10 @@
 import { Stack } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { DefinitionsAd } from "~/components/ads/definitions-ad";
 import { Definition } from "~/components/definition";
-import { Definition as IDefinition } from "~/types/definition";
-import { Word } from "~/types/word";
+import { type Definition as IDefinition } from "~/types/definition";
+import { type Word } from "~/types/word";
 
 import { MissingWord } from "./missing-word";
 import { Spellings } from "./spellings";

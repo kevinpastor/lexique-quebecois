@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, type NextResponse } from "next/server";
 
 import { Status } from "~/types/status";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";

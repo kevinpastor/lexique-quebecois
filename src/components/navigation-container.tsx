@@ -1,5 +1,5 @@
 import { AppBar, Container, Stack } from "@mui/material";
-import { PropsWithChildren, ReactElement } from "react";
+import { type PropsWithChildren, type ReactElement } from "react";
 
 export const NavigationContainer = ({ children }: PropsWithChildren): ReactElement => (
     <AppBar>

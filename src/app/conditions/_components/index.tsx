@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { Email, EmailType } from "~/components/email";
 

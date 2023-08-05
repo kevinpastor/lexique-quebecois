@@ -1,6 +1,6 @@
 import { ThumbDown, ThumbDownOutlined } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { CrossfadeLoad } from "./loading-count";
 

@@ -1,8 +1,8 @@
-import { Collection, Db, Document, ObjectId } from "mongodb";
+import { type Collection, type Db, type Document, ObjectId } from "mongodb";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
-import { Reactions } from "~/types/definition";
-import { WordDocument } from "~/types/word-document";
+import { type Reactions } from "~/types/definition";
+import { type WordDocument } from "~/types/word-document";
 import { safeInOperator } from "~/utils/api/aggregation/safe-in-operator";
 import { safeSizeOperator } from "~/utils/api/aggregation/safe-size-operator";
 

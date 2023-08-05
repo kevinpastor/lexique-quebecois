@@ -1,5 +1,5 @@
 import { Container, List, ListItem, ListItemButton, Skeleton } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 export const LoadingResults = (): ReactElement => (
     <Container>

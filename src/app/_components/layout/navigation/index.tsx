@@ -2,7 +2,7 @@ import { Search as SearchIcon } from "@mui/icons-material";
 import { IconButton, Link, Stack, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
-import { ComponentType, ReactElement } from "react";
+import { type ComponentType, type ReactElement } from "react";
 
 import { DesktopOnly } from "~/components/desktop-only";
 import { NavigationContainer } from "~/components/navigation-container";

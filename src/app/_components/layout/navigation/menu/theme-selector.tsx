@@ -1,7 +1,7 @@
-import { FormControl, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, Stack } from "@mui/material";
-import { ReactElement, useId } from "react";
+import { FormControl, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, type SelectChangeEvent, Stack } from "@mui/material";
+import { type ReactElement, useId } from "react";
 
-import { useThemeMode, ThemeMode, modes, modeIcons, modeLabels } from "~/hooks/use-theme-mode";
+import { useThemeMode, type ThemeMode, modes, modeIcons, modeLabels } from "~/hooks/use-theme-mode";
 
 export const ThemeSelector = (): ReactElement => {
     const { mode, setMode } = useThemeMode();

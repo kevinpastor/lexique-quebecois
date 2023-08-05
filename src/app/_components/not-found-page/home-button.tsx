@@ -1,7 +1,7 @@
 import { Home } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 export const HomeButton = (): ReactElement => (
     <Button

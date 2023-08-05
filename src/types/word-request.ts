@@ -1,6 +1,6 @@
 import { array, nativeEnum, object, string, union } from "zod";
 
-import { WithToken, withTokenSchema } from "./with-token";
+import { type WithToken, withTokenSchema } from "./with-token";
 import { WordClass, wordClasses } from "./word-class";
 
 export interface WordRequest {

@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 import { Method } from "~/types/method";
-import { WithToken } from "~/types/with-token";
+import { type WithToken } from "~/types/with-token";
 import { WordClass } from "~/types/word-class";
-import { WordRequest } from "~/types/word-request";
+import { type WordRequest } from "~/types/word-request";
 
 import { addWord } from "./add-word";
 

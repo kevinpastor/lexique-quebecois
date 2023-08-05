@@ -1,7 +1,7 @@
 "use client";
 
 import { ButtonGroup } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { Dislikes } from "./dislikes";
 import { Likes } from "./likes";

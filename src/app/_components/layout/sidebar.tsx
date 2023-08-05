@@ -1,6 +1,6 @@
 import { Card, CardContent, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { DefinitionsAd } from "~/components/ads/definitions-ad";
 

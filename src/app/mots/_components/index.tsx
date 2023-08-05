@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { groupByFirstLetter } from "~/utils/misc/string";
 

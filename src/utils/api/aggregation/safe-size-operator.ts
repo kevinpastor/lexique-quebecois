@@ -1,4 +1,4 @@
-import { Document } from "mongodb";
+import { type Document } from "mongodb";
 
 export const safeSizeOperator = (expression: Document | string): Document => ({
     $cond: {

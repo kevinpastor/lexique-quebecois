@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { type NextRequest } from "next/server";
 import { getClientIp } from "request-ip";
 
 const massageRequest = (headers: Headers): Parameters<typeof getClientIp>[0] => ({

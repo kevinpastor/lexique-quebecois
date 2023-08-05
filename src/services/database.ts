@@ -1,4 +1,4 @@
-import { AggregateOptions, Db, MongoClient } from "mongodb";
+import { type AggregateOptions, type Db, MongoClient } from "mongodb";
 
 import { isDevelopmentEnvironment, isTestEnvironment } from "~/utils/misc/environment";
 

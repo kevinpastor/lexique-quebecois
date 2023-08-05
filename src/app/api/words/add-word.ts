@@ -1,10 +1,10 @@
-import { Collection, Db, InsertOneResult, WithId, ObjectId, Filter, UpdateFilter, UpdateResult, Document } from "mongodb";
+import { type Collection, type Db, type InsertOneResult, type WithId, ObjectId, type Filter, type UpdateFilter, type UpdateResult, type Document } from "mongodb";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
-import { DefinitionDocument } from "~/types/definition-document";
+import { type DefinitionDocument } from "~/types/definition-document";
 import { Status } from "~/types/status";
-import { WordDocument } from "~/types/word-document";
-import { WordRequest } from "~/types/word-request";
+import { type WordDocument } from "~/types/word-document";
+import { type WordRequest } from "~/types/word-request";
 
 export const addWord = async (wordRequest: WordRequest, ip: string): Promise<Status> => {
     const database: Db = await getDatabase();

@@ -1,6 +1,6 @@
 import { Method } from "~/types/method";
-import { WithToken } from "~/types/with-token";
-import { WordRequest } from "~/types/word-request";
+import { type WithToken } from "~/types/with-token";
+import { type WordRequest } from "~/types/word-request";
 import { HttpError } from "~/utils/http-error";
 
 export const addWord = async (wordRequestWithToken: WithToken<WordRequest>): Promise<void> => {

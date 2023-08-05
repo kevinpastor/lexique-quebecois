@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from "react";
+import { type PropsWithChildren, type ReactElement } from "react";
 import { SWRConfig } from "swr";
 
 import { fetcher } from "./fetcher";

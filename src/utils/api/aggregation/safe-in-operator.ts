@@ -1,4 +1,4 @@
-import { Document } from "mongodb";
+import { type Document } from "mongodb";
 
 export const safeInOperator = (expression: Document | string, element: unknown): Document => ({
     $cond: {

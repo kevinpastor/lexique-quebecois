@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from "react";
+import { type PropsWithChildren, type ReactElement } from "react";
 
 import { ConditionalLayout } from "./conditional-layout";
 import { Content } from "./content";

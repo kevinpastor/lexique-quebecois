@@ -1,6 +1,6 @@
 import { removeAccents } from "~/utils/misc/string";
 
-import { WordClass } from "./word-class";
+import { type WordClass } from "./word-class";
 
 interface Author {
     name?: string;

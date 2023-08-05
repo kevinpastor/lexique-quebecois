@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
-import { ComponentType, ReactElement, Suspense } from "react";
+import { type ComponentType, type ReactElement, Suspense } from "react";
 
 import { useLocalStorage } from "~/hooks/use-local-storage";
 
 import { Consent } from "./consent";
-import type { ConsentSnackbarProps } from "./snackbar";
+import { type ConsentSnackbarProps } from "./snackbar";
 
 const LazyConsentSnackbar = dynamic(async (): Promise<{ default: ComponentType<ConsentSnackbarProps> }> => ({
     default: (await import("./snackbar")).ConsentSnackbar

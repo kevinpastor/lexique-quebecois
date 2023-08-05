@@ -3,12 +3,12 @@
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { IconButton, SwipeableDrawer, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";
-import { ComponentType, ReactElement, Suspense } from "react";
+import { type ComponentType, type ReactElement, Suspense } from "react";
 
-import { BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
+import { type BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
 import { isLowEndDevice } from "~/utils/misc/device";
 
-import type { MenuContentProps } from "./menu-content";
+import { type MenuContentProps } from "./menu-content";
 
 const LazyMenuContent = dynamic(async (): Promise<{ default: ComponentType<MenuContentProps> }> => ({
     default: (await import("./menu-content")).MenuContent

@@ -1,9 +1,9 @@
 import { CssBaseline } from "@mui/material";
 import { Experimental_CssVarsProvider as CssVarsProvider, getInitColorSchemeScript } from "@mui/material/styles";
-import { PropsWithChildren, ReactElement } from "react";
-import { NextAppDirEmotionCacheProvider, NextAppDirEmotionCacheProviderProps } from "tss-react/next/appDir";
+import { type PropsWithChildren, type ReactElement } from "react";
+import { NextAppDirEmotionCacheProvider, type NextAppDirEmotionCacheProviderProps } from "tss-react/next/appDir";
 
-import { ThemeMode } from "~/hooks/use-theme-mode";
+import { type ThemeMode } from "~/hooks/use-theme-mode";
 
 import { theme } from "./theme";
 

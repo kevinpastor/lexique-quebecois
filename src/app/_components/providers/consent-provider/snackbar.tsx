@@ -1,7 +1,7 @@
 import { Cookie as CookieIcon } from "@mui/icons-material";
 import { Button, Card, CardActions, CardHeader, Link, Snackbar, Stack } from "@mui/material";
 import NextLink from "next/link";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 export interface ConsentSnackbarProps {
     isOpen: boolean;

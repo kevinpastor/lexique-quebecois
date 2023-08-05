@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement, createContext, useContext, useEffect, useState } from "react";
+import { type PropsWithChildren, type ReactElement, createContext, useContext, useEffect, useState } from "react";
 
 import { isAndroid, isIOS, isMacOS, isWindows } from "~/utils/misc/device";
 

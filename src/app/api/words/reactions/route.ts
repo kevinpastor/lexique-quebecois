@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
-import { Reactions } from "~/types/definition";
+import { type Reactions } from "~/types/definition";
 import { Status } from "~/types/status";
 import { getIpFromRequest } from "~/utils/api/ip";
 

@@ -1,5 +1,5 @@
 import { Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { RefreshButton } from "./refresh-button";
 

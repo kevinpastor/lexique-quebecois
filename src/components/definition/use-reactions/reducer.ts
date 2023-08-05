@@ -1,4 +1,4 @@
-import { Reactions } from "~/types/definition";
+import { type Reactions } from "~/types/definition";
 
 type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 

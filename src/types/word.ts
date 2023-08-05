@@ -1,4 +1,4 @@
-import { Definition } from "./definition";
+import { type Definition } from "./definition";
 
 export interface Word {
     spellings: Array<string>;

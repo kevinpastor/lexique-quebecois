@@ -1,4 +1,4 @@
-import seedrandom, { PRNG } from "seedrandom";
+import seedrandom, { type PRNG } from "seedrandom";
 
 export const sample = <T>(array: Array<T>, sampleSize: number, seed?: number): Array<T> => {
     if (array.length < sampleSize) {

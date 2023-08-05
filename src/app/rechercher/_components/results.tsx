@@ -1,9 +1,9 @@
 import { Container, List, ListItem, ListItemButton } from "@mui/material";
 import Link from "next/link";
-import { ReactElement, RefObject, useEffect } from "react";
+import { type ReactElement, type RefObject, useEffect } from "react";
 
 import { Highlight } from "~/components/highlight";
-import { KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "~/hooks/use-keyboard-focus-selection";
+import { type KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "~/hooks/use-keyboard-focus-selection";
 import { getSlug } from "~/types/definition";
 
 interface Props {

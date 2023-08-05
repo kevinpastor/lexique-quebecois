@@ -1,8 +1,8 @@
 "use client";
 
 import { useMediaQuery } from "@mui/material";
-import { Theme, useTheme } from "@mui/material/styles";
-import { PropsWithChildren, ReactElement, Suspense } from "react";
+import { type Theme, useTheme } from "@mui/material/styles";
+import { type PropsWithChildren, type ReactElement, Suspense } from "react";
 
 export const DesktopOnly = ({ children }: PropsWithChildren): ReactElement | null => {
     const theme: Theme = useTheme();

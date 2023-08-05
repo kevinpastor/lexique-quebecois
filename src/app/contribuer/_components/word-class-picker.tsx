@@ -1,10 +1,10 @@
 import { Checkbox, FormControl, FormHelperText, InputLabel, ListItemText, MenuItem, Select } from "@mui/material";
-import { ReactElement, ReactNode, useId } from "react";
+import { type ReactElement, type ReactNode, useId } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { WithToken } from "~/types/with-token";
-import { WordClass, wordClassAbreviations, wordClasses } from "~/types/word-class";
-import { WordRequest } from "~/types/word-request";
+import { type WithToken } from "~/types/with-token";
+import { type WordClass, wordClassAbreviations, wordClasses } from "~/types/word-class";
+import { type WordRequest } from "~/types/word-request";
 
 export const WordClassPicker = (): ReactElement => {
     const { control } = useFormContext<WithToken<WordRequest>>();

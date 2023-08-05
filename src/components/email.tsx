@@ -1,5 +1,5 @@
 import { Link } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 export enum EmailType {
     Info = "info",

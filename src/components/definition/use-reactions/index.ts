@@ -4,12 +4,12 @@ import useSWR from "swr";
 
 import { fetcher } from "~/app/_components/providers/swr-provider/fetcher";
 import { useAlerts } from "~/hooks/use-alerts";
-import { Reactions } from "~/types/definition";
+import { type Reactions } from "~/types/definition";
 import { Status } from "~/types/status";
 import { isHttpError } from "~/utils/http-error";
 
 import { dislike, like, removeDislike, removeLike } from "./reactions";
-import { LoadableReactions, reducer } from "./reducer";
+import { type LoadableReactions, reducer } from "./reducer";
 
 function fetchDefinitionsReactions(this: DataLoader<string, Reactions, string>, definitionIds: ReadonlyArray<string>): Promise<Array<Reactions>> {
     this.clearAll();

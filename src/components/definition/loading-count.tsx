@@ -1,5 +1,5 @@
 import { AnimatePresence, m } from "framer-motion";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 interface Props {
     value?: number;

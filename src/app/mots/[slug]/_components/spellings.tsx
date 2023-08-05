@@ -1,5 +1,5 @@
 import { Card, CardHeader } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 interface Props {
     spellings: Array<string>;

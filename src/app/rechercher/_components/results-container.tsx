@@ -1,10 +1,10 @@
-import { ReactElement, RefObject } from "react";
+import { type ReactElement, type RefObject } from "react";
 import { useWatch } from "react-hook-form";
 import useSWR from "swr";
 
 import { useDebounce } from "~/hooks/use-debounce";
 
-import { FormValues } from ".";
+import { type FormValues } from ".";
 import { LoadingResults } from "./loading-results";
 import { Results } from "./results";
 

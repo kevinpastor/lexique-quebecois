@@ -1,6 +1,6 @@
 import { Link, Unstable_Grid2 as Grid } from "@mui/material";
 import NextLink from "next/link";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { getSlug } from "~/types/definition";
 

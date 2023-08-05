@@ -1,7 +1,7 @@
-import { Metadata } from "next";
-import { ReactElement } from "react";
+import { type Metadata } from "next";
+import { type ReactElement } from "react";
 
-import { Word } from "~/types/word";
+import { type Word } from "~/types/word";
 
 import { WordPage } from "./_components";
 import { getWordDefinitions } from "./_services/get-word-definitions";

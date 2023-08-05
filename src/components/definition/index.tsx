@@ -1,9 +1,9 @@
 import { Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { ShareButton } from "~/components/share-button";
-import { Definition as IDefinition, getSlug } from "~/types/definition";
+import { type Definition as IDefinition, getSlug } from "~/types/definition";
 import { formatDate } from "~/utils/misc/date";
 
 import { Reactions } from "./reactions";

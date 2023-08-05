@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { PropsWithChildren, ReactElement, ReactNode } from "react";
+import { type PropsWithChildren, type ReactElement, type ReactNode } from "react";
 
 interface Props {
     fallback: ReactNode;

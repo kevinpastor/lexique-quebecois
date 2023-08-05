@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@mui/material";
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import { useShare } from "~/hooks/use-share";
 

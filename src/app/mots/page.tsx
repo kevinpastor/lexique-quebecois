@@ -1,5 +1,5 @@
-import { Metadata } from "next";
-import { ReactElement } from "react";
+import { type Metadata } from "next";
+import { type ReactElement } from "react";
 
 import { IndexPage } from "./_components";
 import { getWordIndex } from "./_services/get-word-index";

@@ -1,9 +1,9 @@
-import { Collection, Db, WithId, ObjectId, Document } from "mongodb";
+import { type Collection, type Db, type WithId, type ObjectId, type Document } from "mongodb";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
-import { Definition } from "~/types/definition";
-import { DefinitionDocument } from "~/types/definition-document";
-import { WordDocument } from "~/types/word-document";
+import { type Definition } from "~/types/definition";
+import { type DefinitionDocument } from "~/types/definition-document";
+import { type WordDocument } from "~/types/word-document";
 import { ratingOperator } from "~/utils/api/aggregation/rating-operator";
 import { safeSizeOperator } from "~/utils/api/aggregation/safe-size-operator";
 import { timestampOperator } from "~/utils/api/aggregation/timestamp-operator";

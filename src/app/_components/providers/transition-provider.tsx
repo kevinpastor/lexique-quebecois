@@ -1,6 +1,6 @@
 import { AnimatePresence, m } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { PropsWithChildren, ReactElement } from "react";
+import { type PropsWithChildren, type ReactElement } from "react";
 
 const distance: number = 25;
 

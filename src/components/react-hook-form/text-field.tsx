@@ -1,6 +1,6 @@
-import { TextField as MuiTextField, TextFieldProps } from "@mui/material";
-import { ForwardedRef, ReactElement } from "react";
-import { FieldValues, Path, useController } from "react-hook-form";
+import { TextField as MuiTextField, type TextFieldProps } from "@mui/material";
+import { type ForwardedRef, type ReactElement } from "react";
+import { type FieldValues, type Path, useController } from "react-hook-form";
 
 interface Props<T extends FieldValues = FieldValues> extends Omit<TextFieldProps, "name" | "inputRef"> {
     name: Path<T>;

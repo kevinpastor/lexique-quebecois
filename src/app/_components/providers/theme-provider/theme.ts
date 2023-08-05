@@ -2,7 +2,7 @@ import type { } from "@mui/lab/themeAugmentation";
 import { Slide } from "@mui/material";
 import { common } from "@mui/material/colors";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import { alpha, Theme, lighten, CssVarsTheme, experimental_extendTheme as extendTheme, CSSInterpolation } from "@mui/material/styles";
+import { alpha, type Theme, lighten, type CssVarsTheme, experimental_extendTheme as extendTheme, type CSSInterpolation } from "@mui/material/styles";
 
 import { font } from "./font";
 
