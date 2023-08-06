@@ -24,16 +24,19 @@ export const Highlight = ({ word, highlight }: Props): ReactElement => {
         );
     }
 
+    // Required in order to prevent the browser from collapsing the whitespace when the word is split on a space.
+    const escapedWord: string = word.replace(" ", "\u00A0");
+
     return (
         <>
             <Typography
                 component="span"
                 variant="body2"
             >
-                {word.slice(0, highlight.length)}
+                {escapedWord.slice(0, highlight.length)}
             </Typography>
             <Typography component="span">
-                {word.slice(highlight.length)}
+                {escapedWord.slice(highlight.length)}
             </Typography>
         </>
     );
