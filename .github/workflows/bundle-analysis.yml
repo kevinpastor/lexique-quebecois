@@ -1,12 +1,10 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-name: 'Next.js Bundle Analysis'
+name: 'Bundle Analysis'
 
 on:
   - pull_request
-  - push
-  - workflow_dispatch
 
 defaults:
   run:
