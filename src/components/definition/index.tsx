@@ -40,16 +40,40 @@ export const Definition = ({ definition }: Props): ReactElement => {
             />
             <CardContent>
                 <Typography
+                    component="div"
                     variant="body2"
                     gutterBottom
                 >
-                    {definition.definition}
+                    {definition.definition
+                        .split("\n")
+                        .map((paragraph: string, index: number): ReactElement => (
+                            <Typography
+                                // eslint-disable-next-line react/no-array-index-key
+                                key={index}
+                                variant="inherit"
+                            >
+                                {paragraph}
+                            </Typography>
+                        ))
+                    }
                 </Typography>
                 <Typography
+                    component="div"
                     variant="subtitle1"
                     gutterBottom
                 >
-                    {definition.example}
+                    {definition.example
+                        .split("\n")
+                        .map((paragraph: string, index: number): ReactElement => (
+                            <Typography
+                                // eslint-disable-next-line react/no-array-index-key
+                                key={index}
+                                variant="inherit"
+                            >
+                                {paragraph}
+                            </Typography>
+                        ))
+                    }
                 </Typography>
                 <Typography variant="subtitle2">
                     {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
