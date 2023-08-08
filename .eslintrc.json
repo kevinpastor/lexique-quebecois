@@ -268,7 +268,6 @@
                 "ignoreIIFE": true
             }
         ],
-        "@typescript-eslint/no-implicit-any-catch": "error",
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-invalid-void-type": "error",
         "@typescript-eslint/no-require-imports": "error",
@@ -308,7 +307,12 @@
         "no-dupe-class-members": "off",
         "@typescript-eslint/no-dupe-class-members": "error",
         "no-duplicate-imports": "off",
-        "@typescript-eslint/no-duplicate-imports": "error",
+        "import/no-duplicates": [
+            "error",
+            {
+                "prefer-inline": true
+            }
+        ],
         // "no-extra-parens": "off",
         // "@typescript-eslint/no-extra-parens": [
         //     "error",
