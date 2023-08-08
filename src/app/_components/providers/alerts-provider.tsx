@@ -1,5 +1,4 @@
-import type { SnackbarProps } from "@mui/material";
-import { Alert as MuiAlert } from "@mui/material";
+import { Alert as MuiAlert, type SnackbarProps } from "@mui/material";
 import dynamic from "next/dynamic";
 import { type ComponentType, createContext, type PropsWithChildren, type ReactElement, Suspense, type SyntheticEvent, useCallback, useEffect, useMemo } from "react";
 
