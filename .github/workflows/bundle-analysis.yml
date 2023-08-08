@@ -28,20 +28,20 @@ jobs:
           node-version: 18
 
       - uses: pnpm/action-setup@v2
-        name: Install pnpm
+        name: Install PNPM
         id: pnpm-install
         with:
           version: 8
           run_install: false
 
-      - name: Get pnpm store directory
+      - name: Get PNPM store directory
         id: pnpm-cache
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v3
-        name: Setup pnpm cache
+        name: Setup PNPM cache
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -51,7 +51,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Restore next build
+      - name: Restore build
         uses: actions/cache@v3
         id: restore-build-cache
         env:
@@ -63,9 +63,20 @@ jobs:
           # change this if you prefer a more strict cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
-      - name: Build Next.js app
+      - name: Build
         # change this if your site requires a custom build command
         run: pnpm exec next build
+        env:
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_SERVER_HOST: ${{ secrets.EMAIL_SERVER_HOST }}
+          EMAIL_SERVER_PASSWORD: ${{ secrets.EMAIL_SERVER_PASSWORD }}
+          EMAIL_SERVER_PORT: ${{ secrets.EMAIL_SERVER_PORT }}
+          EMAIL_SERVER_USER: ${{ secrets.EMAIL_SERVER_USER }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          HCAPTHCA_SECRET: ${{ secrets.HCAPTHCA_SECRET }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT: ${{ secrets.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT }}
+          NEXT_PUBLIC_HCAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_HCAPTCHA_SITE_KEY }}
 
       # Here's the first place where next-bundle-analysis' own script is used
       # This step pulls the raw bundle stats for the current bundle
