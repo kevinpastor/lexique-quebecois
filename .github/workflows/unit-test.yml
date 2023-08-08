@@ -1,40 +1,36 @@
-name: Unit Test
+name: Unit Test Workflow
 
 on:
   - pull_request
 
 jobs:
   unit-test:
-    name: Unit Test
-
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
         with:
           version: 8
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
+      - name: Get PNPM store directory
         shell: bash
         run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Setup PNPM cache
+        uses: actions/cache@v3
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
@@ -42,5 +38,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       
-      - name: Run unit tests
+      - name: Unit tests
         run: pnpm test
