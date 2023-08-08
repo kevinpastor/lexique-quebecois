@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu as MenuIcon } from "@mui/icons-material";
-import { IconButton, SwipeableDrawer, Tooltip } from "@mui/material";
+import { Box, IconButton, SwipeableDrawer, Tooltip } from "@mui/material";
 import dynamic from "next/dynamic";
 import { type ComponentType, type ReactElement, Suspense } from "react";
 
@@ -23,22 +23,23 @@ export const Menu = (): ReactElement => {
 
     return (
         <>
-            <div>
+            <Box
+                sx={{
+                    display: {
+                        md: "none"
+                    }
+                }}
+            >
                 <Tooltip title="Menu">
                     <IconButton
                         onClick={handleOpen}
                         aria-label="Menu"
                         edge="start"
-                        sx={{
-                            display: {
-                                md: "none"
-                            }
-                        }}
                     >
                         <MenuIcon />
                     </IconButton>
                 </Tooltip>
-            </div>
+            </Box>
             <SwipeableDrawer
                 open={isOpened}
                 onOpen={handleOpen}
