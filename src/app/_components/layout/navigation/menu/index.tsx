@@ -23,20 +23,22 @@ export const Menu = (): ReactElement => {
 
     return (
         <>
-            <Tooltip title="Menu">
-                <IconButton
-                    onClick={handleOpen}
-                    aria-label="Menu"
-                    edge="start"
-                    sx={{
-                        display: {
-                            md: "none"
-                        }
-                    }}
-                >
-                    <MenuIcon />
-                </IconButton>
-            </Tooltip>
+            <div>
+                <Tooltip title="Menu">
+                    <IconButton
+                        onClick={handleOpen}
+                        aria-label="Menu"
+                        edge="start"
+                        sx={{
+                            display: {
+                                md: "none"
+                            }
+                        }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                </Tooltip>
+            </div>
             <SwipeableDrawer
                 open={isOpened}
                 onOpen={handleOpen}
