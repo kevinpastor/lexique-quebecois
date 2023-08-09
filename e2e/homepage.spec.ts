@@ -1,6 +1,4 @@
-import { expect, Locator, test } from "@playwright/test";
-
-test.describe.configure({ mode: "parallel" });
+import { expect, type Locator, test } from "@playwright/test";
 
 test.describe("Homepage", (): void => {
     test.beforeEach(async ({ page }): Promise<void> => {
@@ -10,6 +8,6 @@ test.describe("Homepage", (): void => {
 
     test("should have today's definitions", async ({ page }): Promise<void> => {
         const cardTitles: Locator = page.locator("h2");
-        await expect(cardTitles).toHaveCount(5);
+        await expect(cardTitles).toHaveCount(7);
     });
 });

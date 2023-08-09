@@ -16,6 +16,7 @@ const getWebServerUrl = (): string => {
 };
 
 const config: PlaywrightTestConfig = {
+    fullyParallel: true,
     testDir: "./e2e",
     forbidOnly: isCIEnvironment(),
     reporter: [
