@@ -1,6 +1,6 @@
 import { expect, type Locator, test } from "@playwright/test";
 
-test.describe.skip("Homepage", (): void => {
+test.describe("Homepage", (): void => {
     test.beforeEach(async ({ page }): Promise<void> => {
         await page.goto("/");
         await page.getByRole("button", { name: "Accepter" }).click();
