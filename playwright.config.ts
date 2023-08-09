@@ -1,5 +1,4 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
-import { devices } from "@playwright/test";
+import { devices, type PlaywrightTestConfig } from "@playwright/test";
 
 import { isCIEnvironment } from "~/utils/misc/environment";
 
