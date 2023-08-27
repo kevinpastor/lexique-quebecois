@@ -345,11 +345,13 @@ export const theme = extendTheme({
                         "--AppBar-background": palette.custom.background[elevation],
                         "--glass-background": palette.custom["glass-background"][elevation],
                         "@supports (backdrop-filter: none) or (-webkit-backdrop-filter: none)": {
-                            backgroundImage: "none",
-                            backgroundColor: "var(--glass-background)",
-                            backdropFilter: "blur(20px) saturate(180%)",
-                            ".MuiBackdrop-root ~ &": {
-                                backdropFilter: "blur(20px) saturate(180%) brightness(200%)"
+                            "&:not(.MuiAlert-root)": {
+                                backgroundImage: "none",
+                                backgroundColor: "var(--glass-background)",
+                                backdropFilter: "blur(20px) saturate(180%)",
+                                ".MuiBackdrop-root ~ &": {
+                                    backdropFilter: "blur(20px) saturate(180%) brightness(200%)"
+                                }
                             }
                         }
                     })
