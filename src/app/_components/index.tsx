@@ -4,13 +4,7 @@ import { type ReactElement } from "react";
 import { DefinitionsAd } from "~/components/ads/definitions-ad";
 import { Definition } from "~/components/definition";
 import { type Definition as IDefinition } from "~/types/definition";
-
-// eslint-disable-next-line @typescript-eslint/comma-dangle
-const insert = <T,>(array: Array<T>, index: number, ...items: Array<T>): Array<T> => [
-    ...array.slice(0, index),
-    ...items,
-    ...array.slice(index)
-];
+import { insert } from "~/utils/misc/array";
 
 interface Props {
     definitions: Array<IDefinition>;
