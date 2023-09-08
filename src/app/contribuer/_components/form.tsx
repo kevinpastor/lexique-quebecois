@@ -32,6 +32,7 @@ export const Form = (): ReactElement => {
                         label="Mot"
                         autoFocus
                         required
+                        disabled={isSubmitting}
                     />
                     <WordClassPicker />
                     <TextField
@@ -40,6 +41,7 @@ export const Form = (): ReactElement => {
                         required
                         multiline
                         minRows={2}
+                        disabled={isSubmitting}
                     />
                     <TextField
                         name="example"
@@ -47,10 +49,12 @@ export const Form = (): ReactElement => {
                         required
                         multiline
                         minRows={2}
+                        disabled={isSubmitting}
                     />
                     <TextField
                         name="author"
                         label="Auteur"
+                        disabled={isSubmitting}
                     />
                     <Captcha />
                 </Stack>

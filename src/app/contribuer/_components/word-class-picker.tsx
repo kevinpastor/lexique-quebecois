@@ -35,10 +35,10 @@ export const WordClassPicker = (): ReactElement => {
                         )}
                         value={value}
                         onChange={handleChange}
-                        disabled={isSubmitting}
                         inputRef={ref}
                         onBlur={handleBlur}
                         error={error !== undefined}
+                        disabled={isSubmitting}
                     >
                         {wordClasses.map((wordClass: WordClass): ReactElement => (
                             <MenuItem
