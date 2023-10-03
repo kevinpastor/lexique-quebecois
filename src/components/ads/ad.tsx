@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, type ReactElement, useEffect } from "react";
+import { type CSSProperties, type ReactElement, useEffect, useId } from "react";
 
 import { Consent } from "~/app/_components/providers/consent-provider/consent";
 import { useConsent } from "~/app/_components/providers/consent-provider/context";
@@ -18,6 +18,8 @@ const getClient = (): string => {
 
     return process.env["NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT"];
 };
+
+const initializedAds: Map<string, boolean> = new Map();
 
 interface Props {
     slot: string;
@@ -37,20 +39,22 @@ export const Ad = ({
     fullWidthResponsive = "true"
 }: Props): ReactElement | null => {
     const { consent } = useConsent();
+    const id: string = useId();
 
     useEffect((): void => {
-        if (consent !== Consent.Accepted) {
+        if (consent !== Consent.Accepted || initializedAds.has(id)) {
             return;
         }
 
         try {
             window.adsbygoogle = window.adsbygoogle ?? [];
             window.adsbygoogle.push({});
+            initializedAds.set(id, true);
         }
         catch (error: unknown) {
             console.warn("An error occured while loading an ad: ", error);
         }
-    }, [consent]);
+    }, [consent, id]);
 
     if (consent !== Consent.Accepted) {
         return null;
