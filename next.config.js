@@ -17,15 +17,6 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 module.exports = withSourceMapAnalyzer(withBundleAnalyzer({
-    modularizeImports: {
-        '@mui/material': {
-            transform: '@mui/material/{{member}}',
-        },
-        '@mui/icons-material': {
-            transform: '@mui/icons-material/{{member}}',
-            preventFullImport: true,
-        }
-    },
     reactStrictMode: true,
     eslint: {
         ignoreDuringBuilds: hasAnalyzeEnvironmentVariable
