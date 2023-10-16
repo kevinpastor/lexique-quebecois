@@ -1,6 +1,6 @@
 import { Check } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import { Card, CardHeader, CardContent, Link, Stack, CardActions, Typography } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
 import { type ReactElement } from "react";
 import { useFormState } from "react-hook-form";

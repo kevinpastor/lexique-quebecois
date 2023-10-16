@@ -1,4 +1,4 @@
-import { Container, Stack, Unstable_Grid2 as Grid } from "@mui/material";
+import { Container, Unstable_Grid2 as Grid, Stack } from "@mui/material";
 import { type PropsWithChildren, type ReactElement } from "react";
 
 import { ErrorBoundary } from "./error-boundary";

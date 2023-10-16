@@ -233,6 +233,12 @@
                 "warnOnUnassignedImports": true
             }
         ],
+        "sort-imports": [
+            "warn",
+            {
+                "ignoreDeclarationSort": true
+            }
+        ],
         "promise/always-return": "error",
         "promise/no-return-wrap": "error",
         "promise/param-names": "error",

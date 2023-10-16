@@ -2,7 +2,7 @@ import type { } from "@mui/lab/themeAugmentation";
 import { Slide } from "@mui/material";
 import { common } from "@mui/material/colors";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import { alpha, type Theme, lighten, type CssVarsTheme, experimental_extendTheme as extendTheme, type CSSInterpolation } from "@mui/material/styles";
+import { type CSSInterpolation, type CssVarsTheme, type Theme, alpha, experimental_extendTheme as extendTheme, lighten } from "@mui/material/styles";
 
 import { font } from "./font";
 
@@ -27,10 +27,14 @@ declare module "@mui/material/styles" {
     }
 }
 
-type ElevationOverlay = Record<number, number>;
+const definedElevations = [
+    0, 1, 2, 3, 4, 6, 8, 12, 16, 24
+] as const satisfies ReadonlyArray<number>;
+
+type DefinedElevations = typeof definedElevations[number];
 
 // Values taken from https://material.io/design/color/dark-theme.html
-const darkElevationOverlay: ElevationOverlay = {
+const darkElevationOverlay = {
     [0]: 0,
     [1]: 0.05,
     [2]: 0.07,
@@ -41,12 +45,7 @@ const darkElevationOverlay: ElevationOverlay = {
     [12]: 0.14,
     [16]: 0.15,
     [24]: 0.16
-};
-
-type DefinedEvelation = keyof typeof darkElevationOverlay;
-
-const definedElevations: Array<DefinedEvelation> = Object.keys(darkElevationOverlay)
-    .map((key): DefinedEvelation => parseInt(key, 10));
+} as const satisfies Record<DefinedElevations, number>;
 
 export const theme = extendTheme({
     colorSchemes: {

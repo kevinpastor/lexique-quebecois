@@ -1,4 +1,4 @@
-import { Typography, Unstable_Grid2 as Grid } from "@mui/material";
+import { Unstable_Grid2 as Grid, Typography } from "@mui/material";
 import { type ReactElement } from "react";
 
 import { WordLink } from "./word-link";

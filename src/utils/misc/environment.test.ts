@@ -1,4 +1,4 @@
-import { isDevelopmentEnvironment, isTestEnvironment, isProductionEnvironment } from "~/utils/misc/environment";
+import { isDevelopmentEnvironment, isProductionEnvironment, isTestEnvironment } from "~/utils/misc/environment";
 
 describe("isDevelopmentEnvironment", (): void => {
     const environment: NodeJS.ProcessEnv = process.env;

@@ -5,7 +5,7 @@ import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 
 import { dislike } from "./dislike";
 import { removeDislike } from "./remove-dislike";
-import { PUT, DELETE } from "./route";
+import { DELETE, PUT } from "./route";
 
 jest.mock("./dislike", () => ({
     dislike: jest.fn()

@@ -1,4 +1,4 @@
-import { type Collection, type Db, type WithId, type ObjectId, type Document } from "mongodb";
+import { type Collection, type Db, type Document, type ObjectId, type WithId } from "mongodb";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { type Definition } from "~/types/definition";

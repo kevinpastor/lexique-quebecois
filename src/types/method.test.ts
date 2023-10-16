@@ -1,4 +1,4 @@
-import { isValidMethod, Method } from "./method";
+import { Method, isValidMethod } from "./method";
 
 describe("isValidMethod", (): void => {
     it.each([

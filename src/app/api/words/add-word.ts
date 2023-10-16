@@ -1,4 +1,4 @@
-import { type Collection, type Db, type InsertOneResult, type WithId, ObjectId, type Filter, type UpdateFilter, type UpdateResult, type Document } from "mongodb";
+import { type Collection, type Db, type Document, type Filter, type InsertOneResult, ObjectId, type UpdateFilter, type UpdateResult, type WithId } from "mongodb";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { type DefinitionDocument } from "~/types/definition-document";

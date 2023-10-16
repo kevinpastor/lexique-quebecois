@@ -3,7 +3,7 @@
  */
 import { Method } from "~/types/method";
 
-import { like, removeLike, dislike, removeDislike } from "./reactions";
+import { dislike, like, removeDislike, removeLike } from "./reactions";
 
 const fetchMock = jest.fn()
     .mockResolvedValue({

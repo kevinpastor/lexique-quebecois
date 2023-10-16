@@ -1,4 +1,4 @@
-import { Link, Unstable_Grid2 as Grid } from "@mui/material";
+import { Unstable_Grid2 as Grid, Link } from "@mui/material";
 import NextLink from "next/link";
 import { type ReactElement } from "react";
 
