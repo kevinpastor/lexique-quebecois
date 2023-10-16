@@ -1,4 +1,4 @@
-import { array, nativeEnum, object, string, union } from "zod";
+import { array, is, maxLength, merge, minLength, nativeEnum, notLength, object, optional, parse, regex, strict, string, toTrimmed, transform } from "valibot";
 
 import { type WithToken, withTokenSchema } from "./with-token";
 import { WordClass, wordClasses } from "./word-class";
@@ -11,50 +11,54 @@ export interface WordRequest {
     author?: string;
 }
 
-const labelRegex: RegExp = /^[a-zàâäéèêëïîôöùûüÿæœç\s-]*$/gi;
+const labelRegex: RegExp = /^[a-zàâäéèêëïîôöùûüÿæœç\s-]*$/i;
 
-const wordRequestSchema = object({
-    label: string()
-        .trim()
-        .min(1, "Ce champ est requis.")
-        .min(2, "Ce champ doit contenir au moins 2 caractères.")
-        .max(32, "Ce champ doit contenir au maximum 32 caractères.")
-        .regex(labelRegex, "Ce champ peut contenir des lettres, des espaces ou des tirets."),
-    wordClasses: array(nativeEnum(
-        WordClass,
-        { invalid_type_error: "Ce champ doit contenir une des valeurs proposées." }
-    ))
-        .max(wordClasses.length, `Ce champ doit contenir au maximum ${wordClasses.length} options.`),
-    definition: string()
-        .trim()
-        .min(1, "Ce champ est requis.")
-        .min(2, "Ce champ doit contenir au moins 2 caractères.")
-        .max(256, "Ce champ doit contenir au maximum 256 caractères."),
-    example: string()
-        .trim()
-        .min(1, "Ce champ est requis.")
-        .min(2, "Ce champ doit contenir au moins 2 caractères.")
-        .max(256, "Ce champ doit contenir au maximum 256 caractères."),
-    author: union([ // The order of the union is important to get the correct error message.
-        string()
-            .trim()
-            .min(2, "Ce champ doit contenir au moins 2 caractères.")
-            .max(32, "Ce champ doit contenir au maximum 32 caractères."),
-        string()
-            .trim()
-            .length(0, "Ce champ doit contenir au moins 2 caractères.") // The error message is not necessary, but is there to be safe.
-    ])
-        .optional()
-        .transform((value?: string): string | undefined => value === "" ? undefined : value)
-})
-    .strict();
+const wordRequestSchema = strict(
+    object({
+        label: string([
+            toTrimmed(),
+            minLength(1, "Ce champ est requis."),
+            minLength(2, "Ce champ doit contenir au moins 2 caractères."),
+            maxLength(32, "Ce champ doit contenir au maximum 32 caractères."),
+            regex(labelRegex, "Ce champ ne peut contenir que des lettres, des espaces ou des tirets.")
+        ]),
+        wordClasses: array(
+            nativeEnum(WordClass, "Ce champ doit contenir une des valeurs proposées."),
+            [
+                maxLength(wordClasses.length, `Ce champ doit contenir au maximum ${wordClasses.length} options.`)
+            ]
+        ),
+        definition: string([
+            toTrimmed(),
+            minLength(1, "Ce champ est requis."),
+            minLength(2, "Ce champ doit contenir au moins 2 caractères."),
+            maxLength(256, "Ce champ doit contenir au maximum 256 caractères.")
+        ]),
+        example: string([
+            toTrimmed(),
+            minLength(1, "Ce champ est requis."),
+            minLength(2, "Ce champ doit contenir au moins 2 caractères."),
+            maxLength(256, "Ce champ doit contenir au maximum 256 caractères.")
+        ]),
+        author: transform(
+            optional(
+                string([
+                    toTrimmed(),
+                    notLength(1, "Ce champ optionel doit contenir au moins 2 caractères."), // Not using `minLength` to make the field optional.
+                    maxLength(32, "Ce champ doit contenir au maximum 32 caractères.")
+                ])
+            ),
+            (value: string | undefined): string | undefined => (value === "" ? undefined : value)
+        )
+    })
+);
 
-export const wordRequestWithTokenSchema = wordRequestSchema.merge(withTokenSchema);
+export const wordRequestWithTokenSchema = merge([wordRequestSchema, withTokenSchema]);
 
 export const cleanWordRequestWithToken = (value: WithToken<WordRequest>): WithToken<WordRequest> => (
-    wordRequestWithTokenSchema.parse(value)
+    parse(wordRequestWithTokenSchema, value)
 );
 
 export const isWordRequestWithToken = (value: unknown): value is WithToken<WordRequest> => (
-    wordRequestWithTokenSchema.safeParse(value).success
+    is(wordRequestWithTokenSchema, value)
 );

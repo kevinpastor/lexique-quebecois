@@ -7,7 +7,7 @@ import { FormContainer } from "~/components/react-hook-form/form-container";
 import { useAlerts } from "~/hooks/use-alerts";
 import { Status } from "~/types/status";
 import { type WithToken } from "~/types/with-token";
-import { cleanWordRequestWithToken, type WordRequest, wordRequestWithTokenSchema } from "~/types/word-request";
+import { type WordRequest, cleanWordRequestWithToken, wordRequestWithTokenSchema } from "~/types/word-request";
 import { isHttpError } from "~/utils/http-error";
 
 import { addWord } from "./add-word";
@@ -49,7 +49,7 @@ export const ContributePage = (): ReactElement => {
 
     return (
         <FormContainer
-            useZodFormProps={{
+            useFormProps={{
                 schema: wordRequestWithTokenSchema,
                 defaultValues,
                 reValidateMode: "onBlur"

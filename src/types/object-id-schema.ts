@@ -1,6 +1,7 @@
-import { object, string } from "zod";
+import { object, strict, string } from "valibot";
 
-export const objectIdSchema = object({
-    _oid: string()
-})
-    .strict();
+export const objectIdSchema = strict(
+    object({
+        _oid: string()
+    })
+);

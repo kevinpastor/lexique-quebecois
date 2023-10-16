@@ -1,20 +1,20 @@
 import { type PropsWithChildren, type ReactElement } from "react";
 import { FormProvider, type SubmitHandler } from "react-hook-form";
-import { type TypeOf, type ZodSchema } from "zod";
+import { type BaseSchema, type BaseSchemaAsync, type Output } from "valibot";
 
-import { useZodForm, type UseZodFormProps } from "./use-zod-form";
+import { type UseFormProps, useForm  } from "./use-form";
 
-interface Props<Z extends ZodSchema> {
-    useZodFormProps: UseZodFormProps<Z>;
-    onSuccess: SubmitHandler<TypeOf<Z>>;
+interface Props<Schema extends BaseSchema | BaseSchemaAsync> {
+    useFormProps: UseFormProps<Schema>;
+    onSuccess: SubmitHandler<Output<Schema>>;
 }
 
-export const FormContainer = <Z extends ZodSchema>({
-    useZodFormProps,
+export const FormContainer = <Schema extends BaseSchema | BaseSchemaAsync>({
+    useFormProps,
     onSuccess,
     children
-}: PropsWithChildren<Props<Z>>): ReactElement => {
-    const methods = useZodForm(useZodFormProps);
+}: PropsWithChildren<Props<Schema>>): ReactElement => {
+    const methods = useForm(useFormProps);
     const { handleSubmit } = methods;
 
     return (

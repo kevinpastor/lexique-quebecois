@@ -1,11 +1,13 @@
-import { object, string } from "zod";
+import { minLength, object, strict, string } from "valibot";
 
 export type WithToken<T> = T & {
     token: string;
 };
 
-export const withTokenSchema = object({
-    token: string()
-        .min(1, "Ce champ est requis.")
-})
-    .strict();
+export const withTokenSchema = strict(
+    object({
+        token: string([
+            minLength(1, "Ce champ est requis.")
+        ])
+    })
+);

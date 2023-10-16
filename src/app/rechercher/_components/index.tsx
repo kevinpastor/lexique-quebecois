@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { type ReactElement } from "react";
-import { object, string } from "zod";
+import { minLength, object, string } from "valibot";
 
 import { FormContainer } from "~/components/react-hook-form/form-container";
 import { getSlug } from "~/types/definition";
@@ -18,7 +18,9 @@ const initialValues: FormValues = {
 };
 
 const validationSchema = object({
-    label: string().min(1)
+    label: string([
+        minLength(1)
+    ])
 });
 
 export const SearchPage = (): ReactElement => {
@@ -37,7 +39,7 @@ export const SearchPage = (): ReactElement => {
 
     return (
         <FormContainer
-            useZodFormProps={{
+            useFormProps={{
                 schema: validationSchema,
                 defaultValues: initialValues
             }}

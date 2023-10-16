@@ -1,4 +1,4 @@
-import { boolean, object } from "zod";
+import { boolean, is, object } from "valibot";
 
 export const getHCaptchaSiteKey = (): string => {
     if (!process.env["NEXT_PUBLIC_HCAPTCHA_SITE_KEY"]) {
@@ -25,7 +25,7 @@ const hCaptchaVerifyResponseSchema = object({
 });
 
 const isHCaptchaVerifyResponse = (value: unknown): value is HCapthcaVerifyResponse => (
-    hCaptchaVerifyResponseSchema.safeParse(value).success
+    is(hCaptchaVerifyResponseSchema, value)
 );
 
 export const verifyHCaptcha = async (token: string): Promise<boolean> => {
