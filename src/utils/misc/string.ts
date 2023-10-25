@@ -17,7 +17,11 @@ export const groupByFirstLetter = (words: Array<string>): Array<Array<string>> =
     let currentGroupLetter: string = "";
 
     for (const word of words) {
-        const firstLetter: string = word[0];
+        const firstLetter: string | undefined = word[0];
+        if (!firstLetter) {
+            continue;
+        }
+
         if (firstLetter !== currentGroupLetter) {
             currentGroup = [word];
             currentGroupLetter = firstLetter;

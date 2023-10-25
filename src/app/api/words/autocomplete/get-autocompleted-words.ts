@@ -1,22 +1,10 @@
-import { type Collection, type Db, type Document, type ObjectId } from "mongodb";
+import { type Collection, type Db, type Document } from "mongodb";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { type WordDocument } from "~/types/word-document";
 
-interface HighlightText {
-    value: string;
-    type: "hit" | "text";
-}
-
-interface HighlightDocument {
-    path: string;
-    texts: Array<HighlightText>;
-    score: number;
-}
-
 interface OutputDocument {
-    _id: ObjectId;
-    highlight: HighlightDocument;
+    spelling: string;
 }
 
 export const getAutocompletedWords = async (query: string): Promise<Array<string>> => {
@@ -58,10 +46,22 @@ export const getAutocompletedWords = async (query: string): Promise<Array<string
             $sort: {
                 "highlight.score": -1
             }
+        },
+        {
+            $project: {
+                spelling: {
+                    $getField: {
+                        field: "value",
+                        input: {
+                            $first: "$highlight.texts"
+                        }
+                    }
+                }
+            }
         }
     ];
 
     return await collection.aggregate<OutputDocument>(pipeline, defaultAggregateOptions)
-        .map(({ highlight: { texts: [{ value: spelling }] } }: OutputDocument): string => (spelling))
+        .map(({ spelling }: OutputDocument): string => (spelling))
         .toArray();
 };

@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const WordPage = ({ word }: Props): ReactElement => {
-    if (!word || word.definitions.length === 0) { // `definitions` should theoretically never be empty.
+    if (!word || word.definitions.length === 0 || !word.definitions[0]) { // `definitions` should theoretically never be empty.
         return <MissingWord />;
     }
 

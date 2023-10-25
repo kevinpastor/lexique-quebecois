@@ -8,8 +8,8 @@ interface Props {
 }
 
 export const LetterSection = ({ group }: Props): ReactElement => {
-    const firstWord: string = group[0];
-    const firstLetter: string = firstWord[0];
+    const firstWord: string = group[0] ?? "";
+    const firstLetter: string = firstWord[0] ?? "";
 
     return (
         // Using div instead of Fragment for better HTML markup.

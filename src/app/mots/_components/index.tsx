@@ -18,7 +18,7 @@ export const IndexPage = ({ words }: Props): ReactElement => {
             <CardContent>
                 {wordGroups.map((group: Array<string>): ReactElement => (
                     <LetterSection
-                        key={group[0][0]}
+                        key={group[0] ? group[0][0] : undefined}
                         group={group}
                     />
                 ))}

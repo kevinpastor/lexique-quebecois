@@ -31,7 +31,7 @@ export const useKeyboardFocusSelection = (): KeyboardFocusSelectionUtility => {
             // Prevents the cursor from losing its position in the input.
             event.preventDefault();
 
-            const element: HTMLElement | null = elementRefs.current[focusedElementIndex + 1];
+            const element: HTMLElement | null | undefined = elementRefs.current[focusedElementIndex + 1];
             element?.focus();
         }
         else if (event.key === "ArrowUp") {
@@ -42,7 +42,7 @@ export const useKeyboardFocusSelection = (): KeyboardFocusSelectionUtility => {
             // Prevents the cursor from losing its position in the input.
             event.preventDefault();
 
-            const element: HTMLElement | null = elementRefs.current[focusedElementIndex - 1];
+            const element: HTMLElement | null | undefined = elementRefs.current[focusedElementIndex - 1];
             element?.focus();
         }
     }, []);

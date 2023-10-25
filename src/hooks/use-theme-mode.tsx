@@ -33,7 +33,11 @@ export const useThemeMode = (): ReturnType => {
             return;
         }
 
-        const nextMode: ThemeMode = modes[(modes.indexOf(mode) + 1) % modes.length];
+        const nextMode: ThemeMode | undefined = modes[(modes.indexOf(mode) + 1) % modes.length];
+        if (!nextMode) { // Should theoritically never happen because of the modulo and the fact that `modes` is a constant.
+            return;
+        }
+
         setMode(nextMode);
     }, [mode, setMode]);
 

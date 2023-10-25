@@ -21,7 +21,7 @@ export class RateLimiter {
             return false;
         }
 
-        while (timestamps.length > 0) {
+        while (timestamps[0] !== undefined) {
             const elapsedTime: number = now.getTime() - timestamps[0].getTime();
             if (elapsedTime <= this.window) {
                 break;

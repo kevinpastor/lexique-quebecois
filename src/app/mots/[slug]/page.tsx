@@ -17,7 +17,7 @@ interface Props {
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
     const word: Word | null = await getWordDefinitions(params.slug);
 
-    if (!word) {
+    if (!word || word.definitions.length === 0 || !word.definitions[0]) { // `definitions` should theoretically never be empty.
         return {};
     }
 

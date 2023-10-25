@@ -1,6 +1,8 @@
 import seedrandom, { type PRNG } from "seedrandom";
 
-export const sample = <T>(array: Array<T>, sampleSize: number, seed?: number): Array<T> => {
+type NonUndefined = NonNullable<unknown> | null;
+
+export const sample = <T extends NonUndefined>(array: Array<T>, sampleSize: number, seed?: number): Array<T> => {
     if (array.length < sampleSize) {
         throw new Error("Sample size can not be greater than the array size.");
     }
@@ -21,7 +23,12 @@ export const sample = <T>(array: Array<T>, sampleSize: number, seed?: number): A
 
     const sampleArray: Array<T> = [];
     for (const index of indexes) {
-        sampleArray.push(array[index]);
+        const element: T | undefined = array[index];
+        if (!element) {
+            continue;
+        }
+
+        sampleArray.push(element);
     }
 
     return sampleArray;
