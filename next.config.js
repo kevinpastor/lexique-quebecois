@@ -3,20 +3,39 @@ const bundleAnalyzer = require("@next/bundle-analyzer");
 
 /** @typedef {(nextConfig?: import("next").NextConfig) => import("next").NextConfig} NextPlugin */
 
-const hasAnalyzeEnvironmentVariable = process.env.ANALYZE === "true";
-
 /** @type {NextPlugin} */
 const withSourceMapAnalyzer = (nextConfig = {}) => ({
     ...nextConfig,
-    productionBrowserSourceMaps: hasAnalyzeEnvironmentVariable,
+    productionBrowserSourceMaps: true,
 })
 
 /** @type {NextPlugin} */
-const withBundleAnalyzer = bundleAnalyzer({
-    enabled: hasAnalyzeEnvironmentVariable,
-});
+const withBundleAnalyzer = (nextConfig = {}) => (
+    bundleAnalyzer()({
+        ...nextConfig,
+        experimental: {
+            ...nextConfig.experimental,
+            webpackBuildWorker: true
+        }
+    })
+);
 
-module.exports = withSourceMapAnalyzer(withBundleAnalyzer({
+const hasAnalyzeEnvironmentVariable = process.env.ANALYZE === "true";
+
+/** @type {NextPlugin} */
+const withAnalyze = (nextConfig = {}) => {
+    if (!hasAnalyzeEnvironmentVariable) {
+        return nextConfig;
+    }
+
+    return withSourceMapAnalyzer(
+        withBundleAnalyzer(
+            nextConfig
+        )
+    );
+};
+
+module.exports = withAnalyze({
     reactStrictMode: true,
     eslint: {
         ignoreDuringBuilds: hasAnalyzeEnvironmentVariable
@@ -24,4 +43,4 @@ module.exports = withSourceMapAnalyzer(withBundleAnalyzer({
     typescript: {
         ignoreBuildErrors: hasAnalyzeEnvironmentVariable
     }
-}));
+});
