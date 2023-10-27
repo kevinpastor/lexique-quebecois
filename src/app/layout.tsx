@@ -1,8 +1,14 @@
-import { type Metadata } from "next";
+import { type Metadata, type Viewport } from "next";
 import { type PropsWithChildren, type ReactElement } from "react";
 
 import { Layout } from "./_components/layout";
 import { Providers } from "./_components/providers";
+
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 10
+};
 
 export const metadata: Metadata = {
     title: {
@@ -73,11 +79,6 @@ export const metadata: Metadata = {
         }
     ],
     manifest: "/manifest.json",
-    viewport: {
-        width: "device-width",
-        initialScale: 1,
-        maximumScale: 10
-    },
     appleWebApp: {
         title: "Lexique Québécois",
         statusBarStyle: "default"
