@@ -2,9 +2,9 @@
   "name": "lexique-quebecois",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@8.6.0",
+  "packageManager": "pnpm@8.9.2",
   "engines": {
-    "node": "^18.4.2"
+    "node": "^18.17.0"
   },
   "scripts": {
     "start": "next dev",
