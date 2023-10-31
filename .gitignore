@@ -2,9 +2,9 @@
 node_modules/
 
 # testing
-coverage/
-e2e/results/
-e2e/report/
+tests/unit/coverage/
+tests/e2e/results/
+tests/e2e/report/
 
 # next.js
 .next/

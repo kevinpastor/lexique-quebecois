@@ -26,6 +26,7 @@ const customJestConfig = {
             // statements: 70
         }
     },
+    coverageDirectory: "<rootDir>/tests/unit/coverage/"
 };
 
 module.exports = createJestConfig(customJestConfig);

@@ -16,13 +16,13 @@ const getWebServerUrl = (): string => {
 
 const config: PlaywrightTestConfig = {
     fullyParallel: true,
-    testDir: "./e2e",
+    testDir: "./tests/e2e/",
     forbidOnly: isCIEnvironment(),
     reporter: [
         [
             "html",
             {
-                outputFolder: "./e2e/report"
+                outputFolder: "./tests/e2e/report/"
             }
         ]
     ],
@@ -32,7 +32,7 @@ const config: PlaywrightTestConfig = {
         video: "retain-on-failure",
         trace: "retain-on-failure"
     },
-    outputDir: "./e2e/results/",
+    outputDir: "./tests/e2e/results/",
     webServer: {
         command: "pnpm preview",
         url: getWebServerUrl(),
