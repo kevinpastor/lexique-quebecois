@@ -1,6 +1,5 @@
 import { Status } from "~/types/status";
-
-import { HttpError, isHttpError } from "./http-error";
+import { HttpError, isHttpError } from "~/utils/http-error";
 
 describe("isHttpError", (): void => {
     it("should not be a HttpError", (): void => {

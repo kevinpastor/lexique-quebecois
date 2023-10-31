@@ -8,11 +8,15 @@ const createJestConfig = nextJest({
 
 /** @type {import("jest").Config} */
 const customJestConfig = {
-    collectCoverageFrom: [
-        "<rootDir>/src/**/*.ts"
+    testPathIgnorePatterns: [
+        "/node_modules/",
+        "/e2e/"
     ],
-    coveragePathIgnorePatterns: [
-        "<rootDir>/src/utils/tests/",
+    moduleNameMapper: {
+        "^~\\/(.*)$": "<rootDir>/src/$1"
+    },
+    collectCoverageFrom: [
+        "<rootDir>/src/**/*"
     ],
     coverageThreshold: {
         global: {
@@ -22,13 +26,6 @@ const customJestConfig = {
             // statements: 70
         }
     },
-    moduleNameMapper: {
-        "^~\\/(.*)$": "<rootDir>/src/$1"
-    },
-    testPathIgnorePatterns: [
-        "/node_modules/",
-        "/e2e/"
-    ]
 };
 
 module.exports = createJestConfig(customJestConfig);

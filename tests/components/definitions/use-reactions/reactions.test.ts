@@ -1,9 +1,8 @@
 /**
  * @jest-environment jsdom
  */
+import { dislike, like, removeDislike, removeLike } from "~/components/definition/use-reactions/reactions";
 import { Method } from "~/types/method";
-
-import { dislike, like, removeDislike, removeLike } from "./reactions";
 
 const fetchMock = jest.fn()
     .mockResolvedValue({

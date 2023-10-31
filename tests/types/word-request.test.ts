@@ -1,6 +1,6 @@
-import { type WithToken } from "./with-token";
-import { WordClass } from "./word-class";
-import { type WordRequest, cleanWordRequestWithToken, isWordRequestWithToken } from "./word-request";
+import { type WithToken } from "~/types/with-token";
+import { WordClass } from "~/types/word-class";
+import { type WordRequest, cleanWordRequestWithToken, isWordRequestWithToken } from "~/types/word-request";
 
 const wordRequestWithTokenStub: WithToken<WordRequest> = {
     label: "gyu",

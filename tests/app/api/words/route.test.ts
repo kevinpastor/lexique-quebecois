@@ -1,5 +1,8 @@
 import { NextRequest, type NextResponse } from "next/server";
 
+import { addWord } from "~/app/api/words/add-word";
+import { POST } from "~/app/api/words/route";
+import { sendEmail } from "~/app/api/words/send-email";
 import { Method } from "~/types/method";
 import { Status } from "~/types/status";
 import { type WithToken } from "~/types/with-token";
@@ -8,11 +11,7 @@ import { type WordRequest } from "~/types/word-request";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "~/utils/misc/hcaptcha";
 
-import { addWord } from "./add-word";
-import { POST } from "./route";
-import { sendEmail } from "./send-email";
-
-jest.mock("./add-word", () => ({
+jest.mock("~/app/api/words/add-word", () => ({
     addWord: jest.fn()
 }));
 const addWordMock = addWord as jest.MockedFunction<typeof addWord>;
@@ -22,7 +21,7 @@ jest.mock("~/utils/misc/hcaptcha", () => ({
 }));
 const verifyHCaptchaMock = verifyHCaptcha as jest.MockedFunction<typeof verifyHCaptcha>;
 
-jest.mock("./send-email", () => ({
+jest.mock("~/app/api/words/send-email", () => ({
     sendEmail: jest.fn()
 }));
 const sendEmailMock = sendEmail as jest.MockedFunction<typeof sendEmail>;

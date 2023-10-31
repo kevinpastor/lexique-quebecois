@@ -1,17 +1,16 @@
 import { NextRequest, type NextResponse } from "next/server";
 
+import { like } from "~/app/api/words/[id]/like/like";
+import { removeLike } from "~/app/api/words/[id]/like/remove-like";
+import { DELETE, PUT } from "~/app/api/words/[id]/like/route";
 import { Status } from "~/types/status";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 
-import { like } from "./like";
-import { removeLike } from "./remove-like";
-import { DELETE, PUT } from "./route";
-
-jest.mock("./like", () => ({
+jest.mock("~/app/api/words/[id]/like/like", () => ({
     like: jest.fn()
 }));
 const likeMock = like as jest.MockedFunction<typeof like>;
-jest.mock("./remove-like", () => ({
+jest.mock("~/app/api/words/[id]/like/remove-like", () => ({
     removeLike: jest.fn()
 }));
 const removeLikeMock = removeLike as jest.MockedFunction<typeof removeLike>;

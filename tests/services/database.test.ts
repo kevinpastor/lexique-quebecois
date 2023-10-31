@@ -1,4 +1,4 @@
-import { getDatabase } from "./database";
+import { getDatabase } from "~/services/database";
 
 describe("getDatabase", (): void => {
     it("should throw in test environment", async (): Promise<void> => {

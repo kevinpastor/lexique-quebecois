@@ -1,4 +1,4 @@
-import { getSlug } from "./definition";
+import { getSlug } from "~/types/definition";
 
 describe("getSlug", (): void => {
     it.each([

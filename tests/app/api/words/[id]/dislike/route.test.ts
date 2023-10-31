@@ -1,17 +1,16 @@
 import { NextRequest, type NextResponse } from "next/server";
 
+import { dislike } from "~/app/api/words/[id]/dislike/dislike";
+import { removeDislike } from "~/app/api/words/[id]/dislike/remove-dislike";
+import { DELETE, PUT } from "~/app/api/words/[id]/dislike/route";
 import { Status } from "~/types/status";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 
-import { dislike } from "./dislike";
-import { removeDislike } from "./remove-dislike";
-import { DELETE, PUT } from "./route";
-
-jest.mock("./dislike", () => ({
+jest.mock("~/app/api/words/[id]/dislike/dislike", () => ({
     dislike: jest.fn()
 }));
 const dislikeMock = dislike as jest.MockedFunction<typeof dislike>;
-jest.mock("./remove-dislike", () => ({
+jest.mock("~/app/api/words/[id]/dislike/remove-dislike", () => ({
     removeDislike: jest.fn()
 }));
 const removeDislikeMock = removeDislike as jest.MockedFunction<typeof removeDislike>;

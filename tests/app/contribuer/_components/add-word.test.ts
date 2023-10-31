@@ -1,12 +1,11 @@
 /**
  * @jest-environment jsdom
  */
+import { addWord } from "~/app/contribuer/_components/add-word";
 import { Method } from "~/types/method";
 import { type WithToken } from "~/types/with-token";
 import { WordClass } from "~/types/word-class";
 import { type WordRequest } from "~/types/word-request";
-
-import { addWord } from "./add-word";
 
 const fetchMock = jest.fn()
     .mockResolvedValue({
