@@ -1,3 +1,4 @@
+import { afterEach, beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { NextRequest, type NextResponse } from "next/server";
 
 import { addWord } from "~/app/api/words/add-word";

@@ -1,3 +1,5 @@
+import { afterEach, beforeEach, describe, expect, it, jest } from "@jest/globals";
+
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 
 describe("RateLimiter", (): void => {

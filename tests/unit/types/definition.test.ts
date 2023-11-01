@@ -1,3 +1,5 @@
+import { describe, expect, it } from "@jest/globals";
+
 import { getSlug } from "~/types/definition";
 
 describe("getSlug", (): void => {

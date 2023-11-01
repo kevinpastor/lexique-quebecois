@@ -82,6 +82,9 @@ dependencies:
     version: 0.19.0
 
 devDependencies:
+  '@jest/globals':
+    specifier: ^29.7.0
+    version: 29.7.0
   '@next/bundle-analyzer':
     specifier: ^14.0.1
     version: 14.0.1
@@ -91,9 +94,6 @@ devDependencies:
   '@testing-library/react':
     specifier: ^14.0.0
     version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
-  '@types/jest':
-    specifier: ^29.5.7
-    version: 29.5.7
   '@types/node':
     specifier: ^18.16.18
     version: 18.16.18
@@ -1471,13 +1471,6 @@ packages:
     resolution: {integrity: sha512-1nESsePMBlf0RPRffLZi5ujYh7IH1BWL4y9pr+Bn3cJBdxz+RTP8bUFljLz9HvzhhOSWKdyBZ4DIivdL6rvgZg==}
     dependencies:
       '@types/istanbul-lib-report': 3.0.2
-    dev: true
-
-  /@types/jest@29.5.7:
-    resolution: {integrity: sha512-HLyetab6KVPSiF+7pFcUyMeLsx25LDNDemw9mGsJBkai/oouwrjTycocSDYopMEwFhN2Y4s9oPyOCZNofgSt2g==}
-    dependencies:
-      expect: 29.7.0
-      pretty-format: 29.7.0
     dev: true
 
   /@types/jsdom@20.0.1:

@@ -1,6 +1,9 @@
+import { expect } from "@jest/globals";
 import { type BaseSchema, safeParse } from "valibot";
 
-const toMatchSchema = (value: unknown, schema: BaseSchema): jest.CustomMatcherResult => {
+type CustomMatcherResult = ReturnType<Parameters<typeof expect.extend>[0][number]>;
+
+const toMatchSchema = (value: unknown, schema: BaseSchema): CustomMatcherResult => {
     const result = safeParse(schema, value);
 
     if (result.success) {

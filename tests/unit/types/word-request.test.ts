@@ -1,3 +1,5 @@
+import { describe, expect, it } from "@jest/globals";
+
 import { type WithToken } from "~/types/with-token";
 import { WordClass } from "~/types/word-class";
 import { type WordRequest, cleanWordRequestWithToken, isWordRequestWithToken } from "~/types/word-request";

@@ -1,10 +1,12 @@
 /**
  * @jest-environment jsdom
  */
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
+
 import { dislike, like, removeDislike, removeLike } from "~/components/definition/use-reactions/reactions";
 import { Method } from "~/types/method";
 
-const fetchMock = jest.fn()
+const fetchMock = jest.fn<typeof fetch>()
     .mockResolvedValue({
         ok: true
     } as Partial<Response> as Response);

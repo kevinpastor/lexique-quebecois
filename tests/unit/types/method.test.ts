@@ -1,3 +1,5 @@
+import { describe, expect, it } from "@jest/globals";
+
 import { Method, isValidMethod } from "~/types/method";
 
 describe("isValidMethod", (): void => {

@@ -1,7 +1,8 @@
+import { afterEach, beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { NextRequest, type NextResponse } from "next/server";
 
-import { dislike } from "~/app/api/words/[id]/dislike/dislike";
-import { removeDislike } from "~/app/api/words/[id]/dislike/remove-dislike";
+import * as dislikeModule from "~/app/api/words/[id]/dislike/dislike";
+import * as removeDislikeModule from "~/app/api/words/[id]/dislike/remove-dislike";
 import { DELETE, PUT } from "~/app/api/words/[id]/dislike/route";
 import { Status } from "~/types/status";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
@@ -9,11 +10,12 @@ import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 jest.mock("~/app/api/words/[id]/dislike/dislike", () => ({
     dislike: jest.fn()
 }));
-const dislikeMock = dislike as jest.MockedFunction<typeof dislike>;
+
+const { dislike: dislikeMock } = dislikeModule as jest.Mocked<typeof dislikeModule>;
 jest.mock("~/app/api/words/[id]/dislike/remove-dislike", () => ({
     removeDislike: jest.fn()
 }));
-const removeDislikeMock = removeDislike as jest.MockedFunction<typeof removeDislike>;
+const { removeDislike: removeDislikeMock } = removeDislikeModule as jest.Mocked<typeof removeDislikeModule>;
 
 const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
 

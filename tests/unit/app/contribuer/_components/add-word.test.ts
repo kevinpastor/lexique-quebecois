@@ -1,13 +1,15 @@
 /**
  * @jest-environment jsdom
  */
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
+
 import { addWord } from "~/app/contribuer/_components/add-word";
 import { Method } from "~/types/method";
 import { type WithToken } from "~/types/with-token";
 import { WordClass } from "~/types/word-class";
 import { type WordRequest } from "~/types/word-request";
 
-const fetchMock = jest.fn()
+const fetchMock = jest.fn<typeof fetch>()
     .mockResolvedValue({
         ok: true
     } as Partial<Response> as Response);

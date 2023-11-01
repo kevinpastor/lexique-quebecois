@@ -1,10 +1,12 @@
 /**
  * @jest-environment jsdom
  */
+import { afterEach, beforeEach, describe, expect, it, jest } from "@jest/globals";
+
 import { type CopyFunction, useCopyToClipboard } from "~/hooks/use-copy-to-clipboard";
 
 describe("useCopyToClipboard", (): void => {
-    const writeTextMock = jest.fn()
+    const writeTextMock = jest.fn<typeof navigator.clipboard.writeText>()
         .mockResolvedValue(undefined);
 
     const navigatorMock = jest.spyOn(global, "navigator", "get");
