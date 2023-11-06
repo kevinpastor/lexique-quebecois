@@ -4,19 +4,33 @@ import { Status } from "~/types/status";
 import { HttpError, isHttpError } from "~/utils/http-error";
 
 describe("isHttpError", (): void => {
-    it("should not be a HttpError", (): void => {
-        const error: Error = new Error();
+    describe("when given an object", (): void => {
+        it("should not be considered valid", (): void => {
+            const result: boolean = isHttpError({});
 
-        const result: boolean = isHttpError(error);
-
-        expect(result).toBeFalsy();
+            expect(result).toBeFalsy();
+        });
     });
 
-    it("should be a HttpError", (): void => {
-        const error: Error = new HttpError(Status.NotFound);
+    describe("when given an error", (): void => {
+        describe("which is not an HttpError", (): void => {
+            it("should not be considered valid", (): void => {
+                const error: Error = new Error();
 
-        const result: boolean = isHttpError(error);
+                const result: boolean = isHttpError(error);
 
-        expect(result).toBeTruthy();
+                expect(result).toBeFalsy();
+            });
+        });
+
+        describe("which is an HttpError", (): void => {
+            it("should be considered valid", (): void => {
+                const error: Error = new HttpError(Status.NotFound);
+
+                const result: boolean = isHttpError(error);
+
+                expect(result).toBeTruthy();
+            });
+        });
     });
 });

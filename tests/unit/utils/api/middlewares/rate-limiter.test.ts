@@ -15,46 +15,54 @@ describe("RateLimiter", (): void => {
         jest.useRealTimers();
     });
 
-    it("should not limit initially", (): void => {
-        const rateLimiter: RateLimiter = new RateLimiter(window, tokens);
+    describe("when first called", (): void => {
+        it("should not limit", (): void => {
+            const rateLimiter: RateLimiter = new RateLimiter(window, tokens);
 
-        jest.setSystemTime(0);
-        const isLimited: boolean = rateLimiter.consume(key);
+            jest.setSystemTime(0);
+            const isLimited: boolean = rateLimiter.consume(key);
 
-        expect(isLimited).toBeFalsy();
+            expect(isLimited).toBeFalsy();
+        });
     });
 
-    it("should limit after using all tokens", (): void => {
-        const rateLimiter: RateLimiter = new RateLimiter(window, tokens);
+    describe("when all tokens are used", (): void => {
+        it("should limit", (): void => {
+            const rateLimiter: RateLimiter = new RateLimiter(window, tokens);
 
-        jest.setSystemTime(0);
-        rateLimiter.consume(key);
-        jest.setSystemTime(1);
-        const isLimited: boolean = rateLimiter.consume(key);
+            jest.setSystemTime(0);
+            rateLimiter.consume(key);
+            jest.setSystemTime(1);
+            const isLimited: boolean = rateLimiter.consume(key);
 
-        expect(isLimited).toBeTruthy();
+            expect(isLimited).toBeTruthy();
+        });
     });
 
-    it("should not limit another key", (): void => {
-        const rateLimiter: RateLimiter = new RateLimiter(window, tokens);
+    describe("when another key is provided", (): void => {
+        it("should not limit", (): void => {
+            const rateLimiter: RateLimiter = new RateLimiter(window, tokens);
 
-        jest.setSystemTime(0);
-        rateLimiter.consume(key);
-        jest.setSystemTime(1);
-        rateLimiter.consume(key);
-        const isLimited: boolean = rateLimiter.consume("another-key");
+            jest.setSystemTime(0);
+            rateLimiter.consume(key);
+            jest.setSystemTime(1);
+            rateLimiter.consume(key);
+            const isLimited: boolean = rateLimiter.consume("another-key");
 
-        expect(isLimited).toBeFalsy();
+            expect(isLimited).toBeFalsy();
+        });
     });
 
-    it("should reset after window", (): void => {
-        const rateLimiter: RateLimiter = new RateLimiter(1, tokens);
+    describe("when time window is passed", (): void => {
+        it("should reset", (): void => {
+            const rateLimiter: RateLimiter = new RateLimiter(1, tokens);
 
-        jest.setSystemTime(0);
-        rateLimiter.consume(key);
-        jest.setSystemTime(2);
-        const isLimited: boolean = rateLimiter.consume(key);
+            jest.setSystemTime(0);
+            rateLimiter.consume(key);
+            jest.setSystemTime(2);
+            const isLimited: boolean = rateLimiter.consume(key);
 
-        expect(isLimited).toBeFalsy();
+            expect(isLimited).toBeFalsy();
+        });
     });
 });

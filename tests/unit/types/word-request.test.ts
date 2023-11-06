@@ -14,222 +14,240 @@ const wordRequestWithTokenStub: WithToken<WordRequest> = {
 };
 
 describe("isWordRequestWithToken", (): void => {
-    it.each([
-        [""],
-        [" "],
-        ["  "],
-        ["   "],
-        ["a"],
-        ["1"],
-        ["&"],
-        ["😀"],
-        ["gyu😀"],
-        ["😀gyu"],
-        ["abcdefghijklmnopqrstuvwxyzabcdefg"] // More than 32 characters.
-    ])("should not consider \"%s\" as a valid label", (label: string): void => {
-        const value: WithToken<WordRequest> = {
-            ...wordRequestWithTokenStub,
-            label
-        };
+    describe("when given undefined", (): void => {
+        it("should not be considered valid", (): void => {
+            const value: unknown = undefined;
 
-        const result: boolean = isWordRequestWithToken(value);
+            const result: boolean = isWordRequestWithToken(value);
 
-        expect(result).toBeFalsy();
+            expect(result).toBeFalsy();
+        });
     });
 
-    it.each([
-        ["abrier"],
-        ["adon"],
-        ["apanier"],
-        ["apanya"],
-        ["apanyae"],
-        ["asteur"],
-        ["asti"],
-        ["awaye"],
-        ["aweille"],
-        ["bécosse"],
-        ["ben"],
-        ["beu"],
-        ["bibitte"],
-        ["bin"],
-        ["bleuet"],
-        ["bobépine"],
-        ["boeufs"],
-        ["bœufs"],
-        ["bouette"],
-        ["bs"],
-        ["câlice"],
-        ["câlisse"],
-        ["capoter"],
-        ["cave"],
-        ["char"],
-        ["chicken"],
-        ["chum"],
-        ["criss"],
-        ["crisse"],
-        ["crouser"],
-        ["cruiser"],
-        ["donper"],
-        ["dumper"],
-        ["écoeurant"],
-        ["écœurant"],
-        ["écrapouti"],
-        ["enwaye"],
-        ["enweille"],
-        ["esti"],
-        ["fak"],
-        ["faque"],
-        ["fouarer"],
-        ["fourrer"],
-        ["frette"],
-        ["garnotte"],
-        ["gibelotte"],
-        ["giblotte"],
-        ["giu"],
-        ["gosse"],
-        ["gosser"],
-        ["gratteux"],
-        ["gyu"],
-        ["habitant"],
-        ["icitte"],
-        ["jaser"],
-        ["kétaine"],
-        ["kid kodak"],
-        ["kleenex"],
-        ["laite"],
-        ["laveuse"],
-        ["licher"],
-        ["magasiner"],
-        ["maringouin"],
-        ["minoune"],
-        ["mtl"],
-        ["noob"],
-        ["noub"],
-        ["od"],
-        ["osti"],
-        ["pantoute"],
-        ["patente"],
-        ["pédé"],
-        ["pentoute"],
-        ["pet sauce"],
-        ["peter"],
-        ["pisser"],
-        ["poundi"],
-        ["pundi"],
-        ["quétaine"],
-        ["quêteux"],
-        ["quoi cou beh"],
-        ["quoi kou beh"],
-        ["quoicoubeh"],
-        ["quoikoubeh"],
-        ["roteux"],
-        ["roulotte"],
-        ["sacrament"],
-        ["sacre"],
-        ["sapoud"],
-        ["smat"],
-        ["tabarnac"],
-        ["tabarnak"],
-        ["tabarnaque"],
-        ["tabarnouche"],
-        ["tabarouette"],
-        ["tannant"],
-        ["tokébak"],
-        ["tokébakicitte"],
-        ["tokébec"],
-        ["tokébecicitte"],
-        ["tokébek"],
-        ["tokébekicitte"],
-        ["toquébak"],
-        ["toquébakicitte"],
-        ["toquébec"],
-        ["toquébecicitte"],
-        ["torcher"],
-        ["toune"],
-        ["tourtière"],
-        ["usagé"],
-        ["vidange"],
-        ["vidangeur"]
-    ])("should consider \"%s\" as a valid label", (label: string): void => {
-        const value: WithToken<WordRequest> = {
-            ...wordRequestWithTokenStub,
-            label
-        };
+    describe("when given an empty object", (): void => {
+        it("should not be considered valid", (): void => {
+            const value: unknown = {};
 
-        const result: boolean = isWordRequestWithToken(value);
+            const result: boolean = isWordRequestWithToken(value);
 
-        expect(result).toBeTruthy();
+            expect(result).toBeFalsy();
+        });
     });
 
-    it("should not allow undefined", (): void => {
-        const value: unknown = undefined;
+    describe("when given a word request with token", (): void => {
+        describe("which has an invalid label", (): void => {
+            it.each([
+                [""],
+                [" "],
+                ["  "],
+                ["   "],
+                ["a"],
+                ["1"],
+                ["&"],
+                ["😀"],
+                ["gyu😀"],
+                ["😀gyu"],
+                ["abcdefghijklmnopqrstuvwxyzabcdefg"] // More than 32 characters.
+            ])("should not consider \"%s\" valid", (label: string): void => {
+                const value: WithToken<WordRequest> = {
+                    ...wordRequestWithTokenStub,
+                    label
+                };
 
-        const result: boolean = isWordRequestWithToken(value);
+                const result: boolean = isWordRequestWithToken(value);
 
-        expect(result).toBeFalsy();
-    });
-
-    it("should not be a valid word request", (): void => {
-        const value: unknown = {};
-
-        const result: boolean = isWordRequestWithToken(value);
-
-        expect(result).toBeFalsy();
-    });
-
-    it("should not allow no word class", (): void => {
-        const result: boolean = isWordRequestWithToken({
-            ...wordRequestWithTokenStub,
-            wordClasses: undefined
+                expect(result).toBeFalsy();
+            });
         });
 
-        expect(result).toBeFalsy();
-    });
+        describe("which has missing word classes", (): void => {
+            it("should not be considered valid", (): void => {
+                const result: boolean = isWordRequestWithToken({
+                    ...wordRequestWithTokenStub,
+                    wordClasses: undefined
+                });
 
-    it("should not allow invalid word class", (): void => {
-        const result: boolean = isWordRequestWithToken({
-            ...wordRequestWithTokenStub,
-            wordClasses: ["foo"]
+                expect(result).toBeFalsy();
+            });
         });
 
-        expect(result).toBeFalsy();
-    });
+        describe("which has an invalid word class", (): void => {
+            it("should not be considered valid", (): void => {
+                const result: boolean = isWordRequestWithToken({
+                    ...wordRequestWithTokenStub,
+                    wordClasses: ["foo"]
+                });
 
-    it("should be a valid word request", (): void => {
-        const result: boolean = isWordRequestWithToken(wordRequestWithTokenStub);
+                expect(result).toBeFalsy();
+            });
+        });
 
-        expect(result).toBeTruthy();
+        it.each([
+            ["abrier"],
+            ["adon"],
+            ["apanier"],
+            ["apanya"],
+            ["apanyae"],
+            ["asteur"],
+            ["asti"],
+            ["awaye"],
+            ["aweille"],
+            ["bécosse"],
+            ["ben"],
+            ["beu"],
+            ["bibitte"],
+            ["bin"],
+            ["bleuet"],
+            ["bobépine"],
+            ["boeufs"],
+            ["bœufs"],
+            ["bouette"],
+            ["bs"],
+            ["câlice"],
+            ["câlisse"],
+            ["capoter"],
+            ["cave"],
+            ["char"],
+            ["chicken"],
+            ["chum"],
+            ["criss"],
+            ["crisse"],
+            ["crouser"],
+            ["cruiser"],
+            ["donper"],
+            ["dumper"],
+            ["écoeurant"],
+            ["écœurant"],
+            ["écrapouti"],
+            ["enwaye"],
+            ["enweille"],
+            ["esti"],
+            ["fak"],
+            ["faque"],
+            ["fouarer"],
+            ["fourrer"],
+            ["frette"],
+            ["garnotte"],
+            ["gibelotte"],
+            ["giblotte"],
+            ["giu"],
+            ["gosse"],
+            ["gosser"],
+            ["gratteux"],
+            ["gyu"],
+            ["habitant"],
+            ["icitte"],
+            ["jaser"],
+            ["kétaine"],
+            ["kid kodak"],
+            ["kleenex"],
+            ["laite"],
+            ["laveuse"],
+            ["licher"],
+            ["magasiner"],
+            ["maringouin"],
+            ["minoune"],
+            ["mtl"],
+            ["noob"],
+            ["noub"],
+            ["od"],
+            ["osti"],
+            ["pantoute"],
+            ["patente"],
+            ["pédé"],
+            ["pentoute"],
+            ["pet sauce"],
+            ["peter"],
+            ["pisser"],
+            ["poundi"],
+            ["pundi"],
+            ["quétaine"],
+            ["quêteux"],
+            ["quoi cou beh"],
+            ["quoi kou beh"],
+            ["quoicoubeh"],
+            ["quoikoubeh"],
+            ["roteux"],
+            ["roulotte"],
+            ["sacrament"],
+            ["sacre"],
+            ["sapoud"],
+            ["smat"],
+            ["tabarnac"],
+            ["tabarnak"],
+            ["tabarnaque"],
+            ["tabarnouche"],
+            ["tabarouette"],
+            ["tannant"],
+            ["tokébak"],
+            ["tokébakicitte"],
+            ["tokébec"],
+            ["tokébecicitte"],
+            ["tokébek"],
+            ["tokébekicitte"],
+            ["toquébak"],
+            ["toquébakicitte"],
+            ["toquébec"],
+            ["toquébecicitte"],
+            ["torcher"],
+            ["toune"],
+            ["tourtière"],
+            ["usagé"],
+            ["vidange"],
+            ["vidangeur"]
+        ])("should consider \"%s\" as a valid label", (label: string): void => {
+            const value: WithToken<WordRequest> = {
+                ...wordRequestWithTokenStub,
+                label
+            };
+
+            const result: boolean = isWordRequestWithToken(value);
+
+            expect(result).toBeTruthy();
+        });
+
+        it("should be considered valid", (): void => {
+            const result: boolean = isWordRequestWithToken(wordRequestWithTokenStub);
+
+            expect(result).toBeTruthy();
+        });
     });
 });
 
 describe("cleanWordRequestWithToken", (): void => {
-    it("should not cleanup the word request", (): void => {
-        const result: WordRequest = cleanWordRequestWithToken(wordRequestWithTokenStub);
+    describe("when given a word request", (): void => {
+        it("should not cleanup anything", (): void => {
+            const result: WordRequest = cleanWordRequestWithToken(wordRequestWithTokenStub);
 
-        expect(result).toEqual(wordRequestWithTokenStub);
+            expect(result).toEqual(wordRequestWithTokenStub);
+        });
     });
 
-    it("should remove empty author", (): void => {
-        const value: WithToken<WordRequest> = {
-            ...wordRequestWithTokenStub,
-            author: ""
-        };
+    describe("when given an empty author", (): void => {
+        it("should remove the author", (): void => {
+            const value: WithToken<WordRequest> = {
+                ...wordRequestWithTokenStub,
+                author: ""
+            };
 
-        const result: WordRequest = cleanWordRequestWithToken(value);
+            const result: WordRequest = cleanWordRequestWithToken(value);
 
-        expect(result).not.toEqual(value);
-        expect(result.author).toBeUndefined();
+            expect(result).not.toEqual(value);
+            expect(result.author).toBeUndefined();
+        });
     });
 
-    it("should trim attributes", (): void => {
-        const value: WithToken<WordRequest> = {
-            ...wordRequestWithTokenStub,
-            author: "   John Doe   "
-        };
+    describe("when given attributes with extra whitespaces", (): void => {
+        it("should trim the attributes", (): void => {
+            const value: WithToken<WordRequest> = {
+                ...wordRequestWithTokenStub,
+                author: "   John Doe   "
+            };
 
-        const result: WordRequest = cleanWordRequestWithToken(value);
+            const result: WordRequest = cleanWordRequestWithToken(value);
 
-        expect(result).not.toEqual(value);
-        expect(result.author).toBeDefined();
+            expect(result).not.toEqual(value);
+            expect(result.author).toBeDefined();
+        });
     });
 });
