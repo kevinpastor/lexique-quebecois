@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+import { describe, expect, it } from "@jest/globals";
 import { act, renderHook } from "@testing-library/react";
 
 import { type BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
