@@ -2,9 +2,9 @@
   "name": "lexique-quebecois",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@8.10.0",
   "engines": {
-    "node": "^18.17.0"
+    "node": "^18.17.0",
+    "pnpm": "^8.10.0"
   },
   "scripts": {
     "start": "next dev",
@@ -29,12 +29,12 @@
     "@mui/icons-material": "^5.14.18",
     "@mui/lab": "5.0.0-alpha.153",
     "@mui/material": "^5.14.18",
-    "@next/env": "^14.0.2",
+    "@next/env": "^14.0.3",
     "@vercel/analytics": "^1.1.1",
     "dataloader": "^2.2.2",
     "framer-motion": "^10.16.5",
-    "mongodb": "^6.2.0",
-    "next": "^14.0.2",
+    "mongodb": "^6.3.0",
+    "next": "^14.0.3",
     "nodemailer": "^6.9.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -48,8 +48,8 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@next/bundle-analyzer": "^14.0.2",
-    "@playwright/test": "^1.39.0",
+    "@next/bundle-analyzer": "^14.0.3",
+    "@playwright/test": "^1.40.0",
     "@testing-library/react": "^14.1.0",
     "@types/node": "^18.16.18",
     "@types/nodemailer": "^6.4.14",
@@ -61,7 +61,7 @@
     "@typescript-eslint/parser": "^6.11.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.53.0",
-    "eslint-config-next": "^14.0.2",
+    "eslint-config-next": "^14.0.3",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-sonarjs": "^0.23.0",

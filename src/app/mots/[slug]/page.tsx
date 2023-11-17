@@ -32,8 +32,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 
 export const revalidate: number = 86400; // Revalidate every day.
 
-const Page = async ({ params }: Props): Promise<ReactElement> => {
-    const { slug } = params;
+const Page = async ({ params: { slug } }: Props): Promise<ReactElement> => {
     const word: Word | null = await getWordDefinitions(slug);
 
     return (
