@@ -1,4 +1,4 @@
-import { array, is, maxLength, merge, minLength, nativeEnum, notLength, object, optional, parse, regex, strict, string, toTrimmed, transform } from "valibot";
+import { array, is, maxLength, merge, minLength, nativeEnum, never, notLength, object, optional, parse, regex, string, toTrimmed, transform } from "valibot";
 
 import { type WithToken, withTokenSchema } from "./with-token";
 import { WordClass, wordClasses } from "./word-class";
@@ -13,8 +13,8 @@ export interface WordRequest {
 
 const labelRegex: RegExp = /^[a-zàâäéèêëïîôöùûüÿæœç\s-]*$/i;
 
-const wordRequestSchema = strict(
-    object({
+const wordRequestSchema = object(
+    {
         label: string([
             toTrimmed(),
             minLength(1, "Ce champ est requis."),
@@ -50,7 +50,8 @@ const wordRequestSchema = strict(
             ),
             (value: string | undefined): string | undefined => (value === "" ? undefined : value)
         )
-    })
+    },
+    never()
 );
 
 export const wordRequestWithTokenSchema = merge([wordRequestSchema, withTokenSchema]);
