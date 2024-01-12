@@ -26,7 +26,7 @@ export const useLocalStorage = <T>(key: string, initialValue: T): LocalStorageUt
     const readValue = useCallback((): T => {
         try {
             const item: string | null = window.localStorage.getItem(key);
-            return item
+            return item !== null
                 ? parseJSON(item) as T // We take for granted that the type is correct.
                 : initialValue;
         }
