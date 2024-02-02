@@ -1,6 +1,6 @@
 # Lexique Québécois
 
-A bit like Urban Dictionnary, but tokébakicitte.
+A bit like Urban Dictionnary, but "tokébakicitte".
 
 ## Install
 
