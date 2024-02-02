@@ -11,6 +11,9 @@ dependencies:
   '@ctrl/react-adsense':
     specifier: ^1.7.0
     version: 1.7.0
+  '@emotion/cache':
+    specifier: ^11.11.0
+    version: 11.11.0
   '@emotion/react':
     specifier: ^11.11.3
     version: 11.11.3(@types/react@18.2.51)(react@18.2.0)
@@ -32,6 +35,9 @@ dependencies:
   '@mui/material':
     specifier: ^5.15.7
     version: 5.15.7(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
+  '@mui/material-nextjs':
+    specifier: ^5.15.7
+    version: 5.15.7(@emotion/cache@11.11.0)(@mui/material@5.15.7)(@types/react@18.2.51)(next@14.1.0)(react@18.2.0)
   '@next/env':
     specifier: 14.1.0
     version: 14.1.0
@@ -77,9 +83,6 @@ dependencies:
   swr:
     specifier: ^2.2.4
     version: 2.2.4(react@18.2.0)
-  tss-react:
-    specifier: ^4.9.4
-    version: 4.9.4(@emotion/react@11.11.3)(@mui/material@5.15.7)(react@18.2.0)
   valibot:
     specifier: ^0.27.1
     version: 0.27.1
@@ -1081,6 +1084,31 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@mui/material-nextjs@5.15.7(@emotion/cache@11.11.0)(@mui/material@5.15.7)(@types/react@18.2.51)(next@14.1.0)(react@18.2.0):
+    resolution: {integrity: sha512-nx4MjJSTspW757IyF77hniMixkbamlgxBllRh0v4f5uKtHFEGSP/bLGx2hPEzCkSe+CIq5tNrnhpiAFL32WFrw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@emotion/cache': ^11.11.0
+      '@emotion/server': ^11.11.0
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      next: ^13.0.0 || ^14.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/cache':
+        optional: true
+      '@emotion/server':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@emotion/cache': 11.11.0
+      '@mui/material': 5.15.7(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.51
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
     dev: false
 
   /@mui/material@5.15.7(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
@@ -5537,27 +5565,6 @@ packages:
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
-    dev: false
-
-  /tss-react@4.9.4(@emotion/react@11.11.3)(@mui/material@5.15.7)(react@18.2.0):
-    resolution: {integrity: sha512-4o+XFdaTcraNEIsCRxKiEX7g6xhcsdSxfHRjos3Kg9GbYIpzfK4M2MHMETTuXT54nUrldtnkipNC003v/q5KVg==}
-    peerDependencies:
-      '@emotion/react': ^11.4.1
-      '@emotion/server': ^11.4.0
-      '@mui/material': ^5.0.0
-      react: ^16.8.0 || ^17.0.2 || ^18.0.0
-    peerDependenciesMeta:
-      '@emotion/server':
-        optional: true
-      '@mui/material':
-        optional: true
-    dependencies:
-      '@emotion/cache': 11.11.0
-      '@emotion/react': 11.11.3(@types/react@18.2.51)(react@18.2.0)
-      '@emotion/serialize': 1.1.3
-      '@emotion/utils': 1.2.1
-      '@mui/material': 5.15.7(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
     dev: false
 
   /type-check@0.4.0:

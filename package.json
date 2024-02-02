@@ -22,6 +22,7 @@
   "dependencies": {
     "@babel/core": "^7.23.9",
     "@ctrl/react-adsense": "^1.7.0",
+    "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@hcaptcha/react-hcaptcha": "^1.9.3",
@@ -29,6 +30,7 @@
     "@mui/icons-material": "^5.15.7",
     "@mui/lab": "5.0.0-alpha.163",
     "@mui/material": "^5.15.7",
+    "@mui/material-nextjs": "^5.15.7",
     "@next/env": "14.1.0",
     "@vercel/analytics": "^1.1.2",
     "@vercel/speed-insights": "^1.0.9",
@@ -44,7 +46,6 @@
     "request-ip": "^3.3.0",
     "seedrandom": "^3.0.5",
     "swr": "^2.2.4",
-    "tss-react": "^4.9.4",
     "valibot": "^0.27.1"
   },
   "devDependencies": {
