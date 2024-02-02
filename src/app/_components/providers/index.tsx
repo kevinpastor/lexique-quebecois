@@ -1,6 +1,7 @@
 "use client";
 
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { type PropsWithChildren, type ReactElement } from "react";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -15,24 +16,27 @@ import { ThemeProvider } from "./theme-provider";
 // import { TransitionProvider } from "./transition-provider";
 
 export const Providers = ({ children }: PropsWithChildren): ReactElement => (
-    <PlatformNameProvider>
-        <AnimationProvider>
-            {/* <TransitionProvider> */}
-            <HelmetProvider>
-                <Analytics />
-                <ThemeProvider>
-                    <ThemeColorMetaTag />
-                    <ConsentProvider>
-                        <AdProvider />
-                        <AlertsProvider>
-                            <SWRProvider>
-                                {children}
-                            </SWRProvider>
-                        </AlertsProvider>
-                    </ConsentProvider>
-                </ThemeProvider>
-            </HelmetProvider>
-            {/* </TransitionProvider> */}
-        </AnimationProvider>
-    </PlatformNameProvider>
+    <>
+        <Analytics />
+        <SpeedInsights />
+        <PlatformNameProvider>
+            <AnimationProvider>
+                {/* <TransitionProvider> */}
+                <HelmetProvider>
+                    <ThemeProvider>
+                        <ThemeColorMetaTag />
+                        <ConsentProvider>
+                            <AdProvider />
+                            <AlertsProvider>
+                                <SWRProvider>
+                                    {children}
+                                </SWRProvider>
+                            </AlertsProvider>
+                        </ConsentProvider>
+                    </ThemeProvider>
+                </HelmetProvider>
+                {/* </TransitionProvider> */}
+            </AnimationProvider>
+        </PlatformNameProvider>
+    </>
 );
