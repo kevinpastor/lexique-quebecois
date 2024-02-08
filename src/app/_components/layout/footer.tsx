@@ -1,8 +1,8 @@
 import { Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
-export const Footer = (): ReactElement => (
+export const Footer = (): ReactNode => (
     <Stack
         component="footer"
         spacing={{

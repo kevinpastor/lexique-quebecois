@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 import { FormProvider, type SubmitHandler } from "react-hook-form";
 import { type BaseSchema, type BaseSchemaAsync, type Output } from "valibot";
 
@@ -13,7 +13,7 @@ export const FormContainer = <Schema extends BaseSchema | BaseSchemaAsync>({
     useFormProps,
     onSuccess,
     children
-}: PropsWithChildren<Props<Schema>>): ReactElement => {
+}: PropsWithChildren<Props<Schema>>): ReactNode => {
     const methods = useForm(useFormProps);
     const { handleSubmit } = methods;
 

@@ -1,5 +1,5 @@
 import { Link } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 export enum EmailType {
     Info = "info",
@@ -12,7 +12,7 @@ interface Props {
 }
 
 // TODO Add more email addresses
-export const Email = ({ type: _ }: Props): ReactElement => (
+export const Email = ({ type: _ }: Props): ReactNode => (
     <Link href="mailto:info@lexiquequebecois.com">
         info@lexiquequebecois.com
     </Link>

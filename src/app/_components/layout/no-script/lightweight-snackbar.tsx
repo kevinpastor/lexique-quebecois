@@ -1,7 +1,7 @@
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 
 // Vaguely imitates the behavior of the Snackbar component of MUI.
-export const LightweightSnackbar = ({ children }: PropsWithChildren): ReactElement => (
+export const LightweightSnackbar = ({ children }: PropsWithChildren): ReactNode => (
     <div
         style={{
             zIndex: 1400,

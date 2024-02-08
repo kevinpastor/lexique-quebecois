@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { Email, EmailType } from "~/components/email";
 
-export const ContactPage = (): ReactElement => (
+export const ContactPage = (): ReactNode => (
     <Card>
         <CardHeader title="Contact" />
         <CardContent>

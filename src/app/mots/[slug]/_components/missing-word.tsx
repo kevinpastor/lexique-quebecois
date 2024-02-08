@@ -1,9 +1,9 @@
 import { Add } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
 import Link from "next/link";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
-export const MissingWord = (): ReactElement => (
+export const MissingWord = (): ReactNode => (
     <Card>
         <CardHeader title="Ce mot n'a pas été trouvé" />
         <CardContent>

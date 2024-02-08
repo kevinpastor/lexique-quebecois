@@ -1,12 +1,12 @@
 import { Container, Unstable_Grid2 as Grid, Stack } from "@mui/material";
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 
 import { ErrorBoundary } from "./error-boundary";
 import { Footer } from "./footer";
 import { Sidebar } from "./sidebar";
 import { UnexpectedError } from "../unexpected-error";
 
-export const Content = ({ children }: PropsWithChildren): ReactElement => (
+export const Content = ({ children }: PropsWithChildren): ReactNode => (
     <Container>
         <Grid
             container

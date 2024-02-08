@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
-export const ContentPage = (): ReactElement => (
+export const ContentPage = (): ReactNode => (
     <Card>
         <CardHeader title="Politique sur le contenu" />
         <CardContent>

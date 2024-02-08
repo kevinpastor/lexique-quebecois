@@ -1,6 +1,6 @@
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import Link from "next/link";
-import { type ReactElement, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 interface Props {
     label: ReactNode;
@@ -9,7 +9,7 @@ interface Props {
     onClick: () => void;
 }
 
-export const MenuItem = ({ label, href, icon, onClick }: Props): ReactElement => (
+export const MenuItem = ({ label, href, icon, onClick }: Props): ReactNode => (
     <ListItem disableGutters>
         <ListItemButton
             component={Link}

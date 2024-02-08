@@ -1,7 +1,7 @@
 import { AppBar, Container, Stack, Toolbar } from "@mui/material";
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 
-export const NavigationContainer = ({ children }: PropsWithChildren): ReactElement => (
+export const NavigationContainer = ({ children }: PropsWithChildren): ReactNode => (
     <>
         <AppBar>
             <Toolbar disableGutters>

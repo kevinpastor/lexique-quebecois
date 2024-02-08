@@ -1,7 +1,7 @@
 import { Container, List, ListItem, ListItemButton, Skeleton } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
-export const LoadingResults = (): ReactElement => (
+export const LoadingResults = (): ReactNode => (
     <Container>
         <List>
             <ListItem disablePadding>

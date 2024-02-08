@@ -1,9 +1,9 @@
 import { Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { HomeButton } from "./home-button";
 
-export const NotFoundPage = (): ReactElement => {
+export const NotFoundPage = (): ReactNode => {
     return (
         <Card>
             <CardHeader title="404" />

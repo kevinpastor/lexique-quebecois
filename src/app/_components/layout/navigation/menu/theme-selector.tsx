@@ -1,9 +1,9 @@
 import { FormControl, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, type SelectChangeEvent, Stack } from "@mui/material";
-import { type ReactElement, useId } from "react";
+import { type ReactNode, useId } from "react";
 
 import { type ThemeMode, modeIcons, modeLabels, modes, useThemeMode } from "~/hooks/use-theme-mode";
 
-export const ThemeSelector = (): ReactElement => {
+export const ThemeSelector = (): ReactNode => {
     const { mode, setMode } = useThemeMode();
 
     const handleChange = (event: SelectChangeEvent<ThemeMode>): void => {
@@ -23,7 +23,7 @@ export const ThemeSelector = (): ReactElement => {
                 labelId={id}
                 value={mode}
                 onChange={handleChange}
-                renderValue={(value: ThemeMode): ReactElement => (
+                renderValue={(value: ThemeMode): ReactNode => (
                     <Stack
                         direction="row"
                         alignItems="center"
@@ -36,7 +36,7 @@ export const ThemeSelector = (): ReactElement => {
                     </Stack>
                 )}
             >
-                {modes.map((value: ThemeMode): ReactElement => (
+                {modes.map((value: ThemeMode): ReactNode => (
                     <MenuItem
                         key={value}
                         value={value}

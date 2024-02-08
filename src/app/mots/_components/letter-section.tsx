@@ -1,5 +1,5 @@
 import { Unstable_Grid2 as Grid, Typography } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { WordLink } from "./word-link";
 
@@ -7,7 +7,7 @@ interface Props {
     group: Array<string>;
 }
 
-export const LetterSection = ({ group }: Props): ReactElement => {
+export const LetterSection = ({ group }: Props): ReactNode => {
     const firstWord: string = group[0] ?? "";
     const firstLetter: string = firstWord[0] ?? "";
 
@@ -22,7 +22,7 @@ export const LetterSection = ({ group }: Props): ReactElement => {
                 spacing={2}
                 paddingX={0}
             >
-                {group.map((word: string, index: number): ReactElement => (
+                {group.map((word: string, index: number): ReactNode => (
                     <WordLink
                         key={word}
                         word={word}

@@ -1,5 +1,5 @@
 import { TextField as MuiTextField, type TextFieldProps } from "@mui/material";
-import { type ForwardedRef, type ReactElement } from "react";
+import { type ForwardedRef, type ReactNode } from "react";
 import { type FieldValues, type Path, useController } from "react-hook-form";
 
 interface Props<T extends FieldValues = FieldValues> extends Omit<TextFieldProps, "name" | "inputRef"> {
@@ -13,7 +13,7 @@ export const TextField = <TFieldValues extends FieldValues = FieldValues>({
     hideError = false,
     inputRef,
     ...rest
-}: Props<TFieldValues>): ReactElement => {
+}: Props<TFieldValues>): ReactNode => {
     const {
         field: { value, onChange, onBlur, ref },
         fieldState: { error }

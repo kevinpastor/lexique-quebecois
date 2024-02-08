@@ -1,9 +1,9 @@
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 
 import { ConsentContextProvider } from "./context";
 import { ConsentForm } from "./form";
 
-export const ConsentProvider = ({ children }: PropsWithChildren): ReactElement => (
+export const ConsentProvider = ({ children }: PropsWithChildren): ReactNode => (
     <>
         <ConsentForm />
         <ConsentContextProvider>

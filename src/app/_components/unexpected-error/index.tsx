@@ -1,9 +1,9 @@
 import { Card, CardActions, CardContent, CardHeader, Stack } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { RefreshButton } from "./refresh-button";
 
-export const UnexpectedError = (): ReactElement => (
+export const UnexpectedError = (): ReactNode => (
     <Card>
         <CardHeader title="Une erreur s'est produite" />
         <CardContent>

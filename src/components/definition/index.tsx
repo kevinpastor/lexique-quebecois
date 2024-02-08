@@ -1,6 +1,6 @@
 import { Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { ShareButton } from "~/components/share-button";
 import { type Definition as IDefinition, getSlug } from "~/types/definition";
@@ -13,7 +13,7 @@ interface Props {
     definition: IDefinition;
 }
 
-export const Definition = ({ definition }: Props): ReactElement => {
+export const Definition = ({ definition }: Props): ReactNode => {
     const date: Date = new Date(definition.timestamp);
     const formattedDate: string = formatDate(date);
     const slug = getSlug(definition.label);
@@ -46,7 +46,7 @@ export const Definition = ({ definition }: Props): ReactElement => {
                 >
                     {definition.definition
                         .split("\n")
-                        .map((paragraph: string, index: number): ReactElement => (
+                        .map((paragraph: string, index: number): ReactNode => (
                             <Typography
                                 // eslint-disable-next-line react/no-array-index-key
                                 key={index}
@@ -64,7 +64,7 @@ export const Definition = ({ definition }: Props): ReactElement => {
                 >
                     {definition.example
                         .split("\n")
-                        .map((paragraph: string, index: number): ReactElement => (
+                        .map((paragraph: string, index: number): ReactNode => (
                             <Typography
                                 // eslint-disable-next-line react/no-array-index-key
                                 key={index}

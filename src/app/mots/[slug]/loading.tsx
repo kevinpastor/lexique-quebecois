@@ -1,8 +1,8 @@
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { LoadingWord } from "~/components/loading-word";
 
-export const Loading = (): ReactElement => (
+export const Loading = (): ReactNode => (
     <LoadingWord />
 );
 

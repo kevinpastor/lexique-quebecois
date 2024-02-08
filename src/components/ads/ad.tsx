@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, type ReactElement, useEffect, useId } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useId } from "react";
 
 import { Consent } from "~/app/_components/providers/consent-provider/consent";
 import { useConsent } from "~/app/_components/providers/consent-provider/context";
@@ -37,7 +37,7 @@ export const Ad = ({
     format,
     layoutKey,
     fullWidthResponsive = "true"
-}: Props): ReactElement | null => {
+}: Props): ReactNode => {
     const { consent } = useConsent();
     const id: string = useId();
 

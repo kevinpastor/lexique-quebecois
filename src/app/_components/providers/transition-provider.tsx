@@ -1,10 +1,10 @@
 import { AnimatePresence, m } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 
 const distance: number = 25;
 
-export const TransitionProvider = ({ children }: PropsWithChildren): ReactElement => {
+export const TransitionProvider = ({ children }: PropsWithChildren): ReactNode => {
     const pathname: string = usePathname();
 
     return (

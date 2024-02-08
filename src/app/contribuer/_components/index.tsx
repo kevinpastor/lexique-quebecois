@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { FormContainer } from "~/components/react-hook-form/form-container";
 import { useAlerts } from "~/hooks/use-alerts";
@@ -22,7 +22,7 @@ const defaultValues: WithToken<WordRequest> = {
     token: ""
 };
 
-export const ContributePage = (): ReactElement => {
+export const ContributePage = (): ReactNode => {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { push } = useRouter();
     const { enqueueSuccessAlert, enqueueWarningAlert, enqueueErrorAlert } = useAlerts();

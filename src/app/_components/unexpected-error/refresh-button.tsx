@@ -2,9 +2,9 @@
 
 import { Refresh } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
-export const RefreshButton = (): ReactElement => {
+export const RefreshButton = (): ReactNode => {
     const handleClick = (): void => {
         window.location.reload();
     };

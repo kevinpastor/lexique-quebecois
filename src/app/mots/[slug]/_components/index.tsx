@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { DefinitionsAd } from "~/components/ads/definitions-ad";
 import { Definition } from "~/components/definition";
@@ -13,7 +13,7 @@ interface Props {
     word: Word | null;
 }
 
-export const WordPage = ({ word }: Props): ReactElement => {
+export const WordPage = ({ word }: Props): ReactNode => {
     if (!word || word.definitions.length === 0 || !word.definitions[0]) { // `definitions` should theoretically never be empty.
         return <MissingWord />;
     }
@@ -26,7 +26,7 @@ export const WordPage = ({ word }: Props): ReactElement => {
             />
             <Spellings spellings={word.spellings} />
             <DefinitionsAd />
-            {word.definitions.slice(1).map((definition: IDefinition): ReactElement => (
+            {word.definitions.slice(1).map((definition: IDefinition): ReactNode => (
                 <Definition
                     key={definition.id}
                     definition={definition}

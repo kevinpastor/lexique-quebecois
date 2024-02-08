@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type ReactElement, createContext, useContext, useEffect, useState } from "react";
+import { type PropsWithChildren, type ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 import { isAndroid, isIOS, isMacOS, isWindows } from "~/utils/misc/device";
 
@@ -16,7 +16,7 @@ export const usePlatformName = (): PlatformName | undefined => (
     useContext(PlatformNameContext)
 );
 
-export const PlatformNameProvider = ({ children }: PropsWithChildren): ReactElement => {
+export const PlatformNameProvider = ({ children }: PropsWithChildren): ReactNode => {
     const [platformName, setPlatformName] = useState<PlatformName | undefined>(undefined);
 
     useEffect((): void => {

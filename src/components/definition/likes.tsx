@@ -1,6 +1,6 @@
 import { ThumbUp, ThumbUpOutlined } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { CrossfadeLoad } from "./loading-count";
 
@@ -14,7 +14,7 @@ export const Likes = ({
     likes,
     isLiked,
     toggleLike
-}: Props): ReactElement => (
+}: Props): ReactNode => (
     <Tooltip title="J'aime">
         <Button
             onClick={toggleLike}

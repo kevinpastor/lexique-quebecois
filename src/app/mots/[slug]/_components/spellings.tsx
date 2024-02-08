@@ -1,11 +1,11 @@
 import { Card, CardHeader } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 interface Props {
     spellings: Array<string>;
 }
 
-export const Spellings = ({ spellings }: Props): ReactElement | null => {
+export const Spellings = ({ spellings }: Props): ReactNode => {
     if (spellings.length <= 1) {
         return null;
     }

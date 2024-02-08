@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 import { minLength, object, string } from "valibot";
 
 import { FormContainer } from "~/components/react-hook-form/form-container";
@@ -23,7 +23,7 @@ const validationSchema = object({
     ])
 });
 
-export const SearchPage = (): ReactElement => {
+export const SearchPage = (): ReactNode => {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { push } = useRouter();
 

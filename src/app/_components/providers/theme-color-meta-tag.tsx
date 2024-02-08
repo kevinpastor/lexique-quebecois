@@ -1,9 +1,9 @@
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 
 import { useThemeMode } from "~/hooks/use-theme-mode";
 
-export const ThemeColorMetaTag = (): ReactElement => {
+export const ThemeColorMetaTag = (): ReactNode => {
     const { activeMode } = useThemeMode();
 
     return (

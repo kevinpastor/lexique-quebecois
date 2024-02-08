@@ -1,5 +1,5 @@
 import { type Metadata } from "next";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { ContributePage } from "./_components";
 
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: "Contribuer"
 };
 
-const Page = (): ReactElement => (
+const Page = (): ReactNode => (
     <ContributePage />
 );
 

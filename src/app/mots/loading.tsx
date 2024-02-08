@@ -1,11 +1,11 @@
 import { Card, CardContent, CardHeader, Skeleton, Typography } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
-const Loading = (): ReactElement => (
+const Loading = (): ReactNode => (
     <Card>
         <CardHeader title={<Skeleton width={256} />} />
         <CardContent>
-            {[...Array<unknown>(5)].map((_: unknown, index: number): ReactElement => (
+            {[...Array<unknown>(5)].map((_: unknown, index: number): ReactNode => (
                 // eslint-disable-next-line react/no-array-index-key
                 <div key={index}>
                     <Typography variant="h3">

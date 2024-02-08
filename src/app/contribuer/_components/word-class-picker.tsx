@@ -6,7 +6,7 @@ import { type WithToken } from "~/types/with-token";
 import { type WordClass, wordClassAbreviations, wordClasses } from "~/types/word-class";
 import { type WordRequest } from "~/types/word-request";
 
-export const WordClassPicker = (): ReactElement => {
+export const WordClassPicker = (): ReactNode => {
     const { control } = useFormContext<WithToken<WordRequest>>();
 
     const id: string = useId();
@@ -40,7 +40,7 @@ export const WordClassPicker = (): ReactElement => {
                         error={error !== undefined}
                         disabled={isSubmitting}
                     >
-                        {wordClasses.map((wordClass: WordClass): ReactElement => (
+                        {wordClasses.map((wordClass: WordClass): ReactNode => (
                             <MenuItem
                                 key={wordClass}
                                 value={wordClass}
