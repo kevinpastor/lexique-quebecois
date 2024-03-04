@@ -2,7 +2,8 @@
 node_modules/
 
 # testing
-tests/unit/coverage/
+coverage/
+reports/
 tests/e2e/results/
 tests/e2e/report/
 

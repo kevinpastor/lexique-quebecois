@@ -15,8 +15,19 @@ const customJestConfig = {
     moduleNameMapper: {
         "^~\\/(.*)$": "<rootDir>/src/$1"
     },
+    transform: {
+        "^.+\\.(js|jsx|ts|tsx|mjs)$": [
+            "babel-jest",
+            {
+                presets: [
+                    "next/babel"
+                ]
+            }
+        ]
+    },
     collectCoverageFrom: [
-        "<rootDir>/src/**/*"
+        "<rootDir>/src/**/*",
+        "<rootDir>/src/**/*.test.(ts|tsx)"
     ],
     coverageThreshold: {
         global: {
@@ -26,7 +37,11 @@ const customJestConfig = {
             // statements: 70
         }
     },
-    coverageDirectory: "<rootDir>/tests/unit/coverage/"
+    coverageDirectory: "<rootDir>/coverage/",
+    coverageReporters: [
+        "text",
+        "lcov"
+    ]
 };
 
 module.exports = createJestConfig(customJestConfig);
