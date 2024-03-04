@@ -29,6 +29,16 @@ const customJestConfig = {
         "<rootDir>/src/**/*",
         "<rootDir>/src/**/*.test.(ts|tsx)"
     ],
+    transform: {
+        "^.+\\.(js|jsx|ts|tsx|mjs)$": [
+            "babel-jest",
+            {
+                presets: [
+                    "next/babel"
+                ]
+            }
+        ]
+    },
     coverageThreshold: {
         global: {
             branches: 70,
@@ -37,7 +47,6 @@ const customJestConfig = {
             // statements: 70
         }
     },
-    coverageDirectory: "<rootDir>/coverage/",
     coverageReporters: [
         "text",
         "lcov"

@@ -3,9 +3,9 @@ node_modules/
 
 # testing
 coverage/
+e2e/report/
+e2e/results/
 reports/
-tests/e2e/results/
-tests/e2e/report/
 
 # next.js
 .next/
