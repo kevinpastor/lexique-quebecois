@@ -1,0 +1,30 @@
+name: Deployment Testing Workflow
+
+on:
+  - deployment_status
+
+jobs:
+  test-e2e:
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Initialize
+        uses: ./.github/actions/initialize
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+
+      - name: E2E testing
+        run: pnpm run test:e2e
+        env:
+          BASE_URL: ${{ github.event.deployment_status.target_url }}
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: e2e-report
+          path: e2e/report
+          retention-days: 5
