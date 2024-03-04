@@ -10,7 +10,8 @@ const createJestConfig = nextJest({
 const customJestConfig = {
     testPathIgnorePatterns: [
         "/node_modules/",
-        "/e2e/"
+        "/e2e/",
+        "/.stryker-tmp/"
     ],
     moduleNameMapper: {
         "^~\\/(.*)$": "<rootDir>/src/$1"

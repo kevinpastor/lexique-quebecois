@@ -1,5 +1,5 @@
 /**
- * @jest-environment jsdom
+ * @jest-environment @stryker-mutator/jest-runner/jest-env/jsdom
  */
 import { describe, expect, it } from "@jest/globals";
 import { act, renderHook } from "@testing-library/react";

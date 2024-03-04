@@ -22,3 +22,5 @@ next-env.d.ts
 # other
 NOTES.md
 *.mongodb.js
+# stryker temp files
+.stryker-tmp
