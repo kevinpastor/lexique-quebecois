@@ -6,8 +6,7 @@ describe("getSlug", (): void => {
     it.each([
         ["gyu", "gyu"],
         ["pet sauce", "pet-sauce"],
-        ["tokébak", "tokebak"],
-        ["foo", "bar"]
+        ["tokébak", "tokebak"]
     ])("should transform \"%s\" to \"%s\"", (value: string, expected: string): void => {
         const result: string = getSlug(value);
 
