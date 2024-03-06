@@ -13,9 +13,6 @@ const customJestConfig = {
         "/e2e/",
         "/.stryker-tmp/"
     ],
-    moduleNameMapper: {
-        "^~\\/(.*)$": "<rootDir>/src/$1"
-    },
     transform: {
         "^.+\\.(js|jsx|ts|tsx|mjs)$": [
             "babel-jest",
@@ -26,20 +23,22 @@ const customJestConfig = {
             }
         ]
     },
+    moduleNameMapper: {
+        "^~\\/(.*)$": "<rootDir>/src/$1"
+    },
+    reporters: [
+        "summary",
+        [
+            "github-actions",
+            {
+                silent: false
+            }
+        ],
+    ],
     collectCoverageFrom: [
         "<rootDir>/src/**/*",
         "<rootDir>/src/**/*.test.(ts|tsx)"
     ],
-    transform: {
-        "^.+\\.(js|jsx|ts|tsx|mjs)$": [
-            "babel-jest",
-            {
-                presets: [
-                    "next/babel"
-                ]
-            }
-        ]
-    },
     coverageThreshold: {
         global: {
             branches: 70,
