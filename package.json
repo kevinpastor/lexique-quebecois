@@ -16,6 +16,7 @@
     "test:unit": "jest",
     "test:unit:verbose": "jest --verbose",
     "test:unit:coverage": "jest --coverage",
+    "test:unit:coverage:watch": "jest --coverage --watchAll",
     "test:mutation": "stryker run",
     "e2e": "pnpm run test:e2e",
     "test:e2e": "playwright test",

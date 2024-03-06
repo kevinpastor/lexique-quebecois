@@ -1,6 +1,6 @@
 import { describe, expect, it } from "@jest/globals";
 
-import { removeAccents } from "~/utils/misc/string";
+import { groupByFirstLetter, parseJSON, removeAccents } from "~/utils/misc/string";
 
 describe("removeAccents", (): void => {
     it.each([
@@ -99,5 +99,77 @@ describe("removeAccents", (): void => {
         const result: string = removeAccents(value);
 
         expect(result).toEqual(value);
+    });
+});
+
+describe("parserJSON", (): void => {
+    it.each([
+        ["null", null],
+        ["undefined", undefined],
+        ["true", true],
+        ["false", false],
+        ["0", 0],
+        ["\"hello\"", "hello"],
+        ["{}", {}],
+        ["{\"foo\": true}", { foo: true }]
+    ])("should parse `%p`", (value: string, expected: unknown): void => {
+        const result = parseJSON(value);
+
+        expect(result).toEqual(expected);
+    });
+});
+
+describe("groupByFirstLetter", (): void => {
+    it("should group words by their first letter", (): void => {
+        const words = [
+            "alpha",
+            "article",
+            "beta",
+            "cage",
+            "charlie"
+        ];
+
+        const result = groupByFirstLetter(words);
+
+        expect(result).toEqual([
+            [
+                "alpha",
+                "article"
+            ],
+            [
+                "beta"
+            ],
+            [
+                "cage",
+                "charlie"
+            ]
+        ]);
+    });
+
+    it("should skip empty words", (): void => {
+        const words = [
+            "alpha",
+            "article",
+            "beta",
+            "",
+            "cage",
+            "charlie"
+        ];
+
+        const result = groupByFirstLetter(words);
+
+        expect(result).toEqual([
+            [
+                "alpha",
+                "article"
+            ],
+            [
+                "beta"
+            ],
+            [
+                "cage",
+                "charlie"
+            ]
+        ]);
     });
 });

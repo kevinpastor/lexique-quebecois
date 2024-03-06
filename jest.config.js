@@ -26,18 +26,10 @@ const customJestConfig = {
     moduleNameMapper: {
         "^~\\/(.*)$": "<rootDir>/src/$1"
     },
-    reporters: [
-        "summary",
-        [
-            "github-actions",
-            {
-                silent: false
-            }
-        ],
-    ],
     collectCoverageFrom: [
         "<rootDir>/src/**/*",
-        "<rootDir>/src/**/*.test.(ts|tsx)"
+        "!<rootDir>/src/**/*.tsx",
+        "!<rootDir>/src/**/*.test.ts",
     ],
     coverageThreshold: {
         global: {
@@ -46,11 +38,7 @@ const customJestConfig = {
             // lines: 70
             // statements: 70
         }
-    },
-    coverageReporters: [
-        "text",
-        "lcov"
-    ]
+    }
 };
 
 module.exports = createJestConfig(customJestConfig);
