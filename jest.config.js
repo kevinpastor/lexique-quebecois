@@ -10,13 +10,34 @@ const createJestConfig = nextJest({
 const customJestConfig = {
     testPathIgnorePatterns: [
         "/node_modules/",
-        "/e2e/"
+        "/e2e/",
+        "/.stryker-tmp/"
     ],
+    transform: {
+        "^.+\\.(js|jsx|ts|tsx|mjs)$": [
+            "babel-jest",
+            {
+                presets: [
+                    "next/babel"
+                ]
+            }
+        ]
+    },
     moduleNameMapper: {
         "^~\\/(.*)$": "<rootDir>/src/$1"
     },
+    reporters: [
+        "summary",
+        [
+            "github-actions",
+            {
+                silent: false
+            }
+        ],
+    ],
     collectCoverageFrom: [
-        "<rootDir>/src/**/*"
+        "<rootDir>/src/**/*",
+        "<rootDir>/src/**/*.test.(ts|tsx)"
     ],
     coverageThreshold: {
         global: {
@@ -26,7 +47,10 @@ const customJestConfig = {
             // statements: 70
         }
     },
-    coverageDirectory: "<rootDir>/tests/unit/coverage/"
+    coverageReporters: [
+        "text",
+        "lcov"
+    ]
 };
 
 module.exports = createJestConfig(customJestConfig);

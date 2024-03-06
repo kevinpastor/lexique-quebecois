@@ -1,0 +1,44 @@
+name: Testing Workflow
+
+on:
+  - push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Initialize
+        uses: ./.github/actions/initialize
+
+      - name: Lint
+        run: pnpm run lint
+
+  test-unit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Initialize
+        uses: ./.github/actions/initialize
+
+      - name: Unit testing
+        run: pnpm run test:unit
+
+  test-mutation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Initialize
+        uses: ./.github/actions/initialize
+
+      - name: Mutation testing
+        run: pnpm run test:mutation
