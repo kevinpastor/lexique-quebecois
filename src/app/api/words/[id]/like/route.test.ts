@@ -1,5 +1,5 @@
 import { NextRequest, type NextResponse } from "next/server";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { like } from "~/app/api/words/[id]/like/like";
 import { removeLike } from "~/app/api/words/[id]/like/remove-like";
@@ -79,7 +79,6 @@ describe("DELETE", (): void => {
     beforeEach((): void => {
         consumeMock.mockReturnValue(false);
     });
-
 
     it("should not remove like with no ip", async (): Promise<void> => {
         const response: NextResponse = await DELETE(requestStubWithoutIp, options);

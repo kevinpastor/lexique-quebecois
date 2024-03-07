@@ -12,6 +12,7 @@
     "build": "next build",
     "preview": "next build && next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "test": "pnpm run test:unit",
     "test:unit": "vitest run",
     "test:unit:verbose": "vitest run --reporter verbose",
