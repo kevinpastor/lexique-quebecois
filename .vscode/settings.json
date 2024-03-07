@@ -9,6 +9,6 @@
         "tsconfig.json": "tsconfig.*.json",
         "package.json": "package-lock.json, pnpm-lock.yaml, yarn.lock"
     },
-    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "typescript.tsdk": "node_modules/typescript/lib",
     "typescript.enablePromptUseWorkspaceTsdk": true
 }
