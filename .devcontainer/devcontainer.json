@@ -16,7 +16,7 @@
         "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules/,type=volume",
         "source=${localWorkspaceFolderBasename}-pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store/,type=volume"
     ],
-    "postCreateCommand": "sudo chown vscode ./node_modules/ ./.pnpm-store/"
+    "postCreateCommand": "git config --global --add safe.directory /workspaces/lexique-quebecois && sudo chown vscode ./node_modules/ ./.pnpm-store/"
 
 
     // Features to add to the dev container. More info: https://containers.dev/features.
