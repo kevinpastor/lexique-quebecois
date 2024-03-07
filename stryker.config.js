@@ -20,7 +20,6 @@ module.exports = {
             ]
         }
     },
-    ignoreStatic: true,
     reporters: [
         "progress",
         "html"
