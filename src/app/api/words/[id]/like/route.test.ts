@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { NextRequest, type NextResponse } from "next/server";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { like } from "~/app/api/words/[id]/like/like";
 import { removeLike } from "~/app/api/words/[id]/like/remove-like";
@@ -7,16 +7,14 @@ import { DELETE, PUT } from "~/app/api/words/[id]/like/route";
 import { Status } from "~/types/status";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 
-jest.mock("~/app/api/words/[id]/like/like", () => ({
-    like: jest.fn()
+vi.mock("~/app/api/words/[id]/like/like", () => ({
+    like: vi.fn()
 }));
-const likeMock = like as jest.MockedFunction<typeof like>;
-jest.mock("~/app/api/words/[id]/like/remove-like", () => ({
-    removeLike: jest.fn()
+vi.mock("~/app/api/words/[id]/like/remove-like", () => ({
+    removeLike: vi.fn()
 }));
-const removeLikeMock = removeLike as jest.MockedFunction<typeof removeLike>;
 
-const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
+const consumeMock = vi.spyOn(RateLimiter.prototype, "consume");
 
 const requestStub: NextRequest = new NextRequest(
     new URL("https://lexiquequebecois.com/api/words/gyu/dislike"),
@@ -38,10 +36,6 @@ describe("PUT", (): void => {
         consumeMock.mockReturnValue(false);
     });
 
-    afterEach((): void => {
-        jest.resetAllMocks();
-    });
-
     it("should not like with no ip", async (): Promise<void> => {
         const response: NextResponse = await PUT(requestStubWithoutIp, options);
 
@@ -57,7 +51,7 @@ describe("PUT", (): void => {
     });
 
     it("should not like non existent word", async (): Promise<void> => {
-        likeMock.mockResolvedValue(Status.NotFound);
+        vi.mocked(like).mockResolvedValue(Status.NotFound);
 
         const response: NextResponse = await PUT(requestStub, options);
 
@@ -65,7 +59,7 @@ describe("PUT", (): void => {
     });
 
     it("should not like already liked word", async (): Promise<void> => {
-        likeMock.mockResolvedValue(Status.Conflict);
+        vi.mocked(like).mockResolvedValue(Status.Conflict);
 
         const response: NextResponse = await PUT(requestStub, options);
 
@@ -73,7 +67,7 @@ describe("PUT", (): void => {
     });
 
     it("should like", async (): Promise<void> => {
-        likeMock.mockResolvedValue(Status.OK);
+        vi.mocked(like).mockResolvedValue(Status.OK);
 
         const response: NextResponse = await PUT(requestStub, options);
 
@@ -86,10 +80,6 @@ describe("DELETE", (): void => {
         consumeMock.mockReturnValue(false);
     });
 
-    afterEach((): void => {
-        consumeMock.mockReset();
-        removeLikeMock.mockReset();
-    });
 
     it("should not remove like with no ip", async (): Promise<void> => {
         const response: NextResponse = await DELETE(requestStubWithoutIp, options);
@@ -107,7 +97,7 @@ describe("DELETE", (): void => {
     });
 
     it("should not remove like on non existent word", async (): Promise<void> => {
-        removeLikeMock.mockResolvedValue(Status.NotFound);
+        vi.mocked(removeLike).mockResolvedValue(Status.NotFound);
 
         const response: NextResponse = await DELETE(requestStub, options);
 
@@ -115,7 +105,7 @@ describe("DELETE", (): void => {
     });
 
     it("should not remove non existent like", async (): Promise<void> => {
-        removeLikeMock.mockResolvedValue(Status.Conflict);
+        vi.mocked(removeLike).mockResolvedValue(Status.Conflict);
 
         const response: NextResponse = await DELETE(requestStub, options);
 

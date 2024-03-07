@@ -9,14 +9,6 @@
         "tsconfig.json": "tsconfig.*.json",
         "package.json": "package-lock.json, pnpm-lock.yaml, yarn.lock"
     },
-    "jest.autoRun": "off",
-    "jest.showCoverageOnLoad": false,
-    "jest.coverageFormatter": "GutterFormatter",
-    "jest.coverageColors": {
-        "covered": "rgba(9, 156, 65, 0.4)",
-        "partially-covered": "rgba(235, 198, 52, 0.4)",
-        "uncovered": "rgba(179, 60, 32, 0.4)"
-    },
     "typescript.tsdk": "node_modules\\typescript\\lib",
     "typescript.enablePromptUseWorkspaceTsdk": true
 }

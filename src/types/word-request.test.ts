@@ -1,4 +1,4 @@
-import { describe, expect, it } from "@jest/globals";
+import { describe, expect, it } from "vitest";
 
 import { type WithToken } from "~/types/with-token";
 import { WordClass } from "~/types/word-class";

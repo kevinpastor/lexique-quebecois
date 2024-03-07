@@ -1,25 +1,16 @@
 // @ts-check
-
 /**
-* @type {import("@stryker-mutator/core/schema/stryker-schema.json")}
+ * @type {import("@stryker-mutator/api/core").PartialStrykerOptions}
 */
 module.exports = {
     plugins: [
         "@stryker-mutator/typescript-checker",
-        "@stryker-mutator/jest-runner"
+        "@stryker-mutator/vitest-runner"
     ],
     checkers: [
         "typescript"
     ],
-    testRunner: "jest",
-    jest: {
-        config: {
-            testPathIgnorePatterns: [
-                "/node_modules/",
-                "/e2e/"
-            ]
-        }
-    },
+    testRunner: "vitest",
     reporters: [
         "progress",
         "html"

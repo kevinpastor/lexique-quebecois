@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { NextRequest, type NextResponse } from "next/server";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { addWord } from "~/app/api/words/add-word";
 import { POST } from "~/app/api/words/route";
@@ -12,22 +12,19 @@ import { type WordRequest } from "~/types/word-request";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 import { verifyHCaptcha } from "~/utils/misc/hcaptcha";
 
-jest.mock("~/app/api/words/add-word", () => ({
-    addWord: jest.fn()
+vi.mock("~/app/api/words/add-word", () => ({
+    addWord: vi.fn()
 }));
-const addWordMock = addWord as jest.MockedFunction<typeof addWord>;
 
-jest.mock("~/utils/misc/hcaptcha", () => ({
-    verifyHCaptcha: jest.fn()
+vi.mock("~/utils/misc/hcaptcha", () => ({
+    verifyHCaptcha: vi.fn()
 }));
-const verifyHCaptchaMock = verifyHCaptcha as jest.MockedFunction<typeof verifyHCaptcha>;
 
-jest.mock("~/app/api/words/send-email", () => ({
-    sendEmail: jest.fn()
+vi.mock("~/app/api/words/send-email", () => ({
+    sendEmail: vi.fn()
 }));
-const sendEmailMock = sendEmail as jest.MockedFunction<typeof sendEmail>;
 
-const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
+const consumeMock = vi.spyOn(RateLimiter.prototype, "consume");
 
 const wordRequestStub: WordRequest = {
     label: "gyu",
@@ -53,14 +50,10 @@ const requestStub: NextRequest = new NextRequest(
 describe("POST", (): void => {
     beforeEach((): void => {
         consumeMock.mockReturnValue(false);
-        verifyHCaptchaMock.mockImplementation((token: string): Promise<boolean> => (
+        vi.mocked(verifyHCaptcha).mockImplementation((token: string): Promise<boolean> => (
             Promise.resolve(token ? true : false)
         ));
-        sendEmailMock.mockResolvedValue(undefined);
-    });
-
-    afterEach((): void => {
-        jest.resetAllMocks();
+        vi.mocked(sendEmail).mockResolvedValue(undefined);
     });
 
     it("should not allow empty request", async (): Promise<void> => {
@@ -125,7 +118,7 @@ describe("POST", (): void => {
     });
 
     it("should add word", async (): Promise<void> => {
-        addWordMock.mockResolvedValue(Status.Created);
+        vi.mocked(addWord).mockResolvedValue(Status.Created);
 
         const response: NextResponse = await POST(requestStub);
 

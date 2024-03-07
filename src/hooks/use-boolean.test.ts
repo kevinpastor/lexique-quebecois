@@ -1,8 +1,8 @@
 /**
- * @jest-environment @stryker-mutator/jest-runner/jest-env/jsdom
+ * @vitest-environment jsdom
  */
-import { describe, expect, it } from "@jest/globals";
 import { act, renderHook } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
 import { type BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
 

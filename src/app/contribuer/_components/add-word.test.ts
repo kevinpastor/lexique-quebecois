@@ -1,7 +1,7 @@
 /**
- * @jest-environment @stryker-mutator/jest-runner/jest-env/jsdom
+ * @vitest-environment jsdom
  */
-import { beforeEach, describe, expect, it, jest } from "@jest/globals";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { addWord } from "~/app/contribuer/_components/add-word";
 import { Method } from "~/types/method";
@@ -9,7 +9,7 @@ import { type WithToken } from "~/types/with-token";
 import { WordClass } from "~/types/word-class";
 import { type WordRequest } from "~/types/word-request";
 
-const fetchMock = jest.fn<typeof fetch>()
+const fetchMock = vi.fn<Parameters<typeof fetch>, ReturnType<typeof fetch>>()
     .mockResolvedValue({
         ok: true
     } as Partial<Response> as Response);

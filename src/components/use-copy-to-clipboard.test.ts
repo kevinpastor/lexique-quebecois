@@ -1,15 +1,15 @@
 /**
- * @jest-environment @stryker-mutator/jest-runner/jest-env/jsdom
+ * @vitest-environment jsdom
  */
-import { afterEach, beforeEach, describe, expect, it, jest } from "@jest/globals";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { type CopyFunction, useCopyToClipboard } from "~/hooks/use-copy-to-clipboard";
 
 describe("useCopyToClipboard", (): void => {
-    const writeTextMock = jest.fn<typeof navigator.clipboard.writeText>()
+    const writeTextMock = vi.fn<Parameters<typeof navigator.clipboard.writeText>, ReturnType<typeof navigator.clipboard.writeText>>()
         .mockResolvedValue(undefined);
 
-    const navigatorMock = jest.spyOn(global, "navigator", "get");
+    const navigatorMock = vi.spyOn(global, "navigator", "get");
 
     beforeEach((): void => {
         navigatorMock.mockReturnValue({
@@ -17,10 +17,6 @@ describe("useCopyToClipboard", (): void => {
                 writeText: writeTextMock
             } as unknown as Clipboard
         } as Partial<Navigator> as Navigator);
-    });
-
-    afterEach((): void => {
-        jest.resetAllMocks();
     });
 
     it("should copy to clipboard", async (): Promise<void> => {

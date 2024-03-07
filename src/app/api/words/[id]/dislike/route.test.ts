@@ -1,23 +1,21 @@
-import { afterEach, beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { NextRequest, type NextResponse } from "next/server";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as dislikeModule from "~/app/api/words/[id]/dislike/dislike";
-import * as removeDislikeModule from "~/app/api/words/[id]/dislike/remove-dislike";
+import { dislike } from "~/app/api/words/[id]/dislike/dislike";
+import { removeDislike } from "~/app/api/words/[id]/dislike/remove-dislike";
 import { DELETE, PUT } from "~/app/api/words/[id]/dislike/route";
 import { Status } from "~/types/status";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 
-jest.mock("~/app/api/words/[id]/dislike/dislike", () => ({
-    dislike: jest.fn()
+vi.mock("~/app/api/words/[id]/dislike/dislike", () => ({
+    dislike: vi.fn()
 }));
 
-const { dislike: dislikeMock } = dislikeModule as jest.Mocked<typeof dislikeModule>;
-jest.mock("~/app/api/words/[id]/dislike/remove-dislike", () => ({
-    removeDislike: jest.fn()
+vi.mock("~/app/api/words/[id]/dislike/remove-dislike", () => ({
+    removeDislike: vi.fn()
 }));
-const { removeDislike: removeDislikeMock } = removeDislikeModule as jest.Mocked<typeof removeDislikeModule>;
 
-const consumeMock = jest.spyOn(RateLimiter.prototype, "consume");
+const consumeMock = vi.spyOn(RateLimiter.prototype, "consume");
 
 const requestStub: NextRequest = new NextRequest(
     new URL("https://lexiquequebecois.com/api/words/gyu/dislike"),
@@ -39,10 +37,6 @@ describe("PUT", (): void => {
         consumeMock.mockReturnValue(false);
     });
 
-    afterEach((): void => {
-        jest.resetAllMocks();
-    });
-
     it("should not dislike with no ip", async (): Promise<void> => {
         const response: NextResponse = await PUT(requestStubWithoutIp, options);
 
@@ -58,7 +52,7 @@ describe("PUT", (): void => {
     });
 
     it("should not dislike non existent word", async (): Promise<void> => {
-        dislikeMock.mockResolvedValue(Status.NotFound);
+        vi.mocked(dislike).mockResolvedValue(Status.NotFound);
 
         const response: NextResponse = await PUT(requestStub, options);
 
@@ -66,7 +60,7 @@ describe("PUT", (): void => {
     });
 
     it("should not dislike already disliked word", async (): Promise<void> => {
-        dislikeMock.mockResolvedValue(Status.Conflict);
+        vi.mocked(dislike).mockResolvedValue(Status.Conflict);
 
         const response: NextResponse = await PUT(requestStub, options);
 
@@ -74,7 +68,7 @@ describe("PUT", (): void => {
     });
 
     it("should dislike", async (): Promise<void> => {
-        dislikeMock.mockResolvedValue(Status.OK);
+        vi.mocked(dislike).mockResolvedValue(Status.OK);
 
         const response: NextResponse = await PUT(requestStub, options);
 
@@ -85,10 +79,6 @@ describe("PUT", (): void => {
 describe("DELETE", (): void => {
     beforeEach((): void => {
         consumeMock.mockReturnValue(false);
-    });
-
-    afterEach((): void => {
-        jest.resetAllMocks();
     });
 
     it("should not remove dislike with no ip", async (): Promise<void> => {
@@ -106,7 +96,7 @@ describe("DELETE", (): void => {
     });
 
     it("should not remove dislike on non existent word", async (): Promise<void> => {
-        removeDislikeMock.mockResolvedValue(Status.NotFound);
+        vi.mocked(removeDislike).mockResolvedValue(Status.NotFound);
 
         const response: NextResponse = await DELETE(requestStub, options);
 
@@ -114,7 +104,7 @@ describe("DELETE", (): void => {
     });
 
     it("should not remove non existent dislike", async (): Promise<void> => {
-        removeDislikeMock.mockResolvedValue(Status.Conflict);
+        vi.mocked(removeDislike).mockResolvedValue(Status.Conflict);
 
         const response: NextResponse = await DELETE(requestStub, options);
 
@@ -122,7 +112,7 @@ describe("DELETE", (): void => {
     });
 
     it("should remove dislike", async (): Promise<void> => {
-        removeDislikeMock.mockResolvedValue(Status.OK);
+        vi.mocked(removeDislike).mockResolvedValue(Status.OK);
 
         const response: NextResponse = await DELETE(requestStub, options);
 
