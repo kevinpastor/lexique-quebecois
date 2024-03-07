@@ -14,6 +14,8 @@ describe("isInteger", (): void => {
     });
 
     it.each([
+        [" 0"],
+        ["0 "],
         ["hello"],
         ["NaN"],
         ["undefined"]

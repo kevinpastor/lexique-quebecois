@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { type ComponentType, type ReactNode, Suspense } from "react";
 
 import { type BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
-import { isLowEndDevice } from "~/utils/misc/device";
+import { isLowEndDevice } from "~/utils/misc/device/isLowEndDevice";
 
 import { type MenuContentProps } from "./menu-content";
 
