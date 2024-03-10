@@ -14,6 +14,23 @@ describe("useNumber", (): void => {
         expect(result.current.value).toEqual(initialValue);
     });
 
+    it("should update the value", (): void => {
+        const { result, rerender } = renderHook(
+            ({ value }): NumberUtilities => useNumber(value),
+            {
+                initialProps: {
+                    value: 0
+                }
+            }
+        );
+
+        expect(result.current.value).toBe(0);
+
+        rerender({ value: 1 });
+
+        expect(result.current.value).toBe(1);
+    });
+
     it("should set value", (): void => {
         const initialValue: number = 0;
         const { result, rerender } = renderHook((): NumberUtilities => useNumber(initialValue));
