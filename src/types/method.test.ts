@@ -12,7 +12,7 @@ describe("isValidMethod", (): void => {
         ])("should consider \"%s\" as valid", (method: string): void => {
             const result: boolean = isValidMethod(method);
 
-            expect(result).toBeTruthy();
+            expect(result).toBe(true);
         });
     });
 
@@ -23,7 +23,7 @@ describe("isValidMethod", (): void => {
         ])("should not consider \"%s\" as valid", (method: string): void => {
             const result: boolean = isValidMethod(method);
 
-            expect(result).toBeFalsy();
+            expect(result).toBe(false);
         });
     });
 });

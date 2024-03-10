@@ -10,13 +10,30 @@ describe("useBoolean", (): void => {
     it("should initialize to true", (): void => {
         const { result } = renderHook((): BooleanUtilities => useBoolean(true));
 
-        expect(result.current.value).toBeTruthy();
+        expect(result.current.value).toBe(true);
     });
 
     it("should initialize to false", (): void => {
         const { result } = renderHook((): BooleanUtilities => useBoolean(false));
 
-        expect(result.current.value).toBeFalsy();
+        expect(result.current.value).toBe(false);
+    });
+
+    it("should update the value", (): void => {
+        const { result, rerender } = renderHook(
+            ({ value }): BooleanUtilities => useBoolean(value),
+            {
+                initialProps: {
+                    value: false
+                }
+            }
+        );
+
+        expect(result.current.value).toBe(false);
+
+        rerender({ value: true });
+
+        expect(result.current.value).toBe(true);
     });
 
     it("should set value", (): void => {
@@ -27,7 +44,7 @@ describe("useBoolean", (): void => {
         });
 
         rerender();
-        expect(result.current.value).toBeFalsy();
+        expect(result.current.value).toBe(false);
     });
 
     it("should set to true", (): void => {
@@ -38,7 +55,7 @@ describe("useBoolean", (): void => {
         });
 
         rerender();
-        expect(result.current.value).toBeTruthy();
+        expect(result.current.value).toBe(true);
     });
 
     it("should set to false", (): void => {
@@ -49,7 +66,7 @@ describe("useBoolean", (): void => {
         });
 
         rerender();
-        expect(result.current.value).toBeFalsy();
+        expect(result.current.value).toBe(false);
     });
 
     it("should toggle", (): void => {
@@ -60,13 +77,13 @@ describe("useBoolean", (): void => {
         });
 
         rerender();
-        expect(result.current.value).toBeFalsy();
+        expect(result.current.value).toBe(false);
 
         act((): void => {
             result.current.toggle();
         });
 
         rerender();
-        expect(result.current.value).toBeTruthy();
+        expect(result.current.value).toBe(true);
     });
 });

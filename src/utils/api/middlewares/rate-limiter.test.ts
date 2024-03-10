@@ -22,7 +22,7 @@ describe("RateLimiter", (): void => {
             vi.setSystemTime(0);
             const isLimited: boolean = rateLimiter.consume(key);
 
-            expect(isLimited).toBeFalsy();
+            expect(isLimited).toBe(false);
         });
     });
 
@@ -35,7 +35,7 @@ describe("RateLimiter", (): void => {
             vi.setSystemTime(1);
             const isLimited: boolean = rateLimiter.consume(key);
 
-            expect(isLimited).toBeTruthy();
+            expect(isLimited).toBe(true);
         });
     });
 
@@ -49,7 +49,7 @@ describe("RateLimiter", (): void => {
             rateLimiter.consume(key);
             const isLimited: boolean = rateLimiter.consume("another-key");
 
-            expect(isLimited).toBeFalsy();
+            expect(isLimited).toBe(false);
         });
     });
 
@@ -62,7 +62,7 @@ describe("RateLimiter", (): void => {
             vi.setSystemTime(2);
             const isLimited: boolean = rateLimiter.consume(key);
 
-            expect(isLimited).toBeFalsy();
+            expect(isLimited).toBe(false);
         });
     });
 });

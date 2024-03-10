@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi } from "vitest";
 
-import { isUserAgent } from "./isUserAgent";
+import { isUserAgent } from "./is-user-agent";
 
 describe("isUserAgent", (): void => {
     describe("when navigator is undefined", (): void => {

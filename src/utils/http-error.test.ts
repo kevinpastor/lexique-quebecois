@@ -8,7 +8,7 @@ describe("isHttpError", (): void => {
         it("should not be considered valid", (): void => {
             const result: boolean = isHttpError({});
 
-            expect(result).toBeFalsy();
+            expect(result).toBe(false);
         });
     });
 
@@ -19,7 +19,7 @@ describe("isHttpError", (): void => {
 
                 const result: boolean = isHttpError(error);
 
-                expect(result).toBeFalsy();
+                expect(result).toBe(false);
             });
         });
 
@@ -29,7 +29,7 @@ describe("isHttpError", (): void => {
 
                 const result: boolean = isHttpError(error);
 
-                expect(result).toBeTruthy();
+                expect(result).toBe(true);
             });
         });
     });

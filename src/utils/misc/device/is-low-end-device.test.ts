@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi } from "vitest";
 
-import { isLowEndDevice } from "./isLowEndDevice";
+import { isLowEndDevice } from "./is-low-end-device";
 
 describe("isLowEndDevice", (): void => {
     describe("when the userAgent is a low-end device", (): void => {

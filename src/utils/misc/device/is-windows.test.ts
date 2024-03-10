@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi } from "vitest";
 
-import { isWindows } from "./isWindows";
+import { isWindows } from "./is-windows";
 
 describe("isWindows", (): void => {
     describe("when the userAgent is a Windows device", (): void => {

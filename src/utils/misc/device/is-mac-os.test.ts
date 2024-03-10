@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi } from "vitest";
 
-import { isMacOS } from "./isMacOS";
+import { isMacOS } from "./is-mac-os";
 
 describe("isMacOS", (): void => {
     describe("when the userAgent is a macOS device", (): void => {

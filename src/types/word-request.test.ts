@@ -20,7 +20,7 @@ describe("isWordRequestWithToken", (): void => {
 
             const result: boolean = isWordRequestWithToken(value);
 
-            expect(result).toBeFalsy();
+            expect(result).toBe(false);
         });
     });
 
@@ -30,7 +30,7 @@ describe("isWordRequestWithToken", (): void => {
 
             const result: boolean = isWordRequestWithToken(value);
 
-            expect(result).toBeFalsy();
+            expect(result).toBe(false);
         });
     });
 
@@ -56,7 +56,7 @@ describe("isWordRequestWithToken", (): void => {
 
                 const result: boolean = isWordRequestWithToken(value);
 
-                expect(result).toBeFalsy();
+                expect(result).toBe(false);
             });
         });
 
@@ -67,7 +67,7 @@ describe("isWordRequestWithToken", (): void => {
                     wordClasses: undefined
                 });
 
-                expect(result).toBeFalsy();
+                expect(result).toBe(false);
             });
         });
 
@@ -78,7 +78,7 @@ describe("isWordRequestWithToken", (): void => {
                     wordClasses: ["foo"]
                 });
 
-                expect(result).toBeFalsy();
+                expect(result).toBe(false);
             });
         });
 
@@ -203,13 +203,13 @@ describe("isWordRequestWithToken", (): void => {
 
             const result: boolean = isWordRequestWithToken(value);
 
-            expect(result).toBeTruthy();
+            expect(result).toBe(true);
         });
 
         it("should be considered valid", (): void => {
             const result: boolean = isWordRequestWithToken(wordRequestWithTokenStub);
 
-            expect(result).toBeTruthy();
+            expect(result).toBe(true);
         });
     });
 });

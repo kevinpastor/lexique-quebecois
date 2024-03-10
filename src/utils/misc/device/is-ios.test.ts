@@ -3,7 +3,7 @@
  */
 import { describe, expect, it, vi } from "vitest";
 
-import { isIOS } from "./isIOS";
+import { isIOS } from "./is-ios";
 
 describe("isIOS", (): void => {
     describe("when the userAgent is an iOS device", (): void => {

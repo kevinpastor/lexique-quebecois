@@ -1,9 +1,9 @@
 import { type PropsWithChildren, type ReactNode, createContext, useContext, useEffect, useState } from "react";
 
-import { isAndroid } from "~/utils/misc/device/isAndroid";
-import { isIOS } from "~/utils/misc/device/isIOS";
-import { isMacOS } from "~/utils/misc/device/isMacOS";
-import { isWindows } from "~/utils/misc/device/isWindows";
+import { isAndroid } from "~/utils/misc/device/is-android";
+import { isIOS } from "~/utils/misc/device/is-ios";
+import { isMacOS } from "~/utils/misc/device/is-mac-os";
+import { isWindows } from "~/utils/misc/device/is-windows";
 
 export enum PlatformName {
     iOS = "iOS",

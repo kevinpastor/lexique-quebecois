@@ -14,7 +14,6 @@ const getMongoClient = async (): Promise<MongoClient> => {
     }
 
     // 2. Reassign database from cache
-    /* istanbul ignore if */
     if (isDevelopmentEnvironment()) {
         mongoClientConnect = (global as ExtendedGlobal)._mongoClientConnect;
     }
@@ -30,7 +29,6 @@ const getMongoClient = async (): Promise<MongoClient> => {
         mongoClientConnect = mongoClient.connect();
 
         // 1. Cache the MongoClient for hot reload
-        /* istanbul ignore if */
         if (isDevelopmentEnvironment()) {
             (global as ExtendedGlobal)._mongoClientConnect = mongoClientConnect;
         }
