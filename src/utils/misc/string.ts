@@ -2,10 +2,10 @@ export const removeAccents = (input: string): string => (
     input.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 );
 
-export const parseJSON = (value: string | null): unknown => {
+export const parseJSON = (value: string): unknown => {
     return value === "undefined"
         ? undefined
-        : JSON.parse(value ?? "");
+        : JSON.parse(value);
 };
 
 /**

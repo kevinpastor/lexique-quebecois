@@ -1,4 +1,4 @@
-import { type ReactElement, type RefObject } from "react";
+import { type ReactNode, type RefObject } from "react";
 import { useWatch } from "react-hook-form";
 import useSWR from "swr";
 
@@ -12,7 +12,7 @@ interface Props {
     inputRef: RefObject<HTMLInputElement>;
 }
 
-export const ResultsContainer = ({ inputRef }: Props): ReactElement | null => {
+export const ResultsContainer = ({ inputRef }: Props): ReactNode => {
     const label: string = useWatch<FormValues>({ name: "label" });
     const debouncedLabel: string = useDebounce(label);
 

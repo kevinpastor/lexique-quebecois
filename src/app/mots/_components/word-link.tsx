@@ -1,6 +1,6 @@
 import { Unstable_Grid2 as Grid, Link } from "@mui/material";
 import NextLink from "next/link";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { getSlug } from "~/types/definition";
 
@@ -9,7 +9,7 @@ interface Props {
     isLast?: boolean;
 }
 
-export const WordLink = ({ word, isLast = false }: Props): ReactElement => {
+export const WordLink = ({ word, isLast = false }: Props): ReactNode => {
     const slug: string = getSlug(word);
 
     return (

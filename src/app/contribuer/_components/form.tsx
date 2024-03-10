@@ -2,7 +2,7 @@ import { Check } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { Card, CardActions, CardContent, CardHeader, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 import { useFormState } from "react-hook-form";
 
 import { TextField } from "~/components/react-hook-form/text-field";
@@ -12,7 +12,7 @@ import { type WordRequest } from "~/types/word-request";
 import { Captcha } from "./captcha";
 import { WordClassPicker } from "./word-class-picker";
 
-export const Form = (): ReactElement => {
+export const Form = (): ReactNode => {
     const { isDirty: _, isSubmitting } = useFormState<WithToken<WordRequest>>();
 
     // TODO Bring back onBeforeUnload

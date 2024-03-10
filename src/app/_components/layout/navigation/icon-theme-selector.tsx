@@ -1,11 +1,11 @@
 "use client";
 
 import { IconButton, Tooltip } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { modeIcons, useThemeMode } from "~/hooks/use-theme-mode";
 
-export const IconThemeSelector = (): ReactElement | null => {
+export const IconThemeSelector = (): ReactNode => {
     const { mode, cycle } = useThemeMode();
 
     if (mode === undefined) {

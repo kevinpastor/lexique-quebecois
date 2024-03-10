@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { useShare } from "~/hooks/use-share";
 
@@ -11,7 +11,7 @@ interface Props {
     url: string;
 }
 
-export const ShareButton = ({ url }: Props): ReactElement => {
+export const ShareButton = ({ url }: Props): ReactNode => {
     const share = useShare(url);
 
     return (

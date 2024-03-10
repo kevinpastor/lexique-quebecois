@@ -1,5 +1,5 @@
 import { type FeatureBundle, LazyMotion } from "framer-motion";
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 
 const lazyFeatures = async (): Promise<FeatureBundle> => {
     const { features } = await import("./features");
@@ -7,7 +7,7 @@ const lazyFeatures = async (): Promise<FeatureBundle> => {
     return features;
 };
 
-export const AnimationProvider = ({ children }: PropsWithChildren): ReactElement => (
+export const AnimationProvider = ({ children }: PropsWithChildren): ReactNode => (
     <LazyMotion
         features={lazyFeatures}
         strict

@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { Email, EmailType } from "~/components/email";
 
-export const PrivacyPage = (): ReactElement => (
+export const PrivacyPage = (): ReactNode => (
     <Card>
         <CardHeader title="Politique de confidentialité" />
         <CardContent>

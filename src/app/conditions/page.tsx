@@ -1,5 +1,5 @@
 import { type Metadata } from "next";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { ConditionsPage } from "./_components";
 
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: "Conditions"
 };
 
-const Page = (): ReactElement => (
+const Page = (): ReactNode => (
     <ConditionsPage />
 );
 

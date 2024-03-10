@@ -1,10 +1,12 @@
 # dependencies
 node_modules/
+.pnpm-store/
 
 # testing
-tests/unit/coverage/
-tests/e2e/results/
-tests/e2e/report/
+coverage/
+e2e/report/
+e2e/results/
+reports/
 
 # next.js
 .next/
@@ -21,3 +23,5 @@ next-env.d.ts
 # other
 NOTES.md
 *.mongodb.js
+# stryker temp files
+.stryker-tmp

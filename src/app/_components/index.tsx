@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { DefinitionsAd } from "~/components/ads/definitions-ad";
 import { Definition } from "~/components/definition";
@@ -10,10 +10,10 @@ interface Props {
     definitions: Array<IDefinition>;
 }
 
-export const WordsPage = ({ definitions }: Props): ReactElement => (
+export const WordsPage = ({ definitions }: Props): ReactNode => (
     <Stack spacing={2}>
         {insert(
-            definitions.map((definition: IDefinition): ReactElement => (
+            definitions.map((definition: IDefinition): ReactNode => (
                 <Definition
                     key={definition.id}
                     definition={definition}

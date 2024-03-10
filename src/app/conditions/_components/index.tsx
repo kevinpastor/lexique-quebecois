@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, Link, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { Email, EmailType } from "~/components/email";
 
-export const ConditionsPage = (): ReactElement => (
+export const ConditionsPage = (): ReactNode => (
     <Card>
         <CardHeader title="Conditions d'utilisation" />
         <CardContent>

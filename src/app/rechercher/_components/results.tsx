@@ -1,6 +1,6 @@
 import { Container, List, ListItem, ListItemButton } from "@mui/material";
 import Link from "next/link";
-import { type ReactElement, type RefObject, useEffect } from "react";
+import { type ReactNode, type RefObject, useEffect } from "react";
 
 import { Highlight } from "~/components/highlight";
 import { type KeyboardFocusSelectionUtility, useKeyboardFocusSelection } from "~/hooks/use-keyboard-focus-selection";
@@ -12,7 +12,7 @@ interface Props {
     words: Array<string>;
 }
 
-export const Results = ({ inputRef, label, words }: Props): ReactElement => {
+export const Results = ({ inputRef, label, words }: Props): ReactNode => {
     const { itemRef }: KeyboardFocusSelectionUtility = useKeyboardFocusSelection();
 
     useEffect((): void => {
@@ -22,7 +22,7 @@ export const Results = ({ inputRef, label, words }: Props): ReactElement => {
     return (
         <Container>
             <List>
-                {words.map((word: string, index: number): ReactElement => (
+                {words.map((word: string, index: number): ReactNode => (
                     <ListItem
                         key={word}
                         disablePadding

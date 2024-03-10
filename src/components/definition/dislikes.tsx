@@ -1,6 +1,6 @@
 import { ThumbDown, ThumbDownOutlined } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { CrossfadeLoad } from "./loading-count";
 
@@ -14,7 +14,7 @@ export const Dislikes = ({
     dislikes,
     isDisliked,
     toggleDislike
-}: Props): ReactElement => (
+}: Props): ReactNode => (
     <Tooltip title="Je n'aime pas">
         <Button
             onClick={toggleDislike}

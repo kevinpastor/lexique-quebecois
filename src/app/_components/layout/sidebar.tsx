@@ -1,11 +1,11 @@
 import { Card, CardContent, Link, Stack, Typography } from "@mui/material";
 import NextLink from "next/link";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { DefinitionsAd } from "~/components/ads/definitions-ad";
 import { DesktopOnly } from "~/components/desktop-only";
 
-export const Sidebar = (): ReactElement => (
+export const Sidebar = (): ReactNode => (
     <Stack
         spacing={2}
         component="aside"

@@ -1,10 +1,6 @@
 {
     "recommendations": [
-        "aaron-bond.better-comments",
-        "bradlc.vscode-tailwindcss",
-        "csstools.postcss",
         "dbaeumer.vscode-eslint",
-        "formulahendry.auto-rename-tag",
-        "orta.vscode-jest"
+        "vitest.explorer"
     ]
 }

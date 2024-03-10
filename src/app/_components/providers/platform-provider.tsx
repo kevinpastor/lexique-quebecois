@@ -1,6 +1,9 @@
-import { type PropsWithChildren, type ReactElement, createContext, useContext, useEffect, useState } from "react";
+import { type PropsWithChildren, type ReactNode, createContext, useContext, useEffect, useState } from "react";
 
-import { isAndroid, isIOS, isMacOS, isWindows } from "~/utils/misc/device";
+import { isAndroid } from "~/utils/misc/device/is-android";
+import { isIOS } from "~/utils/misc/device/is-ios";
+import { isMacOS } from "~/utils/misc/device/is-mac-os";
+import { isWindows } from "~/utils/misc/device/is-windows";
 
 export enum PlatformName {
     iOS = "iOS",
@@ -16,7 +19,7 @@ export const usePlatformName = (): PlatformName | undefined => (
     useContext(PlatformNameContext)
 );
 
-export const PlatformNameProvider = ({ children }: PropsWithChildren): ReactElement => {
+export const PlatformNameProvider = ({ children }: PropsWithChildren): ReactNode => {
     const [platformName, setPlatformName] = useState<PlatformName | undefined>(undefined);
 
     useEffect((): void => {

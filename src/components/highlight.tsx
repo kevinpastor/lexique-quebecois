@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { removeAccents } from "~/utils/misc/string";
 
@@ -12,7 +12,7 @@ interface Props {
     highlight: string;
 }
 
-export const Highlight = ({ word, highlight }: Props): ReactElement => {
+export const Highlight = ({ word, highlight }: Props): ReactNode => {
     const massagedWord: string = massageString(word);
     const massagedHighlight: string = massageString(highlight);
 

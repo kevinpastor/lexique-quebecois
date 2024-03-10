@@ -1,12 +1,12 @@
 import { DarkMode, LightMode, SettingsBrightness } from "@mui/icons-material";
 import { useColorScheme } from "@mui/material/styles";
-import { type ReactElement, useCallback } from "react";
+import { type ReactNode, useCallback } from "react";
 
 export type ThemeMode = "light" | "dark" | "system";
 
 export const modes: Array<ThemeMode> = ["system", "light", "dark"];
 
-export const modeIcons: Record<ThemeMode, ReactElement> = {
+export const modeIcons: Record<ThemeMode, ReactNode> = {
     "system": <SettingsBrightness />,
     "light": <LightMode />,
     "dark": <DarkMode />

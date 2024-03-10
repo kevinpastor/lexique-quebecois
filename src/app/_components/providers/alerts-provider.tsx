@@ -1,6 +1,6 @@
 import { Alert as MuiAlert, type SnackbarProps } from "@mui/material";
 import dynamic from "next/dynamic";
-import { type ComponentType, type PropsWithChildren, type ReactElement, Suspense, type SyntheticEvent, createContext, useCallback, useEffect, useMemo } from "react";
+import { type ComponentType, type PropsWithChildren, type ReactNode, Suspense, type SyntheticEvent, createContext, useCallback, useEffect, useMemo } from "react";
 
 import { type BooleanUtilities, useBoolean } from "~/hooks/use-boolean";
 import { type QueueUtility, useQueue } from "~/hooks/use-queue";
@@ -25,7 +25,7 @@ interface Alert {
     severity: Severity;
 }
 
-export const AlertsProvider = ({ children }: PropsWithChildren): ReactElement => {
+export const AlertsProvider = ({ children }: PropsWithChildren): ReactNode => {
     const {
         value: isOpen,
         setTrue: open,

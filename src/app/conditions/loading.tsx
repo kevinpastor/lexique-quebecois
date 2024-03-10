@@ -1,11 +1,11 @@
 import { Card, CardContent, CardHeader, Skeleton } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
-const Loading = (): ReactElement => (
+const Loading = (): ReactNode => (
     <Card>
         <CardHeader title={<Skeleton width={256} />} />
         <CardContent>
-            {[...Array<unknown>(25)].map((_: unknown, index: number): ReactElement => (
+            {[...Array<undefined>(25)].map((_: undefined, index: number): ReactNode => (
                 <Skeleton
                     // eslint-disable-next-line react/no-array-index-key
                     key={index}

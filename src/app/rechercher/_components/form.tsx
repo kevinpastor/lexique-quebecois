@@ -1,4 +1,4 @@
-import { type ReactElement, useRef } from "react";
+import { type ReactNode, useRef } from "react";
 
 import { NavigationContainer } from "~/components/navigation-container";
 import { TextField } from "~/components/react-hook-form/text-field";
@@ -6,7 +6,7 @@ import { TextField } from "~/components/react-hook-form/text-field";
 import { BackButton } from "./back-button";
 import { ResultsContainer } from "./results-container";
 
-export const Form = (): ReactElement => {
+export const Form = (): ReactNode => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     return (

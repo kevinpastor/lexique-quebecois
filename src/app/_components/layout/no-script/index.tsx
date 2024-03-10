@@ -1,9 +1,9 @@
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { LightweightErrorAlert } from "./lightweight-error-alert";
 import { LightweightSnackbar } from "./lightweight-snackbar";
 
-export const NoScript = (): ReactElement => (
+export const NoScript = (): ReactNode => (
     <noscript>
         <LightweightSnackbar>
             <LightweightErrorAlert>

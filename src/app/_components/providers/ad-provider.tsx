@@ -1,10 +1,10 @@
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 
 import { Consent } from "./consent-provider/consent";
 import { useConsent } from "./consent-provider/context";
 
-export const AdProvider = (): ReactElement | null => {
+export const AdProvider = (): ReactNode => {
     const { consent } = useConsent();
 
     if (consent !== Consent.Accepted) {

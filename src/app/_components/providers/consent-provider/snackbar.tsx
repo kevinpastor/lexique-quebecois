@@ -1,7 +1,7 @@
 import { Cookie } from "@mui/icons-material";
 import { Button, Card, CardActions, CardHeader, Link, Snackbar, Stack } from "@mui/material";
 import NextLink from "next/link";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 export interface ConsentSnackbarProps {
     isOpen: boolean;
@@ -9,7 +9,7 @@ export interface ConsentSnackbarProps {
     onRefuse: () => void;
 }
 
-export const ConsentSnackbar = ({ isOpen, onAccept: handleAccept, onRefuse: handleRefuse }: ConsentSnackbarProps): ReactElement => (
+export const ConsentSnackbar = ({ isOpen, onAccept: handleAccept, onRefuse: handleRefuse }: ConsentSnackbarProps): ReactNode => (
     <Snackbar
         open={isOpen}
         sx={{ maxWidth: "500px" }}

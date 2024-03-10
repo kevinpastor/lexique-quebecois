@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { groupByFirstLetter } from "~/utils/misc/string";
 
@@ -9,14 +9,14 @@ interface Props {
     words: Array<string>;
 }
 
-export const IndexPage = ({ words }: Props): ReactElement => {
+export const IndexPage = ({ words }: Props): ReactNode => {
     const wordGroups: Array<Array<string>> = groupByFirstLetter(words);
 
     return (
         <Card>
             <CardHeader title="Index" />
             <CardContent>
-                {wordGroups.map((group: Array<string>): ReactElement => (
+                {wordGroups.map((group: Array<string>): ReactNode => (
                     <LetterSection
                         key={group[0] !== undefined ? group[0][0] : undefined}
                         group={group}

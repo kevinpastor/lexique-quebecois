@@ -1,7 +1,7 @@
 import { Card, CardActions, CardContent, CardHeader, Skeleton, Stack, Typography } from "@mui/material";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
-export const LoadingWord = (): ReactElement => (
+export const LoadingWord = (): ReactNode => (
     <Card>
         <CardHeader title={<Skeleton width={128} />} />
         <CardContent>

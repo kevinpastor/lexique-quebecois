@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type ReactElement, createContext, useContext, useMemo } from "react";
+import { type PropsWithChildren, type ReactNode, createContext, useContext, useMemo } from "react";
 
 import { useLocalStorage } from "~/hooks/use-local-storage";
 
@@ -10,7 +10,7 @@ interface IConsentContext {
 const ConsentContext = createContext<IConsentContext | undefined>(undefined);
 ConsentContext.displayName = "ConsentContext";
 
-export const ConsentContextProvider = ({ children }: PropsWithChildren): ReactElement => {
+export const ConsentContextProvider = ({ children }: PropsWithChildren): ReactNode => {
     const { value: consent } = useLocalStorage("consent", Consent.Pending);
 
     const value = useMemo((): IConsentContext => ({

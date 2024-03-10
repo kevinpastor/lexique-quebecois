@@ -1,13 +1,13 @@
 "use client";
 
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { useThemeMode } from "~/hooks/use-theme-mode";
 
 import { DefinitionsDarkAd } from "./definitions-dark-ad";
 import { DefinitionsLightAd } from "./definitions-light-ad";
 
-export const DefinitionsAd = (): ReactElement | null => {
+export const DefinitionsAd = (): ReactNode => {
     const { activeMode } = useThemeMode();
 
     if (activeMode === "dark") {

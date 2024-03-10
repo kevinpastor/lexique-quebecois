@@ -1,11 +1,11 @@
 import { AnimatePresence, m } from "framer-motion";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 interface Props {
     value?: number;
 }
 
-export const CrossfadeLoad = ({ value }: Props): ReactElement => (
+export const CrossfadeLoad = ({ value }: Props): ReactNode => (
     <AnimatePresence
         initial={false}
         mode="wait"

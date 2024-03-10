@@ -1,8 +1,8 @@
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { Ad } from "../ad";
 
-export const DefinitionsDarkAd = (): ReactElement | null => (
+export const DefinitionsDarkAd = (): ReactNode => (
     <Ad
         slot="9730536548"
         layoutKey="-fs-11+2q-69+a5"

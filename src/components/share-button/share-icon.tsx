@@ -1,12 +1,12 @@
 import { type SvgIconComponent } from "@mui/icons-material";
 import { AnimatePresence, m } from "framer-motion";
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { PlatformName, usePlatformName } from "~/app/_components/providers/platform-provider";
 
 import { useShareIcon } from "./use-share-icon";
 
-export const ShareIcon = (): ReactElement => {
+export const ShareIcon = (): ReactNode => {
     const platformName: PlatformName | undefined = usePlatformName();
     const Icon: SvgIconComponent = useShareIcon();
 

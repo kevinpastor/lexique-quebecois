@@ -1,7 +1,7 @@
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 
 // Vaguely imitates the behavior of the Alert component of MUI.
-export const LightweightErrorAlert = ({ children }: PropsWithChildren): ReactElement => (
+export const LightweightErrorAlert = ({ children }: PropsWithChildren): ReactNode => (
     <div
         style={{
             borderRadius: 4,

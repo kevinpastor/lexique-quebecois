@@ -1,6 +1,6 @@
 "use client";
 
-import { Component, type PropsWithChildren, type ReactElement, type ReactNode } from "react";
+import { Component, type PropsWithChildren, type ReactNode } from "react";
 
 interface Props {
     fallback: ReactNode;
@@ -25,23 +25,15 @@ export class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
         return true;
     }
 
-    public render(): ReactElement {
+    public render(): ReactNode {
         const { children, fallback } = this.props;
         const { hasError } = this.state;
 
         if (hasError) {
-            return (
-                <>
-                    {fallback}
-                </>
-            );
+            return fallback;
         }
 
-        return (
-            <>
-                {children}
-            </>
-        );
+        return children;
     }
 
 }

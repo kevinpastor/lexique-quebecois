@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 import { SWRConfig } from "swr";
 
 import { fetcher } from "./fetcher";
@@ -9,7 +9,7 @@ const value: Config = {
     fetcher
 };
 
-export const SWRProvider = ({ children }: PropsWithChildren): ReactElement => (
+export const SWRProvider = ({ children }: PropsWithChildren): ReactNode => (
     <SWRConfig value={value}>
         {children}
     </SWRConfig>

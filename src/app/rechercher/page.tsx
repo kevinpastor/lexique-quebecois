@@ -1,8 +1,8 @@
-import { type ReactElement } from "react";
+import { type ReactNode } from "react";
 
 import { SearchPage } from "./_components";
 
-const Page = (): ReactElement => (
+const Page = (): ReactNode => (
     <SearchPage />
 );
 

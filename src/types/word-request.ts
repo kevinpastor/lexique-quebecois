@@ -1,4 +1,4 @@
-import { array, is, maxLength, merge, minLength, nativeEnum, never, notLength, object, optional, parse, regex, string, toTrimmed, transform } from "valibot";
+import { array, enum_, is, maxLength, merge, minLength, never, notLength, object, optional, parse, regex, string, toTrimmed, transform } from "valibot";
 
 import { type WithToken, withTokenSchema } from "./with-token";
 import { WordClass, wordClasses } from "./word-class";
@@ -23,7 +23,7 @@ const wordRequestSchema = object(
             regex(labelRegex, "Ce champ ne peut contenir que des lettres, des espaces ou des tirets.")
         ]),
         wordClasses: array(
-            nativeEnum(WordClass, "Ce champ doit contenir une des valeurs proposées."),
+            enum_(WordClass, "Ce champ doit contenir une des valeurs proposées."),
             [
                 maxLength(wordClasses.length, `Ce champ doit contenir au maximum ${wordClasses.length} options.`)
             ]

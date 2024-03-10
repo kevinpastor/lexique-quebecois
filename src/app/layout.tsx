@@ -1,5 +1,5 @@
 import { type Metadata, type Viewport } from "next";
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 
 import { Layout } from "./_components/layout";
 import { Providers } from "./_components/providers";
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     }
 };
 
-const RootLayout = ({ children }: PropsWithChildren): ReactElement => (
+const RootLayout = ({ children }: PropsWithChildren): ReactNode => (
     <html
         lang="fr-CA"
         suppressHydrationWarning // Removes the hydration error: "Extra attributes from the server: data-mui-color-scheme".
