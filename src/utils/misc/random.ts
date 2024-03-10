@@ -24,7 +24,7 @@ export const sample = <T extends NonUndefined>(array: Array<T>, sampleSize: numb
     const sampleArray: Array<T> = [];
     for (const index of indexes) {
         const element: T | undefined = array[index];
-        if (!element) {
+        if (element === undefined) {
             continue;
         }
 

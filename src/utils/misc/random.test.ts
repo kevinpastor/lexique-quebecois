@@ -19,6 +19,6 @@ describe("sample", (): void => {
 
         const result = sample(array, size, seed);
 
-        expect(result).toEqual([5, 4, 9, 2]);
+        expect(result).toEqual([5, 4, 9, 0, 2]);
     });
 });
