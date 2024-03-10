@@ -46,6 +46,9 @@ describe("isProductionEnvironment", (): void => {
 
 describe("isCIEnvironment", (): void => {
     it("should not be in CI environment", (): void => {
+        // This is necessary in order for this test case to pass in the CI.
+        vi.stubEnv("CI", "");
+
         expect(isCIEnvironment()).toBe(false);
     });
 
