@@ -9,56 +9,21 @@ const hasLoaded = (state: LoadableReactions): state is Reactions => (
 );
 
 const load = (state: LoadableReactions, payload: Reactions): LoadableReactions => {
-    if (state.isLiked) {
-        if (payload.isLiked) {
-            return {
-                ...state,
-                likes: payload.likes,
-                dislikes: payload.dislikes
-            };
-        }
-
-        if (payload.isDisliked) {
-            return {
-                ...state,
-                likes: payload.likes + 1,
-                dislikes: payload.dislikes - 1
-            };
-        }
-
-        return {
-            ...state,
-            likes: payload.likes + 1,
-            dislikes: payload.dislikes
-        };
-    }
-
-    if (state.isDisliked) {
-        if (payload.isDisliked) {
-            return {
-                ...state,
-                likes: payload.likes,
-                dislikes: payload.dislikes
-            };
-        }
-
-        if (payload.isLiked) {
-            return {
-                ...state,
-                likes: payload.likes - 1,
-                dislikes: payload.dislikes + 1
-            };
-        }
-
-        return {
-            ...state,
-            likes: payload.likes,
-            dislikes: payload.dislikes + 1
-        };
+    if (
+        payload.likes === state.likes
+        && payload.isLiked === state.isLiked
+        && payload.dislikes === state.dislikes
+        && payload.isDisliked === state.isDisliked
+    ) {
+        // This avoids an unnecessary render when the payload matches.
+        return state;
     }
 
     return {
-        ...payload
+        likes: payload.likes,
+        isLiked: payload.isLiked,
+        dislikes: payload.dislikes,
+        isDisliked: payload.isDisliked
     };
 };
 
