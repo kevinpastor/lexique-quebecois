@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "dbaeumer.vscode-eslint",
-        "vitest.explorer"
+        "vitest.explorer",
+        "github.vscode-github-actions"
     ]
 }

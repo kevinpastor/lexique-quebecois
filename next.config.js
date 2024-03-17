@@ -1,5 +1,6 @@
 // @ts-check
 const bundleAnalyzer = require("@next/bundle-analyzer");
+const { join } = require("path");
 
 /** @typedef {(nextConfig?: import("next").NextConfig) => import("next").NextConfig} NextPlugin */
 
@@ -20,27 +21,64 @@ const withBundleAnalyzer = (nextConfig = {}) => (
     })
 );
 
-const hasAnalyzeEnvironmentVariable = process.env.ANALYZE === "true";
-
 /** @type {NextPlugin} */
 const withAnalyze = (nextConfig = {}) => {
+    const hasAnalyzeEnvironmentVariable = process.env.ANALYZE === "true";
     if (!hasAnalyzeEnvironmentVariable) {
         return nextConfig;
     }
 
     return withSourceMapAnalyzer(
-        withBundleAnalyzer(
-            nextConfig
-        )
+        withBundleAnalyzer({
+            ...nextConfig,
+            eslint: {
+                ignoreDuringBuilds: true
+            },
+            typescript: {
+                ignoreBuildErrors: true
+            }
+        })
     );
 };
 
-module.exports = withAnalyze({
-    reactStrictMode: true,
-    eslint: {
-        ignoreDuringBuilds: hasAnalyzeEnvironmentVariable
-    },
-    typescript: {
-        ignoreBuildErrors: hasAnalyzeEnvironmentVariable
+/** @type {NextPlugin} */
+const withProfile = (nextConfig = {}) => {
+    const hasProfileEnvironmentVariable = process.env.PROFILE === "true";
+    if (!hasProfileEnvironmentVariable) {
+        return nextConfig;
     }
-});
+
+    const injectionSource = join(__dirname, "./scripts/why-did-you-render.ts");
+
+    return {
+        ...nextConfig,
+        webpack: (config, { dev, isServer }) => {
+            if (!dev || isServer) {
+                return config;
+            }
+
+            return {
+                ...config,
+                entry: async () => {
+                    const entries = await config.entry();
+
+                    if (!entries["main-app"] || entries["main-app"].includes(injectionSource)) {
+                        return entries;
+                    }
+
+                    return {
+                        ...entries,
+                        ["main-app"]: [
+                            injectionSource,
+                            ...entries["main-app"]
+                        ]
+                    };
+                }
+            };
+        }
+    };
+};
+
+module.exports = withProfile(
+    withAnalyze()
+);
