@@ -20,7 +20,7 @@ jobs:
         run: pnpm exec playwright install --with-deps
 
       - name: E2E testing
-        run: pnpm run test:e2e
+        run: pnpm run e2e
         env:
           BASE_URL: ${{ github.event.deployment_status.target_url }}
 

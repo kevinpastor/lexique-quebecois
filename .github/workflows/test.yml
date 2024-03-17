@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/actions/initialize/
 
       - name: Unit testing
-        run: pnpm run test:unit
+        run: pnpm run test
 
   test-mutation:
     runs-on: ubuntu-latest
