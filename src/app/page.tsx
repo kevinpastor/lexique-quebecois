@@ -3,12 +3,12 @@ import { type ReactElement } from "react";
 import { type Definition } from "~/types/definition";
 
 import { WordsPage } from "./_components";
-import { getDefinitionsSample } from "./_services/get-definitions-sample";
+import { cachedGetDefinitionsSample } from "./_services/get-definitions-sample";
 
 export const revalidate: number = 86400; // Revalidate every day.
 
 const Page = async (): Promise<ReactElement> => {
-    const words: Array<Definition> = await getDefinitionsSample();
+    const words: Array<Definition> = await cachedGetDefinitionsSample();
 
     return (
         <WordsPage definitions={words} />

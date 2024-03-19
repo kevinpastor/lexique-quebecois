@@ -8,7 +8,7 @@ import { ratingOperator } from "~/utils/api/aggregation/rating-operator";
 import { safeSizeOperator } from "~/utils/api/aggregation/safe-size-operator";
 import { timestampOperator } from "~/utils/api/aggregation/timestamp-operator";
 
-const getWordDefinitionsImplementation = async (spelling: string): Promise<Word | null> => {
+const getWordDefinitions = async (spelling: string): Promise<Word | null> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
     const pipeline: Array<Document> = [
@@ -95,4 +95,4 @@ const getWordDefinitionsImplementation = async (spelling: string): Promise<Word 
         .next();
 };
 
-export const getWordDefinitions = cache(getWordDefinitionsImplementation);
+export const cachedGetWordDefinitions = cache(getWordDefinitions);

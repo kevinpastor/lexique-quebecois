@@ -8,7 +8,7 @@ interface OutputDocument {
     spellings: string;
 }
 
-const getWordIndexImplementation = async (): Promise<Array<string>> => {
+const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
     const pipeline: Array<Document> = [
@@ -36,4 +36,4 @@ const getWordIndexImplementation = async (): Promise<Array<string>> => {
         .toArray();
 };
 
-export const getWordIndex = cache(getWordIndexImplementation);
+export const cachedGetWordIndex = cache(getWordIndex);

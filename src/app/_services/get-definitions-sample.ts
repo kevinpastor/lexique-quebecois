@@ -94,7 +94,7 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
         .toArray();
 };
 
-const getDefinitionsSampleImplementation = async (): Promise<Array<Definition>> => {
+const getDefinitionsSample = async (): Promise<Array<Definition>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
@@ -138,4 +138,4 @@ const getDefinitionsSampleImplementation = async (): Promise<Array<Definition>> 
         .toArray();
 };
 
-export const getDefinitionsSample = cache(getDefinitionsSampleImplementation);
+export const cachedGetDefinitionsSample = cache(getDefinitionsSample);
