@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { removeLike } from "~/components/definition/use-reactions/actions/remove-like-action/remove-like";
+import { removeLike } from "~/components/definition/reactions/use-reactions/actions/remove-like-action/remove-like";
 import { Status } from "~/types/status";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 

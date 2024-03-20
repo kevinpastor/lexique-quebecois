@@ -2,7 +2,7 @@ import { ThumbUp, ThumbUpOutlined } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
 import { type ReactNode } from "react";
 
-import { CrossfadeLoad } from "./loading-count";
+import { CrossfadeLoad } from "../loading-count";
 
 interface Props {
     likes?: number;
