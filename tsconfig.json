@@ -26,22 +26,24 @@
         "paths": {
             "~/*": [
                 "./src/*"
-            ],
+            ]
         },
         "plugins": [
             {
                 "name": "next"
             }
         ],
-        "verbatimModuleSyntax": true
+        "verbatimModuleSyntax": true,
+        "types": []
     },
     "include": [
         ".next/types/**/*.ts",
-        "next-env.d.ts",
-        "**/*.ts",
-        "**/*.tsx"
+        "./next-env.d.ts",
+        "./src/**/*.ts",
+        "./src/**/*.tsx",
     ],
     "exclude": [
-        "node_modules"
+        "**/node_modules",
+        "**/.*/"
     ]
 }

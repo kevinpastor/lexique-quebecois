@@ -1,4 +1,5 @@
 import { type Collection, type Db, type Document } from "mongodb";
+import { unstable_cache } from "next/cache";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { type WordDocument } from "~/types/word-document";
@@ -7,7 +8,7 @@ interface OutputDocument {
     spellings: string;
 }
 
-export const getWordIndex = async (): Promise<Array<string>> => {
+const getWordIndex = async (): Promise<Array<string>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
     const pipeline: Array<Document> = [
@@ -34,3 +35,5 @@ export const getWordIndex = async (): Promise<Array<string>> => {
         .map(({ spellings }: OutputDocument): string => (spellings))
         .toArray();
 };
+
+export const cachedGetWordIndex = unstable_cache(getWordIndex);

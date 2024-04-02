@@ -4,7 +4,7 @@ import { type ReactElement } from "react";
 import { type Word } from "~/types/word";
 
 import { WordPage } from "./_components";
-import { getWordDefinitions } from "./_services/get-word-definitions";
+import { cachedGetWordDefinitions } from "./_services/get-word-definitions";
 
 interface Params {
     slug: string;
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-    const word: Word | null = await getWordDefinitions(params.slug);
+    const word: Word | null = await cachedGetWordDefinitions(params.slug);
 
     if (!word || word.definitions.length === 0 || !word.definitions[0]) { // `definitions` should theoretically never be empty.
         return {};
@@ -33,7 +33,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 export const revalidate: number = 86400; // Revalidate every day.
 
 const Page = async ({ params: { slug } }: Props): Promise<ReactElement> => {
-    const word: Word | null = await getWordDefinitions(slug);
+    const word: Word | null = await cachedGetWordDefinitions(slug);
 
     return (
         <WordPage word={word} />

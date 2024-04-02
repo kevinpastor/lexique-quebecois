@@ -6,9 +6,11 @@ import { fetcher } from "~/app/_components/providers/swr-provider/fetcher";
 import { useAlerts } from "~/hooks/use-alerts";
 import { type Reactions } from "~/types/definition";
 import { Status } from "~/types/status";
-import { isHttpError } from "~/utils/http-error";
 
-import { dislike, like, removeDislike, removeLike } from "./reactions";
+import { dislikeAction } from "./actions/dislike-action";
+import { likeAction } from "./actions/like-action";
+import { removeDislikeAction } from "./actions/remove-dislike-action";
+import { removeLikeAction } from "./actions/remove-like-action";
 import { type LoadableReactions, reducer } from "./reducer";
 
 function fetchDefinitionsReactions(this: DataLoader<string, Reactions, string>, definitionIds: ReadonlyArray<string>): Promise<Array<Reactions>> {
@@ -39,7 +41,7 @@ const defaultState: LoadableReactions = {
 
 export const useReactions = (id: string): ReturnType => {
     // Even if the fetch fails, we still let the user interact with the buttons.
-    const { data: reactions, mutate } = useSWR<Reactions, unknown>(
+    const { data: reactions } = useSWR<Reactions, unknown>(
         `/api/words/${id}/reactions`,
         batchFetcher(id)
     );
@@ -70,80 +72,50 @@ export const useReactions = (id: string): ReturnType => {
         });
     }, [reactions]);
 
-    // Update the fetch cache when the state changes.
-    useEffect((): void => {
-        if (likes === undefined || dislikes === undefined) {
-            return;
-        }
-
-        void mutate({
-            likes,
-            isLiked,
-            dislikes,
-            isDisliked
-        });
-    }, [dislikes, isDisliked, isLiked, likes, mutate]);
-
     const { enqueueErrorAlert } = useAlerts();
 
     const toggleLike = async (): Promise<void> => {
         dispatch({ type: "toggleLike" });
 
         if (isLiked) {
-            try {
-                await removeLike(id);
-            }
-            catch (error: unknown) {
-                if (isHttpError(error) && (error.status === Status.Conflict || error.status === Status.NotFound)) {
-                    return;
-                }
-
-                enqueueErrorAlert("Une erreur inconnue s'est produite.");
-            }
-
-            return;
-        }
-
-        try {
-            await like(id);
-        }
-        catch (error: unknown) {
-            if (isHttpError(error) && (error.status === Status.Conflict)) {
+            const status: Status = await removeLikeAction(id);
+            if (status === Status.OK || status === Status.Conflict || status === Status.NotFound) {
                 return;
             }
 
             enqueueErrorAlert("Une erreur inconnue s'est produite.");
+
+            return;
         }
+
+        const status: Status = await likeAction(id);
+        if (status === Status.OK || status === Status.Conflict) {
+            return;
+        }
+
+        enqueueErrorAlert("Une erreur inconnue s'est produite.");
     };
 
     const toggleDislike = async (): Promise<void> => {
         dispatch({ type: "toggleDislike" });
 
         if (isDisliked) {
-            try {
-                await removeDislike(id);
-            }
-            catch (error: unknown) {
-                if (isHttpError(error) && (error.status === Status.Conflict || error.status === Status.NotFound)) {
-                    return;
-                }
-
-                enqueueErrorAlert("Une erreur inconnue s'est produite.");
-            }
-
-            return;
-        }
-
-        try {
-            await dislike(id);
-        }
-        catch (error: unknown) {
-            if (isHttpError(error) && (error.status === Status.Conflict)) {
+            const status: Status = await removeDislikeAction(id);
+            if (status === Status.OK || status === Status.Conflict || status === Status.NotFound) {
                 return;
             }
 
             enqueueErrorAlert("Une erreur inconnue s'est produite.");
+
+            return;
         }
+
+        const status: Status = await dislikeAction(id);
+        if (status === Status.OK || status === Status.Conflict) {
+            return;
+        }
+
+        enqueueErrorAlert("Une erreur inconnue s'est produite.");
     };
 
     return {

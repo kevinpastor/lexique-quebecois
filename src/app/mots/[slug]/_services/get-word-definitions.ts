@@ -1,4 +1,5 @@
 import { type Collection, type Db, type Document } from "mongodb";
+import { unstable_cache } from "next/cache";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { type Word } from "~/types/word";
@@ -7,7 +8,7 @@ import { ratingOperator } from "~/utils/api/aggregation/rating-operator";
 import { safeSizeOperator } from "~/utils/api/aggregation/safe-size-operator";
 import { timestampOperator } from "~/utils/api/aggregation/timestamp-operator";
 
-export const getWordDefinitions = async (spelling: string): Promise<Word | null> => {
+const getWordDefinitions = async (spelling: string): Promise<Word | null> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
     const pipeline: Array<Document> = [
@@ -93,3 +94,5 @@ export const getWordDefinitions = async (spelling: string): Promise<Word | null>
     return await collection.aggregate<Word>(pipeline, defaultAggregateOptions)
         .next();
 };
+
+export const cachedGetWordDefinitions = unstable_cache(getWordDefinitions);

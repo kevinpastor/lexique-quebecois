@@ -37,6 +37,9 @@ export const getReactions = async (definitionIds: Array<string>, ip: string | un
         },
         {
             $project: {
+                _id: {
+                    $toString: "$_id"
+                },
                 likes: safeSizeOperator("$definitions.reactions.likes"),
                 isLiked: safeInOperator("$definitions.reactions.likes", ip),
                 dislikes: safeSizeOperator("$definitions.reactions.dislikes"),

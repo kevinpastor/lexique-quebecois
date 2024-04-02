@@ -1,4 +1,5 @@
 import { type Collection, type Db, type Document, type ObjectId, type WithId } from "mongodb";
+import { unstable_cache } from "next/cache";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { type Definition } from "~/types/definition";
@@ -93,7 +94,7 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
         .toArray();
 };
 
-export const getDefinitionsSample = async (): Promise<Array<Definition>> => {
+const getDefinitionsSample = async (): Promise<Array<Definition>> => {
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
@@ -136,3 +137,5 @@ export const getDefinitionsSample = async (): Promise<Array<Definition>> => {
     return await collection.aggregate<Definition>(pipeline, defaultAggregateOptions)
         .toArray();
 };
+
+export const cachedGetDefinitionsSample = unstable_cache(getDefinitionsSample);
