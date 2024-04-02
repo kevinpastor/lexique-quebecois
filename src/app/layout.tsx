@@ -26,58 +26,19 @@ export const metadata: Metadata = {
         locale: "fr_CA",
         type: "website"
     },
-    icons: [
-        {
-            url: "/favicon/light/16.ico",
-            sizes: "16x16",
-            media: "(prefers-color-scheme: light)"
-        },
-        {
-            url: "/favicon/light/32.ico",
-            sizes: "32x32",
-            media: "(prefers-color-scheme: light)"
-        },
-        {
-            url: "/favicon/light/128.ico",
-            sizes: "128x128",
-            media: "(prefers-color-scheme: light)"
-        },
-        {
-            url: "/favicon/light/180.ico",
-            sizes: "180x180",
-            media: "(prefers-color-scheme: light)"
-        },
-        {
-            url: "/favicon/light/192.ico",
-            sizes: "192x192",
-            media: "(prefers-color-scheme: light)"
-        },
-        {
-            url: "/favicon/dark/16.ico",
-            sizes: "16x16",
-            media: "(prefers-color-scheme: dark)"
-        },
-        {
-            url: "/favicon/dark/32.ico",
-            sizes: "32x32",
-            media: "(prefers-color-scheme: dark)"
-        },
-        {
-            url: "/favicon/dark/128.ico",
-            sizes: "128x128",
-            media: "(prefers-color-scheme: dark)"
-        },
-        {
-            url: "/favicon/dark/180.ico",
-            sizes: "180x180",
-            media: "(prefers-color-scheme: dark)"
-        },
-        {
-            url: "/favicon/dark/192.ico",
-            sizes: "192x192",
-            media: "(prefers-color-scheme: dark)"
-        }
-    ],
+    icons: {
+        icon: [
+            {
+                url: "/favicon.ico",
+                sizes: "32x32"
+            },
+            {
+                url: "/icon.svg",
+                type: "image/svg+xml"
+            }
+        ],
+        apple: "/apple-touch-icon.png"
+    },
     manifest: "/manifest.json",
     appleWebApp: {
         title: "Lexique Québécois",
