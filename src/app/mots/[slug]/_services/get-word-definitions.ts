@@ -1,5 +1,5 @@
 import { type Collection, type Db, type Document } from "mongodb";
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { type Word } from "~/types/word";
@@ -95,4 +95,4 @@ const getWordDefinitions = async (spelling: string): Promise<Word | null> => {
         .next();
 };
 
-export const cachedGetWordDefinitions = cache(getWordDefinitions);
+export const cachedGetWordDefinitions = unstable_cache(getWordDefinitions);

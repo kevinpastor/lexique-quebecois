@@ -1,5 +1,5 @@
 import { type Collection, type Db, type Document } from "mongodb";
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { type WordDocument } from "~/types/word-document";
@@ -36,4 +36,4 @@ const getWordIndex = async (): Promise<Array<string>> => {
         .toArray();
 };
 
-export const cachedGetWordIndex = cache(getWordIndex);
+export const cachedGetWordIndex = unstable_cache(getWordIndex);

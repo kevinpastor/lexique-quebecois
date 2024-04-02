@@ -7,7 +7,7 @@ import { safeInOperator } from "~/utils/api/aggregation/safe-in-operator";
 import { safeSizeOperator } from "~/utils/api/aggregation/safe-size-operator";
 
 export const getReactions = async (definitionIds: Array<string>, ip: string | undefined = ""): Promise<Array<Reactions>> => {
-    const database: Db = await getDatabase();
+        const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
     const pipeline: Array<Document> = [
@@ -37,6 +37,9 @@ export const getReactions = async (definitionIds: Array<string>, ip: string | un
         },
         {
             $project: {
+                _id: {
+                    $toString: "$_id"
+                },
                 likes: safeSizeOperator("$definitions.reactions.likes"),
                 isLiked: safeInOperator("$definitions.reactions.likes", ip),
                 dislikes: safeSizeOperator("$definitions.reactions.dislikes"),

@@ -1,5 +1,5 @@
 import { type Collection, type Db, type Document, type ObjectId, type WithId } from "mongodb";
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 
 import { defaultAggregateOptions, getDatabase } from "~/services/database";
 import { type Definition } from "~/types/definition";
@@ -95,7 +95,7 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
 };
 
 const getDefinitionsSample = async (): Promise<Array<Definition>> => {
-    const database: Db = await getDatabase();
+        const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
     const ids: Array<ObjectId> = await getDefinitionDocumentsId();
@@ -138,4 +138,4 @@ const getDefinitionsSample = async (): Promise<Array<Definition>> => {
         .toArray();
 };
 
-export const cachedGetDefinitionsSample = cache(getDefinitionsSample);
+export const cachedGetDefinitionsSample = unstable_cache(getDefinitionsSample);
