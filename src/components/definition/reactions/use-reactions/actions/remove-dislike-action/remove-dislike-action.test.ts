@@ -4,8 +4,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { Status } from "~/types/status";
 import { RateLimiter } from "~/utils/api/middlewares/rate-limiter";
 
-import { removeDislike } from "./remove-dislike";
 import { removeDislikeAction } from ".";
+import { removeDislike } from "./remove-dislike";
 
 vi.mock("next/headers", () => ({
     headers: vi.fn()

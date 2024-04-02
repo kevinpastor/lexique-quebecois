@@ -95,7 +95,7 @@ const getDefinitionDocumentsId = async (): Promise<Array<ObjectId>> => {
 };
 
 const getDefinitionsSample = async (): Promise<Array<Definition>> => {
-        const database: Db = await getDatabase();
+    const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
     const ids: Array<ObjectId> = await getDefinitionDocumentsId();
