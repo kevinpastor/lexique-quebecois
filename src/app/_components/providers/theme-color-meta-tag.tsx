@@ -10,7 +10,7 @@ export const ThemeColorMetaTag = (): ReactNode => {
         <Helmet>
             <meta
                 name="theme-color"
-                content={activeMode === "dark" ? "#242424" : "#FFFFFF"}
+                content={activeMode === "dark" ? "#242424" : "#FFF"}
             />
         </Helmet>
     );

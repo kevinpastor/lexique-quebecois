@@ -26,20 +26,6 @@ export const metadata: Metadata = {
         locale: "fr_CA",
         type: "website"
     },
-    icons: {
-        icon: [
-            {
-                url: "/favicon.ico",
-                sizes: "32x32"
-            },
-            {
-                url: "/icon.svg",
-                type: "image/svg+xml"
-            }
-        ],
-        apple: "/apple-touch-icon.png"
-    },
-    manifest: "/manifest.json",
     appleWebApp: {
         title: "Lexique Québécois",
         statusBarStyle: "default"
