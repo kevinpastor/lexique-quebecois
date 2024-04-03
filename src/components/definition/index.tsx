@@ -23,6 +23,8 @@ export const Definition = ({ definition }: Props): ReactNode => {
             <CardHeader
                 title={
                     <Stack
+                        // By default `Stack` renders a `div`, which is an invalid child for `CardHeader` default tag, which is `h2`.
+                        component="span"
                         direction="row"
                         spacing={1}
                         alignItems="baseline"
