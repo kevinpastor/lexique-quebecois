@@ -1,6 +1,7 @@
-const stylistic = require("@stylistic/eslint-plugin")
+// @ts-check
+const stylistic = require("@stylistic/eslint-plugin");
 
-const customized = stylistic.configs.customize({
+const { rules: stylisticRules } = stylistic.configs.customize({
     // the following options are the default values
     indent: 4,
     quotes: "double",
@@ -8,8 +9,9 @@ const customized = stylistic.configs.customize({
     arrowParens: true,
     commaDangle: "never",
     quoteProps: "as-needed"
-})
+});
 
+/** @type {import("eslint").ESLint.ConfigData} */
 module.exports = {
     root: true,
     plugins: [
@@ -19,6 +21,7 @@ module.exports = {
     parserOptions: {
         project: "./tsconfig.json"
     },
+    ignorePatterns: ["**/*.js"],
     extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -49,7 +52,7 @@ module.exports = {
         }
     },
     rules: {
-        ...customized.rules,
+        ...stylisticRules,
         "@typescript-eslint/array-type": [
             "error",
             {
