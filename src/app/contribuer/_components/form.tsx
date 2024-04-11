@@ -13,9 +13,9 @@ import { Captcha } from "./captcha";
 import { WordClassPicker } from "./word-class-picker";
 
 export const Form = (): ReactNode => {
-    const { isDirty: _, isSubmitting } = useFormState<WithToken<WordRequest>>();
+    const { isSubmitting } = useFormState<WithToken<WordRequest>>();
 
-    // TODO Bring back onBeforeUnload
+    // TODO Bring back onBeforeUnload. `isDirty` comes from `useFormState`.
     // useLeavePageConfirmation(isDirty && !isSubmitting, "Ton mot n'a pas encore été soumis, est-tu sûr de vouloir l'abandonner?");
 
     return (
@@ -24,7 +24,7 @@ export const Form = (): ReactNode => {
             <CardContent>
                 <Stack spacing={2}>
                     <Typography>
-                        {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
+                        {/* eslint-disable-next-line @stylistic/jsx-one-expression-per-line */}
                         Assure-toi d&apos;avoir pris connaissance de la <Link component={NextLink} href="/contenu">politique sur le contenu</Link> avant de continuer.
                     </Typography>
                     <TextField

@@ -33,7 +33,7 @@ export const Sidebar = (): ReactNode => (
         <Card>
             <CardContent>
                 <Typography align="center">
-                    {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
+                    {/* eslint-disable-next-line @stylistic/jsx-one-expression-per-line */}
                     C&apos;est un peu comme Urban Dictionary, mais <Link component={NextLink} href="/mots/tokebakicitte">tokébakicitte</Link>.
                 </Typography>
             </CardContent>

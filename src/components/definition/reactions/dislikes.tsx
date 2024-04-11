@@ -7,7 +7,7 @@ import { CrossfadeLoad } from "../loading-count";
 interface Props {
     dislikes?: number;
     isDisliked: boolean;
-    toggleDislike: () => void;
+    toggleDislike: (() => void) | (() => Promise<void>);
 }
 
 export const Dislikes = ({
@@ -17,6 +17,7 @@ export const Dislikes = ({
 }: Props): ReactNode => (
     <Tooltip title="Je n'aime pas">
         <Button
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={toggleDislike}
             aria-label="Je n'aime pas"
             startIcon={

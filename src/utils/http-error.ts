@@ -1,7 +1,6 @@
 import { type Status } from "~/types/status";
 
 export class HttpError extends Error {
-
     public readonly name: string = "HttpError";
 
     public constructor(
@@ -10,7 +9,6 @@ export class HttpError extends Error {
     ) {
         super(...args);
     }
-
 }
 
 export const isHttpError = (error: unknown): error is HttpError => (

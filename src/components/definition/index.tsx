@@ -21,7 +21,7 @@ export const Definition = ({ definition }: Props): ReactNode => {
     return (
         <Card>
             <CardHeader
-                title={
+                title={(
                     <Stack
                         // By default `Stack` renders a `div`, which is an invalid child for `CardHeader` default tag, which is `h2`.
                         component="span"
@@ -38,7 +38,7 @@ export const Definition = ({ definition }: Props): ReactNode => {
                         </Link>
                         <WordClasses wordClasses={definition.wordClasses} />
                     </Stack>
-                }
+                )}
             />
             <CardContent>
                 <Typography
@@ -56,8 +56,7 @@ export const Definition = ({ definition }: Props): ReactNode => {
                             >
                                 {paragraph}
                             </Typography>
-                        ))
-                    }
+                        ))}
                 </Typography>
                 <Typography
                     component="div"
@@ -74,11 +73,10 @@ export const Definition = ({ definition }: Props): ReactNode => {
                             >
                                 {paragraph}
                             </Typography>
-                        ))
-                    }
+                        ))}
                 </Typography>
                 <Typography variant="subtitle2">
-                    {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                    {/* eslint-disable-next-line @stylistic/jsx-one-expression-per-line */}
                     par {definition.author.name ?? "Anonyme"}, le {formattedDate}
                 </Typography>
             </CardContent>

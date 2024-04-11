@@ -11,7 +11,6 @@ interface State {
 }
 
 export class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
-
     public static getDerivedStateFromError(): State {
         return { hasError: true };
     }
@@ -35,5 +34,4 @@ export class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
 
         return children;
     }
-
 }

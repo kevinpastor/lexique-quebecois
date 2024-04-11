@@ -16,6 +16,7 @@ export const ShareButton = ({ url }: Props): ReactNode => {
 
     return (
         <Button
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={share}
             startIcon={<ShareIcon />}
             size="small"

@@ -98,7 +98,7 @@ const generateSitemap = async (): Promise<MetadataRoute.Sitemap> => {
 
     return [
         {
-            url: `${host}`
+            url: host
         },
         {
             url: `${host}/conditions`

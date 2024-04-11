@@ -1,5 +1,4 @@
 export class RateLimiter {
-
     private readonly cache: Map<string, Array<Date>>;
 
     public constructor(
@@ -36,5 +35,4 @@ export class RateLimiter {
         timestamps.push(now);
         return false;
     }
-
 }

@@ -9,7 +9,7 @@ const massageRequest = (headers: Headers): Parameters<typeof getClientIp>[0] => 
         "x-cluster-client-ip": headers.get("x-cluster-client-ip") ?? undefined,
         "x-forwarded": headers.get("x-forwarded") ?? undefined,
         "forwarded-for": headers.get("forwarded-for") ?? undefined,
-        "forwarded": headers.get("forwarded") ?? undefined
+        forwarded: headers.get("forwarded") ?? undefined
     }
 });
 

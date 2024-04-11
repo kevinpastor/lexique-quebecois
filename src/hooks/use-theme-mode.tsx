@@ -7,15 +7,15 @@ export type ThemeMode = "light" | "dark" | "system";
 export const modes: Array<ThemeMode> = ["system", "light", "dark"];
 
 export const modeIcons: Record<ThemeMode, ReactNode> = {
-    "system": <SettingsBrightness />,
-    "light": <LightMode />,
-    "dark": <DarkMode />
+    system: <SettingsBrightness />,
+    light: <LightMode />,
+    dark: <DarkMode />
 };
 
 export const modeLabels: Record<ThemeMode, string> = {
-    "system": "Automatique",
-    "light": "Clair",
-    "dark": "Sombre"
+    system: "Automatique",
+    light: "Clair",
+    dark: "Sombre"
 };
 
 export interface ReturnType {

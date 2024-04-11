@@ -19,7 +19,7 @@ export const ConsentSnackbar = ({ isOpen, onAccept: handleAccept, onRefuse: hand
             elevation={24}
         >
             <CardHeader
-                title={
+                title={(
                     <Stack
                         direction="row"
                         spacing={1}
@@ -29,16 +29,16 @@ export const ConsentSnackbar = ({ isOpen, onAccept: handleAccept, onRefuse: hand
                             Cookies
                         </div>
                     </Stack>
-                }
+                )}
                 titleTypographyProps={{
                     variant: "h4"
                 }}
-                subheader={
+                subheader={(
                     <>
-                        {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
+                        {/* eslint-disable-next-line @stylistic/jsx-one-expression-per-line */}
                         En acceptant, tu consentes à ce que l&apos;on utilise des cookies conformément à notre <Link component={NextLink} href="/confidentialite">politique de confidentialité</Link>.
                     </>
-                }
+                )}
                 subheaderTypographyProps={{
                     variant: "caption"
                 }}

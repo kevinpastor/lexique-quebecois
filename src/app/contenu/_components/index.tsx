@@ -81,5 +81,5 @@ export const ContentPage = (): ReactNode => (
                 Mis à jour le 16 février 2023
             </Typography>
         </CardContent>
-    </Card >
+    </Card>
 );

@@ -50,11 +50,11 @@ export const WordClassPicker = (): ReactNode => {
                             </MenuItem>
                         ))}
                     </Select>
-                    {error &&
+                    {error && (
                         <FormHelperText>
                             {error.message}
                         </FormHelperText>
-                    }
+                    )}
                 </FormControl>
             )}
         />

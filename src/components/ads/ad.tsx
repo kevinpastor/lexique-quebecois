@@ -19,7 +19,7 @@ const getClient = (): string => {
     return process.env["NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT"];
 };
 
-const initializedAds: Map<string, boolean> = new Map();
+const initializedAds: Map<string, boolean> = new Map<string, boolean>();
 
 interface Props {
     slot: string;

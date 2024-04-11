@@ -12,7 +12,8 @@ interface Props {
 }
 
 // TODO Add more email addresses
-export const Email = ({ type: _ }: Props): ReactNode => (
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const Email = ({ type }: Props): ReactNode => (
     <Link href="mailto:info@lexiquequebecois.com">
         info@lexiquequebecois.com
     </Link>

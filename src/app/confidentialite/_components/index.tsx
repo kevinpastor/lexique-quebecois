@@ -81,7 +81,7 @@ export const PrivacyPage = (): ReactNode => (
                 Demandes de communication et demandes de suppression
             </Typography>
             <Typography gutterBottom>
-                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                {/* eslint-disable-next-line @stylistic/jsx-one-expression-per-line */}
                 Vous pouvez demander la divulgation et/ou la suppression de toute information que nous avons recueillie à votre sujet, en nous envoyant un courriel contenant les détails de votre demande à l&apos;adresse suivante&nbsp;: <Email type={EmailType.Support} />.
             </Typography>
             <Typography gutterBottom>
@@ -97,7 +97,7 @@ export const PrivacyPage = (): ReactNode => (
                 Un cookie est une petite quantité de données, qui comprend souvent un identifiant unique anonyme, envoyée à votre navigateur depuis les ordinateurs d&apos;un site web et stockée sur le disque dur de votre ordinateur. Les cookies peuvent être nécessaires pour utiliser le site Web. Lexique Québécois et ses partenaires publicitaires utilisent des cookies pour enregistrer des informations sur la session en cours.
             </Typography>
             <Typography gutterBottom>
-                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                {/* eslint-disable-next-line @stylistic/jsx-one-expression-per-line */}
                 Nos Partenaires publicitaires peuvent également, de temps à autre, utiliser des balises Web (également connues sous le nom de <i>web beacons</i>, <i>Internet tags</i>, <i>pixel tags</i> et <i>clear GIFS</i>). Ces balises web sont fournies par nos Partenaires publicitaires et permettent à ces derniers d&apos;obtenir des informations telles que l&apos;adresse IP de l&apos;ordinateur qui a téléchargé la page sur laquelle la balise apparaît, l&apos;URL de la page sur laquelle la balise apparaît, l&apos;heure à laquelle la page contenant la balise a été consultée, le type de navigateur utilisé pour consulter la page et les informations contenues dans les cookies définis par les Partenaires publicitaires. Les balises web permettent à nos partenaires publicitaires de reconnaître un cookie unique sur votre navigateur web, ce qui nous permet de savoir quelles publicités amènent les utilisateurs sur notre site web.
             </Typography>
             <Typography gutterBottom>
@@ -110,7 +110,7 @@ export const PrivacyPage = (): ReactNode => (
                 hCaptcha
             </Typography>
             <Typography gutterBottom>
-                {/* eslint-disable-next-line react/jsx-one-expression-per-line, react/jsx-max-props-per-line */}
+                {/* eslint-disable-next-line @stylistic/jsx-one-expression-per-line */}
                 Nous utilisons le service anti-robot hCaptcha (ci-après &ldquo;hCaptcha&rdquo;) sur notre site web. Ce service est fourni par Intuition Machines, Inc., une société américaine de Delaware (&ldquo;IMI&rdquo;). hCaptcha est utilisé pour vérifier si les données entrées sur notre site web (comme sur une page de connexion ou un formulaire de contact) ont été entrées par un humain ou par un programme automatisé. Pour ce faire, hCaptcha analyse le comportement du visiteur du site web en fonction de diverses caractéristiques. Cette analyse commence automatiquement dès que le visiteur du site web entre une partie du site web avec hCaptcha activé. Pour l&apos;analyse, hCaptcha évalue diverses informations (par exemple, l&apos;adresse IP, le temps que le visiteur a passé sur le site web ou l&apos;application, ou les mouvements de souris effectués par l&apos;utilisateur). Les données collectées pendant l&apos;analyse seront transmises à IMI. L&apos;analyse hCaptcha en mode &ldquo;invisible&rdquo; peut avoir lieu complètement en arrière-plan. Les visiteurs du site web ne sont pas informés que cette analyse a lieu si l&apos;utilisateur n&apos;est pas confronté à un défi. Le traitement des données est basé sur l&apos;Article 6(1)(f) du RGPD (DSGVO) : l&apos;exploitant du site web a un intérêt légitime à protéger son site contre les crawling automatisés abusifs et le spam. IMI agit en tant que &ldquo;traitant de données&rdquo; agissant en tant que représentant de ses clients tels que définis dans le RGPD et en tant que &ldquo;prestataire de services&rdquo; aux fins du California Consumer Privacy Act (CCPA). Pour plus d&apos;informations sur hCaptcha et la politique de confidentialité et les conditions d&apos;utilisation d&apos;IMI, veuillez consulter les liens suivants : <Link href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">https://www.hcaptcha.com/privacy</Link> et <Link href="https://www.hcaptcha.com/terms" target="_blank" rel="noopener noreferrer">https://www.hcaptcha.com/terms</Link>.
             </Typography>
             <Typography
@@ -162,7 +162,7 @@ export const PrivacyPage = (): ReactNode => (
                 Questions
             </Typography>
             <Typography gutterBottom>
-                {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+                {/* eslint-disable-next-line @stylistic/jsx-one-expression-per-line */}
                 Toute question concernant la présente politique de confidentialité doit être adressée à l&apos;adresse suivante&nbsp;: <Email type={EmailType.Legal} />.
             </Typography>
             <Typography
