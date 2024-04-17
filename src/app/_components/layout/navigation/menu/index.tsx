@@ -15,6 +15,8 @@ const LazyMenuContent = dynamic(async (): Promise<{ default: ComponentType<MenuC
 }));
 
 export const Menu = (): ReactNode => {
+    console.debug("Rendering Menu.");
+
     const {
         value: isOpened,
         setTrue: handleOpen,

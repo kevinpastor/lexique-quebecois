@@ -12,6 +12,8 @@ interface Props {
 }
 
 export const Reactions = ({ definitionId }: Props): ReactNode => {
+    console.debug("Rendering Reactions.");
+
     const {
         likes,
         isLiked,

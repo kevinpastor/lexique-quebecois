@@ -7,6 +7,8 @@ import { safeInOperator } from "~/utils/api/aggregation/safe-in-operator";
 import { safeSizeOperator } from "~/utils/api/aggregation/safe-size-operator";
 
 export const getReactions = async (definitionIds: Array<string>, ip: string | undefined = ""): Promise<Array<Reactions>> => {
+    console.debug("Calling getReactions.");
+
     const database: Db = await getDatabase();
     const collection: Collection<WordDocument> = database.collection("words");
 
