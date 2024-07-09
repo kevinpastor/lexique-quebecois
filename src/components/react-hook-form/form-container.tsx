@@ -1,15 +1,15 @@
 import { type PropsWithChildren, type ReactNode } from "react";
 import { FormProvider, type SubmitHandler } from "react-hook-form";
-import { type BaseSchema, type BaseSchemaAsync, type Output } from "valibot";
+import { type InferOutput } from "valibot";
 
-import { type UseFormProps, useForm } from "./use-form";
+import { type GenericFormSchema, type UseFormProps, useForm } from "./use-form";
 
-interface Props<Schema extends BaseSchema | BaseSchemaAsync> {
+interface Props<Schema extends GenericFormSchema> {
     useFormProps: UseFormProps<Schema>;
-    onSuccess: SubmitHandler<Output<Schema>>;
+    onSuccess: SubmitHandler<InferOutput<Schema>>;
 }
 
-export const FormContainer = <Schema extends BaseSchema | BaseSchemaAsync>({
+export const FormContainer = <Schema extends GenericFormSchema>({
     useFormProps,
     onSuccess,
     children

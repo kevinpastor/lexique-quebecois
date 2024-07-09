@@ -1,14 +1,9 @@
-import { minLength, never, object, string } from "valibot";
+import { minLength, pipe, strictObject, string } from "valibot";
 
 export type WithToken<T> = T & {
     token: string;
 };
 
-export const withTokenSchema = object(
-    {
-        token: string([
-            minLength(1, "Ce champ est requis.")
-        ])
-    },
-    never()
-);
+export const withTokenSchema = strictObject({
+    token: pipe(string(), minLength(1, "Ce champ est requis."))
+});

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { type ReactNode } from "react";
-import { minLength, object, string } from "valibot";
+import { minLength, object, pipe, string } from "valibot";
 
 import { FormContainer } from "~/components/react-hook-form/form-container";
 import { getSlug } from "~/types/definition";
@@ -18,9 +18,7 @@ const initialValues: FormValues = {
 };
 
 const validationSchema = object({
-    label: string([
-        minLength(1)
-    ])
+    label: pipe(string(), minLength(1))
 });
 
 export const SearchPage = (): ReactNode => {

@@ -1,12 +1,16 @@
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { type UseFormReturn, type UseFormProps as UseReactHookFormFormProps, useForm as useReactHookFormForm } from "react-hook-form";
-import { type BaseSchema, type BaseSchemaAsync, type Input } from "valibot";
+import { type InferInput, type StrictObjectSchema } from "valibot";
 
-export interface UseFormProps<Schema extends BaseSchema | BaseSchemaAsync> extends Omit<UseReactHookFormFormProps<Input<Schema>>, "resolver"> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Type inference on `useForm` breaks if `Record<string, BaseSchema<...>>` is given. Might be related to existential types.
+export type GenericFormSchema = StrictObjectSchema<any, undefined>;
+
+export interface UseFormProps<Schema extends GenericFormSchema>
+    extends Omit<UseReactHookFormFormProps<InferInput<Schema>>, "resolver"> {
     schema: Schema;
 }
 
-export const useForm = <Schema extends BaseSchema | BaseSchemaAsync>({ schema, ...formProps }: UseFormProps<Schema>): UseFormReturn<Input<Schema>> => (
+export const useForm = <Schema extends GenericFormSchema>({ schema, ...formProps }: UseFormProps<Schema>): UseFormReturn<InferInput<Schema>> => (
     useReactHookFormForm({
         ...formProps,
         resolver: valibotResolver(schema)

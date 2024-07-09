@@ -1,8 +1,5 @@
-import { never, object, string } from "valibot";
+import { strictObject, string } from "valibot";
 
-export const objectIdSchema = object(
-    {
-        _oid: string()
-    },
-    never()
-);
+export const objectIdSchema = strictObject({
+    _oid: string()
+});
