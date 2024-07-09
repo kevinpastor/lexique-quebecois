@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { type ReactNode } from "react";
-import { minLength, object, pipe, string } from "valibot";
+import { minLength, pipe, strictObject, string } from "valibot";
 
 import { FormContainer } from "~/components/react-hook-form/form-container";
 import { getSlug } from "~/types/definition";
@@ -17,7 +17,7 @@ const initialValues: FormValues = {
     label: ""
 };
 
-const validationSchema = object({
+const validationSchema = strictObject({
     label: pipe(string(), minLength(1))
 });
 

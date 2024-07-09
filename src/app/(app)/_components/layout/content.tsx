@@ -4,7 +4,7 @@ import { type PropsWithChildren, type ReactNode } from "react";
 import { ErrorBoundary } from "./error-boundary";
 import { Footer } from "./footer";
 import { Sidebar } from "./sidebar";
-import { UnexpectedError } from "../unexpected-error";
+import { UnexpectedError } from "../../../_components/unexpected-error";
 
 export const Content = ({ children }: PropsWithChildren): ReactNode => (
     <Container>

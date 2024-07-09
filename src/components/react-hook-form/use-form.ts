@@ -1,9 +1,9 @@
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { type UseFormReturn, type UseFormProps as UseReactHookFormFormProps, useForm as useReactHookFormForm } from "react-hook-form";
-import { type InferInput, type StrictObjectSchema } from "valibot";
+import { type ErrorMessage, type InferInput, type ObjectEntries, type StrictObjectIssue, type StrictObjectSchema } from "valibot";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Type inference on `useForm` breaks if `Record<string, BaseSchema<...>>` is given. Might be related to existential types.
-export type GenericFormSchema = StrictObjectSchema<any, undefined>;
+// It seems like specifying only one schema type breaks type inference on usages. Keeping it as so for now even if the second generic could be combined.
+export type GenericFormSchema = StrictObjectSchema<ObjectEntries, undefined> | StrictObjectSchema<ObjectEntries, ErrorMessage<StrictObjectIssue>>;
 
 export interface UseFormProps<Schema extends GenericFormSchema>
     extends Omit<UseReactHookFormFormProps<InferInput<Schema>>, "resolver"> {

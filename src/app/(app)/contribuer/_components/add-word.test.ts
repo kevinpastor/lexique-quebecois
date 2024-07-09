@@ -3,7 +3,7 @@
  */
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { addWord } from "~/app/contribuer/_components/add-word";
+import { addWord } from "~/app/(app)/contribuer/_components/add-word";
 import { Method } from "~/types/method";
 import { type WithToken } from "~/types/with-token";
 import { WordClass } from "~/types/word-class";

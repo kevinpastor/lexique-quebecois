@@ -1,7 +1,6 @@
 import { type Metadata, type Viewport } from "next";
 import { type PropsWithChildren, type ReactNode } from "react";
 
-import { Layout } from "./_components/layout";
 import { Providers } from "./_components/providers";
 
 export const viewport: Viewport = {
@@ -39,9 +38,7 @@ const RootLayout = ({ children }: PropsWithChildren): ReactNode => (
     >
         <body>
             <Providers>
-                <Layout>
-                    {children}
-                </Layout>
+                {children}
             </Providers>
         </body>
     </html>
