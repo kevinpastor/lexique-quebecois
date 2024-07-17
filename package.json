@@ -6,6 +6,7 @@
         "node": "^20.0.0",
         "pnpm": "^9.4.0"
     },
+    "packageManager": "pnpm@9.4.0",
     "scripts": {
         "start": "next dev --turbo",
         "start:profile": "cross-env PROFILE=true next dev",
