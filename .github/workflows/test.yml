@@ -40,6 +40,9 @@ jobs:
       - name: Initialize
         uses: ./.github/actions/initialize/
 
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+
       - name: Setup Stryker cache
         uses: actions/cache@v3
         with:
