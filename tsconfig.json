@@ -41,6 +41,10 @@
         "./next-env.d.ts",
         "./src/**/*.ts",
         "./src/**/*.tsx",
+        "./vitest.config.ts",
+        "./vitest.workspace.ts",
+        "./stryker.vitest.config.ts",
+        "./stryker.vitest.workspace.ts"
     ],
     "exclude": [
         "**/node_modules",

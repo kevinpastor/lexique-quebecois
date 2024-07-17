@@ -1,6 +1,3 @@
-/**
- * @vitest-environment happy-dom
- */
 import { describe, expect, it, vi } from "vitest";
 
 import { isMobile } from "./is-mobile";

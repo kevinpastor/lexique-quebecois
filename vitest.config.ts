@@ -1,25 +1,25 @@
-// @ts-check
-import { defineConfig, defaultExclude, coverageConfigDefaults, configDefaults } from "vitest/config"
-import tsconfigPaths from "vite-tsconfig-paths"
-import react from "@vitejs/plugin-react"
+import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
+import { coverageConfigDefaults, defaultExclude, defineConfig } from "vitest/config";
 
 export default defineConfig({
     test: {
         exclude: [
             ...defaultExclude,
-            "e2e/**"
+            "./e2e/**",
+            "./.stryker-tmp/**"
         ],
         coverage: {
+            provider: "istanbul",
             reporter: [
                 "text",
                 "html"
             ],
             include: [
-                "src/**/*",
+                "./src/**"
             ],
             exclude: [
-                ...coverageConfigDefaults.exclude,
-                "**/*.tsx",
+                ...coverageConfigDefaults.exclude
             ],
             thresholds: {
                 branches: 70,
@@ -38,5 +38,5 @@ export default defineConfig({
     plugins: [
         react(),
         tsconfigPaths()
-    ],
+    ]
 });

@@ -11,16 +11,19 @@ module.exports = {
         "typescript"
     ],
     testRunner: "vitest",
+    vitest: {
+        configFile: "./stryker.vitest.config.ts"
+    },
     reporters: [
         "progress",
         "html"
     ],
     incremental: true,
     ignorePatterns: [
-        "/.next/",
-        "/.swc/",
-        "/.vscode/",
-        "/coverage/",
-        "/e2e/"
+        "./.next/**",
+        "./.swc/**",
+        "./.vscode/**",
+        "./coverage/**",
+        "./e2e/**"
     ]
 }

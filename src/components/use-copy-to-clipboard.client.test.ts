@@ -1,15 +1,13 @@
-/**
- * @vitest-environment happy-dom
- */
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { type CopyFunction, useCopyToClipboard } from "~/hooks/use-copy-to-clipboard";
 
 describe("useCopyToClipboard", (): void => {
-    const writeTextMock = vi.fn<Parameters<typeof navigator.clipboard.writeText>, ReturnType<typeof navigator.clipboard.writeText>>()
+    const writeTextMock = vi.fn<typeof navigator.clipboard.writeText>()
         .mockResolvedValue(undefined);
 
-    const navigatorMock = vi.spyOn(global, "navigator", "get");
+    // TODO Check if `stubGlobal` could be used instead.
+    const navigatorMock = vi.spyOn(window, "navigator", "get");
 
     beforeEach((): void => {
         navigatorMock.mockReturnValue({

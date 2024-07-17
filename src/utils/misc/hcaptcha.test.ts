@@ -19,6 +19,7 @@ describe("verifyHCaptcha", (): void => {
             }).rejects.toThrow();
         });
     });
+
     describe("when `HCAPTHCA_SECRET` is undefined", (): void => {
         it("should throw", async (): Promise<void> => {
             vi.stubEnv("NEXT_PUBLIC_HCAPTCHA_SITE_KEY", TEST_SITE_KEY);

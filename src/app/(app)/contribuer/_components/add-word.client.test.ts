@@ -1,19 +1,10 @@
-/**
- * @vitest-environment happy-dom
- */
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { addWord } from "~/app/(app)/contribuer/_components/add-word";
 import { Method } from "~/types/method";
 import { type WithToken } from "~/types/with-token";
 import { WordClass } from "~/types/word-class";
 import { type WordRequest } from "~/types/word-request";
-
-const fetchMock = vi.fn<Parameters<typeof fetch>, ReturnType<typeof fetch>>()
-    .mockResolvedValue({
-        ok: true
-    } as Partial<Response> as Response);
-global.fetch = fetchMock;
 
 const wordRequestStub: WordRequest = {
     label: "gyu",
@@ -29,15 +20,12 @@ const wordRequestWithCaptchaTokenStub: WithToken<WordRequest> = {
 };
 
 describe("addWord", (): void => {
-    beforeEach((): void => {
-        fetchMock.mockClear();
-    });
-
     it("should add word", async (): Promise<void> => {
-        fetchMock
+        const fetchMock = vi.fn<typeof fetch>()
             .mockResolvedValue({
                 ok: true
             } as Partial<Response> as Response);
+        vi.stubGlobal("fetch", fetchMock);
 
         await addWord(wordRequestWithCaptchaTokenStub);
 
@@ -50,10 +38,11 @@ describe("addWord", (): void => {
     });
 
     it("should throw an error", async (): Promise<void> => {
-        fetchMock
+        const fetchMock = vi.fn<typeof fetch>()
             .mockResolvedValue({
                 ok: false
             } as Partial<Response> as Response);
+        vi.stubGlobal("fetch", fetchMock);
 
         await expect(addWord(wordRequestWithCaptchaTokenStub)).rejects.toBeDefined();
 
