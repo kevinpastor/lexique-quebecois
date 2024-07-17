@@ -27,6 +27,9 @@ jobs:
       - name: Initialize
         uses: ./.github/actions/initialize/
 
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+
       - name: Unit testing
         run: pnpm run test
 
