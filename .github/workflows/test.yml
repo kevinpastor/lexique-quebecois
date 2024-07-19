@@ -47,7 +47,7 @@ jobs:
         run: pnpm exec playwright install --with-deps
 
       - name: Setup Stryker cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./reports/stryker-incremental.json
           key: ${{ runner.os }}-stryker
