@@ -44,7 +44,7 @@ export const Footer = (): ReactNode => (
             align="center"
             variant="subtitle2"
         >
-            &copy; 2023 Lexique Québécois
+            &copy; 2024 Lexique Québécois
         </Typography>
     </Stack>
 );

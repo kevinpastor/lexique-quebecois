@@ -1,25 +1,22 @@
 import { CssBaseline } from "@mui/material";
-import { Experimental_CssVarsProvider as CssVarsProvider, getInitColorSchemeScript } from "@mui/material/styles";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider, type AppRouterCacheProviderProps } from "@mui/material-nextjs/v13-appRouter";
 import { type PropsWithChildren, type ReactNode } from "react";
 
-import { type ThemeMode } from "~/hooks/use-theme-mode";
-
-import { theme } from "./theme";
+import { colorSchemeSelector, theme } from "./theme";
 
 const options: AppRouterCacheProviderProps["options"] = { key: "css" };
-const defaultMode: ThemeMode = "system";
 
 export const ThemeProvider = ({ children }: PropsWithChildren): ReactNode => (
     <AppRouterCacheProvider options={options}>
-        {getInitColorSchemeScript({ defaultMode })}
-        <CssVarsProvider
+        <InitColorSchemeScript attribute={colorSchemeSelector} />
+        <MuiThemeProvider
             theme={theme}
-            defaultMode={defaultMode}
             disableTransitionOnChange
         >
             <CssBaseline enableColorScheme />
             {children}
-        </CssVarsProvider>
+        </MuiThemeProvider>
     </AppRouterCacheProvider>
 );

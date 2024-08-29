@@ -2,7 +2,7 @@ import type { } from "@mui/lab/themeAugmentation";
 import { Slide } from "@mui/material";
 import { common } from "@mui/material/colors";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import { type CSSInterpolation, type CssVarsTheme, type Theme, alpha, experimental_extendTheme as extendTheme, lighten } from "@mui/material/styles";
+import { type CSSInterpolation, type CssVarsTheme, type Theme, alpha, createTheme, lighten } from "@mui/material/styles";
 
 import { font } from "./font";
 
@@ -47,7 +47,12 @@ const darkElevationOverlay = {
     [24]: 0.16
 } as const satisfies Record<DefinedElevations, number>;
 
-export const theme = extendTheme({
+export const colorSchemeSelector: string = "class";
+
+export const theme = createTheme({
+    cssVariables: {
+        colorSchemeSelector
+    },
     colorSchemes: {
         light: {
             palette: {
@@ -390,9 +395,6 @@ export const theme = extendTheme({
                 }
             },
             styleOverrides: {
-                root: ({ theme: { vars: { palette } } }) => ({
-                    color: palette.common.onBackground
-                }),
                 gutterBottom: {
                     marginBottom: "0.5em"
                 },

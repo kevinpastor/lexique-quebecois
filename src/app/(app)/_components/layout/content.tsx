@@ -1,4 +1,4 @@
-import { Container, Unstable_Grid2 as Grid, Stack } from "@mui/material";
+import { Container, Grid2 as Grid, Stack } from "@mui/material";
 import { type PropsWithChildren, type ReactNode } from "react";
 
 import { ErrorBoundary } from "./error-boundary";
@@ -13,14 +13,16 @@ export const Content = ({ children }: PropsWithChildren): ReactNode => (
             spacing={2}
             py={2}
         >
-            <Grid xs>
+            <Grid size="grow">
                 <ErrorBoundary fallback={<UnexpectedError />}>
                     {children}
                 </ErrorBoundary>
             </Grid>
             <Grid
-                xs={12}
-                md={4}
+                size={{
+                    xs: 12,
+                    md: 4
+                }}
             >
                 <Stack
                     spacing={{
